@@ -1,0 +1,231 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 5EA3C319
+P 4850 3800
+F 0 "U?" H 4850 4167 50  0000 C CNN
+F 1 "TL074" H 4850 4076 50  0000 C CNN
+F 2 "" H 4800 3900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 4900 4000 50  0001 C CNN
+	1    4850 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 5EA3E5B4
+P 4900 3000
+F 0 "R?" V 4695 3000 50  0000 C CNN
+F 1 "30K" V 4786 3000 50  0000 C CNN
+F 2 "" H 4900 3000 50  0001 C CNN
+F 3 "~" H 4900 3000 50  0001 C CNN
+	1    4900 3000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5000 3000 5250 3000
+Wire Wire Line
+	5250 3000 5250 3800
+Wire Wire Line
+	5250 3800 5150 3800
+$Comp
+L power:GND #PWR?
+U 1 1 5EA3EE78
+P 4450 3700
+F 0 "#PWR?" H 4450 3450 50  0001 C CNN
+F 1 "GND" V 4455 3572 50  0000 R CNN
+F 2 "" H 4450 3700 50  0001 C CNN
+F 3 "" H 4450 3700 50  0001 C CNN
+	1    4450 3700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4450 3700 4550 3700
+Wire Wire Line
+	4800 3000 4100 3000
+Wire Wire Line
+	4100 3000 4100 3900
+Wire Wire Line
+	4100 3900 4350 3900
+Text GLabel 1650 4150 0    50   Input ~ 0
+Voice1
+Text GLabel 1650 4650 0    50   Input ~ 0
+Voice2
+Text GLabel 1650 5150 0    50   Input ~ 0
+Voice3
+Wire Wire Line
+	3000 4100 4350 4100
+Wire Wire Line
+	4350 4100 4350 3900
+Connection ~ 4350 3900
+Wire Wire Line
+	4350 3900 4400 3900
+Wire Wire Line
+	3000 4600 4400 4600
+Wire Wire Line
+	4400 4600 4400 3900
+Connection ~ 4400 3900
+Wire Wire Line
+	4400 3900 4450 3900
+Wire Wire Line
+	3000 5100 4450 5100
+Wire Wire Line
+	4450 5100 4450 3900
+Connection ~ 4450 3900
+Wire Wire Line
+	4450 3900 4500 3900
+Text GLabel 5900 3800 2    50   Input ~ 0
+MixOut
+Wire Wire Line
+	5250 3800 5600 3800
+Connection ~ 5250 3800
+Wire Wire Line
+	5600 3800 5600 3450
+Wire Wire Line
+	5600 3450 6800 3450
+Connection ~ 5600 3800
+Wire Wire Line
+	5600 3800 5900 3800
+Wire Wire Line
+	6800 4150 5600 4150
+Wire Wire Line
+	5600 4150 5600 3800
+Text GLabel 8350 3450 0    50   Input ~ 0
+FV1-Left-Out
+Text GLabel 8350 4150 0    50   Input ~ 0
+FV1-Right-Out
+Text GLabel 6800 4150 2    50   Input ~ 0
+FV1-Right-In
+Text GLabel 6800 3450 2    50   Input ~ 0
+FV1-Left-In
+$Comp
+L Analog_VCA:V2164D U?
+U 1 1 5EA43CE2
+P 2700 4100
+F 0 "U?" H 2700 4375 50  0000 C CNN
+F 1 "V2164D" H 2700 4284 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 3450 3850 50  0001 C CNN
+F 3 "" H 2750 4250 50  0001 C CNN
+	1    2700 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Analog_VCA:V2164D U?
+U 3 1 5EA44B99
+P 2700 5100
+F 0 "U?" H 2700 5375 50  0000 C CNN
+F 1 "V2164D" H 2700 5284 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 3450 4850 50  0001 C CNN
+F 3 "" H 2750 5250 50  0001 C CNN
+	3    2700 5100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Analog_VCA:V2164D U?
+U 2 1 5EA452AA
+P 2700 4600
+F 0 "U?" H 2700 4875 50  0000 C CNN
+F 1 "V2164D" H 2700 4784 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 3450 4350 50  0001 C CNN
+F 3 "" H 2750 4750 50  0001 C CNN
+	2    2700 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Analog_VCA:V2164D U?
+U 4 1 5EA49DBD
+P 2700 5600
+F 0 "U?" H 2700 5875 50  0000 C CNN
+F 1 "V2164D" H 2700 5784 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 3450 5350 50  0001 C CNN
+F 3 "" H 2750 5750 50  0001 C CNN
+	4    2700 5600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3000 5600 4500 5600
+Wire Wire Line
+	4500 5600 4500 3900
+Connection ~ 4500 3900
+Wire Wire Line
+	4500 3900 4550 3900
+Wire Wire Line
+	1650 4150 1900 4150
+Wire Wire Line
+	1650 4650 1900 4650
+Wire Wire Line
+	1650 5150 1900 5150
+$Comp
+L Device:R_Small_US R?
+U 1 1 5EA4E72D
+P 2000 4150
+F 0 "R?" V 1795 4150 50  0000 C CNN
+F 1 "30K" V 1886 4150 50  0000 C CNN
+F 2 "" H 2000 4150 50  0001 C CNN
+F 3 "~" H 2000 4150 50  0001 C CNN
+	1    2000 4150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2100 4150 2400 4150
+$Comp
+L Device:R_Small_US R?
+U 1 1 5EA4F639
+P 2000 4650
+F 0 "R?" V 1795 4650 50  0000 C CNN
+F 1 "30K" V 1886 4650 50  0000 C CNN
+F 2 "" H 2000 4650 50  0001 C CNN
+F 3 "~" H 2000 4650 50  0001 C CNN
+	1    2000 4650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 5EA4FBE8
+P 2000 5150
+F 0 "R?" V 1795 5150 50  0000 C CNN
+F 1 "30K" V 1886 5150 50  0000 C CNN
+F 2 "" H 2000 5150 50  0001 C CNN
+F 3 "~" H 2000 5150 50  0001 C CNN
+	1    2000 5150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R_Small_US R?
+U 1 1 5EA500DF
+P 2000 5650
+F 0 "R?" V 1795 5650 50  0000 C CNN
+F 1 "30K" V 1886 5650 50  0000 C CNN
+F 2 "" H 2000 5650 50  0001 C CNN
+F 3 "~" H 2000 5650 50  0001 C CNN
+	1    2000 5650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2100 4650 2400 4650
+Wire Wire Line
+	2100 5150 2400 5150
+Wire Wire Line
+	2100 5650 2400 5650
+Wire Wire Line
+	8350 3450 8850 3450
+Wire Wire Line
+	8850 3450 8850 6000
+Wire Wire Line
+	8850 6000 1900 6000
+Wire Wire Line
+	1900 6000 1900 5650
+$EndSCHEMATC

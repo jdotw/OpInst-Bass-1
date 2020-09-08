@@ -1,0 +1,196 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Electric_Druid:NOISE2 U?
+U 1 1 5EA61A35
+P 3350 3000
+F 0 "U?" H 3350 3465 50  0000 C CNN
+F 1 "NOISE2" H 3350 3374 50  0000 C CNN
+F 2 "" H 3150 3450 50  0001 C CNN
+F 3 "" H 3150 3450 50  0001 C CNN
+	1    3350 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 5EA62AE2
+P 6250 2050
+F 0 "U?" H 6250 2417 50  0000 C CNN
+F 1 "TL074" H 6250 2326 50  0000 C CNN
+F 2 "" H 6200 2150 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 6300 2250 50  0001 C CNN
+	1    6250 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 2 1 5EA64782
+P 6250 3800
+F 0 "U?" H 6250 4167 50  0000 C CNN
+F 1 "TL074" H 6250 4076 50  0000 C CNN
+F 2 "" H 6200 3900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 6300 4000 50  0001 C CNN
+	2    6250 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 5EA663BC
+P 1650 3800
+F 0 "U?" H 1608 3846 50  0000 L CNN
+F 1 "TL074" H 1608 3755 50  0000 L CNN
+F 2 "" H 1600 3900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 1700 4000 50  0001 C CNN
+	5    1650 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 2950 4950 2950
+Wire Wire Line
+	4950 2950 4950 1950
+Wire Wire Line
+	4950 1950 5950 1950
+Wire Wire Line
+	6550 2050 6750 2050
+Wire Wire Line
+	6750 2050 6750 2450
+Wire Wire Line
+	6750 2450 5800 2450
+Wire Wire Line
+	5800 2450 5800 2150
+Wire Wire Line
+	5800 2150 5950 2150
+Text GLabel 7450 2050 2    50   Input ~ 0
+PinkNoise
+Wire Wire Line
+	7450 2050 6750 2050
+Connection ~ 6750 2050
+Wire Wire Line
+	5950 3700 4800 3700
+Wire Wire Line
+	2550 3700 2550 3100
+Wire Wire Line
+	2550 3100 2850 3100
+Wire Wire Line
+	6550 3800 6750 3800
+Wire Wire Line
+	6750 3800 6750 4200
+Wire Wire Line
+	6750 4200 5800 4200
+Wire Wire Line
+	5800 4200 5800 3900
+Wire Wire Line
+	5800 3900 5950 3900
+Text GLabel 7450 3800 2    50   Input ~ 0
+WhiteNoise
+Wire Wire Line
+	7450 3800 6750 3800
+Connection ~ 6750 3800
+$Comp
+L Device:R_Small_US R?
+U 1 1 5EA6A6CF
+P 4500 3700
+F 0 "R?" V 4295 3700 50  0000 C CNN
+F 1 "820R" V 4386 3700 50  0000 C CNN
+F 2 "" H 4500 3700 50  0001 C CNN
+F 3 "~" H 4500 3700 50  0001 C CNN
+	1    4500 3700
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4400 3700 2550 3700
+$Comp
+L power:GND #PWR?
+U 1 1 5EA6B94F
+P 4800 4300
+F 0 "#PWR?" H 4800 4050 50  0001 C CNN
+F 1 "GND" H 4805 4127 50  0000 C CNN
+F 2 "" H 4800 4300 50  0001 C CNN
+F 3 "" H 4800 4300 50  0001 C CNN
+	1    4800 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4800 4100 4800 4300
+Wire Wire Line
+	4800 3900 4800 3700
+Connection ~ 4800 3700
+Wire Wire Line
+	4800 3700 4600 3700
+$Comp
+L power:+5V #PWR?
+U 1 1 5EA6C565
+P 2550 2800
+F 0 "#PWR?" H 2550 2650 50  0001 C CNN
+F 1 "+5V" V 2565 2928 50  0000 L CNN
+F 2 "" H 2550 2800 50  0001 C CNN
+F 3 "" H 2550 2800 50  0001 C CNN
+	1    2550 2800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2550 2800 2850 2800
+$Comp
+L power:GND #PWR?
+U 1 1 5EA6CCE0
+P 4150 2800
+F 0 "#PWR?" H 4150 2550 50  0001 C CNN
+F 1 "GND" V 4155 2672 50  0000 R CNN
+F 2 "" H 4150 2800 50  0001 C CNN
+F 3 "" H 4150 2800 50  0001 C CNN
+	1    4150 2800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3850 2800 4150 2800
+$Comp
+L power:+12V #PWR?
+U 1 1 5EA711A1
+P 1550 3350
+F 0 "#PWR?" H 1550 3200 50  0001 C CNN
+F 1 "+12V" H 1565 3523 50  0000 C CNN
+F 2 "" H 1550 3350 50  0001 C CNN
+F 3 "" H 1550 3350 50  0001 C CNN
+	1    1550 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1550 3350 1550 3500
+$Comp
+L power:-12V #PWR?
+U 1 1 5EA71C03
+P 1550 4250
+F 0 "#PWR?" H 1550 4350 50  0001 C CNN
+F 1 "-12V" H 1565 4423 50  0000 C CNN
+F 2 "" H 1550 4250 50  0001 C CNN
+F 3 "" H 1550 4250 50  0001 C CNN
+	1    1550 4250
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1550 4100 1550 4250
+$Comp
+L Device:C_Small C?
+U 1 1 5EA6B1C3
+P 4800 4000
+F 0 "C?" H 4892 4046 50  0000 L CNN
+F 1 "10nF" H 4892 3955 50  0000 L CNN
+F 2 "" H 4800 4000 50  0001 C CNN
+F 3 "~" H 4800 4000 50  0001 C CNN
+	1    4800 4000
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
