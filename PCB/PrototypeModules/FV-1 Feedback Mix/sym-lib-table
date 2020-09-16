@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name FV-1-Feedback-Mix-rescue)(type Legacy)(uri "${KIPRJMOD}/FV-1 Feedback Mix-rescue.lib")(options "")(descr ""))
+)
