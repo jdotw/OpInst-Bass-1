@@ -9,17 +9,17 @@ CDefines=USE_HAL_DRIVER;STM32G431xx;USE_HAL_DRIVER;USE_HAL_DRIVER;
 [PreviousGenFiles]
 AdvancedFolderStructure=true
 HeaderFileListSize=3
-HeaderFiles#0=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Inc/stm32g4xx_it.h
-HeaderFiles#1=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Inc/stm32g4xx_hal_conf.h
-HeaderFiles#2=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Inc/main.h
+HeaderFiles#0=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Inc/stm32g4xx_it.h
+HeaderFiles#1=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Inc/stm32g4xx_hal_conf.h
+HeaderFiles#2=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Inc/main.h
 HeaderFolderListSize=1
-HeaderPath#0=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Inc
+HeaderPath#0=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Inc
 HeaderFiles=;
 SourceFileListSize=3
-SourceFiles#0=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Src/stm32g4xx_it.c
-SourceFiles#1=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Src/stm32g4xx_hal_msp.c
-SourceFiles#2=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Src/main.c
+SourceFiles#0=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Src/stm32g4xx_it.c
+SourceFiles#1=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Src/stm32g4xx_hal_msp.c
+SourceFiles#2=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Src/main.c
 SourceFolderListSize=1
-SourcePath#0=/Users/jwilson/Source/Boom-1/Boom1-Nucleo/Core/Src
+SourcePath#0=/Users/jwilson/Source/Opinionated-Boom-1/Firmware/Core/Src
 SourceFiles=;
 

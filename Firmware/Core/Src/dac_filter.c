@@ -5,6 +5,9 @@
  *      Author: jwilson
  */
 
+#include <stdint.h>
+
+
 
 uint16_t scaled_dac_value_for_primary_filter(uint8_t mod_wheel_cc, uint8_t filter_1_cc) {
 
