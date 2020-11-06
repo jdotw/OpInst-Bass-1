@@ -2503,8 +2503,6 @@ Wire Wire Line
 	40300 27000 40300 26900
 Connection ~ 40300 26900
 Wire Wire Line
-	40300 26550 40300 26900
-Wire Wire Line
 	39600 26900 40000 26900
 $Comp
 L Device:C_Small C?
@@ -2519,8 +2517,6 @@ F 3 "~" H 39900 27500 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	40000 27600 39600 27600
-Wire Wire Line
-	40300 27950 40300 27600
 Wire Wire Line
 	39600 27600 39600 27500
 Wire Wire Line
@@ -4078,50 +4074,6 @@ F 1 "V2164D" H 7100 46776 50  0000 C CNN
 F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 7050 46600 50  0001 C CNN
 F 3 "" H 7150 46700 50  0001 C CNN
 	2    7100 46500
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 2 1 5E9CE961
-P 40000 26550
-F 0 "U?" H 40000 26850 50  0000 C CNN
-F 1 "V2164D" H 40050 26750 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 39950 26650 50  0001 C CNN
-F 3 "" H 40050 26750 50  0001 C CNN
-	2    40000 26550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U?
-U 2 1 5EAF97FA
-P 52100 27600
-F 0 "U?" H 52100 27900 50  0000 C CNN
-F 1 "V2164D" H 52150 27800 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 52100 27600 50  0001 C CNN
-F 3 "" H 52100 27600 50  0001 C CNN
-	2    52100 27600
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U?
-U 2 1 5EBB7C00
-P 48100 27750
-F 0 "U?" H 48100 28117 50  0000 C CNN
-F 1 "V2164D" H 48100 28026 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 48100 27750 50  0001 C CNN
-F 3 "" H 48100 27750 50  0001 C CNN
-	2    48100 27750
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 2 1 5EDDD55C
-P 43800 26350
-F 0 "U?" H 43800 26717 50  0000 C CNN
-F 1 "V2164D" H 43800 26626 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 43750 26450 50  0001 C CNN
-F 3 "" H 43850 26550 50  0001 C CNN
-	2    43800 26350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -14464,10 +14416,7 @@ Wire Wire Line
 	41300 26450 41300 26550
 Connection ~ 41300 26550
 Wire Wire Line
-	40300 26550 40300 26450
-Wire Wire Line
 	40300 26450 40850 26450
-Connection ~ 40300 26550
 $Comp
 L Device:R_Small_US R?
 U 1 1 9FA760FF
@@ -14481,9 +14430,6 @@ F 3 "~" H 40950 28000 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	41050 28000 41300 28000
-Wire Wire Line
-	40300 27950 40300 28000
-Connection ~ 40300 27950
 Wire Wire Line
 	40300 28000 40850 28000
 Wire Wire Line
@@ -14552,18 +14498,6 @@ Wire Wire Line
 	40050 25950 40050 25600
 Wire Wire Line
 	40750 25600 40350 25600
-$Comp
-L Amplifier_Operational:TL074 U?
-U 2 1 A36406B7
-P 40350 25950
-F 0 "U?" H 40350 26250 50  0000 C CNN
-F 1 "V2164D" H 40400 26150 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 40300 26050 50  0001 C CNN
-F 3 "" H 40400 26150 50  0001 C CNN
-	2    40350 25950
-	-1   0    0    1   
-$EndComp
-Connection ~ 40050 25950
 Wire Wire Line
 	40050 25950 39700 25950
 Connection ~ 40750 25850
@@ -14628,18 +14562,6 @@ Wire Wire Line
 	40050 28500 40050 28850
 Wire Wire Line
 	40750 28850 40350 28850
-$Comp
-L Amplifier_Operational:TL074 U?
-U 2 1 A7EABBA4
-P 40350 28500
-F 0 "U?" H 40350 28800 50  0000 C CNN
-F 1 "V2164D" H 40400 28700 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 40300 28600 50  0001 C CNN
-F 3 "" H 40400 28700 50  0001 C CNN
-	2    40350 28500
-	-1   0    0    -1  
-$EndComp
-Connection ~ 40050 28500
 Wire Wire Line
 	40050 28500 39700 28500
 Connection ~ 40750 28600
@@ -14765,21 +14687,6 @@ Wire Wire Line
 	53300 26400 53400 26400
 Wire Wire Line
 	52400 26400 52750 26400
-$Comp
-L Amplifier_Operational:TL072 U?
-U 2 1 A9266C84
-P 53700 27500
-F 0 "U?" H 53700 27800 50  0000 C CNN
-F 1 "V2164D" H 53750 27700 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 53700 27500 50  0001 C CNN
-F 3 "" H 53700 27500 50  0001 C CNN
-	2    53700 27500
-	1    0    0    -1  
-$EndComp
-Connection ~ 52400 26400
-Connection ~ 52400 27600
-Connection ~ 54000 26300
-Connection ~ 54000 27500
 Wire Wire Line
 	54450 22450 54450 27500
 Wire Wire Line
@@ -15087,17 +14994,6 @@ F 3 "" H 12750 46600 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U?
-U 4 1 5EE09E4D
-P 43800 27550
-F 0 "U?" H 43800 27917 50  0000 C CNN
-F 1 "V2164D" H 43800 27826 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 43750 27650 50  0001 C CNN
-F 3 "" H 43850 27750 50  0001 C CNN
-	4    43800 27550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
 U 3 1 607506FD
 P 14900 38300
 F 0 "U?" H 14900 38667 50  0000 C CNN
@@ -15116,61 +15012,6 @@ F 1 "V2164D" H 7100 45226 50  0000 C CNN
 F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 7050 45050 50  0001 C CNN
 F 3 "" H 7150 45150 50  0001 C CNN
 	1    7100 44950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 3 1 5E9CFBA0
-P 40000 27950
-F 0 "U?" H 40000 28250 50  0000 C CNN
-F 1 "V2164D" H 40050 28150 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 39950 28050 50  0001 C CNN
-F 3 "" H 40050 28150 50  0001 C CNN
-	3    40000 27950
-	1    0    0    1   
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U?
-U 1 1 5EA89205
-P 52100 26400
-F 0 "U?" H 52100 26700 50  0000 C CNN
-F 1 "V2164D" H 52150 26600 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 52100 26400 50  0001 C CNN
-F 3 "" H 52100 26400 50  0001 C CNN
-	1    52100 26400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U?
-U 1 1 5EBB217B
-P 48100 26550
-F 0 "U?" H 48100 26917 50  0000 C CNN
-F 1 "V2164D" H 48100 26826 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 48100 26550 50  0001 C CNN
-F 3 "" H 48100 26550 50  0001 C CNN
-	1    48100 26550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 1 1 5EDD93A8
-P 41850 26450
-F 0 "U?" H 41850 26817 50  0000 C CNN
-F 1 "V2164D" H 41850 26726 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 41800 26550 50  0001 C CNN
-F 3 "" H 41900 26650 50  0001 C CNN
-	1    41850 26450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 3 1 5EDE08C6
-P 41850 27650
-F 0 "U?" H 41850 28017 50  0000 C CNN
-F 1 "V2164D" H 41850 27926 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 41800 27750 50  0001 C CNN
-F 3 "" H 41900 27850 50  0001 C CNN
-	3    41850 27650
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -15479,39 +15320,6 @@ F 1 "V2164D" H 10550 43426 50  0000 C CNN
 F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 10500 43250 50  0001 C CNN
 F 3 "" H 10600 43350 50  0001 C CNN
 	1    10550 43150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 1 1 89DD6794
-P 45350 23500
-F 0 "U?" H 45350 23867 50  0000 C CNN
-F 1 "V2164D" H 45350 23776 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 45300 23600 50  0001 C CNN
-F 3 "" H 45400 23700 50  0001 C CNN
-	1    45350 23500
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 1 1 8BF80AAA
-P 47900 23500
-F 0 "U?" H 47900 23867 50  0000 C CNN
-F 1 "V2164D" H 47900 23776 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 47850 23600 50  0001 C CNN
-F 3 "" H 47950 23700 50  0001 C CNN
-	1    47900 23500
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U?
-U 1 1 A9266BE6
-P 53700 26300
-F 0 "U?" H 53700 26600 50  0000 C CNN
-F 1 "V2164D" H 53750 26500 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 53700 26300 50  0001 C CNN
-F 3 "" H 53700 26300 50  0001 C CNN
-	1    53700 26300
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -16478,4 +16286,196 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 20950 31050 50  0001 C CNN
 	3    20950 31050
 	1    0    0    -1  
 $EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 6218CA00
+P 40350 25950
+F 0 "U?" H 40450 26200 50  0000 C CNN
+F 1 "TL074" H 40450 26100 50  0000 C CNN
+F 2 "" H 40300 26050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 40400 26150 50  0001 C CNN
+	1    40350 25950
+	-1   0    0    1   
+$EndComp
+Connection ~ 40050 25950
+Wire Wire Line
+	40300 26450 40300 26550
+$Comp
+L Amplifier_Operational:TL074 U?
+U 2 1 621954D3
+P 40000 26550
+F 0 "U?" H 40000 26917 50  0000 C CNN
+F 1 "TL074" H 40000 26826 50  0000 C CNN
+F 2 "" H 39950 26650 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 40050 26750 50  0001 C CNN
+	2    40000 26550
+	1    0    0    -1  
+$EndComp
+Connection ~ 40300 26550
+Wire Wire Line
+	40300 26550 40300 26900
+Wire Wire Line
+	40300 27600 40300 27950
+$Comp
+L Amplifier_Operational:TL074 U?
+U 3 1 6219D961
+P 40000 27950
+F 0 "U?" H 40050 28100 50  0000 C CNN
+F 1 "TL074" H 40000 28200 50  0000 C CNN
+F 2 "" H 39950 28050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 40050 28150 50  0001 C CNN
+	3    40000 27950
+	1    0    0    1   
+$EndComp
+Connection ~ 40300 27950
+Wire Wire Line
+	40300 27950 40300 28000
+$Comp
+L Amplifier_Operational:TL074 U?
+U 4 1 621A56C4
+P 40350 28500
+F 0 "U?" H 40400 28750 50  0000 C CNN
+F 1 "TL074" H 40450 28650 50  0000 C CNN
+F 2 "" H 40300 28600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 40400 28700 50  0001 C CNN
+	4    40350 28500
+	-1   0    0    -1  
+$EndComp
+Connection ~ 40050 28500
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 621AF226
+P 41850 26450
+F 0 "U?" H 41850 26817 50  0000 C CNN
+F 1 "TL074" H 41850 26726 50  0000 C CNN
+F 2 "" H 41800 26550 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 41900 26650 50  0001 C CNN
+	1    41850 26450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 2 1 621B7360
+P 41850 27650
+F 0 "U?" H 41850 28017 50  0000 C CNN
+F 1 "TL074" H 41850 27926 50  0000 C CNN
+F 2 "" H 41800 27750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 41900 27850 50  0001 C CNN
+	2    41850 27650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 3 1 621BF4FB
+P 43800 26350
+F 0 "U?" H 43800 26717 50  0000 C CNN
+F 1 "TL074" H 43800 26626 50  0000 C CNN
+F 2 "" H 43750 26450 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 43850 26550 50  0001 C CNN
+	3    43800 26350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 4 1 621C6891
+P 43800 27550
+F 0 "U?" H 43800 27917 50  0000 C CNN
+F 1 "TL074" H 43800 27826 50  0000 C CNN
+F 2 "" H 43750 27650 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 43850 27750 50  0001 C CNN
+	4    43800 27550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 621CEC11
+P 45350 23500
+F 0 "U?" H 45350 23867 50  0000 C CNN
+F 1 "TL074" H 45350 23776 50  0000 C CNN
+F 2 "" H 45300 23600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 45400 23700 50  0001 C CNN
+	1    45350 23500
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 2 1 621D8411
+P 47900 23500
+F 0 "U?" H 47900 23867 50  0000 C CNN
+F 1 "TL074" H 47900 23776 50  0000 C CNN
+F 2 "" H 47850 23600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 47950 23700 50  0001 C CNN
+	2    47900 23500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 3 1 621DFEFF
+P 48100 26550
+F 0 "U?" H 48100 26917 50  0000 C CNN
+F 1 "TL074" H 48100 26826 50  0000 C CNN
+F 2 "" H 48050 26650 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 48150 26750 50  0001 C CNN
+	3    48100 26550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 4 1 621E86F4
+P 48100 27750
+F 0 "U?" H 48100 28117 50  0000 C CNN
+F 1 "TL074" H 48100 28026 50  0000 C CNN
+F 2 "" H 48050 27850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 48150 27950 50  0001 C CNN
+	4    48100 27750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 621EF914
+P 52100 26400
+F 0 "U?" H 52100 26767 50  0000 C CNN
+F 1 "TL074" H 52100 26676 50  0000 C CNN
+F 2 "" H 52050 26500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 52150 26600 50  0001 C CNN
+	1    52100 26400
+	1    0    0    -1  
+$EndComp
+Connection ~ 52400 26400
+$Comp
+L Amplifier_Operational:TL074 U?
+U 2 1 621F74C9
+P 52100 27600
+F 0 "U?" H 52100 27967 50  0000 C CNN
+F 1 "TL074" H 52100 27876 50  0000 C CNN
+F 2 "" H 52050 27700 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 52150 27800 50  0001 C CNN
+	2    52100 27600
+	1    0    0    -1  
+$EndComp
+Connection ~ 52400 27600
+$Comp
+L Amplifier_Operational:TL074 U?
+U 3 1 621FEFE1
+P 53700 26300
+F 0 "U?" H 53700 26667 50  0000 C CNN
+F 1 "TL074" H 53700 26576 50  0000 C CNN
+F 2 "" H 53650 26400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 53750 26500 50  0001 C CNN
+	3    53700 26300
+	1    0    0    -1  
+$EndComp
+Connection ~ 54000 26300
+$Comp
+L Amplifier_Operational:TL074 U?
+U 4 1 6220712E
+P 53700 27500
+F 0 "U?" H 53700 27867 50  0000 C CNN
+F 1 "TL074" H 53700 27776 50  0000 C CNN
+F 2 "" H 53650 27600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 53750 27700 50  0001 C CNN
+	4    53700 27500
+	1    0    0    -1  
+$EndComp
+Connection ~ 54000 27500
 $EndSCHEMATC
