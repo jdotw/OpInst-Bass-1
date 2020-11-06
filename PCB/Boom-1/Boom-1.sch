@@ -16222,12 +16222,12 @@ $EndComp
 $Comp
 L Amplifier_Operational:TL072 U?
 U 3 1 6216D5FB
-P 20950 31050
-F 0 "U?" H 20908 31096 50  0000 L CNN
-F 1 "TL072" H 20908 31005 50  0000 L CNN
-F 2 "" H 20950 31050 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 20950 31050 50  0001 C CNN
-	3    20950 31050
+P 21650 31550
+F 0 "U?" H 21608 31596 50  0000 L CNN
+F 1 "TL072" H 21608 31505 50  0000 L CNN
+F 2 "" H 21650 31550 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21650 31550 50  0001 C CNN
+	3    21650 31550
 	1    0    0    -1  
 $EndComp
 $Comp
