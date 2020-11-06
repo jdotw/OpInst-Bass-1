@@ -15933,17 +15933,6 @@ F 3 "" H 1950 18450 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L CustomSymbols:CEM3340 U?
-U 1 1 600F231F
-P 6600 7500
-F 0 "U?" H 6550 8165 50  0000 C CNN
-F 1 "V2164D" H 6550 8074 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 7350 6800 50  0001 C CNN
-F 3 "" H 6650 8050 50  0001 C CNN
-	1    6600 7500
-	1    0    0    -1  
-$EndComp
-$Comp
 L CustomSymbols:V2164D U?
 U 5 1 62823355
 P 6200 13400
@@ -16344,6 +16333,17 @@ F 1 "TL074" H 5058 13255 50  0000 L CNN
 F 2 "" H 5050 13400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 5150 13500 50  0001 C CNN
 	5    5100 13300
+	1    0    0    -1  
+$EndComp
+$Comp
+L CustomSymbols:CEM3340 U?
+U 1 1 600DCD66
+P 6600 7500
+F 0 "U?" H 6550 8165 50  0000 C CNN
+F 1 "CEM3340" H 6550 8074 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 7350 6800 50  0001 C CNN
+F 3 "" H 6650 8050 50  0001 C CNN
+	1    6600 7500
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
