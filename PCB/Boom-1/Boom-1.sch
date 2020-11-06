@@ -16401,4 +16401,70 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35100 27450 50  0001 C CNN
 	3    35050 27250
 	1    0    0    -1  
 $EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 6014D7EE
+P 30100 18300
+F 0 "U?" H 30058 18346 50  0000 L CNN
+F 1 "TL074" H 30058 18255 50  0000 L CNN
+F 2 "" H 30050 18400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 30150 18500 50  0001 C CNN
+	5    30100 18300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 6015593F
+P 31100 18300
+F 0 "U?" H 31058 18346 50  0000 L CNN
+F 1 "TL074" H 31058 18255 50  0000 L CNN
+F 2 "" H 31050 18400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31150 18500 50  0001 C CNN
+	5    31100 18300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 601576BC
+P 32100 18300
+F 0 "U?" H 32058 18346 50  0000 L CNN
+F 1 "TL074" H 32058 18255 50  0000 L CNN
+F 2 "" H 32050 18400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32150 18500 50  0001 C CNN
+	5    32100 18300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U?
+U 3 1 601601BA
+P 33100 18300
+F 0 "U?" H 33058 18346 50  0000 L CNN
+F 1 "TL072" H 33058 18255 50  0000 L CNN
+F 2 "" H 33100 18300 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 33100 18300 50  0001 C CNN
+	3    33100 18300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 60166610
+P 20000 25400
+F 0 "U?" H 19958 25446 50  0000 L CNN
+F 1 "TL074" H 19958 25355 50  0000 L CNN
+F 2 "" H 19950 25500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 20050 25600 50  0001 C CNN
+	5    20000 25400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U?
+U 3 1 60166672
+P 20650 25400
+F 0 "U?" H 20608 25446 50  0000 L CNN
+F 1 "TL072" H 20608 25355 50  0000 L CNN
+F 2 "" H 20650 25400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 20650 25400 50  0001 C CNN
+	3    20650 25400
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
