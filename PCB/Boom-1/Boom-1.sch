@@ -15335,17 +15335,6 @@ F 3 "" H 18300 41900 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U?
-U 1 1 84A932CC
-P 31400 23650
-F 0 "U?" H 31400 24017 50  0000 C CNN
-F 1 "V2164D" H 31400 23926 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 31350 23750 50  0001 C CNN
-F 3 "" H 31450 23850 50  0001 C CNN
-	1    31400 23650
-	-1   0    0    1   
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
 U 1 1 89F24323
 P 31500 37000
 F 0 "U?" H 31500 37367 50  0000 C CNN
@@ -16399,6 +16388,17 @@ F 1 "TL074" H 31550 22900 50  0000 C CNN
 F 2 "" H 31350 22850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31450 22950 50  0001 C CNN
 	3    31400 22750
+	-1   0    0    1   
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 4 1 600FE3C9
+P 31400 23650
+F 0 "U?" H 31400 23283 50  0000 C CNN
+F 1 "TL074" H 31400 23374 50  0000 C CNN
+F 2 "" H 31350 23750 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31450 23850 50  0001 C CNN
+	4    31400 23650
 	-1   0    0    1   
 $EndComp
 $EndSCHEMATC
