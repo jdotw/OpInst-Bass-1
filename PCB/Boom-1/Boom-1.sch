@@ -16374,34 +16374,34 @@ $EndComp
 $Comp
 L Amplifier_Operational:TL074 U?
 U 5 1 6917B785
-P 21350 49150
-F 0 "U?" H 21308 49196 50  0000 L CNN
-F 1 "TL074" H 21308 49105 50  0000 L CNN
-F 2 "" H 21300 49250 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21400 49350 50  0001 C CNN
-	5    21350 49150
+P 22150 49150
+F 0 "U?" H 22108 49196 50  0000 L CNN
+F 1 "TL074" H 22108 49105 50  0000 L CNN
+F 2 "" H 22100 49250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 22200 49350 50  0001 C CNN
+	5    22150 49150
 	1    0    0    -1  
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U?
 U 5 1 69181953
-P 22350 49150
-F 0 "U?" H 22308 49196 50  0000 L CNN
-F 1 "TL074" H 22308 49105 50  0000 L CNN
-F 2 "" H 22300 49250 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 22400 49350 50  0001 C CNN
-	5    22350 49150
+P 23150 49150
+F 0 "U?" H 23108 49196 50  0000 L CNN
+F 1 "TL074" H 23108 49105 50  0000 L CNN
+F 2 "" H 23100 49250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 23200 49350 50  0001 C CNN
+	5    23150 49150
 	1    0    0    -1  
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U?
 U 5 1 69183854
-P 23350 49150
-F 0 "U?" H 23308 49196 50  0000 L CNN
-F 1 "TL074" H 23308 49105 50  0000 L CNN
-F 2 "" H 23300 49250 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 23400 49350 50  0001 C CNN
-	5    23350 49150
+P 24150 49150
+F 0 "U?" H 24108 49196 50  0000 L CNN
+F 1 "TL074" H 24108 49105 50  0000 L CNN
+F 2 "" H 24100 49250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 24200 49350 50  0001 C CNN
+	5    24150 49150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -16652,4 +16652,6 @@ F 3 "" H 10200 48400 50  0001 C CNN
 	5    10150 48250
 	1    0    0    -1  
 $EndComp
+Text Notes 20700 49200 0    50   ~ 0
+Power for both envelopes
 $EndSCHEMATC
