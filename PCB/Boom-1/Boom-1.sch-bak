@@ -16281,50 +16281,6 @@ Wire Wire Line
 Wire Wire Line
 	5950 13050 6000 13050
 $Comp
-L CustomSymbols:V2164D U?
-U 1 1 B9BD26E7
-P 12250 4800
-F 0 "U?" H 12250 5075 50  0000 C CNN
-F 1 "TL074" H 12250 4984 50  0000 C CNN
-F 2 "" H 13000 4550 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 4950 50  0001 C CNN
-	1    12250 4800
-	1    0    0    -1  
-$EndComp
-$Comp
-L CustomSymbols:V2164D U?
-U 2 1 B9BDB1CA
-P 12250 5950
-F 0 "U?" H 12250 6225 50  0000 C CNN
-F 1 "TL074" H 12250 6134 50  0000 C CNN
-F 2 "" H 13000 5700 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 6100 50  0001 C CNN
-	2    12250 5950
-	1    0    0    -1  
-$EndComp
-$Comp
-L CustomSymbols:V2164D U?
-U 3 1 B9BE44CC
-P 12300 8050
-F 0 "U?" H 12300 8325 50  0000 C CNN
-F 1 "TL074" H 12300 8234 50  0000 C CNN
-F 2 "" H 13050 7800 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12350 8200 50  0001 C CNN
-	3    12300 8050
-	1    0    0    -1  
-$EndComp
-$Comp
-L CustomSymbols:V2164D U?
-U 4 1 B9BED461
-P 12250 9150
-F 0 "U?" H 12250 9425 50  0000 C CNN
-F 1 "TL074" H 12250 9334 50  0000 C CNN
-F 2 "" H 13000 8900 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 9300 50  0001 C CNN
-	4    12250 9150
-	1    0    0    -1  
-$EndComp
-$Comp
 L CustomSymbols:CEM3340 U?
 U 1 1 600F231F
 P 6600 7500
@@ -16344,6 +16300,50 @@ F 1 "V2164D" H 6158 13330 50  0000 L CNN
 F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 6950 13150 50  0001 C CNN
 F 3 "" H 6250 13550 50  0001 C CNN
 	5    6200 13400
+	1    0    0    -1  
+$EndComp
+$Comp
+L CustomSymbols:V2164D U?
+U 1 1 60766C24
+P 12250 4800
+F 0 "U?" H 12250 5075 50  0000 C CNN
+F 1 "V2164D" H 12250 4984 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 13000 4550 50  0001 C CNN
+F 3 "" H 12300 4950 50  0001 C CNN
+	1    12250 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L CustomSymbols:V2164D U?
+U 2 1 6076DFE3
+P 12250 5950
+F 0 "U?" H 12250 6225 50  0000 C CNN
+F 1 "V2164D" H 12250 6134 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 13000 5700 50  0001 C CNN
+F 3 "" H 12300 6100 50  0001 C CNN
+	2    12250 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L CustomSymbols:V2164D U?
+U 3 1 60774BC2
+P 12300 8050
+F 0 "U?" H 12300 8325 50  0000 C CNN
+F 1 "V2164D" H 12300 8234 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 13050 7800 50  0001 C CNN
+F 3 "" H 12350 8200 50  0001 C CNN
+	3    12300 8050
+	1    0    0    -1  
+$EndComp
+$Comp
+L CustomSymbols:V2164D U?
+U 4 1 6077D499
+P 12250 9150
+F 0 "U?" H 12250 9425 50  0000 C CNN
+F 1 "V2164D" H 12250 9334 50  0000 C CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 13000 8900 50  0001 C CNN
+F 3 "" H 12300 9300 50  0001 C CNN
+	4    12250 9150
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
