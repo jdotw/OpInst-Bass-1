@@ -14993,17 +14993,6 @@ F 3 "" H 4000 46350 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U?
-U 1 1 61E9B02E
-P 9650 37600
-F 0 "U?" H 9650 37967 50  0000 C CNN
-F 1 "V2164D" H 9650 37876 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 9600 37700 50  0001 C CNN
-F 3 "" H 9700 37800 50  0001 C CNN
-	1    9650 37600
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
 U 1 1 6CFE24C1
 P 18250 41700
 F 0 "U?" H 18250 42067 50  0000 C CNN
@@ -15209,28 +15198,6 @@ F 1 "V2164D" H 29400 40926 50  0000 C CNN
 F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 29400 40650 50  0001 C CNN
 F 3 "" H 29400 40650 50  0001 C CNN
 	1    29400 40650
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 1 1 7850C6E5
-P 11150 35250
-F 0 "U?" H 11150 35617 50  0000 C CNN
-F 1 "V2164D" H 11150 35526 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 11100 35350 50  0001 C CNN
-F 3 "" H 11200 35450 50  0001 C CNN
-	1    11150 35250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 1 1 7850C7E2
-P 10150 36200
-F 0 "U?" H 10150 36567 50  0000 C CNN
-F 1 "V2164D" H 10150 36476 50  0000 C CNN
-F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 10100 36300 50  0001 C CNN
-F 3 "" H 10200 36400 50  0001 C CNN
-	1    10150 36200
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -16518,6 +16485,72 @@ F 1 "4013" H 5300 40140 50  0000 C CNN
 F 2 "" H 5300 39750 50  0001 C CNN
 F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 5300 39750 50  0001 C CNN
 	2    5300 39750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 1 1 690AF151
+P 11150 35250
+F 0 "U?" H 11150 35617 50  0000 C CNN
+F 1 "TL074" H 11150 35526 50  0000 C CNN
+F 2 "" H 11100 35350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11200 35450 50  0001 C CNN
+	1    11150 35250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 2 1 690B6D45
+P 10150 36200
+F 0 "U?" H 10150 36567 50  0000 C CNN
+F 1 "TL074" H 10150 36476 50  0000 C CNN
+F 2 "" H 10100 36300 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 10200 36400 50  0001 C CNN
+	2    10150 36200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 3 1 690BEF49
+P 9650 37600
+F 0 "U?" H 9650 37967 50  0000 C CNN
+F 1 "TL074" H 9650 37876 50  0000 C CNN
+F 2 "" H 9600 37700 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 9700 37800 50  0001 C CNN
+	3    9650 37600
+	1    0    0    -1  
+$EndComp
+$Comp
+L 4xxx:4013 U?
+U 3 1 690C6830
+P 9650 40200
+F 0 "U?" H 9880 40246 50  0000 L CNN
+F 1 "4013" H 9880 40155 50  0000 L CNN
+F 2 "" H 9650 40200 50  0001 C CNN
+F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 9650 40200 50  0001 C CNN
+	3    9650 40200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 690CFFD0
+P 10850 40250
+F 0 "U?" H 10808 40296 50  0000 L CNN
+F 1 "TL074" H 10808 40205 50  0000 L CNN
+F 2 "" H 10800 40350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 10900 40450 50  0001 C CNN
+	5    10850 40250
+	1    0    0    -1  
+$EndComp
+$Comp
+L CustomSymbols:V2164D U?
+U 5 1 690D7E9F
+P 11950 40200
+F 0 "U?" H 11908 40221 50  0000 L CNN
+F 1 "V2164D" H 11908 40130 50  0000 L CNN
+F 2 "Package_DIP:DIP-16_W7.62mm_Socket" H 12700 39950 50  0001 C CNN
+F 3 "" H 12000 40350 50  0001 C CNN
+	5    11950 40200
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
