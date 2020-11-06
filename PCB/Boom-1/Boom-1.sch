@@ -4147,17 +4147,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 14350 28450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Boom-1-rescue:V2164D-Analog_VCA-CEM3340-Voice-Board-rescue-Boom-1-rescue-Boom-1-rescue U?
-U 5 1 5FD558CF
-P 28600 21150
-F 0 "U?" H 28558 21171 50  0000 L CNN
-F 1 "TL074" H 28558 21080 50  0000 L CNN
-F 2 "" H 29350 20900 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 28650 21300 50  0001 C CNN
-	5    28600 21150
-	1    0    0    -1  
-$EndComp
-$Comp
 L Amplifier_Operational:TL074 U?
 U 3 1 607506FD
 P 14900 38300
