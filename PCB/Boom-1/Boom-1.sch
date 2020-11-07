@@ -14630,10 +14630,10 @@ F 3 "" H 8950 32100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U22
 U 1 1 6018276C
 P 12650 26600
-F 0 "U?" H 12650 26967 50  0000 C CNN
+F 0 "U22" H 12650 26967 50  0000 C CNN
 F 1 "TL074" H 12650 26876 50  0000 C CNN
 F 2 "" H 12600 26700 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12700 26800 50  0001 C CNN
@@ -14641,10 +14641,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12700 26800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U22
 U 2 1 6018AC02
 P 11650 27550
-F 0 "U?" H 11650 27917 50  0000 C CNN
+F 0 "U22" H 11650 27917 50  0000 C CNN
 F 1 "TL074" H 11650 27826 50  0000 C CNN
 F 2 "" H 11600 27650 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11700 27750 50  0001 C CNN
@@ -14652,10 +14652,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11700 27750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U22
 U 3 1 6019A5DA
 P 11600 28750
-F 0 "U?" H 11600 29117 50  0000 C CNN
+F 0 "U22" H 11600 29117 50  0000 C CNN
 F 1 "TL074" H 11600 29026 50  0000 C CNN
 F 2 "" H 11550 28850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11650 28950 50  0001 C CNN
@@ -14665,10 +14665,10 @@ $EndComp
 Connection ~ 11900 28750
 Connection ~ 11300 28850
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U22
 U 4 1 601A1DE6
 P 11600 29900
-F 0 "U?" H 11600 30267 50  0000 C CNN
+F 0 "U22" H 11600 30267 50  0000 C CNN
 F 1 "TL074" H 11600 30176 50  0000 C CNN
 F 2 "" H 11550 30000 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11650 30100 50  0001 C CNN
@@ -14678,10 +14678,10 @@ $EndComp
 Connection ~ 11300 30000
 Connection ~ 11900 29900
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U23
 U 1 1 601A93AC
 P 11600 31650
-F 0 "U?" H 11600 32017 50  0000 C CNN
+F 0 "U23" H 11600 32017 50  0000 C CNN
 F 1 "TL074" H 11600 31926 50  0000 C CNN
 F 2 "" H 11550 31750 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11650 31850 50  0001 C CNN
@@ -14689,10 +14689,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11650 31850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U23
 U 2 1 601B6DC1
 P 12750 31550
-F 0 "U?" H 12750 31917 50  0000 C CNN
+F 0 "U23" H 12750 31917 50  0000 C CNN
 F 1 "TL074" H 12750 31826 50  0000 C CNN
 F 2 "" H 12700 31650 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12800 31750 50  0001 C CNN
@@ -14700,10 +14700,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12800 31750 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U23
 U 3 1 601BF011
 P 12200 32900
-F 0 "U?" H 12200 33267 50  0000 C CNN
+F 0 "U23" H 12200 33267 50  0000 C CNN
 F 1 "TL074" H 12200 33176 50  0000 C CNN
 F 2 "" H 12150 33000 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12250 33100 50  0001 C CNN
@@ -15844,10 +15844,10 @@ Connection ~ 8250 16450
 Wire Wire Line
 	8250 16450 8250 16500
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U22
 U 5 1 6CE7CAAF
 P 7700 25450
-F 0 "U?" H 7658 25496 50  0000 L CNN
+F 0 "U22" H 7658 25496 50  0000 L CNN
 F 1 "TL074" H 7658 25405 50  0000 L CNN
 F 2 "" H 7650 25550 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 7750 25650 50  0001 C CNN
@@ -15935,10 +15935,10 @@ Connection ~ 7600 25800
 Wire Wire Line
 	7600 25800 7600 25850
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U23
 U 5 1 6CE7CB89
 P 8850 25450
-F 0 "U?" H 8808 25496 50  0000 L CNN
+F 0 "U23" H 8808 25496 50  0000 L CNN
 F 1 "TL074" H 8808 25405 50  0000 L CNN
 F 2 "" H 8800 25550 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8900 25650 50  0001 C CNN
