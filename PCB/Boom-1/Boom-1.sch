@@ -14465,10 +14465,10 @@ F 3 "" H 9650 11000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U21
 U 4 1 600DCCDB
 P 24400 14100
-F 0 "U?" H 24400 14467 50  0000 C CNN
+F 0 "U21" H 24400 14467 50  0000 C CNN
 F 1 "TL074" H 24400 14376 50  0000 C CNN
 F 2 "" H 24350 14200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 24450 14300 50  0001 C CNN
