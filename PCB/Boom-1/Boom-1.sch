@@ -16905,17 +16905,6 @@ Connection ~ 31850 31300
 Wire Wire Line
 	31850 31300 31850 31350
 $Comp
-L Amplifier_Operational:TL072 U38
-U 3 1 7A9C96AD
-P 35350 35400
-F 0 "U38" H 35308 35446 50  0000 L CNN
-F 1 "TL072" H 35308 35355 50  0000 L CNN
-F 2 "" H 35350 35400 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35350 35400 50  0001 C CNN
-	3    35350 35400
-	1    0    0    -1  
-$EndComp
-$Comp
 L Amplifier_Operational:TL074 U?
 U 5 1 7A9C974B
 P 34200 35400
@@ -20094,31 +20083,9 @@ Wire Wire Line
 	38150 28700 38150 28400
 Wire Wire Line
 	38150 28400 38100 28400
-$Comp
-L Amplifier_Operational:TL072 U38
-U 1 1 69006DEF
-P 35550 37500
-F 0 "U38" H 35650 37650 50  0000 C CNN
-F 1 "TL072" H 35600 37750 50  0000 C CNN
-F 2 "" H 35550 37500 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35550 37500 50  0001 C CNN
-	1    35550 37500
-	1    0    0    1   
-$EndComp
 Connection ~ 35850 37500
 Wire Wire Line
 	36200 38050 36200 38500
-$Comp
-L Amplifier_Operational:TL072 U38
-U 2 1 690112C8
-P 35900 38500
-F 0 "U38" H 35900 38133 50  0000 C CNN
-F 1 "TL072" H 35900 38224 50  0000 C CNN
-F 2 "" H 35900 38500 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35900 38500 50  0001 C CNN
-	2    35900 38500
-	1    0    0    1   
-$EndComp
 Connection ~ 36200 38500
 Wire Wire Line
 	36200 38500 36200 38850
@@ -20213,4 +20180,37 @@ Wire Wire Line
 Connection ~ 36250 35050
 Wire Wire Line
 	36250 35050 36250 35100
+$Comp
+L Amplifier_Operational:TL072 U38
+U 3 1 7A9C96AD
+P 35350 35400
+F 0 "U38" H 35308 35446 50  0000 L CNN
+F 1 "TL072" H 35308 35355 50  0000 L CNN
+F 2 "" H 35350 35400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35350 35400 50  0001 C CNN
+	3    35350 35400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U38
+U 1 1 69006DEF
+P 35550 37500
+F 0 "U38" H 35650 37650 50  0000 C CNN
+F 1 "TL072" H 35600 37750 50  0000 C CNN
+F 2 "" H 35550 37500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35550 37500 50  0001 C CNN
+	1    35550 37500
+	1    0    0    1   
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U38
+U 2 1 690112C8
+P 35900 38500
+F 0 "U38" H 35900 38133 50  0000 C CNN
+F 1 "TL072" H 35900 38224 50  0000 C CNN
+F 2 "" H 35900 38500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35900 38500 50  0001 C CNN
+	2    35900 38500
+	1    0    0    1   
+$EndComp
 $EndSCHEMATC
