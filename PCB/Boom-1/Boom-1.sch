@@ -19560,10 +19560,10 @@ Wire Wire Line
 	11000 15550 11000 15700
 Connection ~ 11000 15700
 $Comp
-L Regulator_Linear:L7905 U?
+L Regulator_Linear:L7905 U45
 U 1 1 8F2A5DBC
 P 49600 11750
-F 0 "U?" H 49600 11508 50  0000 C CNN
+F 0 "U45" H 49600 11508 50  0000 C CNN
 F 1 "L7905" H 49600 11599 50  0000 C CNN
 F 2 "" H 49600 11550 50  0001 C CIN
 F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/c9/16/86/41/c7/2b/45/f2/CD00000450.pdf/files/CD00000450.pdf/jcr:content/translations/en.CD00000450.pdf" H 49600 11750 50  0001 C CNN
@@ -19571,10 +19571,10 @@ F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/c9/16/8
 	-1   0    0    1   
 $EndComp
 $Comp
-L Regulator_Linear:L7805 U?
+L Regulator_Linear:L7805 U46
 U 1 1 8F2AF784
 P 51200 11750
-F 0 "U?" H 51200 11992 50  0000 C CNN
+F 0 "U46" H 51200 11992 50  0000 C CNN
 F 1 "L7805" H 51200 11901 50  0000 C CNN
 F 2 "" H 51225 11600 50  0001 L CIN
 F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 51200 11700 50  0001 C CNN
