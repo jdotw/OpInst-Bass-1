@@ -15140,10 +15140,10 @@ F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 7100 38300 50  0001 
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U31
 U 1 1 690F5BAC
 P 21400 41100
-F 0 "U?" H 21400 41467 50  0000 C CNN
+F 0 "U31" H 21400 41467 50  0000 C CNN
 F 1 "TL072" H 21400 41376 50  0000 C CNN
 F 2 "" H 21400 41100 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21400 41100 50  0001 C CNN
@@ -15152,10 +15152,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21400 41100 50  0001 C CNN
 $EndComp
 Connection ~ 21700 41100
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U31
 U 2 1 690FE8E2
 P 21250 44500
-F 0 "U?" H 21250 44867 50  0000 C CNN
+F 0 "U31" H 21250 44867 50  0000 C CNN
 F 1 "TL072" H 21250 44776 50  0000 C CNN
 F 2 "" H 21250 44500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21250 44500 50  0001 C CNN
@@ -17620,10 +17620,10 @@ Connection ~ 45800 34050
 Wire Wire Line
 	45800 34050 45800 34100
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U31
 U 3 1 7DBA414E
 P 24450 40250
-F 0 "U?" H 24408 40296 50  0000 L CNN
+F 0 "U31" H 24408 40296 50  0000 L CNN
 F 1 "TL072" H 24408 40205 50  0000 L CNN
 F 2 "" H 24450 40250 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 24450 40250 50  0001 C CNN
