@@ -16461,17 +16461,6 @@ Connection ~ 24050 27800
 Wire Wire Line
 	24050 27800 24050 27850
 $Comp
-L Amplifier_Operational:TL072 U30
-U 3 1 74BE356E
-P 26550 29100
-F 0 "U30" H 26508 29146 50  0000 L CNN
-F 1 "TL074" H 26508 29055 50  0000 L CNN
-F 2 "" H 26550 29100 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 26550 29100 50  0001 C CNN
-	3    26550 29100
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 74BE360C
 P 26150 29100
@@ -20033,4 +20022,15 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35900 38500 50  0001 C CNN
 $EndComp
 Text Notes 37450 28200 0    50   ~ 0
 Unused
+$Comp
+L Amplifier_Operational:TL074 U30
+U 5 1 6DB68DCC
+P 26550 29100
+F 0 "U30" H 26508 29146 50  0000 L CNN
+F 1 "TL074" H 26508 29055 50  0000 L CNN
+F 2 "" H 26500 29200 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 26600 29300 50  0001 C CNN
+	5    26550 29100
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
