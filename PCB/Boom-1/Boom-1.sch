@@ -15455,10 +15455,10 @@ F 3 "" H 15750 49400 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U25
 U 1 1 69F139BD
 P 13550 45950
-F 0 "U?" H 13550 46317 50  0000 C CNN
+F 0 "U25" H 13550 46317 50  0000 C CNN
 F 1 "TL074" H 13550 46226 50  0000 C CNN
 F 2 "" H 13500 46050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13600 46150 50  0001 C CNN
@@ -15466,10 +15466,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13600 46150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U25
 U 2 1 69F1B5EF
 P 12550 46900
-F 0 "U?" H 12550 47267 50  0000 C CNN
+F 0 "U25" H 12550 47267 50  0000 C CNN
 F 1 "TL074" H 12550 47176 50  0000 C CNN
 F 2 "" H 12500 47000 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12600 47100 50  0001 C CNN
@@ -15477,10 +15477,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12600 47100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U25
 U 3 1 69F235EB
 P 10100 47750
-F 0 "U?" H 10100 48117 50  0000 C CNN
+F 0 "U25" H 10100 48117 50  0000 C CNN
 F 1 "TL074" H 10100 48026 50  0000 C CNN
 F 2 "" H 10050 47850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 10150 47950 50  0001 C CNN
@@ -15488,10 +15488,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 10150 47950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U25
 U 4 1 69F2BE9E
 P 10100 49300
-F 0 "U?" H 10100 49667 50  0000 C CNN
+F 0 "U25" H 10100 49667 50  0000 C CNN
 F 1 "TL074" H 10100 49576 50  0000 C CNN
 F 2 "" H 10050 49400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 10150 49500 50  0001 C CNN
@@ -16117,10 +16117,10 @@ Connection ~ 8400 38650
 Wire Wire Line
 	8400 38650 8400 38700
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U25
 U 5 1 6F2BEDD9
 P 11700 51950
-F 0 "U?" H 11658 51996 50  0000 L CNN
+F 0 "U25" H 11658 51996 50  0000 L CNN
 F 1 "TL074" H 11658 51905 50  0000 L CNN
 F 2 "" H 11650 52050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11750 52150 50  0001 C CNN
