@@ -15256,10 +15256,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 25900 55900 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U39
 U 1 1 6983136F
 P 34500 39800
-F 0 "U?" H 34500 40167 50  0000 C CNN
+F 0 "U39" H 34500 40167 50  0000 C CNN
 F 1 "TL074" H 34500 40076 50  0000 C CNN
 F 2 "" H 34450 39900 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34550 40000 50  0001 C CNN
@@ -15267,10 +15267,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34550 40000 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U39
 U 2 1 69838EBC
 P 34500 40700
-F 0 "U?" H 34500 41067 50  0000 C CNN
+F 0 "U39" H 34500 41067 50  0000 C CNN
 F 1 "TL074" H 34500 40976 50  0000 C CNN
 F 2 "" H 34450 40800 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34550 40900 50  0001 C CNN
@@ -15278,10 +15278,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34550 40900 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U39
 U 3 1 6984168A
 P 35150 41400
-F 0 "U?" H 35150 41767 50  0000 C CNN
+F 0 "U39" H 35150 41767 50  0000 C CNN
 F 1 "TL074" H 35150 41676 50  0000 C CNN
 F 2 "" H 35100 41500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35200 41600 50  0001 C CNN
@@ -15289,10 +15289,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35200 41600 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U39
 U 4 1 698496C4
 P 35200 42200
-F 0 "U?" H 35200 42567 50  0000 C CNN
+F 0 "U39" H 35200 42567 50  0000 C CNN
 F 1 "TL074" H 35200 42476 50  0000 C CNN
 F 2 "" H 35150 42300 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35250 42400 50  0001 C CNN
@@ -17076,10 +17076,10 @@ Connection ~ 35250 35050
 Wire Wire Line
 	35250 35050 35250 35100
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U39
 U 5 1 7A9C989D
 P 33050 35400
-F 0 "U?" H 33008 35446 50  0000 L CNN
+F 0 "U39" H 33008 35446 50  0000 L CNN
 F 1 "TL074" H 33008 35355 50  0000 L CNN
 F 2 "" H 33000 35500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 33100 35600 50  0001 C CNN
