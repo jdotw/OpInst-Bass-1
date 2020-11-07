@@ -8266,17 +8266,6 @@ Wire Wire Line
 Wire Wire Line
 	6500 28500 6500 30550
 $Comp
-L Connector_Generic:Conn_01x06 J2
-U 1 1 605F0421
-P 6500 28300
-F 0 "J2" V 6550 28900 50  0000 R CNN
-F 1 "Osc2CV" V 6450 28900 50  0000 R CNN
-F 2 "" H 6500 28300 50  0001 C CNN
-F 3 "~" H 6500 28300 50  0001 C CNN
-	1    6500 28300
-	0    -1   -1   0   
-$EndComp
-$Comp
 L Device:R_Small_US R87
 U 1 1 605F04AD
 P 12700 27050
@@ -9095,8 +9084,6 @@ Wire Wire Line
 	25450 30900 25650 30900
 Wire Wire Line
 	25650 31800 25650 30900
-NoConn ~ 6300 28500
-NoConn ~ 6400 28500
 Text Notes 19400 43100 1    50   ~ 0
 SubFiltFreqCV
 $Comp
@@ -20032,5 +20019,18 @@ F 2 "" H 24350 31000 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 24450 31100 50  0001 C CNN
 	2    24400 30900
 	1    0    0    1   
+$EndComp
+Text Notes 6450 28250 1    50   ~ 0
+Osc2TuningOut
+$Comp
+L Connector_Generic:Conn_01x05 J2
+U 1 1 6E511DD9
+P 6600 28300
+F 0 "J2" V 6564 28012 50  0000 R CNN
+F 1 "Osc2CVConn" V 6473 28012 50  0000 R CNN
+F 2 "" H 6600 28300 50  0001 C CNN
+F 3 "~" H 6600 28300 50  0001 C CNN
+	1    6600 28300
+	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC
