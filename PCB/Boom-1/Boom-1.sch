@@ -14729,10 +14729,10 @@ $EndComp
 Wire Wire Line
 	35600 27600 35600 27950
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U37
 U 1 1 6013410F
 P 35300 27950
-F 0 "U?" H 35300 27650 50  0000 C CNN
+F 0 "U37" H 35300 27650 50  0000 C CNN
 F 1 "TL074" H 35300 27750 50  0000 C CNN
 F 2 "" H 35250 28050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35350 28150 50  0001 C CNN
@@ -14743,10 +14743,10 @@ Connection ~ 35600 27950
 Wire Wire Line
 	35600 27950 35600 28400
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U37
 U 2 1 6013BC76
 P 34950 28950
-F 0 "U?" H 35050 29100 50  0000 C CNN
+F 0 "U37" H 35050 29100 50  0000 C CNN
 F 1 "TL074" H 34950 29200 50  0000 C CNN
 F 2 "" H 34900 29050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35000 29150 50  0001 C CNN
@@ -14755,10 +14755,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35000 29150 50  0001 C CNN
 $EndComp
 Connection ~ 35250 28950
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U37
 U 3 1 60142E99
 P 38050 30050
-F 0 "U?" H 38050 30417 50  0000 C CNN
+F 0 "U37" H 38050 30417 50  0000 C CNN
 F 1 "TL074" H 38050 30326 50  0000 C CNN
 F 2 "" H 38000 30150 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 38100 30250 50  0001 C CNN
@@ -16762,10 +16762,10 @@ Connection ~ 35250 30600
 Wire Wire Line
 	35250 30600 35250 30650
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U37
 U 5 1 791E2EB2
 P 33050 30950
-F 0 "U?" H 33008 30996 50  0000 L CNN
+F 0 "U37" H 33008 30996 50  0000 L CNN
 F 1 "TL074" H 33008 30905 50  0000 L CNN
 F 2 "" H 33000 31050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 33100 31150 50  0001 C CNN
@@ -20088,4 +20088,54 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32000 31150 50  0001 C CNN
 	5    31950 30950
 	1    0    0    -1  
 $EndComp
+$Comp
+L Amplifier_Operational:TL074 U37
+U 4 1 66124DA7
+P 37800 28400
+F 0 "U37" H 37800 28767 50  0000 C CNN
+F 1 "TL074" H 37800 28676 50  0000 C CNN
+F 2 "" H 37750 28500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 37850 28600 50  0001 C CNN
+	4    37800 28400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6612DE9A
+P 37400 28300
+F 0 "#PWR?" H 37400 28050 50  0001 C CNN
+F 1 "GND" V 37405 28172 50  0000 R CNN
+F 2 "" H 37400 28300 50  0001 C CNN
+F 3 "" H 37400 28300 50  0001 C CNN
+	1    37400 28300
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6612E12C
+P 37400 28500
+F 0 "#PWR?" H 37400 28250 50  0001 C CNN
+F 1 "GND" V 37405 28372 50  0000 R CNN
+F 2 "" H 37400 28500 50  0001 C CNN
+F 3 "" H 37400 28500 50  0001 C CNN
+	1    37400 28500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	37400 28300 37500 28300
+Wire Wire Line
+	37500 28500 37400 28500
+$Comp
+L power:GND #PWR?
+U 1 1 673E2A7E
+P 38200 28400
+F 0 "#PWR?" H 38200 28150 50  0001 C CNN
+F 1 "GND" V 38205 28272 50  0000 R CNN
+F 2 "" H 38200 28400 50  0001 C CNN
+F 3 "" H 38200 28400 50  0001 C CNN
+	1    38200 28400
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	38200 28400 38100 28400
 $EndSCHEMATC
