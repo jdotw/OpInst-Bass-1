@@ -14315,10 +14315,10 @@ F 3 "" H 14600 28850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U19
 U 1 1 600DCD0C
 P 13350 5500
-F 0 "U?" H 13350 5867 50  0000 C CNN
+F 0 "U19" H 13350 5867 50  0000 C CNN
 F 1 "TL074" H 13350 5776 50  0000 C CNN
 F 2 "" H 13300 5600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13400 5700 50  0001 C CNN
@@ -14326,10 +14326,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13400 5700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U19
 U 2 1 600E4BC1
 P 12350 6450
-F 0 "U?" H 12350 6817 50  0000 C CNN
+F 0 "U19" H 12350 6817 50  0000 C CNN
 F 1 "TL074" H 12350 6726 50  0000 C CNN
 F 2 "" H 12300 6550 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12400 6650 50  0001 C CNN
@@ -14337,10 +14337,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12400 6650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U19
 U 3 1 600EC953
 P 16350 8650
-F 0 "U?" H 16350 9017 50  0000 C CNN
+F 0 "U19" H 16350 9017 50  0000 C CNN
 F 1 "TL074" H 16350 8926 50  0000 C CNN
 F 2 "" H 16300 8750 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 16400 8850 50  0001 C CNN
@@ -14349,10 +14349,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 16400 8850 50  0001 C CNN
 $EndComp
 Connection ~ 16650 8650
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U19
 U 4 1 600F50B6
 P 17650 8550
-F 0 "U?" H 17650 8917 50  0000 C CNN
+F 0 "U19" H 17650 8917 50  0000 C CNN
 F 1 "TL074" H 17650 8826 50  0000 C CNN
 F 2 "" H 17600 8650 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 17700 8750 50  0001 C CNN
@@ -14361,10 +14361,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 17700 8750 50  0001 C CNN
 $EndComp
 Connection ~ 17950 8550
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U20
 U 1 1 600FD9FE
 P 12300 7650
-F 0 "U?" H 12300 8017 50  0000 C CNN
+F 0 "U20" H 12300 8017 50  0000 C CNN
 F 1 "TL074" H 12300 7926 50  0000 C CNN
 F 2 "" H 12250 7750 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12350 7850 50  0001 C CNN
@@ -14374,10 +14374,10 @@ $EndComp
 Connection ~ 12600 7650
 Connection ~ 12000 7750
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U20
 U 2 1 601055A2
 P 12300 8800
-F 0 "U?" H 12300 9167 50  0000 C CNN
+F 0 "U20" H 12300 9167 50  0000 C CNN
 F 1 "TL074" H 12300 9076 50  0000 C CNN
 F 2 "" H 12250 8900 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12350 9000 50  0001 C CNN
@@ -14387,10 +14387,10 @@ $EndComp
 Connection ~ 12000 8900
 Connection ~ 12600 8800
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U20
 U 3 1 6010D571
 P 12250 9950
-F 0 "U?" H 12250 10317 50  0000 C CNN
+F 0 "U20" H 12250 10317 50  0000 C CNN
 F 1 "TL074" H 12250 10226 50  0000 C CNN
 F 2 "" H 12200 10050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 10150 50  0001 C CNN
@@ -14398,10 +14398,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 10150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U20
 U 4 1 60114D54
 P 12250 11250
-F 0 "U?" H 12250 11617 50  0000 C CNN
+F 0 "U20" H 12250 11617 50  0000 C CNN
 F 1 "TL074" H 12250 11526 50  0000 C CNN
 F 2 "" H 12200 11350 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 11450 50  0001 C CNN
@@ -14409,10 +14409,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 11450 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U21
 U 1 1 6011C5B6
 P 13100 13250
-F 0 "U?" H 13100 13617 50  0000 C CNN
+F 0 "U21" H 13100 13617 50  0000 C CNN
 F 1 "TL074" H 13100 13526 50  0000 C CNN
 F 2 "" H 13050 13350 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13150 13450 50  0001 C CNN
@@ -14420,10 +14420,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13150 13450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U21
 U 2 1 601243A9
 P 13050 14500
-F 0 "U?" H 13050 14867 50  0000 C CNN
+F 0 "U21" H 13050 14867 50  0000 C CNN
 F 1 "TL074" H 13050 14776 50  0000 C CNN
 F 2 "" H 13000 14600 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13100 14700 50  0001 C CNN
@@ -14431,10 +14431,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13100 14700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U21
 U 3 1 6012C079
 P 20000 10750
-F 0 "U?" H 20000 11117 50  0000 C CNN
+F 0 "U21" H 20000 11117 50  0000 C CNN
 F 1 "TL074" H 20000 11026 50  0000 C CNN
 F 2 "" H 19950 10850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 20050 10950 50  0001 C CNN
@@ -14443,10 +14443,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 20050 10950 50  0001 C CNN
 $EndComp
 Connection ~ 20300 10750
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U19
 U 5 1 607BA57B
 P 6000 16100
-F 0 "U?" H 5958 16146 50  0000 L CNN
+F 0 "U19" H 5958 16146 50  0000 L CNN
 F 1 "TL074" H 5958 16055 50  0000 L CNN
 F 2 "" H 5950 16200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 6050 16300 50  0001 C CNN
@@ -15662,10 +15662,10 @@ Connection ~ 5900 16450
 Wire Wire Line
 	5900 16450 5900 16500
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U20
 U 5 1 6AB6F730
 P 7150 16100
-F 0 "U?" H 7108 16146 50  0000 L CNN
+F 0 "U20" H 7108 16146 50  0000 L CNN
 F 1 "TL074" H 7108 16055 50  0000 L CNN
 F 2 "" H 7100 16200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 7200 16300 50  0001 C CNN
@@ -15753,10 +15753,10 @@ Connection ~ 7050 16450
 Wire Wire Line
 	7050 16450 7050 16500
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U21
 U 5 1 6B264E6A
 P 8350 16100
-F 0 "U?" H 8308 16146 50  0000 L CNN
+F 0 "U21" H 8308 16146 50  0000 L CNN
 F 1 "TL074" H 8308 16055 50  0000 L CNN
 F 2 "" H 8300 16200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8400 16300 50  0001 C CNN
