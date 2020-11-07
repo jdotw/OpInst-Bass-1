@@ -16063,17 +16063,6 @@ F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 4100 35500 50  0001 
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
-U 5 1 690CFFD0
-P 5300 35550
-F 0 "U?" H 5258 35596 50  0000 L CNN
-F 1 "TL074" H 5258 35505 50  0000 L CNN
-F 2 "" H 5250 35650 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 5350 35750 50  0001 C CNN
-	5    5300 35550
-	1    0    0    -1  
-$EndComp
-$Comp
 L Amplifier_Operational:TL072 U?
 U 1 1 690F5BAC
 P 18400 38300
@@ -17431,4 +17420,95 @@ Wire Wire Line
 Connection ~ 4150 22800
 Wire Wire Line
 	4150 22800 4150 22850
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 6E429D4A
+P 5500 35500
+F 0 "U?" H 5458 35546 50  0000 L CNN
+F 1 "TL074" H 5458 35455 50  0000 L CNN
+F 2 "" H 5450 35600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 5550 35700 50  0001 C CNN
+	5    5500 35500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 6E429DAC
+P 5400 35100
+F 0 "#PWR?" H 5400 34950 50  0001 C CNN
+F 1 "+12V" H 5415 35273 50  0000 C CNN
+F 2 "" H 5400 35100 50  0001 C CNN
+F 3 "" H 5400 35100 50  0001 C CNN
+	1    5400 35100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5400 35100 5400 35150
+$Comp
+L power:-12V #PWR?
+U 1 1 6E429DC3
+P 5400 35900
+F 0 "#PWR?" H 5400 36000 50  0001 C CNN
+F 1 "-12V" H 5415 36073 50  0000 C CNN
+F 2 "" H 5400 35900 50  0001 C CNN
+F 3 "" H 5400 35900 50  0001 C CNN
+	1    5400 35900
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5400 35800 5400 35850
+$Comp
+L power:GND #PWR?
+U 1 1 6E429DD6
+P 5100 35500
+F 0 "#PWR?" H 5100 35250 50  0001 C CNN
+F 1 "GND" V 5105 35372 50  0000 R CNN
+F 2 "" H 5100 35500 50  0001 C CNN
+F 3 "" H 5100 35500 50  0001 C CNN
+	1    5100 35500
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 6E429DE8
+P 5200 35300
+F 0 "C?" H 5109 35254 50  0000 R CNN
+F 1 "100nF" H 5109 35345 50  0000 R CNN
+F 2 "" H 5200 35300 50  0001 C CNN
+F 3 "~" H 5200 35300 50  0001 C CNN
+	1    5200 35300
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	5400 35150 5200 35150
+Wire Wire Line
+	5200 35150 5200 35200
+Connection ~ 5400 35150
+Wire Wire Line
+	5400 35150 5400 35200
+Wire Wire Line
+	5200 35400 5200 35500
+Wire Wire Line
+	5200 35500 5100 35500
+$Comp
+L Device:C_Small C?
+U 1 1 6E429E06
+P 5200 35700
+F 0 "C?" H 5109 35654 50  0000 R CNN
+F 1 "100nF" H 5109 35745 50  0000 R CNN
+F 2 "" H 5200 35700 50  0001 C CNN
+F 3 "~" H 5200 35700 50  0001 C CNN
+	1    5200 35700
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	5200 35500 5200 35600
+Connection ~ 5200 35500
+Wire Wire Line
+	5200 35800 5200 35850
+Wire Wire Line
+	5200 35850 5400 35850
+Connection ~ 5400 35850
+Wire Wire Line
+	5400 35850 5400 35900
 $EndSCHEMATC
