@@ -16487,17 +16487,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 7150 46700 50  0001 C CNN
 	4    7100 46500
 	1    0    0    -1  
 $EndComp
-$Comp
-L Amplifier_Operational:TL074 U?
-U 5 1 69F33B8D
-P 8700 49150
-F 0 "U?" H 8658 49196 50  0000 L CNN
-F 1 "TL074" H 8658 49105 50  0000 L CNN
-F 2 "" H 8650 49250 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8750 49350 50  0001 C CNN
-	5    8700 49150
-	1    0    0    -1  
-$EndComp
 Text Notes 20700 49200 0    50   ~ 0
 Power for both envelopes
 $Comp
@@ -17511,4 +17500,95 @@ Wire Wire Line
 Connection ~ 5400 35850
 Wire Wire Line
 	5400 35850 5400 35900
+$Comp
+L Amplifier_Operational:TL074 U?
+U 5 1 6F2BEDD9
+P 8700 49150
+F 0 "U?" H 8658 49196 50  0000 L CNN
+F 1 "TL074" H 8658 49105 50  0000 L CNN
+F 2 "" H 8650 49250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8750 49350 50  0001 C CNN
+	5    8700 49150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 6F2BEE3B
+P 8600 48750
+F 0 "#PWR?" H 8600 48600 50  0001 C CNN
+F 1 "+12V" H 8615 48923 50  0000 C CNN
+F 2 "" H 8600 48750 50  0001 C CNN
+F 3 "" H 8600 48750 50  0001 C CNN
+	1    8600 48750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8600 48750 8600 48800
+$Comp
+L power:-12V #PWR?
+U 1 1 6F2BEE52
+P 8600 49550
+F 0 "#PWR?" H 8600 49650 50  0001 C CNN
+F 1 "-12V" H 8615 49723 50  0000 C CNN
+F 2 "" H 8600 49550 50  0001 C CNN
+F 3 "" H 8600 49550 50  0001 C CNN
+	1    8600 49550
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8600 49450 8600 49500
+$Comp
+L power:GND #PWR?
+U 1 1 6F2BEE65
+P 8300 49150
+F 0 "#PWR?" H 8300 48900 50  0001 C CNN
+F 1 "GND" V 8305 49022 50  0000 R CNN
+F 2 "" H 8300 49150 50  0001 C CNN
+F 3 "" H 8300 49150 50  0001 C CNN
+	1    8300 49150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 6F2BEE77
+P 8400 48950
+F 0 "C?" H 8309 48904 50  0000 R CNN
+F 1 "100nF" H 8309 48995 50  0000 R CNN
+F 2 "" H 8400 48950 50  0001 C CNN
+F 3 "~" H 8400 48950 50  0001 C CNN
+	1    8400 48950
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	8600 48800 8400 48800
+Wire Wire Line
+	8400 48800 8400 48850
+Connection ~ 8600 48800
+Wire Wire Line
+	8600 48800 8600 48850
+Wire Wire Line
+	8400 49050 8400 49150
+Wire Wire Line
+	8400 49150 8300 49150
+$Comp
+L Device:C_Small C?
+U 1 1 6F2BEE95
+P 8400 49350
+F 0 "C?" H 8309 49304 50  0000 R CNN
+F 1 "100nF" H 8309 49395 50  0000 R CNN
+F 2 "" H 8400 49350 50  0001 C CNN
+F 3 "~" H 8400 49350 50  0001 C CNN
+	1    8400 49350
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	8400 49150 8400 49250
+Connection ~ 8400 49150
+Wire Wire Line
+	8400 49450 8400 49500
+Wire Wire Line
+	8400 49500 8600 49500
+Connection ~ 8600 49500
+Wire Wire Line
+	8600 49500 8600 49550
 $EndSCHEMATC
