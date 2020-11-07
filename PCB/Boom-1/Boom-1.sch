@@ -15162,10 +15162,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12700 40600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L 4xxx:4013 U?
+L 4xxx:4013 U3
 U 3 1 690C6830
 P 7100 38300
-F 0 "U?" H 7330 38346 50  0000 L CNN
+F 0 "U3" H 7330 38346 50  0000 L CNN
 F 1 "4013" H 7330 38255 50  0000 L CNN
 F 2 "" H 7100 38300 50  0001 C CNN
 F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 7100 38300 50  0001 C CNN
