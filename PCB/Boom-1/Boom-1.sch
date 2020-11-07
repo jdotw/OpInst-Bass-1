@@ -15107,10 +15107,10 @@ Wire Wire Line
 Connection ~ 16500 39700
 Connection ~ 16500 31700
 $Comp
-L 4xxx:4013 U?
+L 4xxx:4013 U3
 U 1 1 6839DC5A
 P 9250 40950
-F 0 "U?" H 9250 41431 50  0000 C CNN
+F 0 "U3" H 9250 41431 50  0000 C CNN
 F 1 "4013" H 9250 41340 50  0000 C CNN
 F 2 "" H 9250 40950 50  0001 C CNN
 F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 9250 40950 50  0001 C CNN
@@ -15118,10 +15118,10 @@ F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 9250 40950 50  0001 
 	1    0    0    -1  
 $EndComp
 $Comp
-L 4xxx:4013 U?
+L 4xxx:4013 U3
 U 2 1 683A61E1
 P 8300 42550
-F 0 "U?" H 8300 43031 50  0000 C CNN
+F 0 "U3" H 8300 43031 50  0000 C CNN
 F 1 "4013" H 8300 42940 50  0000 C CNN
 F 2 "" H 8300 42550 50  0001 C CNN
 F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 8300 42550 50  0001 C CNN
