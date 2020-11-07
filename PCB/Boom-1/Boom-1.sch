@@ -15300,10 +15300,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35250 42400 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U40
 U 1 1 698528F2
 P 31800 42950
-F 0 "U?" H 31800 43317 50  0000 C CNN
+F 0 "U40" H 31800 43317 50  0000 C CNN
 F 1 "TL072" H 31800 43226 50  0000 C CNN
 F 2 "" H 31800 42950 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31800 42950 50  0001 C CNN
@@ -15311,10 +15311,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31800 42950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U40
 U 2 1 6985BC72
 P 32400 43450
-F 0 "U?" H 32400 43817 50  0000 C CNN
+F 0 "U40" H 32400 43817 50  0000 C CNN
 F 1 "TL072" H 32400 43726 50  0000 C CNN
 F 2 "" H 32400 43450 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32400 43450 50  0001 C CNN
@@ -20090,10 +20090,10 @@ Connection ~ 36200 38500
 Wire Wire Line
 	36200 38500 36200 38850
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U40
 U 3 1 69017537
 P 36350 35400
-F 0 "U?" H 36308 35446 50  0000 L CNN
+F 0 "U40" H 36308 35446 50  0000 L CNN
 F 1 "TL072" H 36308 35355 50  0000 L CNN
 F 2 "" H 36350 35400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 36350 35400 50  0001 C CNN
