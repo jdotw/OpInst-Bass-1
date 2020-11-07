@@ -14639,10 +14639,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12250 33100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U35
 U 2 1 600ECDD1
 P 31700 23200
-F 0 "U?" H 31800 23450 50  0000 C CNN
+F 0 "U35" H 31800 23450 50  0000 C CNN
 F 1 "TL072" H 31850 23350 50  0000 C CNN
 F 2 "" H 31700 23200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31700 23200 50  0001 C CNN
@@ -14650,10 +14650,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 31700 23200 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U35
 U 1 1 600F5D8A
 P 32300 22700
-F 0 "U?" H 32400 22950 50  0000 C CNN
+F 0 "U35" H 32400 22950 50  0000 C CNN
 F 1 "TL072" H 32450 22850 50  0000 C CNN
 F 2 "" H 32300 22700 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32300 22700 50  0001 C CNN
@@ -14661,10 +14661,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32300 22700 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U36
 U 1 1 600E7FE3
 P 35100 24050
-F 0 "U?" H 35200 24300 50  0000 C CNN
+F 0 "U36" H 35200 24300 50  0000 C CNN
 F 1 "TL074" H 35250 24200 50  0000 C CNN
 F 2 "" H 35050 24150 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35150 24250 50  0001 C CNN
@@ -14672,10 +14672,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35150 24250 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U36
 U 2 1 600E804D
 P 35050 24850
-F 0 "U?" H 35200 25100 50  0000 C CNN
+F 0 "U36" H 35200 25100 50  0000 C CNN
 F 1 "TL074" H 35200 25000 50  0000 C CNN
 F 2 "" H 35000 24950 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35100 25050 50  0001 C CNN
@@ -14683,10 +14683,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35100 25050 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U36
 U 3 1 600F34AA
 P 34400 25550
-F 0 "U?" H 34550 25800 50  0000 C CNN
+F 0 "U36" H 34550 25800 50  0000 C CNN
 F 1 "TL074" H 34550 25700 50  0000 C CNN
 F 2 "" H 34350 25650 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34450 25750 50  0001 C CNN
@@ -14694,10 +14694,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34450 25750 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U?
+L Amplifier_Operational:TL074 U36
 U 4 1 600FE3C9
 P 34400 26450
-F 0 "U?" H 34550 26700 50  0000 C CNN
+F 0 "U36" H 34550 26700 50  0000 C CNN
 F 1 "TL074" H 34550 26600 50  0000 C CNN
 F 2 "" H 34350 26550 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 34450 26650 50  0001 C CNN
@@ -16580,10 +16580,10 @@ Connection ~ 26450 28750
 Wire Wire Line
 	26450 28750 26450 28800
 $Comp
-L Amplifier_Operational:TL072 U?
+L Amplifier_Operational:TL072 U35
 U 3 1 77A1ADC5
 P 35350 30950
-F 0 "U?" H 35308 30996 50  0000 L CNN
+F 0 "U35" H 35308 30996 50  0000 L CNN
 F 1 "TL072" H 35308 30905 50  0000 L CNN
 F 2 "" H 35350 30950 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35350 30950 50  0001 C CNN
@@ -16852,17 +16852,6 @@ Wire Wire Line
 Connection ~ 32950 31300
 Wire Wire Line
 	32950 31300 32950 31350
-$Comp
-L Amplifier_Operational:TL074 U?
-U 5 1 799D25C6
-P 31950 30950
-F 0 "U?" H 31908 30996 50  0000 L CNN
-F 1 "TL074" H 31908 30905 50  0000 L CNN
-F 2 "" H 31900 31050 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32000 31150 50  0001 C CNN
-	5    31950 30950
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:+12V #PWR?
 U 1 1 799D2628
@@ -20088,4 +20077,15 @@ $EndComp
 Connection ~ 7800 32550
 Wire Wire Line
 	7800 32550 8000 32550
+$Comp
+L Amplifier_Operational:TL074 U36
+U 5 1 799D25C6
+P 31950 30950
+F 0 "U36" H 31908 30996 50  0000 L CNN
+F 1 "TL074" H 31908 30905 50  0000 L CNN
+F 2 "" H 31900 31050 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 32000 31150 50  0001 C CNN
+	5    31950 30950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
