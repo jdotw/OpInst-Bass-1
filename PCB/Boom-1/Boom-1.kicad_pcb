@@ -10938,7 +10938,7 @@
   )
 
   (module Package_TO_SOT_THT:TO-92 (layer F.Cu) (tedit 5A279852) (tstamp 5FA95066)
-    (at 301.284001 296.184369)
+    (at -658.622 25.654)
     (descr "TO-92 leads molded, narrow, drill 0.75mm (see NXP sot054_po.pdf)")
     (tags "to-92 sc-43 sc-43a sot54 PA33 transistor")
     (path /5E959F98)
@@ -28963,7 +28963,7 @@
   )
 
   (module Package_DIP:DIP-14_W7.62mm (layer F.Cu) (tedit 5A02E8C5) (tstamp 5FACAA59)
-    (at -177.8 290.83)
+    (at -621.284 31.242)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils)")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil")
     (path /6839DC5A)
@@ -30474,7 +30474,7 @@
   )
 
   (module Package_DIP:DIP-14_W7.62mm (layer F.Cu) (tedit 5A02E8C5) (tstamp 5FA97B52)
-    (at -161.29 247.65)
+    (at -568.706 2.794)
     (descr "14-lead though-hole mounted DIP package, row spacing 7.62 mm (300 mils)")
     (tags "THT DIP DIL PDIP 2.54mm 7.62mm 300mil")
     (path /690AF151)
