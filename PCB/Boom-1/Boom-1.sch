@@ -8834,10 +8834,6 @@ Wire Wire Line
 	27850 32100 28050 32100
 Wire Wire Line
 	24400 31900 26950 31900
-Connection ~ 25600 32100
-Wire Wire Line
-	25600 32100 25800 32100
-Connection ~ 25800 32100
 Wire Wire Line
 	28250 32100 28300 32100
 Wire Wire Line
