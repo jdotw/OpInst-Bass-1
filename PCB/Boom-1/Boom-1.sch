@@ -3646,10 +3646,6 @@ Wire Wire Line
 Connection ~ 29800 29300
 Wire Wire Line
 	29800 29300 29800 29500
-Connection ~ 25600 12900
-Wire Wire Line
-	25600 12900 25800 12900
-Connection ~ 25800 12900
 Wire Wire Line
 	28250 12900 28300 12900
 $Comp
@@ -9430,10 +9426,6 @@ Wire Wire Line
 	24700 43300 24900 43300
 Wire Wire Line
 	21250 43500 23800 43500
-Connection ~ 22450 43300
-Wire Wire Line
-	22450 43300 22650 43300
-Connection ~ 22650 43300
 Wire Wire Line
 	25100 43300 25150 43300
 Wire Wire Line
