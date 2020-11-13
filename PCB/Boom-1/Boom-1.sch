@@ -5904,13 +5904,9 @@ F 3 "~" H 17000 8650 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	17800 9250 17600 9250
-Connection ~ 17600 9250
-Wire Wire Line
 	17800 9250 17950 9250
 Wire Wire Line
 	17950 9250 17950 8900
-Connection ~ 17800 9250
 Connection ~ 17950 8900
 $Comp
 L power:GND #PWR0118
