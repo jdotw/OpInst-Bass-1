@@ -19,13 +19,13 @@ Text Notes 45050 12150 0    50   ~ 0
 GND\n
 Text Notes 45050 12250 0    50   ~ 0
 -12
-Text Notes 7250 7150 1    50   ~ 0
+Text Notes 7550 7150 1    50   ~ 0
 Osc1NoteCV
 Text Notes 22550 12700 1    50   ~ 0
 Osc1FiltFreqCV
-Text Notes 7550 7150 1    50   ~ 0
+Text Notes 7250 7150 1    50   ~ 0
 Osc1SqrMixCV
-Text Notes 7450 7150 1    50   ~ 0
+Text Notes 7150 7150 1    50   ~ 0
 Osc1SawMixCV
 $Comp
 L Connector_Generic:Conn_01x03 J27
@@ -612,7 +612,7 @@ $EndComp
 Connection ~ 27850 12900
 Text Notes 22650 12700 1    50   ~ 0
 Osc1FiltResCV
-Text Notes 6950 7150 1    50   ~ 0
+Text Notes 7350 7150 1    50   ~ 0
 Osc1ToOsc2MixCV
 $Comp
 L Device:R_Small_US R260
@@ -889,7 +889,7 @@ Wire Wire Line
 Connection ~ 26200 11350
 Wire Wire Line
 	26200 11350 28000 11350
-Text Notes 7350 7150 1    50   ~ 0
+Text Notes 6950 7150 1    50   ~ 0
 Osc1PWMCV
 $Comp
 L Device:R_Small_US R17
@@ -6702,10 +6702,6 @@ F 3 "" H 27450 10550 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	11300 10050 11450 10050
-Wire Wire Line
-	7400 7850 8800 7850
-Wire Wire Line
-	7500 7750 8700 7750
 $Comp
 L Connector_Generic:Conn_01x03 J5
 U 1 1 6883C241
@@ -6727,10 +6723,6 @@ Wire Wire Line
 	9250 8550 9250 8350
 Wire Wire Line
 	9350 8450 9350 8350
-Wire Wire Line
-	7400 7400 7400 7850
-Wire Wire Line
-	7500 7400 7500 7750
 $Comp
 L Connector_Generic:Conn_01x02 J18
 U 1 1 6E911CE4
@@ -6747,13 +6739,7 @@ Wire Wire Line
 Wire Wire Line
 	22600 13100 24200 13100
 Wire Wire Line
-	7300 7400 7300 8200
-Wire Wire Line
-	7300 8200 8050 8200
-Wire Wire Line
 	6800 9250 6800 9900
-Wire Wire Line
-	7200 7400 7200 9450
 $Comp
 L Device:R_Small_US R102
 U 1 1 7AAB0DD9
@@ -6851,7 +6837,7 @@ Wire Wire Line
 Wire Wire Line
 	8700 5600 12600 5600
 Wire Wire Line
-	8700 5600 8700 7750
+	8700 5600 8700 7550
 Wire Wire Line
 	13750 5500 13950 5500
 Wire Wire Line
@@ -6974,10 +6960,6 @@ Wire Wire Line
 	7000 7750 6000 7750
 Wire Wire Line
 	6000 7750 6000 13350
-Wire Wire Line
-	6900 7650 5900 7650
-Wire Wire Line
-	6900 7400 6900 7650
 Wire Wire Line
 	7000 7400 7000 7750
 $Comp
@@ -9990,14 +9972,8 @@ Wire Wire Line
 	13100 9950 13100 11350
 Wire Wire Line
 	12600 11350 13100 11350
-Text Notes 7150 7150 1    50   ~ 0
-Osc1TuningOut
 Wire Wire Line
-	7100 7400 7100 7850
-Wire Wire Line
-	7100 7850 6100 7850
-Wire Wire Line
-	6100 7850 6100 12900
+	6100 7950 6100 12900
 Wire Wire Line
 	6100 12900 11650 12900
 Wire Wire Line
@@ -20211,10 +20187,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 15050 33200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0364
 U 1 1 610253B9
 P 14600 32900
-F 0 "#PWR?" H 14600 32650 50  0001 C CNN
+F 0 "#PWR0364" H 14600 32650 50  0001 C CNN
 F 1 "GND" V 14605 32772 50  0000 R CNN
 F 2 "" H 14600 32900 50  0001 C CNN
 F 3 "" H 14600 32900 50  0001 C CNN
@@ -20245,10 +20221,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13000 42150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0365
 U 1 1 62C50A66
 P 12550 41850
-F 0 "#PWR?" H 12550 41600 50  0001 C CNN
+F 0 "#PWR0365" H 12550 41600 50  0001 C CNN
 F 1 "GND" V 12555 41722 50  0000 R CNN
 F 2 "" H 12550 41850 50  0001 C CNN
 F 3 "" H 12550 41850 50  0001 C CNN
@@ -20270,10 +20246,10 @@ Wire Wire Line
 Text Notes 50550 23700 1    50   ~ 0
 MixGnd
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0366
 U 1 1 60806A1A
 P 50500 24800
-F 0 "#PWR?" H 50500 24550 50  0001 C CNN
+F 0 "#PWR0366" H 50500 24550 50  0001 C CNN
 F 1 "GND" V 50505 24672 50  0000 R CNN
 F 2 "" H 50500 24800 50  0001 C CNN
 F 3 "" H 50500 24800 50  0001 C CNN
@@ -20282,4 +20258,36 @@ F 3 "" H 50500 24800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	50500 24800 50500 24000
+Wire Wire Line
+	7200 9450 7200 7650
+Wire Wire Line
+	7500 7650 7500 7400
+Wire Wire Line
+	7200 7400 7200 7550
+Wire Wire Line
+	7200 7550 8700 7550
+Wire Wire Line
+	7200 7650 7500 7650
+Wire Wire Line
+	6800 7650 5900 7650
+Wire Wire Line
+	6900 7400 6900 8200
+Wire Wire Line
+	6900 8200 8050 8200
+Wire Wire Line
+	7300 7400 7300 7450
+Wire Wire Line
+	7300 7450 6800 7450
+Wire Wire Line
+	6800 7450 6800 7650
+Wire Wire Line
+	7100 7400 7100 7850
+Wire Wire Line
+	7100 7850 8800 7850
+Wire Wire Line
+	7400 7400 7400 7950
+Wire Wire Line
+	6100 7950 7400 7950
+Text Notes 7450 7150 1    50   ~ 0
+Osc1TuningOut
 $EndSCHEMATC
