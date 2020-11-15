@@ -1017,9 +1017,9 @@ Wire Wire Line
 	10250 12000 10250 11550
 Text Notes 9400 8050 1    50   ~ 0
 Osc1SyncOut
-Text Notes 9300 8050 1    50   ~ 0
-Osc1HardSyncIn
 Text Notes 9200 8050 1    50   ~ 0
+Osc1HardSyncIn
+Text Notes 9300 8050 1    50   ~ 0
 Osc1SoftSyncIn
 $Comp
 L Device:C_Small C22
@@ -1044,7 +1044,7 @@ F 3 "~" H 8650 9150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9250 8550 8650 8550
+	9150 8550 8650 8550
 Wire Wire Line
 	8650 8550 8650 9050
 Wire Wire Line
@@ -6715,12 +6715,6 @@ F 3 "~" H 9250 8150 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8450 8450 8450 9050
-Wire Wire Line
-	8450 8450 9150 8450
-Wire Wire Line
-	9150 8450 9150 8350
-Wire Wire Line
-	9250 8550 9250 8350
 Wire Wire Line
 	9350 8450 9350 8350
 $Comp
@@ -14179,13 +14173,13 @@ F 3 "" H 14600 28850 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U20
-U 3 1 600FD9FE
+U 2 1 600FD9FE
 P 12300 7650
 F 0 "U20" H 12300 8017 50  0000 C CNN
 F 1 "TL074" H 12300 7926 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 12250 7750 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12350 7850 50  0001 C CNN
-	3    12300 7650
+	2    12300 7650
 	1    0    0    -1  
 $EndComp
 Connection ~ 12600 7650
@@ -14205,13 +14199,13 @@ Connection ~ 12000 8900
 Connection ~ 12600 8800
 $Comp
 L Amplifier_Operational:TL074 U20
-U 2 1 6010D571
+U 3 1 6010D571
 P 12250 9950
 F 0 "U20" H 12250 10317 50  0000 C CNN
 F 1 "TL074" H 12250 10226 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 12200 10050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 10150 50  0001 C CNN
-	2    12250 9950
+	3    12250 9950
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -20381,4 +20375,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8300 16100 50  0001 C CNN
 	3    8300 16100
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	9250 8350 9250 8450
+Wire Wire Line
+	8450 8450 9250 8450
+Wire Wire Line
+	9150 8350 9150 8550
 $EndSCHEMATC
