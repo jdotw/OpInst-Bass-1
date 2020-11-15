@@ -14192,37 +14192,37 @@ Connection ~ 12600 7650
 Connection ~ 12000 7750
 $Comp
 L Amplifier_Operational:TL074 U20
-U 2 1 601055A2
+U 4 1 601055A2
 P 12300 8800
 F 0 "U20" H 12300 9167 50  0000 C CNN
 F 1 "TL074" H 12300 9076 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 12250 8900 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12350 9000 50  0001 C CNN
-	2    12300 8800
+	4    12300 8800
 	1    0    0    -1  
 $EndComp
 Connection ~ 12000 8900
 Connection ~ 12600 8800
 $Comp
 L Amplifier_Operational:TL074 U20
-U 3 1 6010D571
+U 2 1 6010D571
 P 12250 9950
 F 0 "U20" H 12250 10317 50  0000 C CNN
 F 1 "TL074" H 12250 10226 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 12200 10050 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 10150 50  0001 C CNN
-	3    12250 9950
+	2    12250 9950
 	1    0    0    -1  
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U20
-U 4 1 60114D54
+U 3 1 60114D54
 P 12250 11250
 F 0 "U20" H 12250 11617 50  0000 C CNN
 F 1 "TL074" H 12250 11526 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 12200 11350 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12300 11450 50  0001 C CNN
-	4    12250 11250
+	3    12250 11250
 	-1   0    0    -1  
 $EndComp
 $Comp
