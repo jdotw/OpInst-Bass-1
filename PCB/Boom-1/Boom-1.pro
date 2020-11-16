@@ -1,4 +1,4 @@
-update=Sunday, 15 November 2020 at 09:42:50 pm
+update=Monday, 16 November 2020 at 12:46:42 pm
 version=1
 last_client=kicad
 [general]
@@ -74,19 +74,19 @@ Name=F.Cu
 Type=0
 Enabled=1
 [pcbnew/Layer.In1.Cu]
-Name=In1.Cu
+Name=+12V.Cu
 Type=1
 Enabled=1
 [pcbnew/Layer.In2.Cu]
-Name=In2.Cu
+Name=-12V.Cu
 Type=1
 Enabled=1
 [pcbnew/Layer.In3.Cu]
-Name=In3.Cu
+Name=+5V.Cu
 Type=1
 Enabled=1
 [pcbnew/Layer.In4.Cu]
-Name=In4.Cu
+Name=-5V.Cu
 Type=1
 Enabled=1
 [pcbnew/Layer.In5.Cu]
