@@ -19,13 +19,11 @@ Text Notes 45050 12150 0    50   ~ 0
 GND\n
 Text Notes 45050 12250 0    50   ~ 0
 -12
-Text Notes 7550 7150 1    50   ~ 0
-Osc1NoteCV
 Text Notes 22550 12700 1    50   ~ 0
 Osc1FiltFreqCV
 Text Notes 7250 7150 1    50   ~ 0
 Osc1SqrMixCV
-Text Notes 7150 7150 1    50   ~ 0
+Text Notes 7450 7150 1    50   ~ 0
 Osc1SawMixCV
 $Comp
 L Connector_Generic:Conn_01x03 J27
@@ -1107,7 +1105,7 @@ F 3 "~" H 18450 8400 50  0001 C CNN
 	1    18250 8400
 	1    0    0    -1  
 $EndComp
-Text Notes 7050 7150 1    50   ~ 0
+Text Notes 7550 7150 1    50   ~ 0
 Osc1ToOsc1FiltMixCV
 $Comp
 L Device:C_Small C90
@@ -6951,11 +6949,7 @@ Wire Wire Line
 Wire Wire Line
 	14800 10000 14800 10100
 Wire Wire Line
-	7000 7750 6000 7750
-Wire Wire Line
 	6000 7750 6000 13350
-Wire Wire Line
-	7000 7400 7000 7750
 $Comp
 L Device:R_Small_US R95
 U 1 1 85AC621E
@@ -9974,17 +9968,6 @@ Wire Wire Line
 	11650 12900 11650 12250
 Wire Wire Line
 	11650 11250 11850 11250
-$Comp
-L Connector_Generic:Conn_01x07 J3
-U 1 1 6F9F5B04
-P 7200 7200
-F 0 "J3" V 7164 6812 50  0000 R CNN
-F 1 "Osc1CVConn" V 7073 6812 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 7200 7200 50  0001 C CNN
-F 3 "~" H 7200 7200 50  0001 C CNN
-	1    7200 7200
-	0    -1   -1   0   
-$EndComp
 $Comp
 L Connector:TestPoint TP9
 U 1 1 6F9FC185
@@ -20060,36 +20043,20 @@ $EndComp
 Wire Wire Line
 	50500 24800 50500 24000
 Wire Wire Line
-	7200 9450 7200 7650
-Wire Wire Line
-	7500 7650 7500 7400
+	7200 9450 7200 8300
 Wire Wire Line
 	7200 7400 7200 7550
 Wire Wire Line
 	7200 7550 8700 7550
 Wire Wire Line
-	7200 7650 7500 7650
-Wire Wire Line
-	6800 7650 5900 7650
-Wire Wire Line
 	6900 7400 6900 8200
 Wire Wire Line
 	6900 8200 8050 8200
 Wire Wire Line
-	7300 7400 7300 7450
+	7400 7850 8800 7850
 Wire Wire Line
-	7300 7450 6800 7450
-Wire Wire Line
-	6800 7450 6800 7650
-Wire Wire Line
-	7100 7400 7100 7850
-Wire Wire Line
-	7100 7850 8800 7850
-Wire Wire Line
-	7400 7400 7400 7950
-Wire Wire Line
-	6100 7950 7400 7950
-Text Notes 7450 7150 1    50   ~ 0
+	6100 7950 7100 7950
+Text Notes 7150 7150 1    50   ~ 0
 Osc1TuningOut
 $Comp
 L Amplifier_Operational:TL074 U19
@@ -20381,4 +20348,33 @@ Wire Wire Line
 	8450 8450 9250 8450
 Wire Wire Line
 	9150 8350 9150 8550
+Text Notes 7050 7150 1    50   ~ 0
+Osc1NoteCV
+Wire Wire Line
+	6000 7750 7300 7750
+Wire Wire Line
+	7000 7400 7000 8300
+Wire Wire Line
+	7000 8300 7200 8300
+$Comp
+L Connector_Generic:Conn_01x07 J3
+U 1 1 6F9F5B04
+P 7200 7200
+F 0 "J3" V 7164 6812 50  0000 R CNN
+F 1 "Osc1CVConn" V 7073 6812 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 7200 7200 50  0001 C CNN
+F 3 "~" H 7200 7200 50  0001 C CNN
+	1    7200 7200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7400 7400 7400 7850
+Wire Wire Line
+	7100 7400 7100 7950
+Wire Wire Line
+	7500 7400 7500 7650
+Wire Wire Line
+	5900 7650 7500 7650
+Wire Wire Line
+	7300 7400 7300 7750
 $EndSCHEMATC
