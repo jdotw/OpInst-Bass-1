@@ -7254,9 +7254,9 @@ Wire Wire Line
 	25650 13200 25650 14100
 Text Notes 6550 28250 1    50   ~ 0
 Osc2NoteCV
-Text Notes 6850 28250 1    50   ~ 0
-Osc2SqrMixCV
 Text Notes 6750 28250 1    50   ~ 0
+Osc2SqrMixCV
+Text Notes 6850 28250 1    50   ~ 0
 Osc2SawMixCV
 $Comp
 L Device:R_Small_US R28
@@ -7602,7 +7602,7 @@ F 3 "~" H 6900 30650 50  0001 C CNN
 	1    6900 30650
 	1    0    0    -1  
 $EndComp
-Text Notes 6650 28250 1    50   ~ 0
+Text Notes 6450 28250 1    50   ~ 0
 Osc2PWMCV
 $Comp
 L Device:R_Small_US R12
@@ -8130,9 +8130,7 @@ Osc2HFTrackHigh
 Wire Wire Line
 	9400 29150 9400 30350
 Wire Wire Line
-	6700 28950 8100 28950
-Wire Wire Line
-	6800 28850 8000 28850
+	6800 28950 8100 28950
 $Comp
 L Connector_Generic:Conn_01x03 J4
 U 1 1 605F03F8
@@ -8154,14 +8152,6 @@ Wire Wire Line
 	8550 29650 8550 29450
 Wire Wire Line
 	8650 29550 8650 29450
-Wire Wire Line
-	6700 28500 6700 28950
-Wire Wire Line
-	6800 28500 6800 28850
-Wire Wire Line
-	6600 28500 6600 29300
-Wire Wire Line
-	6600 29300 7350 29300
 Wire Wire Line
 	6100 30350 6100 31000
 Wire Wire Line
@@ -9790,11 +9780,7 @@ Wire Wire Line
 Wire Wire Line
 	13150 32100 12850 32100
 Wire Wire Line
-	6400 28500 6400 29300
-Wire Wire Line
-	6400 29300 5600 29300
-Wire Wire Line
-	5600 29300 5600 34000
+	5600 29200 5600 34000
 Wire Wire Line
 	5600 34000 13750 34000
 Wire Wire Line
@@ -19658,7 +19644,7 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 24450 31100 50  0001 C CNN
 	2    24400 30900
 	1    0    0    1   
 $EndComp
-Text Notes 6450 28250 1    50   ~ 0
+Text Notes 6650 28250 1    50   ~ 0
 Osc2TuningOut
 $Comp
 L Connector_Generic:Conn_01x05 J2
@@ -20468,4 +20454,18 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8850 25450 50  0001 C CNN
 	3    8850 25450
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	6600 28500 6600 29200
+Wire Wire Line
+	5600 29200 6600 29200
+Wire Wire Line
+	6400 28500 6400 29300
+Wire Wire Line
+	6400 29300 7350 29300
+Wire Wire Line
+	6700 28500 6700 28850
+Wire Wire Line
+	6700 28850 8000 28850
+Wire Wire Line
+	6800 28500 6800 28950
 $EndSCHEMATC
