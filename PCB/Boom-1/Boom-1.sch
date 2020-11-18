@@ -3955,11 +3955,11 @@ Wire Wire Line
 	8800 42650 8600 42650
 Wire Wire Line
 	33850 27600 34400 27600
-Text Notes 9950 38400 1    50   ~ 0
+Text Notes 9950 38450 1    50   ~ 0
 SubOct1Out
-Text Notes 10150 38400 1    50   ~ 0
+Text Notes 10150 38450 1    50   ~ 0
 SubOct2Out
-Text Notes 10050 38400 1    50   ~ 0
+Text Notes 10050 38450 1    50   ~ 0
 SubOctBothOut
 Wire Wire Line
 	12850 35250 5900 35250
@@ -4050,9 +4050,9 @@ F 3 "~" H 11150 43750 50  0001 C CNN
 	1    10950 43750
 	0    1    1    0   
 $EndComp
-Text Notes 10350 38400 1    50   ~ 0
+Text Notes 7050 28250 1    50   ~ 0
 SubToOsc2MixCV
-Text Notes 10250 38400 1    50   ~ 0
+Text Notes 6950 28250 1    50   ~ 0
 SubToSubFiltMixCV
 Wire Wire Line
 	10600 47100 10600 47750
@@ -4129,13 +4129,9 @@ F 3 "~" H 41650 30050 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	10300 38700 10300 39000
-Wire Wire Line
-	10300 39000 11150 39000
+	10950 38900 11150 38900
 Wire Wire Line
 	14750 39650 14850 39650
-Wire Wire Line
-	10200 38700 10200 39100
 Wire Wire Line
 	10550 40850 10700 40850
 Wire Wire Line
@@ -12991,7 +12987,7 @@ Text Notes 14600 38000 0    50   ~ 0
 Text Notes 13600 38950 0    50   ~ 0
 +5V (min) to 0 (max)
 Wire Wire Line
-	11150 39000 11150 38150
+	11150 38900 11150 38150
 Wire Wire Line
 	11150 38150 13400 38150
 Wire Wire Line
@@ -13027,18 +13023,7 @@ Wire Wire Line
 Wire Wire Line
 	14750 38050 14750 39650
 Wire Wire Line
-	10200 39100 12400 39100
-$Comp
-L Connector_Generic:Conn_01x05 J8
-U 1 1 80784613
-P 10100 38500
-F 0 "J8" V 10150 39150 50  0000 R CNN
-F 1 "SubIOConn" V 10050 39400 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 10100 38500 50  0001 C CNN
-F 3 "~" H 10100 38500 50  0001 C CNN
-	1    10100 38500
-	0    -1   -1   0   
-$EndComp
+	10950 39100 12400 39100
 Text Notes 13000 46850 0    50   ~ 0
 +5V (min) to 0 (max)
 Text Notes 14000 45900 0    50   ~ 0
@@ -19621,17 +19606,6 @@ $EndComp
 Text Notes 6650 28250 1    50   ~ 0
 Osc2TuningOut
 $Comp
-L Connector_Generic:Conn_01x05 J2
-U 1 1 6E511DD9
-P 6600 28300
-F 0 "J2" V 6564 28012 50  0000 R CNN
-F 1 "Osc2CVConn" V 6473 28012 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 6600 28300 50  0001 C CNN
-F 3 "~" H 6600 28300 50  0001 C CNN
-	1    6600 28300
-	0    -1   -1   0   
-$EndComp
-$Comp
 L power:+12V #PWR0361
 U 1 1 7FD24A22
 P 47000 13100
@@ -20450,24 +20424,24 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 11700 27750 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U23
-U 3 1 6055E8EA
+U 4 1 6055E8EA
 P 14150 38050
 F 0 "U23" H 14150 38417 50  0000 C CNN
 F 1 "TL074" H 14150 38326 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 14100 38150 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 14200 38250 50  0001 C CNN
-	3    14150 38050
+	4    14150 38050
 	1    0    0    -1  
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U23
-U 4 1 60567992
+U 3 1 60567992
 P 13150 39000
 F 0 "U23" H 13150 39367 50  0000 C CNN
 F 1 "TL074" H 13150 39276 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 13100 39100 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13200 39200 50  0001 C CNN
-	4    13150 39000
+	3    13150 39000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -20480,5 +20454,39 @@ F 2 "Package_DIP:DIP-14_W7.62mm" H 8800 25550 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8900 25650 50  0001 C CNN
 	5    8850 25450
 	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x07 J2
+U 1 1 61247556
+P 6700 28300
+F 0 "J2" V 6664 27912 50  0000 R CNN
+F 1 "Conn_01x07" V 6573 27912 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 6700 28300 50  0001 C CNN
+F 3 "~" H 6700 28300 50  0001 C CNN
+	1    6700 28300
+	0    -1   -1   0   
+$EndComp
+Text GLabel 6900 28750 2    50   Input ~ 0
+SubToSubFiltMixCV
+Wire Wire Line
+	6900 28500 6900 28750
+Text GLabel 10950 39100 0    50   Input ~ 0
+SubToSubFiltMixCV
+Text GLabel 7000 28600 2    50   Input ~ 0
+SubToOsc2MixCV
+Wire Wire Line
+	7000 28500 7000 28600
+Text GLabel 10950 38900 0    50   Input ~ 0
+SubToOsc2MixCV
+$Comp
+L Connector_Generic:Conn_01x03 J8
+U 1 1 656400F9
+P 10000 38500
+F 0 "J8" V 9964 38312 50  0000 R CNN
+F 1 "Conn_01x03" V 9873 38312 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10000 38500 50  0001 C CNN
+F 3 "~" H 10000 38500 50  0001 C CNN
+	1    10000 38500
+	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC
