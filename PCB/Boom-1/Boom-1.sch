@@ -7714,9 +7714,9 @@ Wire Wire Line
 	9550 33100 9550 32650
 Text Notes 8700 29150 1    50   ~ 0
 Osc2SyncOut
-Text Notes 8600 29150 1    50   ~ 0
-Osc2HardSyncIn
 Text Notes 8500 29150 1    50   ~ 0
+Osc2HardSyncIn
+Text Notes 8600 29150 1    50   ~ 0
 Osc2SoftSyncIn
 $Comp
 L Device:C_Small C16
@@ -7730,7 +7730,7 @@ F 3 "~" H 7950 30250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8550 29650 7950 29650
+	8450 29650 7950 29650
 Wire Wire Line
 	7950 29650 7950 30150
 Wire Wire Line
@@ -8140,12 +8140,6 @@ F 3 "~" H 8550 29250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7750 29550 7750 30150
-Wire Wire Line
-	7750 29550 8450 29550
-Wire Wire Line
-	8450 29550 8450 29450
-Wire Wire Line
-	8550 29650 8550 29450
 Wire Wire Line
 	8650 29550 8650 29450
 Wire Wire Line
@@ -20309,39 +20303,6 @@ Wire Wire Line
 Wire Wire Line
 	9650 25750 9650 25800
 $Comp
-L Amplifier_Operational:TL072 U48
-U 2 1 60997A06
-P 15000 33000
-F 0 "U48" H 15000 33367 50  0000 C CNN
-F 1 "TL072" H 15000 33276 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 15000 33000 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 15000 33000 50  0001 C CNN
-	2    15000 33000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U48
-U 1 1 6098B306
-P 12200 32900
-F 0 "U48" H 12200 33267 50  0000 C CNN
-F 1 "TL072" H 12200 33176 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 12200 32900 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12200 32900 50  0001 C CNN
-	1    12200 32900
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U48
-U 3 1 609A2939
-P 9750 25450
-F 0 "U48" H 9708 25496 50  0000 L CNN
-F 1 "TL072" H 9708 25405 50  0000 L CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 9750 25450 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 9750 25450 50  0001 C CNN
-	3    9750 25450
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:+12V #PWR0371
 U 1 1 626EA860
 P 9650 25050
@@ -20488,5 +20449,44 @@ F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10000 38500 5
 F 3 "~" H 10000 38500 50  0001 C CNN
 	1    10000 38500
 	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8550 29450 8550 29550
+Wire Wire Line
+	7750 29550 8550 29550
+Wire Wire Line
+	8450 29450 8450 29650
+$Comp
+L Amplifier_Operational:TL072 U48
+U 2 1 627A499E
+P 12200 32900
+F 0 "U48" H 12200 33267 50  0000 C CNN
+F 1 "TL072" H 12200 33176 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 12200 32900 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12200 32900 50  0001 C CNN
+	2    12200 32900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U48
+U 1 1 627AFF3E
+P 15000 33000
+F 0 "U48" H 15000 33367 50  0000 C CNN
+F 1 "TL072" H 15000 33276 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 15000 33000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 15000 33000 50  0001 C CNN
+	1    15000 33000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U48
+U 3 1 627BBA11
+P 9750 25450
+F 0 "U48" H 9708 25496 50  0000 L CNN
+F 1 "TL072" H 9708 25405 50  0000 L CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 9750 25450 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 9750 25450 50  0001 C CNN
+	3    9750 25450
+	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
