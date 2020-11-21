@@ -14714,17 +14714,6 @@ F 3 "http://www.onsemi.com/pub/Collateral/MC14013B-D.PDF" H 8300 42550 50  0001 
 	1    0    0    -1  
 $EndComp
 $Comp
-L Amplifier_Operational:TL074 U24
-U 3 1 690BEF49
-P 12650 40400
-F 0 "U24" H 12650 40767 50  0000 C CNN
-F 1 "TL074" H 12650 40676 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 12600 40500 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12700 40600 50  0001 C CNN
-	3    12650 40400
-	1    0    0    -1  
-$EndComp
-$Comp
 L 4xxx:4013 U3
 U 3 1 690C6830
 P 7100 38300
@@ -15458,17 +15447,6 @@ Wire Wire Line
 Connection ~ 8750 25800
 Wire Wire Line
 	8750 25800 8750 25850
-$Comp
-L Amplifier_Operational:TL074 U24
-U 5 1 6E429D4A
-P 8500 38300
-F 0 "U24" H 8458 38346 50  0000 L CNN
-F 1 "TL074" H 8458 38255 50  0000 L CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 8450 38400 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8550 38500 50  0001 C CNN
-	5    8500 38300
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:+12V #PWR037
 U 1 1 6E429DAC
@@ -19840,17 +19818,6 @@ Wire Wire Line
 Wire Wire Line
 	15400 33000 15300 33000
 $Comp
-L Amplifier_Operational:TL074 U24
-U 4 1 62C50A04
-P 12950 41950
-F 0 "U24" H 12950 42317 50  0000 C CNN
-F 1 "TL074" H 12950 42226 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 12900 42050 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 13000 42150 50  0001 C CNN
-	4    12950 41950
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0365
 U 1 1 62C50A66
 P 12550 41850
@@ -20489,4 +20456,37 @@ Wire Wire Line
 	10100 38700 10100 40050
 Wire Wire Line
 	10100 40050 10850 40050
+$Comp
+L Amplifier_Operational:TL072 U24
+U 3 1 626B162E
+P 8500 38300
+F 0 "U24" H 8458 38346 50  0000 L CNN
+F 1 "TL072" H 8458 38255 50  0000 L CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 8500 38300 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8500 38300 50  0001 C CNN
+	3    8500 38300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U24
+U 1 1 626BB8DD
+P 12650 40400
+F 0 "U24" H 12650 40767 50  0000 C CNN
+F 1 "TL072" H 12650 40676 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 12650 40400 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12650 40400 50  0001 C CNN
+	1    12650 40400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U24
+U 2 1 626C59CD
+P 12950 41950
+F 0 "U24" H 12950 42317 50  0000 C CNN
+F 1 "TL072" H 12950 42226 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 12950 41950 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12950 41950 50  0001 C CNN
+	2    12950 41950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
