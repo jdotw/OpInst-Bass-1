@@ -9783,8 +9783,6 @@ Wire Wire Line
 	12650 32900 12500 32900
 Wire Wire Line
 	12650 32900 12850 32900
-Wire Wire Line
-	12850 32900 12850 33350
 Connection ~ 12650 32900
 Text Notes 12900 32950 0    50   ~ 0
 ToSubOsc
@@ -9943,20 +9941,6 @@ $EndComp
 Connection ~ 13750 31950
 Wire Wire Line
 	13750 31950 13750 31550
-$Comp
-L Connector:TestPoint TP14
-U 1 1 6FA02700
-P 12850 33350
-F 0 "TP14" V 12804 33538 50  0000 L CNN
-F 1 "Osc1ToSubTri" V 12895 33538 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 13050 33350 50  0001 C CNN
-F 3 "~" H 13050 33350 50  0001 C CNN
-	1    12850 33350
-	0    1    1    0   
-$EndComp
-Connection ~ 12850 33350
-Wire Wire Line
-	12850 33350 12850 35250
 Wire Wire Line
 	10850 31750 10950 31750
 Wire Wire Line
@@ -20489,4 +20473,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 12950 41950 50  0001 C CNN
 	2    12950 41950
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	12850 32900 12850 35250
 $EndSCHEMATC
