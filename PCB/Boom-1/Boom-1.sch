@@ -3955,9 +3955,9 @@ Wire Wire Line
 	8800 42650 8600 42650
 Wire Wire Line
 	33850 27600 34400 27600
-Text Notes 9950 38450 1    50   ~ 0
-SubOct1Out
 Text Notes 10150 38450 1    50   ~ 0
+SubOct1Out
+Text Notes 9950 38450 1    50   ~ 0
 SubOct2Out
 Text Notes 10050 38450 1    50   ~ 0
 SubOctBothOut
@@ -4136,10 +4136,6 @@ Wire Wire Line
 	10550 40850 10700 40850
 Wire Wire Line
 	10850 40850 10850 40050
-Wire Wire Line
-	10850 40050 9900 40050
-Wire Wire Line
-	9900 40050 9900 38700
 Connection ~ 10850 40850
 Wire Wire Line
 	10850 40850 10950 40850
@@ -4165,10 +4161,6 @@ Wire Wire Line
 	10950 40500 11900 40500
 Wire Wire Line
 	10950 40850 10950 40500
-Wire Wire Line
-	10100 38700 10100 39850
-Wire Wire Line
-	10100 39850 11700 39850
 Wire Wire Line
 	11700 39850 11700 43400
 Wire Wire Line
@@ -20489,4 +20481,12 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 9750 25450 50  0001 C CNN
 	3    9750 25450
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	9900 38700 9900 39850
+Wire Wire Line
+	9900 39850 11700 39850
+Wire Wire Line
+	10100 38700 10100 40050
+Wire Wire Line
+	10100 40050 10850 40050
 $EndSCHEMATC
