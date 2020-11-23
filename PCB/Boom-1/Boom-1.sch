@@ -6287,26 +6287,14 @@ Text Notes 20650 21100 3    50   ~ 0
 OscFiltEnv1Gate
 Text Notes 20750 21100 3    50   ~ 0
 OscFiltEnv1Trigger
-Text Notes 20850 21100 3    50   ~ 0
+Text Notes 20900 21100 3    50   ~ 0
 OscFiltEnv1AttackCV
-Text Notes 20950 21100 3    50   ~ 0
+Text Notes 21000 21100 3    50   ~ 0
 OscFiltEnv1DecayCV
-Text Notes 21050 21100 3    50   ~ 0
+Text Notes 21100 21100 3    50   ~ 0
 OscFiltEnv1SustainCV
-Text Notes 21150 21100 3    50   ~ 0
+Text Notes 21200 21100 3    50   ~ 0
 OscFiltEnv1ReleaseCV
-$Comp
-L Connector_Generic:Conn_01x10 J12
-U 1 1 732F368F
-P 20750 21000
-F 0 "J12" V 20800 20350 50  0000 C CNN
-F 1 "OscFiltEnv1Conn" V 20700 20100 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x10_P2.54mm_Vertical" H 20750 21000 50  0001 C CNN
-F 3 "~" H 20750 21000 50  0001 C CNN
-	1    20750 21000
-	0    -1   1    0   
-$EndComp
-NoConn ~ 21250 20800
 Wire Wire Line
 	20850 27050 20850 27700
 Wire Wire Line
@@ -19140,23 +19128,23 @@ $EndComp
 $Comp
 L Amplifier_Operational:TL072 U27
 U 1 1 601065A4
-P 21750 19300
-F 0 "U27" H 21750 19667 50  0000 C CNN
-F 1 "TL072" H 21750 19576 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 21750 19300 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21750 19300 50  0001 C CNN
-	1    21750 19300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL072 U27
-U 2 1 601145C9
 P 22350 19800
 F 0 "U27" H 22350 20167 50  0000 C CNN
 F 1 "TL072" H 22350 20076 50  0000 C CNN
 F 2 "Package_DIP:DIP-8_W7.62mm" H 22350 19800 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 22350 19800 50  0001 C CNN
-	2    22350 19800
+	1    22350 19800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U27
+U 2 1 601145C9
+P 21750 19300
+F 0 "U27" H 21750 19667 50  0000 C CNN
+F 1 "TL072" H 21750 19576 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 21750 19300 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 21750 19300 50  0001 C CNN
+	2    21750 19300
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -20539,4 +20527,26 @@ Wire Wire Line
 	25100 11950 22500 11950
 Wire Wire Line
 	22500 11950 22500 13750
+$Comp
+L Connector_Generic:Conn_01x05 J12
+U 1 1 60DA4F70
+P 20550 21000
+F 0 "J12" V 20400 21350 50  0000 R CNN
+F 1 "OscFiltEnv1Conn" V 20500 21900 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 20550 21000 50  0001 C CNN
+F 3 "~" H 20550 21000 50  0001 C CNN
+	1    20550 21000
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x04 J17
+U 1 1 60DB7A00
+P 20950 21000
+F 0 "J17" V 20822 20712 50  0000 R CNN
+F 1 "OscFiltEnv1CVConn" V 20913 20712 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 20950 21000 50  0001 C CNN
+F 3 "~" H 20950 21000 50  0001 C CNN
+	1    20950 21000
+	0    -1   1    0   
+$EndComp
 $EndSCHEMATC
