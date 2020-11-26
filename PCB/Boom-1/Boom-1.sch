@@ -5215,18 +5215,6 @@ F 3 "~" H 22650 54250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	22500 55300 23150 55300
-Text Label 30150 40450 0    50   ~ 0
-SubAmpEnv
-Text Label 20900 47150 0    50   ~ 0
-SubFiltEnv1
-Text Label 20900 54050 0    50   ~ 0
-SubFiltEnv2
-Text Label 30300 25550 0    50   ~ 0
-OscAmpEnv
-Text Label 20250 23950 0    50   ~ 0
-OscFiltEnv2
-Text Label 20250 17050 0    50   ~ 0
-OscFiltEnv1
 Text Notes 45000 23700 1    50   ~ 0
 VCC
 Text Notes 45100 23700 1    50   ~ 0
@@ -5289,14 +5277,6 @@ Wire Wire Line
 	46150 27150 50550 27150
 Wire Wire Line
 	49600 24000 49600 26400
-Text Label 47350 29150 0    50   ~ 0
-FV1LeftIn
-Text Label 47500 30450 0    50   ~ 0
-FV1RightIn
-Text Label 50100 29250 0    50   ~ 0
-FV1LeftOut
-Text Label 50050 30450 0    50   ~ 0
-FV1RightOut
 Connection ~ 57150 29100
 Wire Wire Line
 	57150 29100 57350 29100
@@ -5586,10 +5566,6 @@ Text Notes 44500 26800 2    50   ~ 0
 SEL2
 Text Notes 44500 26900 2    50   ~ 0
 SRC
-Text Label 57550 29100 0    50   ~ 0
-LeftMixOut
-Text Label 57500 30300 0    50   ~ 0
-RightMixOut
 Wire Wire Line
 	47250 23950 47200 23950
 Wire Wire Line
@@ -11675,8 +11651,6 @@ Wire Wire Line
 	36100 28950 37300 28950
 Wire Wire Line
 	37300 28950 37300 29250
-Text Label 33050 38750 0    50   ~ 0
-CVInput
 $Comp
 L Connector:TestPoint TP35
 U 1 1 62340FB5
@@ -11688,11 +11662,7 @@ F 3 "~" H 33500 37350 50  0001 C CNN
 	1    33300 37350
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	34100 37150 34100 37250
 Connection ~ 36200 37500
-Text Label 33500 37350 0    50   ~ 0
-AudioInput
 Wire Wire Line
 	33600 38750 34100 38750
 Wire Wire Line
@@ -12005,8 +11975,6 @@ Wire Wire Line
 	37300 30850 37300 37500
 Wire Wire Line
 	36200 37500 37300 37500
-Text Label 35900 37600 0    50   ~ 0
-AudioOutput
 $Comp
 L Device:R_Small_US R273
 U 1 1 738BB679
@@ -12133,8 +12101,6 @@ Wire Wire Line
 	6150 47100 6150 46750
 Wire Wire Line
 	6150 47100 10600 47100
-Text Label 35350 28950 0    50   ~ 0
-AudioOutput
 Wire Wire Line
 	21450 19400 21400 19400
 Wire Wire Line
