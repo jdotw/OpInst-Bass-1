@@ -13752,13 +13752,13 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 38100 30250 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U41
-U 3 1 6218CA00
+U 2 1 6218CA00
 P 43350 28750
 F 0 "U41" H 43400 29000 50  0000 C CNN
 F 1 "TL074" H 43450 28900 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 43300 28850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 43400 28950 50  0001 C CNN
-	3    43350 28750
+	2    43350 28750
 	-1   0    0    1   
 $EndComp
 Connection ~ 43050 28750
@@ -13766,13 +13766,13 @@ Wire Wire Line
 	43300 29250 43300 29350
 $Comp
 L Amplifier_Operational:TL074 U41
-U 4 1 621954D3
+U 1 1 621954D3
 P 43000 29350
 F 0 "U41" H 43000 29650 50  0000 C CNN
 F 1 "TL074" H 43000 29550 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 42950 29450 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 43050 29550 50  0001 C CNN
-	4    43000 29350
+	1    43000 29350
 	1    0    0    -1  
 $EndComp
 Connection ~ 43300 29350
@@ -13808,13 +13808,13 @@ $EndComp
 Connection ~ 43050 31300
 $Comp
 L Amplifier_Operational:TL074 U41
-U 1 1 621AF226
+U 4 1 621AF226
 P 44850 29250
 F 0 "U41" H 44850 29617 50  0000 C CNN
 F 1 "TL074" H 44850 29526 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 44800 29350 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 44900 29450 50  0001 C CNN
-	1    44850 29250
+	4    44850 29250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -13830,13 +13830,13 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 44900 30650 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U41
-U 2 1 621BF4FB
+U 3 1 621BF4FB
 P 46800 29150
 F 0 "U41" H 46800 29517 50  0000 C CNN
 F 1 "TL074" H 46800 29426 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 46750 29250 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 46850 29350 50  0001 C CNN
-	2    46800 29150
+	3    46800 29150
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -13852,47 +13852,25 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 46850 30550 50  0001 C CNN
 $EndComp
 $Comp
 L Amplifier_Operational:TL074 U44
-U 4 1 621DFEFF
-P 51100 29350
-F 0 "U44" H 51100 29717 50  0000 C CNN
-F 1 "TL074" H 51100 29626 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 51050 29450 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 51150 29550 50  0001 C CNN
-	4    51100 29350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U43
-U 4 1 621E86F4
-P 51100 30550
-F 0 "U43" H 51100 30917 50  0000 C CNN
-F 1 "TL074" H 51100 30826 50  0000 C CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 51050 30650 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 51150 30750 50  0001 C CNN
-	4    51100 30550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Amplifier_Operational:TL074 U44
-U 1 1 621EF914
+U 4 1 621EF914
 P 55100 29200
 F 0 "U44" H 55100 29567 50  0000 C CNN
 F 1 "TL074" H 55100 29476 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 55050 29300 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 55150 29400 50  0001 C CNN
-	1    55100 29200
+	4    55100 29200
 	1    0    0    -1  
 $EndComp
 Connection ~ 55400 29200
 $Comp
 L Amplifier_Operational:TL074 U44
-U 2 1 621F74C9
+U 3 1 621F74C9
 P 56800 29100
 F 0 "U44" H 56800 29467 50  0000 C CNN
 F 1 "TL074" H 56800 29376 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 56750 29200 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 56850 29300 50  0001 C CNN
-	2    56800 29100
+	3    56800 29100
 	1    0    0    -1  
 $EndComp
 Connection ~ 57100 29100
@@ -15790,17 +15768,6 @@ Wire Wire Line
 Connection ~ 49200 34050
 Wire Wire Line
 	49200 34050 49200 34100
-$Comp
-L Amplifier_Operational:TL074 U43
-U 5 1 7BA24A33
-P 48150 33700
-F 0 "U43" H 48108 33746 50  0000 L CNN
-F 1 "TL074" H 48108 33655 50  0000 L CNN
-F 2 "Package_DIP:DIP-14_W7.62mm" H 48100 33800 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 48200 33900 50  0001 C CNN
-	5    48150 33700
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:+12V #PWR0331
 U 1 1 7BA24A95
@@ -20282,10 +20249,10 @@ $EndComp
 Connection ~ 57200 30300
 Connection ~ 57000 30300
 $Comp
-L Amplifier_Operational:TL074 U43
+L Amplifier_Operational:TL074 U44
 U 2 1 6220712E
 P 56700 30300
-F 0 "U43" H 56700 30667 50  0000 C CNN
+F 0 "U44" H 56700 30667 50  0000 C CNN
 F 1 "TL074" H 56700 30576 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 56650 30400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 56750 30500 50  0001 C CNN
@@ -20411,10 +20378,10 @@ Wire Wire Line
 Wire Wire Line
 	54250 30500 54700 30500
 $Comp
-L Amplifier_Operational:TL074 U43
+L Amplifier_Operational:TL074 U44
 U 1 1 621FEFE1
 P 55100 30400
-F 0 "U43" H 55100 30767 50  0000 C CNN
+F 0 "U44" H 55100 30767 50  0000 C CNN
 F 1 "TL074" H 55100 30676 50  0000 C CNN
 F 2 "Package_DIP:DIP-14_W7.62mm" H 55050 30500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 55150 30600 50  0001 C CNN
@@ -20541,6 +20508,39 @@ F 1 "TL072" H 44808 33655 50  0000 L CNN
 F 2 "Package_DIP:DIP-8_W7.62mm" H 44850 33700 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 44850 33700 50  0001 C CNN
 	3    44850 33700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U43
+U 1 1 60AC4F7F
+P 51100 30550
+F 0 "U43" H 51100 30917 50  0000 C CNN
+F 1 "TL072" H 51100 30826 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 51100 30550 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 51100 30550 50  0001 C CNN
+	1    51100 30550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U43
+U 2 1 60ACF913
+P 51100 29350
+F 0 "U43" H 51100 29717 50  0000 C CNN
+F 1 "TL072" H 51100 29626 50  0000 C CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 51100 29350 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 51100 29350 50  0001 C CNN
+	2    51100 29350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Amplifier_Operational:TL072 U43
+U 3 1 60B1CB2B
+P 48150 33700
+F 0 "U43" H 48108 33746 50  0000 L CNN
+F 1 "TL072" H 48108 33655 50  0000 L CNN
+F 2 "Package_DIP:DIP-8_W7.62mm" H 48150 33700 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 48150 33700 50  0001 C CNN
+	3    48150 33700
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
