@@ -26,17 +26,6 @@ Osc1SqrMixCV
 Text Notes 7450 7150 1    50   ~ 0
 Osc1SawMixCV
 $Comp
-L Connector_Generic:Conn_01x03 J27
-U 1 1 5E8DD2A6
-P 45300 12100
-F 0 "J27" H 45450 11800 50  0000 L CNN
-F 1 "PowerConn" H 45450 11700 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 45300 12100 50  0001 C CNN
-F 3 "~" H 45300 12100 50  0001 C CNN
-	1    45300 12100
-	-1   0    0    1   
-$EndComp
-$Comp
 L Device:R_Small_US R38
 U 1 1 5E8EC106
 P 10800 9900
@@ -20895,5 +20884,16 @@ F 2 "" H 50500 14150 50  0001 C CNN
 F 3 "" H 50500 14150 50  0001 C CNN
 	1    50500 14150
 	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J27
+U 1 1 6061CEEF
+P 45300 12100
+F 0 "J27" H 45218 12417 50  0000 C CNN
+F 1 "PowerConn" H 45218 12326 50  0000 C CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 45300 12100 50  0001 C CNN
+F 3 "~" H 45300 12100 50  0001 C CNN
+	1    45300 12100
+	-1   0    0    -1  
 $EndComp
 $EndSCHEMATC
