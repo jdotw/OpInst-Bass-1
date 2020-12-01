@@ -148,12 +148,13 @@ int main(void)
 		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
 	}
 
+	dpot_calibrate_tracking(&hi2c1);
 	midi_rx_set_uart(&huart1);
-//	dpot_calibrate_tracking(&hi2c1);
 	set_osc1_tuning_timer(&htim3, TIM_CHANNEL_3);
 	set_osc2_tuning_timer(&htim4, TIM_CHANNEL_1);
 	dac_calibrate_all();
 //	dac_tracking_test_mode();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
