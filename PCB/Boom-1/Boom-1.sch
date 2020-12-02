@@ -4007,7 +4007,7 @@ F 3 "~" H 11150 43750 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Text Notes 6200 27800 1    50   ~ 0
-SubToOsc2MixCV
+SubToOsc2FiltMixCV
 Text Notes 6100 27800 1    50   ~ 0
 SubToSubFiltMixCV
 Wire Wire Line
@@ -19448,9 +19448,9 @@ SubToSubFiltMixCV
 Text GLabel 10950 39100 0    50   Input ~ 0
 SubToSubFiltMixCV
 Text GLabel 6150 28050 3    50   Input ~ 0
-SubToOsc2MixCV
+SubToOsc2FiltMixCV
 Text GLabel 10950 38900 0    50   Input ~ 0
-SubToOsc2MixCV
+SubToOsc2FiltMixCV
 $Comp
 L Connector_Generic:Conn_01x03 J8
 U 1 1 656400F9
@@ -20927,9 +20927,9 @@ Text GLabel 5850 28050 3    50   Input ~ 0
 Osc2SqrMixCV
 Text GLabel 5950 28050 3    50   Input ~ 0
 Osc2SawMixCV
-Text GLabel 4850 43900 0    50   Input ~ 0
+Text GLabel 5350 44300 2    50   Input ~ 0
 SubToSubFiltMixCV
-Text GLabel 4850 44000 0    50   Input ~ 0
+Text GLabel 5350 43900 2    50   Input ~ 0
 SubToOsc2FiltMixCV
 Text GLabel 3800 30850 0    50   Input ~ 0
 Osc2SqrMixCV
@@ -21095,13 +21095,13 @@ Text GLabel 6750 45850 3    50   Input ~ 0
 PinkNoiseOut
 Text GLabel 6650 45850 3    50   Input ~ 0
 WhiteNoiseOut
-Text GLabel 5350 43900 2    50   Input ~ 0
-WhiteNoiseOut
-Text GLabel 5350 44000 2    50   Input ~ 0
-PinkNoiseOut
 Text GLabel 4850 44200 0    50   Input ~ 0
-NoiseToOsc2FiltMixCV
+WhiteNoiseOut
 Text GLabel 4850 44100 0    50   Input ~ 0
+PinkNoiseOut
+Text GLabel 4850 44400 0    50   Input ~ 0
+NoiseToOsc2FiltMixCV
+Text GLabel 4850 44300 0    50   Input ~ 0
 NoiseToSubFiltMixCV
 Text GLabel 9900 38700 1    50   Input ~ 0
 SubOct2Out
@@ -21115,37 +21115,12 @@ Text GLabel 10350 38150 3    50   Input ~ 0
 SubOctBothOut
 Text GLabel 10450 38150 3    50   Input ~ 0
 SubOct1Out
-Text GLabel 5350 44300 2    50   Input ~ 0
-SubOct2Out
 Text GLabel 5350 44200 2    50   Input ~ 0
-SubOctBothOut
+SubOct2Out
 Text GLabel 5350 44100 2    50   Input ~ 0
+SubOctBothOut
+Text GLabel 5350 44000 2    50   Input ~ 0
 SubOct1Out
-$Comp
-L Connector_Generic:Conn_02x06_Top_Bottom J39
-U 1 1 777555D2
-P 5050 44100
-F 0 "J39" H 5100 44517 50  0000 C CNN
-F 1 "SubNoiseConn" H 5100 44426 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical" H 5050 44100 50  0001 C CNN
-F 3 "~" H 5050 44100 50  0001 C CNN
-	1    5050 44100
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0394
-U 1 1 78117FF3
-P 4850 44400
-F 0 "#PWR0394" H 4850 44150 50  0001 C CNN
-F 1 "GND" H 4855 44227 50  0000 C CNN
-F 2 "" H 4850 44400 50  0001 C CNN
-F 3 "" H 4850 44400 50  0001 C CNN
-	1    4850 44400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4850 44300 4850 44400
-Connection ~ 4850 44400
 $Comp
 L power:GND #PWR0395
 U 1 1 78ADB901
@@ -21799,4 +21774,29 @@ F 3 "~" H 4100 31150 50  0001 C CNN
 	1    4100 31150
 	-1   0    0    -1  
 $EndComp
+$Comp
+L Connector_Generic:Conn_02x06_Odd_Even J39
+U 1 1 776AA4B6
+P 5150 44100
+F 0 "J39" H 5200 44517 50  0000 C CNN
+F 1 "SubNoiseConn" H 5200 44426 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical" H 5150 44100 50  0001 C CNN
+F 3 "~" H 5150 44100 50  0001 C CNN
+	1    5150 44100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 7EEE39AD
+P 4850 43900
+F 0 "#PWR?" H 4850 43650 50  0001 C CNN
+F 1 "GND" H 4855 43727 50  0000 C CNN
+F 2 "" H 4850 43900 50  0001 C CNN
+F 3 "" H 4850 43900 50  0001 C CNN
+	1    4850 43900
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4850 43900 4850 44000
+Connection ~ 4850 43900
 $EndSCHEMATC
