@@ -4157,21 +4157,8 @@ Wire Wire Line
 Wire Wire Line
 	37300 30650 37300 30150
 Connection ~ 37300 30150
-$Comp
-L Connector_Generic:Conn_01x03 J9
-U 1 1 5FF06384
-P 10650 7350
-F 0 "J9" V 10614 7162 50  0000 R CNN
-F 1 "Osc1ScaleConn" V 10523 7162 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10650 7350 50  0001 C CNN
-F 3 "~" H 10650 7350 50  0001 C CNN
-	1    10650 7350
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	10200 8050 10200 8950
-Wire Wire Line
-	10300 8050 10300 8850
 $Comp
 L Device:R_POT_TRIM_US RV9
 U 1 1 5F148328
@@ -4209,11 +4196,6 @@ Wire Wire Line
 Connection ~ 10650 9050
 Wire Wire Line
 	10650 9050 10750 9050
-Wire Wire Line
-	10300 8850 10750 8850
-Wire Wire Line
-	10750 8850 10750 9050
-Connection ~ 10750 9050
 $Comp
 L Connector_Generic:Conn_01x03 J10
 U 1 1 63812E66
@@ -6018,8 +6000,6 @@ Text Notes 10700 7250 1    50   ~ 0
 Osc1ScaleWiper
 Text Notes 10600 7250 1    50   ~ 0
 Osc1ScaleHigh
-Text Notes 10800 7250 1    50   ~ 0
-Osc1ScaleTied
 Text Notes 11050 12200 3    50   ~ 0
 Osc1HFTrackLow
 Text Notes 11150 12200 3    50   ~ 0
@@ -20893,17 +20873,6 @@ F 3 "~" H 45300 12100 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_02x09_Top_Bottom J37
-U 1 1 61AE2935
-P 4850 9450
-F 0 "J37" H 4900 10067 50  0000 C CNN
-F 1 "Osc1Conn" H 4900 9976 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x09_P2.54mm_Vertical" H 4850 9450 50  0001 C CNN
-F 3 "~" H 4850 9450 50  0001 C CNN
-	1    4850 9450
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector_Generic:Conn_02x09_Top_Bottom J38
 U 1 1 61BAF4C4
 P 4000 31150
@@ -21088,34 +21057,20 @@ Text GLabel 8300 6450 3    50   Input ~ 0
 Osc1SawMixCV
 Text GLabel 8400 6450 3    50   Input ~ 0
 Osc1ToOsc2FiltMixCV
-Text GLabel 4650 9050 0    50   Input ~ 0
+Text GLabel 5150 9350 2    50   Input ~ 0
 Osc1PWMCV
-Text GLabel 4650 9150 0    50   Input ~ 0
+Text GLabel 5150 9250 2    50   Input ~ 0
 Osc1NoteCV
-Text GLabel 4650 9250 0    50   Input ~ 0
+Text GLabel 4650 9850 0    50   Input ~ 0
 Osc1TuningOut
-Text GLabel 4650 9350 0    50   Input ~ 0
+Text GLabel 4650 9250 0    50   Input ~ 0
 Osc1SqrMixCV
-Text GLabel 4650 9550 0    50   Input ~ 0
+Text GLabel 4650 9050 0    50   Input ~ 0
 Osc1ToOsc1FiltMixCV
-Text GLabel 4650 9450 0    50   Input ~ 0
+Text GLabel 4650 9150 0    50   Input ~ 0
 Osc1SawMixCV
-Text GLabel 4650 9650 0    50   Input ~ 0
+Text GLabel 4650 9350 0    50   Input ~ 0
 Osc1ToOsc2FiltMixCV
-$Comp
-L power:GND #PWR?
-U 1 1 64A02EFD
-P 4650 9850
-F 0 "#PWR?" H 4650 9600 50  0001 C CNN
-F 1 "GND" H 4655 9677 50  0000 C CNN
-F 2 "" H 4650 9850 50  0001 C CNN
-F 3 "" H 4650 9850 50  0001 C CNN
-	1    4650 9850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4650 9750 4650 9850
-Connection ~ 4650 9850
 Text GLabel 9150 8350 1    50   Input ~ 0
 Osc1HardSyncIn
 Text GLabel 9250 8350 1    50   Input ~ 0
@@ -21132,23 +21087,19 @@ Text GLabel 10100 8050 1    50   Input ~ 0
 Osc1ScaleHigh
 Text GLabel 10200 8050 1    50   Input ~ 0
 Osc1ScaleWiper
-Text GLabel 10300 8050 1    50   Input ~ 0
-Osc1ScaleTied
 Text GLabel 10550 7550 3    50   Input ~ 0
 Osc1ScaleHigh
 Text GLabel 10650 7550 3    50   Input ~ 0
 Osc1ScaleWiper
-Text GLabel 10750 7550 3    50   Input ~ 0
-Osc1ScaleTied
-Text GLabel 5150 9350 2    50   Input ~ 0
-Osc1ScaleHigh
-Text GLabel 5150 9450 2    50   Input ~ 0
-Osc1ScaleWiper
 Text GLabel 5150 9050 2    50   Input ~ 0
-Osc1HardSyncIn
+Osc1ScaleHigh
 Text GLabel 5150 9150 2    50   Input ~ 0
+Osc1ScaleWiper
+Text GLabel 5150 9750 2    50   Input ~ 0
+Osc1HardSyncIn
+Text GLabel 5150 9850 2    50   Input ~ 0
 Osc1SoftSyncIn
-Text GLabel 5150 9250 2    50   Input ~ 0
+Text GLabel 5150 9650 2    50   Input ~ 0
 Osc1SyncOut
 Text GLabel 10500 11800 3    50   Input ~ 0
 Osc1HFTrackLow
@@ -21162,23 +21113,10 @@ Text GLabel 11100 11900 1    50   Input ~ 0
 Osc1HFTrackWiper
 Text GLabel 11200 11900 1    50   Input ~ 0
 Osc1HFTrackHigh
-Text GLabel 5150 9750 2    50   Input ~ 0
-Osc1HFTrackLow
-Text GLabel 5150 9650 2    50   Input ~ 0
-Osc1HFTrackWiper
 Text GLabel 5150 9550 2    50   Input ~ 0
+Osc1HFTrackWiper
+Text GLabel 5150 9450 2    50   Input ~ 0
 Osc1HFTrackHigh
-$Comp
-L power:GND #PWR?
-U 1 1 6D1F9A5A
-P 5150 9850
-F 0 "#PWR?" H 5150 9600 50  0001 C CNN
-F 1 "GND" H 5155 9677 50  0000 C CNN
-F 2 "" H 5150 9850 50  0001 C CNN
-F 3 "" H 5150 9850 50  0001 C CNN
-	1    5150 9850
-	1    0    0    -1  
-$EndComp
 Text GLabel 4300 30750 2    50   Input ~ 0
 Osc2HardSyncIn
 Text GLabel 4300 30850 2    50   Input ~ 0
@@ -21241,21 +21179,21 @@ SubOctBothOut
 Text GLabel 5350 44100 2    50   Input ~ 0
 SubOct1Out
 $Comp
-L Connector_Generic:Conn_02x06_Top_Bottom J?
+L Connector_Generic:Conn_02x06_Top_Bottom J39
 U 1 1 777555D2
 P 5050 44100
-F 0 "J?" H 5100 44517 50  0000 C CNN
+F 0 "J39" H 5100 44517 50  0000 C CNN
 F 1 "SubNoiseConn" H 5100 44426 50  0000 C CNN
-F 2 "" H 5050 44100 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x06_P2.54mm_Vertical" H 5050 44100 50  0001 C CNN
 F 3 "~" H 5050 44100 50  0001 C CNN
 	1    5050 44100
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0394
 U 1 1 78117FF3
 P 4850 44400
-F 0 "#PWR?" H 4850 44150 50  0001 C CNN
+F 0 "#PWR0394" H 4850 44150 50  0001 C CNN
 F 1 "GND" H 4855 44227 50  0000 C CNN
 F 2 "" H 4850 44400 50  0001 C CNN
 F 3 "" H 4850 44400 50  0001 C CNN
@@ -21266,10 +21204,10 @@ Wire Wire Line
 	4850 44300 4850 44400
 Connection ~ 4850 44400
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0395
 U 1 1 78ADB901
 P 5350 44400
-F 0 "#PWR?" H 5350 44150 50  0001 C CNN
+F 0 "#PWR0395" H 5350 44150 50  0001 C CNN
 F 1 "GND" H 5355 44227 50  0000 C CNN
 F 2 "" H 5350 44400 50  0001 C CNN
 F 3 "" H 5350 44400 50  0001 C CNN
@@ -21783,10 +21721,10 @@ FV1EEpromSDA
 Text GLabel 56050 23550 2    50   Input ~ 0
 FV1EEpromSCL
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0396
 U 1 1 82841852
 P 56050 23150
-F 0 "#PWR?" H 56050 22900 50  0001 C CNN
+F 0 "#PWR0396" H 56050 22900 50  0001 C CNN
 F 1 "GND" V 56055 23022 50  0000 R CNN
 F 2 "" H 56050 23150 50  0001 C CNN
 F 3 "" H 56050 23150 50  0001 C CNN
@@ -21794,10 +21732,10 @@ F 3 "" H 56050 23150 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0397
 U 1 1 8284243C
 P 56050 23450
-F 0 "#PWR?" H 56050 23200 50  0001 C CNN
+F 0 "#PWR0397" H 56050 23200 50  0001 C CNN
 F 1 "GND" V 56055 23322 50  0000 R CNN
 F 2 "" H 56050 23450 50  0001 C CNN
 F 3 "" H 56050 23450 50  0001 C CNN
@@ -21805,10 +21743,10 @@ F 3 "" H 56050 23450 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0398
 U 1 1 82842780
 P 55550 23650
-F 0 "#PWR?" H 55550 23400 50  0001 C CNN
+F 0 "#PWR0398" H 55550 23400 50  0001 C CNN
 F 1 "GND" V 55555 23522 50  0000 R CNN
 F 2 "" H 55550 23650 50  0001 C CNN
 F 3 "" H 55550 23650 50  0001 C CNN
@@ -21852,14 +21790,56 @@ FXGND
 Text GLabel 22450 37100 2    50   Input ~ 0
 FX-12V
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0399
 U 1 1 862BF522
 P 21950 37600
-F 0 "#PWR?" H 21950 37350 50  0001 C CNN
+F 0 "#PWR0399" H 21950 37350 50  0001 C CNN
 F 1 "GND" V 21955 37472 50  0000 R CNN
 F 2 "" H 21950 37600 50  0001 C CNN
 F 3 "" H 21950 37600 50  0001 C CNN
 	1    21950 37600
 	0    1    1    0   
 $EndComp
+$Comp
+L power:GND #PWR0392
+U 1 1 69B7D239
+P 4650 9650
+F 0 "#PWR0392" H 4650 9400 50  0001 C CNN
+F 1 "GND" V 4655 9522 50  0000 R CNN
+F 2 "" H 4650 9650 50  0001 C CNN
+F 3 "" H 4650 9650 50  0001 C CNN
+	1    4650 9650
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J37
+U 1 1 6064D3C3
+P 4950 9450
+F 0 "J37" H 5000 10067 50  0000 C CNN
+F 1 "Osc1Conn" H 5000 9976 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x09_P2.54mm_Vertical" H 4950 9450 50  0001 C CNN
+F 3 "~" H 4950 9450 50  0001 C CNN
+	1    4950 9450
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4650 9450 4650 9550
+Connection ~ 4650 9550
+Wire Wire Line
+	4650 9550 4650 9650
+Connection ~ 4650 9650
+Wire Wire Line
+	4650 9650 4650 9750
+$Comp
+L Connector_Generic:Conn_01x03 J9
+U 1 1 5FF06384
+P 10650 7350
+F 0 "J9" V 10614 7162 50  0000 R CNN
+F 1 "Osc1ScaleConn" V 10523 7162 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10650 7350 50  0001 C CNN
+F 3 "~" H 10650 7350 50  0001 C CNN
+	1    10650 7350
+	0    -1   -1   0   
+$EndComp
+NoConn ~ 10750 7550
 $EndSCHEMATC
