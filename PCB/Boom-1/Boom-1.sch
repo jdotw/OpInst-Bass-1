@@ -21164,9 +21164,9 @@ Text GLabel 21950 37400 0    50   Input ~ 0
 FXGND
 Text GLabel 21950 37300 0    50   Input ~ 0
 FX-12V
-Text GLabel 21950 36600 0    50   Input ~ 0
-Osc1FiltFreqCV
 Text GLabel 21950 36500 0    50   Input ~ 0
+Osc1FiltFreqCV
+Text GLabel 21950 36600 0    50   Input ~ 0
 Osc1FiltResCV
 Text GLabel 21950 36700 0    50   Input ~ 0
 Osc1FXSend
@@ -21784,10 +21784,10 @@ F 3 "~" H 5150 44100 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0390
 U 1 1 7EEE39AD
 P 4850 43900
-F 0 "#PWR?" H 4850 43650 50  0001 C CNN
+F 0 "#PWR0390" H 4850 43650 50  0001 C CNN
 F 1 "GND" H 4855 43727 50  0000 C CNN
 F 2 "" H 4850 43900 50  0001 C CNN
 F 3 "" H 4850 43900 50  0001 C CNN
