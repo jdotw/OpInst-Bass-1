@@ -7671,8 +7671,6 @@ Text Notes 9800 28300 1    50   ~ 0
 Osc2ScaleHigh
 Text Notes 10000 28300 1    50   ~ 0
 Osc2ScaleTied
-Text Notes 10400 33200 3    50   ~ 0
-Osc2HFTrackLow
 Text Notes 10500 33200 3    50   ~ 0
 Osc2HFTrackWiper
 Text Notes 10600 33200 3    50   ~ 0
