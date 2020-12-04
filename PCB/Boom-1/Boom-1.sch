@@ -19287,12 +19287,8 @@ F 3 "~" H 5850 27850 50  0001 C CNN
 	1    5850 27850
 	0    -1   -1   0   
 $EndComp
-Text GLabel 6050 28050 3    50   Input ~ 0
-SubToSubFiltMixCV
 Text GLabel 10950 39100 0    50   Input ~ 0
 SubToSubFiltMixCV
-Text GLabel 6150 28050 3    50   Input ~ 0
-SubToOsc2FiltMixCV
 Text GLabel 10950 38900 0    50   Input ~ 0
 SubToOsc2FiltMixCV
 $Comp
@@ -20682,16 +20678,6 @@ Text GLabel 6700 28500 1    50   Input ~ 0
 Osc2SqrMixCV
 Text GLabel 6800 28500 1    50   Input ~ 0
 Osc2SawMixCV
-Text GLabel 5550 28050 3    50   Input ~ 0
-Osc2PWMCV
-Text GLabel 5650 28050 3    50   Input ~ 0
-Osc2NoteCV
-Text GLabel 5750 28050 3    50   Input ~ 0
-Osc2TuningOut
-Text GLabel 5850 28050 3    50   Input ~ 0
-Osc2SqrMixCV
-Text GLabel 5950 28050 3    50   Input ~ 0
-Osc2SawMixCV
 Text GLabel 5350 44300 2    50   Input ~ 0
 SubToSubFiltMixCV
 Text GLabel 5350 43900 2    50   Input ~ 0
@@ -20706,21 +20692,9 @@ Text GLabel 8550 29450 1    50   Input ~ 0
 Osc2SoftSyncIn
 Text GLabel 8650 29450 1    50   Input ~ 0
 Osc2SyncOut
-Text GLabel 8800 28600 3    50   Input ~ 0
-Osc2HardSyncIn
-Text GLabel 8900 28600 3    50   Input ~ 0
-Osc2SoftSyncIn
-Text GLabel 9000 28600 3    50   Input ~ 0
-Osc2SyncOut
-Text GLabel 9750 28600 3    50   Input ~ 0
-Osc2Scale
 Text GLabel 10050 32900 3    50   Input ~ 0
 Osc2HFTrackWiper
 Text GLabel 10150 32900 3    50   Input ~ 0
-Osc2HFTrackHigh
-Text GLabel 10450 32900 1    50   Input ~ 0
-Osc2HFTrackWiper
-Text GLabel 10550 32900 1    50   Input ~ 0
 Osc2HFTrackHigh
 Text GLabel 4300 31150 2    50   Input ~ 0
 Osc2HFTrackHigh
@@ -20748,20 +20722,6 @@ Text GLabel 7400 7400 1    50   Input ~ 0
 Osc1SawMixCV
 Text GLabel 7500 7400 1    50   Input ~ 0
 Osc1ToOsc2FiltMixCV
-Text GLabel 7800 6450 3    50   Input ~ 0
-Osc1PWMCV
-Text GLabel 7900 6450 3    50   Input ~ 0
-Osc1NoteCV
-Text GLabel 8000 6450 3    50   Input ~ 0
-Osc1TuningOut
-Text GLabel 8100 6450 3    50   Input ~ 0
-Osc1SqrMixCV
-Text GLabel 8200 6450 3    50   Input ~ 0
-Osc1ToOsc1FiltMixCV
-Text GLabel 8300 6450 3    50   Input ~ 0
-Osc1SawMixCV
-Text GLabel 8400 6450 3    50   Input ~ 0
-Osc1ToOsc2FiltMixCV
 Text GLabel 5150 9350 2    50   Input ~ 0
 Osc1PWMCV
 Text GLabel 5150 9250 2    50   Input ~ 0
@@ -20782,15 +20742,7 @@ Text GLabel 9250 8350 1    50   Input ~ 0
 Osc1SoftSyncIn
 Text GLabel 9350 8350 1    50   Input ~ 0
 Osc1SyncOut
-Text GLabel 9500 7550 3    50   Input ~ 0
-Osc1HardSyncIn
-Text GLabel 9600 7550 3    50   Input ~ 0
-Osc1SoftSyncIn
-Text GLabel 9700 7550 3    50   Input ~ 0
-Osc1SyncOut
 Text GLabel 10100 8050 1    50   Input ~ 0
-Osc1Scale
-Text GLabel 10550 7550 3    50   Input ~ 0
 Osc1Scale
 Text GLabel 5150 9050 2    50   Input ~ 0
 Osc1Scale
@@ -20803,10 +20755,6 @@ Osc1SyncOut
 Text GLabel 10600 11800 3    50   Input ~ 0
 Osc1HFTrackWiper
 Text GLabel 10700 11800 3    50   Input ~ 0
-Osc1HFTrackHigh
-Text GLabel 11100 11900 1    50   Input ~ 0
-Osc1HFTrackWiper
-Text GLabel 11200 11900 1    50   Input ~ 0
 Osc1HFTrackHigh
 Text GLabel 5150 9550 2    50   Input ~ 0
 Osc1HFTrackWiper
@@ -20830,14 +20778,6 @@ Text GLabel 6250 46750 1    50   Input ~ 0
 NoiseToOsc2FiltMixCV
 Text GLabel 6350 46750 1    50   Input ~ 0
 NoiseToSubFiltMixCV
-Text GLabel 6850 45850 3    50   Input ~ 0
-NoiseToOsc2FiltMixCV
-Text GLabel 6950 45850 3    50   Input ~ 0
-NoiseToSubFiltMixCV
-Text GLabel 6750 45850 3    50   Input ~ 0
-PinkNoiseOut
-Text GLabel 6650 45850 3    50   Input ~ 0
-WhiteNoiseOut
 Text GLabel 4850 44200 0    50   Input ~ 0
 WhiteNoiseOut
 Text GLabel 4850 44100 0    50   Input ~ 0
@@ -20851,12 +20791,6 @@ SubOct2Out
 Text GLabel 10000 38700 1    50   Input ~ 0
 SubOctBothOut
 Text GLabel 10100 38700 1    50   Input ~ 0
-SubOct1Out
-Text GLabel 10250 38150 3    50   Input ~ 0
-SubOct2Out
-Text GLabel 10350 38150 3    50   Input ~ 0
-SubOctBothOut
-Text GLabel 10450 38150 3    50   Input ~ 0
 SubOct1Out
 Text GLabel 5350 44200 2    50   Input ~ 0
 SubOct2Out
