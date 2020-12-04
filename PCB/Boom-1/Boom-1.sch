@@ -4157,8 +4157,6 @@ Wire Wire Line
 Wire Wire Line
 	37300 30650 37300 30150
 Connection ~ 37300 30150
-Wire Wire Line
-	10200 8050 10200 8950
 $Comp
 L Device:R_POT_TRIM_US RV9
 U 1 1 5F148328
@@ -5455,19 +5453,6 @@ F 3 "" H 48400 24150 50  0001 C CNN
 	1    48400 24150
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR0349
-U 1 1 75E6DCBD
-P 50400 24700
-F 0 "#PWR0349" H 50400 24450 50  0001 C CNN
-F 1 "GND" V 50405 24572 50  0000 R CNN
-F 2 "" H 50400 24700 50  0001 C CNN
-F 3 "" H 50400 24700 50  0001 C CNN
-	1    50400 24700
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	50400 23750 50400 24700
 Text Notes 52500 22550 1    50   ~ 0
 ControlPotCommonHigh
 Text Notes 52900 22550 1    50   ~ 0
@@ -5659,55 +5644,55 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0122
 U 1 1 7894C23A
-P 20350 20700
-F 0 "#PWR0122" H 20350 20450 50  0001 C CNN
-F 1 "GND" H 20355 20527 50  0000 C CNN
-F 2 "" H 20350 20700 50  0001 C CNN
-F 3 "" H 20350 20700 50  0001 C CNN
-	1    20350 20700
+P 21350 21200
+F 0 "#PWR0122" H 21350 20950 50  0001 C CNN
+F 1 "GND" H 21355 21027 50  0000 C CNN
+F 2 "" H 21350 21200 50  0001 C CNN
+F 3 "" H 21350 21200 50  0001 C CNN
+	1    21350 21200
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	20350 20700 20350 20800
+	21350 21200 21350 22000
 $Comp
 L power:GND #PWR0134
 U 1 1 601D05C9
-P 24900 10350
-F 0 "#PWR0134" H 24900 10100 50  0001 C CNN
-F 1 "GND" H 24905 10177 50  0000 C CNN
-F 2 "" H 24900 10350 50  0001 C CNN
-F 3 "" H 24900 10350 50  0001 C CNN
-	1    24900 10350
+P 25750 9750
+F 0 "#PWR0134" H 25750 9500 50  0001 C CNN
+F 1 "GND" H 25755 9577 50  0000 C CNN
+F 2 "" H 25750 9750 50  0001 C CNN
+F 3 "" H 25750 9750 50  0001 C CNN
+	1    25750 9750
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	24900 10050 24900 10350
+	25750 9450 25750 9750
 $Comp
 L power:+12V #PWR0133
 U 1 1 605CB27E
-P 24800 10100
-F 0 "#PWR0133" H 24800 9950 50  0001 C CNN
-F 1 "+12V" H 24815 10273 50  0000 C CNN
-F 2 "" H 24800 10100 50  0001 C CNN
-F 3 "" H 24800 10100 50  0001 C CNN
-	1    24800 10100
+P 25650 9500
+F 0 "#PWR0133" H 25650 9350 50  0001 C CNN
+F 1 "+12V" H 25665 9673 50  0000 C CNN
+F 2 "" H 25650 9500 50  0001 C CNN
+F 3 "" H 25650 9500 50  0001 C CNN
+	1    25650 9500
 	-1   0    0    1   
 $EndComp
 $Comp
 L power:-12V #PWR0138
 U 1 1 60DB08F1
-P 25000 10100
-F 0 "#PWR0138" H 25000 10200 50  0001 C CNN
-F 1 "-12V" H 25015 10273 50  0000 C CNN
-F 2 "" H 25000 10100 50  0001 C CNN
-F 3 "" H 25000 10100 50  0001 C CNN
-	1    25000 10100
+P 25850 10050
+F 0 "#PWR0138" H 25850 10150 50  0001 C CNN
+F 1 "-12V" H 25865 10223 50  0000 C CNN
+F 2 "" H 25850 10050 50  0001 C CNN
+F 3 "" H 25850 10050 50  0001 C CNN
+	1    25850 10050
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	25000 10050 25000 10100
+	25850 9450 25850 10050
 Wire Wire Line
-	24800 10050 24800 10100
+	25650 9450 25650 9500
 Text Notes 25700 9150 1    50   ~ 0
 FX+12V
 Text Notes 25800 9150 1    50   ~ 0
@@ -5851,44 +5836,44 @@ $EndComp
 $Comp
 L power:GND #PWR0304
 U 1 1 717FDDAA
-P 41050 29550
-F 0 "#PWR0304" H 41050 29300 50  0001 C CNN
-F 1 "GND" H 41055 29377 50  0000 C CNN
-F 2 "" H 41050 29550 50  0001 C CNN
-F 3 "" H 41050 29550 50  0001 C CNN
-	1    41050 29550
+P 40400 29250
+F 0 "#PWR0304" H 40400 29000 50  0001 C CNN
+F 1 "GND" H 40405 29077 50  0000 C CNN
+F 2 "" H 40400 29250 50  0001 C CNN
+F 3 "" H 40400 29250 50  0001 C CNN
+	1    40400 29250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	41050 29250 41050 29550
+	40400 28950 40400 29250
 $Comp
 L power:+12V #PWR0303
 U 1 1 717FDDBD
-P 40950 29300
-F 0 "#PWR0303" H 40950 29150 50  0001 C CNN
-F 1 "+12V" H 40965 29473 50  0000 C CNN
-F 2 "" H 40950 29300 50  0001 C CNN
-F 3 "" H 40950 29300 50  0001 C CNN
-	1    40950 29300
+P 40300 29500
+F 0 "#PWR0303" H 40300 29350 50  0001 C CNN
+F 1 "+12V" H 40315 29673 50  0000 C CNN
+F 2 "" H 40300 29500 50  0001 C CNN
+F 3 "" H 40300 29500 50  0001 C CNN
+	1    40300 29500
 	-1   0    0    1   
 $EndComp
 $Comp
 L power:-12V #PWR0305
 U 1 1 717FDDD3
-P 41200 29300
-F 0 "#PWR0305" H 41200 29400 50  0001 C CNN
-F 1 "-12V" H 41215 29473 50  0000 C CNN
-F 2 "" H 41200 29300 50  0001 C CNN
-F 3 "" H 41200 29300 50  0001 C CNN
-	1    41200 29300
+P 40550 29000
+F 0 "#PWR0305" H 40550 29100 50  0001 C CNN
+F 1 "-12V" H 40565 29173 50  0000 C CNN
+F 2 "" H 40550 29000 50  0001 C CNN
+F 3 "" H 40550 29000 50  0001 C CNN
+	1    40550 29000
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	41150 29250 41150 29300
+	40500 28950 40500 29000
 Wire Wire Line
-	40950 29250 40950 29300
+	40300 28950 40300 29500
 Wire Wire Line
-	41150 29300 41200 29300
+	40500 29000 40550 29000
 Text Notes 40350 28650 1    50   ~ 0
 FX+12V
 Text Notes 40450 28650 1    50   ~ 0
@@ -5987,10 +5972,8 @@ Wire Wire Line
 Connection ~ 53150 29950
 Wire Wire Line
 	53150 29950 53750 29950
-Text Notes 10700 7250 1    50   ~ 0
-Osc1ScaleWiper
 Text Notes 10600 7250 1    50   ~ 0
-Osc1ScaleHigh
+Osc1Scale
 Text Notes 11150 12200 3    50   ~ 0
 Osc1HFTrackWiper
 Text Notes 11250 12200 3    50   ~ 0
@@ -6030,16 +6013,16 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0123
 U 1 1 76624A33
-P 20350 27600
-F 0 "#PWR0123" H 20350 27350 50  0001 C CNN
-F 1 "GND" H 20355 27427 50  0000 C CNN
-F 2 "" H 20350 27600 50  0001 C CNN
-F 3 "" H 20350 27600 50  0001 C CNN
-	1    20350 27600
+P 21400 27800
+F 0 "#PWR0123" H 21400 27550 50  0001 C CNN
+F 1 "GND" H 21405 27627 50  0000 C CNN
+F 2 "" H 21400 27800 50  0001 C CNN
+F 3 "" H 21400 27800 50  0001 C CNN
+	1    21400 27800
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	20350 27600 20350 27700
+	21400 27800 21400 28600
 Text Notes 21400 28900 3    50   ~ 0
 OscFiltEnv2AmtLow
 Text Notes 21500 28900 3    50   ~ 0
@@ -6077,16 +6060,16 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0238
 U 1 1 78B1977C
-P 30300 21800
-F 0 "#PWR0238" H 30300 21550 50  0001 C CNN
-F 1 "GND" H 30305 21627 50  0000 C CNN
-F 2 "" H 30300 21800 50  0001 C CNN
-F 3 "" H 30300 21800 50  0001 C CNN
-	1    30300 21800
+P 31700 21450
+F 0 "#PWR0238" H 31700 21200 50  0001 C CNN
+F 1 "GND" H 31705 21277 50  0000 C CNN
+F 2 "" H 31700 21450 50  0001 C CNN
+F 3 "" H 31700 21450 50  0001 C CNN
+	1    31700 21450
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	30300 21800 30300 21700
+	31700 21450 31700 20650
 Text Notes 31700 20350 1    50   ~ 0
 OscAmpEnvAmtLow
 Text Notes 31800 20350 1    50   ~ 0
@@ -6119,19 +6102,6 @@ Wire Wire Line
 	30500 41700 30500 44450
 Wire Wire Line
 	30600 41600 30600 44450
-$Comp
-L power:GND #PWR0242
-U 1 1 7B059EA1
-P 30400 44350
-F 0 "#PWR0242" H 30400 44100 50  0001 C CNN
-F 1 "GND" H 30405 44177 50  0000 C CNN
-F 2 "" H 30400 44350 50  0001 C CNN
-F 3 "" H 30400 44350 50  0001 C CNN
-	1    30400 44350
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	30400 44350 30400 44450
 Text Notes 31600 45850 3    50   ~ 0
 SubAmpEnvAmtLow
 Text Notes 31700 45850 3    50   ~ 0
@@ -6167,16 +6137,16 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0129
 U 1 1 7D1C6FF5
-P 21050 51150
-F 0 "#PWR0129" H 21050 50900 50  0001 C CNN
-F 1 "GND" H 21055 50977 50  0000 C CNN
-F 2 "" H 21050 51150 50  0001 C CNN
-F 3 "" H 21050 51150 50  0001 C CNN
-	1    21050 51150
+P 22050 51400
+F 0 "#PWR0129" H 22050 51150 50  0001 C CNN
+F 1 "GND" H 22055 51227 50  0000 C CNN
+F 2 "" H 22050 51400 50  0001 C CNN
+F 3 "" H 22050 51400 50  0001 C CNN
+	1    22050 51400
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	21050 51150 21050 51250
+	22050 51400 22050 52200
 Text Notes 22050 52500 3    50   ~ 0
 SubFiltEnv1AmtLow
 Text Notes 22150 52500 3    50   ~ 0
@@ -6214,16 +6184,16 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0130
 U 1 1 7F37A826
-P 21050 57850
-F 0 "#PWR0130" H 21050 57600 50  0001 C CNN
-F 1 "GND" H 21055 57677 50  0000 C CNN
-F 2 "" H 21050 57850 50  0001 C CNN
-F 3 "" H 21050 57850 50  0001 C CNN
-	1    21050 57850
+P 22050 58200
+F 0 "#PWR0130" H 22050 57950 50  0001 C CNN
+F 1 "GND" H 22055 58027 50  0000 C CNN
+F 2 "" H 22050 58200 50  0001 C CNN
+F 3 "" H 22050 58200 50  0001 C CNN
+	1    22050 58200
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	21050 57850 21050 57950
+	22050 58200 22050 59000
 Text Notes 22050 59300 3    50   ~ 0
 SubFiltEnv2AmtLow
 Text Notes 22150 59300 3    50   ~ 0
@@ -7519,10 +7489,6 @@ F 3 "~" H 9850 28400 50  0001 C CNN
 	1    9850 28400
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	9500 29350 9500 30050
-Wire Wire Line
-	9600 29350 9600 29950
 $Comp
 L Device:R_POT_TRIM_US RV7
 U 1 1 605F0188
@@ -7549,22 +7515,8 @@ Connection ~ 9700 30350
 Wire Wire Line
 	9700 30350 9700 30500
 Wire Wire Line
-	9850 30150 9950 30150
-Wire Wire Line
 	10050 30150 10050 30300
 Connection ~ 10050 30300
-Wire Wire Line
-	9500 30050 9950 30050
-Wire Wire Line
-	9950 30050 9950 30150
-Connection ~ 9950 30150
-Wire Wire Line
-	9950 30150 10050 30150
-Wire Wire Line
-	9600 29950 10050 29950
-Wire Wire Line
-	10050 29950 10050 30150
-Connection ~ 10050 30150
 $Comp
 L Connector_Generic:Conn_01x03 J7
 U 1 1 605F01BD
@@ -7654,12 +7606,8 @@ F 3 "~" H 13350 29800 50  0001 C CNN
 	1    13350 29800
 	0    1    1    0   
 $EndComp
-Text Notes 9900 28300 1    50   ~ 0
-Osc2ScaleWiper
 Text Notes 9800 28300 1    50   ~ 0
-Osc2ScaleHigh
-Text Notes 10000 28300 1    50   ~ 0
-Osc2ScaleTied
+Osc2Scale
 Text Notes 10500 33200 3    50   ~ 0
 Osc2HFTrackWiper
 Text Notes 10600 33200 3    50   ~ 0
@@ -8965,45 +8913,6 @@ Text Notes 21350 39350 1    50   ~ 0
 SubFXSend
 Text Notes 21550 39350 1    50   ~ 0
 SubFXReturn
-$Comp
-L power:GND #PWR0144
-U 1 1 6CFE2452
-P 21900 40700
-F 0 "#PWR0144" H 21900 40450 50  0001 C CNN
-F 1 "GND" H 21905 40527 50  0000 C CNN
-F 2 "" H 21900 40700 50  0001 C CNN
-F 3 "" H 21900 40700 50  0001 C CNN
-	1    21900 40700
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	21900 40400 21900 40700
-$Comp
-L power:+12V #PWR0143
-U 1 1 6CFE2465
-P 21800 40450
-F 0 "#PWR0143" H 21800 40300 50  0001 C CNN
-F 1 "+12V" H 21815 40623 50  0000 C CNN
-F 2 "" H 21800 40450 50  0001 C CNN
-F 3 "" H 21800 40450 50  0001 C CNN
-	1    21800 40450
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:-12V #PWR0148
-U 1 1 6CFE247B
-P 22000 40450
-F 0 "#PWR0148" H 22000 40550 50  0001 C CNN
-F 1 "-12V" H 22015 40623 50  0000 C CNN
-F 2 "" H 22000 40450 50  0001 C CNN
-F 3 "" H 22000 40450 50  0001 C CNN
-	1    22000 40450
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	22000 40400 22000 40450
-Wire Wire Line
-	21800 40400 21800 40450
 Text Notes 20950 39350 1    50   ~ 0
 FX+12V
 Text Notes 21050 39350 1    50   ~ 0
@@ -11926,45 +11835,6 @@ Text Notes 23450 35000 3    50   ~ 0
 FXGND
 Text Notes 23350 35000 3    50   ~ 0
 FX+12V
-Wire Wire Line
-	22500 33800 22500 33750
-Wire Wire Line
-	22700 33800 22700 33750
-$Comp
-L power:-12V #PWR0159
-U 1 1 65865819
-P 22700 33750
-F 0 "#PWR0159" H 22700 33850 50  0001 C CNN
-F 1 "-12V" H 22715 33923 50  0000 C CNN
-F 2 "" H 22700 33750 50  0001 C CNN
-F 3 "" H 22700 33750 50  0001 C CNN
-	1    22700 33750
-	-1   0    0    -1  
-$EndComp
-$Comp
-L power:+12V #PWR0151
-U 1 1 65865803
-P 22500 33750
-F 0 "#PWR0151" H 22500 33600 50  0001 C CNN
-F 1 "+12V" H 22515 33923 50  0000 C CNN
-F 2 "" H 22500 33750 50  0001 C CNN
-F 3 "" H 22500 33750 50  0001 C CNN
-	1    22500 33750
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	22600 33800 22600 33500
-$Comp
-L power:GND #PWR0152
-U 1 1 658657F0
-P 22600 33500
-F 0 "#PWR0152" H 22600 33250 50  0001 C CNN
-F 1 "GND" H 22605 33327 50  0000 C CNN
-F 2 "" H 22600 33500 50  0001 C CNN
-F 3 "" H 22600 33500 50  0001 C CNN
-	1    22600 33500
-	1    0    0    1   
-$EndComp
 Text Notes 23950 35000 3    50   ~ 0
 Osc2FXReturn
 Text Notes 23750 35000 3    50   ~ 0
@@ -18886,19 +18756,6 @@ Wire Wire Line
 	13350 41950 13250 41950
 Text Notes 53100 22550 1    50   ~ 0
 MixGnd
-$Comp
-L power:GND #PWR0366
-U 1 1 60806A1A
-P 50600 24800
-F 0 "#PWR0366" H 50600 24550 50  0001 C CNN
-F 1 "GND" V 50605 24672 50  0000 R CNN
-F 2 "" H 50600 24800 50  0001 C CNN
-F 3 "" H 50600 24800 50  0001 C CNN
-	1    50600 24800
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	50600 24800 50600 23750
 Wire Wire Line
 	7200 9450 7200 8300
 Wire Wire Line
@@ -20527,19 +20384,6 @@ F 3 "~" H 53050 22650 50  0001 C CNN
 	1    53050 22650
 	0    -1   -1   0   
 $EndComp
-$Comp
-L power:GND #PWR0376
-U 1 1 6C36E2CE
-P 50950 24000
-F 0 "#PWR0376" H 50950 23750 50  0001 C CNN
-F 1 "GND" V 50955 23872 50  0000 R CNN
-F 2 "" H 50950 24000 50  0001 C CNN
-F 3 "" H 50950 24000 50  0001 C CNN
-	1    50950 24000
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	50950 23750 50950 24000
 Text Notes 53450 22550 1    50   ~ 0
 MixGnd
 $Comp
@@ -20868,18 +20712,8 @@ Text GLabel 8900 28600 3    50   Input ~ 0
 Osc2SoftSyncIn
 Text GLabel 9000 28600 3    50   Input ~ 0
 Osc2SyncOut
-Text GLabel 9400 29350 1    50   Input ~ 0
-Osc2ScaleHigh
-Text GLabel 9500 29350 1    50   Input ~ 0
-Osc2ScaleWiper
-Text GLabel 9600 29350 1    50   Input ~ 0
-Osc2ScaleTied
 Text GLabel 9750 28600 3    50   Input ~ 0
-Osc2ScaleHigh
-Text GLabel 9850 28600 3    50   Input ~ 0
-Osc2ScaleWiper
-Text GLabel 9950 28600 3    50   Input ~ 0
-Osc2ScaleTied
+Osc2Scale
 Text GLabel 10050 32900 3    50   Input ~ 0
 Osc2HFTrackWiper
 Text GLabel 10150 32900 3    50   Input ~ 0
@@ -20892,10 +20726,8 @@ Text GLabel 4300 31150 2    50   Input ~ 0
 Osc2HFTrackHigh
 Text GLabel 4300 31250 2    50   Input ~ 0
 Osc2HFTrackWiper
-Text GLabel 4300 31050 2    50   Input ~ 0
-Osc2ScaleWiper
 Text GLabel 4300 30950 2    50   Input ~ 0
-Osc2ScaleHigh
+Osc2Scale
 Text GLabel 4300 30850 2    50   Input ~ 0
 Osc2PWMCV
 Text GLabel 4300 30750 2    50   Input ~ 0
@@ -20957,17 +20789,11 @@ Osc1SoftSyncIn
 Text GLabel 9700 7550 3    50   Input ~ 0
 Osc1SyncOut
 Text GLabel 10100 8050 1    50   Input ~ 0
-Osc1ScaleHigh
-Text GLabel 10200 8050 1    50   Input ~ 0
-Osc1ScaleWiper
+Osc1Scale
 Text GLabel 10550 7550 3    50   Input ~ 0
-Osc1ScaleHigh
-Text GLabel 10650 7550 3    50   Input ~ 0
-Osc1ScaleWiper
+Osc1Scale
 Text GLabel 5150 9050 2    50   Input ~ 0
-Osc1ScaleHigh
-Text GLabel 5150 9150 2    50   Input ~ 0
-Osc1ScaleWiper
+Osc1Scale
 Text GLabel 5150 9750 2    50   Input ~ 0
 Osc1HardSyncIn
 Text GLabel 5150 9850 2    50   Input ~ 0
@@ -21049,12 +20875,6 @@ F 3 "" H 5350 44400 50  0001 C CNN
 	1    5350 44400
 	1    0    0    -1  
 $EndComp
-Text GLabel 24800 10050 1    50   Input ~ 0
-FX+12V
-Text GLabel 24900 10050 1    50   Input ~ 0
-FXGND
-Text GLabel 25000 10050 1    50   Input ~ 0
-FX-12V
 Text GLabel 25100 10050 1    50   Input ~ 0
 Osc1FiltFreqCV
 Text GLabel 25300 10050 1    50   Input ~ 0
@@ -21063,12 +20883,6 @@ Text GLabel 25200 10050 1    50   Input ~ 0
 Osc1FXSend
 Text GLabel 25400 10050 1    50   Input ~ 0
 Osc1FXReturn
-Text GLabel 25650 9450 3    50   Input ~ 0
-FX+12V
-Text GLabel 25750 9450 3    50   Input ~ 0
-FXGND
-Text GLabel 25850 9450 3    50   Input ~ 0
-FX-12V
 Text GLabel 25950 9450 3    50   Input ~ 0
 Osc1FiltFreqCV
 Text GLabel 26150 9450 3    50   Input ~ 0
@@ -21077,12 +20891,6 @@ Text GLabel 26050 9450 3    50   Input ~ 0
 Osc1FXSend
 Text GLabel 26250 9450 3    50   Input ~ 0
 Osc1FXReturn
-Text GLabel 21950 37100 3    50   Input ~ 0
-FX+12V
-Text GLabel 22050 37100 3    50   Input ~ 0
-FXGND
-Text GLabel 22150 37100 3    50   Input ~ 0
-FX-12V
 Text GLabel 21550 8900 3    50   Input ~ 0
 Osc1FiltFreqCV
 Text GLabel 21750 8900 3    50   Input ~ 0
@@ -21091,12 +20899,6 @@ Text GLabel 21450 8900 3    50   Input ~ 0
 Osc1FXSend
 Text GLabel 21650 8900 3    50   Input ~ 0
 Osc1FXReturn
-Text GLabel 21800 40400 1    50   Input ~ 0
-FX+12V
-Text GLabel 21900 40400 1    50   Input ~ 0
-FXGND
-Text GLabel 22000 40400 1    50   Input ~ 0
-FX-12V
 Text GLabel 22100 40400 1    50   Input ~ 0
 SubFiltFreqCV
 Text GLabel 22200 40400 1    50   Input ~ 0
@@ -21105,12 +20907,6 @@ Text GLabel 22300 40400 1    50   Input ~ 0
 SubFiltResCV
 Text GLabel 22400 40400 1    50   Input ~ 0
 SubFXReturn
-Text GLabel 20900 39650 3    50   Input ~ 0
-FX+12V
-Text GLabel 21000 39650 3    50   Input ~ 0
-FXGND
-Text GLabel 21100 39650 3    50   Input ~ 0
-FX-12V
 Text GLabel 21200 39650 3    50   Input ~ 0
 SubFiltFreqCV
 Text GLabel 21300 39650 3    50   Input ~ 0
@@ -21127,18 +20923,6 @@ Text GLabel 22050 36600 1    50   Input ~ 0
 SubFiltResCV
 Text GLabel 21850 36600 1    50   Input ~ 0
 SubFXReturn
-Text GLabel 22500 33800 3    50   Input ~ 0
-FX+12V
-Text GLabel 22600 33800 3    50   Input ~ 0
-FXGND
-Text GLabel 22700 33800 3    50   Input ~ 0
-FX-12V
-Text GLabel 23300 34700 1    50   Input ~ 0
-FX+12V
-Text GLabel 23400 34700 1    50   Input ~ 0
-FXGND
-Text GLabel 23500 34700 1    50   Input ~ 0
-FX-12V
 Text GLabel 23600 34700 1    50   Input ~ 0
 Osc2FiltFreqCV
 Text GLabel 23700 34700 1    50   Input ~ 0
@@ -21163,8 +20947,6 @@ Text GLabel 21550 36600 1    50   Input ~ 0
 Osc2FiltResCV
 Text GLabel 21450 36600 1    50   Input ~ 0
 Osc2FXReturn
-Text GLabel 21350 22000 1    50   Input ~ 0
-OscFiltEnv1AmtLow
 Text GLabel 21450 22000 1    50   Input ~ 0
 OscFiltEnv1AmtWiper
 Text GLabel 21550 22000 1    50   Input ~ 0
@@ -21181,8 +20963,6 @@ Text GLabel 22050 22000 1    50   Input ~ 0
 OscFiltEnv1SustainCV
 Text GLabel 22150 22000 1    50   Input ~ 0
 OscFiltEnv1ReleaseCV
-Text GLabel 20350 20800 3    50   Input ~ 0
-OscFiltEnv1AmtLow
 Text GLabel 20450 20800 3    50   Input ~ 0
 OscFiltEnv1AmtWiper
 Text GLabel 20550 20800 3    50   Input ~ 0
@@ -21215,8 +20995,6 @@ Text GLabel 34600 50250 0    50   Input ~ 0
 OscFiltEnv1SustainCV
 Text GLabel 34600 50150 0    50   Input ~ 0
 OscFiltEnv1ReleaseCV
-Text GLabel 20350 27700 3    50   Input ~ 0
-OscFiltEnv2AmtLow
 Text GLabel 20450 27700 3    50   Input ~ 0
 OscFiltEnv2AmtWiper
 Text GLabel 20550 27700 3    50   Input ~ 0
@@ -21233,8 +21011,6 @@ Text GLabel 21050 27700 3    50   Input ~ 0
 OscFiltEnv2SustainCV
 Text GLabel 21150 27700 3    50   Input ~ 0
 OscFiltEnv2ReleaseCV
-Text GLabel 21400 28600 1    50   Input ~ 0
-OscFiltEnv2AmtLow
 Text GLabel 21500 28600 1    50   Input ~ 0
 OscFiltEnv2AmtWiper
 Text GLabel 21600 28600 1    50   Input ~ 0
@@ -21267,8 +21043,6 @@ Text GLabel 35100 50750 2    50   Input ~ 0
 OscFiltEnv2SustainCV
 Text GLabel 35100 50850 2    50   Input ~ 0
 OscFiltEnv2ReleaseCV
-Text GLabel 21050 51250 3    50   Input ~ 0
-SubFiltEnv1AmtLow
 Text GLabel 21150 51250 3    50   Input ~ 0
 SubFiltEnv1AmtWiper
 Text GLabel 21250 51250 3    50   Input ~ 0
@@ -21285,8 +21059,6 @@ Text GLabel 21750 51250 3    50   Input ~ 0
 SubFiltEnv1SustainCV
 Text GLabel 21850 51250 3    50   Input ~ 0
 SubFiltEnv1ReleaseCV
-Text GLabel 22050 52200 1    50   Input ~ 0
-SubFiltEnv1AmtLow
 Text GLabel 22150 52200 1    50   Input ~ 0
 SubFiltEnv1AmtWiper
 Text GLabel 22250 52200 1    50   Input ~ 0
@@ -21317,8 +21089,6 @@ Text GLabel 35100 54400 2    50   Input ~ 0
 SubFiltEnv1ReleaseCV
 Text GLabel 34600 54200 0    50   Input ~ 0
 SubFiltEnv1AmtHigh
-Text GLabel 21050 57950 3    50   Input ~ 0
-SubFiltEnv2AmtLow
 Text GLabel 21150 57950 3    50   Input ~ 0
 SubFiltEnv2AmtWiper
 Text GLabel 21250 57950 3    50   Input ~ 0
@@ -21335,8 +21105,6 @@ Text GLabel 21750 57950 3    50   Input ~ 0
 SubFiltEnv2SustainCV
 Text GLabel 21850 57950 3    50   Input ~ 0
 SubFiltEnv2ReleaseCV
-Text GLabel 22050 59000 1    50   Input ~ 0
-SubFiltEnv2AmtLow
 Text GLabel 22150 59000 1    50   Input ~ 0
 SubFiltEnv2AmtWiper
 Text GLabel 22250 59000 1    50   Input ~ 0
@@ -21369,8 +21137,6 @@ Text GLabel 34600 53800 0    50   Input ~ 0
 SubFiltEnv2SustainCV
 Text GLabel 34600 53700 0    50   Input ~ 0
 SubFiltEnv2ReleaseCV
-Text GLabel 30300 21700 1    50   Input ~ 0
-OscAmpEnvAmtLow
 Text GLabel 30400 21700 1    50   Input ~ 0
 OscAmpEnvAmtWiper
 Text GLabel 30500 21700 1    50   Input ~ 0
@@ -21387,8 +21153,6 @@ Text GLabel 31000 21700 1    50   Input ~ 0
 OscAmpEnvSustainCV
 Text GLabel 31100 21700 1    50   Input ~ 0
 OscAmpEnvReleaseCV
-Text GLabel 31700 20650 3    50   Input ~ 0
-OscAmpEnvAmtLow
 Text GLabel 31800 20650 3    50   Input ~ 0
 OscAmpEnvAmtWiper
 Text GLabel 31900 20650 3    50   Input ~ 0
@@ -21421,8 +21185,6 @@ Text GLabel 34600 51850 0    50   Input ~ 0
 OscAmpEnvSustainCV
 Text GLabel 34600 51750 0    50   Input ~ 0
 OscAmpEnvReleaseCV
-Text GLabel 30400 44450 3    50   Input ~ 0
-SubAmpEnvAmtLow
 Text GLabel 30500 44450 3    50   Input ~ 0
 SubAmpEnvAmtWiper
 Text GLabel 30600 44450 3    50   Input ~ 0
@@ -21439,8 +21201,6 @@ Text GLabel 31100 44450 3    50   Input ~ 0
 SubAmpEnvSustainCV
 Text GLabel 31200 44450 3    50   Input ~ 0
 SubAmpEnvReleaseCV
-Text GLabel 31600 45550 1    50   Input ~ 0
-SubAmpEnvAmtLow
 Text GLabel 31700 45550 1    50   Input ~ 0
 SubAmpEnvAmtWiper
 Text GLabel 31800 45550 1    50   Input ~ 0
@@ -21479,22 +21239,16 @@ Text GLabel 49700 23750 1    50   Input ~ 0
 FV1WetDryCV
 Text GLabel 50000 23750 1    50   Input ~ 0
 FV1ControlCommonHigh
-Text GLabel 50400 23750 1    50   Input ~ 0
-FV1ControlCommonLow
 Text GLabel 50100 23750 1    50   Input ~ 0
 FV1ControlPot1Wiper
 Text GLabel 50200 23750 1    50   Input ~ 0
 FV1ControlPot2Wiper
 Text GLabel 50300 23750 1    50   Input ~ 0
 FV1ControlPot3Wiper
-Text GLabel 50600 23750 1    50   Input ~ 0
-MixOutLeftGnd
 Text GLabel 50700 23750 1    50   Input ~ 0
 MixOutLeftTip
 Text GLabel 51050 23750 1    50   Input ~ 0
 MixOutRightTip
-Text GLabel 50950 23750 1    50   Input ~ 0
-MixOutRightGnd
 Text GLabel 51300 23750 1    50   Input ~ 0
 FV1EEpromSCL
 Text GLabel 51400 23750 1    50   Input ~ 0
@@ -21505,26 +21259,18 @@ Text GLabel 52150 22850 3    50   Input ~ 0
 FV1WetDryCV
 Text GLabel 52450 22850 3    50   Input ~ 0
 FV1ControlCommonHigh
-Text GLabel 52850 22850 3    50   Input ~ 0
-FV1ControlCommonLow
 Text GLabel 52550 22850 3    50   Input ~ 0
 FV1ControlPot1Wiper
 Text GLabel 52650 22850 3    50   Input ~ 0
 FV1ControlPot2Wiper
 Text GLabel 52750 22850 3    50   Input ~ 0
 FV1ControlPot3Wiper
-Text GLabel 53050 22850 3    50   Input ~ 0
-MixOutLeftGnd
 Text GLabel 53150 22850 3    50   Input ~ 0
 MixOutLeftTip
 Text GLabel 53500 22850 3    50   Input ~ 0
 MixOutRightTip
-Text GLabel 53400 22850 3    50   Input ~ 0
-MixOutRightGnd
 Text GLabel 55300 22500 1    50   Input ~ 0
 FV1ControlCommonHigh
-Text GLabel 55700 22500 1    50   Input ~ 0
-FV1ControlCommonLow
 Text GLabel 55400 22500 1    50   Input ~ 0
 FV1ControlPot1Wiper
 Text GLabel 55500 22500 1    50   Input ~ 0
@@ -21561,38 +21307,14 @@ Text GLabel 40750 29250 1    50   Input ~ 0
 PreFV1FXSend
 Text GLabel 40850 29250 1    50   Input ~ 0
 PreFV1FXReturn
-Text GLabel 40950 29250 1    50   Input ~ 0
-FX+12V
-Text GLabel 41050 29250 1    50   Input ~ 0
-FXGND
-Text GLabel 41150 29250 1    50   Input ~ 0
-FX-12V
 Text GLabel 40100 28950 3    50   Input ~ 0
 PreFV1FXSend
 Text GLabel 40200 28950 3    50   Input ~ 0
 PreFV1FXReturn
-Text GLabel 40300 28950 3    50   Input ~ 0
-FX+12V
-Text GLabel 40400 28950 3    50   Input ~ 0
-FXGND
-Text GLabel 40500 28950 3    50   Input ~ 0
-FX-12V
 Text GLabel 22150 36600 1    50   Input ~ 0
 PreFV1FXSend
 Text GLabel 22250 36600 1    50   Input ~ 0
 PreFV1FXReturn
-Text GLabel 21650 37100 3    50   Input ~ 0
-FX+12V
-Text GLabel 21750 37100 3    50   Input ~ 0
-FXGND
-Text GLabel 21850 37100 3    50   Input ~ 0
-FX-12V
-Text GLabel 21350 37100 3    50   Input ~ 0
-FX+12V
-Text GLabel 21450 37100 3    50   Input ~ 0
-FXGND
-Text GLabel 21550 37100 3    50   Input ~ 0
-FX-12V
 $Comp
 L power:GND #PWR0399
 U 1 1 862BF522
@@ -21696,12 +21418,6 @@ F 3 "~" H 21550 8600 50  0001 C CNN
 	1    21550 8600
 	0    -1   1    0   
 $EndComp
-Text GLabel 21450 8400 1    50   Input ~ 0
-FX+12V
-Text GLabel 21550 8400 1    50   Input ~ 0
-FXGND
-Text GLabel 21650 8400 1    50   Input ~ 0
-FX-12V
 $Comp
 L power:GND #PWR0391
 U 1 1 62D12545
@@ -21945,4 +21661,322 @@ $EndComp
 Wire Wire Line
 	10050 11350 10050 11750
 NoConn ~ 11000 11900
+Wire Wire Line
+	9850 30150 10050 30150
+Text GLabel 9400 29350 1    50   Input ~ 0
+Osc2Scale
+NoConn ~ 9850 28600
+NoConn ~ 9950 28600
+Wire Wire Line
+	20900 39650 20900 39700
+Wire Wire Line
+	21100 39650 21100 39700
+$Comp
+L power:-12V #PWR0148
+U 1 1 6CFE247B
+P 21100 39700
+F 0 "#PWR0148" H 21100 39800 50  0001 C CNN
+F 1 "-12V" H 21115 39873 50  0000 C CNN
+F 2 "" H 21100 39700 50  0001 C CNN
+F 3 "" H 21100 39700 50  0001 C CNN
+	1    21100 39700
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+12V #PWR0143
+U 1 1 6CFE2465
+P 20900 39700
+F 0 "#PWR0143" H 20900 39550 50  0001 C CNN
+F 1 "+12V" H 20915 39873 50  0000 C CNN
+F 2 "" H 20900 39700 50  0001 C CNN
+F 3 "" H 20900 39700 50  0001 C CNN
+	1    20900 39700
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	21000 39650 21000 39950
+$Comp
+L power:GND #PWR0144
+U 1 1 6CFE2452
+P 21000 39950
+F 0 "#PWR0144" H 21000 39700 50  0001 C CNN
+F 1 "GND" H 21005 39777 50  0000 C CNN
+F 2 "" H 21000 39950 50  0001 C CNN
+F 3 "" H 21000 39950 50  0001 C CNN
+	1    21000 39950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	21350 37100 21350 37150
+Wire Wire Line
+	21550 37100 21550 37600
+$Comp
+L power:-12V #PWR?
+U 1 1 64AB26FF
+P 21550 37600
+F 0 "#PWR?" H 21550 37700 50  0001 C CNN
+F 1 "-12V" H 21565 37773 50  0000 C CNN
+F 2 "" H 21550 37600 50  0001 C CNN
+F 3 "" H 21550 37600 50  0001 C CNN
+	1    21550 37600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	21450 37100 21450 37400
+$Comp
+L power:GND #PWR?
+U 1 1 64AB2728
+P 21450 37400
+F 0 "#PWR?" H 21450 37150 50  0001 C CNN
+F 1 "GND" H 21455 37227 50  0000 C CNN
+F 2 "" H 21450 37400 50  0001 C CNN
+F 3 "" H 21450 37400 50  0001 C CNN
+	1    21450 37400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 64AB2711
+P 21350 37150
+F 0 "#PWR?" H 21350 37000 50  0001 C CNN
+F 1 "+12V" H 21365 37323 50  0000 C CNN
+F 2 "" H 21350 37150 50  0001 C CNN
+F 3 "" H 21350 37150 50  0001 C CNN
+	1    21350 37150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	21950 37100 21950 37150
+Wire Wire Line
+	22150 37100 22150 37600
+$Comp
+L power:-12V #PWR?
+U 1 1 667F23F1
+P 22150 37600
+F 0 "#PWR?" H 22150 37700 50  0001 C CNN
+F 1 "-12V" H 22165 37773 50  0000 C CNN
+F 2 "" H 22150 37600 50  0001 C CNN
+F 3 "" H 22150 37600 50  0001 C CNN
+	1    22150 37600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	22050 37100 22050 37400
+$Comp
+L power:GND #PWR?
+U 1 1 667F2404
+P 22050 37400
+F 0 "#PWR?" H 22050 37150 50  0001 C CNN
+F 1 "GND" H 22055 37227 50  0000 C CNN
+F 2 "" H 22050 37400 50  0001 C CNN
+F 3 "" H 22050 37400 50  0001 C CNN
+	1    22050 37400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 667F2416
+P 21950 37150
+F 0 "#PWR?" H 21950 37000 50  0001 C CNN
+F 1 "+12V" H 21965 37323 50  0000 C CNN
+F 2 "" H 21950 37150 50  0001 C CNN
+F 3 "" H 21950 37150 50  0001 C CNN
+	1    21950 37150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	21650 37100 21650 37150
+Wire Wire Line
+	21850 37100 21850 37600
+$Comp
+L power:-12V #PWR?
+U 1 1 671B1214
+P 21850 37600
+F 0 "#PWR?" H 21850 37700 50  0001 C CNN
+F 1 "-12V" H 21865 37773 50  0000 C CNN
+F 2 "" H 21850 37600 50  0001 C CNN
+F 3 "" H 21850 37600 50  0001 C CNN
+	1    21850 37600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	21750 37100 21750 37400
+$Comp
+L power:GND #PWR?
+U 1 1 671B1227
+P 21750 37400
+F 0 "#PWR?" H 21750 37150 50  0001 C CNN
+F 1 "GND" H 21755 37227 50  0000 C CNN
+F 2 "" H 21750 37400 50  0001 C CNN
+F 3 "" H 21750 37400 50  0001 C CNN
+	1    21750 37400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 671B1239
+P 21650 37150
+F 0 "#PWR?" H 21650 37000 50  0001 C CNN
+F 1 "+12V" H 21665 37323 50  0000 C CNN
+F 2 "" H 21650 37150 50  0001 C CNN
+F 3 "" H 21650 37150 50  0001 C CNN
+	1    21650 37150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	23300 34700 23300 34650
+Wire Wire Line
+	23500 34700 23500 34150
+$Comp
+L power:-12V #PWR?
+U 1 1 6A283EFF
+P 23500 34150
+F 0 "#PWR?" H 23500 34250 50  0001 C CNN
+F 1 "-12V" H 23515 34323 50  0000 C CNN
+F 2 "" H 23500 34150 50  0001 C CNN
+F 3 "" H 23500 34150 50  0001 C CNN
+	1    23500 34150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:+12V #PWR?
+U 1 1 6A283F11
+P 23300 34650
+F 0 "#PWR?" H 23300 34500 50  0001 C CNN
+F 1 "+12V" H 23315 34823 50  0000 C CNN
+F 2 "" H 23300 34650 50  0001 C CNN
+F 3 "" H 23300 34650 50  0001 C CNN
+	1    23300 34650
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	23400 34700 23400 34400
+$Comp
+L power:GND #PWR?
+U 1 1 6A283F28
+P 23400 34400
+F 0 "#PWR?" H 23400 34150 50  0001 C CNN
+F 1 "GND" H 23405 34227 50  0000 C CNN
+F 2 "" H 23400 34400 50  0001 C CNN
+F 3 "" H 23400 34400 50  0001 C CNN
+	1    23400 34400
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6F0C471C
+P 21550 8100
+F 0 "#PWR?" H 21550 7850 50  0001 C CNN
+F 1 "GND" H 21555 7927 50  0000 C CNN
+F 2 "" H 21550 8100 50  0001 C CNN
+F 3 "" H 21550 8100 50  0001 C CNN
+	1    21550 8100
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	21550 8400 21550 8100
+$Comp
+L power:+12V #PWR?
+U 1 1 6F0C472F
+P 21450 8350
+F 0 "#PWR?" H 21450 8200 50  0001 C CNN
+F 1 "+12V" H 21465 8523 50  0000 C CNN
+F 2 "" H 21450 8350 50  0001 C CNN
+F 3 "" H 21450 8350 50  0001 C CNN
+	1    21450 8350
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:-12V #PWR?
+U 1 1 6F0C4745
+P 21650 7800
+F 0 "#PWR?" H 21650 7900 50  0001 C CNN
+F 1 "-12V" H 21665 7973 50  0000 C CNN
+F 2 "" H 21650 7800 50  0001 C CNN
+F 3 "" H 21650 7800 50  0001 C CNN
+	1    21650 7800
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	21650 8400 21650 7800
+Wire Wire Line
+	21450 8400 21450 8350
+$Comp
+L power:GND #PWR?
+U 1 1 721C4E62
+P 53050 23400
+F 0 "#PWR?" H 53050 23150 50  0001 C CNN
+F 1 "GND" H 53055 23227 50  0000 C CNN
+F 2 "" H 53050 23400 50  0001 C CNN
+F 3 "" H 53050 23400 50  0001 C CNN
+	1    53050 23400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	53050 22850 53050 23400
+$Comp
+L power:GND #PWR?
+U 1 1 72B982CF
+P 53400 23400
+F 0 "#PWR?" H 53400 23150 50  0001 C CNN
+F 1 "GND" H 53405 23227 50  0000 C CNN
+F 2 "" H 53400 23400 50  0001 C CNN
+F 3 "" H 53400 23400 50  0001 C CNN
+	1    53400 23400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	53400 22850 53400 23400
+$Comp
+L power:GND #PWR?
+U 1 1 735753FB
+P 52850 23650
+F 0 "#PWR?" H 52850 23400 50  0001 C CNN
+F 1 "GND" H 52855 23477 50  0000 C CNN
+F 2 "" H 52850 23650 50  0001 C CNN
+F 3 "" H 52850 23650 50  0001 C CNN
+	1    52850 23650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	52850 22850 52850 23650
+Wire Wire Line
+	55700 22500 55800 22500
+Connection ~ 55800 22500
+$Comp
+L power:GND #PWR?
+U 1 1 752E9794
+P 31600 44750
+F 0 "#PWR?" H 31600 44500 50  0001 C CNN
+F 1 "GND" H 31605 44577 50  0000 C CNN
+F 2 "" H 31600 44750 50  0001 C CNN
+F 3 "" H 31600 44750 50  0001 C CNN
+	1    31600 44750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	31600 44750 31600 45550
+NoConn ~ 10650 7550
+$Comp
+L power:-5V #PWR?
+U 1 1 7E5CC938
+P 5150 9150
+F 0 "#PWR?" H 5150 9250 50  0001 C CNN
+F 1 "-5V" V 5165 9278 50  0000 L CNN
+F 2 "" H 5150 9150 50  0001 C CNN
+F 3 "" H 5150 9150 50  0001 C CNN
+	1    5150 9150
+	0    1    1    0   
+$EndComp
+$Comp
+L power:-5V #PWR?
+U 1 1 7E5D5D13
+P 4300 31050
+F 0 "#PWR?" H 4300 31150 50  0001 C CNN
+F 1 "-5V" V 4315 31178 50  0000 L CNN
+F 2 "" H 4300 31050 50  0001 C CNN
+F 3 "" H 4300 31050 50  0001 C CNN
+	1    4300 31050
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
