@@ -5992,19 +5992,6 @@ Wire Wire Line
 	30400 24550 30400 21700
 Wire Wire Line
 	30500 24650 30500 21700
-$Comp
-L power:GND #PWR0238
-U 1 1 78B1977C
-P 31700 21450
-F 0 "#PWR0238" H 31700 21200 50  0001 C CNN
-F 1 "GND" H 31705 21277 50  0000 C CNN
-F 2 "" H 31700 21450 50  0001 C CNN
-F 3 "" H 31700 21450 50  0001 C CNN
-	1    31700 21450
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	31700 21450 31700 20650
 Text Notes 31700 20350 1    50   ~ 0
 OscAmpEnvAmtLow
 Text Notes 31800 20350 1    50   ~ 0
@@ -6037,24 +6024,6 @@ Wire Wire Line
 	30500 41700 30500 44450
 Wire Wire Line
 	30600 41600 30600 44450
-Text Notes 31600 45850 3    50   ~ 0
-SubAmpEnvAmtLow
-Text Notes 31700 45850 3    50   ~ 0
-SubAmpEnvAmtWiper
-Text Notes 31800 45850 3    50   ~ 0
-SubAmpEnvAmtHigh
-Text Notes 32000 45850 3    50   ~ 0
-SubAmpEnvGate
-Text Notes 31900 45850 3    50   ~ 0
-SubAmpEnvTrigger
-Text Notes 32150 45850 3    50   ~ 0
-SubAmpEnvAttackCV
-Text Notes 32250 45850 3    50   ~ 0
-SubAmpEnvDecayCV
-Text Notes 32350 45850 3    50   ~ 0
-SubAmpEnvSustainCV
-Text Notes 32450 45850 3    50   ~ 0
-SubAmpEnvReleaseCV
 Wire Wire Line
 	30500 41700 30050 41700
 Wire Wire Line
@@ -20908,22 +20877,6 @@ Text GLabel 31000 21700 1    50   Input ~ 0
 OscAmpEnvSustainCV
 Text GLabel 31100 21700 1    50   Input ~ 0
 OscAmpEnvReleaseCV
-Text GLabel 31800 20650 3    50   Input ~ 0
-OscAmpEnvAmtWiper
-Text GLabel 31900 20650 3    50   Input ~ 0
-OscAmpEnvAmtHigh
-Text GLabel 32000 20650 3    50   Input ~ 0
-OscAmpEnvTrigger
-Text GLabel 32100 20650 3    50   Input ~ 0
-OscAmpEnvGate
-Text GLabel 32200 20650 3    50   Input ~ 0
-OscAmpEnvAttackCV
-Text GLabel 32300 20650 3    50   Input ~ 0
-OscAmpEnvDecayCV
-Text GLabel 32400 20650 3    50   Input ~ 0
-OscAmpEnvSustainCV
-Text GLabel 32500 20650 3    50   Input ~ 0
-OscAmpEnvReleaseCV
 Text GLabel 35100 52050 2    50   Input ~ 0
 OscAmpEnvAmtWiper
 Text GLabel 35100 51950 2    50   Input ~ 0
@@ -20955,22 +20908,6 @@ SubAmpEnvDecayCV
 Text GLabel 31100 44450 3    50   Input ~ 0
 SubAmpEnvSustainCV
 Text GLabel 31200 44450 3    50   Input ~ 0
-SubAmpEnvReleaseCV
-Text GLabel 31700 45550 1    50   Input ~ 0
-SubAmpEnvAmtWiper
-Text GLabel 31800 45550 1    50   Input ~ 0
-SubAmpEnvAmtHigh
-Text GLabel 31900 45550 1    50   Input ~ 0
-SubAmpEnvTrigger
-Text GLabel 32000 45550 1    50   Input ~ 0
-SubAmpEnvGate
-Text GLabel 32100 45550 1    50   Input ~ 0
-SubAmpEnvAttackCV
-Text GLabel 32200 45550 1    50   Input ~ 0
-SubAmpEnvDecayCV
-Text GLabel 32300 45550 1    50   Input ~ 0
-SubAmpEnvSustainCV
-Text GLabel 32400 45550 1    50   Input ~ 0
 SubAmpEnvReleaseCV
 Text GLabel 34600 52150 0    50   Input ~ 0
 SubAmpEnvAmtWiper
@@ -21620,19 +21557,6 @@ Wire Wire Line
 Wire Wire Line
 	55700 22500 55800 22500
 Connection ~ 55800 22500
-$Comp
-L power:GND #PWR0417
-U 1 1 752E9794
-P 31600 44750
-F 0 "#PWR0417" H 31600 44500 50  0001 C CNN
-F 1 "GND" H 31605 44577 50  0000 C CNN
-F 2 "" H 31600 44750 50  0001 C CNN
-F 3 "" H 31600 44750 50  0001 C CNN
-	1    31600 44750
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	31600 44750 31600 45550
 NoConn ~ 10650 7550
 $Comp
 L power:-5V #PWR0418
@@ -21656,4 +21580,22 @@ F 3 "" H 4300 31050 50  0001 C CNN
 	1    4300 31050
 	0    1    1    0   
 $EndComp
+Text Notes 32450 45850 3    50   ~ 0
+SubAmpEnvReleaseCV
+Text Notes 32350 45850 3    50   ~ 0
+SubAmpEnvSustainCV
+Text Notes 32250 45850 3    50   ~ 0
+SubAmpEnvDecayCV
+Text Notes 32150 45850 3    50   ~ 0
+SubAmpEnvAttackCV
+Text Notes 31900 45850 3    50   ~ 0
+SubAmpEnvTrigger
+Text Notes 32000 45850 3    50   ~ 0
+SubAmpEnvGate
+Text Notes 31800 45850 3    50   ~ 0
+SubAmpEnvAmtHigh
+Text Notes 31700 45850 3    50   ~ 0
+SubAmpEnvAmtWiper
+Text Notes 31600 45850 3    50   ~ 0
+SubAmpEnvAmtLow
 $EndSCHEMATC
