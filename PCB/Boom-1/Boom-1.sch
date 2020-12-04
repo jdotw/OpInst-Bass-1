@@ -5781,47 +5781,6 @@ F 3 "~" H 40300 28750 50  0001 C CNN
 	1    40300 28750
 	0    -1   -1   0   
 $EndComp
-$Comp
-L power:GND #PWR0304
-U 1 1 717FDDAA
-P 40400 29250
-F 0 "#PWR0304" H 40400 29000 50  0001 C CNN
-F 1 "GND" H 40405 29077 50  0000 C CNN
-F 2 "" H 40400 29250 50  0001 C CNN
-F 3 "" H 40400 29250 50  0001 C CNN
-	1    40400 29250
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	40400 28950 40400 29250
-$Comp
-L power:+12V #PWR0303
-U 1 1 717FDDBD
-P 40300 29500
-F 0 "#PWR0303" H 40300 29350 50  0001 C CNN
-F 1 "+12V" H 40315 29673 50  0000 C CNN
-F 2 "" H 40300 29500 50  0001 C CNN
-F 3 "" H 40300 29500 50  0001 C CNN
-	1    40300 29500
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:-12V #PWR0305
-U 1 1 717FDDD3
-P 40550 29000
-F 0 "#PWR0305" H 40550 29100 50  0001 C CNN
-F 1 "-12V" H 40565 29173 50  0000 C CNN
-F 2 "" H 40550 29000 50  0001 C CNN
-F 3 "" H 40550 29000 50  0001 C CNN
-	1    40550 29000
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	40500 28950 40500 29000
-Wire Wire Line
-	40300 28950 40300 29500
-Wire Wire Line
-	40500 29000 40550 29000
 Text Notes 40350 28650 1    50   ~ 0
 FX+12V
 Text Notes 40450 28650 1    50   ~ 0
@@ -20945,22 +20904,6 @@ Text GLabel 51300 23750 1    50   Input ~ 0
 FV1EEpromSCL
 Text GLabel 51400 23750 1    50   Input ~ 0
 FV1EEpromSDA
-Text GLabel 52050 22850 3    50   Input ~ 0
-FV1FeedbackCV
-Text GLabel 52150 22850 3    50   Input ~ 0
-FV1WetDryCV
-Text GLabel 52450 22850 3    50   Input ~ 0
-FV1ControlCommonHigh
-Text GLabel 52550 22850 3    50   Input ~ 0
-FV1ControlPot1Wiper
-Text GLabel 52650 22850 3    50   Input ~ 0
-FV1ControlPot2Wiper
-Text GLabel 52750 22850 3    50   Input ~ 0
-FV1ControlPot3Wiper
-Text GLabel 53150 22850 3    50   Input ~ 0
-MixOutLeftTip
-Text GLabel 53500 22850 3    50   Input ~ 0
-MixOutRightTip
 Text GLabel 55300 22500 1    50   Input ~ 0
 FV1ControlCommonHigh
 Text GLabel 55400 22500 1    50   Input ~ 0
@@ -20969,10 +20912,6 @@ Text GLabel 55500 22500 1    50   Input ~ 0
 FV1ControlPot2Wiper
 Text GLabel 55600 22500 1    50   Input ~ 0
 FV1ControlPot3Wiper
-Text GLabel 53850 22850 3    50   Input ~ 0
-FV1EEpromSDA
-Text GLabel 53750 22850 3    50   Input ~ 0
-FV1EEpromSCL
 $Comp
 L power:GND #PWR0397
 U 1 1 8284243C
@@ -20998,10 +20937,6 @@ $EndComp
 Text GLabel 40750 29250 1    50   Input ~ 0
 PreFV1FXSend
 Text GLabel 40850 29250 1    50   Input ~ 0
-PreFV1FXReturn
-Text GLabel 40100 28950 3    50   Input ~ 0
-PreFV1FXSend
-Text GLabel 40200 28950 3    50   Input ~ 0
 PreFV1FXReturn
 Text GLabel 22150 36600 1    50   Input ~ 0
 PreFV1FXSend
@@ -21515,45 +21450,6 @@ Wire Wire Line
 	21650 8400 21650 7800
 Wire Wire Line
 	21450 8400 21450 8350
-$Comp
-L power:GND #PWR0414
-U 1 1 721C4E62
-P 53050 23400
-F 0 "#PWR0414" H 53050 23150 50  0001 C CNN
-F 1 "GND" H 53055 23227 50  0000 C CNN
-F 2 "" H 53050 23400 50  0001 C CNN
-F 3 "" H 53050 23400 50  0001 C CNN
-	1    53050 23400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	53050 22850 53050 23400
-$Comp
-L power:GND #PWR0415
-U 1 1 72B982CF
-P 53400 23400
-F 0 "#PWR0415" H 53400 23150 50  0001 C CNN
-F 1 "GND" H 53405 23227 50  0000 C CNN
-F 2 "" H 53400 23400 50  0001 C CNN
-F 3 "" H 53400 23400 50  0001 C CNN
-	1    53400 23400
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	53400 22850 53400 23400
-$Comp
-L power:GND #PWR0416
-U 1 1 735753FB
-P 52850 23650
-F 0 "#PWR0416" H 52850 23400 50  0001 C CNN
-F 1 "GND" H 52855 23477 50  0000 C CNN
-F 2 "" H 52850 23650 50  0001 C CNN
-F 3 "" H 52850 23650 50  0001 C CNN
-	1    52850 23650
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	52850 22850 52850 23650
 Wire Wire Line
 	55700 22500 55800 22500
 Connection ~ 55800 22500
