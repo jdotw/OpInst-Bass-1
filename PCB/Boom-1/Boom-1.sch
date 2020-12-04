@@ -5840,24 +5840,6 @@ Wire Wire Line
 	20450 24950 20450 27700
 Wire Wire Line
 	20550 24850 20550 27700
-Text Notes 21400 28900 3    50   ~ 0
-OscFiltEnv2AmtLow
-Text Notes 21500 28900 3    50   ~ 0
-OscFiltEnv2AmtWiper
-Text Notes 21600 28900 3    50   ~ 0
-OscFiltEnv2AmtHigh
-Text Notes 21800 28900 3    50   ~ 0
-OscFiltEnv2Gate
-Text Notes 21700 28900 3    50   ~ 0
-OscFiltEnv2Trigger
-Text Notes 21950 28900 3    50   ~ 0
-OscFiltEnv2AttackCV
-Text Notes 22050 28900 3    50   ~ 0
-OscFiltEnv2DecayCV
-Text Notes 22150 28900 3    50   ~ 0
-OscFiltEnv2SustainCV
-Text Notes 22250 28900 3    50   ~ 0
-OscFiltEnv2ReleaseCV
 Wire Wire Line
 	20250 24650 20250 24950
 Wire Wire Line
@@ -5920,28 +5902,10 @@ Wire Wire Line
 	21150 48500 21150 51250
 Wire Wire Line
 	21250 48400 21250 51250
-Text Notes 22050 52500 3    50   ~ 0
-SubFiltEnv1AmtLow
-Text Notes 22150 52500 3    50   ~ 0
-SubFiltEnv1AmtWiper
-Text Notes 22250 52500 3    50   ~ 0
-SubFiltEnv1AmtHigh
-Text Notes 22450 52500 3    50   ~ 0
-SubFiltEnv1Gate
-Text Notes 22350 52500 3    50   ~ 0
-SubFiltEnv1Trigger
-Text Notes 22600 52500 3    50   ~ 0
-SubFiltEnv1AttackCV
-Text Notes 22800 52500 3    50   ~ 0
-SubFiltEnv1SustainCV
-Text Notes 22900 52500 3    50   ~ 0
-SubFiltEnv1ReleaseCV
 Wire Wire Line
 	20350 48200 20350 48500
 Wire Wire Line
 	20350 48500 21150 48500
-Text Notes 22700 52500 3    50   ~ 0
-SubFiltEnv1DecayCV
 Wire Wire Line
 	21550 57300 21550 57950
 Wire Wire Line
@@ -5954,24 +5918,6 @@ Wire Wire Line
 	21150 55200 21150 57950
 Wire Wire Line
 	21250 55100 21250 57950
-Text Notes 22050 59300 3    50   ~ 0
-SubFiltEnv2AmtLow
-Text Notes 22150 59300 3    50   ~ 0
-SubFiltEnv2AmtWiper
-Text Notes 22250 59300 3    50   ~ 0
-SubFiltEnv2AmtHigh
-Text Notes 22450 59300 3    50   ~ 0
-SubFiltEnv2Gate
-Text Notes 22350 59300 3    50   ~ 0
-SubFiltEnv2Trigger
-Text Notes 22600 59300 3    50   ~ 0
-SubFiltEnv2AttackCV
-Text Notes 22800 59300 3    50   ~ 0
-SubFiltEnv2SustainCV
-Text Notes 22900 59300 3    50   ~ 0
-SubFiltEnv2ReleaseCV
-Text Notes 22700 59300 3    50   ~ 0
-SubFiltEnv2DecayCV
 Wire Wire Line
 	21150 55200 20450 55200
 Wire Wire Line
@@ -19246,28 +19192,6 @@ Wire Wire Line
 	20550 20800 20550 17950
 Wire Wire Line
 	20550 17950 20850 17950
-$Comp
-L Connector_Generic:Conn_01x05 J13
-U 1 1 622E8285
-P 21600 28800
-F 0 "J13" V 21450 29200 50  0000 R CNN
-F 1 "Conn_01x05" V 21550 29550 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 21600 28800 50  0001 C CNN
-F 3 "~" H 21600 28800 50  0001 C CNN
-	1    21600 28800
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J14
-U 1 1 622F2781
-P 22000 28800
-F 0 "J14" V 21872 28512 50  0000 R CNN
-F 1 "Conn_01x04" V 21963 28512 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 22000 28800 50  0001 C CNN
-F 3 "~" H 22000 28800 50  0001 C CNN
-	1    22000 28800
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	20650 27700 20650 26600
 Wire Wire Line
@@ -19276,28 +19200,6 @@ Wire Wire Line
 	20750 27700 20750 26100
 Wire Wire Line
 	20750 26100 21450 26100
-$Comp
-L Connector_Generic:Conn_01x05 J15
-U 1 1 63670ED4
-P 22250 52400
-F 0 "J15" V 22100 52800 50  0000 R CNN
-F 1 "Conn_01x05" V 22200 53150 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 22250 52400 50  0001 C CNN
-F 3 "~" H 22250 52400 50  0001 C CNN
-	1    22250 52400
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J19
-U 1 1 6367A0C6
-P 22650 52400
-F 0 "J19" V 22522 52112 50  0000 R CNN
-F 1 "Conn_01x04" V 22613 52112 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 22650 52400 50  0001 C CNN
-F 3 "~" H 22650 52400 50  0001 C CNN
-	1    22650 52400
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	21350 51250 21350 50150
 Wire Wire Line
@@ -19306,28 +19208,6 @@ Wire Wire Line
 	21450 51250 21450 49650
 Wire Wire Line
 	21450 49650 22150 49650
-$Comp
-L Connector_Generic:Conn_01x05 J18
-U 1 1 649F9B11
-P 22250 59200
-F 0 "J18" V 22100 59600 50  0000 R CNN
-F 1 "Conn_01x05" V 22200 59950 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 22250 59200 50  0001 C CNN
-F 3 "~" H 22250 59200 50  0001 C CNN
-	1    22250 59200
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J30
-U 1 1 64A03AD1
-P 22650 59200
-F 0 "J30" V 22522 58912 50  0000 R CNN
-F 1 "Conn_01x04" V 22613 58912 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 22650 59200 50  0001 C CNN
-F 3 "~" H 22650 59200 50  0001 C CNN
-	1    22650 59200
-	0    -1   1    0   
-$EndComp
 $Comp
 L Amplifier_Operational:TL072 U33
 U 1 1 64C19109
@@ -21198,44 +21078,4 @@ Text Notes 31700 45850 3    50   ~ 0
 SubAmpEnvAmtWiper
 Text Notes 31600 45850 3    50   ~ 0
 SubAmpEnvAmtLow
-$Comp
-L Connector_Generic:Conn_01x04 J17
-U 1 1 60DB7A00
-P 21950 22200
-F 0 "J17" V 21822 21912 50  0000 R CNN
-F 1 "OscFiltEnv1CVConn" V 21913 21912 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 21950 22200 50  0001 C CNN
-F 3 "~" H 21950 22200 50  0001 C CNN
-	1    21950 22200
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x05 J12
-U 1 1 60DA4F70
-P 21550 22200
-F 0 "J12" V 21400 22550 50  0000 R CNN
-F 1 "OscFiltEnv1Conn" V 21500 23100 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 21550 22200 50  0001 C CNN
-F 3 "~" H 21550 22200 50  0001 C CNN
-	1    21550 22200
-	0    -1   1    0   
-$EndComp
-Text Notes 22200 22300 3    50   ~ 0
-OscFiltEnv1ReleaseCV
-Text Notes 22100 22300 3    50   ~ 0
-OscFiltEnv1SustainCV
-Text Notes 22000 22300 3    50   ~ 0
-OscFiltEnv1DecayCV
-Text Notes 21900 22300 3    50   ~ 0
-OscFiltEnv1AttackCV
-Text Notes 21650 22300 3    50   ~ 0
-OscFiltEnv1Trigger
-Text Notes 21750 22300 3    50   ~ 0
-OscFiltEnv1Gate
-Text Notes 21550 22300 3    50   ~ 0
-OscFiltEnv1AmtHigh
-Text Notes 21450 22300 3    50   ~ 0
-OscFiltEnv1AmtWiper
-Text Notes 21350 22300 3    50   ~ 0
-OscFiltEnv1AmtLow
 $EndSCHEMATC
