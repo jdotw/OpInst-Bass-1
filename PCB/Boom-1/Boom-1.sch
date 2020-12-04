@@ -5856,24 +5856,6 @@ Wire Wire Line
 	30400 24550 30400 21700
 Wire Wire Line
 	30500 24650 30500 21700
-Text Notes 31700 20350 1    50   ~ 0
-OscAmpEnvAmtLow
-Text Notes 31800 20350 1    50   ~ 0
-OscAmpEnvAmtWiper
-Text Notes 31900 20350 1    50   ~ 0
-OscAmpEnvAmtHigh
-Text Notes 32100 20350 1    50   ~ 0
-OscAmpEnvGate
-Text Notes 32000 20350 1    50   ~ 0
-OscAmpEnvTrigger
-Text Notes 32250 20350 1    50   ~ 0
-OscAmpEnvAttackCV
-Text Notes 32350 20350 1    50   ~ 0
-OscAmpEnvDecayCV
-Text Notes 32450 20350 1    50   ~ 0
-OscAmpEnvSustainCV
-Text Notes 32550 20350 1    50   ~ 0
-OscAmpEnvReleaseCV
 Wire Wire Line
 	30400 24550 29900 24550
 Wire Wire Line
@@ -19364,28 +19346,6 @@ Wire Wire Line
 	21450 56350 22150 56350
 Wire Wire Line
 	29900 24550 29900 27600
-$Comp
-L Connector_Generic:Conn_01x05 J21
-U 1 1 60F8B145
-P 31900 20450
-F 0 "J21" V 31900 21000 50  0000 R CNN
-F 1 "Conn_01x05" V 31800 21200 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 31900 20450 50  0001 C CNN
-F 3 "~" H 31900 20450 50  0001 C CNN
-	1    31900 20450
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J31
-U 1 1 60F94A1C
-P 32300 20450
-F 0 "J31" V 32264 20162 50  0000 R CNN
-F 1 "Conn_01x04" V 32173 20162 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 32300 20450 50  0001 C CNN
-F 3 "~" H 32300 20450 50  0001 C CNN
-	1    32300 20450
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	30600 21700 30600 22800
 Wire Wire Line
@@ -19396,28 +19356,6 @@ Wire Wire Line
 	30700 23300 31400 23300
 Wire Wire Line
 	30050 38750 30050 41700
-$Comp
-L Connector_Generic:Conn_01x05 J22
-U 1 1 636E0FC4
-P 31800 45750
-F 0 "J22" V 31650 46300 50  0000 R CNN
-F 1 "Conn_01x05" V 31750 46500 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 31800 45750 50  0001 C CNN
-F 3 "~" H 31800 45750 50  0001 C CNN
-	1    31800 45750
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J32
-U 1 1 636F2DCB
-P 32200 45750
-F 0 "J32" V 32072 45462 50  0000 R CNN
-F 1 "Conn_01x04" V 32163 45462 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 32200 45750 50  0001 C CNN
-F 3 "~" H 32200 45750 50  0001 C CNN
-	1    32200 45750
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	30700 44450 30700 43350
 Wire Wire Line
@@ -21060,22 +20998,4 @@ F 3 "" H 4300 31050 50  0001 C CNN
 	1    4300 31050
 	0    1    1    0   
 $EndComp
-Text Notes 32450 45850 3    50   ~ 0
-SubAmpEnvReleaseCV
-Text Notes 32350 45850 3    50   ~ 0
-SubAmpEnvSustainCV
-Text Notes 32250 45850 3    50   ~ 0
-SubAmpEnvDecayCV
-Text Notes 32150 45850 3    50   ~ 0
-SubAmpEnvAttackCV
-Text Notes 31900 45850 3    50   ~ 0
-SubAmpEnvTrigger
-Text Notes 32000 45850 3    50   ~ 0
-SubAmpEnvGate
-Text Notes 31800 45850 3    50   ~ 0
-SubAmpEnvAmtHigh
-Text Notes 31700 45850 3    50   ~ 0
-SubAmpEnvAmtWiper
-Text Notes 31600 45850 3    50   ~ 0
-SubAmpEnvAmtLow
 $EndSCHEMATC
