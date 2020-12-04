@@ -21,10 +21,6 @@ Text Notes 45050 12250 0    50   ~ 0
 -12
 Text Notes 26000 9150 1    50   ~ 0
 Osc1FiltFreqCV
-Text Notes 8150 6200 1    50   ~ 0
-Osc1SqrMixCV
-Text Notes 8350 6200 1    50   ~ 0
-Osc1SawMixCV
 $Comp
 L Device:R_Small_US R38
 U 1 1 5E8EC106
@@ -874,8 +870,6 @@ Wire Wire Line
 Connection ~ 26200 11350
 Wire Wire Line
 	26200 11350 28000 11350
-Text Notes 7850 6200 1    50   ~ 0
-Osc1PWMCV
 $Comp
 L Device:R_Small_US R17
 U 1 1 5F12C788
@@ -1000,12 +994,6 @@ Wire Wire Line
 	7850 12000 10250 12000
 Wire Wire Line
 	10250 12000 10250 11550
-Text Notes 9750 7250 1    50   ~ 0
-Osc1SyncOut
-Text Notes 9550 7250 1    50   ~ 0
-Osc1HardSyncIn
-Text Notes 9650 7250 1    50   ~ 0
-Osc1SoftSyncIn
 $Comp
 L Device:C_Small C22
 U 1 1 5F3B6B8A
@@ -1092,8 +1080,6 @@ F 3 "~" H 18450 8400 50  0001 C CNN
 	1    18250 8400
 	1    0    0    -1  
 $EndComp
-Text Notes 8250 6200 1    50   ~ 0
-Osc1ToOsc1FiltMixCV
 $Comp
 L Device:C_Small C90
 U 1 1 5E8F0F28
@@ -3911,12 +3897,6 @@ Wire Wire Line
 	8800 42650 8600 42650
 Wire Wire Line
 	33850 27600 34400 27600
-Text Notes 10500 37900 1    50   ~ 0
-SubOct1Out
-Text Notes 10300 37900 1    50   ~ 0
-SubOct2Out
-Text Notes 10400 37900 1    50   ~ 0
-SubOctBothOut
 Wire Wire Line
 	12850 35250 5900 35250
 Connection ~ 5900 40650
@@ -4006,19 +3986,11 @@ F 3 "~" H 11150 43750 50  0001 C CNN
 	1    10950 43750
 	0    1    1    0   
 $EndComp
-Text Notes 6200 27800 1    50   ~ 0
-SubToOsc2FiltMixCV
-Text Notes 6100 27800 1    50   ~ 0
-SubToSubFiltMixCV
 Wire Wire Line
 	10600 47100 10600 47750
 Connection ~ 10600 47750
 Wire Wire Line
 	10600 47750 10950 47750
-Text Notes 6900 45550 1    50   ~ 0
-NoiseToOsc2MixCV
-Text Notes 7000 45550 1    50   ~ 0
-NoiseToSubOscMixCV
 Wire Wire Line
 	11750 47750 11750 49300
 Connection ~ 11750 47750
@@ -4194,17 +4166,6 @@ Wire Wire Line
 Connection ~ 10650 9050
 Wire Wire Line
 	10650 9050 10750 9050
-$Comp
-L Connector_Generic:Conn_01x03 J10
-U 1 1 63812E66
-P 11100 12100
-F 0 "J10" V 10972 12280 50  0000 L CNN
-F 1 "Osc1HFTrackConn" V 11063 12280 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 11100 12100 50  0001 C CNN
-F 3 "~" H 11100 12100 50  0001 C CNN
-	1    11100 12100
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	10450 10300 10450 11350
 Wire Wire Line
@@ -5879,12 +5840,6 @@ Wire Wire Line
 Connection ~ 53150 29950
 Wire Wire Line
 	53150 29950 53750 29950
-Text Notes 10600 7250 1    50   ~ 0
-Osc1Scale
-Text Notes 11150 12200 3    50   ~ 0
-Osc1HFTrackWiper
-Text Notes 11250 12200 3    50   ~ 0
-Osc1HFTrackHigh
 Wire Wire Line
 	10100 8050 10100 9250
 Text Notes 21350 22300 3    50   ~ 0
@@ -6066,17 +6021,6 @@ F 3 "" H 27450 10550 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	11300 10050 11450 10050
-$Comp
-L Connector_Generic:Conn_01x03 J5
-U 1 1 6883C241
-P 9600 7350
-F 0 "J5" V 9650 7800 50  0000 R CNN
-F 1 "Osc1SyncConn" V 9550 8050 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 9600 7350 50  0001 C CNN
-F 3 "~" H 9600 7350 50  0001 C CNN
-	1    9600 7350
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	8450 8450 8450 9050
 Wire Wire Line
@@ -6607,12 +6551,6 @@ Wire Wire Line
 	25450 14100 25650 14100
 Wire Wire Line
 	25650 13200 25650 14100
-Text Notes 5700 27800 1    50   ~ 0
-Osc2NoteCV
-Text Notes 5900 27800 1    50   ~ 0
-Osc2SqrMixCV
-Text Notes 6000 27800 1    50   ~ 0
-Osc2SawMixCV
 $Comp
 L Device:R_Small_US R28
 U 1 1 605EF69E
@@ -6957,8 +6895,6 @@ F 3 "~" H 6900 30650 50  0001 C CNN
 	1    6900 30650
 	1    0    0    -1  
 $EndComp
-Text Notes 5600 27800 1    50   ~ 0
-Osc2PWMCV
 $Comp
 L Device:R_Small_US R12
 U 1 1 605EF9B5
@@ -7071,12 +7007,6 @@ Wire Wire Line
 	7150 33100 9550 33100
 Wire Wire Line
 	9550 33100 9550 32650
-Text Notes 9050 28300 1    50   ~ 0
-Osc2SyncOut
-Text Notes 8850 28300 1    50   ~ 0
-Osc2HardSyncIn
-Text Notes 8950 28300 1    50   ~ 0
-Osc2SoftSyncIn
 $Comp
 L Device:C_Small C16
 U 1 1 605EFAA7
@@ -7316,17 +7246,6 @@ F 3 "~" H 10950 31600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector_Generic:Conn_01x03 J6
-U 1 1 605F0167
-P 9850 28400
-F 0 "J6" V 9814 28212 50  0000 R CNN
-F 1 "Osc2ScaleConn" V 9723 28212 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 9850 28400 50  0001 C CNN
-F 3 "~" H 9850 28400 50  0001 C CNN
-	1    9850 28400
-	0    -1   -1   0   
-$EndComp
-$Comp
 L Device:R_POT_TRIM_US RV7
 U 1 1 605F0188
 P 9850 30300
@@ -7354,17 +7273,6 @@ Wire Wire Line
 Wire Wire Line
 	10050 30150 10050 30300
 Connection ~ 10050 30300
-$Comp
-L Connector_Generic:Conn_01x03 J7
-U 1 1 605F01BD
-P 10450 33100
-F 0 "J7" V 10322 33280 50  0000 L CNN
-F 1 "Osc2HFTrackConn" V 10413 33280 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10450 33100 50  0001 C CNN
-F 3 "~" H 10450 33100 50  0001 C CNN
-	1    10450 33100
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	9750 31400 9750 32450
 Wire Wire Line
@@ -7443,27 +7351,10 @@ F 3 "~" H 13350 29800 50  0001 C CNN
 	1    13350 29800
 	0    1    1    0   
 $EndComp
-Text Notes 9800 28300 1    50   ~ 0
-Osc2Scale
-Text Notes 10500 33200 3    50   ~ 0
-Osc2HFTrackWiper
-Text Notes 10600 33200 3    50   ~ 0
-Osc2HFTrackHigh
 Wire Wire Line
 	9400 29350 9400 30350
 Wire Wire Line
 	6800 28950 8100 28950
-$Comp
-L Connector_Generic:Conn_01x03 J4
-U 1 1 605F03F8
-P 8900 28400
-F 0 "J4" V 8900 28750 50  0000 R CNN
-F 1 "Osc2SyncConn" V 9000 29100 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8900 28400 50  0001 C CNN
-F 3 "~" H 8900 28400 50  0001 C CNN
-	1    8900 28400
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	7750 29550 7750 30150
 Wire Wire Line
@@ -11694,17 +11585,6 @@ Wire Wire Line
 Connection ~ 28450 32100
 Wire Wire Line
 	28450 32100 28900 32100
-$Comp
-L Connector_Generic:Conn_01x04 J1
-U 1 1 60036B4B
-P 6750 45650
-F 0 "J1" V 6714 45362 50  0000 R CNN
-F 1 "NoiseIOConn" V 6623 45362 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 6750 45650 50  0001 C CNN
-F 3 "~" H 6750 45650 50  0001 C CNN
-	1    6750 45650
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	6350 46900 6350 46750
 Wire Wire Line
@@ -18318,8 +18198,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35900 38500 50  0001 C CNN
 $EndComp
 Text Notes 37450 28200 0    50   ~ 0
 Unused
-Text Notes 5800 27800 1    50   ~ 0
-Osc2TuningOut
 $Comp
 L power:+12V #PWR0361
 U 1 1 7FD24A22
@@ -18607,8 +18485,6 @@ Wire Wire Line
 	7400 7850 8800 7850
 Wire Wire Line
 	6100 7950 7100 7950
-Text Notes 8050 6200 1    50   ~ 0
-Osc1TuningOut
 $Comp
 L Amplifier_Operational:TL074 U19
 U 2 1 601243A9
@@ -18899,23 +18775,10 @@ Wire Wire Line
 	8450 8450 9250 8450
 Wire Wire Line
 	9150 8350 9150 8550
-Text Notes 7950 6200 1    50   ~ 0
-Osc1NoteCV
 Wire Wire Line
 	7000 7400 7000 8300
 Wire Wire Line
 	7000 8300 7200 8300
-$Comp
-L Connector_Generic:Conn_01x07 J3
-U 1 1 6F9F5B04
-P 8100 6250
-F 0 "J3" V 8250 6950 50  0000 R CNN
-F 1 "Osc1CVConn" V 8150 7100 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 8100 6250 50  0001 C CNN
-F 3 "~" H 8100 6250 50  0001 C CNN
-	1    8100 6250
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	7400 7400 7400 7850
 Wire Wire Line
@@ -18935,8 +18798,6 @@ F 3 "~" H 12400 14400 50  0001 C CNN
 	1    12400 14400
 	0    -1   -1   0   
 $EndComp
-Text Notes 8450 6200 1    50   ~ 0
-Osc1ToOsc2MixCV
 Wire Wire Line
 	7300 7400 7300 7650
 Wire Wire Line
@@ -19113,32 +18974,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 8900 25650 50  0001 C CNN
 	5    8850 25450
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector_Generic:Conn_01x07 J2
-U 1 1 61247556
-P 5850 27850
-F 0 "J2" V 5814 27462 50  0000 R CNN
-F 1 "Conn_01x07" V 5723 27462 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 5850 27850 50  0001 C CNN
-F 3 "~" H 5850 27850 50  0001 C CNN
-	1    5850 27850
-	0    -1   -1   0   
-$EndComp
 Text GLabel 10950 39100 0    50   Input ~ 0
 SubToSubFiltMixCV
 Text GLabel 10950 38900 0    50   Input ~ 0
 SubToOsc2FiltMixCV
-$Comp
-L Connector_Generic:Conn_01x03 J8
-U 1 1 656400F9
-P 10350 37950
-F 0 "J8" V 10314 37762 50  0000 R CNN
-F 1 "Conn_01x03" V 10223 37762 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10350 37950 50  0001 C CNN
-F 3 "~" H 10350 37950 50  0001 C CNN
-	1    10350 37950
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	8550 29450 8550 29550
 Wire Wire Line
@@ -20603,10 +20442,6 @@ Text GLabel 4300 31450 2    50   Input ~ 0
 Osc2SoftSyncIn
 Text GLabel 4300 31350 2    50   Input ~ 0
 Osc2SyncOut
-Text Notes 6700 45550 1    50   ~ 0
-WhiteNoiseOut
-Text Notes 6800 45550 1    50   ~ 0
-PinkNoiseOut
 Text GLabel 6050 46750 1    50   Input ~ 0
 WhiteNoiseOut
 Text GLabel 6150 46750 1    50   Input ~ 0
@@ -20983,18 +20818,6 @@ Wire Wire Line
 Connection ~ 4650 9650
 Wire Wire Line
 	4650 9650 4650 9750
-$Comp
-L Connector_Generic:Conn_01x03 J9
-U 1 1 5FF06384
-P 10650 7350
-F 0 "J9" V 10614 7162 50  0000 R CNN
-F 1 "Osc1ScaleConn" V 10523 7162 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 10650 7350 50  0001 C CNN
-F 3 "~" H 10650 7350 50  0001 C CNN
-	1    10650 7350
-	0    -1   -1   0   
-$EndComp
-NoConn ~ 10750 7550
 Wire Wire Line
 	9350 32450 9350 32850
 NoConn ~ 10350 32900
@@ -21287,13 +21110,10 @@ F 3 "" H 35100 50950 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	10050 11350 10050 11750
-NoConn ~ 11000 11900
 Wire Wire Line
 	9850 30150 10050 30150
 Text GLabel 9400 29350 1    50   Input ~ 0
 Osc2Scale
-NoConn ~ 9850 28600
-NoConn ~ 9950 28600
 Wire Wire Line
 	21350 37100 21350 37150
 Wire Wire Line
@@ -21453,7 +21273,6 @@ Wire Wire Line
 Wire Wire Line
 	55700 22500 55800 22500
 Connection ~ 55800 22500
-NoConn ~ 10650 7550
 $Comp
 L power:-5V #PWR0418
 U 1 1 7E5CC938
