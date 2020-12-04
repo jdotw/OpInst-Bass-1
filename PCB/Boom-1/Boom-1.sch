@@ -4280,22 +4280,14 @@ F 3 "~" H 14900 11500 50  0001 C CNN
 	1    14700 11500
 	0    1    -1   0   
 $EndComp
-Text Notes 52100 22550 1    50   ~ 0
-FV1FeedbackCV
 Wire Wire Line
 	48900 28700 48900 29200
-Text Notes 52200 22550 1    50   ~ 0
-FV1WetDryCV
 Wire Wire Line
 	50700 25350 50700 23750
 Wire Wire Line
 	51050 23750 51050 25250
 Wire Wire Line
 	57450 30300 57200 30300
-Text Notes 53200 22550 1    50   ~ 0
-MixOutLeft
-Text Notes 53550 22550 1    50   ~ 0
-MixOutRight
 Wire Wire Line
 	49700 27250 49700 30200
 Wire Wire Line
@@ -5239,10 +5231,6 @@ Wire Wire Line
 	45650 24000 45650 25350
 Wire Wire Line
 	45750 24000 45750 25250
-Text Notes 53800 22550 1    50   ~ 0
-FV1EEpromSCL
-Text Notes 53900 22550 1    50   ~ 0
-FV1EEpromSDA
 $Comp
 L Device:R_POT_US RV17
 U 1 1 6CF8D21A
@@ -5410,16 +5398,6 @@ F 3 "" H 48400 24150 50  0001 C CNN
 	1    48400 24150
 	1    0    0    -1  
 $EndComp
-Text Notes 52500 22550 1    50   ~ 0
-ControlPotCommonHigh
-Text Notes 52900 22550 1    50   ~ 0
-ControlPotCommonLow
-Text Notes 52600 22550 1    50   ~ 0
-ControlPot1Wiper
-Text Notes 52700 22550 1    50   ~ 0
-ControlPot2Wiper
-Text Notes 52800 22550 1    50   ~ 0
-ControlPot3Wiper
 Text Notes 44500 26600 2    50   ~ 0
 SEL0
 Text Notes 44500 26700 2    50   ~ 0
@@ -5713,27 +5691,6 @@ F 3 "" H 21200 31500 50  0001 C CNN
 	1    21200 31500
 	0    1    1    0   
 $EndComp
-Text Notes 40150 28650 1    50   ~ 0
-PreFV1FXSend
-Text Notes 40250 28650 1    50   ~ 0
-PreFV1FXReturn
-$Comp
-L Connector_Generic:Conn_01x05 J26
-U 1 1 717FDD84
-P 40300 28750
-F 0 "J26" V 40300 29400 50  0000 R CNN
-F 1 "PreFV1FXConn" V 40200 29600 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 40300 28750 50  0001 C CNN
-F 3 "~" H 40300 28750 50  0001 C CNN
-	1    40300 28750
-	0    -1   -1   0   
-$EndComp
-Text Notes 40350 28650 1    50   ~ 0
-FX+12V
-Text Notes 40450 28650 1    50   ~ 0
-FXGND
-Text Notes 40550 28650 1    50   ~ 0
-FX-12V
 Wire Wire Line
 	40750 29250 40750 30050
 Wire Wire Line
@@ -18337,8 +18294,6 @@ Wire Wire Line
 	13350 42200 13350 41950
 Wire Wire Line
 	13350 41950 13250 41950
-Text Notes 53100 22550 1    50   ~ 0
-MixGnd
 Wire Wire Line
 	7200 9450 7200 8300
 Wire Wire Line
@@ -19715,63 +19670,6 @@ Wire Wire Line
 	50450 25000 50450 25350
 Wire Wire Line
 	45650 25350 50450 25350
-$Comp
-L Connector_Generic:Conn_01x02 J29
-U 1 1 6736389E
-P 52050 22650
-F 0 "J29" V 52100 23000 50  0000 R CNN
-F 1 "FV1CVConn" V 52000 23150 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 52050 22650 50  0001 C CNN
-F 3 "~" H 52050 22650 50  0001 C CNN
-	1    52050 22650
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x05 J33
-U 1 1 6736D219
-P 52650 22650
-F 0 "J33" H 52600 22950 50  0000 R CNN
-F 1 "FV1PotConn" H 53150 22950 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 52650 22650 50  0001 C CNN
-F 3 "~" H 52650 22650 50  0001 C CNN
-	1    52650 22650
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x02 J35
-U 1 1 65FE066D
-P 53750 22650
-F 0 "J35" V 53714 22462 50  0000 R CNN
-F 1 "FV1I2CConn" V 53623 22462 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 53750 22650 50  0001 C CNN
-F 3 "~" H 53750 22650 50  0001 C CNN
-	1    53750 22650
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x02 J34
-U 1 1 6B0086DB
-P 53050 22650
-F 0 "J34" H 53000 22450 50  0000 R CNN
-F 1 "MixLeftConn" H 53500 22450 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 53050 22650 50  0001 C CNN
-F 3 "~" H 53050 22650 50  0001 C CNN
-	1    53050 22650
-	0    -1   -1   0   
-$EndComp
-Text Notes 53450 22550 1    50   ~ 0
-MixGnd
-$Comp
-L Connector_Generic:Conn_01x02 J36
-U 1 1 6B00965C
-P 53400 22650
-F 0 "J36" H 53350 22450 50  0000 R CNN
-F 1 "MixRightConn" H 53900 22450 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 53400 22650 50  0001 C CNN
-F 3 "~" H 53400 22650 50  0001 C CNN
-	1    53400 22650
-	0    -1   -1   0   
-$EndComp
 $Comp
 L Mechanical:MountingHole_Pad H1
 U 1 1 6060E66D
