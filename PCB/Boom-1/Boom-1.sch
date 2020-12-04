@@ -20214,14 +20214,6 @@ Text GLabel 34600 54100 0    50   Input ~ 0
 SubFiltEnv1AmtWiper
 Text GLabel 34600 54400 0    50   Input ~ 0
 SubFiltEnv1Trigger
-Text GLabel 35100 54100 2    50   Input ~ 0
-SubFiltEnv1AttackCV
-Text GLabel 35100 54200 2    50   Input ~ 0
-SubFiltEnv1DecayCV
-Text GLabel 35100 54300 2    50   Input ~ 0
-SubFiltEnv1SustainCV
-Text GLabel 35100 54400 2    50   Input ~ 0
-SubFiltEnv1ReleaseCV
 Text GLabel 34600 54200 0    50   Input ~ 0
 SubFiltEnv1AmtHigh
 Text GLabel 21150 57950 3    50   Input ~ 0
@@ -20896,4 +20888,12 @@ F 3 "" H 4300 31050 50  0001 C CNN
 	1    4300 31050
 	0    1    1    0   
 $EndComp
+Text GLabel 35100 54400 2    50   Input ~ 0
+SubFiltEnv1ReleaseCV
+Text GLabel 35100 54300 2    50   Input ~ 0
+SubFiltEnv1SustainCV
+Text GLabel 35100 54200 2    50   Input ~ 0
+SubFiltEnv1DecayCV
+Text GLabel 35100 54100 2    50   Input ~ 0
+SubFiltEnv1AttackCV
 $EndSCHEMATC
