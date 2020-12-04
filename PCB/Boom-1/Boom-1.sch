@@ -5641,19 +5641,6 @@ Wire Wire Line
 	26950 20450 21150 20450
 Wire Wire Line
 	21150 20450 21150 20800
-$Comp
-L power:GND #PWR0122
-U 1 1 7894C23A
-P 21350 21200
-F 0 "#PWR0122" H 21350 20950 50  0001 C CNN
-F 1 "GND" H 21355 21027 50  0000 C CNN
-F 2 "" H 21350 21200 50  0001 C CNN
-F 3 "" H 21350 21200 50  0001 C CNN
-	1    21350 21200
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	21350 21200 21350 22000
 Text Notes 25700 9150 1    50   ~ 0
 FX+12V
 Text Notes 25800 9150 1    50   ~ 0
@@ -5971,19 +5958,6 @@ Wire Wire Line
 	20450 24950 20450 27700
 Wire Wire Line
 	20550 24850 20550 27700
-$Comp
-L power:GND #PWR0123
-U 1 1 76624A33
-P 21400 27800
-F 0 "#PWR0123" H 21400 27550 50  0001 C CNN
-F 1 "GND" H 21405 27627 50  0000 C CNN
-F 2 "" H 21400 27800 50  0001 C CNN
-F 3 "" H 21400 27800 50  0001 C CNN
-	1    21400 27800
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	21400 27800 21400 28600
 Text Notes 21400 28900 3    50   ~ 0
 OscFiltEnv2AmtLow
 Text Notes 21500 28900 3    50   ~ 0
@@ -6095,19 +6069,6 @@ Wire Wire Line
 	21150 48500 21150 51250
 Wire Wire Line
 	21250 48400 21250 51250
-$Comp
-L power:GND #PWR0129
-U 1 1 7D1C6FF5
-P 22050 51400
-F 0 "#PWR0129" H 22050 51150 50  0001 C CNN
-F 1 "GND" H 22055 51227 50  0000 C CNN
-F 2 "" H 22050 51400 50  0001 C CNN
-F 3 "" H 22050 51400 50  0001 C CNN
-	1    22050 51400
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	22050 51400 22050 52200
 Text Notes 22050 52500 3    50   ~ 0
 SubFiltEnv1AmtLow
 Text Notes 22150 52500 3    50   ~ 0
@@ -6142,19 +6103,6 @@ Wire Wire Line
 	21150 55200 21150 57950
 Wire Wire Line
 	21250 55100 21250 57950
-$Comp
-L power:GND #PWR0130
-U 1 1 7F37A826
-P 22050 58200
-F 0 "#PWR0130" H 22050 57950 50  0001 C CNN
-F 1 "GND" H 22055 58027 50  0000 C CNN
-F 2 "" H 22050 58200 50  0001 C CNN
-F 3 "" H 22050 58200 50  0001 C CNN
-	1    22050 58200
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	22050 58200 22050 59000
 Text Notes 22050 59300 3    50   ~ 0
 SubFiltEnv2AmtLow
 Text Notes 22150 59300 3    50   ~ 0
@@ -20818,22 +20766,6 @@ Text GLabel 21550 36600 1    50   Input ~ 0
 Osc2FiltResCV
 Text GLabel 21450 36600 1    50   Input ~ 0
 Osc2FXReturn
-Text GLabel 21450 22000 1    50   Input ~ 0
-OscFiltEnv1AmtWiper
-Text GLabel 21550 22000 1    50   Input ~ 0
-OscFiltEnv1AmtHigh
-Text GLabel 21650 22000 1    50   Input ~ 0
-OscFiltEnv1Trigger
-Text GLabel 21750 22000 1    50   Input ~ 0
-OscFiltEnv1Gate
-Text GLabel 21850 22000 1    50   Input ~ 0
-OscFiltEnv1AttackCV
-Text GLabel 21950 22000 1    50   Input ~ 0
-OscFiltEnv1DecayCV
-Text GLabel 22050 22000 1    50   Input ~ 0
-OscFiltEnv1SustainCV
-Text GLabel 22150 22000 1    50   Input ~ 0
-OscFiltEnv1ReleaseCV
 Text GLabel 20450 20800 3    50   Input ~ 0
 OscFiltEnv1AmtWiper
 Text GLabel 20550 20800 3    50   Input ~ 0
@@ -20882,22 +20814,6 @@ Text GLabel 21050 27700 3    50   Input ~ 0
 OscFiltEnv2SustainCV
 Text GLabel 21150 27700 3    50   Input ~ 0
 OscFiltEnv2ReleaseCV
-Text GLabel 21500 28600 1    50   Input ~ 0
-OscFiltEnv2AmtWiper
-Text GLabel 21600 28600 1    50   Input ~ 0
-OscFiltEnv2AmtHigh
-Text GLabel 21700 28600 1    50   Input ~ 0
-OscFiltEnv2Trigger
-Text GLabel 21800 28600 1    50   Input ~ 0
-OscFiltEnv2Gate
-Text GLabel 21900 28600 1    50   Input ~ 0
-OscFiltEnv2AttackCV
-Text GLabel 22000 28600 1    50   Input ~ 0
-OscFiltEnv2DecayCV
-Text GLabel 22100 28600 1    50   Input ~ 0
-OscFiltEnv2SustainCV
-Text GLabel 22200 28600 1    50   Input ~ 0
-OscFiltEnv2ReleaseCV
 Text GLabel 34600 50550 0    50   Input ~ 0
 OscFiltEnv2AmtWiper
 Text GLabel 34600 50650 0    50   Input ~ 0
@@ -20930,22 +20846,6 @@ Text GLabel 21750 51250 3    50   Input ~ 0
 SubFiltEnv1SustainCV
 Text GLabel 21850 51250 3    50   Input ~ 0
 SubFiltEnv1ReleaseCV
-Text GLabel 22150 52200 1    50   Input ~ 0
-SubFiltEnv1AmtWiper
-Text GLabel 22250 52200 1    50   Input ~ 0
-SubFiltEnv1AmtHigh
-Text GLabel 22350 52200 1    50   Input ~ 0
-SubFiltEnv1Trigger
-Text GLabel 22450 52200 1    50   Input ~ 0
-SubFiltEnv1Gate
-Text GLabel 22550 52200 1    50   Input ~ 0
-SubFiltEnv1AttackCV
-Text GLabel 22650 52200 1    50   Input ~ 0
-SubFiltEnv1DecayCV
-Text GLabel 22750 52200 1    50   Input ~ 0
-SubFiltEnv1SustainCV
-Text GLabel 22850 52200 1    50   Input ~ 0
-SubFiltEnv1ReleaseCV
 Text GLabel 34600 54100 0    50   Input ~ 0
 SubFiltEnv1AmtWiper
 Text GLabel 34600 54400 0    50   Input ~ 0
@@ -20975,22 +20875,6 @@ SubFiltEnv2DecayCV
 Text GLabel 21750 57950 3    50   Input ~ 0
 SubFiltEnv2SustainCV
 Text GLabel 21850 57950 3    50   Input ~ 0
-SubFiltEnv2ReleaseCV
-Text GLabel 22150 59000 1    50   Input ~ 0
-SubFiltEnv2AmtWiper
-Text GLabel 22250 59000 1    50   Input ~ 0
-SubFiltEnv2AmtHigh
-Text GLabel 22350 59000 1    50   Input ~ 0
-SubFiltEnv2Trigger
-Text GLabel 22450 59000 1    50   Input ~ 0
-SubFiltEnv2Gate
-Text GLabel 22550 59000 1    50   Input ~ 0
-SubFiltEnv2AttackCV
-Text GLabel 22650 59000 1    50   Input ~ 0
-SubFiltEnv2DecayCV
-Text GLabel 22750 59000 1    50   Input ~ 0
-SubFiltEnv2SustainCV
-Text GLabel 22850 59000 1    50   Input ~ 0
 SubFiltEnv2ReleaseCV
 Text GLabel 35100 53900 2    50   Input ~ 0
 SubFiltEnv2AmtWiper
