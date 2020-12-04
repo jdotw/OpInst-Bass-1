@@ -4212,16 +4212,7 @@ Wire Wire Line
 Wire Wire Line
 	10100 11350 10050 11350
 Wire Wire Line
-	10050 11350 10050 11650
-Wire Wire Line
 	10400 11350 10450 11350
-Wire Wire Line
-	10500 11800 10500 11650
-Wire Wire Line
-	10500 11650 10050 11650
-Connection ~ 10050 11650
-Wire Wire Line
-	10050 11650 10050 11750
 Wire Wire Line
 	10700 11800 10700 11350
 Wire Wire Line
@@ -6000,8 +5991,6 @@ Text Notes 10700 7250 1    50   ~ 0
 Osc1ScaleWiper
 Text Notes 10600 7250 1    50   ~ 0
 Osc1ScaleHigh
-Text Notes 11050 12200 3    50   ~ 0
-Osc1HFTrackLow
 Text Notes 11150 12200 3    50   ~ 0
 Osc1HFTrackWiper
 Text Notes 11250 12200 3    50   ~ 0
@@ -20642,17 +20631,6 @@ F 3 "~" H 49500 14550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Mechanical:MountingHole_Pad H8
-U 1 1 6076E5DC
-P 50000 14550
-F 0 "H8" H 50100 14599 50  0000 L CNN
-F 1 "MountingHole_Pad" H 50100 14508 50  0000 L CNN
-F 2 "MountingHole:MountingHole_2.2mm_M2_Pad" H 50000 14550 50  0001 C CNN
-F 3 "~" H 50000 14550 50  0001 C CNN
-	1    50000 14550
-	1    0    0    -1  
-$EndComp
-$Comp
 L Mechanical:MountingHole_Pad H9
 U 1 1 6076EB23
 P 50500 14550
@@ -20785,17 +20763,6 @@ F 3 "" H 49500 14650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR0385
-U 1 1 6112E86D
-P 50000 14650
-F 0 "#PWR0385" H 50000 14400 50  0001 C CNN
-F 1 "GND" H 50005 14477 50  0000 C CNN
-F 2 "" H 50000 14650 50  0001 C CNN
-F 3 "" H 50000 14650 50  0001 C CNN
-	1    50000 14650
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR0386
 U 1 1 6113768C
 P 50500 14650
@@ -20860,50 +20827,6 @@ F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 45300 12100 50  0001 C CNN
 F 3 "~" H 45300 12100 50  0001 C CNN
 	1    45300 12100
 	-1   0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_02x08_Top_Bottom J43
-U 1 1 61BDFC2A
-P 55750 23250
-F 0 "J43" H 55800 23767 50  0000 C CNN
-F 1 "FXConn" H 55800 23676 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical" H 55750 23250 50  0001 C CNN
-F 3 "~" H 55750 23250 50  0001 C CNN
-	1    55750 23250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_02x16_Top_Bottom J42
-U 1 1 61BE9DEA
-P 35400 15150
-F 0 "J42" H 35450 16067 50  0000 C CNN
-F 1 "EnvGenConn1" H 35450 15976 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x16_P2.54mm_Vertical" H 35400 15150 50  0001 C CNN
-F 3 "~" H 35400 15150 50  0001 C CNN
-	1    35400 15150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_02x16_Top_Bottom J41
-U 1 1 61BEC729
-P 34800 52450
-F 0 "J41" H 34850 53367 50  0000 C CNN
-F 1 "EnvGenConn2" H 34850 53276 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x16_P2.54mm_Vertical" H 34800 52450 50  0001 C CNN
-F 3 "~" H 34800 52450 50  0001 C CNN
-	1    34800 52450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_02x12_Top_Bottom J40
-U 1 1 61D6A959
-P 22150 37000
-F 0 "J40" H 22200 37717 50  0000 C CNN
-F 1 "FiltConn" H 22200 37626 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x12_P2.54mm_Vertical" H 22150 37000 50  0001 C CNN
-F 3 "~" H 22150 37000 50  0001 C CNN
-	1    22150 37000
-	1    0    0    -1  
 $EndComp
 Text GLabel 6400 28500 1    50   Input ~ 0
 Osc2PWMCV
@@ -21051,14 +20974,10 @@ Text GLabel 5150 9850 2    50   Input ~ 0
 Osc1SoftSyncIn
 Text GLabel 5150 9650 2    50   Input ~ 0
 Osc1SyncOut
-Text GLabel 10500 11800 3    50   Input ~ 0
-Osc1HFTrackLow
 Text GLabel 10600 11800 3    50   Input ~ 0
 Osc1HFTrackWiper
 Text GLabel 10700 11800 3    50   Input ~ 0
 Osc1HFTrackHigh
-Text GLabel 11000 11900 1    50   Input ~ 0
-Osc1HFTrackLow
 Text GLabel 11100 11900 1    50   Input ~ 0
 Osc1HFTrackWiper
 Text GLabel 11200 11900 1    50   Input ~ 0
@@ -21158,19 +21077,19 @@ Text GLabel 26050 9450 3    50   Input ~ 0
 Osc1FXSend
 Text GLabel 26250 9450 3    50   Input ~ 0
 Osc1FXReturn
-Text GLabel 21950 37500 0    50   Input ~ 0
+Text GLabel 21950 37100 3    50   Input ~ 0
 FX+12V
-Text GLabel 21950 37400 0    50   Input ~ 0
+Text GLabel 22050 37100 3    50   Input ~ 0
 FXGND
-Text GLabel 21950 37300 0    50   Input ~ 0
+Text GLabel 22150 37100 3    50   Input ~ 0
 FX-12V
-Text GLabel 21950 36500 0    50   Input ~ 0
+Text GLabel 21550 8900 3    50   Input ~ 0
 Osc1FiltFreqCV
-Text GLabel 21950 36600 0    50   Input ~ 0
+Text GLabel 21750 8900 3    50   Input ~ 0
 Osc1FiltResCV
-Text GLabel 21950 36700 0    50   Input ~ 0
+Text GLabel 21450 8900 3    50   Input ~ 0
 Osc1FXSend
-Text GLabel 21950 36800 0    50   Input ~ 0
+Text GLabel 21650 8900 3    50   Input ~ 0
 Osc1FXReturn
 Text GLabel 21800 40400 1    50   Input ~ 0
 FX+12V
@@ -21200,13 +21119,13 @@ Text GLabel 21400 39650 3    50   Input ~ 0
 SubFiltResCV
 Text GLabel 21500 39650 3    50   Input ~ 0
 SubFXReturn
-Text GLabel 22450 36500 2    50   Input ~ 0
+Text GLabel 21750 36600 1    50   Input ~ 0
 SubFiltFreqCV
-Text GLabel 22450 36800 2    50   Input ~ 0
+Text GLabel 21950 36600 1    50   Input ~ 0
 SubFXSend
-Text GLabel 22450 36600 2    50   Input ~ 0
+Text GLabel 22050 36600 1    50   Input ~ 0
 SubFiltResCV
-Text GLabel 22450 36700 2    50   Input ~ 0
+Text GLabel 21850 36600 1    50   Input ~ 0
 SubFXReturn
 Text GLabel 22500 33800 3    50   Input ~ 0
 FX+12V
@@ -21236,13 +21155,13 @@ Text GLabel 23000 33800 3    50   Input ~ 0
 Osc2FiltResCV
 Text GLabel 23100 33800 3    50   Input ~ 0
 Osc2FXReturn
-Text GLabel 21950 36900 0    50   Input ~ 0
+Text GLabel 21350 36600 1    50   Input ~ 0
 Osc2FiltFreqCV
-Text GLabel 21950 37000 0    50   Input ~ 0
+Text GLabel 21650 36600 1    50   Input ~ 0
 Osc2FXSend
-Text GLabel 21950 37100 0    50   Input ~ 0
+Text GLabel 21550 36600 1    50   Input ~ 0
 Osc2FiltResCV
-Text GLabel 21950 37200 0    50   Input ~ 0
+Text GLabel 21450 36600 1    50   Input ~ 0
 Osc2FXReturn
 Text GLabel 21350 22000 1    50   Input ~ 0
 OscFiltEnv1AmtLow
@@ -21280,21 +21199,21 @@ Text GLabel 21050 20800 3    50   Input ~ 0
 OscFiltEnv1SustainCV
 Text GLabel 21150 20800 3    50   Input ~ 0
 OscFiltEnv1ReleaseCV
-Text GLabel 35200 14450 0    50   Input ~ 0
+Text GLabel 35100 50450 2    50   Input ~ 0
 OscFiltEnv1AmtWiper
-Text GLabel 35200 14550 0    50   Input ~ 0
+Text GLabel 35100 50350 2    50   Input ~ 0
 OscFiltEnv1AmtHigh
-Text GLabel 35200 14650 0    50   Input ~ 0
+Text GLabel 35100 50150 2    50   Input ~ 0
 OscFiltEnv1Trigger
-Text GLabel 35200 14750 0    50   Input ~ 0
+Text GLabel 35100 50250 2    50   Input ~ 0
 OscFiltEnv1Gate
-Text GLabel 35200 14850 0    50   Input ~ 0
+Text GLabel 34600 50450 0    50   Input ~ 0
 OscFiltEnv1AttackCV
-Text GLabel 35200 14950 0    50   Input ~ 0
+Text GLabel 34600 50350 0    50   Input ~ 0
 OscFiltEnv1DecayCV
-Text GLabel 35200 15050 0    50   Input ~ 0
+Text GLabel 34600 50250 0    50   Input ~ 0
 OscFiltEnv1SustainCV
-Text GLabel 35200 15150 0    50   Input ~ 0
+Text GLabel 34600 50150 0    50   Input ~ 0
 OscFiltEnv1ReleaseCV
 Text GLabel 20350 27700 3    50   Input ~ 0
 OscFiltEnv2AmtLow
@@ -21332,21 +21251,21 @@ Text GLabel 22100 28600 1    50   Input ~ 0
 OscFiltEnv2SustainCV
 Text GLabel 22200 28600 1    50   Input ~ 0
 OscFiltEnv2ReleaseCV
-Text GLabel 35200 15950 0    50   Input ~ 0
+Text GLabel 34600 50550 0    50   Input ~ 0
 OscFiltEnv2AmtWiper
-Text GLabel 35200 15850 0    50   Input ~ 0
+Text GLabel 34600 50650 0    50   Input ~ 0
 OscFiltEnv2AmtHigh
-Text GLabel 35200 15750 0    50   Input ~ 0
+Text GLabel 34600 50850 0    50   Input ~ 0
 OscFiltEnv2Trigger
-Text GLabel 35200 15650 0    50   Input ~ 0
+Text GLabel 34600 50750 0    50   Input ~ 0
 OscFiltEnv2Gate
-Text GLabel 35200 15550 0    50   Input ~ 0
+Text GLabel 35100 50550 2    50   Input ~ 0
 OscFiltEnv2AttackCV
-Text GLabel 35200 15450 0    50   Input ~ 0
+Text GLabel 35100 50650 2    50   Input ~ 0
 OscFiltEnv2DecayCV
-Text GLabel 35200 15350 0    50   Input ~ 0
+Text GLabel 35100 50750 2    50   Input ~ 0
 OscFiltEnv2SustainCV
-Text GLabel 35200 15250 0    50   Input ~ 0
+Text GLabel 35100 50850 2    50   Input ~ 0
 OscFiltEnv2ReleaseCV
 Text GLabel 21050 51250 3    50   Input ~ 0
 SubFiltEnv1AmtLow
@@ -21384,21 +21303,19 @@ Text GLabel 22750 52200 1    50   Input ~ 0
 SubFiltEnv1SustainCV
 Text GLabel 22850 52200 1    50   Input ~ 0
 SubFiltEnv1ReleaseCV
-Text GLabel 35700 14450 2    50   Input ~ 0
+Text GLabel 34600 54100 0    50   Input ~ 0
 SubFiltEnv1AmtWiper
-Text GLabel 35700 14650 2    50   Input ~ 0
+Text GLabel 34600 54400 0    50   Input ~ 0
 SubFiltEnv1Trigger
-Text GLabel 35700 14750 2    50   Input ~ 0
-SubFiltEnv1Gate
-Text GLabel 35700 14850 2    50   Input ~ 0
+Text GLabel 35100 54100 2    50   Input ~ 0
 SubFiltEnv1AttackCV
-Text GLabel 35700 14950 2    50   Input ~ 0
+Text GLabel 35100 54200 2    50   Input ~ 0
 SubFiltEnv1DecayCV
-Text GLabel 35700 15050 2    50   Input ~ 0
+Text GLabel 35100 54300 2    50   Input ~ 0
 SubFiltEnv1SustainCV
-Text GLabel 35700 15150 2    50   Input ~ 0
+Text GLabel 35100 54400 2    50   Input ~ 0
 SubFiltEnv1ReleaseCV
-Text GLabel 35700 14550 2    50   Input ~ 0
+Text GLabel 34600 54200 0    50   Input ~ 0
 SubFiltEnv1AmtHigh
 Text GLabel 21050 57950 3    50   Input ~ 0
 SubFiltEnv2AmtLow
@@ -21436,21 +21353,21 @@ Text GLabel 22750 59000 1    50   Input ~ 0
 SubFiltEnv2SustainCV
 Text GLabel 22850 59000 1    50   Input ~ 0
 SubFiltEnv2ReleaseCV
-Text GLabel 35700 15250 2    50   Input ~ 0
+Text GLabel 35100 53900 2    50   Input ~ 0
 SubFiltEnv2AmtWiper
-Text GLabel 35700 15350 2    50   Input ~ 0
+Text GLabel 35100 54000 2    50   Input ~ 0
 SubFiltEnv2AmtHigh
-Text GLabel 35700 15450 2    50   Input ~ 0
+Text GLabel 35100 53700 2    50   Input ~ 0
 SubFiltEnv2Trigger
-Text GLabel 35700 15550 2    50   Input ~ 0
+Text GLabel 35100 53800 2    50   Input ~ 0
 SubFiltEnv2Gate
-Text GLabel 35700 15650 2    50   Input ~ 0
+Text GLabel 34600 54000 0    50   Input ~ 0
 SubFiltEnv2AttackCV
-Text GLabel 35700 15750 2    50   Input ~ 0
+Text GLabel 34600 53900 0    50   Input ~ 0
 SubFiltEnv2DecayCV
-Text GLabel 35700 15850 2    50   Input ~ 0
+Text GLabel 34600 53800 0    50   Input ~ 0
 SubFiltEnv2SustainCV
-Text GLabel 35700 15950 2    50   Input ~ 0
+Text GLabel 34600 53700 0    50   Input ~ 0
 SubFiltEnv2ReleaseCV
 Text GLabel 30300 21700 1    50   Input ~ 0
 OscAmpEnvAmtLow
@@ -21488,21 +21405,21 @@ Text GLabel 32400 20650 3    50   Input ~ 0
 OscAmpEnvSustainCV
 Text GLabel 32500 20650 3    50   Input ~ 0
 OscAmpEnvReleaseCV
-Text GLabel 34600 51750 0    50   Input ~ 0
+Text GLabel 35100 52050 2    50   Input ~ 0
 OscAmpEnvAmtWiper
-Text GLabel 34600 51850 0    50   Input ~ 0
+Text GLabel 35100 51950 2    50   Input ~ 0
 OscAmpEnvAmtHigh
-Text GLabel 34600 51950 0    50   Input ~ 0
+Text GLabel 35100 51750 2    50   Input ~ 0
 OscAmpEnvTrigger
-Text GLabel 34600 52050 0    50   Input ~ 0
+Text GLabel 35100 51850 2    50   Input ~ 0
 OscAmpEnvGate
-Text GLabel 34600 52150 0    50   Input ~ 0
+Text GLabel 34600 52050 0    50   Input ~ 0
 OscAmpEnvAttackCV
-Text GLabel 34600 52250 0    50   Input ~ 0
+Text GLabel 34600 51950 0    50   Input ~ 0
 OscAmpEnvDecayCV
-Text GLabel 34600 52350 0    50   Input ~ 0
+Text GLabel 34600 51850 0    50   Input ~ 0
 OscAmpEnvSustainCV
-Text GLabel 34600 52450 0    50   Input ~ 0
+Text GLabel 34600 51750 0    50   Input ~ 0
 OscAmpEnvReleaseCV
 Text GLabel 30400 44450 3    50   Input ~ 0
 SubAmpEnvAmtLow
@@ -21540,23 +21457,21 @@ Text GLabel 32300 45550 1    50   Input ~ 0
 SubAmpEnvSustainCV
 Text GLabel 32400 45550 1    50   Input ~ 0
 SubAmpEnvReleaseCV
-Text GLabel 35100 51750 2    50   Input ~ 0
-SubAmpEnvAmtLow
-Text GLabel 35100 51850 2    50   Input ~ 0
+Text GLabel 34600 52150 0    50   Input ~ 0
 SubAmpEnvAmtWiper
-Text GLabel 35100 51950 2    50   Input ~ 0
+Text GLabel 34600 52250 0    50   Input ~ 0
 SubAmpEnvAmtHigh
-Text GLabel 35100 52050 2    50   Input ~ 0
+Text GLabel 34600 52450 0    50   Input ~ 0
 SubAmpEnvTrigger
-Text GLabel 35100 52150 2    50   Input ~ 0
+Text GLabel 34600 52350 0    50   Input ~ 0
 SubAmpEnvGate
-Text GLabel 35100 52250 2    50   Input ~ 0
+Text GLabel 35100 52150 2    50   Input ~ 0
 SubAmpEnvAttackCV
-Text GLabel 35100 52350 2    50   Input ~ 0
+Text GLabel 35100 52250 2    50   Input ~ 0
 SubAmpEnvDecayCV
-Text GLabel 35100 52450 2    50   Input ~ 0
+Text GLabel 35100 52350 2    50   Input ~ 0
 SubAmpEnvSustainCV
-Text GLabel 35100 52550 2    50   Input ~ 0
+Text GLabel 35100 52450 2    50   Input ~ 0
 SubAmpEnvReleaseCV
 Text GLabel 49600 23750 1    50   Input ~ 0
 FV1FeedbackCV
@@ -21606,68 +21521,41 @@ Text GLabel 53500 22850 3    50   Input ~ 0
 MixOutRightTip
 Text GLabel 53400 22850 3    50   Input ~ 0
 MixOutRightGnd
-Text GLabel 55550 22950 0    50   Input ~ 0
-FV1FeedbackCV
-Text GLabel 55550 23050 0    50   Input ~ 0
-FV1WetDryCV
-Text GLabel 55550 23150 0    50   Input ~ 0
+Text GLabel 55300 22500 1    50   Input ~ 0
 FV1ControlCommonHigh
-Text GLabel 55550 23550 0    50   Input ~ 0
+Text GLabel 55700 22500 1    50   Input ~ 0
 FV1ControlCommonLow
-Text GLabel 55550 23250 0    50   Input ~ 0
+Text GLabel 55400 22500 1    50   Input ~ 0
 FV1ControlPot1Wiper
-Text GLabel 55550 23350 0    50   Input ~ 0
+Text GLabel 55500 22500 1    50   Input ~ 0
 FV1ControlPot2Wiper
-Text GLabel 55550 23450 0    50   Input ~ 0
+Text GLabel 55600 22500 1    50   Input ~ 0
 FV1ControlPot3Wiper
 Text GLabel 53850 22850 3    50   Input ~ 0
 FV1EEpromSDA
 Text GLabel 53750 22850 3    50   Input ~ 0
 FV1EEpromSCL
-Text GLabel 56050 22950 2    50   Input ~ 0
-MixOutLeftGnd
-Text GLabel 56050 23050 2    50   Input ~ 0
-MixOutLeftTip
-Text GLabel 56050 23350 2    50   Input ~ 0
-MixOutRightTip
-Text GLabel 56050 23250 2    50   Input ~ 0
-MixOutRightGnd
-Text GLabel 56050 23650 2    50   Input ~ 0
-FV1EEpromSDA
-Text GLabel 56050 23550 2    50   Input ~ 0
-FV1EEpromSCL
-$Comp
-L power:GND #PWR0396
-U 1 1 82841852
-P 56050 23150
-F 0 "#PWR0396" H 56050 22900 50  0001 C CNN
-F 1 "GND" V 56055 23022 50  0000 R CNN
-F 2 "" H 56050 23150 50  0001 C CNN
-F 3 "" H 56050 23150 50  0001 C CNN
-	1    56050 23150
-	0    -1   -1   0   
-$EndComp
 $Comp
 L power:GND #PWR0397
 U 1 1 8284243C
-P 56050 23450
-F 0 "#PWR0397" H 56050 23200 50  0001 C CNN
-F 1 "GND" V 56055 23322 50  0000 R CNN
-F 2 "" H 56050 23450 50  0001 C CNN
-F 3 "" H 56050 23450 50  0001 C CNN
-	1    56050 23450
-	0    -1   -1   0   
+P 56000 22500
+F 0 "#PWR0397" H 56000 22250 50  0001 C CNN
+F 1 "GND" V 56005 22372 50  0000 R CNN
+F 2 "" H 56000 22500 50  0001 C CNN
+F 3 "" H 56000 22500 50  0001 C CNN
+	1    56000 22500
+	-1   0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0398
 U 1 1 82842780
-P 55550 23650
-F 0 "#PWR0398" H 55550 23400 50  0001 C CNN
-F 1 "GND" V 55555 23522 50  0000 R CNN
-F 2 "" H 55550 23650 50  0001 C CNN
-F 3 "" H 55550 23650 50  0001 C CNN
-	1    55550 23650
-	0    1    1    0   
+P 56000 23000
+F 0 "#PWR0398" H 56000 22750 50  0001 C CNN
+F 1 "GND" V 56005 22872 50  0000 R CNN
+F 2 "" H 56000 23000 50  0001 C CNN
+F 3 "" H 56000 23000 50  0001 C CNN
+	1    56000 23000
+	1    0    0    -1  
 $EndComp
 Text GLabel 40750 29250 1    50   Input ~ 0
 PreFV1FXSend
@@ -21689,32 +21577,32 @@ Text GLabel 40400 28950 3    50   Input ~ 0
 FXGND
 Text GLabel 40500 28950 3    50   Input ~ 0
 FX-12V
-Text GLabel 22450 37200 2    50   Input ~ 0
+Text GLabel 22150 36600 1    50   Input ~ 0
 PreFV1FXSend
-Text GLabel 22450 37300 2    50   Input ~ 0
+Text GLabel 22250 36600 1    50   Input ~ 0
 PreFV1FXReturn
-Text GLabel 22450 37400 2    50   Input ~ 0
+Text GLabel 21650 37100 3    50   Input ~ 0
 FX+12V
-Text GLabel 22450 37500 2    50   Input ~ 0
+Text GLabel 21750 37100 3    50   Input ~ 0
 FXGND
-Text GLabel 22450 37600 2    50   Input ~ 0
+Text GLabel 21850 37100 3    50   Input ~ 0
 FX-12V
-Text GLabel 22450 36900 2    50   Input ~ 0
+Text GLabel 21350 37100 3    50   Input ~ 0
 FX+12V
-Text GLabel 22450 37000 2    50   Input ~ 0
+Text GLabel 21450 37100 3    50   Input ~ 0
 FXGND
-Text GLabel 22450 37100 2    50   Input ~ 0
+Text GLabel 21550 37100 3    50   Input ~ 0
 FX-12V
 $Comp
 L power:GND #PWR0399
 U 1 1 862BF522
-P 21950 37600
-F 0 "#PWR0399" H 21950 37350 50  0001 C CNN
-F 1 "GND" V 21955 37472 50  0000 R CNN
-F 2 "" H 21950 37600 50  0001 C CNN
-F 3 "" H 21950 37600 50  0001 C CNN
-	1    21950 37600
-	0    1    1    0   
+P 22450 36600
+F 0 "#PWR0399" H 22450 36350 50  0001 C CNN
+F 1 "GND" V 22455 36472 50  0000 R CNN
+F 2 "" H 22450 36600 50  0001 C CNN
+F 3 "" H 22450 36600 50  0001 C CNN
+	1    22450 36600
+	1    0    0    1   
 $EndComp
 $Comp
 L power:GND #PWR0392
@@ -21797,4 +21685,264 @@ $EndComp
 Wire Wire Line
 	4850 43900 4850 44000
 Connection ~ 4850 43900
+$Comp
+L Connector_Generic:Conn_02x04_Odd_Even J44
+U 1 1 60FF4A68
+P 21550 8600
+F 0 "J44" V 21554 8312 50  0000 R CNN
+F 1 "FiltConn1" V 21645 8312 50  0000 R CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x04_P2.54mm_Vertical" H 21550 8600 50  0001 C CNN
+F 3 "~" H 21550 8600 50  0001 C CNN
+	1    21550 8600
+	0    -1   1    0   
+$EndComp
+Text GLabel 21450 8400 1    50   Input ~ 0
+FX+12V
+Text GLabel 21550 8400 1    50   Input ~ 0
+FXGND
+Text GLabel 21650 8400 1    50   Input ~ 0
+FX-12V
+$Comp
+L power:GND #PWR0391
+U 1 1 62D12545
+P 21750 8400
+F 0 "#PWR0391" H 21750 8150 50  0001 C CNN
+F 1 "GND" V 21755 8272 50  0000 R CNN
+F 2 "" H 21750 8400 50  0001 C CNN
+F 3 "" H 21750 8400 50  0001 C CNN
+	1    21750 8400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x12_Odd_Even J40
+U 1 1 64BF7C18
+P 21850 36800
+F 0 "J40" V 21854 36112 50  0000 R CNN
+F 1 "FiltConn2" V 21945 36112 50  0000 R CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x12_P2.54mm_Vertical" H 21850 36800 50  0001 C CNN
+F 3 "~" H 21850 36800 50  0001 C CNN
+	1    21850 36800
+	0    -1   1    0   
+$EndComp
+$Comp
+L power:GND #PWR0393
+U 1 1 686A9710
+P 22450 37100
+F 0 "#PWR0393" H 22450 36850 50  0001 C CNN
+F 1 "GND" V 22455 36972 50  0000 R CNN
+F 2 "" H 22450 37100 50  0001 C CNN
+F 3 "" H 22450 37100 50  0001 C CNN
+	1    22450 37100
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	22250 37100 22350 37100
+Connection ~ 22350 37100
+Wire Wire Line
+	22350 37100 22450 37100
+Connection ~ 22450 37100
+Wire Wire Line
+	22350 36600 22450 36600
+Connection ~ 22450 36600
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even J43
+U 1 1 6E0189A8
+P 55600 22700
+F 0 "J43" V 55604 22212 50  0000 R CNN
+F 1 "FXConn1" V 55695 22212 50  0000 R CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical" H 55600 22700 50  0001 C CNN
+F 3 "~" H 55600 22700 50  0001 C CNN
+	1    55600 22700
+	0    -1   1    0   
+$EndComp
+Text GLabel 56900 23000 3    50   Input ~ 0
+FV1FeedbackCV
+Text GLabel 57000 23000 3    50   Input ~ 0
+FV1WetDryCV
+Text GLabel 57100 23000 3    50   Input ~ 0
+MixOutLeftTip
+Text GLabel 57200 23000 3    50   Input ~ 0
+MixOutRightTip
+Text GLabel 57200 22500 1    50   Input ~ 0
+FV1EEpromSDA
+Text GLabel 57100 22500 1    50   Input ~ 0
+FV1EEpromSCL
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J45
+U 1 1 6FEDF4A3
+P 57100 22700
+F 0 "J45" V 57104 22412 50  0000 R CNN
+F 1 "FXConn2" V 57195 22412 50  0000 R CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x05_P2.54mm_Vertical" H 57100 22700 50  0001 C CNN
+F 3 "~" H 57100 22700 50  0001 C CNN
+	1    57100 22700
+	0    -1   1    0   
+$EndComp
+$Comp
+L power:GND #PWR0394
+U 1 1 71C024F2
+P 57300 23000
+F 0 "#PWR0394" H 57300 22750 50  0001 C CNN
+F 1 "GND" V 57305 22872 50  0000 R CNN
+F 2 "" H 57300 23000 50  0001 C CNN
+F 3 "" H 57300 23000 50  0001 C CNN
+	1    57300 23000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0400
+U 1 1 71C02A0B
+P 57300 22500
+F 0 "#PWR0400" H 57300 22250 50  0001 C CNN
+F 1 "GND" V 57305 22372 50  0000 R CNN
+F 2 "" H 57300 22500 50  0001 C CNN
+F 3 "" H 57300 22500 50  0001 C CNN
+	1    57300 22500
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0401
+U 1 1 71C0344A
+P 56900 22500
+F 0 "#PWR0401" H 56900 22250 50  0001 C CNN
+F 1 "GND" V 56905 22372 50  0000 R CNN
+F 2 "" H 56900 22500 50  0001 C CNN
+F 3 "" H 56900 22500 50  0001 C CNN
+	1    56900 22500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	56900 22500 57000 22500
+Connection ~ 56900 22500
+Wire Wire Line
+	55800 22500 55900 22500
+Connection ~ 56000 22500
+Connection ~ 55900 22500
+Wire Wire Line
+	55900 22500 56000 22500
+Wire Wire Line
+	55300 23000 55400 23000
+Connection ~ 56000 23000
+Connection ~ 55400 23000
+Wire Wire Line
+	55400 23000 55500 23000
+Connection ~ 55500 23000
+Wire Wire Line
+	55500 23000 55600 23000
+Connection ~ 55600 23000
+Wire Wire Line
+	55600 23000 55700 23000
+Connection ~ 55700 23000
+Wire Wire Line
+	55700 23000 55800 23000
+Connection ~ 55800 23000
+Wire Wire Line
+	55800 23000 55900 23000
+Connection ~ 55900 23000
+Wire Wire Line
+	55900 23000 56000 23000
+Text GLabel 34600 54300 0    50   Input ~ 0
+SubFiltEnv1Gate
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J46
+U 1 1 800E432F
+P 34900 54100
+F 0 "J46" H 34950 54717 50  0000 C CNN
+F 1 "EnvGenConn3" H 34950 54626 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x09_P2.54mm_Vertical" H 34900 54100 50  0001 C CNN
+F 3 "~" H 34900 54100 50  0001 C CNN
+	1    34900 54100
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0396
+U 1 1 81472792
+P 34600 54500
+F 0 "#PWR0396" H 34600 54250 50  0001 C CNN
+F 1 "GND" H 34605 54327 50  0000 C CNN
+F 2 "" H 34600 54500 50  0001 C CNN
+F 3 "" H 34600 54500 50  0001 C CNN
+	1    34600 54500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0402
+U 1 1 8147BB72
+P 35100 54500
+F 0 "#PWR0402" H 35100 54250 50  0001 C CNN
+F 1 "GND" H 35105 54327 50  0000 C CNN
+F 2 "" H 35100 54500 50  0001 C CNN
+F 3 "" H 35100 54500 50  0001 C CNN
+	1    35100 54500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J41
+U 1 1 8148D8E4
+P 34900 52150
+F 0 "J41" H 34950 52767 50  0000 C CNN
+F 1 "EnvGenConn2" H 34950 52676 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x09_P2.54mm_Vertical" H 34900 52150 50  0001 C CNN
+F 3 "~" H 34900 52150 50  0001 C CNN
+	1    34900 52150
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0404
+U 1 1 8149922A
+P 35100 52550
+F 0 "#PWR0404" H 35100 52300 50  0001 C CNN
+F 1 "GND" H 35105 52377 50  0000 C CNN
+F 2 "" H 35100 52550 50  0001 C CNN
+F 3 "" H 35100 52550 50  0001 C CNN
+	1    35100 52550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0403
+U 1 1 814A231F
+P 34600 52550
+F 0 "#PWR0403" H 34600 52300 50  0001 C CNN
+F 1 "GND" H 34605 52377 50  0000 C CNN
+F 2 "" H 34600 52550 50  0001 C CNN
+F 3 "" H 34600 52550 50  0001 C CNN
+	1    34600 52550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J42
+U 1 1 81690DCF
+P 34900 50550
+F 0 "J42" H 34950 51167 50  0000 C CNN
+F 1 "EnvGenConn1" H 34950 51076 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x09_P2.54mm_Vertical" H 34900 50550 50  0001 C CNN
+F 3 "~" H 34900 50550 50  0001 C CNN
+	1    34900 50550
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0405
+U 1 1 83DA1C76
+P 34600 50950
+F 0 "#PWR0405" H 34600 50700 50  0001 C CNN
+F 1 "GND" H 34605 50777 50  0000 C CNN
+F 2 "" H 34600 50950 50  0001 C CNN
+F 3 "" H 34600 50950 50  0001 C CNN
+	1    34600 50950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0406
+U 1 1 83DAAB2B
+P 35100 50950
+F 0 "#PWR0406" H 35100 50700 50  0001 C CNN
+F 1 "GND" H 35105 50777 50  0000 C CNN
+F 2 "" H 35100 50950 50  0001 C CNN
+F 3 "" H 35100 50950 50  0001 C CNN
+	1    35100 50950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10050 11350 10050 11750
+NoConn ~ 11000 11900
 $EndSCHEMATC
