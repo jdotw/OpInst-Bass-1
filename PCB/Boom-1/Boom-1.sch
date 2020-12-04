@@ -19,8 +19,6 @@ Text Notes 45050 12150 0    50   ~ 0
 GND\n
 Text Notes 45050 12250 0    50   ~ 0
 -12
-Text Notes 26000 9150 1    50   ~ 0
-Osc1FiltFreqCV
 $Comp
 L Device:R_Small_US R38
 U 1 1 5E8EC106
@@ -593,8 +591,6 @@ F 3 "~" H 28150 12900 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Connection ~ 27850 12900
-Text Notes 26200 9150 1    50   ~ 0
-Osc1FiltResCV
 $Comp
 L Device:R_Small_US R260
 U 1 1 5EAAF0BF
@@ -5578,10 +5574,6 @@ Wire Wire Line
 	18250 8550 17950 8550
 Wire Wire Line
 	25750 10750 25750 11050
-Text Notes 26100 9150 1    50   ~ 0
-Osc1FXSend
-Text Notes 26300 9150 1    50   ~ 0
-Osc1FXReturn
 Wire Wire Line
 	16850 41200 21050 41200
 Connection ~ 16850 41200
@@ -5602,12 +5594,6 @@ Wire Wire Line
 	26950 20450 21150 20450
 Wire Wire Line
 	21150 20450 21150 20800
-Text Notes 25700 9150 1    50   ~ 0
-FX+12V
-Text Notes 25800 9150 1    50   ~ 0
-FXGND
-Text Notes 25900 9150 1    50   ~ 0
-FX-12V
 Wire Wire Line
 	14250 7550 14450 7550
 Wire Wire Line
@@ -5842,24 +5828,6 @@ Wire Wire Line
 	53150 29950 53750 29950
 Wire Wire Line
 	10100 8050 10100 9250
-Text Notes 21350 22300 3    50   ~ 0
-OscFiltEnv1AmtLow
-Text Notes 21450 22300 3    50   ~ 0
-OscFiltEnv1AmtWiper
-Text Notes 21550 22300 3    50   ~ 0
-OscFiltEnv1AmtHigh
-Text Notes 21750 22300 3    50   ~ 0
-OscFiltEnv1Gate
-Text Notes 21650 22300 3    50   ~ 0
-OscFiltEnv1Trigger
-Text Notes 21900 22300 3    50   ~ 0
-OscFiltEnv1AttackCV
-Text Notes 22000 22300 3    50   ~ 0
-OscFiltEnv1DecayCV
-Text Notes 22100 22300 3    50   ~ 0
-OscFiltEnv1SustainCV
-Text Notes 22200 22300 3    50   ~ 0
-OscFiltEnv1ReleaseCV
 Wire Wire Line
 	20850 27050 20850 27700
 Wire Wire Line
@@ -7580,8 +7548,6 @@ Wire Wire Line
 Connection ~ 14900 29300
 Wire Wire Line
 	14900 29300 14900 29450
-Text Notes 23650 35000 3    50   ~ 0
-Osc2FiltFreqCV
 $Comp
 L Device:R_Small_US R226
 U 1 1 65865453
@@ -7892,8 +7858,6 @@ F 3 "~" H 28150 32100 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 Connection ~ 27850 32100
-Text Notes 23850 35000 3    50   ~ 0
-Osc2FiltResCV
 $Comp
 L Device:R_Small_US R261
 U 1 1 65865659
@@ -8159,8 +8123,6 @@ Wire Wire Line
 	25450 30900 25650 30900
 Wire Wire Line
 	25650 31800 25650 30900
-Text Notes 21250 39350 1    50   ~ 0
-SubFiltFreqCV
 $Comp
 L Device:R_Small_US R158
 U 1 1 6CFE20B8
@@ -8471,8 +8433,6 @@ F 3 "~" H 25000 43300 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 Connection ~ 24700 43300
-Text Notes 21450 39350 1    50   ~ 0
-SubFiltResCV
 $Comp
 L Device:R_Small_US R219
 U 1 1 6CFE22BE
@@ -8637,16 +8597,6 @@ Wire Wire Line
 	22200 40400 22200 41100
 Wire Wire Line
 	22400 41100 22600 41100
-Text Notes 21350 39350 1    50   ~ 0
-SubFXSend
-Text Notes 21550 39350 1    50   ~ 0
-SubFXReturn
-Text Notes 20950 39350 1    50   ~ 0
-FX+12V
-Text Notes 21050 39350 1    50   ~ 0
-FXGND
-Text Notes 21150 39350 1    50   ~ 0
-FX-12V
 $Comp
 L Device:R_Small_US R140
 U 1 1 6CFE2523
@@ -11557,16 +11507,6 @@ Wire Wire Line
 	25250 33100 25450 33100
 Wire Wire Line
 	23750 31000 23950 31000
-Text Notes 23550 35000 3    50   ~ 0
-FX-12V
-Text Notes 23450 35000 3    50   ~ 0
-FXGND
-Text Notes 23350 35000 3    50   ~ 0
-FX+12V
-Text Notes 23950 35000 3    50   ~ 0
-Osc2FXReturn
-Text Notes 23750 35000 3    50   ~ 0
-Osc2FXSend
 Wire Wire Line
 	22000 31600 22000 33100
 Connection ~ 25250 33100
@@ -19223,17 +19163,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 26550 29100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	23100 33800 23100 33100
-$Comp
-L Connector_Generic:Conn_01x07 J20
-U 1 1 6793EBAD
-P 23600 34900
-F 0 "J20" V 23472 34512 50  0000 R CNN
-F 1 "Osc2FiltConn" V 23563 34512 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 23600 34900 50  0001 C CNN
-F 3 "~" H 23600 34900 50  0001 C CNN
-	1    23600 34900
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	23000 33800 23000 31900
 Wire Wire Line
@@ -19246,17 +19175,6 @@ Wire Wire Line
 	22000 33100 22900 33100
 Wire Wire Line
 	22800 33800 22800 32000
-$Comp
-L Connector_Generic:Conn_01x07 J11
-U 1 1 612CEC03
-P 21200 39450
-F 0 "J11" V 21164 39062 50  0000 R CNN
-F 1 "SubFiltConn" V 21073 39062 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 21200 39450 50  0001 C CNN
-F 3 "~" H 21200 39450 50  0001 C CNN
-	1    21200 39450
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	22400 40400 22400 41100
 Wire Wire Line
@@ -19287,17 +19205,6 @@ Wire Wire Line
 	22100 42200 19350 42200
 Wire Wire Line
 	19350 42200 19350 44150
-$Comp
-L Connector_Generic:Conn_01x07 J16
-U 1 1 67527F94
-P 25950 9250
-F 0 "J16" V 25914 8862 50  0000 R CNN
-F 1 "Osc1FiltConn" V 25823 8862 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical" H 25950 9250 50  0001 C CNN
-F 3 "~" H 25950 9250 50  0001 C CNN
-	1    25950 9250
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	25400 10050 25400 10750
 Wire Wire Line
@@ -19323,28 +19230,6 @@ Wire Wire Line
 	25100 11950 22500 11950
 Wire Wire Line
 	22500 11950 22500 13750
-$Comp
-L Connector_Generic:Conn_01x05 J12
-U 1 1 60DA4F70
-P 21550 22200
-F 0 "J12" V 21400 22550 50  0000 R CNN
-F 1 "OscFiltEnv1Conn" V 21500 23100 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 21550 22200 50  0001 C CNN
-F 3 "~" H 21550 22200 50  0001 C CNN
-	1    21550 22200
-	0    -1   1    0   
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x04 J17
-U 1 1 60DB7A00
-P 21950 22200
-F 0 "J17" V 21822 21912 50  0000 R CNN
-F 1 "OscFiltEnv1CVConn" V 21913 21912 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 21950 22200 50  0001 C CNN
-F 3 "~" H 21950 22200 50  0001 C CNN
-	1    21950 22200
-	0    -1   1    0   
-$EndComp
 Wire Wire Line
 	20650 20800 20650 19700
 Wire Wire Line
@@ -21313,4 +21198,44 @@ Text Notes 31700 45850 3    50   ~ 0
 SubAmpEnvAmtWiper
 Text Notes 31600 45850 3    50   ~ 0
 SubAmpEnvAmtLow
+$Comp
+L Connector_Generic:Conn_01x04 J17
+U 1 1 60DB7A00
+P 21950 22200
+F 0 "J17" V 21822 21912 50  0000 R CNN
+F 1 "OscFiltEnv1CVConn" V 21913 21912 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 21950 22200 50  0001 C CNN
+F 3 "~" H 21950 22200 50  0001 C CNN
+	1    21950 22200
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J12
+U 1 1 60DA4F70
+P 21550 22200
+F 0 "J12" V 21400 22550 50  0000 R CNN
+F 1 "OscFiltEnv1Conn" V 21500 23100 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 21550 22200 50  0001 C CNN
+F 3 "~" H 21550 22200 50  0001 C CNN
+	1    21550 22200
+	0    -1   1    0   
+$EndComp
+Text Notes 22200 22300 3    50   ~ 0
+OscFiltEnv1ReleaseCV
+Text Notes 22100 22300 3    50   ~ 0
+OscFiltEnv1SustainCV
+Text Notes 22000 22300 3    50   ~ 0
+OscFiltEnv1DecayCV
+Text Notes 21900 22300 3    50   ~ 0
+OscFiltEnv1AttackCV
+Text Notes 21650 22300 3    50   ~ 0
+OscFiltEnv1Trigger
+Text Notes 21750 22300 3    50   ~ 0
+OscFiltEnv1Gate
+Text Notes 21550 22300 3    50   ~ 0
+OscFiltEnv1AmtHigh
+Text Notes 21450 22300 3    50   ~ 0
+OscFiltEnv1AmtWiper
+Text Notes 21350 22300 3    50   ~ 0
+OscFiltEnv1AmtLow
 $EndSCHEMATC
