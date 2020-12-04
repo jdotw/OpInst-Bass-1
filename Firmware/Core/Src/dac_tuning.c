@@ -51,18 +51,9 @@ void dac_timer_input_capture_callback(TIM_HandleTypeDef *htim, uint32_t channel)
 	}
 }
 
-#define MIDI_NOTE_A4 69
-#define MIDI_NOTE_C2 36
-
-#define TUNING_ERROR_MARGIN 0 // == 1Hz
-#define TUNING_DAC_VALUE_STEP 100
-
-#define DAC_SETTLING_DELAY 50
-#define TIMER_SAMPLING_PERIOD 10
-
-uint32_t _dac_value_to_tune(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value) {
+uint32_t frequency_for_dac_value(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint16_t dac_value) {
 	// Set the DAC to the suggested value
-	set_mcp4728_dac_value_channel(dac_bus, dac_addr, dac_channel, near_dac_value);
+	set_mcp4728_dac_value_channel(dac_bus, dac_addr, dac_channel, dac_value);
 	HAL_Delay(1000); // Wait for osc to settle
 
 	// Listen to the oscillator
@@ -75,8 +66,23 @@ uint32_t _dac_value_to_tune(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_
 	HAL_Delay(DAC_SETTLING_DELAY);
 	HAL_TIM_IC_Stop_IT(timer, timer_channel);
 
+	return Frequency * 10;
+}
+
+#define MIDI_NOTE_A4 69
+#define MIDI_NOTE_C2 36
+#define MIDI_NOTE_C3 48
+
+#define TUNING_ERROR_MARGIN 0 // == 1Hz
+#define TUNING_DAC_VALUE_STEP 100
+
+#define DAC_SETTLING_DELAY 50
+#define TIMER_SAMPLING_PERIOD 10
+
+uint32_t _dac_value_to_tune(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value) {
+
 	// Check the result against expected
-	uint32_t observed_frequency = Frequency * 10;
+	uint32_t observed_frequency = frequency_for_dac_value(dac_bus, dac_addr, dac_channel, timer, timer_channel, near_dac_value);
 	if (observed_frequency > (expected_frequency - TUNING_ERROR_MARGIN)
 			&& observed_frequency < (expected_frequency + TUNING_ERROR_MARGIN)) {
 		// Got us a tuned oscillator!

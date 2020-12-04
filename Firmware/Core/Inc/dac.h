@@ -36,6 +36,8 @@ void set_quad_dac2_i2c(I2C_HandleTypeDef *value);
 void set_osc1_tuning_timer(TIM_HandleTypeDef *value, uint32_t channel);
 void set_osc2_tuning_timer(TIM_HandleTypeDef *value, uint32_t channel);
 
+uint32_t frequency_for_dac_value(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint16_t dac_value);
+
 void dac_calibrate_all();
 void update_dac_control_voltages();
 
