@@ -5146,7 +5146,7 @@ U 1 1 67580605
 P 45750 23800
 F 0 "J28" V 45700 25100 50  0000 C CNN
 F 1 "FV1Conn" V 45800 24800 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x18_P2.54mm_Vertical" H 45750 23800 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x18_P2.54mm_Vertical" H 45750 23800 50  0001 C CNN
 F 3 "~" H 45750 23800 50  0001 C CNN
 	1    45750 23800
 	0    -1   -1   0   
