@@ -20861,4 +20861,30 @@ Text GLabel 22350 37100 3    50   Input ~ 0
 SubAmpAudioBypassSend
 Text GLabel 22250 37100 3    50   Input ~ 0
 SubAmpAudioBypassReturn
+$Comp
+L power:GND #PWR?
+U 1 1 68B72696
+P 3800 31450
+F 0 "#PWR?" H 3800 31200 50  0001 C CNN
+F 1 "GND" V 3805 31322 50  0000 R CNN
+F 2 "" H 3800 31450 50  0001 C CNN
+F 3 "" H 3800 31450 50  0001 C CNN
+	1    3800 31450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3800 31450 3800 31350
+Connection ~ 3800 31450
+Connection ~ 3800 31050
+Wire Wire Line
+	3800 31050 3800 30950
+Connection ~ 3800 31150
+Wire Wire Line
+	3800 31150 3800 31050
+Connection ~ 3800 31250
+Wire Wire Line
+	3800 31250 3800 31150
+Connection ~ 3800 31350
+Wire Wire Line
+	3800 31350 3800 31250
 $EndSCHEMATC
