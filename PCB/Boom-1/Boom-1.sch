@@ -20092,11 +20092,11 @@ Text GLabel 25400 10050 1    50   Input ~ 0
 Osc1FXReturn
 Text GLabel 21550 8900 3    50   Input ~ 0
 Osc1FiltFreqCV
-Text GLabel 21750 8900 3    50   Input ~ 0
+Text GLabel 21650 8900 3    50   Input ~ 0
 Osc1FiltResCV
 Text GLabel 21450 8900 3    50   Input ~ 0
 Osc1FXSend
-Text GLabel 21650 8900 3    50   Input ~ 0
+Text GLabel 21750 8900 3    50   Input ~ 0
 Osc1FXReturn
 Text GLabel 22100 40400 1    50   Input ~ 0
 SubFiltFreqCV
