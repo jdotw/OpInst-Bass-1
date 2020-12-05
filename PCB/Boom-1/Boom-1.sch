@@ -4819,8 +4819,6 @@ Wire Wire Line
 	18300 15000 18300 17950
 Wire Wire Line
 	32850 27600 33650 27600
-Text Label 29900 29300 0    50   ~ 0
-AudioInput
 $Comp
 L Device:R_Small_US R224
 U 1 1 70347BD9
@@ -18021,8 +18019,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/tl071.pdf" H 35900 38500 50  0001 C CNN
 	2    35900 38500
 	1    0    0    1   
 $EndComp
-Text Notes 37450 28200 0    50   ~ 0
-Unused
 $Comp
 L power:+12V #PWR0361
 U 1 1 7FD24A22
