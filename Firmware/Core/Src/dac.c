@@ -87,16 +87,27 @@ void update_dac_control_voltages(midi_state midi) {
 	uint16_t osc1_note_dac_value = dac_value_for_midi_state(midi, 0, true) + osc1_tuning_offset;
 	set_mcp4728_dac_value_channel(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 0, osc1_note_dac_value);
 
-	uint16_t osc2_note_dac_value = dac_value_for_midi_state(midi, 0, true) + osc2_tuning_offset;
+	uint16_t osc2_note_dac_value = dac_value_for_midi_state(midi, 0, false) + osc2_tuning_offset;
 	set_mcp4728_dac_value_channel(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 1, osc2_note_dac_value);
 
 	uint16_t velocityDACValue = dac_value_for_midi_velocity(midi.cur_note_velocity);
 	set_mcp4728_dac_value_channel(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 2, velocityDACValue);
+
+	uint16_t filterDACValue = dac_value_for_primary_filter_cutoff(midi);
+	set_mcp4728_dac_value_channel(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 3, filterDACValue);
 }
 
 void dac_calibrate_all() {
+	bool audible_tuning = true;
+  HAL_GPIO_WritePin(NOTE_GATE_GPIO_Port, NOTE_GATE_Pin, audible_tuning);
+
+  uint16_t open_filter_dac_value = scaled_dac_value_for_primary_filter(127, 127);
+	set_mcp4728_dac_value_channel(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 3, open_filter_dac_value);
+
 	osc1_tuning_offset = dac_tunning_offset(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 0, osc1_tuning_timer, osc1_tuning_timer_channel);
 	osc2_tuning_offset = dac_tunning_offset(quad_dac1_i2c, QUAD_DAC_1_ADDRESS, 1, osc2_tuning_timer, osc2_tuning_timer_channel);
+
+  HAL_GPIO_WritePin(NOTE_GATE_GPIO_Port, NOTE_GATE_Pin, 0);
 }
 
 void dac_tracking_test_mode() {

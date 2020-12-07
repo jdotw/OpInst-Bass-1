@@ -160,6 +160,9 @@ uint8_t handle_midi_rx_data(uint8_t status_msg, uint8_t *data, uint8_t recv_coun
 		case MIDI_CHANNEL_VOICE_PITCH_BEND:
 			handle_midi_pitch_bend_msg(status_msg, data);
 			return STATUS_MSG_NONE;
+		case MIDI_CHANNEL_VOICE_CONTROL_CHANGE:
+			handle_midi_cc_msg(status_msg, data);
+			return STATUS_MSG_NONE;
 		default:
 			return STATUS_MSG_NONE;
 		}

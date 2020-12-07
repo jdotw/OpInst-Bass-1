@@ -28,6 +28,7 @@ typedef struct midi_state_s
 
     // Pitch Bend and Mod Wheel
     uint16_t pitch_bend_amount;
+    uint8_t mod_wheel_amount;
 
 } midi_state;
 

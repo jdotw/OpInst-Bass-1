@@ -58,9 +58,14 @@ uint16_t dac_value_for_midi_state(midi_state midi, uint8_t transpose_steps, bool
 uint16_t dac_value_for_midi_velocity(uint8_t velocity);
 
 /*
- * dac_tuning.c
+ * dac_filter.c
  */
 
+uint16_t dac_value_for_primary_filter_cutoff(midi_state midi);
+
+/*
+ * dac_tuning.c
+ */
 
 int16_t dac_tunning_offset(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel);
 void dac_timer_input_capture_callback(TIM_HandleTypeDef *htim, uint32_t channel);

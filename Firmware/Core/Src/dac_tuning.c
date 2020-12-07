@@ -132,7 +132,6 @@ int16_t dac_tunning_offset(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t
 	//
 	// Does not return until the tuning sequence is done
 
-
 	// Determine the presumed dac_value for A4 / 440Hz
 	uint16_t initial_dac_value = scaled_dac_value_for_midi_note(MIDI_NOTE_C2);
 	uint32_t expected_frequency = 67406;
