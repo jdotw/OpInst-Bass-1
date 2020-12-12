@@ -1,0 +1,306 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A0 46811 33110
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L PIC18F26Q43:PIC18F26Q43 U2
+U 1 1 5FD37D72
+P 16350 4450
+F 0 "U2" H 16075 4365 50  0000 C CNN
+F 1 "PIC18F26Q43" H 16075 4274 50  0000 C CNN
+F 2 "" H 16350 4450 50  0001 C CNN
+F 3 "" H 16350 4450 50  0001 C CNN
+	1    16350 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L MCU_ST_STM32F4:STM32F407VGTx U1
+U 1 1 5FD3AAB9
+P 8950 6000
+F 0 "U1" H 8950 3111 50  0000 C CNN
+F 1 "STM32F407VGTx" H 8950 3020 50  0000 C CNN
+F 2 "Package_QFP:LQFP-100_14x14mm_P0.5mm" H 8250 3400 50  0001 R CNN
+F 3 "http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00037051.pdf" H 8950 6000 50  0001 C CNN
+	1    8950 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J37
+U 1 1 606F9E0C
+P 3500 13900
+F 0 "J37" H 3550 14517 50  0000 C CNN
+F 1 "Osc1Conn" H 3550 14426 50  0000 C CNN
+F 2 "" H 3500 13900 50  0001 C CNN
+F 3 "~" H 3500 13900 50  0001 C CNN
+	1    3500 13900
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J38
+U 1 1 606FB0DA
+P 3500 15450
+F 0 "J38" H 3550 16067 50  0000 C CNN
+F 1 "Osc2Conn" H 3550 15976 50  0000 C CNN
+F 2 "" H 3500 15450 50  0001 C CNN
+F 3 "~" H 3500 15450 50  0001 C CNN
+	1    3500 15450
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x06_Odd_Even J39
+U 1 1 607010E7
+P 4650 16700
+F 0 "J39" V 4654 16312 50  0000 R CNN
+F 1 "SubNoiseConn" V 4745 16312 50  0000 R CNN
+F 2 "" H 4650 16700 50  0001 C CNN
+F 3 "~" H 4650 16700 50  0001 C CNN
+	1    4650 16700
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x12_Odd_Even J40
+U 1 1 607053C9
+P 6850 16700
+F 0 "J40" V 6854 16012 50  0000 R CNN
+F 1 "FiltConn2" V 6945 16012 50  0000 R CNN
+F 2 "" H 6850 16700 50  0001 C CNN
+F 3 "~" H 6850 16700 50  0001 C CNN
+	1    6850 16700
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even J43
+U 1 1 60708219
+P 9300 16700
+F 0 "J43" V 9304 16212 50  0000 R CNN
+F 1 "FXConn1" V 9395 16212 50  0000 R CNN
+F 2 "" H 9300 16700 50  0001 C CNN
+F 3 "~" H 9300 16700 50  0001 C CNN
+	1    9300 16700
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x04_Odd_Even J44
+U 1 1 6070D0C0
+P 6450 13350
+F 0 "J44" V 6454 13062 50  0000 R CNN
+F 1 "FiltConn1" V 6545 13062 50  0000 R CNN
+F 2 "" H 6450 13350 50  0001 C CNN
+F 3 "~" H 6450 13350 50  0001 C CNN
+	1    6450 13350
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J45
+U 1 1 6070E3D6
+P 9200 13350
+F 0 "J45" V 9204 13062 50  0000 R CNN
+F 1 "FXConn2" V 9295 13062 50  0000 R CNN
+F 2 "" H 9200 13350 50  0001 C CNN
+F 3 "~" H 9200 13350 50  0001 C CNN
+	1    9200 13350
+	0    -1   1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J42
+U 1 1 6070FDF5
+P 11450 13900
+F 0 "J42" H 11500 14517 50  0000 C CNN
+F 1 "EnvGenConn1" H 11500 14426 50  0000 C CNN
+F 2 "" H 11450 13900 50  0001 C CNN
+F 3 "~" H 11450 13900 50  0001 C CNN
+	1    11450 13900
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J41
+U 1 1 60710CA3
+P 11450 15200
+F 0 "J41" H 11500 15817 50  0000 C CNN
+F 1 "EnvGenConn2" H 11500 15726 50  0000 C CNN
+F 2 "" H 11450 15200 50  0001 C CNN
+F 3 "~" H 11450 15200 50  0001 C CNN
+	1    11450 15200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x09_Odd_Even J46
+U 1 1 60711C12
+P 11450 16500
+F 0 "J46" H 11500 17117 50  0000 C CNN
+F 1 "EnvGenConn3" H 11500 17026 50  0000 C CNN
+F 2 "" H 11450 16500 50  0001 C CNN
+F 3 "~" H 11450 16500 50  0001 C CNN
+	1    11450 16500
+	-1   0    0    -1  
+$EndComp
+Text GLabel 3700 13500 2    50   Input ~ 0
+Osc1Scale
+Text GLabel 3700 13600 2    50   Input ~ 0
+Osc1Scale-5V
+Text GLabel 3700 13700 2    50   Input ~ 0
+Osc1NoteCV
+Text GLabel 3700 13800 2    50   Input ~ 0
+Osc1PWMCV
+Text GLabel 3700 13900 2    50   Input ~ 0
+Osc1HFTrackHigh
+Text GLabel 3700 14000 2    50   Input ~ 0
+Osc1HFTrackWiper
+Text GLabel 3700 14100 2    50   Input ~ 0
+Osc1SyncOut
+Text GLabel 3700 14200 2    50   Input ~ 0
+Osc1HardSyncIn
+Text GLabel 3700 14300 2    50   Input ~ 0
+Osc1SoftSyncIn
+Text GLabel 3200 14300 0    50   Input ~ 0
+Osc1TuningOut
+Text GLabel 3200 13800 0    50   Input ~ 0
+Osc1ToOsc2FiltMixCV
+Text GLabel 3200 13700 0    50   Input ~ 0
+Osc1SqrMixCV
+Text GLabel 3200 13600 0    50   Input ~ 0
+Osc1SawMixCV
+Text GLabel 3200 13500 0    50   Input ~ 0
+Osc1ToOsc1FiltMixCV
+Text GLabel 3200 15850 0    50   Input ~ 0
+Osc2TuningOut
+Text GLabel 3200 15150 0    50   Input ~ 0
+Osc2SqrMixCV
+Text GLabel 3200 15050 0    50   Input ~ 0
+Osc2SawMixCV
+Text GLabel 3700 15050 2    50   Input ~ 0
+Osc2Scale
+Text GLabel 3700 15150 2    50   Input ~ 0
+Osc2Scale-5V
+Text GLabel 3700 15250 2    50   Input ~ 0
+Osc2NoteCV
+Text GLabel 3700 15350 2    50   Input ~ 0
+Osc2PWMCV
+Text GLabel 3700 15450 2    50   Input ~ 0
+Osc2HFTrackHigh
+Text GLabel 3700 15550 2    50   Input ~ 0
+Osc2HFTrackWiper
+Text GLabel 3700 15650 2    50   Input ~ 0
+Osc2SyncOut
+Text GLabel 3700 15750 2    50   Input ~ 0
+Osc2HardSyncIn
+Text GLabel 3700 15850 2    50   Input ~ 0
+Osc2SoftSyncIn
+Text GLabel 4850 16500 2    50   Input ~ 0
+SubToOsc2FiltMixCV
+Text GLabel 4850 16600 2    50   Input ~ 0
+SubOct1Out
+Text GLabel 4850 16700 2    50   Input ~ 0
+SubOctBothOut
+Text GLabel 4850 16800 2    50   Input ~ 0
+SubOct2Out
+Text GLabel 4850 16900 2    50   Input ~ 0
+SubToSubFiltMixCV
+Text GLabel 4350 16700 0    50   Input ~ 0
+PinkNoiseOut
+Text GLabel 4350 16800 0    50   Input ~ 0
+WhiteNoiseOut
+Text GLabel 4350 16900 0    50   Input ~ 0
+NoiseToSubFiltMixCV
+Text GLabel 4350 17000 0    50   Input ~ 0
+NoiseToOsc2FiltMixCV
+Text GLabel 6350 16500 1    50   Input ~ 0
+Osc2FiltFreqCV
+Text GLabel 6450 16500 1    50   Input ~ 0
+Osc2FXReturn
+Text GLabel 6550 16500 1    50   Input ~ 0
+Osc2FiltResCV
+Text GLabel 6650 16500 1    50   Input ~ 0
+Osc2FXSend
+Text GLabel 6750 16500 1    50   Input ~ 0
+SubFiltFreqCV
+Text GLabel 6850 16500 1    50   Input ~ 0
+SubFXReturn
+Text GLabel 6950 16500 1    50   Input ~ 0
+SubFXSend
+Text GLabel 7050 16500 1    50   Input ~ 0
+SubFiltResCV
+Text GLabel 7150 16500 1    50   Input ~ 0
+PreFV1FXSend
+Text GLabel 7250 16500 1    50   Input ~ 0
+PreFV1FXReturn
+Text GLabel 7350 17000 3    50   Input ~ 0
+SubAmpAudioBypassSend
+Text GLabel 7250 17000 3    50   Input ~ 0
+SubAmpAudioBypassReturn
+Text GLabel 11150 13500 0    50   Input ~ 0
+OscFiltEnv1ReleaseCV
+Text GLabel 11150 13600 0    50   Input ~ 0
+OscFiltEnv1SustainCV
+Text GLabel 11150 13700 0    50   Input ~ 0
+OscFiltEnv1DecayCV
+Text GLabel 11150 13800 0    50   Input ~ 0
+OscFiltEnv1AttackCV
+Text GLabel 11150 13900 0    50   Input ~ 0
+OscFiltEnv2AmtWiper
+Text GLabel 11150 14000 0    50   Input ~ 0
+OscFiltEnv2AmtHigh
+Text GLabel 11150 14100 0    50   Input ~ 0
+OscFiltEnv2Gate
+Text GLabel 11150 14200 0    50   Input ~ 0
+OscFiltEnv2Trigger
+Text GLabel 11650 14200 2    50   Input ~ 0
+OscFiltEnv2ReleaseCV
+Text GLabel 11650 14100 2    50   Input ~ 0
+OscFiltEnv2SustainCV
+Text GLabel 11650 14000 2    50   Input ~ 0
+OscFiltEnv2DecayCV
+Text GLabel 11650 13900 2    50   Input ~ 0
+OscFiltEnv2AttackCV
+Text GLabel 11650 13800 2    50   Input ~ 0
+OscFiltEnv1AmtWiper
+Text GLabel 11650 13700 2    50   Input ~ 0
+OscFiltEnv1AmtHigh
+Text GLabel 11650 13600 2    50   Input ~ 0
+OscFiltEnv1Gate
+Text GLabel 11650 13500 2    50   Input ~ 0
+OscFiltEnv1Trigger
+Text GLabel 11150 14800 0    50   Input ~ 0
+OscAmpEnvReleaseCV
+Text GLabel 11150 14900 0    50   Input ~ 0
+OscAmpEnvSustainCV
+Text GLabel 11150 15000 0    50   Input ~ 0
+OscAmpEnvDecayCV
+Text GLabel 11150 15100 0    50   Input ~ 0
+OscAmpEnvAttackCV
+Text GLabel 11150 15200 0    50   Input ~ 0
+SubAmpEnvAmtWiper
+Text GLabel 11150 15300 0    50   Input ~ 0
+SubAmpEnvAmtHigh
+Text GLabel 11150 15400 0    50   Input ~ 0
+SubAmpEnvGate
+Text GLabel 11150 15500 0    50   Input ~ 0
+SubAmpEnvTrigger
+Text GLabel 11650 15500 2    50   Input ~ 0
+SubAmpEnvReleaseCV
+Text GLabel 11650 15400 2    50   Input ~ 0
+SubAmpEnvSustainCV
+Text GLabel 11650 15300 2    50   Input ~ 0
+SubAmpEnvDecayCV
+Text GLabel 11650 15200 2    50   Input ~ 0
+SubAmpEnvAttackCV
+Text GLabel 11650 15100 2    50   Input ~ 0
+OscAmpEnvAmtWiper
+Text GLabel 11650 15000 2    50   Input ~ 0
+OscAmpEnvAmtHigh
+Text GLabel 11650 14900 2    50   Input ~ 0
+OscAmpEnvGate
+Text GLabel 11650 14800 2    50   Input ~ 0
+OscAmpEnvTrigger
+$EndSCHEMATC
