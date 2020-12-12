@@ -778,4 +778,225 @@ $EndComp
 Wire Wire Line
 	9100 13150 9000 13150
 Connection ~ 9000 13150
+$Comp
+L DAC7678:DAC7678xPW U?
+U 1 1 611074E9
+P 3300 12150
+F 0 "U?" H 3300 12931 50  0000 C CNN
+F 1 "DAC7678xPW" H 3300 12840 50  0000 C CNN
+F 2 "" H 3300 12150 50  0001 C CNN
+F 3 "" H 3300 12150 50  0001 C CNN
+	1    3300 12150
+	1    0    0    -1  
+$EndComp
+Text GLabel 3750 11850 2    50   Input ~ 0
+Osc1NoteCV
+Text GLabel 3750 11950 2    50   Input ~ 0
+Osc1PWMCV
+Text GLabel 3750 12050 2    50   Input ~ 0
+Osc1SawMixCV
+Text GLabel 3750 12150 2    50   Input ~ 0
+Osc1SqrMixCV
+Text GLabel 3750 12250 2    50   Input ~ 0
+Osc1ToOsc1FiltMixCV
+Text GLabel 3750 12350 2    50   Input ~ 0
+Osc1ToOsc2FiltMixCV
+Text GLabel 3750 12450 2    50   Input ~ 0
+Osc1FiltFreqCV
+Text GLabel 3750 12550 2    50   Input ~ 0
+Osc1FiltResCV
+$Comp
+L DAC7678:DAC7678xPW U?
+U 1 1 6110BEBD
+P 3500 18300
+F 0 "U?" H 3500 19081 50  0000 C CNN
+F 1 "DAC7678xPW" H 3500 18990 50  0000 C CNN
+F 2 "" H 3500 18300 50  0001 C CNN
+F 3 "" H 3500 18300 50  0001 C CNN
+	1    3500 18300
+	1    0    0    -1  
+$EndComp
+Text GLabel 3950 18000 2    50   Input ~ 0
+Osc2NoteCV
+Text GLabel 3950 18100 2    50   Input ~ 0
+Osc2PWMCV
+Text GLabel 3950 18200 2    50   Input ~ 0
+Osc2SqrMixCV
+Text GLabel 3950 18300 2    50   Input ~ 0
+Osc2SawMixCV
+Text GLabel 3950 18500 2    50   Input ~ 0
+SubToOsc2FiltMixCV
+Text GLabel 3950 18400 2    50   Input ~ 0
+SubToSubFiltMixCV
+Text GLabel 3950 18600 2    50   Input ~ 0
+NoiseToSubFiltMixCV
+Text GLabel 3950 18700 2    50   Input ~ 0
+NoiseToOsc2FiltMixCV
+$Comp
+L DAC7678:DAC7678xPW U?
+U 1 1 611104AA
+P 7450 14950
+F 0 "U?" H 7450 15731 50  0000 C CNN
+F 1 "DAC7678xPW" H 7450 15640 50  0000 C CNN
+F 2 "" H 7450 14950 50  0001 C CNN
+F 3 "" H 7450 14950 50  0001 C CNN
+	1    7450 14950
+	1    0    0    -1  
+$EndComp
+Text GLabel 7900 14650 2    50   Input ~ 0
+Osc2FiltFreqCV
+Text GLabel 7900 14750 2    50   Input ~ 0
+Osc2FiltResCV
+Text GLabel 7900 14850 2    50   Input ~ 0
+SubFiltFreqCV
+Text GLabel 7900 14950 2    50   Input ~ 0
+SubFiltResCV
+Text GLabel 7900 15150 2    50   Input ~ 0
+FV1FeedbackCV
+Text GLabel 7900 15050 2    50   Input ~ 0
+FV1WetDryCV
+$Comp
+L DAC7678:DAC7678xPW U?
+U 1 1 61111B77
+P 13550 13650
+F 0 "U?" H 13550 14431 50  0000 C CNN
+F 1 "DAC7678xPW" H 13550 14340 50  0000 C CNN
+F 2 "" H 13550 13650 50  0001 C CNN
+F 3 "" H 13550 13650 50  0001 C CNN
+	1    13550 13650
+	1    0    0    -1  
+$EndComp
+Text GLabel 14000 13650 2    50   Input ~ 0
+OscFiltEnv1ReleaseCV
+Text GLabel 14000 13550 2    50   Input ~ 0
+OscFiltEnv1SustainCV
+Text GLabel 14000 13450 2    50   Input ~ 0
+OscFiltEnv1DecayCV
+Text GLabel 14000 13350 2    50   Input ~ 0
+OscFiltEnv1AttackCV
+Text GLabel 14000 14050 2    50   Input ~ 0
+OscFiltEnv2ReleaseCV
+Text GLabel 14000 13950 2    50   Input ~ 0
+OscFiltEnv2SustainCV
+Text GLabel 14000 13850 2    50   Input ~ 0
+OscFiltEnv2DecayCV
+Text GLabel 14000 13750 2    50   Input ~ 0
+OscFiltEnv2AttackCV
+$Comp
+L DAC7678:DAC7678xPW U?
+U 1 1 6111305C
+P 13550 15200
+F 0 "U?" H 13550 15981 50  0000 C CNN
+F 1 "DAC7678xPW" H 13550 15890 50  0000 C CNN
+F 2 "" H 13550 15200 50  0001 C CNN
+F 3 "" H 13550 15200 50  0001 C CNN
+	1    13550 15200
+	1    0    0    -1  
+$EndComp
+Text GLabel 14000 15200 2    50   Input ~ 0
+OscAmpEnvReleaseCV
+Text GLabel 14000 15100 2    50   Input ~ 0
+OscAmpEnvSustainCV
+Text GLabel 14000 15000 2    50   Input ~ 0
+OscAmpEnvDecayCV
+Text GLabel 14000 14900 2    50   Input ~ 0
+OscAmpEnvAttackCV
+Text GLabel 14000 15600 2    50   Input ~ 0
+SubAmpEnvReleaseCV
+Text GLabel 14000 15500 2    50   Input ~ 0
+SubAmpEnvSustainCV
+Text GLabel 14000 15400 2    50   Input ~ 0
+SubAmpEnvDecayCV
+Text GLabel 14000 15300 2    50   Input ~ 0
+SubAmpEnvAttackCV
+$Comp
+L DAC7678:DAC7678xPW U?
+U 1 1 61114278
+P 13550 16700
+F 0 "U?" H 13550 17481 50  0000 C CNN
+F 1 "DAC7678xPW" H 13550 17390 50  0000 C CNN
+F 2 "" H 13550 16700 50  0001 C CNN
+F 3 "" H 13550 16700 50  0001 C CNN
+	1    13550 16700
+	1    0    0    -1  
+$EndComp
+Text GLabel 14000 17100 2    50   Input ~ 0
+SubFiltEnv1ReleaseCV
+Text GLabel 14000 17000 2    50   Input ~ 0
+SubFiltEnv1SustainCV
+Text GLabel 14000 16900 2    50   Input ~ 0
+SubFiltEnv1DecayCV
+Text GLabel 14000 16800 2    50   Input ~ 0
+SubFiltEnv1AttackCV
+Text GLabel 14000 16700 2    50   Input ~ 0
+SubFiltEnv2ReleaseCV
+Text GLabel 14000 16600 2    50   Input ~ 0
+SubFiltEnv2SustainCV
+Text GLabel 14000 16500 2    50   Input ~ 0
+SubFiltEnv2DecayCV
+Text GLabel 14000 16400 2    50   Input ~ 0
+SubFiltEnv2AttackCV
+Text GLabel 10250 7000 2    50   Input ~ 0
+OscFiltEnv1Gate
+Text GLabel 10250 6900 2    50   Input ~ 0
+OscFiltEnv1Trigger
+Text GLabel 10250 7200 2    50   Input ~ 0
+OscFiltEnv2Gate
+Text GLabel 10250 7100 2    50   Input ~ 0
+OscFiltEnv2Trigger
+Text GLabel 10250 7400 2    50   Input ~ 0
+SubAmpEnvGate
+Text GLabel 10250 7300 2    50   Input ~ 0
+SubAmpEnvTrigger
+Text GLabel 10250 7600 2    50   Input ~ 0
+OscAmpEnvGate
+Text GLabel 10250 7500 2    50   Input ~ 0
+OscAmpEnvTrigger
+Text GLabel 10250 7800 2    50   Input ~ 0
+SubFiltEnv1Gate
+Text GLabel 10250 7700 2    50   Input ~ 0
+SubFiltEnv1Trigger
+Text GLabel 10250 8000 2    50   Input ~ 0
+SubFiltEnv2Gate
+Text GLabel 10250 7900 2    50   Input ~ 0
+SubFiltEnv2Trigger
+Text GLabel 7350 7650 0    50   Input ~ 0
+Osc1TuningOut
+Text GLabel 7350 7750 0    50   Input ~ 0
+Osc2TuningOut
+$Comp
+L Potentiometer_Digital:AD5290 U?
+U 1 1 6111B8FF
+P 5400 12100
+F 0 "U?" H 5400 12681 50  0000 C CNN
+F 1 "AD5290" H 5400 12590 50  0000 C CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 5400 11500 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 4950 12500 50  0001 C CNN
+	1    5400 12100
+	1    0    0    -1  
+$EndComp
+Text GLabel 5900 12100 2    50   Input ~ 0
+Osc1Scale
+Text GLabel 5900 11900 2    50   Input ~ 0
+Osc1Scale-5V
+NoConn ~ 5900 12300
+Text GLabel 5500 12600 3    50   Input ~ 0
+Osc1Scale-5V
+$Comp
+L Potentiometer_Digital:AD5290 U?
+U 1 1 6111E25F
+P 5050 14650
+F 0 "U?" H 5050 15231 50  0000 C CNN
+F 1 "AD5290" H 5050 15140 50  0000 C CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 5050 14050 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 4600 15050 50  0001 C CNN
+	1    5050 14650
+	1    0    0    -1  
+$EndComp
+Text GLabel 5550 14650 2    50   Input ~ 0
+Osc2Scale
+Text GLabel 5550 14450 2    50   Input ~ 0
+Osc2Scale-5V
+Text GLabel 5150 15150 3    50   Input ~ 0
+Osc2Scale-5V
 $EndSCHEMATC

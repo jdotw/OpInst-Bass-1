@@ -964,4 +964,39 @@ Text GLabel 7350 7650 0    50   Input ~ 0
 Osc1TuningOut
 Text GLabel 7350 7750 0    50   Input ~ 0
 Osc2TuningOut
+$Comp
+L Potentiometer_Digital:AD5290 U?
+U 1 1 6111B8FF
+P 1300 13350
+F 0 "U?" H 1300 13931 50  0000 C CNN
+F 1 "AD5290" H 1300 13840 50  0000 C CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 1300 12750 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 850 13750 50  0001 C CNN
+	1    1300 13350
+	1    0    0    -1  
+$EndComp
+Text GLabel 1800 13350 2    50   Input ~ 0
+Osc1Scale
+Text GLabel 1800 13150 2    50   Input ~ 0
+Osc1Scale-5V
+NoConn ~ 1800 13550
+Text GLabel 1400 13850 3    50   Input ~ 0
+Osc1Scale-5V
+$Comp
+L Potentiometer_Digital:AD5290 U?
+U 1 1 6111E25F
+P 1300 15450
+F 0 "U?" H 1300 16031 50  0000 C CNN
+F 1 "AD5290" H 1300 15940 50  0000 C CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 1300 14850 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 850 15850 50  0001 C CNN
+	1    1300 15450
+	1    0    0    -1  
+$EndComp
+Text GLabel 1800 15450 2    50   Input ~ 0
+Osc2Scale
+Text GLabel 1800 15250 2    50   Input ~ 0
+Osc2Scale-5V
+Text GLabel 1400 15950 3    50   Input ~ 0
+Osc2Scale-5V
 $EndSCHEMATC
