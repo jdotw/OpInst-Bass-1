@@ -1,4 +1,5 @@
 (sym_lib_table
   (lib (name PIC18F26Q43)(type Legacy)(uri ${KIPRJMOD}/PIC18F26Q43.lib)(options "")(descr ""))
   (lib (name DAC7678)(type Legacy)(uri ${KIPRJMOD}/DAC7678.lib)(options "")(descr ""))
+  (lib (name AD5290)(type Legacy)(uri ${KIPRJMOD}/AD5290.lib)(options "")(descr ""))
 )

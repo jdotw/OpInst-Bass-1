@@ -964,40 +964,16 @@ Text GLabel 4000 8200 0    50   Input ~ 0
 Osc1TuningOut
 Text GLabel 4000 8300 0    50   Input ~ 0
 Osc2TuningOut
-$Comp
-L Potentiometer_Digital:AD5290 U3
-U 1 1 6111B8FF
-P 4300 24100
-F 0 "U3" H 4300 24681 50  0000 C CNN
-F 1 "AD5290" H 4300 24590 50  0000 C CNN
-F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 4300 23500 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 3850 24500 50  0001 C CNN
-	1    4300 24100
-	1    0    0    -1  
-$EndComp
 Text GLabel 4800 24100 2    50   Input ~ 0
 Osc1Scale
 Text GLabel 4800 23900 2    50   Input ~ 0
 Osc1Scale-5V
 NoConn ~ 4800 24300
-Text GLabel 4400 24600 3    50   Input ~ 0
+Text GLabel 4450 24950 3    50   Input ~ 0
 Osc1Scale-5V
-$Comp
-L Potentiometer_Digital:AD5290 U4
-U 1 1 6111E25F
-P 4300 26200
-F 0 "U4" H 4300 26781 50  0000 C CNN
-F 1 "AD5290" H 4300 26690 50  0000 C CNN
-F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 4300 25600 50  0001 C CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 3850 26600 50  0001 C CNN
-	1    4300 26200
-	1    0    0    -1  
-$EndComp
 Text GLabel 4800 26200 2    50   Input ~ 0
 Osc2Scale
 Text GLabel 4800 26000 2    50   Input ~ 0
-Osc2Scale-5V
-Text GLabel 4400 26700 3    50   Input ~ 0
 Osc2Scale-5V
 Text GLabel 3800 23900 0    50   Input ~ 0
 SPIBus1SDI
@@ -1101,23 +1077,12 @@ Osc2ScaleDPotCS
 $Comp
 L power:GND #PWR01
 U 1 1 6115589B
-P 4200 24600
-F 0 "#PWR01" H 4200 24350 50  0001 C CNN
-F 1 "GND" H 4205 24427 50  0000 C CNN
-F 2 "" H 4200 24600 50  0001 C CNN
-F 3 "" H 4200 24600 50  0001 C CNN
-	1    4200 24600
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR02
-U 1 1 61155CBF
-P 4200 26700
-F 0 "#PWR02" H 4200 26450 50  0001 C CNN
-F 1 "GND" H 4205 26527 50  0000 C CNN
-F 2 "" H 4200 26700 50  0001 C CNN
-F 3 "" H 4200 26700 50  0001 C CNN
-	1    4200 26700
+P 4250 25050
+F 0 "#PWR01" H 4250 24800 50  0001 C CNN
+F 1 "GND" H 4255 24877 50  0000 C CNN
+F 2 "" H 4250 25050 50  0001 C CNN
+F 3 "" H 4250 25050 50  0001 C CNN
+	1    4250 25050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1134,24 +1099,13 @@ $EndComp
 $Comp
 L power:+5V #PWR03
 U 1 1 61157667
-P 4300 23700
-F 0 "#PWR03" H 4300 23550 50  0001 C CNN
-F 1 "+5V" V 4315 23828 50  0000 L CNN
-F 2 "" H 4300 23700 50  0001 C CNN
-F 3 "" H 4300 23700 50  0001 C CNN
-	1    4300 23700
-	0    1    1    0   
-$EndComp
-$Comp
-L power:+5V #PWR04
-U 1 1 61157C84
-P 4300 25800
-F 0 "#PWR04" H 4300 25650 50  0001 C CNN
-F 1 "+5V" V 4315 25928 50  0000 L CNN
-F 2 "" H 4300 25800 50  0001 C CNN
-F 3 "" H 4300 25800 50  0001 C CNN
-	1    4300 25800
-	0    1    1    0   
+P 4050 24950
+F 0 "#PWR03" H 4050 24800 50  0001 C CNN
+F 1 "+5V" V 4065 25078 50  0000 L CNN
+F 2 "" H 4050 24950 50  0001 C CNN
+F 3 "" H 4050 24950 50  0001 C CNN
+	1    4050 24950
+	-1   0    0    1   
 $EndComp
 $Comp
 L power:+5V #PWR09
@@ -7622,6 +7576,196 @@ F 1 "Rotary_Encoder_Switch" V 32345 14830 50  0000 L CNN
 F 2 "PEC11R:PEC11R-4x15F-S0024" H 32150 14760 50  0001 C CNN
 F 3 "~" H 32300 14860 50  0001 C CNN
 	1    32300 14600
+	0    1    1    0   
+$EndComp
+$Comp
+L AD5290:AD5290 U3
+U 1 1 5FE15044
+P 4300 24100
+F 0 "U3" H 4300 24567 50  0000 C CNN
+F 1 "AD5290" H 4300 24476 50  0000 C CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 4250 23500 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 3850 24500 50  0001 C CNN
+	1    4300 24100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C81
+U 1 1 5FE19EA2
+P 4150 24700
+F 0 "C81" V 4200 25000 50  0000 C CNN
+F 1 "100nF" V 4100 25000 50  0000 C TNN
+F 2 "" H 4150 24700 50  0001 C CNN
+F 3 "~" H 4150 24700 50  0001 C CNN
+	1    4150 24700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP_Small C82
+U 1 1 5FE25F77
+P 4150 24850
+F 0 "C82" V 4100 25150 50  0000 C CNN
+F 1 "10uF" V 4150 25150 50  0000 C TNN
+F 2 "" H 4150 24850 50  0001 C CNN
+F 3 "~" H 4150 24850 50  0001 C CNN
+	1    4150 24850
+	0    -1   1    0   
+$EndComp
+$Comp
+L Device:CP_Small C84
+U 1 1 5FEF4C6F
+P 4350 24850
+F 0 "C84" V 4400 25100 50  0000 C CNN
+F 1 "10uF" V 4300 25100 50  0000 C TNN
+F 2 "" H 4350 24850 50  0001 C CNN
+F 3 "~" H 4350 24850 50  0001 C CNN
+	1    4350 24850
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	4250 24600 4250 24700
+Connection ~ 4250 24700
+Wire Wire Line
+	4250 24700 4250 24850
+Connection ~ 4250 24850
+Wire Wire Line
+	4250 24850 4250 25050
+Wire Wire Line
+	4150 24600 4050 24600
+Wire Wire Line
+	4050 24600 4050 24700
+Wire Wire Line
+	4050 24700 4050 24850
+Connection ~ 4050 24700
+Wire Wire Line
+	4050 24850 4050 24950
+Connection ~ 4050 24850
+Wire Wire Line
+	4350 24600 4450 24600
+Wire Wire Line
+	4450 24600 4450 24700
+Wire Wire Line
+	4450 24700 4450 24850
+Connection ~ 4450 24700
+Wire Wire Line
+	4450 24850 4450 24950
+Connection ~ 4450 24850
+$Comp
+L AD5290:AD5290 U4
+U 1 1 601F9047
+P 4300 26200
+F 0 "U4" H 4300 26667 50  0000 C CNN
+F 1 "AD5290" H 4300 26576 50  0000 C CNN
+F 2 "Package_SO:MSOP-10_3x3mm_P0.5mm" H 4250 25600 50  0001 C CNN
+F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf" H 3850 26600 50  0001 C CNN
+	1    4300 26200
+	1    0    0    -1  
+$EndComp
+Text GLabel 4450 27050 3    50   Input ~ 0
+Osc2Scale-5V
+Wire Wire Line
+	4150 26700 4050 26700
+Wire Wire Line
+	4350 26700 4450 26700
+$Comp
+L Device:C_Small C83
+U 1 1 5FE21F00
+P 4350 24700
+F 0 "C83" V 4300 24950 50  0000 C CNN
+F 1 "100nF" V 4350 24950 50  0000 C TNN
+F 2 "" H 4350 24700 50  0001 C CNN
+F 3 "~" H 4350 24700 50  0001 C CNN
+	1    4350 24700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 603D6233
+P 4250 27150
+F 0 "#PWR?" H 4250 26900 50  0001 C CNN
+F 1 "GND" H 4255 26977 50  0000 C CNN
+F 2 "" H 4250 27150 50  0001 C CNN
+F 3 "" H 4250 27150 50  0001 C CNN
+	1    4250 27150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 603D6245
+P 4050 27050
+F 0 "#PWR?" H 4050 26900 50  0001 C CNN
+F 1 "+5V" V 4065 27178 50  0000 L CNN
+F 2 "" H 4050 27050 50  0001 C CNN
+F 3 "" H 4050 27050 50  0001 C CNN
+	1    4050 27050
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 603D625B
+P 4150 26800
+F 0 "C?" V 4200 27100 50  0000 C CNN
+F 1 "100nF" V 4100 27100 50  0000 C TNN
+F 2 "" H 4150 26800 50  0001 C CNN
+F 3 "~" H 4150 26800 50  0001 C CNN
+	1    4150 26800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP_Small C?
+U 1 1 603D6273
+P 4150 26950
+F 0 "C?" V 4100 27250 50  0000 C CNN
+F 1 "10uF" V 4150 27250 50  0000 C TNN
+F 2 "" H 4150 26950 50  0001 C CNN
+F 3 "~" H 4150 26950 50  0001 C CNN
+	1    4150 26950
+	0    -1   1    0   
+$EndComp
+$Comp
+L Device:CP_Small C?
+U 1 1 603D628F
+P 4350 26950
+F 0 "C?" V 4400 27200 50  0000 C CNN
+F 1 "10uF" V 4300 27200 50  0000 C TNN
+F 2 "" H 4350 26950 50  0001 C CNN
+F 3 "~" H 4350 26950 50  0001 C CNN
+	1    4350 26950
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	4250 26700 4250 26800
+Connection ~ 4250 26800
+Wire Wire Line
+	4250 26800 4250 26950
+Connection ~ 4250 26950
+Wire Wire Line
+	4250 26950 4250 27150
+Wire Wire Line
+	4050 26700 4050 26800
+Wire Wire Line
+	4050 26800 4050 26950
+Connection ~ 4050 26800
+Wire Wire Line
+	4050 26950 4050 27050
+Connection ~ 4050 26950
+Wire Wire Line
+	4450 26700 4450 26800
+Wire Wire Line
+	4450 26800 4450 26950
+Connection ~ 4450 26800
+Wire Wire Line
+	4450 26950 4450 27050
+Connection ~ 4450 26950
+$Comp
+L Device:C_Small C?
+U 1 1 603D62BA
+P 4350 26800
+F 0 "C?" V 4300 27050 50  0000 C CNN
+F 1 "100nF" V 4350 27050 50  0000 C TNN
+F 2 "" H 4350 26800 50  0001 C CNN
+F 3 "~" H 4350 26800 50  0001 C CNN
+	1    4350 26800
 	0    1    1    0   
 $EndComp
 $EndSCHEMATC
