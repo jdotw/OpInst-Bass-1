@@ -4,6 +4,22 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>mcc_generated_files/clc4.h</itemPath>
+        <itemPath>mcc_generated_files/clc5.h</itemPath>
+        <itemPath>mcc_generated_files/clc2.h</itemPath>
+        <itemPath>mcc_generated_files/clc3.h</itemPath>
+        <itemPath>mcc_generated_files/clc1.h</itemPath>
+        <itemPath>mcc_generated_files/mcc.h</itemPath>
+        <itemPath>mcc_generated_files/device_config.h</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
+        <itemPath>mcc_generated_files/clc8.h</itemPath>
+        <itemPath>mcc_generated_files/clc6.h</itemPath>
+        <itemPath>mcc_generated_files/clc7.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -12,6 +28,23 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="MCC Generated Files"
+                     displayName="MCC Generated Files"
+                     projectFiles="true">
+        <itemPath>mcc_generated_files/clc7.c</itemPath>
+        <itemPath>mcc_generated_files/clc8.c</itemPath>
+        <itemPath>mcc_generated_files/clc5.c</itemPath>
+        <itemPath>mcc_generated_files/clc6.c</itemPath>
+        <itemPath>mcc_generated_files/clc3.c</itemPath>
+        <itemPath>mcc_generated_files/clc4.c</itemPath>
+        <itemPath>mcc_generated_files/clc1.c</itemPath>
+        <itemPath>mcc_generated_files/clc2.c</itemPath>
+        <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
+        <itemPath>mcc_generated_files/mcc.c</itemPath>
+        <itemPath>mcc_generated_files/pin_manager.c</itemPath>
+        <itemPath>mcc_generated_files/device_config.c</itemPath>
+      </logicalFolder>
+      <itemPath>main.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
