@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name PEC11R)(type KiCad)(uri /Users/jwilson/Source/Opinionated-Boom-1/PCB/Boom-1-Top)(options "")(descr ""))
+  (lib (name 5PINDIN)(type KiCad)(uri ${KIPRJMOD}/5PINDIN.pretty)(options "")(descr ""))
 )

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP AD5290
+D Digital Potentiometer  256 steps   (SPI control) +- 15V, MSOP-10
+K R POT
+F https://www.analog.com/media/en/technical-documentation/data-sheets/AD5290.pdf
+$ENDCMP
+#
+#End Doc Library
