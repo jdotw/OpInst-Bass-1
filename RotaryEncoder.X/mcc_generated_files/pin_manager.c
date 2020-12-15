@@ -65,22 +65,22 @@ void PIN_MANAGER_Initialize(void)
     TRISx registers
     */
     TRISA = 0xFF;
-    TRISB = 0xFF;
-    TRISC = 0xFF;
+    TRISB = 0x80;
+    TRISC = 0xF0;
 
     /**
     ANSELx registers
     */
-    ANSELC = 0xFA;
-    ANSELB = 0x3E;
-    ANSELA = 0xF8;
+    ANSELC = 0x0F;
+    ANSELB = 0xFC;
+    ANSELA = 0x00;
 
     /**
     WPUx registers
     */
     WPUE = 0x00;
     WPUB = 0x00;
-    WPUA = 0x00;
+    WPUA = 0xF0;
     WPUC = 0x00;
 
     /**
@@ -96,8 +96,8 @@ void PIN_MANAGER_Initialize(void)
     */
     ODCONE = 0x00;
     ODCONA = 0x00;
-    ODCONB = 0x00;
-    ODCONC = 0x18;
+    ODCONB = 0x83;
+    ODCONC = 0x00;
 
     /**
     SLRCONx registers
@@ -121,14 +121,29 @@ void PIN_MANAGER_Initialize(void)
    
     
 	
-    CLCIN7PPS = 0x0E;   //RB6->CLC8:CLCIN7;    
-    CLCIN0PPS = 0x00;   //RA0->CLC3:CLCIN0;    
-    CLCIN6PPS = 0x08;   //RB0->CLC1:CLCIN6;    
-    CLCIN3PPS = 0x0F;   //RB7->CLC7:CLCIN3;    
-    CLCIN5PPS = 0x01;   //RA1->CLC4:CLCIN5;    
+    CLCIN7PPS = 0x17;   //RC7->CLC8:CLCIN7;    
+    RC0PPS = 0x18;   //RC0->PWM1_16BIT:PWM11;    
+    RB6PPS = 0x17;   //RB6->CCP3:CCP3;    
+    RC3PPS = 0x1B;   //RC3->PWM2_16BIT:PWM22;    
+    CLCIN3PPS = 0x15;   //RC5->CLC7:CLCIN3;    
+    CLCIN6PPS = 0x16;   //RC6->CLC1:CLCIN6;    
+    RB5PPS = 0x16;   //RB5->CCP2:CCP2;    
+    RC1PPS = 0x19;   //RC1->PWM1_16BIT:PWM12;    
     CLCIN4PPS = 0x02;   //RA2->CLC7:CLCIN4;    
-    CLCIN2PPS = 0x10;   //RC0->CLC7:CLCIN2;    
-    CLCIN1PPS = 0x12;   //RC2->CLC7:CLCIN1;    
+    CLCIN5PPS = 0x03;   //RA3->CLC4:CLCIN5;    
+    RB4PPS = 0x15;   //RB4->CCP1:CCP1;    
+    RC2PPS = 0x1A;   //RC2->PWM2_16BIT:PWM21;    
+    I2C1SCLPPS = 0x08;   //RB0->I2C1:SCL1;    
+    PWMIN1PPS = 0x15;   //RC5->PWM3_16BIT:PWMIN1;    
+    PWMIN0PPS = 0x14;   //RC4->PWM3_16BIT:PWMIN0;    
+    I2C1SDAPPS = 0x09;   //RB1->I2C1:SDA1;    
+    RB1PPS = 0x38;   //RB1->I2C1:SDA1;    
+    CLCIN0PPS = 0x00;   //RA0->CLC3:CLCIN0;    
+    RB0PPS = 0x37;   //RB0->I2C1:SCL1;    
+    RB2PPS = 0x1C;   //RB2->PWM3_16BIT:PWM31;    
+    RB3PPS = 0x1D;   //RB3->PWM3_16BIT:PWM32;    
+    CLCIN2PPS = 0x14;   //RC4->CLC7:CLCIN2;    
+    CLCIN1PPS = 0x01;   //RA1->CLC7:CLCIN1;    
 }
   
 void PIN_MANAGER_IOC(void)

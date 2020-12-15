@@ -90,6 +90,10 @@ void __interrupt() INTERRUPT_InterruptManager (void)
     {
         CLC1_ISR();
     }
+    else if(PIE3bits.TMR0IE == 1 && PIR3bits.TMR0IF == 1)
+    {
+        TMR0_ISR();
+    }
     else
     {
         //Unhandled Interrupt

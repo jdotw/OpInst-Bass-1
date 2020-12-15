@@ -7,6 +7,9 @@
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
+        <logicalFolder name="examples" displayName="examples" projectFiles="true">
+          <itemPath>mcc_generated_files/examples/i2c1_master_example.h</itemPath>
+        </logicalFolder>
         <itemPath>mcc_generated_files/clc4.h</itemPath>
         <itemPath>mcc_generated_files/clc5.h</itemPath>
         <itemPath>mcc_generated_files/clc2.h</itemPath>
@@ -19,6 +22,15 @@
         <itemPath>mcc_generated_files/clc8.h</itemPath>
         <itemPath>mcc_generated_files/clc6.h</itemPath>
         <itemPath>mcc_generated_files/clc7.h</itemPath>
+        <itemPath>mcc_generated_files/pwm1.h</itemPath>
+        <itemPath>mcc_generated_files/tmr2.h</itemPath>
+        <itemPath>mcc_generated_files/tmr0.h</itemPath>
+        <itemPath>mcc_generated_files/pwm2.h</itemPath>
+        <itemPath>mcc_generated_files/pwm3.h</itemPath>
+        <itemPath>mcc_generated_files/pwm2_16bit.h</itemPath>
+        <itemPath>mcc_generated_files/pwm3_16bit.h</itemPath>
+        <itemPath>mcc_generated_files/pwm1_16bit.h</itemPath>
+        <itemPath>mcc_generated_files/i2c1_master.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -31,6 +43,9 @@
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
+        <logicalFolder name="examples" displayName="examples" projectFiles="true">
+          <itemPath>mcc_generated_files/examples/i2c1_master_example.c</itemPath>
+        </logicalFolder>
         <itemPath>mcc_generated_files/clc7.c</itemPath>
         <itemPath>mcc_generated_files/clc8.c</itemPath>
         <itemPath>mcc_generated_files/clc5.c</itemPath>
@@ -43,6 +58,15 @@
         <itemPath>mcc_generated_files/mcc.c</itemPath>
         <itemPath>mcc_generated_files/pin_manager.c</itemPath>
         <itemPath>mcc_generated_files/device_config.c</itemPath>
+        <itemPath>mcc_generated_files/pwm3.c</itemPath>
+        <itemPath>mcc_generated_files/tmr0.c</itemPath>
+        <itemPath>mcc_generated_files/pwm1.c</itemPath>
+        <itemPath>mcc_generated_files/pwm2.c</itemPath>
+        <itemPath>mcc_generated_files/tmr2.c</itemPath>
+        <itemPath>mcc_generated_files/pwm3_16bit.c</itemPath>
+        <itemPath>mcc_generated_files/pwm2_16bit.c</itemPath>
+        <itemPath>mcc_generated_files/i2c1_master.c</itemPath>
+        <itemPath>mcc_generated_files/pwm1_16bit.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
