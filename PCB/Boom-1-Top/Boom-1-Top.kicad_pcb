@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 4)
+    (drawings 7)
     (tracks 0)
     (zones 0)
     (modules 493)
@@ -10409,8 +10409,8 @@
     )
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3C66)
-    (at 287 57)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE832)
+    (at 324.5 53)
     (path /6020388D)
     (fp_text reference SW40 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10490,7 +10490,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3DC8)
-    (at 287 169)
+    (at 324.5 159)
     (path /602A4C74)
     (fp_text reference SW39 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10569,8 +10569,8 @@
       (net 284 "Net-(R153-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3D17)
-    (at 300 128)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAC854)
+    (at 353.5 120)
     (path /604AFE72)
     (fp_text reference SW38 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10649,8 +10649,8 @@
       (net 286 "Net-(R155-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA44BB)
-    (at 285 114)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAC7A3)
+    (at 335.5 106)
     (path /603862B7)
     (fp_text reference SW37 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10729,8 +10729,8 @@
       (net 277 "Net-(R139-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA42A5)
-    (at 272 57)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE781)
+    (at 300.5 53)
     (path /601DC79D)
     (fp_text reference SW36 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10810,7 +10810,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3BB5)
-    (at 272 169)
+    (at 300.5 159)
     (path /602A4DA6)
     (fp_text reference SW35 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10889,8 +10889,8 @@
       (net 278 "Net-(R143-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3789)
-    (at 270 114)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAC6F2)
+    (at 311.5 106)
     (path /6034EA46)
     (fp_text reference SW34 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -10969,8 +10969,8 @@
       (net 272 "Net-(R133-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA36D8)
-    (at 257 57)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE6D0)
+    (at 276.5 53)
     (path /601B709C)
     (fp_text reference SW33 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11050,7 +11050,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3627)
-    (at 257 169)
+    (at 276.5 159)
     (path /602A4ED8)
     (fp_text reference SW32 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11129,8 +11129,8 @@
       (net 269 "Net-(R129-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA41F4)
-    (at 255 114)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAC641)
+    (at 287.5 106)
     (path /60317912)
     (fp_text reference SW31 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11210,7 +11210,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2C79)
-    (at 242 57)
+    (at 252.5 53)
     (path /6018E598)
     (fp_text reference SW30 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11290,7 +11290,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3B04)
-    (at 242 169)
+    (at 252.5 159)
     (path /602A4FE2)
     (fp_text reference SW29 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11369,8 +11369,8 @@
       (net 262 "Net-(R117-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-S0024 (layer F.Cu) (tedit 5FD5B9DB) (tstamp 5FDA3A4F)
-    (at 240 100)
+  (module PEC11R:PEC11R-4x15F-S0024 (layer F.Cu) (tedit 5FD5B9DB) (tstamp 5FDAC58C)
+    (at 269.5 92)
     (path /604359EF)
     (fp_text reference SW28 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11453,8 +11453,8 @@
       (net 291 "Net-(SW28-PadS1)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA399C)
-    (at 195 152)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE05A)
+    (at 217 139)
     (path /6006CC2D)
     (fp_text reference SW27 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11533,8 +11533,8 @@
       (net 255 "Net-(R102-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA4143)
-    (at 195 79)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE10B)
+    (at 217 74)
     (path /5FF9CC52)
     (fp_text reference SW26 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11614,7 +11614,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA4092)
-    (at 202 107)
+    (at 204 105.5)
     (path /6001CC36)
     (fp_text reference SW25 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11694,7 +11694,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA440A)
-    (at 202 53)
+    (at 204 42.5)
     (path /5FF3E07E)
     (fp_text reference SW24 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11773,8 +11773,8 @@
       (net 248 "Net-(R93-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3576)
-    (at 180 152)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE1BC)
+    (at 193 139)
     (path /60050711)
     (fp_text reference SW23 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11853,8 +11853,8 @@
       (net 245 "Net-(R86-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA34C5)
-    (at 180 79)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAD3E4)
+    (at 193 74)
     (path /5FF768E7)
     (fp_text reference SW22 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -11933,8 +11933,8 @@
       (net 244 "Net-(R85-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3414)
-    (at 165 152)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDAE26D)
+    (at 169 139)
     (path /60032699)
     (fp_text reference SW21 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12014,7 +12014,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3363)
-    (at 165 79)
+    (at 169 74)
     (path /5FF61CEA)
     (fp_text reference SW20 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12094,7 +12094,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA32B2)
-    (at 203 176)
+    (at 157 167)
     (path /600A93E1)
     (fp_text reference SW19 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12174,7 +12174,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2BC8)
-    (at 171 106)
+    (at 156.5 105.5)
     (path /5FFFC1A7)
     (fp_text reference SW18 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12254,7 +12254,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2B17)
-    (at 171 53)
+    (at 157 42.5)
     (path /5FF2B647)
     (fp_text reference SW17 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12334,7 +12334,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-S0024 (layer F.Cu) (tedit 5FD5B9DB) (tstamp 5FDA3FDD)
-    (at 150 152)
+    (at 145 139)
     (path /6086041A)
     (fp_text reference SW16 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12418,7 +12418,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-S0024 (layer F.Cu) (tedit 5FD5B9DB) (tstamp 5FDA2A62)
-    (at 150 79)
+    (at 145 74)
     (path /6085D47A)
     (fp_text reference SW15 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12502,7 +12502,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3201)
-    (at 140 176)
+    (at 133 167)
     (path /60087E13)
     (fp_text reference SW14 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12582,7 +12582,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA29AF)
-    (at 140 106)
+    (at 133 105.5)
     (path /5FFE5E50)
     (fp_text reference SW13 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12662,7 +12662,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA38EB)
-    (at 140 53)
+    (at 133 42.5)
     (path /5FF1B1A1)
     (fp_text reference SW12 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12742,7 +12742,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3150)
-    (at 115 70)
+    (at 99.5 70)
     (path /60852CBB)
     (fp_text reference SW11 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12822,7 +12822,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA309F)
-    (at 115 137)
+    (at 99.5 141.5)
     (path /60857BBF)
     (fp_text reference SW10 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12902,7 +12902,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA90A7)
-    (at 62.5 117)
+    (at 66 112)
     (path /60856755)
     (fp_text reference SW9 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12981,8 +12981,8 @@
       (net 217 "Net-(R26-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8FF6)
-    (at 62.5 67)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9D7A)
+    (at 66 61)
     (path /608520DF)
     (fp_text reference SW8 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13062,7 +13062,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8F45)
-    (at 48.5 173)
+    (at 48.5 177.5)
     (path /60859B7D)
     (fp_text reference SW7 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13142,7 +13142,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8E94)
-    (at 48.5 155)
+    (at 48.5 156)
     (path /60858B18)
     (fp_text reference SW6 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13222,7 +13222,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8DE3)
-    (at 48.5 125)
+    (at 48.5 126.5)
     (path /6085738F)
     (fp_text reference SW5 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13302,7 +13302,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9158)
-    (at 48.5 108)
+    (at 48.5 105.5)
     (path /6085582B)
     (fp_text reference SW4 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13382,7 +13382,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9209)
-    (at 48.5 91)
+    (at 48.5 83.5)
     (path /608546B2)
     (fp_text reference SW3 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13461,8 +13461,8 @@
       (net 204 "Net-(R22-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA92BA)
-    (at 48.5 52)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9E2B)
+    (at 48.5 54.5)
     (path /6085161D)
     (fp_text reference SW2 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13541,8 +13541,8 @@
       (net 202 "Net-(R18-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA936B)
-    (at 48.5 35)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9EDC)
+    (at 48.5 33)
     (path /608501A3)
     (fp_text reference SW1 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -22961,6 +22961,9 @@
     )
   )
 
+  (target plus (at 202.5 30) (size 5) (width 0.05) (layer Edge.Cuts))
+  (target plus (at 375 112.5) (size 5) (width 0.05) (layer Edge.Cuts) (tstamp 5FDA998D))
+  (target plus (at 30 112.5) (size 5) (width 0.05) (layer Edge.Cuts))
   (gr_line (start 30 195) (end 30 30) (layer Edge.Cuts) (width 0.05) (tstamp 5FDA4532))
   (gr_line (start 375 195) (end 30 195) (layer Edge.Cuts) (width 0.05) (tstamp 5FDA431C))
   (gr_line (start 375 30) (end 375 195) (layer Edge.Cuts) (width 0.05) (tstamp 5FD9E67E))
