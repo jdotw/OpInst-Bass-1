@@ -12901,8 +12901,8 @@
       (net 220 "Net-(R38-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2FEE)
-    (at 90 114)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA90A7)
+    (at 62.5 117)
     (path /60856755)
     (fp_text reference SW9 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -12981,8 +12981,8 @@
       (net 217 "Net-(R26-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2F3D)
-    (at 90 64)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8FF6)
+    (at 62.5 67)
     (path /608520DF)
     (fp_text reference SW8 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13061,8 +13061,8 @@
       (net 215 "Net-(R20-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA383A)
-    (at 76 170)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8F45)
+    (at 48.5 173)
     (path /60859B7D)
     (fp_text reference SW7 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13141,8 +13141,8 @@
       (net 212 "Net-(R14-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA4359)
-    (at 76 152)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8E94)
+    (at 48.5 155)
     (path /60858B18)
     (fp_text reference SW6 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13221,8 +13221,8 @@
       (net 210 "Net-(R12-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3F2A)
-    (at 76 122)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA8DE3)
+    (at 48.5 125)
     (path /6085738F)
     (fp_text reference SW5 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13301,8 +13301,8 @@
       (net 208 "Net-(R10-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA3E79)
-    (at 76 105)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9158)
+    (at 48.5 108)
     (path /6085582B)
     (fp_text reference SW4 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13381,8 +13381,8 @@
       (net 206 "Net-(R24-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2E8C)
-    (at 76 88)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA9209)
+    (at 48.5 91)
     (path /608546B2)
     (fp_text reference SW3 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13461,8 +13461,8 @@
       (net 204 "Net-(R22-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2DDB)
-    (at 76 49)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA92BA)
+    (at 48.5 52)
     (path /6085161D)
     (fp_text reference SW2 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -13541,8 +13541,8 @@
       (net 202 "Net-(R18-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA2D2A)
-    (at 76 32)
+  (module PEC11R:PEC11R-4x15F-N0024 (layer F.Cu) (tedit 5FD5B81E) (tstamp 5FDA936B)
+    (at 48.5 35)
     (path /608501A3)
     (fp_text reference SW1 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -19381,7 +19381,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63D52)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63D52)
     (at 370.5 149.5 180)
     (descr "Through hole straight pin header, 2x09, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x09 2.54mm double row")
@@ -19455,7 +19455,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63D2A)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63D2A)
     (at 269 34.5 270)
     (descr "Through hole straight pin header, 2x05, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x05 2.54mm double row")
@@ -19513,7 +19513,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA618C)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x04_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA618C)
     (at 129 34.5 270)
     (descr "Through hole straight pin header, 2x04, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x04 2.54mm double row")
@@ -19567,7 +19567,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63CEC)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x08_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63CEC)
     (at 236.5 187.5 270)
     (descr "Through hole straight pin header, 2x08, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x08 2.54mm double row")
@@ -19637,7 +19637,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA7BF5)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA7BF5)
     (at 370.5 57 180)
     (descr "Through hole straight pin header, 2x09, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x09 2.54mm double row")
@@ -19711,7 +19711,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63C9E)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63C9E)
     (at 370.5 101 180)
     (descr "Through hole straight pin header, 2x09, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x09 2.54mm double row")
@@ -19785,7 +19785,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x12_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA50E5)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x12_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA50E5)
     (at 148 187.5 270)
     (descr "Through hole straight pin header, 2x12, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x12 2.54mm double row")
@@ -19871,7 +19871,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63C48)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63C48)
     (at 70.5 187.5 270)
     (descr "Through hole straight pin header, 2x06, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x06 2.54mm double row")
@@ -19933,7 +19933,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63C26)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FD63C26)
     (at 39 133 180)
     (descr "Through hole straight pin header, 2x09, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x09 2.54mm double row")
@@ -20007,7 +20007,7 @@
     )
   )
 
-  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA7844)
+  (module Connector_PinHeader_2.54mm:PinHeader_2x09_P2.54mm_Vertical locked (layer B.Cu) (tedit 59FED5CC) (tstamp 5FDA7844)
     (at 39 64 180)
     (descr "Through hole straight pin header, 2x09, 2.54mm pitch, double rows")
     (tags "Through hole pin header THT 2x09 2.54mm double row")
@@ -22964,6 +22964,6 @@
   (gr_line (start 30 195) (end 30 30) (layer Edge.Cuts) (width 0.05) (tstamp 5FDA4532))
   (gr_line (start 375 195) (end 30 195) (layer Edge.Cuts) (width 0.05) (tstamp 5FDA431C))
   (gr_line (start 375 30) (end 375 195) (layer Edge.Cuts) (width 0.05) (tstamp 5FD9E67E))
-  (gr_line (start 30 30) (end 375 30) (layer Edge.Cuts) (width 0.05) (tstamp 5FD9E67B))
+  (gr_line (start 30 30) (end 375 30) (layer Edge.Cuts) (width 0.05) (tstamp 5FDA93E2))
 
 )
