@@ -4259,8 +4259,8 @@
     )
   )
 
-  (module Package_TO_SOT_SMD:SOT-223-3_TabPin2 (layer F.Cu) (tedit 5A02FF57) (tstamp 5FD92A30)
-    (at 500.35 349.13)
+  (module Package_TO_SOT_SMD:SOT-223-3_TabPin2 (layer F.Cu) (tedit 5A02FF57) (tstamp 5FDD1212)
+    (at 237.5 113)
     (descr "module CMS SOT223 4 pins")
     (tags "CMS SOT")
     (path /666ABDEE)
@@ -6188,7 +6188,7 @@
   )
 
   (module Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD (layer F.Cu) (tedit 59FED6E3) (tstamp 5FD8F630)
-    (at 535.53 315.41)
+    (at 237 122.5)
     (descr "surface-mounted straight pin header, 2x05, 1.27mm pitch, double rows")
     (tags "Surface mounted pin header SMD 2x05 1.27mm double row")
     (path /67F77C42)
@@ -9349,8 +9349,8 @@
     )
   )
 
-  (module Package_SO:SSOP-28_5.3x10.2mm_P0.65mm (layer F.Cu) (tedit 5A02F25C) (tstamp 5FD65384)
-    (at 432.79 312.22)
+  (module Package_SO:SSOP-28_5.3x10.2mm_P0.65mm (layer F.Cu) (tedit 5A02F25C) (tstamp 5FDD12DA)
+    (at 72 171.5)
     (descr "28-Lead Plastic Shrink Small Outline (SS)-5.30 mm Body [SSOP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "SSOP 0.65")
     (path /611AD845)
@@ -9444,7 +9444,7 @@
   )
 
   (module Package_SO:SSOP-28_5.3x10.2mm_P0.65mm (layer F.Cu) (tedit 5A02F25C) (tstamp 5FD65353)
-    (at 402.01 312.95)
+    (at 84 115.5)
     (descr "28-Lead Plastic Shrink Small Outline (SS)-5.30 mm Body [SSOP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "SSOP 0.65")
     (path /611AB81D)
@@ -10056,7 +10056,7 @@
   )
 
   (module Package_SO:SSOP-28_5.3x10.2mm_P0.65mm (layer F.Cu) (tedit 5A02F25C) (tstamp 5FD65218)
-    (at 525.26 223.42)
+    (at 71 41.5)
     (descr "28-Lead Plastic Shrink Small Outline (SS)-5.30 mm Body [SSOP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "SSOP 0.65")
     (path /5FD37D72)
@@ -10150,7 +10150,7 @@
   )
 
   (module Package_QFP:LQFP-100_14x14mm_P0.5mm (layer F.Cu) (tedit 5D9F72B0) (tstamp 5FD651E7)
-    (at 390.26 226.64)
+    (at 251 127.5)
     (descr "LQFP, 100 Pin (https://www.nxp.com/docs/en/package-information/SOT407-1.pdf), generated with kicad-footprint-generator ipc_gullwing_generator.py")
     (tags "LQFP QFP")
     (path /5FD3AAB9)
