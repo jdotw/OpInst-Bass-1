@@ -789,21 +789,21 @@ F 3 "" H 6500 29050 50  0001 C CNN
 	1    6500 29050
 	1    0    0    -1  
 $EndComp
-Text GLabel 6950 28650 2    50   Input ~ 0
-Osc2NoteCV
-Text GLabel 6950 28750 2    50   Input ~ 0
-Osc2PWMCV
-Text GLabel 6950 28850 2    50   Input ~ 0
-Osc2SqrMixCV
-Text GLabel 6950 28950 2    50   Input ~ 0
-Osc2SawMixCV
-Text GLabel 6950 29150 2    50   Input ~ 0
-SubToOsc2FiltMixCV
 Text GLabel 6950 29050 2    50   Input ~ 0
-SubToSubFiltMixCV
+Osc2NoteCV
+Text GLabel 6950 29150 2    50   Input ~ 0
+Osc2PWMCV
 Text GLabel 6950 29250 2    50   Input ~ 0
-NoiseToSubFiltMixCV
+Osc2SqrMixCV
 Text GLabel 6950 29350 2    50   Input ~ 0
+Osc2SawMixCV
+Text GLabel 6950 28950 2    50   Input ~ 0
+SubToOsc2FiltMixCV
+Text GLabel 6950 28850 2    50   Input ~ 0
+SubToSubFiltMixCV
+Text GLabel 6950 28650 2    50   Input ~ 0
+NoiseToSubFiltMixCV
+Text GLabel 6950 28750 2    50   Input ~ 0
 NoiseToOsc2FiltMixCV
 $Comp
 L DAC7678:DAC7678xPW U7
@@ -7570,19 +7570,19 @@ F 3 "" H 6050 22750 50  0001 C CNN
 $EndComp
 Text GLabel 6950 22950 2    50   Input ~ 0
 Osc1FiltResCV
-Text GLabel 6950 22850 2    50   Input ~ 0
+Text GLabel 6950 22250 2    50   Input ~ 0
 Osc1FiltFreqCV
 Text GLabel 6950 22750 2    50   Input ~ 0
 Osc1ToOsc2FiltMixCV
 Text GLabel 6950 22650 2    50   Input ~ 0
 Osc1ToOsc1FiltMixCV
-Text GLabel 6950 22550 2    50   Input ~ 0
+Text GLabel 6950 22350 2    50   Input ~ 0
 Osc1SqrMixCV
 Text GLabel 6950 22450 2    50   Input ~ 0
 Osc1SawMixCV
-Text GLabel 6950 22350 2    50   Input ~ 0
+Text GLabel 6950 22550 2    50   Input ~ 0
 Osc1PWMCV
-Text GLabel 6950 22250 2    50   Input ~ 0
+Text GLabel 6950 22850 2    50   Input ~ 0
 Osc1NoteCV
 $Comp
 L DAC7678:DAC7678xPW U5
@@ -11878,4 +11878,7 @@ Text GLabel 11350 8000 0    50   Input ~ 0
 BT_TX
 Text GLabel 11350 7900 0    50   Input ~ 0
 BT_RX
+NoConn ~ 6050 28650
+NoConn ~ 6050 28750
+NoConn ~ 6150 28750
 $EndSCHEMATC
