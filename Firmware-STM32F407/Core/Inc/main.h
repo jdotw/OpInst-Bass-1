@@ -74,10 +74,14 @@ void Error_Handler(void);
 #define OSC1_TUNE_GPIO_Port GPIOE
 #define OSC2_TUNE_Pin GPIO_PIN_11
 #define OSC2_TUNE_GPIO_Port GPIOE
+#define I2C2_EXTI_Pin GPIO_PIN_12
+#define I2C2_EXTI_GPIO_Port GPIOB
 #define MIDI_TX_Pin GPIO_PIN_9
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
 #define MIDI_RX_GPIO_Port GPIOA
+#define I2C1_EXTI_Pin GPIO_PIN_5
+#define I2C1_EXTI_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

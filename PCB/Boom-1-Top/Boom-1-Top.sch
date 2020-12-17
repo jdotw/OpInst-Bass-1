@@ -909,29 +909,29 @@ Text GLabel 17450 27300 2    50   Input ~ 0
 SubFiltEnv2DecayCV
 Text GLabel 17450 27200 2    50   Input ~ 0
 SubFiltEnv2AttackCV
-Text GLabel 3850 8750 0    50   Input ~ 0
+Text GLabel 4700 8850 0    50   Input ~ 0
 OscFiltEnv1Gate
-Text GLabel 3850 8850 0    50   Input ~ 0
+Text GLabel 4700 8950 0    50   Input ~ 0
 OscFiltEnv1Trigger
-Text GLabel 3850 8550 0    50   Input ~ 0
+Text GLabel 4700 8650 0    50   Input ~ 0
 OscFiltEnv2Gate
-Text GLabel 3850 8650 0    50   Input ~ 0
+Text GLabel 4700 8750 0    50   Input ~ 0
 OscFiltEnv2Trigger
-Text GLabel 3850 8350 0    50   Input ~ 0
+Text GLabel 4700 8450 0    50   Input ~ 0
 SubAmpEnvGate
-Text GLabel 3850 8450 0    50   Input ~ 0
+Text GLabel 4700 8550 0    50   Input ~ 0
 SubAmpEnvTrigger
-Text GLabel 3850 7950 0    50   Input ~ 0
+Text GLabel 4700 8250 0    50   Input ~ 0
 OscAmpEnvGate
-Text GLabel 3850 8050 0    50   Input ~ 0
+Text GLabel 4700 8350 0    50   Input ~ 0
 OscAmpEnvTrigger
-Text GLabel 3850 7750 0    50   Input ~ 0
+Text GLabel 4700 8050 0    50   Input ~ 0
 SubFiltEnv1Gate
-Text GLabel 3850 7850 0    50   Input ~ 0
+Text GLabel 4700 8150 0    50   Input ~ 0
 SubFiltEnv1Trigger
-Text GLabel 3850 7550 0    50   Input ~ 0
+Text GLabel 4700 7850 0    50   Input ~ 0
 SubFiltEnv2Gate
-Text GLabel 3850 7650 0    50   Input ~ 0
+Text GLabel 4700 7950 0    50   Input ~ 0
 SubFiltEnv2Trigger
 Text GLabel 4700 6750 0    50   Input ~ 0
 Osc1TuningOut
@@ -8812,9 +8812,9 @@ F 3 "" H 4700 4800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	4700 4800 4700 4750
-Text GLabel 6500 4350 2    50   Input ~ 0
+Text GLabel 6500 5050 2    50   Input ~ 0
 MIDITXUSART
-Text GLabel 4700 8150 0    50   Input ~ 0
+Text GLabel 6500 5150 2    50   Input ~ 0
 MIDIRXUSART
 Text GLabel 23750 4450 2    50   Input ~ 0
 I2CBus1SDA
@@ -11838,4 +11838,44 @@ Wire Wire Line
 	27950 18600 27950 17800
 Wire Wire Line
 	27950 17800 27350 17800
+Text GLabel 6500 4150 2    50   Input ~ 0
+BT_CTS
+Text GLabel 6500 4250 2    50   Input ~ 0
+BT_RTS
+Text GLabel 6500 4350 2    50   Input ~ 0
+BT_TX
+Text GLabel 6500 4450 2    50   Input ~ 0
+BT_RX
+Text GLabel 6500 6350 2    50   Input ~ 0
+I2CBus1Interrupt
+Text GLabel 6500 7050 2    50   Input ~ 0
+I2CBus1Interrupt
+Text GLabel 6500 5250 2    50   Input ~ 0
+USB_DM
+Text GLabel 6500 5350 2    50   Input ~ 0
+USB_DP
+Text GLabel 2400 7100 2    50   Input ~ 0
+USB_DM
+Text GLabel 2400 7000 2    50   Input ~ 0
+USB_DP
+Text GLabel 11650 5200 0    50   Input ~ 0
+SDIO_CMD
+Text GLabel 11650 5700 0    50   Input ~ 0
+SDIO_D0
+Text GLabel 11650 5800 0    50   Input ~ 0
+SDIO_D1
+Text GLabel 11650 5000 0    50   Input ~ 0
+SDIO_D2
+Text GLabel 11650 5100 0    50   Input ~ 0
+SDIO_D3
+Text GLabel 11650 5500 0    50   Input ~ 0
+SDIO_CLK
+Text GLabel 11350 8200 0    50   Input ~ 0
+BT_CTS
+Text GLabel 11350 8100 0    50   Input ~ 0
+BT_RTS
+Text GLabel 11350 8000 0    50   Input ~ 0
+BT_TX
+Text GLabel 11350 7900 0    50   Input ~ 0
+BT_RX
 $EndSCHEMATC
