@@ -2,4 +2,5 @@
   (lib (name PIC18F26Q43)(type Legacy)(uri ${KIPRJMOD}/PIC18F26Q43.lib)(options "")(descr ""))
   (lib (name DAC7678)(type Legacy)(uri ${KIPRJMOD}/DAC7678.lib)(options "")(descr ""))
   (lib (name AD5290)(type Legacy)(uri ${KIPRJMOD}/AD5290.lib)(options "")(descr ""))
+  (lib (name BLUENRG-M2SA)(type Legacy)(uri ${KIPRJMOD}/BLUENRG-M2SA.lib)(options "")(descr ""))
 )

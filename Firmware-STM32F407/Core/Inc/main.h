@@ -58,8 +58,14 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define MIDI_TX_Pin GPIO_PIN_2
-#define MIDI_TX_GPIO_Port GPIOA
+#define BT_CTS_Pin GPIO_PIN_0
+#define BT_CTS_GPIO_Port GPIOA
+#define BT_RTS_Pin GPIO_PIN_1
+#define BT_RTS_GPIO_Port GPIOA
+#define BT_TX_Pin GPIO_PIN_2
+#define BT_TX_GPIO_Port GPIOA
+#define BT_RX_Pin GPIO_PIN_3
+#define BT_RX_GPIO_Port GPIOA
 #define OSC1_SCALE_CS_Pin GPIO_PIN_4
 #define OSC1_SCALE_CS_GPIO_Port GPIOC
 #define OSC2_SCALE_CS_Pin GPIO_PIN_5
@@ -68,8 +74,10 @@ void Error_Handler(void);
 #define OSC1_TUNE_GPIO_Port GPIOE
 #define OSC2_TUNE_Pin GPIO_PIN_11
 #define OSC2_TUNE_GPIO_Port GPIOE
-#define MIDI_RX_Pin GPIO_PIN_6
-#define MIDI_RX_GPIO_Port GPIOD
+#define MIDI_TX_Pin GPIO_PIN_9
+#define MIDI_TX_GPIO_Port GPIOA
+#define MIDI_RX_Pin GPIO_PIN_10
+#define MIDI_RX_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
