@@ -11617,4 +11617,6 @@ F 3 "~" H 8450 13800 50  0001 C CNN
 	1    8450 13850
 	1    0    0    -1  
 $EndComp
+Text GLabel 4700 4050 1    50   Input ~ 0
+NRST
 $EndSCHEMATC
