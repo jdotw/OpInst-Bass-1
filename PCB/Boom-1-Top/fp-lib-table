@@ -3,4 +3,5 @@
   (lib (name 5PINDIN)(type KiCad)(uri ${KIPRJMOD}/5PINDIN.pretty)(options "")(descr ""))
   (lib (name PTS636)(type KiCad)(uri ${KIPRJMOD}/PTS636.pretty)(options "")(descr ""))
   (lib (name BLUENRG)(type KiCad)(uri ${KIPRJMOD}/BLUENRG.pretty)(options "")(descr ""))
+  (lib (name LEDs)(type KiCad)(uri ${KIPRJMOD}/LEDs.pretty)(options "")(descr ""))
 )
