@@ -65,7 +65,7 @@
     (pad_to_mask_clearance 0)
     (aux_axis_origin 0 0)
     (grid_origin 304 187.2)
-    (visible_elements FFFFF77F)
+    (visible_elements FFFFFF7F)
     (pcbplotparams
       (layerselection 0x010fc_ffffffff)
       (usegerberextensions false)
@@ -3037,7 +3037,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FEA69C9)
-    (at 504.48 204.2)
+    (at 404.7 224.1)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /60122831)
@@ -3169,7 +3169,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FEA697F)
-    (at 497.19 204.2)
+    (at 393 126.2)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /5FFD9894)
@@ -3301,7 +3301,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FEA6935)
-    (at 489.9 212.49)
+    (at 308.8 207.2)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /601227CD)
@@ -3433,7 +3433,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FEA68EB)
-    (at 489.9 204.2)
+    (at 299.2 143.4)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /5FFD451D)
@@ -3565,7 +3565,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E256)
-    (at 519.065 183.42)
+    (at 331.7 136.5)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /649B0324)
@@ -3697,7 +3697,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E20C)
-    (at 511.775 183.42)
+    (at 289.5375 201.7)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /67F9B780)
@@ -3835,7 +3835,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E1C2)
-    (at 519.065 175.13)
+    (at 424.4 169.6)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /7309C0C0)
@@ -3973,7 +3973,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E178)
-    (at 511.775 175.13)
+    (at 227 154.2)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /63B125FC)
@@ -4105,7 +4105,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E12E)
-    (at 504.485 183.42)
+    (at 322.5 177.5)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /66E79604)
@@ -4243,7 +4243,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E0E4)
-    (at 497.195 183.42)
+    (at 197.5 117.5)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /655E5FB1)
@@ -4381,7 +4381,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E09A)
-    (at 504.485 175.13)
+    (at 192.9 195.1)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /65C165ED)
@@ -4519,7 +4519,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E050)
-    (at 497.195 175.13)
+    (at 186.9 241.1)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /68F7EFF6)
@@ -4657,7 +4657,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9E006)
-    (at 489.905 183.42)
+    (at 424.4 206.7)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /730A0630)
@@ -4795,7 +4795,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FF9DFBC)
-    (at 489.905 175.13)
+    (at 388.9 169.6)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /73099863)
@@ -9465,7 +9465,7 @@
   )
 
   (module Capacitor_SMD:C_0603_1608Metric (layer F.Cu) (tedit 5F68FEEE) (tstamp 6009CF1A)
-    (at 323.2 130.6 180)
+    (at 304 108.9 180)
     (descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags capacitor)
     (path /64B65032)
@@ -9501,7 +9501,7 @@
   )
 
   (module Package_DIP:SMDIP-8_W9.53mm (layer F.Cu) (tedit 5A02E8C5) (tstamp 60017C8A)
-    (at 326.21 138.735 90)
+    (at 307.01 117.035 90)
     (descr "8-lead surface-mounted (SMD) DIP package, row spacing 9.53 mm (375 mils)")
     (tags "SMD DIP DIL PDIP SMDIP 2.54mm 9.53mm 375mil")
     (path /687CB7B6)
@@ -17209,7 +17209,7 @@
   )
 
   (module Resistor_SMD:R_0603_1608Metric placed (layer F.Cu) (tedit 5F68FEEE) (tstamp 60017C4F)
-    (at 333.4 138.9 270)
+    (at 314.2 117.2 270)
     (descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags resistor)
     (path /694B7AEE)
@@ -17245,7 +17245,7 @@
   )
 
   (module Resistor_SMD:R_0603_1608Metric placed (layer F.Cu) (tedit 5F68FEEE) (tstamp 60093ED6)
-    (at 320.1 130.6 90)
+    (at 300.9 108.9 90)
     (descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags resistor)
     (path /687C6CFB)
@@ -17281,7 +17281,7 @@
   )
 
   (module Resistor_SMD:R_0603_1608Metric placed (layer F.Cu) (tedit 5F68FEEE) (tstamp 60017C1F)
-    (at 334.5 131.1 90)
+    (at 315.3 109.4 90)
     (descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags resistor)
     (path /69A1E9AA)
@@ -17731,7 +17731,7 @@
   )
 
   (module Diode_SMD:D_SOD-123 placed (layer F.Cu) (tedit 58645DC7) (tstamp 5FD8F5C0)
-    (at 316.8 131.4 90)
+    (at 297.6 109.7 90)
     (descr SOD-123)
     (tags SOD-123)
     (path /687D154A)
