@@ -16284,4 +16284,75 @@ Text GLabel 12350 45950 0    50   Input ~ 0
 G4C22
 Text GLabel 13100 45950 0    50   Input ~ 0
 G4C23
+Text GLabel 16650 26450 3    50   Input ~ 0
+L8B9
+Text GLabel 16550 26450 3    50   Input ~ 0
+L8G9
+Text GLabel 16450 26450 3    50   Input ~ 0
+L8R9
+Text GLabel 16350 26450 3    50   Input ~ 0
+L8B8
+Text GLabel 16250 26450 3    50   Input ~ 0
+L8G8
+Text GLabel 16150 26450 3    50   Input ~ 0
+L8R8
+Text GLabel 16050 26450 3    50   Input ~ 0
+L8B7
+Text GLabel 15950 26450 3    50   Input ~ 0
+L8G7
+Text GLabel 15850 26450 3    50   Input ~ 0
+L8R7
+Text GLabel 15750 26450 3    50   Input ~ 0
+L8B6
+Text GLabel 15650 26450 3    50   Input ~ 0
+L8G6
+Text GLabel 15550 26450 3    50   Input ~ 0
+L8R6
+Text GLabel 15450 26450 3    50   Input ~ 0
+L8B5
+Text GLabel 15350 26450 3    50   Input ~ 0
+L8G5
+Text GLabel 15250 26450 3    50   Input ~ 0
+L8R5
+Text GLabel 15150 26450 3    50   Input ~ 0
+L8B4
+Text GLabel 15050 26450 3    50   Input ~ 0
+L8G4
+Text GLabel 14950 26450 3    50   Input ~ 0
+L8R4
+Text GLabel 14850 26450 3    50   Input ~ 0
+L8B3
+Text GLabel 14750 26450 3    50   Input ~ 0
+L8G3
+Text GLabel 14650 26450 3    50   Input ~ 0
+L8R3
+Text GLabel 14550 26450 3    50   Input ~ 0
+L8B2
+Text GLabel 14450 26450 3    50   Input ~ 0
+L8G2
+Text GLabel 14350 26450 3    50   Input ~ 0
+L8R2
+Text GLabel 14250 26450 3    50   Input ~ 0
+L8B1
+Text GLabel 14150 26450 3    50   Input ~ 0
+L8G1
+Text GLabel 14050 26450 3    50   Input ~ 0
+L8R1
+Text GLabel 13950 26450 3    50   Input ~ 0
+L8B0
+Text GLabel 13850 26450 3    50   Input ~ 0
+L8G0
+Text GLabel 13750 26450 3    50   Input ~ 0
+L8R0
+$Comp
+L LP5030:LP5030 U38
+U 1 1 6011E766
+P 15550 25950
+F 0 "U38" V 15504 27993 50  0000 L CNN
+F 1 "LP5030" V 15595 27993 50  0000 L CNN
+F 2 "Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm" H 15550 26000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 15550 26000 50  0001 C CNN
+	1    15550 25950
+	0    -1   1    0   
+$EndComp
 $EndSCHEMATC

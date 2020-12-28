@@ -15857,10 +15857,10 @@ Wire Notes Line
 Wire Notes Line
 	21300 16600 17150 16600
 $Comp
-L LP5030:LP5030 U?
+L LP5030:LP5030 U34
 U 1 1 5FFD451D
 P 6000 35450
-F 0 "U?" V 5954 37493 50  0000 L CNN
+F 0 "U34" V 5954 37493 50  0000 L CNN
 F 1 "LP5030" V 6045 37493 50  0000 L CNN
 F 2 "Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm" H 6000 35500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 6000 35500 50  0001 C CNN
@@ -15868,10 +15868,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 6000 35500 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L LP5030:LP5030 U?
+L LP5030:LP5030 U36
 U 1 1 5FFD9894
 P 11400 35400
-F 0 "U?" V 11354 37443 50  0000 L CNN
+F 0 "U36" V 11354 37443 50  0000 L CNN
 F 1 "LP5030" V 11445 37443 50  0000 L CNN
 F 2 "Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm" H 11400 35450 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 11400 35450 50  0001 C CNN
@@ -15879,10 +15879,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 11400 35450 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L LP5030:LP5030 U?
+L LP5030:LP5030 U35
 U 1 1 601227CD
 P 6050 41400
-F 0 "U?" V 6004 43443 50  0000 L CNN
+F 0 "U35" V 6004 43443 50  0000 L CNN
 F 1 "LP5030" V 6095 43443 50  0000 L CNN
 F 2 "Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm" H 6050 41450 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 6050 41450 50  0001 C CNN
@@ -15890,10 +15890,10 @@ F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 6050 41450 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 $Comp
-L LP5030:LP5030 U?
+L LP5030:LP5030 U37
 U 1 1 60122831
 P 11450 41350
-F 0 "U?" V 11404 43393 50  0000 L CNN
+F 0 "U37" V 11404 43393 50  0000 L CNN
 F 1 "LP5030" V 11495 43393 50  0000 L CNN
 F 2 "Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm" H 11450 41400 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 11450 41400 50  0001 C CNN
@@ -16284,4 +16284,81 @@ Text GLabel 12350 45950 0    50   Input ~ 0
 G4C22
 Text GLabel 13100 45950 0    50   Input ~ 0
 G4C23
+Text GLabel 16950 26450 3    50   Input ~ 0
+L8B10
+Text GLabel 16850 26450 3    50   Input ~ 0
+L8G10
+Text GLabel 16750 26450 3    50   Input ~ 0
+L8R10
+$Comp
+L Driver_LED:LP5036 U?
+U 1 1 5FFD8EB9
+P 15550 25950
+F 0 "U?" V 15504 27993 50  0000 L CNN
+F 1 "LP5036" V 15595 27993 50  0000 L CNN
+F 2 "Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm" H 15550 26000 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 15550 26000 50  0001 C CNN
+	1    15550 25950
+	0    -1   1    0   
+$EndComp
+Text GLabel 16650 26450 3    50   Input ~ 0
+L8B9
+Text GLabel 16550 26450 3    50   Input ~ 0
+L8G9
+Text GLabel 16450 26450 3    50   Input ~ 0
+L8R9
+Text GLabel 16350 26450 3    50   Input ~ 0
+L8B8
+Text GLabel 16250 26450 3    50   Input ~ 0
+L8G8
+Text GLabel 16150 26450 3    50   Input ~ 0
+L8R8
+Text GLabel 16050 26450 3    50   Input ~ 0
+L8B7
+Text GLabel 15950 26450 3    50   Input ~ 0
+L8G7
+Text GLabel 15850 26450 3    50   Input ~ 0
+L8R7
+Text GLabel 15750 26450 3    50   Input ~ 0
+L8B6
+Text GLabel 15650 26450 3    50   Input ~ 0
+L8G6
+Text GLabel 15550 26450 3    50   Input ~ 0
+L8R6
+Text GLabel 15450 26450 3    50   Input ~ 0
+L8B5
+Text GLabel 15350 26450 3    50   Input ~ 0
+L8G5
+Text GLabel 15250 26450 3    50   Input ~ 0
+L8R5
+Text GLabel 15150 26450 3    50   Input ~ 0
+L8B4
+Text GLabel 15050 26450 3    50   Input ~ 0
+L8G4
+Text GLabel 14950 26450 3    50   Input ~ 0
+L8R4
+Text GLabel 14850 26450 3    50   Input ~ 0
+L8B3
+Text GLabel 14750 26450 3    50   Input ~ 0
+L8G3
+Text GLabel 14650 26450 3    50   Input ~ 0
+L8R3
+Text GLabel 14550 26450 3    50   Input ~ 0
+L8B2
+Text GLabel 14450 26450 3    50   Input ~ 0
+L8G2
+Text GLabel 14350 26450 3    50   Input ~ 0
+L8R2
+Text GLabel 14250 26450 3    50   Input ~ 0
+L8B1
+Text GLabel 14150 26450 3    50   Input ~ 0
+L8G1
+Text GLabel 14050 26450 3    50   Input ~ 0
+L8R1
+Text GLabel 13950 26450 3    50   Input ~ 0
+L8B0
+Text GLabel 13850 26450 3    50   Input ~ 0
+L8G0
+Text GLabel 13750 26450 3    50   Input ~ 0
+L8R0
 $EndSCHEMATC
