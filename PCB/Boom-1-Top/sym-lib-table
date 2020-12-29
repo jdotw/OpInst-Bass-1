@@ -8,4 +8,5 @@
   (lib (name IN-S85TATRGB)(type Legacy)(uri ${KIPRJMOD}/IN-S85TATRGB/IN-S85TATRGB.lib)(options "")(descr ""))
   (lib (name 150080M153000)(type Legacy)(uri ${KIPRJMOD}/150080M153000/150080M153000.lib)(options "")(descr ""))
   (lib (name LP5030)(type Legacy)(uri ${KIPRJMOD}/LP5030.lib)(options "")(descr ""))
+  (lib (name MP2359DJ)(type Legacy)(uri ${KIPRJMOD}/MP2359DJ.lib)(options "")(descr ""))
 )
