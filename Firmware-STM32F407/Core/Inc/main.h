@@ -58,10 +58,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BT_CTS_Pin GPIO_PIN_0
-#define BT_CTS_GPIO_Port GPIOA
-#define BT_RTS_Pin GPIO_PIN_1
-#define BT_RTS_GPIO_Port GPIOA
+#define BT_IRQ_Pin GPIO_PIN_0
+#define BT_IRQ_GPIO_Port GPIOA
 #define BT_TX_Pin GPIO_PIN_2
 #define BT_TX_GPIO_Port GPIOA
 #define BT_RX_Pin GPIO_PIN_3
@@ -80,6 +78,8 @@ void Error_Handler(void);
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
 #define MIDI_RX_GPIO_Port GPIOA
+#define SDIO_DETECT_Pin GPIO_PIN_0
+#define SDIO_DETECT_GPIO_Port GPIOD
 #define I2C1_EXTI_Pin GPIO_PIN_5
 #define I2C1_EXTI_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
