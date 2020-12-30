@@ -36029,7 +36029,7 @@
   (gr_line (start 458.6 187) (end 458.6 209.2) (layer F.SilkS) (width 0.12))
   (gr_line (start 380.5 209.2) (end 390.325 209.2) (layer F.SilkS) (width 0.12) (tstamp 5FEC2EFD))
   (gr_line (start 356.6 187.2) (end 373.425 187.2) (layer F.SilkS) (width 0.12) (tstamp 5FEC2EFA))
-  (gr_line (start 380.5 179.9) (end 380.5 165.2) (layer F.SilkS) (width 0.12) (tstamp 5FEC2EF7))
+  (gr_line (start 380.525 179.9) (end 380.5 165.2) (layer F.SilkS) (width 0.12) (tstamp 5FEC2EF7))
   (gr_line (start 380.5 209.2) (end 380.525 193.7) (layer F.SilkS) (width 0.12) (tstamp 5FEC2EF4))
   (gr_circle (center 176.312492 150.9) (end 184.062492 143.65) (layer F.SilkS) (width 0.12))
   (gr_line (start 303.6 218.2) (end 313.4 218.2) (layer F.SilkS) (width 0.12))
