@@ -35832,7 +35832,7 @@
     )
   )
 
-  (gr_line (start 390 209.2) (end 476.5 209.2) (layer Dwgs.User) (width 0.15) (tstamp 5FED8E9C))
+  (gr_line (start 388.7 209.2) (end 475.2 209.2) (layer Dwgs.User) (width 0.15) (tstamp 5FED8E9C))
   (gr_line (start 390 165.2) (end 476.5 165.2) (layer Dwgs.User) (width 0.15))
   (dimension 22 (width 0.15) (layer Dwgs.User)
     (gr_text "22.000 mm" (at 442.3 176.2 90) (layer Dwgs.User)
