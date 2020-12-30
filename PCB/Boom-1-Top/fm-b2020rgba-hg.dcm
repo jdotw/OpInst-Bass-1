@@ -3,7 +3,7 @@ EESchema-DOCLIB  Version 2.0
 $CMP FM-B2020RGBA-HG
 D RGB LED, red/green/blue/anode
 K LED RGB diode
-F ~
+F https://datasheet.lcsc.com/szlcsc/Foshan-NationStar-Optoelectronics-FM-B2020RGBA-HG_C108793.pdf
 $ENDCMP
 #
 #End Doc Library
