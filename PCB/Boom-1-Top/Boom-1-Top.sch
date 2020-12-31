@@ -11590,17 +11590,6 @@ F 3 "~" H 6450 15900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D62
-U 1 1 60B4E911
-P 7400 15950
-F 0 "D62" H 7400 16447 50  0000 C CNN
-F 1 "Osc1ToOsc2LED7" H 7400 16356 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 7400 15900 50  0001 C CNN
-F 3 "~" H 7400 15900 50  0001 C CNN
-	1    7400 15950
-	1    0    0    -1  
-$EndComp
-$Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D66
 U 1 1 60EA3C66
 P 9000 26150
@@ -11642,17 +11631,6 @@ F 1 "SubToOsc2ED6" H 6450 22306 50  0000 C CNN
 F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 6450 21850 50  0001 C CNN
 F 3 "~" H 6450 21850 50  0001 C CNN
 	1    6450 21900
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D72
-U 1 1 60EA3E46
-P 7400 21900
-F 0 "D72" H 7400 22397 50  0000 C CNN
-F 1 "SubToOsc2LED7" H 7400 22306 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 7400 21850 50  0001 C CNN
-F 3 "~" H 7400 21850 50  0001 C CNN
-	1    7400 21900
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -13842,12 +13820,6 @@ Text GLabel 10600 13050 3    50   Input ~ 0
 L2G1
 Text GLabel 10700 13050 3    50   Input ~ 0
 L2B1
-Text GLabel 10800 13050 3    50   Input ~ 0
-L2R2
-Text GLabel 10900 13050 3    50   Input ~ 0
-L2G2
-Text GLabel 11000 13050 3    50   Input ~ 0
-L2B2
 Text GLabel 11100 13050 3    50   Input ~ 0
 L2R3
 Text GLabel 11200 13050 3    50   Input ~ 0
@@ -13902,12 +13874,6 @@ Text GLabel 6250 15950 0    50   Input ~ 0
 L2G1
 Text GLabel 6250 16150 0    50   Input ~ 0
 L2B1
-Text GLabel 7200 15750 0    50   Input ~ 0
-L2R2
-Text GLabel 7200 15950 0    50   Input ~ 0
-L2G2
-Text GLabel 7200 16150 0    50   Input ~ 0
-L2B2
 Text GLabel 12550 14500 0    50   Input ~ 0
 L2R3
 Text GLabel 12550 14700 0    50   Input ~ 0
