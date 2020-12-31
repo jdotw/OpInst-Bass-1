@@ -26000,7 +26000,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60011E3C)
-    (at 334.9 221.9 270)
+    (at 334.9 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63C7C001)
@@ -26038,7 +26038,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60011E20)
-    (at 333 218.3 270)
+    (at 333 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63C7BFB1)
@@ -26076,7 +26076,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60011E04)
-    (at 333 221.9 270)
+    (at 333 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63C7BF61)
@@ -26114,7 +26114,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60011DE8)
-    (at 331.1 214.7 270)
+    (at 331.1 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63C7BF11)
@@ -26152,7 +26152,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60011DCC)
-    (at 331.1 218.3 270)
+    (at 331.1 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63C7BEC1)
@@ -26190,7 +26190,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60011DB0)
-    (at 331.1 221.9 270)
+    (at 331.1 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63C7BE71)
@@ -26228,7 +26228,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60015B2F)
-    (at 309.3 214.7 270)
+    (at 309.4 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63AEB33C)
@@ -26266,7 +26266,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60015B80)
-    (at 309.3 218.3 270)
+    (at 309.4 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63AEB2EC)
@@ -26304,7 +26304,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60015C22)
-    (at 309.3 221.9 270)
+    (at 309.4 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63AEB29C)
@@ -26342,7 +26342,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60015BD1)
-    (at 307.4 214.7 270)
+    (at 307.5 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63AEB24C)
@@ -26380,7 +26380,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60015CC4)
-    (at 307.4 218.3 270)
+    (at 307.5 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63AEB1FC)
@@ -26418,7 +26418,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60015C73)
-    (at 307.4 221.9 270)
+    (at 307.5 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63AEB1AC)
@@ -26456,7 +26456,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60001C12)
-    (at 286.3 221.8 270)
+    (at 286.4 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /638D2CAC)
@@ -26494,7 +26494,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60001BF6)
-    (at 284.4 218.2 270)
+    (at 284.5 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /638D2C5C)
@@ -26532,7 +26532,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60001BDA)
-    (at 284.4 221.8 270)
+    (at 284.5 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /638D2C0C)
@@ -26570,7 +26570,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60001BBE)
-    (at 282.5 214.6 270)
+    (at 282.6 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /638D2BBC)
@@ -26608,7 +26608,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60001BA2)
-    (at 282.5 218.2 270)
+    (at 282.6 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /638D2B6C)
@@ -26646,7 +26646,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 60001B86)
-    (at 282.5 221.8 270)
+    (at 282.6 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /638D2B1C)
@@ -26684,7 +26684,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFF56E6)
-    (at 262.4 214.5 270)
+    (at 262.4 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /636A2322)
@@ -26722,7 +26722,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFF1C52)
-    (at 260.5 214.5 270)
+    (at 260.5 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /636A22D2)
@@ -26760,7 +26760,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFF1C36)
-    (at 260.5 218.1 270)
+    (at 260.5 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /636A2282)
@@ -26798,7 +26798,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 6003D8F0)
-    (at 258.6 214.5 270)
+    (at 258.6 214.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /636A2232)
@@ -26836,7 +26836,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFF1BFE)
-    (at 258.6 218.1 270)
+    (at 258.6 218.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /636A21E2)
@@ -26874,7 +26874,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFF1BE2)
-    (at 258.6 221.7 270)
+    (at 258.6 221.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /636A2192)
@@ -26912,7 +26912,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFE21B0)
-    (at 334.4 160.4 270)
+    (at 334.4 159.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63326129)
@@ -26950,7 +26950,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFE2194)
-    (at 332.5 156.8 270)
+    (at 332.5 156.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /633260D9)
@@ -26988,7 +26988,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFE2178)
-    (at 332.5 160.4 270)
+    (at 332.5 159.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63326089)
@@ -27026,7 +27026,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFE215C)
-    (at 330.6 153.2 270)
+    (at 330.6 152.6 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63326039)
@@ -27064,7 +27064,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFE2140)
-    (at 330.6 156.8 270)
+    (at 330.6 156.2 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63325FE9)
@@ -27102,7 +27102,7 @@
   )
 
   (module LED_SMD:LED_0603_1608Metric (layer F.Cu) (tedit 5F68FEF1) (tstamp 5FFE2124)
-    (at 330.6 160.4 270)
+    (at 330.6 159.8 270)
     (descr "LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator")
     (tags LED)
     (path /63325F99)
