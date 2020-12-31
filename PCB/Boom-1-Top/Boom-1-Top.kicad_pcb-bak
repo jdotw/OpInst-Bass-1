@@ -13495,7 +13495,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FF09BC7)
-    (at 366.5 183.7 270)
+    (at 367.5 184.2 270)
     (path /613AD3C3)
     (attr smd)
     (fp_text reference D174 (at 0 -2 90) (layer F.SilkS)
@@ -13525,7 +13525,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FF09BAB)
-    (at 355.5 180.1)
+    (at 356.5 179.2)
     (path /613AD373)
     (attr smd)
     (fp_text reference D173 (at 0 -2) (layer F.SilkS)
@@ -13555,7 +13555,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFC336)
-    (at 366.5 188.7 270)
+    (at 367.5 190.2 270)
     (path /6157BF23)
     (attr smd)
     (fp_text reference D169 (at 0 -2 90) (layer F.SilkS)
@@ -13675,7 +13675,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFC2C6)
-    (at 355.39 224.93)
+    (at 355.4 224.9)
     (path /6157BDE3)
     (attr smd)
     (fp_text reference D165 (at 0 -2) (layer F.SilkS)
@@ -13705,7 +13705,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFDB31)
-    (at 355.5 170.1)
+    (at 356.5 169.2)
     (path /613F7225)
     (attr smd)
     (fp_text reference D164 (at 0 -2) (layer F.SilkS)
@@ -13735,7 +13735,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEE0FAA)
-    (at 355.5 160.1)
+    (at 356.5 159.2)
     (path /61391B87)
     (attr smd)
     (fp_text reference D163 (at 0 -2) (layer F.SilkS)
@@ -13765,7 +13765,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF2116)
-    (at 355.5 150.1)
+    (at 356.5 149.2)
     (path /613910C7)
     (attr smd)
     (fp_text reference D162 (at 0 -2) (layer F.SilkS)
@@ -14065,7 +14065,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEDDB0B)
-    (at 335 244 270)
+    (at 335 243.2 270)
     (path /60455529)
     (attr smd)
     (fp_text reference D136 (at 0 -2 90) (layer F.SilkS)
