@@ -12775,7 +12775,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF80E8)
-    (at 443.5 215.4 270)
+    (at 450.4 223.7 270)
     (path /627B3900)
     (attr smd)
     (fp_text reference D211 (at 0 -2 90) (layer F.SilkS)
@@ -12805,7 +12805,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8097)
-    (at 433.5 215.4 270)
+    (at 440.4 223.6 270)
     (path /627B38B0)
     (attr smd)
     (fp_text reference D210 (at 0 -2 90) (layer F.SilkS)
@@ -12835,7 +12835,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8046)
-    (at 423.6 215.5 270)
+    (at 434.8 223.6 270)
     (path /627B3860)
     (attr smd)
     (fp_text reference D209 (at 0 -2 90) (layer F.SilkS)
@@ -12865,7 +12865,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF7FA4)
-    (at 413.6 215.5 270)
+    (at 429.7 223.4 270)
     (path /627B37C0)
     (attr smd)
     (fp_text reference D207 (at 0 -2 90) (layer F.SilkS)
@@ -12895,7 +12895,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF7F53)
-    (at 403.6 215.5 270)
+    (at 415.6 223.5 270)
     (path /627B3770)
     (attr smd)
     (fp_text reference D206 (at 0 -2 90) (layer F.SilkS)
@@ -12925,7 +12925,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF7F02)
-    (at 387.4 215.1)
+    (at 408.25 223.95)
     (path /627B3720)
     (attr smd)
     (fp_text reference D205 (at 0 -2) (layer F.SilkS)
@@ -12955,7 +12955,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF7E60)
-    (at 384.5 207)
+    (at 399.7 224.3)
     (path /627B3680)
     (attr smd)
     (fp_text reference D203 (at 0 -2) (layer F.SilkS)
@@ -12985,7 +12985,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FF5026F)
-    (at 384.5 197)
+    (at 394.3 224.2)
     (path /627B3630)
     (attr smd)
     (fp_text reference D202 (at 0 -2) (layer F.SilkS)
@@ -13195,7 +13195,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF785D)
-    (at 459.625 164.1 270)
+    (at 461.425 165.2 270)
     (path /61E487D9)
     (attr smd)
     (fp_text reference D184 (at 0 -2 90) (layer F.SilkS)
@@ -13225,7 +13225,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF780C)
-    (at 449.625 164.1 270)
+    (at 451.425 165.2 270)
     (path /61C4FC97)
     (attr smd)
     (fp_text reference D183 (at 0 -2 90) (layer F.SilkS)
@@ -13255,7 +13255,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF77BB)
-    (at 439.625 164.1 270)
+    (at 441.425 165.2 270)
     (path /61C4FC47)
     (attr smd)
     (fp_text reference D182 (at 0 -2 90) (layer F.SilkS)
@@ -13285,7 +13285,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF776A)
-    (at 429.625 164.1 270)
+    (at 431.425 165.2 270)
     (path /61C4FBF7)
     (attr smd)
     (fp_text reference D181 (at 0 -2 90) (layer F.SilkS)
@@ -13315,7 +13315,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8BEF)
-    (at 419.625 164.1 270)
+    (at 421.425 165.2 270)
     (path /61B22D3B)
     (attr smd)
     (fp_text reference D180 (at 0 -2 90) (layer F.SilkS)
@@ -13345,7 +13345,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8B9E)
-    (at 409.6 164.1 270)
+    (at 411.43 165.2 270)
     (path /61B22CEB)
     (attr smd)
     (fp_text reference D179 (at 0 -2 90) (layer F.SilkS)
@@ -13374,8 +13374,8 @@
       (net 960 L9R4))
   )
 
-  (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8B4D)
-    (at 399.6 164.1 270)
+  (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEDA6A4)
+    (at 401.5 165.2 270)
     (path /61B22C9B)
     (attr smd)
     (fp_text reference D178 (at 0 -2 90) (layer F.SilkS)
@@ -13405,7 +13405,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8AFC)
-    (at 389.6 164.1 270)
+    (at 391.5 165.2 270)
     (path /619E92AB)
     (attr smd)
     (fp_text reference D177 (at 0 -2 90) (layer F.SilkS)
@@ -13435,13 +13435,13 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FFD4369)
-    (at 379.5 167.6)
+    (at 381.5 165.2 270)
     (path /619E824F)
     (attr smd)
-    (fp_text reference D176 (at 0 -2) (layer F.SilkS)
+    (fp_text reference D176 (at 0 -2 90) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
-    (fp_text value FXDryLED2 (at 0 2.05) (layer F.Fab)
+    (fp_text value FXDryLED2 (at 0 2.05 90) (layer F.Fab)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_line (start 1.25 0) (end 1.25 0.9) (layer F.CrtYd) (width 0.12))
@@ -13454,18 +13454,18 @@
     (fp_line (start 1.55 1.2) (end 1.55 -1.2) (layer F.SilkS) (width 0.12))
     (fp_line (start 1.55 -1.2) (end -1.55 -1.2) (layer F.SilkS) (width 0.12))
     (fp_line (start 1.05 1.2) (end 1.55 0.7) (layer F.SilkS) (width 0.12))
-    (pad 4 smd rect (at 0.85 -0.55) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
+    (pad 4 smd rect (at 0.85 -0.55 270) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
       (net 952 L9G1))
-    (pad 3 smd rect (at -0.85 -0.55) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
+    (pad 3 smd rect (at -0.85 -0.55 270) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
       (net 1377 "Net-(D176-Pad3)"))
-    (pad 2 smd rect (at -0.85 0.55) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
+    (pad 2 smd rect (at -0.85 0.55 270) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
       (net 953 L9B1))
-    (pad 1 smd rect (at 0.85 0.55) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
+    (pad 1 smd rect (at 0.85 0.55 270) (size 0.8 0.7) (layers F.Cu F.Paste F.Mask)
       (net 951 L9R1))
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEF8A5A)
-    (at 379.5 173.3)
+    (at 380.5 174.2)
     (path /619E6C42)
     (attr smd)
     (fp_text reference D175 (at 0 -2) (layer F.SilkS)
@@ -13585,7 +13585,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFC31A)
-    (at 355.4 194.9)
+    (at 356.5 195.2)
     (path /6157BED3)
     (attr smd)
     (fp_text reference D168 (at 0 -2) (layer F.SilkS)
@@ -13615,7 +13615,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFC2FE)
-    (at 355.4 204.9)
+    (at 356.5 205.2)
     (path /6157BE83)
     (attr smd)
     (fp_text reference D167 (at 0 -2) (layer F.SilkS)
@@ -13645,7 +13645,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFC2E2)
-    (at 355.4 214.9)
+    (at 356.5 215.2)
     (path /6157BE33)
     (attr smd)
     (fp_text reference D166 (at 0 -2) (layer F.SilkS)
@@ -13675,7 +13675,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEFC2C6)
-    (at 355.4 224.9)
+    (at 356.5 225.2)
     (path /6157BDE3)
     (attr smd)
     (fp_text reference D165 (at 0 -2) (layer F.SilkS)
@@ -17294,7 +17294,7 @@
   )
 
   (module Capacitor_SMD:C_0402_1005Metric (layer F.Cu) (tedit 5F68FEEE) (tstamp 5FEAE5F4)
-    (at 409.6 222.2)
+    (at 399 255.9)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags capacitor)
     (path /619C1F84)
@@ -17438,7 +17438,7 @@
   )
 
   (module Capacitor_SMD:C_0402_1005Metric (layer F.Cu) (tedit 5F68FEEE) (tstamp 5FEAE5B0)
-    (at 399.5 223.6)
+    (at 388.9 257.3)
     (descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags capacitor)
     (path /6365ED7D)
@@ -21586,7 +21586,7 @@
   )
 
   (module Resistor_SMD:R_0603_1608Metric (layer F.Cu) (tedit 5F68FEEE) (tstamp 5FEB305F)
-    (at 399.5 221.9)
+    (at 388.9 255.6)
     (descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
     (tags resistor)
     (path /619C1FB0)
@@ -22042,7 +22042,7 @@
   )
 
   (module Package_DFN_QFN:VQFN-46-1EP_5x6mm_P0.4mm_EP2.8x3.8mm (layer F.Cu) (tedit 5DA73464) (tstamp 5FEA69C9)
-    (at 404.7 224.1)
+    (at 394.2 255.4)
     (descr "VQFN, 46 Pin (http://www.ti.com/lit/ds/symlink/lp5036.pdf#page=59), generated with kicad-footprint-generator ipc_noLead_generator.py")
     (tags "VQFN NoLead")
     (path /60122831)
