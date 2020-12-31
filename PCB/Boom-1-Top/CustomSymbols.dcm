@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP AS3310
+D ADSR Voltage Controlled Envelope Generator, DIP-16/SOIC-16
+K VCEG CEM3310 ALFA
+F http://www.alfarzpp.lv/eng/sc/AS3310.pdf
+$ENDCMP
+#
+$CMP AS3320
+D Voltage Controlled Filter (VCF), DIP-18
+K VCF CEM3320 ALFA
+F http://www.alfarzpp.lv/eng/sc/AS3320.pdf
+$ENDCMP
+#
+#End Doc Library
