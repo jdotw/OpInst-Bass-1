@@ -3539,8 +3539,8 @@
       (net 217 "Net-(R61-Pad1)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FEC5A55)
-    (at 425.95 129.2)
+  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FEDD36D)
+    (at 425.99 129.21)
     (path /6020388D)
     (fp_text reference SW40 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -3627,7 +3627,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FDA94A1)
-    (at 426 231.2)
+    (at 425.99 231.21)
     (path /602A4C74)
     (fp_text reference SW39 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -3887,8 +3887,8 @@
       (net 257 "Net-(R139-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FEC598F)
-    (at 401.95 129.2)
+  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FEDD2A7)
+    (at 401.99 129.21)
     (path /601DC79D)
     (fp_text reference SW36 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -3975,7 +3975,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FDA93F0)
-    (at 402 231.2)
+    (at 401.99 231.21)
     (path /602A4DA6)
     (fp_text reference SW35 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -4148,8 +4148,8 @@
       (net 253 "Net-(R133-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FDAE6D0)
-    (at 377.95 129.2)
+  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FEDD1E1)
+    (at 377.99 129.21)
     (path /601B709C)
     (fp_text reference SW33 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -4236,7 +4236,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FDA933F)
-    (at 378 231.2)
+    (at 377.99 231.21)
     (path /602A4ED8)
     (fp_text reference SW32 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -4409,8 +4409,8 @@
       (net 247 "Net-(R121-Pad2)"))
   )
 
-  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FDA2C79)
-    (at 353.95 129.2)
+  (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FEDD11B)
+    (at 353.99 129.21)
     (path /6018E598)
     (fp_text reference SW30 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -4497,7 +4497,7 @@
   )
 
   (module PEC11R:PEC11R-4x15F-N0024 locked (layer F.Cu) (tedit 5FEBFE1A) (tstamp 5FDA928E)
-    (at 354 231.2)
+    (at 353.99 231.21)
     (path /602A4FE2)
     (fp_text reference SW29 (at 2.54 -2.54) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
