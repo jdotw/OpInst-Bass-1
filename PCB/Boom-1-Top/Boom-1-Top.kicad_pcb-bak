@@ -13855,7 +13855,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEC5512)
-    (at 329.7 185.9 270)
+    (at 329.5 187.2 270)
     (path /60ED0B9F)
     (attr smd)
     (fp_text reference D153 (at 0 -2 90) (layer F.SilkS)
@@ -14035,7 +14035,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FE83376)
-    (at 344.1 237.1 270)
+    (at 344.5 238.2 270)
     (path /60455579)
     (attr smd)
     (fp_text reference D137 (at 0 -2 90) (layer F.SilkS)
@@ -14065,7 +14065,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FEDDB0B)
-    (at 335.7 244 270)
+    (at 335 244 270)
     (path /60455529)
     (attr smd)
     (fp_text reference D136 (at 0 -2 90) (layer F.SilkS)
@@ -14095,7 +14095,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FE8333E)
-    (at 325.6 247.7 270)
+    (at 325.5 249.2 270)
     (path /604554D9)
     (attr smd)
     (fp_text reference D135 (at 0 -2 90) (layer F.SilkS)
@@ -14125,7 +14125,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FE76508)
-    (at 315.6 247.7 270)
+    (at 315.5 249.2 270)
     (path /602BE27D)
     (attr smd)
     (fp_text reference D134 (at 0 -2 90) (layer F.SilkS)
@@ -14155,7 +14155,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FE764EC)
-    (at 305.6 247.7 270)
+    (at 305.5 249.2 270)
     (path /602BE22D)
     (attr smd)
     (fp_text reference D133 (at 0 -2 90) (layer F.SilkS)
@@ -14185,7 +14185,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FE764D0)
-    (at 295.6 247.7 270)
+    (at 295.5 249.2 270)
     (path /602BE1DD)
     (attr smd)
     (fp_text reference D132 (at 0 -2 90) (layer F.SilkS)
@@ -14215,7 +14215,7 @@
   )
 
   (module fm-b2020rgba-hg:FM-B2020RGBA-HG (layer F.Cu) (tedit 5D573C5F) (tstamp 5FE764B4)
-    (at 285.6 247.7 270)
+    (at 285.5 249.2 270)
     (path /602BE18D)
     (attr smd)
     (fp_text reference D131 (at 0 -2 90) (layer F.SilkS)
