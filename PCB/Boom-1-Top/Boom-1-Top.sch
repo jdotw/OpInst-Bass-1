@@ -14911,12 +14911,6 @@ F 3 "~" H 10400 29800 50  0001 C CNN
 	1    10400 29850
 	1    0    0    -1  
 $EndComp
-Wire Notes Line
-	12350 29250 12350 30200
-Wire Notes Line
-	4500 29250 12350 29250
-Wire Notes Line
-	4500 30200 12350 30200
 Text GLabel 5700 29650 0    50   Input ~ 0
 L9R1
 Text GLabel 5700 29850 0    50   Input ~ 0
@@ -15158,113 +15152,6 @@ L11G7
 Text GLabel 17450 32200 0    50   Input ~ 0
 L11B7
 $Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D4
-U 1 1 71E1A9CE
-P 10500 33250
-F 0 "D4" H 10500 33747 50  0000 C CNN
-F 1 "FXPot1LED1" H 10500 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 10500 33200 50  0001 C CNN
-F 3 "~" H 10500 33200 50  0001 C CNN
-	1    10500 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D8
-U 1 1 71E1AA1E
-P 11250 33250
-F 0 "D8" H 11250 33747 50  0000 C CNN
-F 1 "FXPot1LED2" H 11250 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 11250 33200 50  0001 C CNN
-F 3 "~" H 11250 33200 50  0001 C CNN
-	1    11250 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D10
-U 1 1 71E1AA6E
-P 12000 33250
-F 0 "D10" H 12000 33747 50  0000 C CNN
-F 1 "FXPot1LED3" H 12000 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 12000 33200 50  0001 C CNN
-F 3 "~" H 12000 33200 50  0001 C CNN
-	1    12000 33250
-	1    0    0    -1  
-$EndComp
-Wire Notes Line
-	9750 32650 9750 33600
-Wire Notes Line
-	9750 32650 17600 32650
-Wire Notes Line
-	9750 33600 17600 33600
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D12
-U 1 1 72BA94BF
-P 13100 33250
-F 0 "D12" H 13100 33747 50  0000 C CNN
-F 1 "FXPot2LED1" H 13100 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 13100 33200 50  0001 C CNN
-F 3 "~" H 13100 33200 50  0001 C CNN
-	1    13100 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D13
-U 1 1 72BA950F
-P 13850 33250
-F 0 "D13" H 13850 33747 50  0000 C CNN
-F 1 "FXPot2LED2" H 13850 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 13850 33200 50  0001 C CNN
-F 3 "~" H 13850 33200 50  0001 C CNN
-	1    13850 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D16
-U 1 1 72BA955F
-P 14600 33250
-F 0 "D16" H 14600 33747 50  0000 C CNN
-F 1 "FXPot2LED3" H 14600 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 14600 33200 50  0001 C CNN
-F 3 "~" H 14600 33200 50  0001 C CNN
-	1    14600 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D18
-U 1 1 72CE49E9
-P 15600 33250
-F 0 "D18" H 15600 33747 50  0000 C CNN
-F 1 "FXPot3LED1" H 15600 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 15600 33200 50  0001 C CNN
-F 3 "~" H 15600 33200 50  0001 C CNN
-	1    15600 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D43
-U 1 1 72CE4A39
-P 16350 33250
-F 0 "D43" H 16350 33747 50  0000 C CNN
-F 1 "FXPot3LED2" H 16350 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 16350 33200 50  0001 C CNN
-F 3 "~" H 16350 33200 50  0001 C CNN
-	1    16350 33250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D44
-U 1 1 72CE4A89
-P 17100 33250
-F 0 "D44" H 17100 33747 50  0000 C CNN
-F 1 "FXPot3LED3" H 17100 33656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 17100 33200 50  0001 C CNN
-F 3 "~" H 17100 33200 50  0001 C CNN
-	1    17100 33250
-	1    0    0    -1  
-$EndComp
-Wire Notes Line
-	17600 32650 17600 33600
-$Comp
 L Driver_LED:LP5036 U24
 U 1 1 73099863
 P 6950 28200
@@ -15303,108 +15190,54 @@ Text GLabel 8250 28700 3    50   Input ~ 0
 L9G10
 Text GLabel 8350 28700 3    50   Input ~ 0
 L9B10
-Text GLabel 8450 28700 3    50   Input ~ 0
+Text GLabel 8450 28850 3    50   Input ~ 0
 L9R11
-Text GLabel 8550 28700 3    50   Input ~ 0
+Text GLabel 8550 28850 3    50   Input ~ 0
 L9G11
-Text GLabel 8650 28700 3    50   Input ~ 0
+Text GLabel 8650 28850 3    50   Input ~ 0
 L9B11
-Text GLabel 10300 33050 0    50   Input ~ 0
-L9R10
-Text GLabel 10300 33250 0    50   Input ~ 0
-L9G10
-Text GLabel 10300 33450 0    50   Input ~ 0
-L9B10
-Text GLabel 11050 33050 0    50   Input ~ 0
-L9R11
-Text GLabel 11050 33250 0    50   Input ~ 0
-L9G11
-Text GLabel 11050 33450 0    50   Input ~ 0
-L9B11
-Text GLabel 15850 28700 3    50   Input ~ 0
+Text GLabel 15850 28850 3    50   Input ~ 0
 L10R7
-Text GLabel 15950 28700 3    50   Input ~ 0
+Text GLabel 15950 28850 3    50   Input ~ 0
 L10G7
-Text GLabel 16050 28700 3    50   Input ~ 0
+Text GLabel 16050 28850 3    50   Input ~ 0
 L10B7
-Text GLabel 16150 28700 3    50   Input ~ 0
+Text GLabel 16150 28850 3    50   Input ~ 0
 L10R8
-Text GLabel 16250 28700 3    50   Input ~ 0
+Text GLabel 16250 28850 3    50   Input ~ 0
 L10G8
-Text GLabel 16350 28700 3    50   Input ~ 0
+Text GLabel 16350 28850 3    50   Input ~ 0
 L10B8
-Text GLabel 16450 28700 3    50   Input ~ 0
+Text GLabel 16450 28850 3    50   Input ~ 0
 L10R9
-Text GLabel 16550 28700 3    50   Input ~ 0
+Text GLabel 16550 28850 3    50   Input ~ 0
 L10G9
-Text GLabel 16650 28700 3    50   Input ~ 0
+Text GLabel 16650 28850 3    50   Input ~ 0
 L10B9
-Text GLabel 16750 28700 3    50   Input ~ 0
+Text GLabel 16750 28850 3    50   Input ~ 0
 L10R10
-Text GLabel 16850 28700 3    50   Input ~ 0
+Text GLabel 16850 28850 3    50   Input ~ 0
 L10G10
-Text GLabel 16950 28700 3    50   Input ~ 0
+Text GLabel 16950 28850 3    50   Input ~ 0
 L10B10
-Text GLabel 11800 33050 0    50   Input ~ 0
-L10R7
-Text GLabel 11800 33250 0    50   Input ~ 0
-L10G7
-Text GLabel 11800 33450 0    50   Input ~ 0
-L10B7
-Text GLabel 12900 33050 0    50   Input ~ 0
-L10R8
-Text GLabel 12900 33250 0    50   Input ~ 0
-L10G8
-Text GLabel 12900 33450 0    50   Input ~ 0
-L10B8
-Text GLabel 13650 33050 0    50   Input ~ 0
-L10R9
-Text GLabel 13650 33250 0    50   Input ~ 0
-L10G9
-Text GLabel 13650 33450 0    50   Input ~ 0
-L10B9
-Text GLabel 7550 32300 3    50   Input ~ 0
+Text GLabel 7550 32450 3    50   Input ~ 0
 L11R8
-Text GLabel 7650 32300 3    50   Input ~ 0
+Text GLabel 7650 32450 3    50   Input ~ 0
 L11G8
-Text GLabel 7750 32300 3    50   Input ~ 0
+Text GLabel 7750 32450 3    50   Input ~ 0
 L11B8
-Text GLabel 7850 32300 3    50   Input ~ 0
+Text GLabel 7850 32450 3    50   Input ~ 0
 L11R9
-Text GLabel 7950 32300 3    50   Input ~ 0
+Text GLabel 7950 32450 3    50   Input ~ 0
 L11G9
-Text GLabel 8050 32300 3    50   Input ~ 0
+Text GLabel 8050 32450 3    50   Input ~ 0
 L11B9
-Text GLabel 8150 32300 3    50   Input ~ 0
+Text GLabel 8150 32450 3    50   Input ~ 0
 L11R10
-Text GLabel 8250 32300 3    50   Input ~ 0
+Text GLabel 8250 32450 3    50   Input ~ 0
 L11G10
-Text GLabel 8350 32300 3    50   Input ~ 0
+Text GLabel 8350 32450 3    50   Input ~ 0
 L11B10
-Text GLabel 15400 33050 0    50   Input ~ 0
-L11R8
-Text GLabel 15400 33250 0    50   Input ~ 0
-L11G8
-Text GLabel 15400 33450 0    50   Input ~ 0
-L11B8
-Text GLabel 16150 33050 0    50   Input ~ 0
-L11R9
-Text GLabel 16150 33250 0    50   Input ~ 0
-L11G9
-Text GLabel 16150 33450 0    50   Input ~ 0
-L11B9
-Text GLabel 16900 33050 0    50   Input ~ 0
-L11R10
-Text GLabel 16900 33250 0    50   Input ~ 0
-L11G10
-Text GLabel 16900 33450 0    50   Input ~ 0
-L11B10
-Text GLabel 14400 33450 0    50   Input ~ 0
-L10B10
-Text GLabel 14400 33250 0    50   Input ~ 0
-L10G10
-Text GLabel 14400 33050 0    50   Input ~ 0
-L10R10
 Wire Notes Line
 	8400 21300 11450 21300
 Wire Notes Line
@@ -20355,4 +20188,27 @@ F 3 "~" H 5200 6850 50  0001 C CNN
 	1    5200 6850
 	0    -1   -1   0   
 $EndComp
+$Comp
+L fm-b2020rgba-hg:FM-B2020RGBA-HG D?
+U 1 1 61BDD9D0
+P 12700 29850
+F 0 "D?" H 12700 30347 50  0000 C CNN
+F 1 "FXDryLED11" H 12700 30256 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 12700 29800 50  0001 C CNN
+F 3 "~" H 12700 29800 50  0001 C CNN
+	1    12700 29850
+	1    0    0    -1  
+$EndComp
+Text GLabel 12500 29650 0    50   Input ~ 0
+L9R10
+Text GLabel 12500 29850 0    50   Input ~ 0
+L9G10
+Text GLabel 12500 30050 0    50   Input ~ 0
+L9B10
+Wire Notes Line
+	13250 29250 13250 30200
+Wire Notes Line
+	4500 29250 13250 29250
+Wire Notes Line
+	4500 30200 13250 30200
 $EndSCHEMATC
