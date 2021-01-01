@@ -3124,7 +3124,7 @@
     (add_net WhiteNoiseOut)
   )
 
-  (module Futaba:ELW2701AA (layer F.Cu) (tedit 5FEECD10) (tstamp 5FF07C7B)
+  (module Futaba:ELW2701AA locked (layer F.Cu) (tedit 5FEECD10) (tstamp 5FF07C7B)
     (at 463.5 200.4 180)
     (path /601F44F5)
     (fp_text reference U51 (at 0 0.5) (layer F.SilkS)
@@ -3146,7 +3146,7 @@
     (fp_line (start 4.9 22.5) (end 4.9 2.5) (layer F.SilkS) (width 0.12))
   )
 
-  (module "TE FPC:TE_1-1734592-8" (layer F.Cu) (tedit 5FEEB390) (tstamp 5FF3FDC6)
+  (module "TE FPC:TE_1-1734592-8" locked (layer F.Cu) (tedit 5FEEB390) (tstamp 5FF3FDC6)
     (at 425.6 180.2 180)
     (path /6F5BB19D)
     (fp_text reference J23 (at -5.168 -1.8064) (layer F.SilkS)
