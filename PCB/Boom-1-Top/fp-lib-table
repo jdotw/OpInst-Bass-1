@@ -5,4 +5,5 @@
   (lib (name BLUENRG)(type KiCad)(uri ${KIPRJMOD}/BLUENRG.pretty)(options "")(descr ""))
   (lib (name LEDs)(type KiCad)(uri ${KIPRJMOD}/LEDs.pretty)(options "")(descr ""))
   (lib (name fm-b2020rgba-hg)(type KiCad)(uri ${KIPRJMOD}/fm-b2020rgba-hg.pretty)(options "")(descr ""))
+  (lib (name "TE FPC")(type KiCad)(uri "${KIPRJMOD}/TE FPC.pretty")(options "")(descr ""))
 )
