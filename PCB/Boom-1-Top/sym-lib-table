@@ -12,4 +12,5 @@
   (lib (name fm-b2020rgba-hg)(type Legacy)(uri ${KIPRJMOD}/fm-b2020rgba-hg.lib)(options "")(descr ""))
   (lib (name CustomSymbols)(type Legacy)(uri ${KIPRJMOD}/CustomSymbols.lib)(options "")(descr ""))
   (lib (name 1-1734592-8)(type Legacy)(uri ${KIPRJMOD}/1-1734592-8/1-1734592-8.lib)(options "")(descr ""))
+  (lib (name Futaba)(type Legacy)(uri ${KIPRJMOD}/Futaba.lib)(options "")(descr ""))
 )

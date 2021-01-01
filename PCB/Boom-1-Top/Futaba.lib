@@ -1,0 +1,17 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# ELW2701AA
+#
+DEF ELW2701AA U 0 40 Y Y 1 F N
+F0 "U" -200 0 50 H V C CNN
+F1 "ELW2701AA" 700 0 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+T 0 350 -200 50 0 0 0 "176x52 OLED Display" Normal 0 C C
+S -250 -50 950 -350 0 0 0 f
+ENDDRAW
+ENDDEF
+#
+#End Library
