@@ -13524,17 +13524,6 @@ F 3 "~" H 23800 20200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D318
-U 1 1 6198B16D
-P 21000 20250
-F 0 "D318" H 21000 20747 50  0000 C CNN
-F 1 "Osc2DriveLED14" H 21000 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 21000 20200 50  0001 C CNN
-F 3 "~" H 21000 20200 50  0001 C CNN
-	1    21000 20250
-	1    0    0    -1  
-$EndComp
-$Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D320
 U 1 1 61D12316
 P 24750 20250
@@ -14276,12 +14265,6 @@ Text GLabel 12300 18800 3    50   Input ~ 0
 L5G8
 Text GLabel 12200 18800 3    50   Input ~ 0
 L5R8
-Text GLabel 12100 18800 3    50   Input ~ 0
-L5B7
-Text GLabel 12000 18800 3    50   Input ~ 0
-L5G7
-Text GLabel 11900 18800 3    50   Input ~ 0
-L5R7
 Text GLabel 11800 18800 3    50   Input ~ 0
 L5B6
 Text GLabel 11700 18800 3    50   Input ~ 0
@@ -14366,12 +14349,6 @@ Text GLabel 19900 20250 0    50   Input ~ 0
 L5G6
 Text GLabel 19900 20050 0    50   Input ~ 0
 L5R6
-Text GLabel 20800 20450 0    50   Input ~ 0
-L5B7
-Text GLabel 20800 20250 0    50   Input ~ 0
-L5G7
-Text GLabel 20800 20050 0    50   Input ~ 0
-L5R7
 Text GLabel 21750 20450 0    50   Input ~ 0
 L5B8
 Text GLabel 21750 20250 0    50   Input ~ 0
@@ -22093,17 +22070,6 @@ F 3 "" H 33150 36550 50  0001 C CNN
 	1    33150 36550
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:+5V #PWR0595
-U 1 1 61C39C69
-P 33150 34500
-F 0 "#PWR0595" H 33150 34350 50  0001 C CNN
-F 1 "+5V" H 33165 34673 50  0000 C CNN
-F 2 "" H 33150 34500 50  0001 C CNN
-F 3 "" H 33150 34500 50  0001 C CNN
-	1    33150 34500
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	33150 34500 33150 34550
 $Comp
@@ -22306,13 +22272,13 @@ Wire Wire Line
 	33650 36050 33800 36050
 NoConn ~ 32750 35050
 Text GLabel 35950 35400 3    50   Input ~ 0
-LED_I2C_1_SCL
+DAC_I2C_1_SCL
 Text GLabel 35850 35400 3    50   Input ~ 0
-LED_I2C_1_SDA
+DAC_I2C_1_SDA
 Text GLabel 36600 35400 3    50   Input ~ 0
-LED_I2C_2_SCL
+DAC_I2C_2_SCL
 Text GLabel 36500 35400 3    50   Input ~ 0
-LED_I2C_2_SDA
+DAC_I2C_2_SDA
 $Comp
 L Device:R_Small_US R269
 U 1 1 61C39DC5
@@ -22347,9 +22313,9 @@ F 3 "~" H 36600 35300 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Text GLabel 37250 35400 3    50   Input ~ 0
-LED_I2C_3_SCL
+DAC_I2C_3_SCL
 Text GLabel 37150 35400 3    50   Input ~ 0
-LED_I2C_3_SDA
+DAC_I2C_3_SDA
 $Comp
 L Device:R_Small_US R272
 U 1 1 61C39E0F
@@ -22373,9 +22339,9 @@ F 3 "~" H 37250 35300 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 Text GLabel 37900 35400 3    50   Input ~ 0
-LED_I2C_4_SCL
+DAC_I2C_4_SCL
 Text GLabel 37800 35400 3    50   Input ~ 0
-LED_I2C_4_SDA
+DAC_I2C_4_SDA
 $Comp
 L Device:R_Small_US R274
 U 1 1 61C39E41
@@ -23566,5 +23532,16 @@ F 2 "Futaba:ELW2701AA" H 16350 43050 50  0001 C CNN
 F 3 "" H 16350 43050 50  0001 C CNN
 	1    16350 43050
 	0    1    1    0   
+$EndComp
+$Comp
+L power:+3.3V #PWR?
+U 1 1 60584F2F
+P 33150 34500
+F 0 "#PWR?" H 33150 34350 50  0001 C CNN
+F 1 "+3.3V" V 33165 34628 50  0000 L CNN
+F 2 "" H 33150 34500 50  0001 C CNN
+F 3 "" H 33150 34500 50  0001 C CNN
+	1    33150 34500
+	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
