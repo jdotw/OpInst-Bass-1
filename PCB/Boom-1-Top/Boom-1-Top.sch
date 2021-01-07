@@ -12976,42 +12976,36 @@ Text GLabel 10800 18800 3    50   Input ~ 0
 L5G3
 Text GLabel 10700 18800 3    50   Input ~ 0
 L5R3
-Text GLabel 10600 18800 3    50   Input ~ 0
+Text GLabel 10600 19000 3    50   Input ~ 0
 L5B2
-Text GLabel 10500 18800 3    50   Input ~ 0
+Text GLabel 10500 19000 3    50   Input ~ 0
 L5G2
-Text GLabel 10400 18800 3    50   Input ~ 0
+Text GLabel 10400 19000 3    50   Input ~ 0
 L5R2
-Text GLabel 10300 18800 3    50   Input ~ 0
+Text GLabel 10300 19000 3    50   Input ~ 0
 L5B1
-Text GLabel 10100 18800 3    50   Input ~ 0
+Text GLabel 10100 19000 3    50   Input ~ 0
 L5R1
-Text GLabel 10000 18800 3    50   Input ~ 0
+Text GLabel 10000 19000 3    50   Input ~ 0
 L5B0
-Text GLabel 9900 18800 3    50   Input ~ 0
+Text GLabel 9900 19000 3    50   Input ~ 0
 L5G0
-Text GLabel 9800 18800 3    50   Input ~ 0
+Text GLabel 9800 19000 3    50   Input ~ 0
 L5R0
-Text GLabel 10200 18800 3    50   Input ~ 0
+Text GLabel 10200 19000 3    50   Input ~ 0
 L5G1
 Text GLabel 5350 22100 0    50   Input ~ 0
-L5B0
+L6B7
 Text GLabel 5350 21900 0    50   Input ~ 0
-L5G0
+L6G7
 Text GLabel 5350 21700 0    50   Input ~ 0
-L5R0
+L6R7
 Text GLabel 6250 22100 0    50   Input ~ 0
-L5B1
+L6B8
 Text GLabel 6250 21700 0    50   Input ~ 0
-L5R1
+L6R8
 Text GLabel 6250 21900 0    50   Input ~ 0
-L5G1
-Text GLabel 7200 22100 0    50   Input ~ 0
-L5B2
-Text GLabel 7200 21900 0    50   Input ~ 0
-L5G2
-Text GLabel 7200 21700 0    50   Input ~ 0
-L5R2
+L6G8
 Text GLabel 17200 20450 0    50   Input ~ 0
 L5B3
 Text GLabel 17200 20250 0    50   Input ~ 0
@@ -13066,11 +13060,11 @@ Text GLabel 24550 20250 0    50   Input ~ 0
 L5G11
 Text GLabel 24550 20050 0    50   Input ~ 0
 L5R11
-Text GLabel 17550 18800 3    50   Input ~ 0
+Text GLabel 17550 18950 3    50   Input ~ 0
 L6B10
-Text GLabel 17450 18800 3    50   Input ~ 0
+Text GLabel 17450 18950 3    50   Input ~ 0
 L6G10
-Text GLabel 17350 18800 3    50   Input ~ 0
+Text GLabel 17350 18950 3    50   Input ~ 0
 L6R10
 $Comp
 L Driver_LED:LP5036 U32
@@ -13083,11 +13077,11 @@ F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 16150 18350 50  0001 C CNN
 	1    16150 18300
 	0    -1   1    0   
 $EndComp
-Text GLabel 17250 18800 3    50   Input ~ 0
+Text GLabel 17250 18950 3    50   Input ~ 0
 L6B9
-Text GLabel 17150 18800 3    50   Input ~ 0
+Text GLabel 17150 18950 3    50   Input ~ 0
 L6G9
-Text GLabel 17050 18800 3    50   Input ~ 0
+Text GLabel 17050 18950 3    50   Input ~ 0
 L6R9
 Text GLabel 16950 18800 3    50   Input ~ 0
 L6B8
@@ -13143,11 +13137,11 @@ Text GLabel 14350 18800 3    50   Input ~ 0
 L6R0
 Text GLabel 14750 18800 3    50   Input ~ 0
 L6G1
-Text GLabel 17850 18800 3    50   Input ~ 0
+Text GLabel 17850 18950 3    50   Input ~ 0
 L6B11
-Text GLabel 17750 18800 3    50   Input ~ 0
+Text GLabel 17750 18950 3    50   Input ~ 0
 L6G11
-Text GLabel 17650 18800 3    50   Input ~ 0
+Text GLabel 17650 18950 3    50   Input ~ 0
 L6R11
 Text GLabel 11700 20450 0    50   Input ~ 0
 L6B0
@@ -13192,35 +13186,35 @@ L6G6
 Text GLabel 10750 21750 0    50   Input ~ 0
 L6R6
 Text GLabel 12350 22150 0    50   Input ~ 0
-L6B7
+L10B7
 Text GLabel 12350 21950 0    50   Input ~ 0
-L6G7
+L10G7
 Text GLabel 12350 21750 0    50   Input ~ 0
-L6R7
+L10R7
 Text GLabel 13250 22150 0    50   Input ~ 0
-L6B8
+L10B8
 Text GLabel 13250 21950 0    50   Input ~ 0
-L6G8
+L10G8
 Text GLabel 13250 21750 0    50   Input ~ 0
-L6R8
+L10R8
 Text GLabel 14200 22150 0    50   Input ~ 0
-L6B9
+L10B9
 Text GLabel 14200 21950 0    50   Input ~ 0
-L6G9
+L10G9
 Text GLabel 14200 21750 0    50   Input ~ 0
-L6R9
+L10R9
 Text GLabel 15200 22150 0    50   Input ~ 0
-L6B10
+L10B10
 Text GLabel 15200 21950 0    50   Input ~ 0
-L6G10
+L10G10
 Text GLabel 15200 21750 0    50   Input ~ 0
-L6R10
+L10R10
 Text GLabel 16250 22150 0    50   Input ~ 0
-L6B11
+L10B11
 Text GLabel 16250 21950 0    50   Input ~ 0
-L6G11
+L10G11
 Text GLabel 16250 21750 0    50   Input ~ 0
-L6R11
+L10R11
 Text GLabel 8400 24950 3    50   Input ~ 0
 L7B10
 Text GLabel 8300 24950 3    50   Input ~ 0
@@ -13836,30 +13830,6 @@ Text GLabel 8550 28850 3    50   Input ~ 0
 L9G11
 Text GLabel 8650 28850 3    50   Input ~ 0
 L9B11
-Text GLabel 15850 28850 3    50   Input ~ 0
-L10R7
-Text GLabel 15950 28850 3    50   Input ~ 0
-L10G7
-Text GLabel 16050 28850 3    50   Input ~ 0
-L10B7
-Text GLabel 16150 28850 3    50   Input ~ 0
-L10R8
-Text GLabel 16250 28850 3    50   Input ~ 0
-L10G8
-Text GLabel 16350 28850 3    50   Input ~ 0
-L10B8
-Text GLabel 16450 28850 3    50   Input ~ 0
-L10R9
-Text GLabel 16550 28850 3    50   Input ~ 0
-L10G9
-Text GLabel 16650 28850 3    50   Input ~ 0
-L10B9
-Text GLabel 16750 28850 3    50   Input ~ 0
-L10R10
-Text GLabel 16850 28850 3    50   Input ~ 0
-L10G10
-Text GLabel 16950 28850 3    50   Input ~ 0
-L10B10
 Text GLabel 7550 32450 3    50   Input ~ 0
 L11R8
 Text GLabel 7650 32450 3    50   Input ~ 0
@@ -23583,4 +23553,34 @@ Wire Wire Line
 	30850 24550 31450 24550
 Wire Wire Line
 	31450 24550 31450 26500
+Text GLabel 15850 28700 3    50   Input ~ 0
+L10R7
+Text GLabel 15950 28700 3    50   Input ~ 0
+L10G7
+Text GLabel 16050 28700 3    50   Input ~ 0
+L10B7
+Text GLabel 16150 28700 3    50   Input ~ 0
+L10R8
+Text GLabel 16250 28700 3    50   Input ~ 0
+L10G8
+Text GLabel 16350 28700 3    50   Input ~ 0
+L10B8
+Text GLabel 16450 28700 3    50   Input ~ 0
+L10R9
+Text GLabel 16550 28700 3    50   Input ~ 0
+L10G9
+Text GLabel 16650 28700 3    50   Input ~ 0
+L10B9
+Text GLabel 16750 28700 3    50   Input ~ 0
+L10R10
+Text GLabel 16850 28700 3    50   Input ~ 0
+L10G10
+Text GLabel 16950 28700 3    50   Input ~ 0
+L10B10
+Text GLabel 17050 28700 3    50   Input ~ 0
+L10R11
+Text GLabel 17150 28700 3    50   Input ~ 0
+L10G11
+Text GLabel 17250 28700 3    50   Input ~ 0
+L10B11
 $EndSCHEMATC
