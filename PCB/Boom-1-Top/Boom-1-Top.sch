@@ -9675,15 +9675,7 @@ NoConn ~ 29500 36600
 Wire Wire Line
 	37500 10000 37050 10000
 Wire Wire Line
-	37050 10000 37050 8050
-Wire Wire Line
-	37050 8050 37550 8050
-Wire Wire Line
 	37400 10100 36950 10100
-Wire Wire Line
-	36950 7950 37550 7950
-Wire Wire Line
-	36950 7950 36950 10100
 Wire Wire Line
 	38800 8650 38800 10600
 Wire Wire Line
@@ -10748,17 +10740,6 @@ F 3 "~" H 20700 14650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D152
-U 1 1 60C54EF2
-P 18300 20250
-F 0 "D152" H 18300 20747 50  0000 C CNN
-F 1 "Osc2DriveLED2" H 18300 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 18300 20200 50  0001 C CNN
-F 3 "~" H 18300 20200 50  0001 C CNN
-	1    18300 20250
-	1    0    0    -1  
-$EndComp
-$Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D154
 U 1 1 60C54F42
 P 19200 20250
@@ -10772,23 +10753,12 @@ $EndComp
 $Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D153
 U 1 1 60ED0B9F
-P 17400 20250
-F 0 "D153" H 17400 20747 50  0000 C CNN
-F 1 "Osc2DriveLED10" H 17400 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 17400 20200 50  0001 C CNN
-F 3 "~" H 17400 20200 50  0001 C CNN
-	1    17400 20250
-	1    0    0    -1  
-$EndComp
-$Comp
-L fm-b2020rgba-hg:FM-B2020RGBA-HG D159
-U 1 1 60ED0C8F
-P 20100 20250
-F 0 "D159" H 20100 20747 50  0000 C CNN
-F 1 "Osc2DriveLED13" H 20100 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 20100 20200 50  0001 C CNN
-F 3 "~" H 20100 20200 50  0001 C CNN
-	1    20100 20250
+P 18300 20250
+F 0 "D153" H 18300 20747 50  0000 C CNN
+F 1 "Osc2DriveLED10" H 18300 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 18300 20200 50  0001 C CNN
+F 3 "~" H 18300 20200 50  0001 C CNN
+	1    18300 20250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -12180,45 +12150,45 @@ $EndComp
 $Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D315
 U 1 1 617E420F
-P 21950 20250
-F 0 "D315" H 21950 20747 50  0000 C CNN
-F 1 "Osc2DriveLED6" H 21950 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 21950 20200 50  0001 C CNN
-F 3 "~" H 21950 20200 50  0001 C CNN
-	1    21950 20250
+P 20150 20250
+F 0 "D315" H 20150 20747 50  0000 C CNN
+F 1 "Osc2DriveLED6" H 20150 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 20150 20200 50  0001 C CNN
+F 3 "~" H 20150 20200 50  0001 C CNN
+	1    20150 20250
 	1    0    0    -1  
 $EndComp
 $Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D316
 U 1 1 617E425F
-P 22850 20250
-F 0 "D316" H 22850 20747 50  0000 C CNN
-F 1 "Osc2DriveLED7" H 22850 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 22850 20200 50  0001 C CNN
-F 3 "~" H 22850 20200 50  0001 C CNN
-	1    22850 20250
+P 21050 20250
+F 0 "D316" H 21050 20747 50  0000 C CNN
+F 1 "Osc2DriveLED7" H 21050 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 21050 20200 50  0001 C CNN
+F 3 "~" H 21050 20200 50  0001 C CNN
+	1    21050 20250
 	1    0    0    -1  
 $EndComp
 $Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D317
 U 1 1 61910DF9
-P 23800 20250
-F 0 "D317" H 23800 20747 50  0000 C CNN
-F 1 "Osc2DriveLED8" H 23800 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 23800 20200 50  0001 C CNN
-F 3 "~" H 23800 20200 50  0001 C CNN
-	1    23800 20250
+P 22000 20250
+F 0 "D317" H 22000 20747 50  0000 C CNN
+F 1 "Osc2DriveLED8" H 22000 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 22000 20200 50  0001 C CNN
+F 3 "~" H 22000 20200 50  0001 C CNN
+	1    22000 20250
 	1    0    0    -1  
 $EndComp
 $Comp
 L fm-b2020rgba-hg:FM-B2020RGBA-HG D320
 U 1 1 61D12316
-P 24750 20250
-F 0 "D320" H 24750 20747 50  0000 C CNN
-F 1 "Osc2DriveLED9" H 24750 20656 50  0000 C CNN
-F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 24750 20200 50  0001 C CNN
-F 3 "~" H 24750 20200 50  0001 C CNN
-	1    24750 20250
+P 23000 20250
+F 0 "D320" H 23000 20747 50  0000 C CNN
+F 1 "Osc2DriveLED9" H 23000 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 23000 20200 50  0001 C CNN
+F 3 "~" H 23000 20200 50  0001 C CNN
+	1    23000 20250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -13024,41 +12994,35 @@ Text GLabel 19000 20250 0    50   Input ~ 0
 L5G5
 Text GLabel 19000 20050 0    50   Input ~ 0
 L5R5
-Text GLabel 19900 20450 0    50   Input ~ 0
+Text GLabel 19950 20450 0    50   Input ~ 0
 L5B6
-Text GLabel 19900 20250 0    50   Input ~ 0
+Text GLabel 19950 20250 0    50   Input ~ 0
 L5G6
-Text GLabel 19900 20050 0    50   Input ~ 0
+Text GLabel 19950 20050 0    50   Input ~ 0
 L5R6
-Text GLabel 21750 20450 0    50   Input ~ 0
+Text GLabel 21800 20450 0    50   Input ~ 0
 L5B8
-Text GLabel 21750 20250 0    50   Input ~ 0
+Text GLabel 21800 20250 0    50   Input ~ 0
 L5G8
-Text GLabel 21750 20050 0    50   Input ~ 0
+Text GLabel 21800 20050 0    50   Input ~ 0
 L5R8
-Text GLabel 22650 20450 0    50   Input ~ 0
+Text GLabel 22800 20450 0    50   Input ~ 0
 L5B9
-Text GLabel 22650 20250 0    50   Input ~ 0
+Text GLabel 22800 20250 0    50   Input ~ 0
 L5G9
-Text GLabel 22650 20050 0    50   Input ~ 0
+Text GLabel 22800 20050 0    50   Input ~ 0
 L5R9
-Text GLabel 23600 20450 0    50   Input ~ 0
+Text GLabel 23800 20450 0    50   Input ~ 0
 L5B10
-Text GLabel 23600 20250 0    50   Input ~ 0
+Text GLabel 23800 20250 0    50   Input ~ 0
 L5G10
-Text GLabel 23600 20050 0    50   Input ~ 0
+Text GLabel 23800 20050 0    50   Input ~ 0
 L5R10
-Text GLabel 13300 18800 3    50   Input ~ 0
+Text GLabel 13300 19050 3    50   Input ~ 0
 L5B11
-Text GLabel 13200 18800 3    50   Input ~ 0
+Text GLabel 13200 19050 3    50   Input ~ 0
 L5G11
-Text GLabel 13100 18800 3    50   Input ~ 0
-L5R11
-Text GLabel 24550 20450 0    50   Input ~ 0
-L5B11
-Text GLabel 24550 20250 0    50   Input ~ 0
-L5G11
-Text GLabel 24550 20050 0    50   Input ~ 0
+Text GLabel 13100 19050 3    50   Input ~ 0
 L5R11
 Text GLabel 17550 18950 3    50   Input ~ 0
 L6B10
@@ -13984,54 +13948,30 @@ F 3 "http://www.ti.com/lit/ds/symlink/lp5036.pdf" H 11450 41400 50  0001 C CNN
 	1    11450 41350
 	0    -1   1    0   
 $EndComp
-Text GLabel 4200 35950 3    50   Input ~ 0
-G1C0
-Text GLabel 4300 35950 3    50   Input ~ 0
-G1C1
-Text GLabel 4400 35950 3    50   Input ~ 0
-G1C2
-Text GLabel 4500 35950 3    50   Input ~ 0
-G1C3
-Text GLabel 4600 35950 3    50   Input ~ 0
-G1C4
 Text GLabel 4700 35950 3    50   Input ~ 0
+G1C0
+Text GLabel 4600 35950 3    50   Input ~ 0
+G1C1
+Text GLabel 4500 35950 3    50   Input ~ 0
+G1C2
+Text GLabel 4400 35950 3    50   Input ~ 0
+G1C3
+Text GLabel 4300 35950 3    50   Input ~ 0
+G1C4
+Text GLabel 4200 35950 3    50   Input ~ 0
 G1C5
-Text GLabel 4800 35950 3    50   Input ~ 0
+Text GLabel 7100 35950 3    50   Input ~ 0
 G1C6
-Text GLabel 4900 35950 3    50   Input ~ 0
+Text GLabel 7000 35950 3    50   Input ~ 0
 G1C7
-Text GLabel 5000 35950 3    50   Input ~ 0
+Text GLabel 6900 35950 3    50   Input ~ 0
 G1C8
-Text GLabel 5100 35950 3    50   Input ~ 0
+Text GLabel 6800 35950 3    50   Input ~ 0
 G1C9
-Text GLabel 5200 35950 3    50   Input ~ 0
+Text GLabel 6700 35950 3    50   Input ~ 0
 G1C10
-Text GLabel 5300 35950 3    50   Input ~ 0
+Text GLabel 6600 35950 3    50   Input ~ 0
 G1C11
-Text GLabel 5400 35950 3    50   Input ~ 0
-G1C12
-Text GLabel 5500 35950 3    50   Input ~ 0
-G1C13
-Text GLabel 5600 35950 3    50   Input ~ 0
-G1C14
-Text GLabel 5700 35950 3    50   Input ~ 0
-G1C15
-Text GLabel 5800 35950 3    50   Input ~ 0
-G1C16
-Text GLabel 5900 35950 3    50   Input ~ 0
-G1C17
-Text GLabel 6000 35950 3    50   Input ~ 0
-G1C18
-Text GLabel 6100 35950 3    50   Input ~ 0
-G1C19
-Text GLabel 6200 35950 3    50   Input ~ 0
-G1C20
-Text GLabel 6300 35950 3    50   Input ~ 0
-G1C21
-Text GLabel 6400 35950 3    50   Input ~ 0
-G1C22
-Text GLabel 6500 35950 3    50   Input ~ 0
-G1C23
 Text GLabel 9600 35900 3    50   Input ~ 0
 G2C0
 Text GLabel 9700 35900 3    50   Input ~ 0
@@ -23583,4 +23523,70 @@ Text GLabel 17150 28700 3    50   Input ~ 0
 L10G11
 Text GLabel 17250 28700 3    50   Input ~ 0
 L10B11
+Wire Wire Line
+	37550 7950 37050 7950
+Wire Wire Line
+	37050 7950 37050 10000
+Wire Wire Line
+	37550 8050 36950 8050
+Wire Wire Line
+	36950 8050 36950 10100
+Text GLabel 5400 35950 3    50   Input ~ 0
+G1C23
+Text GLabel 5500 35950 3    50   Input ~ 0
+G1C22
+Text GLabel 5600 35950 3    50   Input ~ 0
+G1C21
+Text GLabel 5900 35950 3    50   Input ~ 0
+G1C20
+Text GLabel 5800 35950 3    50   Input ~ 0
+G1C19
+Text GLabel 5700 35950 3    50   Input ~ 0
+G1C18
+Text GLabel 6300 35950 3    50   Input ~ 0
+G1C12
+Text GLabel 6400 35950 3    50   Input ~ 0
+G1C13
+Text GLabel 6500 35950 3    50   Input ~ 0
+G1C14
+Text GLabel 6200 35950 3    50   Input ~ 0
+G1C15
+Text GLabel 6100 35950 3    50   Input ~ 0
+G1C16
+Text GLabel 6000 35950 3    50   Input ~ 0
+G1C17
+$Comp
+L fm-b2020rgba-hg:FM-B2020RGBA-HG D159
+U 1 1 60ED0C8F
+P 24000 20250
+F 0 "D159" H 24000 20747 50  0000 C CNN
+F 1 "Osc2DriveLED13" H 24000 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 24000 20200 50  0001 C CNN
+F 3 "~" H 24000 20200 50  0001 C CNN
+	1    24000 20250
+	1    0    0    -1  
+$EndComp
+$Comp
+L fm-b2020rgba-hg:FM-B2020RGBA-HG D152
+U 1 1 60C54EF2
+P 17400 20250
+F 0 "D152" H 17400 20747 50  0000 C CNN
+F 1 "Osc2DriveLED2" H 17400 20656 50  0000 C CNN
+F 2 "fm-b2020rgba-hg:FM-B2020RGBA-HG" H 17400 20200 50  0001 C CNN
+F 3 "~" H 17400 20200 50  0001 C CNN
+	1    17400 20250
+	1    0    0    -1  
+$EndComp
+Text GLabel 12100 18800 3    50   Input ~ 0
+L5B7
+Text GLabel 12000 18800 3    50   Input ~ 0
+L5G7
+Text GLabel 11900 18800 3    50   Input ~ 0
+L5R7
+Text GLabel 20850 20450 0    50   Input ~ 0
+L5B7
+Text GLabel 20850 20250 0    50   Input ~ 0
+L5G7
+Text GLabel 20850 20050 0    50   Input ~ 0
+L5R7
 $EndSCHEMATC
