@@ -9734,22 +9734,6 @@ Wire Wire Line
 Wire Wire Line
 	28850 23850 28850 27200
 Wire Wire Line
-	36800 14450 37650 14450
-Wire Wire Line
-	36800 14450 36800 16700
-Wire Wire Line
-	37650 14550 36700 14550
-Wire Wire Line
-	36700 14550 36700 16700
-Wire Wire Line
-	39400 15150 38700 15150
-Wire Wire Line
-	39400 15150 39400 16700
-Wire Wire Line
-	38700 15250 39500 15250
-Wire Wire Line
-	39500 15250 39500 16700
-Wire Wire Line
 	29800 23650 29150 23650
 Wire Wire Line
 	29150 23650 29150 27950
@@ -13972,12 +13956,8 @@ Text GLabel 6700 35950 3    50   Input ~ 0
 G1C10
 Text GLabel 6600 35950 3    50   Input ~ 0
 G1C11
-Text GLabel 9600 35900 3    50   Input ~ 0
-G2C0
 Text GLabel 9700 35900 3    50   Input ~ 0
 G2C1
-Text GLabel 9800 35900 3    50   Input ~ 0
-G2C2
 Text GLabel 9900 35900 3    50   Input ~ 0
 G2C3
 Text GLabel 10000 35900 3    50   Input ~ 0
@@ -13998,12 +13978,8 @@ Text GLabel 10800 35900 3    50   Input ~ 0
 G2C12
 Text GLabel 10900 35900 3    50   Input ~ 0
 G2C13
-Text GLabel 11100 35900 3    50   Input ~ 0
-G2C15
 Text GLabel 11200 35900 3    50   Input ~ 0
 G2C16
-Text GLabel 11300 35900 3    50   Input ~ 0
-G2C17
 Text GLabel 11400 35900 3    50   Input ~ 0
 G2C18
 Text GLabel 11500 35900 3    50   Input ~ 0
@@ -23589,4 +23565,28 @@ Text GLabel 20850 20250 0    50   Input ~ 0
 L5G7
 Text GLabel 20850 20050 0    50   Input ~ 0
 L5R7
+Wire Wire Line
+	38700 15250 39400 15250
+Wire Wire Line
+	39400 15250 39400 16700
+Wire Wire Line
+	39500 15150 38700 15150
+Wire Wire Line
+	39500 15150 39500 16700
+Wire Wire Line
+	36800 14550 37650 14550
+Wire Wire Line
+	36800 14550 36800 16700
+Wire Wire Line
+	37650 14450 36700 14450
+Wire Wire Line
+	36700 14450 36700 16700
+Text GLabel 11300 35900 3    50   Input ~ 0
+G2C17
+Text GLabel 11100 35900 3    50   Input ~ 0
+G2C15
+Text GLabel 9600 35900 3    50   Input ~ 0
+G2C0
+Text GLabel 9800 35900 3    50   Input ~ 0
+G2C2
 $EndSCHEMATC
