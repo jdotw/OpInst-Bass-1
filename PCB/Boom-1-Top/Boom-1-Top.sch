@@ -8028,10 +8028,6 @@ Wire Wire Line
 Wire Wire Line
 	42500 19250 42500 18650
 Connection ~ 42500 18650
-Wire Wire Line
-	43600 17800 43600 15050
-Connection ~ 43600 17800
-Connection ~ 43700 17800
 Connection ~ 45350 17800
 Connection ~ 45250 17800
 Wire Wire Line
@@ -9813,39 +9809,13 @@ Wire Wire Line
 	45500 3350 45300 3350
 Connection ~ 45250 5200
 Wire Wire Line
-	45850 16850 45250 16850
-Wire Wire Line
 	45250 16850 45250 17800
-Wire Wire Line
-	45350 16950 45950 16950
 Wire Wire Line
 	45350 16950 45350 17800
 Wire Wire Line
 	44450 16750 44050 16750
 Wire Wire Line
 	44150 16650 44550 16650
-Wire Wire Line
-	44050 14750 44550 14750
-Wire Wire Line
-	44050 14750 44050 16750
-Wire Wire Line
-	44550 14850 44150 14850
-Wire Wire Line
-	44150 14850 44150 16650
-Wire Wire Line
-	44550 14950 43700 14950
-Wire Wire Line
-	43700 14950 43700 17800
-Wire Wire Line
-	44550 15050 43600 15050
-Wire Wire Line
-	45850 15550 45600 15550
-Wire Wire Line
-	45850 15550 45850 16850
-Wire Wire Line
-	45600 15450 45950 15450
-Wire Wire Line
-	45950 15450 45950 16950
 Wire Wire Line
 	45600 15650 46250 15650
 Wire Wire Line
@@ -14044,25 +14014,25 @@ Text GLabel 5650 41900 3    50   Input ~ 0
 G3C14
 Text GLabel 4950 41900 3    50   Input ~ 0
 G3C7
-Text GLabel 9650 41850 3    50   Input ~ 0
+Text GLabel 10250 41850 3    50   Input ~ 0
 G4C0
-Text GLabel 9750 41850 3    50   Input ~ 0
+Text GLabel 10350 41850 3    50   Input ~ 0
 G4C1
-Text GLabel 9850 41850 3    50   Input ~ 0
-G4C2
-Text GLabel 9950 41850 3    50   Input ~ 0
-G4C3
-Text GLabel 10050 41850 3    50   Input ~ 0
-G4C4
-Text GLabel 10150 41850 3    50   Input ~ 0
-G4C5
 Text GLabel 10450 41850 3    50   Input ~ 0
-G4C8
+G4C2
 Text GLabel 10550 41850 3    50   Input ~ 0
-G4C9
+G4C3
 Text GLabel 10650 41850 3    50   Input ~ 0
-G4C10
+G4C4
 Text GLabel 10750 41850 3    50   Input ~ 0
+G4C5
+Text GLabel 9850 41850 3    50   Input ~ 0
+G4C8
+Text GLabel 9950 41850 3    50   Input ~ 0
+G4C9
+Text GLabel 10050 41850 3    50   Input ~ 0
+G4C10
+Text GLabel 10150 41850 3    50   Input ~ 0
 G4C11
 Text GLabel 10850 41850 3    50   Input ~ 0
 G4C12
@@ -14088,9 +14058,9 @@ Text GLabel 11950 41850 3    50   Input ~ 0
 G4C23
 Text GLabel 11050 41850 3    50   Input ~ 0
 G4C14
-Text GLabel 10350 41850 3    50   Input ~ 0
+Text GLabel 9750 41850 3    50   Input ~ 0
 G4C7
-Text GLabel 10250 41850 3    50   Input ~ 0
+Text GLabel 9650 41850 3    50   Input ~ 0
 G4C6
 Text GLabel 4050 37100 0    50   Input ~ 0
 G1C0
@@ -23589,4 +23559,42 @@ Text GLabel 9600 35900 3    50   Input ~ 0
 G2C0
 Text GLabel 9800 35900 3    50   Input ~ 0
 G2C2
+Wire Wire Line
+	45250 16850 43950 16850
+Wire Wire Line
+	43850 16950 45350 16950
+Wire Wire Line
+	43600 17800 43600 17050
+Wire Wire Line
+	43600 17050 45750 17050
+Connection ~ 43600 17800
+Wire Wire Line
+	43700 17800 43700 17150
+Wire Wire Line
+	43700 17150 45850 17150
+Wire Wire Line
+	45850 17150 45850 15550
+Connection ~ 43700 17800
+Wire Wire Line
+	44550 14750 44150 14750
+Wire Wire Line
+	44150 14750 44150 16650
+Wire Wire Line
+	44550 14850 44050 14850
+Wire Wire Line
+	44050 14850 44050 16750
+Wire Wire Line
+	43950 14950 44550 14950
+Wire Wire Line
+	43950 14950 43950 16850
+Wire Wire Line
+	44550 15050 43850 15050
+Wire Wire Line
+	43850 15050 43850 16950
+Wire Wire Line
+	45600 15450 45750 15450
+Wire Wire Line
+	45750 15450 45750 17050
+Wire Wire Line
+	45600 15550 45850 15550
 $EndSCHEMATC
