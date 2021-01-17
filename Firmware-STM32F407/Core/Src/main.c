@@ -553,6 +553,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BT_IRQ_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : BT_CS_Pin */
+  GPIO_InitStruct.Pin = BT_CS_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(BT_CS_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : OSC1_SCALE_CS_Pin OSC2_SCALE_CS_Pin */
   GPIO_InitStruct.Pin = OSC1_SCALE_CS_Pin|OSC2_SCALE_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;

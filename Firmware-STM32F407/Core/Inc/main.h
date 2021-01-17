@@ -60,6 +60,8 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define BT_IRQ_Pin GPIO_PIN_0
 #define BT_IRQ_GPIO_Port GPIOA
+#define BT_CS_Pin GPIO_PIN_1
+#define BT_CS_GPIO_Port GPIOA
 #define BT_TX_Pin GPIO_PIN_2
 #define BT_TX_GPIO_Port GPIOA
 #define BT_RX_Pin GPIO_PIN_3
