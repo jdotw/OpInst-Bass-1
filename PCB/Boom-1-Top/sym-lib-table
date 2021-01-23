@@ -14,4 +14,5 @@
   (lib (name 1-1734592-8)(type Legacy)(uri ${KIPRJMOD}/1-1734592-8/1-1734592-8.lib)(options "")(descr ""))
   (lib (name Futaba)(type Legacy)(uri ${KIPRJMOD}/Futaba.lib)(options "")(descr ""))
   (lib (name MP2331H)(type Legacy)(uri ${KIPRJMOD}/MP2331H.lib)(options "")(descr ""))
+  (lib (name IS32FL3237)(type Legacy)(uri ${KIPRJMOD}/IS32FL3237.lib)(options "")(descr ""))
 )

@@ -7,4 +7,5 @@
   (lib (name fm-b2020rgba-hg)(type KiCad)(uri ${KIPRJMOD}/fm-b2020rgba-hg.pretty)(options "")(descr ""))
   (lib (name "TE FPC")(type KiCad)(uri "${KIPRJMOD}/TE FPC.pretty")(options "")(descr ""))
   (lib (name Futaba)(type KiCad)(uri ${KIPRJMOD}/Futaba.pretty)(options "")(descr ""))
+  (lib (name IS32FL3237)(type KiCad)(uri ${KIPRJMOD}/IS32FL3237.pretty)(options "")(descr ""))
 )
