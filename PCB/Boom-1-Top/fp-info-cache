@@ -1,18 +1,4 @@
-19102641648881975
-5PINDIN
-SWITCHCRAFT_57PC5F
-
-
-0
-7
-7
-BLUENRG
-XCVR_BLUENRG-M2SA
-
-
-0
-23
-23
+19088162150520102
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -46962,6 +46948,13 @@ connector Wuerth WR-WTB vertical
 0
 10
 10
+ControlBreakout
+ExportedBackImage
+
+
+0
+0
+0
 Converter_ACDC
 Converter_ACDC_CUI_PBO-3-Sxx_THT_Vertical
 ACDC-Converter, 3W, CUI PBO-3, THT https://www.cui.com/product/resource/pbo-3.pdf
@@ -51589,13 +51582,6 @@ Fuse Fuseholder TR5 Littelfuse/Wickmann No. 460 No560
 0
 2
 2
-Futaba
-ELW2701AA
-
-
-0
-0
-0
 Heatsink
 Heatsink_35x26mm_1xFixation3mm_Fischer-SK486-35
 Heatsink, 35mm x 26mm, 1x Fixation 3mm, Fischer SK486-35
@@ -59730,48 +59716,6 @@ DIL DIP PDIP 2.54mm 7.62mm 300mil
 0
 4
 4
-PEC11R
-PEC11R-4x15F-N0024
-
-
-0
-5
-5
-PEC11R
-PEC11R-4x15F-S0024
-
-
-0
-7
-7
-PEC11R
-PTS636
-
-
-0
-2
-2
-PEC11R
-SWITCHCRAFT_57PC5F
-
-
-0
-7
-7
-PEC11R
-XCVR_BLUENRG-M2SA
-
-
-0
-23
-23
-PTS636
-PTS636
-
-
-0
-2
-2
 Package_BGA
 Analog_BGA-28_4.0x6.25mm_Layout4x7_P0.8mm_Ball0.45mm_Pad0.4
 Analog BGA-28 4.0mm x 6.25mm package, pitch 0.4mm pad, based on https://www.analog.com/media/en/technical-documentation/data-sheets/8063fa.pdf
@@ -77797,13 +77741,6 @@ Logo WEEE
 0
 0
 0
-TE FPC
-TE_1-1734592-8
-
-
-0
-20
-20
 TerminalBlock
 TerminalBlock_Altech_AK300-2_P5.00mm
 Altech AK300 terminal block, pitch 5.0mm, 45 degree angled, see http://www.mouser.com/ds/2/16/PCBMETRC-24178.pdf
