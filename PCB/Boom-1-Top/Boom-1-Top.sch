@@ -13772,45 +13772,45 @@ Text GLabel 6700 35950 3    50   Input ~ 0
 G1C10
 Text GLabel 6600 35950 3    50   Input ~ 0
 G1C11
-Text GLabel 9700 35900 3    50   Input ~ 0
-G2C1
-Text GLabel 9900 35900 3    50   Input ~ 0
-G2C3
-Text GLabel 10000 35900 3    50   Input ~ 0
-G2C4
-Text GLabel 10100 35900 3    50   Input ~ 0
-G2C5
-Text GLabel 10300 35900 3    50   Input ~ 0
-G2C7
-Text GLabel 10400 35900 3    50   Input ~ 0
-G2C8
-Text GLabel 10500 35900 3    50   Input ~ 0
-G2C9
-Text GLabel 10600 35900 3    50   Input ~ 0
-G2C10
-Text GLabel 10700 35900 3    50   Input ~ 0
-G2C11
-Text GLabel 10800 35900 3    50   Input ~ 0
-G2C12
-Text GLabel 10900 35900 3    50   Input ~ 0
-G2C13
-Text GLabel 11200 35900 3    50   Input ~ 0
-G2C16
-Text GLabel 11400 35900 3    50   Input ~ 0
-G2C18
 Text GLabel 11500 35900 3    50   Input ~ 0
-G2C19
-Text GLabel 11600 35900 3    50   Input ~ 0
-G2C20
+G2C1
 Text GLabel 11700 35900 3    50   Input ~ 0
-G2C21
+G2C3
 Text GLabel 11800 35900 3    50   Input ~ 0
-G2C22
+G2C4
 Text GLabel 11900 35900 3    50   Input ~ 0
-G2C23
-Text GLabel 10200 35900 3    50   Input ~ 0
-G2C6
+G2C5
 Text GLabel 11000 35900 3    50   Input ~ 0
+G2C7
+Text GLabel 10800 35900 3    50   Input ~ 0
+G2C8
+Text GLabel 11200 35900 3    50   Input ~ 0
+G2C9
+Text GLabel 10900 35900 3    50   Input ~ 0
+G2C10
+Text GLabel 11300 35900 3    50   Input ~ 0
+G2C11
+Text GLabel 10500 35900 3    50   Input ~ 0
+G2C12
+Text GLabel 10600 35900 3    50   Input ~ 0
+G2C13
+Text GLabel 10300 35900 3    50   Input ~ 0
+G2C16
+Text GLabel 9600 35900 3    50   Input ~ 0
+G2C18
+Text GLabel 9700 35900 3    50   Input ~ 0
+G2C19
+Text GLabel 9800 35900 3    50   Input ~ 0
+G2C20
+Text GLabel 9900 35900 3    50   Input ~ 0
+G2C21
+Text GLabel 10000 35900 3    50   Input ~ 0
+G2C22
+Text GLabel 10100 35900 3    50   Input ~ 0
+G2C23
+Text GLabel 11100 35900 3    50   Input ~ 0
+G2C6
+Text GLabel 10700 35900 3    50   Input ~ 0
 G2C14
 Text GLabel 4250 41900 3    50   Input ~ 0
 G3C0
@@ -21067,13 +21067,13 @@ Wire Wire Line
 	37650 14450 36700 14450
 Wire Wire Line
 	36700 14450 36700 16700
-Text GLabel 11300 35900 3    50   Input ~ 0
+Text GLabel 10400 35900 3    50   Input ~ 0
 G2C17
-Text GLabel 11100 35900 3    50   Input ~ 0
+Text GLabel 10200 35900 3    50   Input ~ 0
 G2C15
-Text GLabel 9600 35900 3    50   Input ~ 0
+Text GLabel 11400 35900 3    50   Input ~ 0
 G2C0
-Text GLabel 9800 35900 3    50   Input ~ 0
+Text GLabel 11600 35900 3    50   Input ~ 0
 G2C2
 Wire Wire Line
 	45250 16850 43950 16850
