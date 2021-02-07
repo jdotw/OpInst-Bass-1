@@ -909,30 +909,6 @@ Text GLabel 40900 42050 2    50   Input ~ 0
 SubFiltEnv2DecayCV
 Text GLabel 40900 41850 2    50   Input ~ 0
 SubFiltEnv2AttackCV
-Text GLabel 10050 9500 0    50   Input ~ 0
-OscFiltEnv1Gate
-Text GLabel 10050 9600 0    50   Input ~ 0
-OscFiltEnv1Trigger
-Text GLabel 10050 9300 0    50   Input ~ 0
-OscFiltEnv2Gate
-Text GLabel 10050 9400 0    50   Input ~ 0
-OscFiltEnv2Trigger
-Text GLabel 10050 9100 0    50   Input ~ 0
-SubAmpEnvGate
-Text GLabel 10050 9200 0    50   Input ~ 0
-SubAmpEnvTrigger
-Text GLabel 10050 8900 0    50   Input ~ 0
-OscAmpEnvGate
-Text GLabel 10050 9000 0    50   Input ~ 0
-OscAmpEnvTrigger
-Text GLabel 10050 8700 0    50   Input ~ 0
-SubFiltEnv1Gate
-Text GLabel 10050 8800 0    50   Input ~ 0
-SubFiltEnv1Trigger
-Text GLabel 10050 8500 0    50   Input ~ 0
-SubFiltEnv2Gate
-Text GLabel 10050 8600 0    50   Input ~ 0
-SubFiltEnv2Trigger
 Text GLabel 10050 7400 0    50   Input ~ 0
 Osc1TuningOut
 Text GLabel 10050 7600 0    50   Input ~ 0
