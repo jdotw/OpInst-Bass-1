@@ -25847,4 +25847,6 @@ F 3 "" H 22200 42550 50  0001 C CNN
 	1    22200 42550
 	1    0    0    -1  
 $EndComp
+Text GLabel 10050 9200 0    50   Input ~ 0
+SHIFTSW
 $EndSCHEMATC
