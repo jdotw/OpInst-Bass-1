@@ -76,6 +76,8 @@ void Error_Handler(void);
 #define OSC2_TUNE_GPIO_Port GPIOE
 #define I2C2_EXTI_Pin GPIO_PIN_12
 #define I2C2_EXTI_GPIO_Port GPIOB
+#define SHIFT_SW_Pin GPIO_PIN_10
+#define SHIFT_SW_GPIO_Port GPIOD
 #define MIDI_TX_Pin GPIO_PIN_9
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
