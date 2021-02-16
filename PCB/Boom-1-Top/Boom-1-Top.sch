@@ -7601,26 +7601,6 @@ Text GLabel 11850 5700 2    50   Input ~ 0
 MIDITXUSART
 Text GLabel 11850 5800 2    50   Input ~ 0
 MIDIRXUSART
-Text GLabel 27300 4500 2    50   Input ~ 0
-I2CBus1SDA
-Text GLabel 27300 4400 2    50   Input ~ 0
-I2CBus1SCL
-Text GLabel 28750 16400 2    50   Input ~ 0
-I2CBus1SDA
-Text GLabel 28750 16300 2    50   Input ~ 0
-I2CBus1SCL
-Text GLabel 30850 23550 2    50   Input ~ 0
-I2CBus1SDA
-Text GLabel 30850 23450 2    50   Input ~ 0
-I2CBus1SCL
-Text GLabel 35900 2500 2    50   Input ~ 0
-I2CBus1SDA
-Text GLabel 35900 2400 2    50   Input ~ 0
-I2CBus1SCL
-Text GLabel 38600 7750 2    50   Input ~ 0
-I2CBus1SDA
-Text GLabel 38600 7650 2    50   Input ~ 0
-I2CBus1SCL
 Wire Wire Line
 	36150 11850 35800 11850
 $Comp
@@ -7647,26 +7627,6 @@ F 3 "" H 36400 26300 50  0001 C CNN
 	1    36400 26300
 	0    -1   -1   0   
 $EndComp
-Text GLabel 38650 22100 2    50   Input ~ 0
-I2CBus2SDA
-Text GLabel 38650 22000 2    50   Input ~ 0
-I2CBus2SCL
-Text GLabel 39350 29200 2    50   Input ~ 0
-I2CBus2SDA
-Text GLabel 39350 29100 2    50   Input ~ 0
-I2CBus2SCL
-Text GLabel 45300 2650 2    50   Input ~ 0
-I2CBus2SDA
-Text GLabel 45300 2550 2    50   Input ~ 0
-I2CBus2SCL
-Text GLabel 45600 14750 2    50   Input ~ 0
-I2CBus2SDA
-Text GLabel 45600 14650 2    50   Input ~ 0
-I2CBus2SCL
-Text GLabel 45300 25900 2    50   Input ~ 0
-I2CBus2SDA
-Text GLabel 45300 25800 2    50   Input ~ 0
-I2CBus2SCL
 $Comp
 L power:GND #PWR0247
 U 1 1 742218BF
@@ -7944,10 +7904,6 @@ Wire Wire Line
 Connection ~ 38400 15700
 Wire Wire Line
 	38400 15600 38300 15600
-Text GLabel 38700 14250 2    50   Input ~ 0
-I2CBus1SDA
-Text GLabel 38700 14150 2    50   Input ~ 0
-I2CBus1SCL
 Wire Wire Line
 	27200 15350 30900 15350
 Wire Wire Line
@@ -8229,8 +8185,6 @@ Wire Wire Line
 	26600 3950 26250 3950
 Wire Wire Line
 	26250 3950 26250 4400
-Wire Wire Line
-	27900 5100 27700 5100
 Wire Wire Line
 	27800 5000 27300 5000
 Wire Wire Line
@@ -8529,8 +8483,6 @@ Wire Wire Line
 	43800 1850 46000 1850
 Wire Wire Line
 	46000 1850 46000 3250
-Wire Wire Line
-	46000 3250 45400 3250
 $Comp
 L Connector_Generic:Conn_01x05 J9
 U 1 1 6F2BA7D9
@@ -8629,8 +8581,6 @@ Wire Wire Line
 	36050 7200 39250 7200
 Wire Wire Line
 	39250 7200 39250 8350
-Wire Wire Line
-	39250 8350 38700 8350
 $Comp
 L Connector_Generic:Conn_01x05 J8
 U 1 1 6F75221A
@@ -9029,8 +8979,6 @@ Wire Wire Line
 	37200 21450 39300 21450
 Wire Wire Line
 	39300 21450 39300 22700
-Wire Wire Line
-	39300 22700 38950 22700
 $Comp
 L Connector_Generic:Conn_01x05 J13
 U 1 1 70BD2E1F
@@ -9125,8 +9073,6 @@ Wire Wire Line
 	45850 25300 45850 26400
 Wire Wire Line
 	45850 26400 45300 26400
-Wire Wire Line
-	45300 26500 45500 26500
 Wire Wire Line
 	45950 26500 45950 25200
 Wire Wire Line
@@ -9445,14 +9391,9 @@ F 3 "~" H 29400 7010 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	27700 5100 27700 7150
-Wire Wire Line
 	27700 7150 29700 7150
 Wire Wire Line
 	29700 7150 29700 6850
-Connection ~ 27700 5100
-Wire Wire Line
-	27700 5100 27300 5100
 $Comp
 L power:GND #PWR0376
 U 1 1 635BE5A8
@@ -18209,34 +18150,6 @@ F 3 "" H 26400 11400 50  0001 C CNN
 	1    26400 11400
 	0    -1   -1   0   
 $EndComp
-Text GLabel 29500 37300 0    50   Input ~ 0
-DAC_I2C_1_SCL
-Text GLabel 29500 37200 0    50   Input ~ 0
-DAC_I2C_1_SDA
-Text GLabel 29500 43700 0    50   Input ~ 0
-DAC_I2C_1_SCL
-Text GLabel 29500 43600 0    50   Input ~ 0
-DAC_I2C_1_SDA
-Text GLabel 33500 39900 0    50   Input ~ 0
-DAC_I2C_1_SCL
-Text GLabel 33500 39800 0    50   Input ~ 0
-DAC_I2C_1_SDA
-Text GLabel 40000 37300 0    50   Input ~ 0
-DAC_I2C_2_SCL
-Text GLabel 40000 37200 0    50   Input ~ 0
-DAC_I2C_2_SDA
-Text GLabel 40000 39550 0    50   Input ~ 0
-DAC_I2C_2_SCL
-Text GLabel 40000 39450 0    50   Input ~ 0
-DAC_I2C_2_SDA
-Text GLabel 40000 42250 0    50   Input ~ 0
-DAC_I2C_2_SCL
-Text GLabel 40000 42150 0    50   Input ~ 0
-DAC_I2C_2_SDA
-Text GLabel 45300 37900 0    50   Input ~ 0
-DAC_I2C_3_SCL
-Text GLabel 45300 37800 0    50   Input ~ 0
-DAC_I2C_3_SDA
 Wire Wire Line
 	49650 36500 49650 36700
 $Comp
@@ -18320,17 +18233,7 @@ Wire Wire Line
 Wire Wire Line
 	37950 23950 38950 23950
 Wire Wire Line
-	38950 23950 38950 22700
-Connection ~ 38950 22700
-Wire Wire Line
-	38950 22700 38650 22700
-Wire Wire Line
-	38700 8350 38700 9700
-Wire Wire Line
 	38700 9700 38450 9700
-Connection ~ 38700 8350
-Wire Wire Line
-	38700 8350 38600 8350
 $Comp
 L Mechanical:MountingHole_Pad H2
 U 1 1 6708C524
@@ -18678,11 +18581,6 @@ Wire Wire Line
 	44850 6450 44850 4550
 Wire Wire Line
 	44850 4550 45400 4550
-Wire Wire Line
-	45400 4550 45400 3250
-Connection ~ 45400 3250
-Wire Wire Line
-	45400 3250 45300 3250
 $Comp
 L power:GND #PWR0629
 U 1 1 625CE4C2
@@ -18700,11 +18598,6 @@ Wire Wire Line
 	44850 29650 44850 27950
 Wire Wire Line
 	44850 27950 45500 27950
-Wire Wire Line
-	45500 27950 45500 26500
-Connection ~ 45500 26500
-Wire Wire Line
-	45500 26500 45950 26500
 $Comp
 L Device:LED D64
 U 1 1 62B5F457
@@ -26159,4 +26052,34 @@ Wire Wire Line
 Connection ~ 5950 31450
 Wire Wire Line
 	5950 31450 5950 31500
+Wire Wire Line
+	27300 5100 27900 5100
+Wire Wire Line
+	27700 7150 27700 4900
+Wire Wire Line
+	27700 4900 27300 4900
+Wire Wire Line
+	45300 3250 46000 3250
+Wire Wire Line
+	45400 4550 45400 3050
+Wire Wire Line
+	45400 3050 45300 3050
+Wire Wire Line
+	38600 8350 39250 8350
+Wire Wire Line
+	38700 9700 38700 8150
+Wire Wire Line
+	38700 8150 38600 8150
+Wire Wire Line
+	38650 22700 39300 22700
+Wire Wire Line
+	38950 23950 38950 22500
+Wire Wire Line
+	38950 22500 38650 22500
+Wire Wire Line
+	45300 26500 45950 26500
+Wire Wire Line
+	45500 27950 45500 26300
+Wire Wire Line
+	45500 26300 45300 26300
 $EndSCHEMATC
