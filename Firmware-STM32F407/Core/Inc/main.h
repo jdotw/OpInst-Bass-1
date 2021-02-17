@@ -78,6 +78,12 @@ void Error_Handler(void);
 #define I2C2_EXTI_GPIO_Port GPIOB
 #define SHIFT_SW_Pin GPIO_PIN_10
 #define SHIFT_SW_GPIO_Port GPIOD
+#define OLED_RST_Pin GPIO_PIN_15
+#define OLED_RST_GPIO_Port GPIOD
+#define OLED_DC_Pin GPIO_PIN_6
+#define OLED_DC_GPIO_Port GPIOC
+#define OLED_CS_Pin GPIO_PIN_7
+#define OLED_CS_GPIO_Port GPIOC
 #define MIDI_TX_Pin GPIO_PIN_9
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
