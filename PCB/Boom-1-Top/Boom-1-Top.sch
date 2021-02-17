@@ -26309,4 +26309,10 @@ Wire Wire Line
 Wire Wire Line
 	23900 7000 23900 6750
 Connection ~ 23900 6750
+Text GLabel 11850 8900 2    50   Input ~ 0
+OLED_SPI_CS
+Text GLabel 11850 9700 2    50   Input ~ 0
+OLED_RESET
+Text GLabel 11850 8800 2    50   Input ~ 0
+OLED_DATA_SELECT
 $EndSCHEMATC
