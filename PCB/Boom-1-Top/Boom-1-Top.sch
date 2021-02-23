@@ -29379,4 +29379,11 @@ F 3 "" H 40450 41850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 NoConn ~ 40000 41950
+Text Notes 44700 38050 0    50   ~ 0
+DAC_LEFT0:100
+Text GLabel 45300 37800 0    50   Input ~ 0
+LEFT_I2C_0_SDA
+Text GLabel 45300 37900 0    50   Input ~ 0
+LEFT_I2C_0_SCL
+NoConn ~ 45300 37600
 $EndSCHEMATC
