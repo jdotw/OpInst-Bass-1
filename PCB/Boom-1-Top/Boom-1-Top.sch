@@ -29676,4 +29676,124 @@ F 3 "" H 33900 44150 50  0001 C CNN
 	1    33900 44150
 	-1   0    0    1   
 $EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J25
+U 1 1 608ABCAB
+P 22600 9650
+F 0 "J25" V 22472 9730 50  0000 L CNN
+F 1 "LeftI2C0Test" V 22700 9400 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 22600 9650 50  0001 C CNN
+F 3 "~" H 22600 9650 50  0001 C CNN
+	1    22600 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 22500 9450 1    50   Input ~ 0
+LEFT_I2C_0_SCL
+Text GLabel 22600 9450 1    50   Input ~ 0
+LEFT_I2C_0_SDA
+$Comp
+L Connector_Generic:Conn_01x02 J29
+U 1 1 60DBDDEB
+P 23250 9650
+F 0 "J29" V 23122 9730 50  0000 L CNN
+F 1 "LeftI2C1Test" V 23350 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 23250 9650 50  0001 C CNN
+F 3 "~" H 23250 9650 50  0001 C CNN
+	1    23250 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 23150 9450 1    50   Input ~ 0
+LEFT_I2C_1_SCL
+Text GLabel 23250 9450 1    50   Input ~ 0
+LEFT_I2C_1_SDA
+$Comp
+L Connector_Generic:Conn_01x02 J30
+U 1 1 612D0684
+P 23900 9650
+F 0 "J30" V 23772 9730 50  0000 L CNN
+F 1 "LeftI2C2Test" V 24000 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 23900 9650 50  0001 C CNN
+F 3 "~" H 23900 9650 50  0001 C CNN
+	1    23900 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 23800 9450 1    50   Input ~ 0
+LEFT_I2C_2_SCL
+Text GLabel 23900 9450 1    50   Input ~ 0
+LEFT_I2C_2_SDA
+$Comp
+L Connector_Generic:Conn_01x02 J31
+U 1 1 617E17E5
+P 24550 9650
+F 0 "J31" V 24422 9730 50  0000 L CNN
+F 1 "LeftI2C3Test" V 24650 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 24550 9650 50  0001 C CNN
+F 3 "~" H 24550 9650 50  0001 C CNN
+	1    24550 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 24450 9450 1    50   Input ~ 0
+LEFT_I2C_3_SCL
+Text GLabel 24550 9450 1    50   Input ~ 0
+LEFT_I2C_3_SDA
+$Comp
+L Connector_Generic:Conn_01x02 J32
+U 1 1 61CF7537
+P 29600 9650
+F 0 "J32" V 29472 9730 50  0000 L CNN
+F 1 "RightI2C0Test" V 29700 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 29600 9650 50  0001 C CNN
+F 3 "~" H 29600 9650 50  0001 C CNN
+	1    29600 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 29500 9450 1    50   Input ~ 0
+RIGHT_I2C_0_SCL
+Text GLabel 29600 9450 1    50   Input ~ 0
+RIGHT_I2C_0_SDA
+$Comp
+L Connector_Generic:Conn_01x02 J33
+U 1 1 61CF7553
+P 30250 9650
+F 0 "J33" V 30122 9730 50  0000 L CNN
+F 1 "RightI2C1Test" V 30350 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 30250 9650 50  0001 C CNN
+F 3 "~" H 30250 9650 50  0001 C CNN
+	1    30250 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 30150 9450 1    50   Input ~ 0
+RIGHT_I2C_1_SCL
+$Comp
+L Connector_Generic:Conn_01x02 J34
+U 1 1 61CF755F
+P 30900 9650
+F 0 "J34" V 30772 9730 50  0000 L CNN
+F 1 "RightI2C2Test" V 31000 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 30900 9650 50  0001 C CNN
+F 3 "~" H 30900 9650 50  0001 C CNN
+	1    30900 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 30800 9450 1    50   Input ~ 0
+RIGHT_I2C_2_SCL
+$Comp
+L Connector_Generic:Conn_01x02 J35
+U 1 1 61CF756B
+P 31550 9650
+F 0 "J35" V 31422 9730 50  0000 L CNN
+F 1 "RightI2C3Test" V 31650 9400 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical" H 31550 9650 50  0001 C CNN
+F 3 "~" H 31550 9650 50  0001 C CNN
+	1    31550 9650
+	0    1    1    0   
+$EndComp
+Text GLabel 31450 9450 1    50   Input ~ 0
+RIGHT_I2C_3_SCL
+Text GLabel 30250 9450 1    50   Input ~ 0
+RIGHT_I2C_1_SDA
+Text GLabel 30900 9450 1    50   Input ~ 0
+RIGHT_I2C_2_SDA
+Text GLabel 31550 9450 1    50   Input ~ 0
+RIGHT_I2C_3_SDA
 $EndSCHEMATC
