@@ -30057,4 +30057,170 @@ F 3 "" H 21350 5150 50  0001 C CNN
 	1    21350 5150
 	0    -1   -1   0   
 $EndComp
+$Comp
+L Connector_Generic:Conn_02x03_Counter_Clockwise J49
+U 1 1 6927AAF5
+P 18500 10750
+F 0 "J49" H 18550 11067 50  0000 C CNN
+F 1 "I2CBus1TestConn" H 18550 10976 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 18500 10750 50  0001 C CNN
+F 3 "~" H 18500 10750 50  0001 C CNN
+	1    18500 10750
+	1    0    0    -1  
+$EndComp
+Text GLabel 18300 10750 0    50   Input ~ 0
+I2CBus1SDA
+Text GLabel 18300 10650 0    50   Input ~ 0
+I2CBus1SCL
+Text GLabel 18300 10850 0    50   Input ~ 0
+I2CBus1Interrupt
+$Comp
+L power:GND #PWR0962
+U 1 1 697A8F5A
+P 18800 10850
+F 0 "#PWR0962" H 18800 10600 50  0001 C CNN
+F 1 "GND" H 18805 10677 50  0000 C CNN
+F 2 "" H 18800 10850 50  0001 C CNN
+F 3 "" H 18800 10850 50  0001 C CNN
+	1    18800 10850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	18800 10650 18800 10750
+Connection ~ 18800 10850
+Connection ~ 18800 10750
+Wire Wire Line
+	18800 10750 18800 10850
+$Comp
+L Connector_Generic:Conn_02x03_Counter_Clockwise J50
+U 1 1 6A7213EA
+P 25500 11700
+F 0 "J50" H 25550 12017 50  0000 C CNN
+F 1 "I2CBus2TestConn" H 25550 11926 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 25500 11700 50  0001 C CNN
+F 3 "~" H 25500 11700 50  0001 C CNN
+	1    25500 11700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0963
+U 1 1 6A721417
+P 25800 11800
+F 0 "#PWR0963" H 25800 11550 50  0001 C CNN
+F 1 "GND" H 25805 11627 50  0000 C CNN
+F 2 "" H 25800 11800 50  0001 C CNN
+F 3 "" H 25800 11800 50  0001 C CNN
+	1    25800 11800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	25800 11600 25800 11700
+Connection ~ 25800 11800
+Connection ~ 25800 11700
+Wire Wire Line
+	25800 11700 25800 11800
+Text GLabel 25300 11700 0    50   Input ~ 0
+I2CBus2SDA
+Text GLabel 25300 11600 0    50   Input ~ 0
+I2CBus2SCL
+Text GLabel 25300 11800 0    50   Input ~ 0
+I2CBus2Interrupt
+Text GLabel 22500 7800 2    50   Input ~ 0
+OLED_SPI_CS
+Text GLabel 22500 7700 2    50   Input ~ 0
+OLED_DATA_SELECT
+Text GLabel 22500 7900 2    50   Input ~ 0
+OLED_RESET
+$Comp
+L Connector_Generic:Conn_02x03_Odd_Even J51
+U 1 1 60E08ED5
+P 22200 7800
+F 0 "J51" H 22250 8117 50  0000 C CNN
+F 1 "OLEDTestConn" H 22250 8026 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical" H 22200 7800 50  0001 C CNN
+F 3 "~" H 22200 7800 50  0001 C CNN
+	1    22200 7800
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0964
+U 1 1 60E16665
+P 22000 7700
+F 0 "#PWR0964" H 22000 7450 50  0001 C CNN
+F 1 "GND" V 22005 7572 50  0000 R CNN
+F 2 "" H 22000 7700 50  0001 C CNN
+F 3 "" H 22000 7700 50  0001 C CNN
+	1    22000 7700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0965
+U 1 1 60E16708
+P 22000 7800
+F 0 "#PWR0965" H 22000 7550 50  0001 C CNN
+F 1 "GND" V 22005 7672 50  0000 R CNN
+F 2 "" H 22000 7800 50  0001 C CNN
+F 3 "" H 22000 7800 50  0001 C CNN
+	1    22000 7800
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0966
+U 1 1 60E169B8
+P 22000 7900
+F 0 "#PWR0966" H 22000 7650 50  0001 C CNN
+F 1 "GND" V 22005 7772 50  0000 R CNN
+F 2 "" H 22000 7900 50  0001 C CNN
+F 3 "" H 22000 7900 50  0001 C CNN
+	1    22000 7900
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x06_Odd_Even J52
+U 1 1 60F17000
+P 16100 7150
+F 0 "J52" H 16150 7567 50  0000 C CNN
+F 1 "SDIOTestConn" H 16150 7476 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_2x06_P2.54mm_Vertical" H 16100 7150 50  0001 C CNN
+F 3 "~" H 16100 7150 50  0001 C CNN
+	1    16100 7150
+	1    0    0    -1  
+$EndComp
+Text GLabel 15900 7450 0    50   Input ~ 0
+SDIO_CMD
+Text GLabel 15900 7250 0    50   Input ~ 0
+SDIO_D2
+Text GLabel 15900 7350 0    50   Input ~ 0
+SDIO_D3
+Text GLabel 15900 7050 0    50   Input ~ 0
+SDIO_D0
+Text GLabel 15900 7150 0    50   Input ~ 0
+SDIO_D1
+Text GLabel 15900 6950 0    50   Input ~ 0
+SDIO_CLK
+Text GLabel 16400 6950 2    50   Input ~ 0
+SDIO_DETECT
+$Comp
+L power:GND #PWR?
+U 1 1 619F761C
+P 16400 7450
+F 0 "#PWR?" H 16400 7200 50  0001 C CNN
+F 1 "GND" H 16405 7277 50  0000 C CNN
+F 2 "" H 16400 7450 50  0001 C CNN
+F 3 "" H 16400 7450 50  0001 C CNN
+	1    16400 7450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	16400 7050 16400 7150
+Connection ~ 16400 7450
+Connection ~ 16400 7150
+Wire Wire Line
+	16400 7150 16400 7250
+Connection ~ 16400 7250
+Wire Wire Line
+	16400 7250 16400 7350
+Connection ~ 16400 7350
+Wire Wire Line
+	16400 7350 16400 7450
 $EndSCHEMATC
