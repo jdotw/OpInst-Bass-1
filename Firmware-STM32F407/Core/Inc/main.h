@@ -92,6 +92,8 @@ void Error_Handler(void);
 #define SDIO_DETECT_GPIO_Port GPIOD
 #define I2C1_EXTI_Pin GPIO_PIN_5
 #define I2C1_EXTI_GPIO_Port GPIOB
+#define HAPTIC_TRIG_Pin GPIO_PIN_1
+#define HAPTIC_TRIG_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

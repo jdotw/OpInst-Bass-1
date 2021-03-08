@@ -545,6 +545,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(HAPTIC_TRIG_GPIO_Port, HAPTIC_TRIG_Pin, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : BT_IRQ_Pin */
   GPIO_InitStruct.Pin = BT_IRQ_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
@@ -582,6 +585,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(OLED_RST_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : HAPTIC_TRIG_Pin */
+  GPIO_InitStruct.Pin = HAPTIC_TRIG_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(HAPTIC_TRIG_GPIO_Port, &GPIO_InitStruct);
 
 }
 
