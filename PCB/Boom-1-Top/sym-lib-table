@@ -16,4 +16,5 @@
   (lib (name MP2331H)(type Legacy)(uri ${KIPRJMOD}/MP2331H.lib)(options "")(descr ""))
   (lib (name IS32FL3237)(type Legacy)(uri ${KIPRJMOD}/IS32FL3237.lib)(options "")(descr ""))
   (lib (name MP1541)(type Legacy)(uri ${KIPRJMOD}/MP1541.lib)(options "")(descr ""))
+  (lib (name MCP4651)(type Legacy)(uri ${KIPRJMOD}/MCP4651/MCP4651.lib)(options "")(descr ""))
 )
