@@ -7266,7 +7266,7 @@ U 1 1 665F4EFC
 P 9200 6950
 F 0 "R161" V 8995 6950 50  0000 C CNN
 F 1 "220R" V 9086 6950 50  0000 C CNN
-F 2 "Resistor_SMD:R_1206_3216Metric" H 9200 6950 50  0001 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" H 9200 6950 50  0001 C CNN
 F 3 "~" H 9200 6950 50  0001 C CNN
 	1    9200 6950
 	0    1    1    0   
@@ -30885,9 +30885,9 @@ F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/21072G.pdf" H 34600 36100 5
 	1    34600 36100
 	1    0    0    -1  
 $EndComp
-Text GLabel 35400 36000 2    50   Input ~ 0
+Text GLabel 35000 36000 2    50   Input ~ 0
 FV1EEpromSDA
-Text GLabel 35400 36100 2    50   Input ~ 0
+Text GLabel 35000 36100 2    50   Input ~ 0
 FV1EEpromSCL
 $Comp
 L power:+3.3V #PWR0989
@@ -30955,8 +30955,4 @@ F 3 "" H 35000 36200 50  0001 C CNN
 	1    35000 36200
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	35000 36100 35400 36100
-Wire Wire Line
-	35000 36000 35400 36000
 $EndSCHEMATC
