@@ -104,7 +104,10 @@ int main(void)
   i2c_mux_select_channel(&hi2c1, I2C_MUX_DEFAULT_ADDRESS, 0);
   i2c_scan_bus(&hi2c1);
   dac7678_reset(&hi2c1, 0x48);
-  calibrate_osc(&hi2c1, &hspi1, &htim1);
+//  calibrate_osc(&hi2c1, &hspi1, &htim1);
+  i2c_mux_select_channel(&hi2c1, I2C_MUX_DEFAULT_ADDRESS, 2);
+  i2c_scan_bus(&hi2c1);
+  i2c_mux_select_channel(&hi2c1, I2C_MUX_DEFAULT_ADDRESS, 0);
   is32_enable(&hi2c1, 0x35);
   is32_flux_cap(&hi2c1, 0x35);
   /* USER CODE END 2 */
@@ -304,6 +307,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -315,6 +319,25 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(OSC1SCALEDPOTCS_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PD10 */
+  GPIO_InitStruct.Pin = GPIO_PIN_10;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : I2C1_INT_Pin */
+  GPIO_InitStruct.Pin = I2C1_INT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(I2C1_INT_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
 
