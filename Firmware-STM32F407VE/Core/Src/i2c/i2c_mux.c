@@ -8,15 +8,7 @@
 #include <main.h>
 #include <i2c.h>
 
-void _i2c_mux_irq_callback() {
-	printf("I2C MUX IRQ!!");
-}
-
 HAL_StatusTypeDef i2c_mux_reset(I2C_HandleTypeDef *bus, uint8_t mux_addr, EXTI_HandleTypeDef *irq) {
-	HAL_StatusTypeDef result = HAL_EXTI_RegisterCallback(irq, HAL_EXTI_COMMON_CB_ID, &_i2c_mux_irq_callback);
-	if (result != HAL_OK) {
-		return result;
-	}
 	return HAL_OK;
 }
 
