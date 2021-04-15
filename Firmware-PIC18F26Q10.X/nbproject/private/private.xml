@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/i2c1_slave.h</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/clc4.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/main.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/interrupt_manager.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/clc2.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/mcc.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/i2c1_slave.c</file>
         </group>
