@@ -5,6 +5,7 @@
  *      Author: jwilson
  */
 
+#include <stdio.h>
 #include "is32.h"
 #include "main.h"
 
@@ -90,7 +91,8 @@ HAL_StatusTypeDef is32_turn_on_led(I2C_HandleTypeDef *bus, uint8_t address, uint
 void is32_flux_cap(I2C_HandleTypeDef *bus, uint8_t address) {
 	uint8_t red, green, blue;
 
-	uint8_t brightness[PATTERN_LENGTH] = { 10, 10, 15, 20, 30, 45, 65, 90, 130, 90, 65, 45, 30, 20, 10, 10, 10, 10, 10, 5  };
+//	uint8_t brightness[PATTERN_LENGTH] = { 10, 10, 15, 20, 30, 45, 65, 90, 130, 90, 65, 45, 30, 20, 10, 10, 10, 10, 10, 5  };
+	uint8_t brightness[PATTERN_LENGTH] = { 10, 10, 15, 20, 30, 45, 65, 90, 130, 90, 65, 45, };
 	uint8_t i = 0;
 
 	red = 0xFF;
@@ -101,9 +103,12 @@ void is32_flux_cap(I2C_HandleTypeDef *bus, uint8_t address) {
 		uint8_t offset;
 		for (offset=0; offset < PATTERN_LENGTH; offset++) {
 			for (i=0; i < 10; i++) {
-				is32_turn_on_led(bus, address, i, red, green, blue, brightness[(i+offset)%PATTERN_LENGTH]);
+				HAL_StatusTypeDef result = is32_turn_on_led(bus, address, i, red, green, blue, brightness[(i+offset)%PATTERN_LENGTH]);
+				if (result != HAL_OK) {
+					printf("Failed...");
+				}
 			}
-			HAL_Delay(32);
+			HAL_Delay(48);
 		}
 	}
 }

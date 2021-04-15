@@ -23,10 +23,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "tca9544a.h"
 #include "i2c.h"
 #include "dac7678.h"
-#include "calibrate.h"
 #include "is32.h"
+#include "osc.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,24 +105,37 @@ int main(void)
   MX_SPI1_Init();
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
-  i2c_mux_select_channel(&hi2c1, I2C_MUX_DEFAULT_ADDRESS, 0);
-  i2c_scan_bus(&hi2c1);
+
+  // Scan all i2c buses
+  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
+//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 1);
+//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 2);
+//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 3);
+//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 0);
+//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
+//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
+//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
+
+  // Reset DACs
+  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
   dac7678_reset(&hi2c1, 0x48);
-//  calibrate_osc(&hi2c1, &hspi1, &htim1);
-  i2c_mux_select_channel(&hi2c1, I2C_MUX_DEFAULT_ADDRESS, 2);
-//  i2c_scan_bus(&hi2c1);
-//  i2c_mux_select_channel(&hi2c2, I2C_MUX_DEFAULT_ADDRESS, 2);
-  i2c_scan_bus(&hi2c2);
-  i2c_mux_select_channel(&hi2c1, I2C_MUX_DEFAULT_ADDRESS, 0);
-  is32_enable(&hi2c1, 0x35);
-  is32_flux_cap(&hi2c1, 0x35);
+  dac7678_reset(&hi2c1, 0x4a);
+
+  // Calibrate oscillators
+  osc_calibrate(&hi2c1, &hspi1, &htim1);
+
+  // Enable RGB LED drivers
+  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-  	HAL_Delay(100);
+  	// Do the light show!
+    tca9544a_select(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
+    is32_enable(&hi2c2, 0x34);
+    is32_flux_cap(&hi2c2, 0x34);
 
     /* USER CODE END WHILE */
 
@@ -350,14 +364,14 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : OSC1SCALEDPOTCS_Pin */
-  GPIO_InitStruct.Pin = OSC1SCALEDPOTCS_Pin;
+  /*Configure GPIO pins : OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin */
+  GPIO_InitStruct.Pin = OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(OSC1SCALEDPOTCS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PD10 */
   GPIO_InitStruct.Pin = GPIO_PIN_10;
@@ -391,12 +405,12 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
 	{
 		// DAC Tuning channel (oscillator 1)
-		calibrate_osc_timercallback(htim, TIM_CHANNEL_1);
+		osc_calibrate_timercallback(htim, TIM_CHANNEL_1);
 	}
 	else if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
 	{
 		// DAC Tuning channel (oscillator 2)
-		calibrate_osc_timercallback(htim, TIM_CHANNEL_2);
+		osc_calibrate_timercallback(htim, TIM_CHANNEL_2);
 	}
 }
 /* USER CODE END 4 */
