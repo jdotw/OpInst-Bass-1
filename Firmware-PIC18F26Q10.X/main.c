@@ -47,7 +47,6 @@
                          Main application
  */
 
-
 void main(void)
 {
     // Initialize the device
@@ -69,7 +68,7 @@ void main(void)
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
 
-    I2C1_Open();
+    I2C1_Open(88);
     while (1)
     {
         

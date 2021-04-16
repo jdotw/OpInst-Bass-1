@@ -65,7 +65,7 @@ void I2C1_Initialize(void);
  *
  * \return Nothing
  */
-void I2C1_Open(void);
+void I2C1_Open(uint8_t slave_address);
 
 /**
  * \brief Close the I2C1 for communication. Disables the module if enabled.

@@ -113,10 +113,10 @@ void I2C1_Initialize()
     SSP1CON1bits.SSPEN = 0;
 }
 
-void I2C1_Open() 
+void I2C1_Open(uint8_t slave_address) 
 {
     I2C1_SlaveOpen();
-    I2C1_SlaveSetSlaveAddr(I2C1_SLAVE_ADDRESS);
+    I2C1_SlaveSetSlaveAddr(slave_address);
     I2C1_SlaveSetSlaveMask(I2C1_SLAVE_MASK);
     I2C1_SlaveSetIsrHandler(I2C1_Isr);
     I2C1_SlaveSetBusColIntHandler(I2C1_SlaveDefBusColInterruptHandler);
