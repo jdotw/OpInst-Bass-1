@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/main.c</file>
-            <file>file:/home/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/i2c1_slave.h</file>
-            <file>file:/home/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/i2c1_slave.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/main.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/pin_manager.h</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/interrupt_manager.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/pin_manager.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/clc1.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/device_config.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/mcc.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/i2c1_slave.c</file>
         </group>
     </open-files>
 </project-private>

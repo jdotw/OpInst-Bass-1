@@ -47,7 +47,6 @@
 #include "i2c1_slave.h"
 #include <xc.h>
 
-#define I2C1_SLAVE_ADDRESS      8
 #define I2C1_SLAVE_MASK         127
 
 typedef enum
