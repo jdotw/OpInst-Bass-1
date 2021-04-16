@@ -87,7 +87,7 @@ void PIN_MANAGER_Initialize(void)
     ODx registers
     */
     ODCONA = 0x00;
-    ODCONB = 0x00;
+    ODCONB = 0x10;
     ODCONC = 0x0F;
 
     /**
