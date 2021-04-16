@@ -67,8 +67,14 @@ void main(void)
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
+    
+    // Read address pins
+    uint8_t i2c_addr = (ADDR1_GetValue()) & (ADDR2_GetValue() << 1) & (ADDR3_GetValue() << 2);
 
-    I2C1_Open(88);
+    // Start I2C
+    I2C1_Open(i2c_addr);
+
+    // Main loop 
     while (1)
     {
         

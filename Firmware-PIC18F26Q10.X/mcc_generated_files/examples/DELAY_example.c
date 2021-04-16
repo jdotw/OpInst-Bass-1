@@ -48,7 +48,7 @@ void DELAY_MsExample(void)
 {   
     DELAY_milliseconds(500);
 
-    PIN0_Toggle();
+//    PIN0_Toggle();
 }
 
 /**
@@ -60,7 +60,7 @@ void DELAY_UsExample(void)
 {
     DELAY_microseconds(50000);
 
-    PIN0_Toggle();
+//    PIN0_Toggle();
 }
 
 /**
