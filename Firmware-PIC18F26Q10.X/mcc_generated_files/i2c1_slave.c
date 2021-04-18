@@ -47,6 +47,7 @@
 #include "i2c1_slave.h"
 #include <xc.h>
 
+#define I2C1_SLAVE_ADDRESS      80
 #define I2C1_SLAVE_MASK         127
 
 typedef enum
@@ -106,16 +107,16 @@ static inline bool I2C1_SlaveIsOverFlow(void);
 
 void I2C1_Initialize()
 {
-    SSP1STAT  = 0x00;
+    SSP1STAT  = 0x80;
     SSP1CON1 |= 0x06;
-    SSP1CON2  = 0x00;
+    SSP1CON2  = 0x01;
     SSP1CON1bits.SSPEN = 0;
 }
 
-void I2C1_Open(uint8_t slave_address) 
+void I2C1_Open(uint8_t slave_addr) 
 {
     I2C1_SlaveOpen();
-    I2C1_SlaveSetSlaveAddr(slave_address);
+    I2C1_SlaveSetSlaveAddr(slave_addr);
     I2C1_SlaveSetSlaveMask(I2C1_SLAVE_MASK);
     I2C1_SlaveSetIsrHandler(I2C1_Isr);
     I2C1_SlaveSetBusColIntHandler(I2C1_SlaveDefBusColInterruptHandler);
@@ -310,9 +311,9 @@ static inline bool I2C1_SlaveOpen()
 {
     if(!SSP1CON1bits.SSPEN)
     {      
-        SSP1STAT  = 0x00;
+        SSP1STAT  = 0x80;
         SSP1CON1 |= 0x06;
-        SSP1CON2  = 0x00;
+        SSP1CON2  = 0x01;
         SSP1CON1bits.SSPEN = 1;
         return true;
     }
@@ -321,9 +322,9 @@ static inline bool I2C1_SlaveOpen()
 
 static inline void I2C1_SlaveClose()
 {
-    SSP1STAT  = 0x00;
+    SSP1STAT  = 0x80;
     SSP1CON1 |= 0x06;
-    SSP1CON2  = 0x00;
+    SSP1CON2  = 0x01;
     SSP1CON1bits.SSPEN = 0;
 }
 

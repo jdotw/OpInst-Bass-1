@@ -58,8 +58,8 @@ void SYSTEM_Initialize(void)
     CLC4_Initialize();
     CLC8_Initialize();
     CLC5_Initialize();
-    CLC7_Initialize();
     CLC6_Initialize();
+    CLC7_Initialize();
     CLC3_Initialize();
     CLC2_Initialize();
 }

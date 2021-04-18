@@ -28,6 +28,7 @@
 #include "dac7678.h"
 #include "is32.h"
 #include "osc.h"
+#include "rotpic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -107,7 +108,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   // Scan all i2c buses
-  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
+//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 1);
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 2);
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 3);
@@ -115,6 +116,7 @@ int main(void)
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
+  rotpic_get_state(&hi2c1, 2, 0);
 
   // Reset DACs
   tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
@@ -203,7 +205,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 400000;
+  hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
