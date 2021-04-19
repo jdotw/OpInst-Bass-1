@@ -43,6 +43,8 @@
 
 #include "mcc_generated_files/mcc.h"
 #include "i2c.h"
+#include "encoder.h"
+#include "sw.h"
 
 /*
                          Main application
@@ -68,6 +70,10 @@ void main(void)
 
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
+    
+    // Init Encoders 
+    encoder_init();
+    sw_init();
     
     // Init I2C
     i2c_init();

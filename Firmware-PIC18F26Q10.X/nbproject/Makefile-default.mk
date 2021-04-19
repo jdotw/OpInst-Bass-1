@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/examples/DELAY_example.c mcc_generated_files/clc6.c mcc_generated_files/clc8.c mcc_generated_files/clc5.c mcc_generated_files/clc7.c mcc_generated_files/clc2.c mcc_generated_files/interrupt_manager.c mcc_generated_files/clc1.c mcc_generated_files/clc4.c mcc_generated_files/clc3.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/device_config.c mcc_generated_files/delay.c mcc_generated_files/i2c1_slave.c main.c i2c.c
+SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/examples/DELAY_example.c mcc_generated_files/clc6.c mcc_generated_files/clc8.c mcc_generated_files/clc5.c mcc_generated_files/clc7.c mcc_generated_files/clc2.c mcc_generated_files/interrupt_manager.c mcc_generated_files/clc1.c mcc_generated_files/clc4.c mcc_generated_files/clc3.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/device_config.c mcc_generated_files/delay.c mcc_generated_files/i2c1_slave.c main.c i2c.c mcc_generated_files/tmr0.c encoder.c sw.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1 ${OBJECTDIR}/mcc_generated_files/clc6.p1 ${OBJECTDIR}/mcc_generated_files/clc8.p1 ${OBJECTDIR}/mcc_generated_files/clc5.p1 ${OBJECTDIR}/mcc_generated_files/clc7.p1 ${OBJECTDIR}/mcc_generated_files/clc2.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/clc1.p1 ${OBJECTDIR}/mcc_generated_files/clc4.p1 ${OBJECTDIR}/mcc_generated_files/clc3.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/delay.p1 ${OBJECTDIR}/mcc_generated_files/i2c1_slave.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/i2c.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1.d ${OBJECTDIR}/mcc_generated_files/clc6.p1.d ${OBJECTDIR}/mcc_generated_files/clc8.p1.d ${OBJECTDIR}/mcc_generated_files/clc5.p1.d ${OBJECTDIR}/mcc_generated_files/clc7.p1.d ${OBJECTDIR}/mcc_generated_files/clc2.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/clc1.p1.d ${OBJECTDIR}/mcc_generated_files/clc4.p1.d ${OBJECTDIR}/mcc_generated_files/clc3.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/device_config.p1.d ${OBJECTDIR}/mcc_generated_files/delay.p1.d ${OBJECTDIR}/mcc_generated_files/i2c1_slave.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/i2c.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1 ${OBJECTDIR}/mcc_generated_files/clc6.p1 ${OBJECTDIR}/mcc_generated_files/clc8.p1 ${OBJECTDIR}/mcc_generated_files/clc5.p1 ${OBJECTDIR}/mcc_generated_files/clc7.p1 ${OBJECTDIR}/mcc_generated_files/clc2.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/clc1.p1 ${OBJECTDIR}/mcc_generated_files/clc4.p1 ${OBJECTDIR}/mcc_generated_files/clc3.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/delay.p1 ${OBJECTDIR}/mcc_generated_files/i2c1_slave.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/encoder.p1 ${OBJECTDIR}/sw.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1.d ${OBJECTDIR}/mcc_generated_files/clc6.p1.d ${OBJECTDIR}/mcc_generated_files/clc8.p1.d ${OBJECTDIR}/mcc_generated_files/clc5.p1.d ${OBJECTDIR}/mcc_generated_files/clc7.p1.d ${OBJECTDIR}/mcc_generated_files/clc2.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/clc1.p1.d ${OBJECTDIR}/mcc_generated_files/clc4.p1.d ${OBJECTDIR}/mcc_generated_files/clc3.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/device_config.p1.d ${OBJECTDIR}/mcc_generated_files/delay.p1.d ${OBJECTDIR}/mcc_generated_files/i2c1_slave.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/i2c.p1.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d ${OBJECTDIR}/encoder.p1.d ${OBJECTDIR}/sw.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1 ${OBJECTDIR}/mcc_generated_files/clc6.p1 ${OBJECTDIR}/mcc_generated_files/clc8.p1 ${OBJECTDIR}/mcc_generated_files/clc5.p1 ${OBJECTDIR}/mcc_generated_files/clc7.p1 ${OBJECTDIR}/mcc_generated_files/clc2.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/clc1.p1 ${OBJECTDIR}/mcc_generated_files/clc4.p1 ${OBJECTDIR}/mcc_generated_files/clc3.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/delay.p1 ${OBJECTDIR}/mcc_generated_files/i2c1_slave.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/i2c.p1
+OBJECTFILES=${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1 ${OBJECTDIR}/mcc_generated_files/clc6.p1 ${OBJECTDIR}/mcc_generated_files/clc8.p1 ${OBJECTDIR}/mcc_generated_files/clc5.p1 ${OBJECTDIR}/mcc_generated_files/clc7.p1 ${OBJECTDIR}/mcc_generated_files/clc2.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/clc1.p1 ${OBJECTDIR}/mcc_generated_files/clc4.p1 ${OBJECTDIR}/mcc_generated_files/clc3.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/delay.p1 ${OBJECTDIR}/mcc_generated_files/i2c1_slave.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/encoder.p1 ${OBJECTDIR}/sw.p1
 
 # Source Files
-SOURCEFILES=mcc_generated_files/examples/DELAY_example.c mcc_generated_files/clc6.c mcc_generated_files/clc8.c mcc_generated_files/clc5.c mcc_generated_files/clc7.c mcc_generated_files/clc2.c mcc_generated_files/interrupt_manager.c mcc_generated_files/clc1.c mcc_generated_files/clc4.c mcc_generated_files/clc3.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/device_config.c mcc_generated_files/delay.c mcc_generated_files/i2c1_slave.c main.c i2c.c
+SOURCEFILES=mcc_generated_files/examples/DELAY_example.c mcc_generated_files/clc6.c mcc_generated_files/clc8.c mcc_generated_files/clc5.c mcc_generated_files/clc7.c mcc_generated_files/clc2.c mcc_generated_files/interrupt_manager.c mcc_generated_files/clc1.c mcc_generated_files/clc4.c mcc_generated_files/clc3.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/device_config.c mcc_generated_files/delay.c mcc_generated_files/i2c1_slave.c main.c i2c.c mcc_generated_files/tmr0.c encoder.c sw.c
 
 
 
@@ -230,6 +230,30 @@ ${OBJECTDIR}/i2c.p1: i2c.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/i2c.d ${OBJECTDIR}/i2c.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/i2c.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/mcc_generated_files/tmr0.p1: mcc_generated_files/tmr0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr0.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/mcc_generated_files/tmr0.p1 mcc_generated_files/tmr0.c 
+	@-${MV} ${OBJECTDIR}/mcc_generated_files/tmr0.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/encoder.p1: encoder.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/encoder.p1.d 
+	@${RM} ${OBJECTDIR}/encoder.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/encoder.p1 encoder.c 
+	@-${MV} ${OBJECTDIR}/encoder.d ${OBJECTDIR}/encoder.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/encoder.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/sw.p1: sw.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/sw.p1.d 
+	@${RM} ${OBJECTDIR}/sw.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/sw.p1 sw.c 
+	@-${MV} ${OBJECTDIR}/sw.d ${OBJECTDIR}/sw.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/sw.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/mcc_generated_files/examples/DELAY_example.p1: mcc_generated_files/examples/DELAY_example.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/mcc_generated_files/examples" 
@@ -366,6 +390,30 @@ ${OBJECTDIR}/i2c.p1: i2c.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/i2c.p1 i2c.c 
 	@-${MV} ${OBJECTDIR}/i2c.d ${OBJECTDIR}/i2c.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/i2c.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/mcc_generated_files/tmr0.p1: mcc_generated_files/tmr0.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr0.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/mcc_generated_files/tmr0.p1 mcc_generated_files/tmr0.c 
+	@-${MV} ${OBJECTDIR}/mcc_generated_files/tmr0.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/encoder.p1: encoder.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/encoder.p1.d 
+	@${RM} ${OBJECTDIR}/encoder.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/encoder.p1 encoder.c 
+	@-${MV} ${OBJECTDIR}/encoder.d ${OBJECTDIR}/encoder.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/encoder.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/sw.p1: sw.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/sw.p1.d 
+	@${RM} ${OBJECTDIR}/sw.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-download -mdefault-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/sw.p1 sw.c 
+	@-${MV} ${OBJECTDIR}/sw.d ${OBJECTDIR}/sw.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/sw.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

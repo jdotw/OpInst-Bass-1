@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "i2c.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -206,11 +207,14 @@ void SysTick_Handler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-	printf("EXI9_5 HANDLER!");
+
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
-
+  // Must do this after the IRQHandler call
+  // Otherwise a race condition seems to exist
+  // which causes the interrupt to stay low
+	i2c_isr();
   /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
@@ -235,10 +239,14 @@ void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
 
-  /* USER CODE END EXTI15_10_IRQn 0 */
+	/* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_12);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
-
+  // Must do this after the IRQHandler call
+  // Otherwise a race condition seems to exist
+  // which causes the interrupt to stay low
+	i2c_isr();
   /* USER CODE END EXTI15_10_IRQn 1 */
 }
 

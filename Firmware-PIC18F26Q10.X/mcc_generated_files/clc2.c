@@ -50,6 +50,7 @@
 
 #include <xc.h>
 #include "clc2.h"
+#include "../encoder.h"
 
 /**
   Section: CLC2 APIs
@@ -90,6 +91,7 @@ void CLC2_ISR(void)
 {
     // Clear the CLC interrupt flag
     PIR5bits.CLC2IF = 0;
+    encoder_clc_isr(0, -1);
 }
 
 bool CLC2_OutputStatusGet(void)

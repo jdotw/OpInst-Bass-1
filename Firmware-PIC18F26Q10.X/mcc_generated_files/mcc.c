@@ -54,14 +54,15 @@ void SYSTEM_Initialize(void)
     I2C1_Initialize();
     PIN_MANAGER_Initialize();
     OSCILLATOR_Initialize();
+    CLC5_Initialize();
+    CLC7_Initialize();
+    CLC2_Initialize();
+    TMR0_Initialize();
     CLC1_Initialize();
     CLC4_Initialize();
     CLC8_Initialize();
-    CLC5_Initialize();
     CLC6_Initialize();
-    CLC7_Initialize();
     CLC3_Initialize();
-    CLC2_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)

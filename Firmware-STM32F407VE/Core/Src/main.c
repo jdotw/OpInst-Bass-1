@@ -107,6 +107,10 @@ int main(void)
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
 
+  // Set i2c buses
+  i2c_bus[0] = &hi2c1; // Left
+  i2c_bus[1] = &hi2c2; // Right
+
   // Scan all i2c buses
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 1);
@@ -116,7 +120,6 @@ int main(void)
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
-  rotpic_get_state(&hi2c1, 2, 0);
 
   // Reset DACs
   tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
@@ -375,17 +378,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PD10 */
-  GPIO_InitStruct.Pin = GPIO_PIN_10;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : I2C1_INT_Pin */
-  GPIO_InitStruct.Pin = I2C1_INT_Pin;
+  /*Configure GPIO pins : I2C2_INT_Pin I2C1_INT_Pin */
+  GPIO_InitStruct.Pin = I2C2_INT_Pin|I2C1_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(I2C1_INT_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : SHIFTSW_Pin */
+  GPIO_InitStruct.Pin = SHIFTSW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(SHIFTSW_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);

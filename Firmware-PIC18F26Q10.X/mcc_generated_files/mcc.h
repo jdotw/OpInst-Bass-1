@@ -54,6 +54,7 @@
 #include <conio.h>
 #include "interrupt_manager.h"
 #include "i2c1_slave.h"
+#include "tmr0.h"
 #include "clc8.h"
 #include "clc7.h"
 #include "clc6.h"

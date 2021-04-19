@@ -50,6 +50,7 @@
 
 #include <xc.h>
 #include "clc7.h"
+#include "../encoder.h"
 
 /**
   Section: CLC7 APIs
@@ -90,6 +91,7 @@ void CLC7_ISR(void)
 {
     // Clear the CLC interrupt flag
     PIR6bits.CLC7IF = 0;
+    encoder_clc_isr(3, 1);
 }
 
 bool CLC7_OutputStatusGet(void)
