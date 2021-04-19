@@ -7,6 +7,8 @@
 volatile uint8_t rx_index;
 volatile uint8_t tx_index;
 
+uint8_t i2c_addr;
+
 static void _i2c_addr_callback() {
     // Called when we see our address on the bus
     
@@ -75,7 +77,8 @@ void i2c_init() {
     uint8_t a0 = ADDR1_GetValue();
     uint8_t a1 = ADDR2_GetValue();
     uint8_t a2 = ADDR3_GetValue();
-    uint8_t i2c_addr = ((uint8_t)0x50) | a0 | (uint8_t)(a1 << 1) | (uint8_t)(a2 << 2);
+    
+    i2c_addr = ((uint8_t)0x50) | a0 | (uint8_t)(a1 << 1) | (uint8_t)(a2 << 2);
 
     // Start I2C
     I2C1_Open(i2c_addr);

@@ -122,15 +122,15 @@ int main(void)
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
 
   // Reset DACs
-  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
-  dac7678_reset(&hi2c1, 0x48);
-  dac7678_reset(&hi2c1, 0x4a);
+//  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
+//  dac7678_reset(&hi2c1, 0x48);
+//  dac7678_reset(&hi2c1, 0x4a);
 
   // Calibrate oscillators
-  osc_calibrate(&hi2c1, &hspi1, &htim1);
+//  osc_calibrate(&hi2c1, &hspi1, &htim1);
 
   // Enable RGB LED drivers
-  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
+//  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -138,9 +138,9 @@ int main(void)
   while (1)
   {
   	// Do the light show!
-    tca9544a_select(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
-    is32_enable(&hi2c2, 0x34);
-    is32_flux_cap(&hi2c2, 0x34);
+//    tca9544a_select(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
+//    is32_enable(&hi2c2, 0x34);
+//    is32_flux_cap(&hi2c2, 0x34);
 
     /* USER CODE END WHILE */
 

@@ -45,6 +45,12 @@ rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t rotpic_addr) {
 
 void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic, rotpic_state state) {
 	// Depending on which PIC this is, update actual state values
+	if (state.enc1_delta != 0 || state.enc2_delta != 0 || state.enc3_delta != 0 || state.enc4_delta != 0) {
+		printf("ENC CHANGE!");
+	}
+	if (state.sw1_changed || state.sw2_changed) {
+		printf("SW CHANGE!");
+	}
 	if (bus == 0) {
 		// Left I2C
 		switch (channel) {
