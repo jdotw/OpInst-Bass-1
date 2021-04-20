@@ -12,6 +12,8 @@
 #include "rotpic.h"
 #include "tca9544a.h"
 #include "i2c.h"
+#include "osc.h"
+#include "ctrl.h"
 
 #define DEFAULT_ROTPIC_ADDR 0x50
 
@@ -56,16 +58,47 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 		switch (channel) {
 		case 0:
 			// Left I2C 0
+			switch(pic) {
+			case 0:
+				// Left 0:000
+				if (state.sw2_changed) {
+					if (state.sw2_state) osc_ctrl_toggle_squ_func();
+				} else {
+					switch (osc_ctrl_state.squ_func) {
+					case OSC1_SQU_FUNC_LEVEL:
+						osc_ctrl_inc_squ_level(state.enc1_delta);
+						break;
+					case OSC1_SQU_FUNC_PWM:
+						osc_ctrl_inc_squ_pwm(state.enc1_delta);
+						break;
+					}
+				}
+				break;
+			}
 			break;
 		case 1:
 			// Left I2C 0
+			switch(pic) {
+			case 0:
+				// Left 1:000
+				break;
+			}
 			break;
 		case 2:
 			// Left I2C 0
-			printf("This! %i %i %i %i", state.enc1_delta, state.enc2_delta, state.enc3_delta, state.enc3_delta);
+			switch(pic) {
+			case 0:
+				// Left 2:000
+				break;
+			}
 			break;
 		case 3:
 			// Left I2C 0
+			switch(pic) {
+			case 0:
+				// Left 3:000
+				break;
+			}
 			break;
 		}
 	}
