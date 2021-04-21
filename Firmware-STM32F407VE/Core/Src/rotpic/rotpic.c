@@ -61,18 +61,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			switch(pic) {
 			case 0:
 				// Left 0:000
-				if (state.sw2_changed) {
-					if (state.sw2_state) osc_ctrl_toggle_squ_func();
-				} else {
-					switch (osc_ctrl_state.squ_func) {
-					case OSC1_SQU_FUNC_LEVEL:
-						osc_ctrl_inc_squ_level(state.enc1_delta);
-						break;
-					case OSC1_SQU_FUNC_PWM:
-						osc_ctrl_inc_squ_pwm(state.enc1_delta);
-						break;
-					}
-				}
+				ctrl_apply_delta(CTRL_OSC1_SAW, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC1_SQU, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC1_TO_OSC2, state.enc3_delta);
+				ctrl_apply_toggle(CTRL_OSC1_SQU, state.sw2_changed, state.sw2_state);
 				break;
 			}
 			break;

@@ -9,12 +9,15 @@
 #define INC_CTRL_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
-#define CTRL_DEFAULT_SCALE 100
-#define CTRL_DEFAULT_MIN 0
-#define CTRL_12BIT_MAX 0xFFF
+typedef enum {
+	CTRL_OSC1_SAW,
+	CTRL_OSC1_SQU,
+	CTRL_OSC1_TO_OSC2,
+} ctrl_enum_t;
 
-void ctrl_apply_delta(uint16_t *ctrl, int8_t enc_delta, int16_t scale_percent, uint16_t min_value, uint16_t max_value);
-
+void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta);
+void ctrl_apply_toggle(ctrl_enum_t ctrl, bool changed, bool state);
 
 #endif /* INC_CTRL_H_ */
