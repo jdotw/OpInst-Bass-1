@@ -66,10 +66,41 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 				ctrl_apply_delta(CTRL_OSC1_TO_OSC2, state.enc3_delta);
 				ctrl_apply_toggle(CTRL_OSC1_SQU, state.sw2_changed, state.sw2_state);
 				break;
+			case 1:
+				// Left 0:001
+				ctrl_apply_delta(CTRL_OSC1_DRIVE, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC1_FILT_RES, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC1_TUNE, state.enc3_delta);
+				ctrl_apply_delta(CTRL_OSC1_FILT_CUTOFF, state.enc4_delta);
+				ctrl_apply_toggle(CTRL_OSC1_TUNE, state.sw1_changed, state.sw1_state);
+				break;
+			case 2:
+				// Left 0:010
+				ctrl_apply_delta(CTRL_OSC_FILT_ENV_A, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC_FILT_ENV_S, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC_FILT_ENV_D, state.enc3_delta);
+				ctrl_apply_delta(CTRL_OSC_FILT_ENV_R, state.enc4_delta);
+				ctrl_apply_toggle(CTRL_OSC_FILT_ENV_A, state.sw1_changed, state.sw1_state);
+				ctrl_apply_toggle(CTRL_OSC_FILT_ENV_S, state.sw2_changed, state.sw2_state);
+				break;
+			case 3:
+				// Left 0:011
+				ctrl_apply_delta(CTRL_OSC2_SAW, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC2_SQU, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC2_NOISE, state.enc3_delta);
+				ctrl_apply_toggle(CTRL_OSC2_SQU, state.sw1_changed, state.sw1_state);
+				break;
+			case 4:
+				// Left 0:100
+				ctrl_apply_delta(CTRL_SUB_NOISE, state.enc1_delta);
+				ctrl_apply_delta(CTRL_SUB_TO_OSC2, state.enc2_delta);
+				ctrl_apply_delta(CTRL_SUB, state.enc3_delta);
+				break;
+
 			}
 			break;
 		case 1:
-			// Left I2C 0
+			// Left I2C 1
 			switch(pic) {
 			case 0:
 				// Left 1:000
@@ -77,7 +108,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			}
 			break;
 		case 2:
-			// Left I2C 0
+			// Left I2C 2
 			switch(pic) {
 			case 0:
 				// Left 2:000
@@ -85,7 +116,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			}
 			break;
 		case 3:
-			// Left I2C 0
+			// Left I2C 3
 			switch(pic) {
 			case 0:
 				// Left 3:000
