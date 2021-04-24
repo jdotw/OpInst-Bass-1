@@ -96,15 +96,6 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 				ctrl_apply_delta(CTRL_SUB_TO_OSC2, state.enc2_delta);
 				ctrl_apply_delta(CTRL_SUB, state.enc3_delta);
 				break;
-
-			}
-			break;
-		case 1:
-			// Left I2C 1
-			switch(pic) {
-			case 0:
-				// Left 1:000
-				break;
 			}
 			break;
 		case 2:
@@ -112,7 +103,17 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			switch(pic) {
 			case 0:
 				// Left 2:000
+				ctrl_apply_delta(CTRL_SUB_FILT_ENV_D, state.enc1_delta);
+				ctrl_apply_delta(CTRL_SUB_FILT_ENV_R, state.enc2_delta);
+				ctrl_apply_delta(CTRL_SUB_FILT_ENV_A, state.enc3_delta);
+				ctrl_apply_delta(CTRL_SUB_FILT_ENV_S, state.enc4_delta);
+				ctrl_apply_toggle(CTRL_SUB_FILT_ENV_A, state.sw1_changed, state.sw1_state);
+				ctrl_apply_toggle(CTRL_SUB_FILT_ENV_S, state.sw2_changed, state.sw2_state);
 				break;
+			case 1:
+				// Left 2:001
+				ctrl_apply_delta(CTRL_SUB_FILT_CUTOFF, state.enc1_delta);
+				ctrl_apply_delta(CTRL_SUB_FILT_RES, state.enc2_delta);
 			}
 			break;
 		case 3:
@@ -120,7 +121,48 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			switch(pic) {
 			case 0:
 				// Left 3:000
+				ctrl_apply_delta(CTRL_OSC2_FILT_CUTOFF, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC2_DRIVE, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC2_FILT_RES, state.enc3_delta);
+				ctrl_apply_delta(CTRL_FX_WETDRY, state.enc4_delta);
+				ctrl_apply_toggle(CTRL_FX_WETDRY, state.sw1_changed, state.sw1_state);
 				break;
+			}
+			break;
+		}
+	} else if (bus == 1) {
+		// Right I2C
+		switch (channel) {
+		case 0:
+			// Right I2C 0
+			switch(pic) {
+			case 0:
+				// Right 0:000
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_D, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_R, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_A, state.enc3_delta);
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_S, state.enc4_delta);
+				ctrl_apply_toggle(CTRL_OSC_AMP_ENV_S, state.sw2_changed, state.sw2_state);
+				break;
+			}
+			break;
+		case 1:
+			// Right I2C 1
+			switch(pic) {
+			case 0:
+				// Right 1:000
+				ctrl_apply_delta(CTRL_FX_VAL2, state.enc1_delta);
+				ctrl_apply_delta(CTRL_FX_VAL4, state.enc2_delta);
+				ctrl_apply_delta(CTRL_FX_VAL3, state.enc3_delta);
+				ctrl_apply_delta(CTRL_FX_VAL1, state.enc4_delta);
+				break;
+			case 1:
+				// Right 1:001
+				ctrl_apply_delta(CTRL_SUB_AMP_ENV_A, state.enc1_delta);
+				ctrl_apply_delta(CTRL_SUB_AMP_ENV_S, state.enc2_delta);
+				ctrl_apply_delta(CTRL_SUB_AMP_ENV_D, state.enc3_delta);
+				ctrl_apply_delta(CTRL_SUB_AMP_ENV_R, state.enc4_delta);
+				ctrl_apply_toggle(CTRL_SUB_AMP_ENV_S, state.sw2_changed, state.sw2_state);
 			}
 			break;
 		}
