@@ -516,6 +516,7 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		_ctrl_apply_delta(&ctrl_value.fx_val4, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, UINT8_MAX);
 		break;
 	}
+
 }
 
 void ctrl_apply_toggle(ctrl_enum_t ctrl, bool changed, bool state) {

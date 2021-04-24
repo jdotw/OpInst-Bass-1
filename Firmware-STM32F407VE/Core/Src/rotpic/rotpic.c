@@ -63,7 +63,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 				// Left 0:000
 				ctrl_apply_delta(CTRL_OSC1_SAW, state.enc1_delta);
 				ctrl_apply_delta(CTRL_OSC1_SQU, state.enc2_delta);
-				ctrl_apply_delta(CTRL_OSC1_TO_OSC2, state.enc3_delta);
+				ctrl_apply_delta(CTRL_OSC1_TO_OSC2, state.enc4_delta);
 				ctrl_apply_toggle(CTRL_OSC1_SQU, state.sw2_changed, state.sw2_state);
 				break;
 			case 1:
@@ -86,8 +86,8 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			case 3:
 				// Left 0:011
 				ctrl_apply_delta(CTRL_OSC2_SAW, state.enc1_delta);
-				ctrl_apply_delta(CTRL_OSC2_SQU, state.enc2_delta);
-				ctrl_apply_delta(CTRL_OSC2_NOISE, state.enc3_delta);
+				ctrl_apply_delta(CTRL_OSC2_NOISE, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC2_SQU, state.enc3_delta);
 				ctrl_apply_toggle(CTRL_OSC2_SQU, state.sw1_changed, state.sw1_state);
 				break;
 			case 4:
