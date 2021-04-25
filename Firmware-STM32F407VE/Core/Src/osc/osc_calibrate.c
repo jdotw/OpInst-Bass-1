@@ -12,13 +12,8 @@
 #include "main.h"
 #include "dac7678.h"
 #include "i2c.h"
+#include "midi.h"
 
-#define MIDI_NOTE_A2 45
-#define MIDI_NOTE_A3 57
-#define MIDI_NOTE_A4 69
-#define MIDI_NOTE_A5 81
-#define MIDI_NOTE_C2 36
-#define MIDI_NOTE_C3 48
 
 /*
  * Frequency Counter
@@ -153,28 +148,6 @@ void _set_dpot_value(SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, ui
 	HAL_GPIO_WritePin(dpot_cs_port, dpot_cs_pin, GPIO_PIN_SET);
 }
 
-#define MIDI_NOTE_OUT_OF_RANGE 0
-#define MIDI_NOTE_MINIMUM 24 // C1
-#define MIDI_NOTE_MAXIMUM 72 // C5
-
-uint16_t _scaled_dac_value_for_midi_note(uint8_t note)
-{
-	// This instruments range is from C1= (1v) up to C4 (4v)
-	if (note < MIDI_NOTE_MINIMUM || note > MIDI_NOTE_MAXIMUM)
-	{
-		return MIDI_NOTE_OUT_OF_RANGE;
-	}
-
-	// 5v vref version
-	// Scale up to 1v/oct across a 5v/4096bit range
-	// Each midi note is 1v / 12steps = 83.3333mv per step
-	// Scaling 5000mv across 12bits (4096) means each bit is 0.8192mv
-	// Therefore scaled dac value is steps * (83.3333mv per step * 0.8192mv per bit scale)
-	uint16_t dacValue = (note - MIDI_NOTE_MINIMUM) * 68.2663936;
-
-	return dacValue;
-}
-
 #define DAC_VALUE_MAX 0xFFF
 #define DAC_VALUE_MIN 0x0
 
@@ -190,14 +163,14 @@ typedef struct {
 #define CAL_ERROR_DAC_MAX 3
 #define CAL_ERROR_DAC_MIN 4
 
-_calibration_result _dpot_value_for_tracking(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel, uint8_t min_val, uint8_t max_val, uint8_t cur_val) {
+_calibration_result _dpot_value_for_tracking(osc_t osc, uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel, uint8_t min_val, uint8_t max_val, uint8_t cur_val) {
 	_calibration_result result;
 
 	// Set dPOT to the cur_val
 	_set_dpot_value(dpot_bus, dpot_cs_port, dpot_cs_pin, cur_val);
 
 	// Set DAC value to achieve desired frequency
-	uint16_t dac_value = _scaled_dac_value_for_midi_note(MIDI_NOTE_A2);
+	uint16_t dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A2);
 	uint32_t expected_frequency = 11000;
 
 	// Attempt to tune oscillator
@@ -215,7 +188,7 @@ _calibration_result _dpot_value_for_tracking(uint8_t dac_bus, uint8_t dac_addr, 
 	result.dac_offset = dac_tuning_offset;
 
 	// Set DAC value to +1 octave
-	dac_value = _scaled_dac_value_for_midi_note(MIDI_NOTE_A3);
+	dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
 	dac_value += dac_tuning_offset;
 	expected_frequency = 22000;
 	dac7678_set_value(dac_bus, dac_addr, dac_channel, dac_value);
@@ -238,7 +211,7 @@ _calibration_result _dpot_value_for_tracking(uint8_t dac_bus, uint8_t dac_addr, 
 			return result;
 		} else {
 			max_val = cur_val;
-			return _dpot_value_for_tracking(dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, min_val, max_val, new_val);
+			return _dpot_value_for_tracking(osc, dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, min_val, max_val, new_val);
 		}
 	} else if (actual_freq < expected_frequency) {
 		// Too low
@@ -255,7 +228,7 @@ _calibration_result _dpot_value_for_tracking(uint8_t dac_bus, uint8_t dac_addr, 
 			return result;
 		} else {
 			min_val = cur_val;
-			return _dpot_value_for_tracking(dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, min_val, max_val, new_val);
+			return _dpot_value_for_tracking(osc, dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, min_val, max_val, new_val);
 		}
 	} else {
 		// Nailed it, we're in tune!
@@ -270,7 +243,7 @@ void _init_dpot() {
 	HAL_GPIO_WritePin(OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, GPIO_PIN_SET);
 }
 
-void _osc_calibrate_voice(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel) {
+void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel) {
 	// Trying to determine the correct dPOT value
 	// for the scaling between 1v variance in CV
 	// to produce exactly double the frequency.
@@ -278,35 +251,48 @@ void _osc_calibrate_voice(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel
 	// E.g. CV 3v = 440Hz
 	//      CV 4v = 880Hz
 
+  osc_dac_offset[osc] = 0;
+
 	_init_dpot();
 
   uint32_t freq = _get_frequency(timer, timer_channel);
   printf("Osc 1 Starting Frequency: %lu\n", freq);
 
-	_calibration_result result = _dpot_value_for_tracking(dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, DPOT_VALUE_MIN, DPOT_VALUE_MAX, (DPOT_VALUE_MAX - DPOT_VALUE_MIN)/2);
+	_calibration_result result = _dpot_value_for_tracking(osc, dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, DPOT_VALUE_MIN, DPOT_VALUE_MAX, (DPOT_VALUE_MAX - DPOT_VALUE_MIN)/2);
 	if (!result.success) {
 		printf("Failed to calibrate oscillator at %i:%i:%i", dac_bus, dac_addr, dac_channel);
 		Error_Handler();
 	}
-  printf("Osc 1 Final dpot value: %u\n", result.dpot_val);
+  printf("Osc Final dpot value: %u\n", result.dpot_val);
 
-  uint16_t dac_value = _scaled_dac_value_for_midi_note(MIDI_NOTE_A2);
-  dac_value += result.dac_offset;
+  osc_dac_offset[osc] = result.dac_offset;
+
+  uint16_t dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A2);
 	dac7678_set_value(dac_bus, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  printf("Osc 1 A2 Frequency: %lu\n", freq);
+  printf("Osc A2 Frequency: %lu\n", freq);
+  if (freq < 10700 || freq > 11300) {
+  	// Not scaling properly
+  	Error_Handler();
+  }
 
-  dac_value = _scaled_dac_value_for_midi_note(MIDI_NOTE_A3);
-  dac_value += result.dac_offset;
+  dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
 	dac7678_set_value(dac_bus, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  printf("Osc 1 A3 Frequency: %lu\n", freq);
+  printf("Osc A3 Frequency: %lu\n", freq);
+  if (freq < 21700 || freq > 22300) {
+  	// Not scaling properly
+  	Error_Handler();
+  }
 
-  dac_value = _scaled_dac_value_for_midi_note(MIDI_NOTE_A4);
-  dac_value += result.dac_offset;
+  dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A4);
 	dac7678_set_value(dac_bus, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  printf("Osc 1 A4 Frequency: %lu\n", freq);
+  printf("Osc A4 Frequency: %lu\n", freq);
+  if (freq < 43700 || freq > 44300) {
+  	// Not scaling properly
+  	Error_Handler();
+  }
 
 
 }
@@ -321,8 +307,8 @@ void osc_calibrate(uint8_t dac_bus, SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeD
 	}
 
 	// Calibrate Osc 1
-	_osc_calibrate_voice(dac_bus, 0, 2, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
+	_osc_calibrate_voice(OSC1, dac_bus, 0, 2, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
 
 	// Calibrate Osc 2
-	_osc_calibrate_voice(dac_bus, 2, 4, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
+	_osc_calibrate_voice(OSC2, dac_bus, 2, 4, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
 }

@@ -8,8 +8,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "ctrl.h"
+#include "midi.h"
 
 ctrl_value_t ctrl_value = {
+		.note_number = MIDI_NOTE_A3,
+
 		.osc1_saw_lvl = 0,
 		.osc1_squ_lvl = 0,
 		.osc1_squ_pwm = CTRL_DEFAULT_MID,

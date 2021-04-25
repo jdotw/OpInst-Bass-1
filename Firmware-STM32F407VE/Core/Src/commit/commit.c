@@ -10,6 +10,7 @@
 #include "main.h"
 #include "i2c.h"
 #include "dac7678.h"
+#include "osc.h"
 
 void _commit_dac() {
   // Reset DACs
@@ -23,7 +24,7 @@ void _commit_dac() {
 	// Left0:000
 	dac_val[0] = ctrl_value.osc1_filt_res;
 	dac_val[1] = ctrl_value.osc1_filt_cutoff;
-	dac_val[2] = 0; // TODO: NoteCV
+	dac_val[2] = osc_dac_value_for_note(OSC1, ctrl_value.note_number);
 	dac_val[3] = ctrl_value.osc1_to_osc2;
 	dac_val[4] = ctrl_value.osc1_to_osc1;
 	dac_val[5] = ctrl_value.osc1_squ_pwm;
