@@ -37,7 +37,7 @@ void ctrl_overflow_handler() {
 	// TODO: Buzz the haptic
 }
 
-void _ctrl_apply_delta(uint16_t *ctrl_ptr, int8_t delta, int16_t scale_percent, uint16_t min_value, uint16_t max_value) {
+void _ctrl_apply_delta(uint16_t *ctrl_ptr, int16_t delta, int16_t scale_percent, uint16_t min_value, uint16_t max_value) {
 	bool did_overflow = false;
 	int16_t scaled_enc_delta = (scale_percent / 100) * delta;
 	if (scaled_enc_delta > 0) {
@@ -67,12 +67,12 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* OSC 1 */
 	case CTRL_OSC1_SAW:
-		_ctrl_apply_delta(&ctrl_value.osc1_saw_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc1_saw_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC1_SQU:
 		switch(ctrl_toggle.osc1_squ_func) {
 		case CTRL_OSC_SQU_LEVEL:
-			_ctrl_apply_delta(&ctrl_value.osc1_squ_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc1_squ_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_OSC_SQL_PWM:
 			_ctrl_apply_delta(&ctrl_value.osc1_squ_pwm, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
@@ -82,8 +82,8 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		}
 		break;
 	case CTRL_OSC1_TO_OSC2:
-		_ctrl_apply_delta(&ctrl_value.osc1_to_osc2, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
-		_ctrl_apply_delta(&ctrl_value.osc1_to_osc1, (delta * -1), CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc1_to_osc2, delta, CTRL_SCALE_HALT_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc1_to_osc1, (delta * -1), CTRL_SCALE_HALT_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC 1 TUNING */
