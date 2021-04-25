@@ -10,6 +10,9 @@
 
 #include "stm32f4xx_hal.h"
 
+#define I2C_LEFT 0
+#define I2C_RIGHT 1
+
 /* i2c.c */
 extern I2C_HandleTypeDef *i2c_bus[2];
 

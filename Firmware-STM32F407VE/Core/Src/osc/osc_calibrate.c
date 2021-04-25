@@ -76,7 +76,7 @@ void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel)
 #define TUNING_ERROR_MARGIN 0
 
 // Add the find-freq here
-uint32_t _dac_value_for_freq(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value) {
+uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value) {
 
 	// Set the DAC value
 	dac7678_set_value(dac_bus, dac_addr, dac_channel, near_dac_value);
@@ -188,7 +188,7 @@ typedef struct {
 #define CAL_ERROR_DAC_MAX 3
 #define CAL_ERROR_DAC_MIN 4
 
-_calibration_result _dpot_value_for_tracking(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel, uint8_t min_val, uint8_t max_val, uint8_t cur_val) {
+_calibration_result _dpot_value_for_tracking(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel, uint8_t min_val, uint8_t max_val, uint8_t cur_val) {
 	_calibration_result result;
 
 	// Set dPOT to the cur_val
@@ -268,7 +268,7 @@ void _init_dpot() {
 	HAL_GPIO_WritePin(OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, GPIO_PIN_SET);
 }
 
-void _osc_calibrate_voice(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel) {
+void _osc_calibrate_voice(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef* dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel) {
 	// Trying to determine the correct dPOT value
 	// for the scaling between 1v variance in CV
 	// to produce exactly double the frequency.
@@ -306,7 +306,7 @@ void _osc_calibrate_voice(I2C_HandleTypeDef *dac_bus, uint8_t dac_addr, uint8_t 
 }
 
 
-void osc_calibrate(I2C_HandleTypeDef *dac_bus, SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeDef *timer) {
+void osc_calibrate(uint8_t dac_bus, SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeDef *timer) {
 	_osc_calibrate_voice(dac_bus, 0x48, 2, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
 	_osc_calibrate_voice(dac_bus, 0x4a, 4, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
 }

@@ -11,7 +11,7 @@
 #include "stm32f4xx_hal.h"
 
 // osc_calibrate.c
-void osc_calibrate();
+void osc_calibrate(uint8_t dac_bus, SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeDef *timer);
 void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel);
 
 // osc_ctrl.c
