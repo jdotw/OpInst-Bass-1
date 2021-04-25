@@ -116,7 +116,6 @@ int main(void)
   i2c_bus[0] = &hi2c1; // Left
   i2c_bus[1] = &hi2c2; // Right
 
-
   // Scan all i2c buses
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
 //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 1);

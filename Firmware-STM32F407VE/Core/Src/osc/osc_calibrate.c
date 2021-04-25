@@ -11,6 +11,7 @@
 
 #include "main.h"
 #include "dac7678.h"
+#include "i2c.h"
 
 #define MIDI_NOTE_A2 45
 #define MIDI_NOTE_A3 57
@@ -29,7 +30,7 @@ uint32_t Difference = 0;
 uint32_t Frequency = 0;
 uint8_t Is_First_Captured = 0;  // 0- not captured, 1- captured
 
-#define OSC_SETTLING_DELAY 1000
+#define OSC_FREQ_COUNT_DELAY 20
 
 uint32_t _get_frequency(TIM_HandleTypeDef *htim, uint32_t channel) {
 	IC_Value1 = 0;
@@ -38,7 +39,7 @@ uint32_t _get_frequency(TIM_HandleTypeDef *htim, uint32_t channel) {
 	Frequency = 0;
 	Is_First_Captured = 0;
 	HAL_TIM_IC_Start_IT(htim, channel);
-	HAL_Delay(OSC_SETTLING_DELAY);
+	HAL_Delay(OSC_FREQ_COUNT_DELAY);
 	HAL_TIM_IC_Stop_IT(htim, channel);
 	return Frequency;
 }
@@ -79,7 +80,8 @@ void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel)
 uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value) {
 
 	// Set the DAC value
-	dac7678_set_value(dac_bus, dac_addr, dac_channel, near_dac_value);
+	HAL_StatusTypeDef res = dac7678_set_value(dac_bus, dac_addr, dac_channel, near_dac_value);
+	if (res != HAL_OK) { Error_Handler(); }
 
 	// Listen to the frequency produced
 	uint32_t observed_frequency = _get_frequency(timer, timer_channel);
@@ -282,6 +284,10 @@ void _osc_calibrate_voice(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel
   printf("Osc 1 Starting Frequency: %lu\n", freq);
 
 	_calibration_result result = _dpot_value_for_tracking(dac_bus, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, DPOT_VALUE_MIN, DPOT_VALUE_MAX, (DPOT_VALUE_MAX - DPOT_VALUE_MIN)/2);
+	if (!result.success) {
+		printf("Failed to calibrate oscillator at %i:%i:%i", dac_bus, dac_addr, dac_channel);
+		Error_Handler();
+	}
   printf("Osc 1 Final dpot value: %u\n", result.dpot_val);
 
   uint16_t dac_value = _scaled_dac_value_for_midi_note(MIDI_NOTE_A2);
@@ -307,6 +313,16 @@ void _osc_calibrate_voice(uint8_t dac_bus, uint8_t dac_addr, uint8_t dac_channel
 
 
 void osc_calibrate(uint8_t dac_bus, SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeDef *timer) {
-	_osc_calibrate_voice(dac_bus, 0x48, 2, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
-	_osc_calibrate_voice(dac_bus, 0x4a, 4, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
+	// Select I2C Left 0
+	HAL_StatusTypeDef res = i2c_mux_select(0, 0, 0);
+	if (res != HAL_OK) {
+		printf("Failed to select I2C Left 0\n");
+		Error_Handler();
+	}
+
+	// Calibrate Osc 1
+	_osc_calibrate_voice(dac_bus, 0, 2, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
+
+	// Calibrate Osc 2
+	_osc_calibrate_voice(dac_bus, 2, 4, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
 }
