@@ -10,81 +10,28 @@
 #include "ctrl.h"
 #include "midi.h"
 
-ctrl_value_t ctrl_value = {
+static const ctrl_value_t _init_ctrl_value = {
 		.note_number = MIDI_NOTE_A3,
-
-		.osc1_saw_lvl = 0,
-		.osc1_squ_lvl = 0,
 		.osc1_squ_pwm = CTRL_DEFAULT_MID,
 		.osc1_to_osc1 = CTRL_DEFAULT_MAX,
-		.osc1_to_osc2 = 0,
-
-		.osc1_tune_coarse = 0,
-		.osc1_tune_fine = 0,
-		.osc1_filt_cutoff = 0,
-		.osc1_filt_res = 0,
-		.osc1_drive = 0,
-
-		.osc2_saw_lvl = 0,
-		.osc2_squ_lvl = 0,
 		.osc2_squ_pwm = CTRL_DEFAULT_MID,
-		.osc2_noise_lvl = 0,
-
-		.osc2_filt_cutoff = 0,
-		.osc2_filt_res = 0,
-		.osc2_drive = 0,
-
-		.sub_lvl = 0,
-		.sub_noise_lvl = 0,
-		.sub_to_osc2 = 0,
-
-		.sub_filt_cutoff = 0,
-		.sub_filt_res = 0,
-
-		.osc_filt_env1_a = 0,
-		.osc_filt_env1_d = 0,
-		.osc_filt_env1_s = 0,
-		.osc_filt_env1_r = 0,
-		.osc_filt_env1_amt = 0,
-
-		.osc_filt_env2_a = 0,
-		.osc_filt_env2_d = 0,
-		.osc_filt_env2_s = 0,
-		.osc_filt_env2_r = 0,
-		.osc_filt_env2_amt = 0,
-
-		.sub_filt_env1_a = 0,
-		.sub_filt_env1_d = 0,
-		.sub_filt_env1_s = 0,
-		.sub_filt_env1_r = 0,
-		.sub_filt_env1_amt = 0,
-
-		.sub_filt_env2_a = 0,
-		.sub_filt_env2_d = 0,
-		.sub_filt_env2_s = 0,
-		.sub_filt_env2_r = 0,
-		.sub_filt_env2_amt = 0,
-
-		.fx_wetdry = 0,
-		.fx_val1 = 0,
-		.fx_val2 = 0,
-		.fx_val3 = 0,
-		.fx_val4 = 0,
 };
 
-ctrl_toggle_t ctrl_toggle = {
-		.osc1_squ_func = 0,
-		.osc2_squ_func = 0,
-		.osc1_tune_func = 0,
-
-		.osc_filt_env_attack_func = 0,
-		.osc_filt_env_sustain_func = 0,
-		.osc_amp_env_sustain_func = 0,
-
-		.sub_filt_env_attack_func = 0,
-		.sub_filt_env_sustain_func = 0,
-		.sub_amp_env_sustain_func = 0,
+static const ctrl_toggle_t _init_ctrl_toggle = {
+		0
 };
+
+ctrl_value_t ctrl_value;
+ctrl_toggle_t ctrl_toggle;
+bool ctrl_enabled = true;
+
+void ctrl_value_init() {
+	ctrl_value = _init_ctrl_value;
+}
+
+void ctrl_toggle_init() {
+	ctrl_toggle = _init_ctrl_toggle;
+}
 
 void ctrl_overflow_handler() {
 	// TODO: Buzz the haptic
@@ -115,7 +62,7 @@ void _ctrl_apply_delta(uint16_t *ctrl_ptr, int8_t delta, int16_t scale_percent, 
 }
 
 void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
-	if (delta == 0) return;
+	if (!ctrl_enabled || delta == 0) return;
 	switch (ctrl) {
 
 	/* OSC 1 */
@@ -143,10 +90,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_OSC1_TUNE:
 		switch(ctrl_toggle.osc1_tune_func) {
 		case CTRL_OSC_TUNE_COARSE:
-			_ctrl_apply_delta(&ctrl_value.osc1_tune_coarse, (delta * -1), 100, -12, 12);
+			_ctrl_apply_delta((uint16_t*)&ctrl_value.osc1_tune_coarse, (delta * -1), 100, -12, 12);
 			break;
 		case CTRL_OSC_TUNE_FINE:
-			_ctrl_apply_delta(&ctrl_value.osc1_tune_fine, (delta * -1), 100, INT16_MIN, INT16_MAX);
+			_ctrl_apply_delta((uint16_t*)&ctrl_value.osc1_tune_fine, (delta * -1), 100, INT16_MIN, INT16_MAX);
 			break;
 		default:
 			break;
@@ -406,7 +353,7 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 }
 
 void ctrl_apply_toggle(ctrl_enum_t ctrl, bool changed, bool state) {
-	if (state && changed) {
+	if (ctrl_enabled && state && changed) {
 		switch(ctrl) {
 		case CTRL_OSC1_SQU:
 			ctrl_toggle.osc1_squ_func++;

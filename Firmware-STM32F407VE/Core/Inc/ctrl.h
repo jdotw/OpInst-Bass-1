@@ -100,7 +100,7 @@ typedef enum {
 
 
 typedef struct {
-	uint8_t note_number;
+	uint16_t note_number;
 
 	uint16_t osc1_saw_lvl;
 	uint16_t osc1_squ_lvl;
@@ -108,7 +108,7 @@ typedef struct {
 	uint16_t osc1_to_osc1;
 	uint16_t osc1_to_osc2;
 
-	int8_t osc1_tune_coarse;
+	int16_t osc1_tune_coarse;
 	int16_t osc1_tune_fine;
 	uint16_t osc1_filt_cutoff;
 	uint16_t osc1_filt_res;
@@ -191,6 +191,10 @@ typedef struct {
 
 extern ctrl_value_t ctrl_value;
 extern ctrl_toggle_t ctrl_toggle;
+extern bool ctrl_enabled;
+
+void ctrl_value_init(void);
+void ctrl_toggle_init(void);
 
 void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta);
 void ctrl_apply_toggle(ctrl_enum_t ctrl, bool changed, bool state);

@@ -23,7 +23,7 @@ typedef struct {
 	bool sw2_changed;
 } rotpic_state;
 
-void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel, bool ignore_state);
+void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel);
 
 
 #endif /* INC_ROTPIC_H_ */

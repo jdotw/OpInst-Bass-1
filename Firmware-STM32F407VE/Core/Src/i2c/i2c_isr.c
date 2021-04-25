@@ -12,7 +12,7 @@
 #include "rotpic.h"
 
 void _i2c_isr_handle_channel_int(uint8_t bus, uint8_t mux, uint8_t channel) {
-	rotpic_poll_all(bus, mux, channel, false);
+	rotpic_poll_all(bus, mux, channel);
 }
 
 void _i2c_isr_check_mux(uint8_t bus_id, uint8_t mux_id) {
