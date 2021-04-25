@@ -25,7 +25,7 @@ void _commit_dac() {
 	dac_val[0] = ctrl_value.osc1_filt_res;
 	dac_val[1] = ctrl_value.osc1_filt_cutoff;
 	uint8_t osc1_note = ctrl_value.note_number + ctrl_value.osc1_tune_coarse;
-	uint8_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
+	uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
 	osc1_note_dac_val += ctrl_value.osc1_tune_fine; // TODO: Handle wrapping, maybe add it to osc1_note_dac_val?
 	dac_val[2] = osc1_note_dac_val;
 	dac_val[3] = ctrl_value.osc1_to_osc2;
