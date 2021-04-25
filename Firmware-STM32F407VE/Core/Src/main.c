@@ -153,7 +153,7 @@ int main(void)
 //  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
 
   // Re-enable controls
-  ctrl_enabled = false;
+  ctrl_enabled = true;
 
   // Start commit timer
   HAL_TIM_Base_Start_IT(&htim7);
