@@ -143,10 +143,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_OSC1_TUNE:
 		switch(ctrl_toggle.osc1_tune_func) {
 		case CTRL_OSC_TUNE_COARSE:
-			_ctrl_apply_delta(&ctrl_value.osc1_tune_coarse, delta, CTRL_DEFAULT_SCALE, -12, 12);
+			_ctrl_apply_delta(&ctrl_value.osc1_tune_coarse, (delta * -1), 100, -12, 12);
 			break;
 		case CTRL_OSC_TUNE_FINE:
-			_ctrl_apply_delta(&ctrl_value.osc1_tune_fine, delta, CTRL_DEFAULT_SCALE, INT16_MIN, INT16_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc1_tune_fine, (delta * -1), 100, INT16_MIN, INT16_MAX);
 			break;
 		default:
 			break;

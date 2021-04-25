@@ -169,14 +169,14 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 	}
 }
 
-void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel) {
+void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel, bool ignore_state) {
 	// Select the mux channel
 	i2c_mux_select(bus, mux, channel);
 
 	// Poll all (possible) 8 rotary PICs on that bus
 	for (uint8_t i=0; i < 8; i++) {
 		rotpic_state state = _rotpic_poll_selected(bus, DEFAULT_ROTPIC_ADDR + i);
-		if (state.success) {
+		if (state.success && !ignore_state) {
 			_rotpic_handle_state(bus, mux, channel, i, state);
 		}
 	}

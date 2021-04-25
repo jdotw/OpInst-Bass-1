@@ -126,6 +126,18 @@ int main(void)
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
 
+  // Poll all rotary encoder PICs
+  // This will clear any interrupts
+  rotpic_poll_all(I2C_LEFT, 0, 0, true);
+  rotpic_poll_all(I2C_LEFT, 0, 1, true);
+  rotpic_poll_all(I2C_LEFT, 0, 2, true);
+  rotpic_poll_all(I2C_LEFT, 0, 3, true);
+  rotpic_poll_all(I2C_RIGHT, 1, 0, true);
+  rotpic_poll_all(I2C_RIGHT, 1, 1, true);
+  rotpic_poll_all(I2C_RIGHT, 1, 2, true);
+  rotpic_poll_all(I2C_RIGHT, 1, 3, true);
+
+
   // Reset DACs
   dac_init();
 

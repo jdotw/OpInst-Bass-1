@@ -108,8 +108,8 @@ typedef struct {
 	uint16_t osc1_to_osc1;
 	uint16_t osc1_to_osc2;
 
-	uint16_t osc1_tune_coarse;
-	uint16_t osc1_tune_fine;
+	int8_t osc1_tune_coarse;
+	int16_t osc1_tune_fine;
 	uint16_t osc1_filt_cutoff;
 	uint16_t osc1_filt_res;
 	uint16_t osc1_drive;
