@@ -25,3 +25,12 @@ HAL_StatusTypeDef dac7678_set_value(uint8_t bus, uint8_t dac, uint8_t dac_channe
 	return result;
 }
 
+HAL_StatusTypeDef dac7678_set_value_array(uint8_t bus, uint8_t dac, uint16_t val[7]) {
+	for (uint8_t i = 0; i < 8; i++) {
+		HAL_StatusTypeDef res = dac7678_set_value(bus, dac, i, val[i]);
+		if (res != HAL_OK) return res;
+	}
+	return HAL_OK;
+}
+
+
