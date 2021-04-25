@@ -152,7 +152,20 @@ int main(void)
   // Enable RGB LED drivers
 //  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
 
+  // Poll all rotary encoder PICs
+  // This will clear any interrupts
+  rotpic_poll_all(I2C_LEFT, 0, 0);
+  rotpic_poll_all(I2C_LEFT, 0, 1);
+  rotpic_poll_all(I2C_LEFT, 0, 2);
+  rotpic_poll_all(I2C_LEFT, 0, 3);
+  rotpic_poll_all(I2C_RIGHT, 1, 0);
+  rotpic_poll_all(I2C_RIGHT, 1, 1);
+  rotpic_poll_all(I2C_RIGHT, 1, 2);
+  rotpic_poll_all(I2C_RIGHT, 1, 3);
+
   // Re-enable controls
+  ctrl_value_init();
+  ctrl_toggle_init();
   ctrl_enabled = true;
 
   // Start commit timer
