@@ -67,6 +67,7 @@ typedef enum {
 
 #define CTRL_DEFAULT_SCALE 4096
 #define CTRL_DEFAULT_MIN 0
+#define CTRL_DEFAULT_MID 0x800
 #define CTRL_DEFAULT_MAX 0xFFF // 12-bit
 
 typedef enum {

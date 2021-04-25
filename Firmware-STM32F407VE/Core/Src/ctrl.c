@@ -24,6 +24,7 @@ ctrl_value_t ctrl_value = {
 
 		.osc2_saw_lvl = 0,
 		.osc2_squ_lvl = 0,
+		.osc2_squ_pwm = CTRL_DEFAULT_MID,
 		.osc2_noise_lvl = 0,
 
 		.osc2_filt_cutoff = 0,
