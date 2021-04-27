@@ -11,6 +11,17 @@
 #include "i2c.h"
 #include "dac7678.h"
 #include "osc.h"
+#include <math.h>
+
+uint16_t _dac_lin_to_log(uint16_t input) {
+	// Converts a linear scale to the logarithmic scale
+	// That is needed to provide linear control through a VCA
+	// I worked this out in Number
+	// *shrug*
+
+	if (input == 0) return 0;
+	else return (log10(input)/log10(2))*(4095/12);
+}
 
 void _commit_dac() {
   // Reset DACs
@@ -28,13 +39,26 @@ void _commit_dac() {
 	uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
 	osc1_note_dac_val += ctrl_value.osc1_tune_fine; // TODO: Handle wrapping, maybe add it to osc1_note_dac_val?
 	dac_val[2] = osc1_note_dac_val;
-	dac_val[3] = ctrl_value.osc1_to_osc2;
-	dac_val[4] = ctrl_value.osc1_to_osc1;
+	dac_val[3] = _dac_lin_to_log(ctrl_value.osc1_to_osc1);
+	dac_val[4] = _dac_lin_to_log(ctrl_value.osc1_to_osc2);
 	dac_val[5] = ctrl_value.osc1_squ_pwm;
-	dac_val[6] = ctrl_value.osc1_saw_lvl;
-	dac_val[7] = ctrl_value.osc1_squ_lvl;
-	res = dac7678_set_value_array(0, 0, dac_val);
+	dac_val[6] = _dac_lin_to_log(ctrl_value.osc1_saw_lvl);
+	dac_val[7] = _dac_lin_to_log(ctrl_value.osc1_squ_lvl);
+	res = dac7678_set_value_array(I2C_LEFT, 0, dac_val);
 	if (res != HAL_OK) Error_Handler();
+
+	// Left0:010
+	dac_val[0] = _dac_lin_to_log(ctrl_value.osc2_noise_lvl);
+	dac_val[1] = _dac_lin_to_log(ctrl_value.sub_noise_lvl);
+	dac_val[2] = _dac_lin_to_log(ctrl_value.sub_lvl);
+	dac_val[3] = _dac_lin_to_log(ctrl_value.sub_to_osc2);
+	dac_val[4] = osc_dac_value_for_note(OSC2, ctrl_value.note_number);
+	dac_val[5] = ctrl_value.osc2_squ_pwm;
+	dac_val[6] = _dac_lin_to_log(ctrl_value.osc2_squ_lvl);
+	dac_val[7] = _dac_lin_to_log(ctrl_value.osc2_saw_lvl);
+	res = dac7678_set_value_array(I2C_LEFT, 2, dac_val);
+	if (res != HAL_OK) Error_Handler();
+
 }
 
 void commit_30hz_timer(void) {

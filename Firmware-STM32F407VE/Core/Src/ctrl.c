@@ -12,9 +12,17 @@
 
 static const ctrl_value_t _init_ctrl_value = {
 		.note_number = MIDI_NOTE_A3,
+
+		.osc1_saw_lvl = CTRL_DEFAULT_MAX,
 		.osc1_squ_pwm = CTRL_DEFAULT_MID,
 		.osc1_to_osc1 = CTRL_DEFAULT_MAX,
+		.osc1_to_osc2 = CTRL_DEFAULT_MIN,
+
+		.osc2_squ_lvl = CTRL_DEFAULT_MAX,
 		.osc2_squ_pwm = CTRL_DEFAULT_MID,
+
+		.sub_lvl = CTRL_DEFAULT_MAX,
+		.sub_to_osc2 = CTRL_DEFAULT_MIN,
 };
 
 static const ctrl_toggle_t _init_ctrl_toggle = {
@@ -83,17 +91,16 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		break;
 	case CTRL_OSC1_TO_OSC2:
 		_ctrl_apply_delta(&ctrl_value.osc1_to_osc2, delta, CTRL_SCALE_HALT_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
-		_ctrl_apply_delta(&ctrl_value.osc1_to_osc1, (delta * -1), CTRL_SCALE_HALT_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC 1 TUNING */
 	case CTRL_OSC1_TUNE:
 		switch(ctrl_toggle.osc1_tune_func) {
 		case CTRL_OSC_TUNE_COARSE:
-			_ctrl_apply_delta((uint16_t*)&ctrl_value.osc1_tune_coarse, (delta * -1), 100, -12, 12);
+			_ctrl_apply_delta((uint16_t*)&ctrl_value.osc1_tune_coarse, delta, 100, -12, 12);
 			break;
 		case CTRL_OSC_TUNE_FINE:
-			_ctrl_apply_delta((uint16_t*)&ctrl_value.osc1_tune_fine, (delta * -1), 100, INT16_MIN, INT16_MAX);
+			_ctrl_apply_delta((uint16_t*)&ctrl_value.osc1_tune_fine, delta, 100, INT16_MIN, INT16_MAX);
 			break;
 		default:
 			break;
@@ -113,22 +120,22 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* OSC 2 */
 	case CTRL_OSC2_SAW:
-		_ctrl_apply_delta(&ctrl_value.osc2_saw_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc2_saw_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC2_SQU:
 		switch(ctrl_toggle.osc2_squ_func) {
 		case CTRL_OSC_SQU_LEVEL:
-			_ctrl_apply_delta(&ctrl_value.osc2_squ_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc2_squ_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_OSC_SQL_PWM:
-			_ctrl_apply_delta(&ctrl_value.osc2_squ_pwm, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc2_squ_pwm, delta, CTRL_SCALE_TWO_TURNS, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
 		}
 		break;
 	case CTRL_OSC2_NOISE:
-		_ctrl_apply_delta(&ctrl_value.osc2_noise_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc2_noise_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC 2 FILTER AND DRIVE */
@@ -144,13 +151,13 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* SUB */
 	case CTRL_SUB:
-		_ctrl_apply_delta(&ctrl_value.sub_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_SUB_NOISE:
-		_ctrl_apply_delta(&ctrl_value.sub_noise_lvl, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_noise_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_SUB_TO_OSC2:
-		_ctrl_apply_delta(&ctrl_value.sub_to_osc2, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_to_osc2, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* SUB FILTER */
