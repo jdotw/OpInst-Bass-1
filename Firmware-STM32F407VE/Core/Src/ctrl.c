@@ -109,13 +109,13 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* OSC 1 FILTER AND DRIVE */
 	case CTRL_OSC1_FILT_CUTOFF:
-		_ctrl_apply_delta(&ctrl_value.osc1_filt_cutoff, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc1_filt_cutoff, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC1_FILT_RES:
-		_ctrl_apply_delta(&ctrl_value.osc1_filt_res, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc1_filt_res, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC1_DRIVE:
-		_ctrl_apply_delta(&ctrl_value.osc1_drive, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc1_drive, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC 2 */
@@ -140,13 +140,13 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* OSC 2 FILTER AND DRIVE */
 	case CTRL_OSC2_FILT_CUTOFF:
-		_ctrl_apply_delta(&ctrl_value.osc2_filt_cutoff, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc2_filt_cutoff, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC2_FILT_RES:
-		_ctrl_apply_delta(&ctrl_value.osc2_filt_res, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc2_filt_res, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC2_DRIVE:
-		_ctrl_apply_delta(&ctrl_value.osc2_drive, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc2_drive, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* SUB */
@@ -162,10 +162,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* SUB FILTER */
 	case CTRL_SUB_FILT_CUTOFF:
-		_ctrl_apply_delta(&ctrl_value.sub_filt_cutoff, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_filt_cutoff, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_SUB_FILT_RES:
-		_ctrl_apply_delta(&ctrl_value.sub_filt_res, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_filt_res, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC FILTER ADSR ENVELOPE */

@@ -71,7 +71,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 				ctrl_apply_delta(CTRL_OSC1_DRIVE, state.enc1_delta);
 				ctrl_apply_delta(CTRL_OSC1_FILT_RES, state.enc2_delta);
 				ctrl_apply_delta(CTRL_OSC1_TUNE, (state.enc3_delta * -1));
-				ctrl_apply_delta(CTRL_OSC1_FILT_CUTOFF, state.enc4_delta);
+				ctrl_apply_delta(CTRL_OSC1_FILT_CUTOFF, (state.enc4_delta * -1));
 				ctrl_apply_toggle(CTRL_OSC1_TUNE, state.sw1_changed, state.sw1_state);
 				break;
 			case 2:
@@ -112,8 +112,8 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 				break;
 			case 1:
 				// Left 2:001
-				ctrl_apply_delta(CTRL_SUB_FILT_CUTOFF, state.enc1_delta);
-				ctrl_apply_delta(CTRL_SUB_FILT_RES, state.enc2_delta);
+				ctrl_apply_delta(CTRL_SUB_FILT_CUTOFF, (state.enc1_delta * -1));
+				ctrl_apply_delta(CTRL_SUB_FILT_RES, (state.enc2_delta * -1));
 			}
 			break;
 		case 3:
@@ -121,7 +121,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			switch(pic) {
 			case 0:
 				// Left 3:000
-				ctrl_apply_delta(CTRL_OSC2_FILT_CUTOFF, state.enc1_delta);
+				ctrl_apply_delta(CTRL_OSC2_FILT_CUTOFF, (state.enc1_delta * -1));
 				ctrl_apply_delta(CTRL_OSC2_DRIVE, state.enc2_delta);
 				ctrl_apply_delta(CTRL_OSC2_FILT_RES, state.enc3_delta);
 				ctrl_apply_delta(CTRL_FX_WETDRY, state.enc4_delta);
