@@ -173,7 +173,7 @@ typedef struct {
 	uint16_t fx_val1;
 	uint16_t fx_val2;
 	uint16_t fx_val3;
-	uint16_t fx_val4;
+	uint16_t fx_feedback;
 
 } ctrl_value_t;
 

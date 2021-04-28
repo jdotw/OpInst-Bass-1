@@ -23,6 +23,8 @@ static const ctrl_value_t _init_ctrl_value = {
 
 		.sub_lvl = CTRL_DEFAULT_MAX,
 		.sub_to_osc2 = CTRL_DEFAULT_MIN,
+
+		.fx_wetdry = CTRL_DEFAULT_MID,
 };
 
 static const ctrl_toggle_t _init_ctrl_toggle = {
@@ -172,10 +174,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_OSC_FILT_ENV_A:
 		switch(ctrl_toggle.osc_filt_env_attack_func) {
 		case CTRL_SELECT_ENV_1:
-			_ctrl_apply_delta(&ctrl_value.osc_filt_env1_a, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_filt_env1_a, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_SELECT_ENV_2:
-			_ctrl_apply_delta(&ctrl_value.osc_filt_env2_a, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_filt_env2_a, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
@@ -184,10 +186,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_OSC_FILT_ENV_D:
 		switch(ctrl_toggle.osc_filt_env_attack_func) {
 		case CTRL_SELECT_ENV_1:
-			_ctrl_apply_delta(&ctrl_value.osc_filt_env1_d, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_filt_env1_d, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_SELECT_ENV_2:
-			_ctrl_apply_delta(&ctrl_value.osc_filt_env2_d, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_filt_env2_d, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
@@ -198,9 +200,9 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		case CTRL_SELECT_ENV_1:
 			switch(ctrl_toggle.osc_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
-				_ctrl_apply_delta(&ctrl_value.osc_filt_env1_s, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.osc_filt_env1_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			case CTRL_ENV_AMOUNT:
-				_ctrl_apply_delta(&ctrl_value.osc_filt_env1_amt, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.osc_filt_env1_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			default:
 				break;
 			}
@@ -208,9 +210,9 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		case CTRL_SELECT_ENV_2:
 			switch(ctrl_toggle.osc_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
-				_ctrl_apply_delta(&ctrl_value.osc_filt_env2_s, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.osc_filt_env2_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			case CTRL_ENV_AMOUNT:
-				_ctrl_apply_delta(&ctrl_value.osc_filt_env2_amt, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.osc_filt_env2_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			default:
 				break;
 			}
@@ -222,10 +224,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_OSC_FILT_ENV_R:
 		switch(ctrl_toggle.osc_filt_env_attack_func) {
 		case CTRL_SELECT_ENV_1:
-			_ctrl_apply_delta(&ctrl_value.osc_filt_env1_r, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_filt_env1_r, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_SELECT_ENV_2:
-			_ctrl_apply_delta(&ctrl_value.osc_filt_env2_r, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_filt_env2_r, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
@@ -234,23 +236,23 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* OSC AMP ADSR ENVELOPE */
 	case CTRL_OSC_AMP_ENV_A:
-		_ctrl_apply_delta(&ctrl_value.osc_amp_env_a, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc_amp_env_a, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC_AMP_ENV_D:
-		_ctrl_apply_delta(&ctrl_value.osc_amp_env_d, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc_amp_env_d, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_OSC_AMP_ENV_S:
 		switch(ctrl_toggle.osc_amp_env_sustain_func) {
 		case CTRL_ENV_SUSTAIN:
-			_ctrl_apply_delta(&ctrl_value.osc_amp_env_s, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_amp_env_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		case CTRL_ENV_AMOUNT:
-			_ctrl_apply_delta(&ctrl_value.osc_amp_env_amt, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.osc_amp_env_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		default:
 			break;
 		}
 		break;
 	case CTRL_OSC_AMP_ENV_R:
-		_ctrl_apply_delta(&ctrl_value.osc_amp_env_r, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.osc_amp_env_r, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 
@@ -258,10 +260,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_SUB_FILT_ENV_A:
 		switch(ctrl_toggle.sub_filt_env_attack_func) {
 		case CTRL_SELECT_ENV_1:
-			_ctrl_apply_delta(&ctrl_value.sub_filt_env1_a, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_filt_env1_a, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_SELECT_ENV_2:
-			_ctrl_apply_delta(&ctrl_value.sub_filt_env2_a, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_filt_env2_a, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
@@ -270,10 +272,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_SUB_FILT_ENV_D:
 		switch(ctrl_toggle.sub_filt_env_attack_func) {
 		case CTRL_SELECT_ENV_1:
-			_ctrl_apply_delta(&ctrl_value.sub_filt_env1_d, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_filt_env1_d, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_SELECT_ENV_2:
-			_ctrl_apply_delta(&ctrl_value.sub_filt_env2_d, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_filt_env2_d, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
@@ -284,9 +286,9 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		case CTRL_SELECT_ENV_1:
 			switch(ctrl_toggle.sub_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
-				_ctrl_apply_delta(&ctrl_value.sub_filt_env1_s, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.sub_filt_env1_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			case CTRL_ENV_AMOUNT:
-				_ctrl_apply_delta(&ctrl_value.sub_filt_env1_amt, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.sub_filt_env1_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			default:
 				break;
 			}
@@ -294,9 +296,9 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		case CTRL_SELECT_ENV_2:
 			switch(ctrl_toggle.sub_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
-				_ctrl_apply_delta(&ctrl_value.sub_filt_env2_s, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.sub_filt_env2_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			case CTRL_ENV_AMOUNT:
-				_ctrl_apply_delta(&ctrl_value.sub_filt_env2_amt, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				_ctrl_apply_delta(&ctrl_value.sub_filt_env2_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			default:
 				break;
 			}
@@ -308,10 +310,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	case CTRL_SUB_FILT_ENV_R:
 		switch(ctrl_toggle.sub_filt_env_attack_func) {
 		case CTRL_SELECT_ENV_1:
-			_ctrl_apply_delta(&ctrl_value.sub_filt_env1_r, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_filt_env1_r, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		case CTRL_SELECT_ENV_2:
-			_ctrl_apply_delta(&ctrl_value.sub_filt_env2_r, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_filt_env2_r, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
 			break;
@@ -320,40 +322,40 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 	/* SUB AMP ADSR ENVELOPE */
 	case CTRL_SUB_AMP_ENV_A:
-		_ctrl_apply_delta(&ctrl_value.sub_amp_env_a, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_amp_env_a, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_SUB_AMP_ENV_D:
-		_ctrl_apply_delta(&ctrl_value.sub_amp_env_d, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_amp_env_d, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_SUB_AMP_ENV_S:
 		switch(ctrl_toggle.sub_amp_env_sustain_func) {
 		case CTRL_ENV_SUSTAIN:
-			_ctrl_apply_delta(&ctrl_value.sub_amp_env_s, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_amp_env_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		case CTRL_ENV_AMOUNT:
-			_ctrl_apply_delta(&ctrl_value.sub_amp_env_amt, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			_ctrl_apply_delta(&ctrl_value.sub_amp_env_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		default:
 			break;
 		}
 		break;
 	case CTRL_SUB_AMP_ENV_R:
-		_ctrl_apply_delta(&ctrl_value.sub_amp_env_r, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.sub_amp_env_r, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* FX */
 	case CTRL_FX_WETDRY:
-		_ctrl_apply_delta(&ctrl_value.fx_wetdry, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(&ctrl_value.fx_wetdry, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case CTRL_FX_VAL1:
-		_ctrl_apply_delta(&ctrl_value.fx_val1, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, UINT8_MAX);
+		_ctrl_apply_delta(&ctrl_value.fx_val1, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, UINT8_MAX);
 		break;
 	case CTRL_FX_VAL2:
-		_ctrl_apply_delta(&ctrl_value.fx_val2, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, UINT8_MAX);
+		_ctrl_apply_delta(&ctrl_value.fx_val2, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, UINT8_MAX);
 		break;
 	case CTRL_FX_VAL3:
-		_ctrl_apply_delta(&ctrl_value.fx_val3, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, UINT8_MAX);
+		_ctrl_apply_delta(&ctrl_value.fx_val3, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, UINT8_MAX);
 		break;
 	case CTRL_FX_VAL4:
-		_ctrl_apply_delta(&ctrl_value.fx_val4, delta, CTRL_DEFAULT_SCALE, CTRL_DEFAULT_MIN, UINT8_MAX);
+		_ctrl_apply_delta(&ctrl_value.fx_feedback, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, UINT8_MAX);
 		break;
 	}
 

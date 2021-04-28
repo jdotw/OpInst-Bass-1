@@ -61,6 +61,17 @@ void _commit_dac() {
 
 	// Left0:100
 	// TODO: This DAC
+	dac_val[0] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.osc_filt_env1_amt);
+	dac_val[1] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.osc_filt_env2_amt);
+	dac_val[2] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.osc_amp_env_amt);
+	dac_val[3] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.sub_amp_env_amt);
+	dac_val[4] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.sub_filt_env2_amt);
+	dac_val[5] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.sub_filt_env1_amt);
+	dac_val[6] = _dac_lin_to_log(ctrl_value.fx_wetdry);
+	dac_val[7] = _dac_lin_to_log(ctrl_value.fx_feedback);
+	res = dac7678_set_value_array(I2C_LEFT, 4, dac_val);
+	if (res != HAL_OK) Error_Handler();
+
 
 	// I2C Left 2
 	res = i2c_mux_select(0, 0, 2);
