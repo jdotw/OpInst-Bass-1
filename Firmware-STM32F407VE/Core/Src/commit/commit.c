@@ -59,6 +59,24 @@ void _commit_dac() {
 	res = dac7678_set_value_array(I2C_LEFT, 2, dac_val);
 	if (res != HAL_OK) Error_Handler();
 
+	// Left0:100
+	// TODO: This DAC
+
+	// I2C Left 2
+	res = i2c_mux_select(0, 0, 2);
+	if (res != HAL_OK) Error_Handler();
+
+	// Left2:000
+	dac_val[0] = ctrl_value.osc2_filt_res;
+	dac_val[1] = 0; // Not connected
+	dac_val[2] = ctrl_value.sub_filt_cutoff;
+	dac_val[3] = 0; // Not connected
+	dac_val[4] = ctrl_value.sub_filt_res;
+	dac_val[5] = ctrl_value.osc2_filt_cutoff;
+	dac_val[6] = 0; // Not connected
+	dac_val[7] = 0; // Not connected
+	res = dac7678_set_value_array(I2C_LEFT, 0, dac_val);
+	if (res != HAL_OK) Error_Handler();
 }
 
 void commit_30hz_timer(void) {
