@@ -171,7 +171,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 
 void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel) {
 	// Select the mux channel
-	i2c_mux_select(bus, mux, channel);
+	HAL_StatusTypeDef res = i2c_mux_select(bus, mux, channel);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
 
 	// Poll all (possible) 8 rotary PICs on that bus
 	for (uint8_t i=0; i < 8; i++) {

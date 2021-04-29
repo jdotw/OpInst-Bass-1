@@ -17,6 +17,8 @@
 extern I2C_HandleTypeDef *i2c_bus[2];
 
 /* i2c_mux.c */
+#define I2C_LEFT_MUX 0
+#define I2C_RIGHT_MUX 1
 extern uint8_t i2c_mux_addr[2]; // TODO: Hide this (use index instead)
 #define LEFT_I2C_MUX_ADDR 0x70  // TODO: Hide these (use index instead)
 #define RIGHT_I2C_MUX_ADDR 0x71 // TODO: Hide these (use index instead)

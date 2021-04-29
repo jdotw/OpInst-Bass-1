@@ -31,6 +31,7 @@
 #include "rotpic.h"
 #include "dac.h"
 #include "ctrl.h"
+#include "pca9555.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -126,6 +127,9 @@ int main(void)
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
 //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
+
+  // Reset GPIO Extenders
+  pca9555_init();
 
   // Poll all rotary encoder PICs
   // This will clear any interrupts

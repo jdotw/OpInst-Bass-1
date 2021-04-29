@@ -201,8 +201,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 			switch(ctrl_toggle.osc_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
 				_ctrl_apply_delta(&ctrl_value.osc_filt_env1_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			case CTRL_ENV_AMOUNT:
 				_ctrl_apply_delta(&ctrl_value.osc_filt_env1_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			default:
 				break;
 			}
@@ -211,8 +213,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 			switch(ctrl_toggle.osc_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
 				_ctrl_apply_delta(&ctrl_value.osc_filt_env2_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			case CTRL_ENV_AMOUNT:
 				_ctrl_apply_delta(&ctrl_value.osc_filt_env2_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			default:
 				break;
 			}
@@ -245,8 +249,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		switch(ctrl_toggle.osc_amp_env_sustain_func) {
 		case CTRL_ENV_SUSTAIN:
 			_ctrl_apply_delta(&ctrl_value.osc_amp_env_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			break;
 		case CTRL_ENV_AMOUNT:
 			_ctrl_apply_delta(&ctrl_value.osc_amp_env_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			break;
 		default:
 			break;
 		}
@@ -287,8 +293,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 			switch(ctrl_toggle.sub_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
 				_ctrl_apply_delta(&ctrl_value.sub_filt_env1_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			case CTRL_ENV_AMOUNT:
 				_ctrl_apply_delta(&ctrl_value.sub_filt_env1_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			default:
 				break;
 			}
@@ -297,8 +305,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 			switch(ctrl_toggle.sub_filt_env_sustain_func) {
 			case CTRL_ENV_SUSTAIN:
 				_ctrl_apply_delta(&ctrl_value.sub_filt_env2_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			case CTRL_ENV_AMOUNT:
 				_ctrl_apply_delta(&ctrl_value.sub_filt_env2_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+				break;
 			default:
 				break;
 			}
@@ -331,8 +341,10 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		switch(ctrl_toggle.sub_amp_env_sustain_func) {
 		case CTRL_ENV_SUSTAIN:
 			_ctrl_apply_delta(&ctrl_value.sub_amp_env_s, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			break;
 		case CTRL_ENV_AMOUNT:
 			_ctrl_apply_delta(&ctrl_value.sub_amp_env_amt, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+			break;
 		default:
 			break;
 		}
