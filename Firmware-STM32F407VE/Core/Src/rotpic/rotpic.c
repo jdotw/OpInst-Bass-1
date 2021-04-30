@@ -77,7 +77,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			case 2:
 				// Left 0:010
 				ctrl_apply_delta(CTRL_OSC_FILT_ENV_A, state.enc1_delta);
-				ctrl_apply_delta(CTRL_OSC_FILT_ENV_S, state.enc2_delta);
+				ctrl_apply_delta(CTRL_OSC_FILT_ENV_S, (state.enc2_delta * -1));
 				ctrl_apply_delta(CTRL_OSC_FILT_ENV_D, state.enc3_delta);
 				ctrl_apply_delta(CTRL_OSC_FILT_ENV_R, state.enc4_delta);
 				ctrl_apply_toggle(CTRL_OSC_FILT_ENV_A, state.sw1_changed, state.sw1_state);

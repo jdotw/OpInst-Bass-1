@@ -31,6 +31,9 @@
 #define PIN6_OUTPUT 0 << 6
 #define PIN7_OUTPUT 0 << 7
 
+#define CMD_OUTPUT_PORT0 2
+#define CMD_OUTPUT_PORT1 3
+
 #define CMD_CONFIG_PORT0 6
 #define CMD_CONFIG_PORT1 7
 
@@ -40,6 +43,18 @@ HAL_StatusTypeDef pca9555_set_port_config(uint8_t bus, uint8_t addr, uint8_t por
 	if (result != HAL_OK) return result;
 
 	uint8_t port_1_data[2] = { CMD_CONFIG_PORT1, ports[1] };
+	result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_1_data, 2, HAL_MAX_DELAY);
+	if (result != HAL_OK) return result;
+
+	return result;
+}
+
+HAL_StatusTypeDef pca9555_set_port_output(uint8_t bus, uint8_t addr, uint8_t outputs[2]) {
+	uint8_t port_0_data[2] = { CMD_OUTPUT_PORT0, outputs[0] };
+	HAL_StatusTypeDef result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_0_data, 2, HAL_MAX_DELAY);
+	if (result != HAL_OK) return result;
+
+	uint8_t port_1_data[2] = { CMD_OUTPUT_PORT1, outputs[1] };
 	result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_1_data, 2, HAL_MAX_DELAY);
 	if (result != HAL_OK) return result;
 
@@ -74,7 +89,7 @@ void pca9555_init() {
 	}
 
 	// Configure ports on Right PCA9555
-	uint8_t right_ports[2] = { 0x00, 0x00 };
+	uint8_t right_ports[2] = { 0x0, 0x0 };
 	right_ports[0] |= PIN0_INPUT;
 	right_ports[0] |= PIN1_INPUT;
 	right_ports[0] |= PIN2_OUTPUT;
@@ -91,10 +106,17 @@ void pca9555_init() {
 	right_ports[1] |= PIN5_OUTPUT;
 	right_ports[1] |= PIN6_INPUT;
 	right_ports[1] |= PIN7_INPUT;
-	res = pca9555_set_port_config(I2C_LEFT, DEFAULT_PCA9555_ADDRESS, left_ports);
+	res = pca9555_set_port_config(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, right_ports);
 	if (res != HAL_OK) {
 		printf("Failed to set RIGHT PCA9555 port configuration");
 		Error_Handler();
 	}
 
+	// Set all outputs to 0
+	uint8_t right_outputs[2] = { 0xFF, 0xFF };
+	res = pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, right_outputs);
+	if (res != HAL_OK) {
+		printf("Failed to set RIGHT PCA9555 port outputs");
+		Error_Handler();
+	}
 }

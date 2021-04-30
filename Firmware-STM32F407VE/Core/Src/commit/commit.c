@@ -60,7 +60,6 @@ void _commit_dac() {
 	if (res != HAL_OK) Error_Handler();
 
 	// Left0:100
-	// TODO: This DAC
 	dac_val[0] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.osc_filt_env1_amt);
 	dac_val[1] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.osc_filt_env2_amt);
 	dac_val[2] = _dac_lin_to_log(CTRL_DEFAULT_MAX - ctrl_value.osc_amp_env_amt);
@@ -88,6 +87,47 @@ void _commit_dac() {
 	dac_val[7] = 0; // Not connected
 	res = dac7678_set_value_array(I2C_LEFT, 0, dac_val);
 	if (res != HAL_OK) Error_Handler();
+
+	// I2C Right 2
+	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	if (res != HAL_OK) Error_Handler();
+
+	// Right2:000
+	dac_val[0] = ctrl_value.osc_filt_env1_r;
+	dac_val[1] = ctrl_value.osc_filt_env2_r;
+	dac_val[2] = ctrl_value.osc_filt_env1_s;
+	dac_val[3] = ctrl_value.osc_filt_env2_s;
+	dac_val[4] = ctrl_value.osc_filt_env1_a;
+	dac_val[5] = ctrl_value.osc_filt_env2_d;
+	dac_val[6] = ctrl_value.osc_filt_env1_d;
+	dac_val[7] = ctrl_value.osc_filt_env2_a;
+	res = dac7678_set_value_array(I2C_RIGHT, 0, dac_val);
+	if (res != HAL_OK) Error_Handler();
+
+	// Right2:010
+	dac_val[0] = ctrl_value.osc_amp_env_r;
+	dac_val[1] = ctrl_value.sub_amp_env_r;
+	dac_val[2] = ctrl_value.osc_amp_env_s;
+	dac_val[3] = ctrl_value.sub_amp_env_s;
+	dac_val[4] = ctrl_value.osc_amp_env_a;
+	dac_val[5] = ctrl_value.sub_amp_env_d;
+	dac_val[6] = ctrl_value.osc_amp_env_d;
+	dac_val[7] = ctrl_value.sub_amp_env_a;
+	res = dac7678_set_value_array(I2C_RIGHT, 2, dac_val);
+	if (res != HAL_OK) Error_Handler();
+
+	// Right2:100
+	dac_val[0] = ctrl_value.sub_filt_env2_r;
+	dac_val[1] = ctrl_value.sub_filt_env1_r;
+	dac_val[2] = ctrl_value.sub_filt_env2_s;
+	dac_val[3] = ctrl_value.sub_filt_env1_s;
+	dac_val[4] = ctrl_value.sub_filt_env2_a;
+	dac_val[5] = ctrl_value.sub_filt_env1_d;
+	dac_val[6] = ctrl_value.sub_filt_env2_d;
+	dac_val[7] = ctrl_value.sub_filt_env1_a;
+	res = dac7678_set_value_array(I2C_RIGHT, 4, dac_val);
+	if (res != HAL_OK) Error_Handler();
+
 }
 
 void commit_30hz_timer(void) {
