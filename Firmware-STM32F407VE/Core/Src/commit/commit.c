@@ -13,6 +13,8 @@
 #include "osc.h"
 #include <math.h>
 
+void commit_rotic_led(void);
+
 uint16_t _dac_lin_to_log(uint16_t input) {
 	// Converts a linear scale to the logarithmic scale
 	// That is needed to provide linear control through a VCA
@@ -132,4 +134,5 @@ void _commit_dac() {
 
 void commit_30hz_timer(void) {
 	_commit_dac();
+	commit_rotic_led();
 }

@@ -15,8 +15,6 @@
 #include "osc.h"
 #include "ctrl.h"
 
-#define DEFAULT_ROTPIC_ADDR 0x50
-
 #define ROTPIC_SW1_STATE_MASK   0b00000001
 #define ROTPIC_SW1_CHANGED_MASK 0b00000010
 #define ROTPIC_SW2_STATE_MASK   0b00000100

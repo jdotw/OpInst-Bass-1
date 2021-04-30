@@ -75,7 +75,7 @@ typedef enum {
 
 typedef enum {
 	CTRL_OSC_SQU_LEVEL,
-	CTRL_OSC_SQL_PWM,
+	CTRL_OSC_SQU_PWM,
 
 	CTRL_OSC_SQU_MAX,
 } osc_pwm_func_t;

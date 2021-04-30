@@ -11,6 +11,10 @@
 #include "stm32f4xx_hal.h"
 #include <stdbool.h>
 
+#define DEFAULT_ROTPIC_ADDR 0x50
+
+/* rotpic.c */
+
 typedef struct {
 	bool success;
 	int8_t enc1_delta;
@@ -25,5 +29,16 @@ typedef struct {
 
 void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel);
 
+/* rotpic_led.c */
+
+#define ROTPIC_LED1_BIT_SHIFT 0
+#define ROTPIC_LED2_BIT_SHIFT 1
+#define ROTPIC_LED3_BIT_SHIFT 2
+#define ROTPIC_LED4_BIT_SHIFT 3
+#define ROTPIC_LED5_BIT_SHIFT 4
+#define ROTPIC_LED6_BIT_SHIFT 5
+#define ROTPIC_LED7_BIT_SHIFT 6
+
+HAL_StatusTypeDef rotpic_led_set_state(uint8_t bus, uint8_t pic, uint8_t led_state);
 
 #endif /* INC_ROTPIC_H_ */

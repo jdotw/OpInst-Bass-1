@@ -84,7 +84,7 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		case CTRL_OSC_SQU_LEVEL:
 			_ctrl_apply_delta(&ctrl_value.osc1_squ_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
-		case CTRL_OSC_SQL_PWM:
+		case CTRL_OSC_SQU_PWM:
 			_ctrl_apply_delta(&ctrl_value.osc1_squ_pwm, delta, CTRL_SCALE_TWO_TURNS, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
@@ -129,7 +129,7 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		case CTRL_OSC_SQU_LEVEL:
 			_ctrl_apply_delta(&ctrl_value.osc2_squ_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
-		case CTRL_OSC_SQL_PWM:
+		case CTRL_OSC_SQU_PWM:
 			_ctrl_apply_delta(&ctrl_value.osc2_squ_pwm, delta, CTRL_SCALE_TWO_TURNS, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 			break;
 		default:
