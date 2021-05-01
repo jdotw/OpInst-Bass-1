@@ -75,6 +75,34 @@ static void MX_TIM7_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void one_second_callback() {
+	// JW TEST CODE
+	// JW TEST CODE
+	// JW TEST CODE
+	// JW TEST CODE
+	// JW TEST CODE
+	// Cycle the trigger and gate
+	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	static uint8_t cycle;
+	uint8_t outputs[2] = { 0, 0 };
+	if (cycle % 2) {
+		// Pull gate high and pulse trigger
+		outputs[0] = 0b00001100;
+		pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+		uint32_t pause = 0;
+		while (pause < 300000) {
+			pause++;
+		}
+		// Let trigger fall while gate stays high
+		outputs[0] = 0b00001000;
+		pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+	} else {
+		// No gate or trigger
+		outputs[0] = 0b00000000;
+		pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+	}
+	cycle++;
+}
 
 /* USER CODE END 0 */
 

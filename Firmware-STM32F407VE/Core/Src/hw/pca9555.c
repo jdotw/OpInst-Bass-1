@@ -7,9 +7,8 @@
 
 #include <stdio.h>
 #include "main.h"
+#include "pca9555.h"
 #include "i2c.h"
-
-#define DEFAULT_PCA9555_ADDRESS 0x20
 
 #define ALL_INPUT 0xFF
 #define PIN0_INPUT 1 << 0
@@ -113,7 +112,7 @@ void pca9555_init() {
 	}
 
 	// Set all outputs to 0
-	uint8_t right_outputs[2] = { 0xFF, 0xFF };
+	uint8_t right_outputs[2] = { 0x00, 0x00 };
 	res = pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, right_outputs);
 	if (res != HAL_OK) {
 		printf("Failed to set RIGHT PCA9555 port outputs");

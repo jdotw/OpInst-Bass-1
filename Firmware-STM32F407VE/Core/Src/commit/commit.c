@@ -133,6 +133,12 @@ void _commit_dac() {
 }
 
 void commit_30hz_timer(void) {
+	static uint32_t cycle;
 	_commit_dac();
 	commit_rotic_led();
+	if (cycle % 30 == 0) {
+		printf("Second");
+		one_second_callback();
+	}
+	cycle++;
 }
