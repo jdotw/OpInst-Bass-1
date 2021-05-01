@@ -1,0 +1,56 @@
+/*
+ * commit_gatetrig.c
+ *
+ *  Created on: 1 May 2021
+ *      Author: jwilson
+ */
+
+#include "note.h"
+#include "main.h"
+#include "i2c.h"
+#include "pca9555.h"
+
+#define TRIGGER_LENGTH 30
+
+void _commit_gatetrig(void) {
+	uint8_t outputs[2] = { 0, 0 };
+
+	// Select I2C Right 2
+	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+
+	// Configure Gates
+	outputs[0] |= note_value.note_on << 3;
+	outputs[0] |= note_value.note_on << 5;
+	outputs[0] |= note_value.note_on << 7;
+	outputs[1] |= note_value.note_on << 1;
+	outputs[1] |= note_value.note_on << 3;
+	outputs[1] |= note_value.note_on << 5;
+
+	// Configure Triggers
+	uint32_t tick = HAL_GetTick();
+	if (tick == 0) tick++; // Guarantee non-zero
+	if (note_trig.ping_trigger) {
+		// We need to ping the trigger
+		bool trig_state = false;
+		if (note_trig.triggered_at == 0) {
+			// This is the start of a ping
+			note_trig.triggered_at = tick;
+			trig_state = true;
+		} else if (tick < (note_trig.triggered_at + TRIGGER_LENGTH)) {
+			// Hold trigger high
+			trig_state = false;
+		} else {
+			// Let trig go
+			note_trig.ping_trigger = 0;
+		}
+
+		outputs[0] |= trig_state << 2;
+		outputs[0] |= trig_state << 4;
+		outputs[0] |= trig_state << 6;
+		outputs[1] |= trig_state << 0;
+		outputs[1] |= trig_state << 2;
+		outputs[1] |= trig_state << 4;
+	}
+
+	pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+}

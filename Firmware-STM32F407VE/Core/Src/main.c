@@ -32,6 +32,8 @@
 #include "dac.h"
 #include "ctrl.h"
 #include "pca9555.h"
+#include "note.h"
+#include "midi.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -82,24 +84,11 @@ void one_second_callback() {
 	// JW TEST CODE
 	// JW TEST CODE
 	// Cycle the trigger and gate
-	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
 	static uint8_t cycle;
-	uint8_t outputs[2] = { 0, 0 };
 	if (cycle % 2) {
-		// Pull gate high and pulse trigger
-		outputs[0] = 0b00001100;
-		pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
-		uint32_t pause = 0;
-		while (pause < 300000) {
-			pause++;
-		}
-		// Let trigger fall while gate stays high
-		outputs[0] = 0b00001000;
-		pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+		note_set_on(MIDI_NOTE_A3);
 	} else {
-		// No gate or trigger
-		outputs[0] = 0b00000000;
-		pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+		note_set_off();
 	}
 	cycle++;
 }
@@ -544,55 +533,54 @@ void Error_Handler(void)
   {
   	uint8_t led = (cycle % 2) ? 0xFF : 0x00;
   	led = 0xFF;
-  	HAL_StatusTypeDef res;
 
   	// I2C Left 0
-  	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 0);
+  	i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 0);
 
   	// LEFT0:000
-  	res = rotpic_led_set_state(I2C_LEFT, 0b000, led);
+  	rotpic_led_set_state(I2C_LEFT, 0b000, led);
 
   	// LEFT0:001
-  	res = rotpic_led_set_state(I2C_LEFT, 0b001, led);
+  	rotpic_led_set_state(I2C_LEFT, 0b001, led);
 
   	// LEFT0:010
   	// No LEDs
 
   	// LEFT0:011
-  	res = rotpic_led_set_state(I2C_LEFT, 0b011, led);
+  	rotpic_led_set_state(I2C_LEFT, 0b011, led);
 
   	// LEFT0:100
   	// No LEDs
 
   	// I2C Left 2
-  	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 2);
+  	i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 2);
 
   	// LEFT2:000
-  	res = rotpic_led_set_state(I2C_LEFT, 0b000, led);
+  	rotpic_led_set_state(I2C_LEFT, 0b000, led);
 
   	// LEFT2:001
   	// No LEDs
 
   	// I2C Left 3
-  	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 3);
+  	i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 3);
 
   	// LEFT3:000
   	// No LEDs
 
   	// I2C Right 0
-  	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 0);
+  	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 0);
 
   	// RIGHT0:000
-  	res = rotpic_led_set_state(I2C_LEFT, 0b000, led);
+  	rotpic_led_set_state(I2C_LEFT, 0b000, led);
 
   	// I2C Right 1
-  	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
+  	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
 
   	// RIGHT1:000
   	// No LEDs
 
   	// RIGHT1:001
-  	res = rotpic_led_set_state(I2C_LEFT, 0b001, led);
+  	rotpic_led_set_state(I2C_LEFT, 0b001, led);
 
 //  	// Wait and cycle
 //  	HAL_Delay(1000);

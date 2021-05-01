@@ -24,7 +24,18 @@ static const ctrl_value_t _init_ctrl_value = {
 		.sub_lvl = CTRL_DEFAULT_MAX,
 		.sub_to_osc2 = CTRL_DEFAULT_MIN,
 
+		.osc1_filt_cutoff = CTRL_DEFAULT_MAX,
+		.osc2_filt_cutoff = CTRL_DEFAULT_MAX,
+		.sub_filt_cutoff = CTRL_DEFAULT_MAX,
+
 		.fx_wetdry = CTRL_DEFAULT_MID,
+
+		.osc_amp_env_s = CTRL_DEFAULT_MAX,
+		.osc_amp_env_amt = CTRL_DEFAULT_MAX,
+		.sub_amp_env_s = CTRL_DEFAULT_MAX,
+		.sub_amp_env_amt = CTRL_DEFAULT_MAX,
+
+		0.
 };
 
 static const ctrl_toggle_t _init_ctrl_toggle = {

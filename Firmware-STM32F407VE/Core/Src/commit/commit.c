@@ -14,6 +14,7 @@
 #include <math.h>
 
 void commit_rotic_led(void);
+void _commit_gatetrig(void);
 
 uint16_t _dac_lin_to_log(uint16_t input) {
 	// Converts a linear scale to the logarithmic scale
@@ -137,8 +138,8 @@ void commit_30hz_timer(void) {
 	_commit_dac();
 	commit_rotic_led();
 	if (cycle % 30 == 0) {
-		printf("Second");
 		one_second_callback();
 	}
 	cycle++;
+	_commit_gatetrig();
 }

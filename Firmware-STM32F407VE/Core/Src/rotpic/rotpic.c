@@ -136,10 +136,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t pic
 			switch(pic) {
 			case 0:
 				// Right 0:000
-				ctrl_apply_delta(CTRL_OSC_AMP_ENV_D, state.enc1_delta);
-				ctrl_apply_delta(CTRL_OSC_AMP_ENV_R, state.enc2_delta);
-				ctrl_apply_delta(CTRL_OSC_AMP_ENV_A, state.enc3_delta);
-				ctrl_apply_delta(CTRL_OSC_AMP_ENV_S, state.enc4_delta);
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_D, (state.enc1_delta * -1));
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_R, (state.enc2_delta * -1));
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_A, (state.enc3_delta * -1));
+				ctrl_apply_delta(CTRL_OSC_AMP_ENV_S, (state.enc4_delta * -1));
 				ctrl_apply_toggle(CTRL_OSC_AMP_ENV_S, state.sw2_changed, state.sw2_state);
 				break;
 			}
