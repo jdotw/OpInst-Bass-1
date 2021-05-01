@@ -91,7 +91,7 @@ void commit_rotic_led() {
 	led = 0x00;
 	led |= (ctrl_toggle.osc_amp_env_sustain_func == CTRL_ENV_SUSTAIN) << ROTPIC_LED1_BIT_SHIFT;
 	led |= (ctrl_toggle.osc_amp_env_sustain_func == CTRL_ENV_AMOUNT) << ROTPIC_LED2_BIT_SHIFT;
-	res = rotpic_led_set_state(I2C_LEFT, 0b000, led);
+	res = rotpic_led_set_state(I2C_RIGHT, 0b000, led);
 	if (res != HAL_OK) Error_Handler();
 
 
