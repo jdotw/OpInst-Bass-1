@@ -37,6 +37,6 @@ void i2c_scan_bus(I2C_HandleTypeDef *bus, uint8_t mux_address, uint8_t mux_chann
 /* i2c_isr.c */
 #define I2C_LEFT_BUS_ID 0
 #define I2C_RIGHT_BUS_ID 1
-void i2c_isr();
+void i2c_isr(uint8_t bus, uint8_t mux);
 
 #endif /* INC_I2C_H_ */

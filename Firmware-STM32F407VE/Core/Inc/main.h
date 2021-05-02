@@ -54,7 +54,6 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-void one_second_callback(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -68,6 +67,10 @@ void one_second_callback(void);
 #define SHIFTSW_Pin GPIO_PIN_10
 #define SHIFTSW_GPIO_Port GPIOD
 #define SHIFTSW_EXTI_IRQn EXTI15_10_IRQn
+#define MIDI_TX_Pin GPIO_PIN_9
+#define MIDI_TX_GPIO_Port GPIOA
+#define MIDI_RX_Pin GPIO_PIN_10
+#define MIDI_RX_GPIO_Port GPIOA
 #define I2C1_INT_Pin GPIO_PIN_5
 #define I2C1_INT_GPIO_Port GPIOB
 #define I2C1_INT_EXTI_IRQn EXTI9_5_IRQn

@@ -103,8 +103,6 @@ typedef enum {
 
 
 typedef struct {
-	uint16_t note_number;
-
 	uint16_t osc1_saw_lvl;
 	uint16_t osc1_squ_lvl;
 	uint16_t osc1_squ_pwm;

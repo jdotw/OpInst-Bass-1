@@ -11,8 +11,6 @@
 #include "midi.h"
 
 static const ctrl_value_t _init_ctrl_value = {
-		.note_number = MIDI_NOTE_A3,
-
 		.osc1_saw_lvl = CTRL_DEFAULT_MAX,
 		.osc1_squ_pwm = CTRL_DEFAULT_MID,
 		.osc1_to_osc1 = CTRL_DEFAULT_MAX,

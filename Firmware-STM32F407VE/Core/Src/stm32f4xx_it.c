@@ -60,6 +60,7 @@
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim7;
+extern DMA_HandleTypeDef hdma_usart1_rx;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -213,7 +214,7 @@ void EXTI9_5_IRQHandler(void)
   // Must do this after the IRQHandler call
   // Otherwise a race condition seems to exist
   // which causes the interrupt to stay low
-	i2c_isr();
+	i2c_isr(I2C_LEFT, I2C_LEFT_MUX);
   /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
@@ -245,7 +246,7 @@ void EXTI15_10_IRQHandler(void)
   // Must do this after the IRQHandler call
   // Otherwise a race condition seems to exist
   // which causes the interrupt to stay low
-	i2c_isr();
+	i2c_isr(I2C_RIGHT, I2C_RIGHT_MUX);
   /* USER CODE END EXTI15_10_IRQn 1 */
 }
 
@@ -260,6 +261,20 @@ void TIM7_IRQHandler(void)
   /* USER CODE BEGIN TIM7_IRQn 1 */
   commit_30hz_timer();
   /* USER CODE END TIM7_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2 stream2 global interrupt.
+  */
+void DMA2_Stream2_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
+
+  /* USER CODE END DMA2_Stream2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_usart1_rx);
+  /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
+
+  /* USER CODE END DMA2_Stream2_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

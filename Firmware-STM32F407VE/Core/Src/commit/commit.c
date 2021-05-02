@@ -11,6 +11,7 @@
 #include "i2c.h"
 #include "dac7678.h"
 #include "osc.h"
+#include "note.h"
 #include <math.h>
 
 void commit_rotic_led(void);
@@ -38,7 +39,7 @@ void _commit_dac() {
 	// Left0:000
 	dac_val[0] = ctrl_value.osc1_filt_res;
 	dac_val[1] = ctrl_value.osc1_filt_cutoff;
-	uint8_t osc1_note = ctrl_value.note_number + ctrl_value.osc1_tune_coarse;
+	uint8_t osc1_note = note_value.note_number + ctrl_value.osc1_tune_coarse;
 	uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
 	osc1_note_dac_val += ctrl_value.osc1_tune_fine; // TODO: Handle wrapping, maybe add it to osc1_note_dac_val?
 	dac_val[2] = osc1_note_dac_val;
@@ -55,7 +56,7 @@ void _commit_dac() {
 	dac_val[1] = _dac_lin_to_log(ctrl_value.sub_noise_lvl);
 	dac_val[2] = _dac_lin_to_log(ctrl_value.sub_lvl);
 	dac_val[3] = _dac_lin_to_log(ctrl_value.sub_to_osc2);
-	dac_val[4] = osc_dac_value_for_note(OSC2, ctrl_value.note_number);
+	dac_val[4] = osc_dac_value_for_note(OSC2, note_value.note_number);
 	dac_val[5] = ctrl_value.osc2_squ_pwm;
 	dac_val[6] = _dac_lin_to_log(ctrl_value.osc2_squ_lvl);
 	dac_val[7] = _dac_lin_to_log(ctrl_value.osc2_saw_lvl);
@@ -134,12 +135,7 @@ void _commit_dac() {
 }
 
 void commit_30hz_timer(void) {
-	static uint32_t cycle;
 	_commit_dac();
 	commit_rotic_led();
-	if (cycle % 30 == 0) {
-		one_second_callback();
-	}
-	cycle++;
 	_commit_gatetrig();
 }
