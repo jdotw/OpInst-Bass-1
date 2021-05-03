@@ -185,6 +185,9 @@ int main(void)
   ctrl_toggle_init();
   ctrl_enabled = true;
 
+  // Enable RGB/Graph LED Controllers
+  is32_init();
+
   // Start commit timer
   HAL_TIM_Base_Start_IT(&htim7);
 
@@ -536,10 +539,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(SHIFTSW_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 9, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 7, 0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }

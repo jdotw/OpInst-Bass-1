@@ -15,6 +15,7 @@
 #include <math.h>
 
 void commit_rotic_led(void);
+void commit_led_adsr(void);
 void _commit_gatetrig(void);
 
 uint16_t _dac_lin_to_log(uint16_t input) {
@@ -137,5 +138,6 @@ void _commit_dac() {
 void commit_30hz_timer(void) {
 	_commit_dac();
 	commit_rotic_led();
+	commit_led_adsr();
 	_commit_gatetrig();
 }

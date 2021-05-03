@@ -25,9 +25,12 @@ rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t rotpic_addr) {
 
 	uint8_t rx[5];
 	HAL_StatusTypeDef res = HAL_I2C_Master_Receive(i2c_bus[bus], rotpic_addr << 1, rx, 5, HAL_MAX_DELAY);
-	if (res != HAL_OK) {
+	if (res == HAL_ERROR) {
+		// Rotpic doesnt exist?
 		state.success = false;
 		return state;
+	} else if (res == HAL_BUSY) {
+		Error_Handler();
 	}
 
 	state.success = true;

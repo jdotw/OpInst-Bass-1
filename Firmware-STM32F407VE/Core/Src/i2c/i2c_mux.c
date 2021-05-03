@@ -23,7 +23,7 @@ uint8_t i2c_mux_get_int_status(I2C_HandleTypeDef *bus, uint8_t mux_addr) {
 	uint8_t rx;
 	HAL_StatusTypeDef res = HAL_I2C_Master_Receive(bus, mux_addr << 1, &rx, 1, HAL_MAX_DELAY);
 	if (res != HAL_OK) {
-		return I2C_MUX_INT_ERROR;
+		Error_Handler();	// FATAL -- We must be able to get our status!
 	}
 
 	return (rx & I2C_MUX_INT_MASK);	// Only return the INT status bits
