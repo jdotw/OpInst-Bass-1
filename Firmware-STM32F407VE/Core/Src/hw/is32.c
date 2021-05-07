@@ -33,6 +33,24 @@ void is32_init() {
 	// LEFT3:01
 	is32_enable(I2C_LEFT, 1);
 
+	// I2C Right 1
+	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	// RIGHT1:10
+	is32_enable(I2C_RIGHT, 2);
+
+	// I2C Right 2
+	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	// RIGHT2:00
+	is32_enable(I2C_RIGHT, 0);
+
 }
 
 HAL_StatusTypeDef is32_enable(uint8_t bus, uint8_t unit) {

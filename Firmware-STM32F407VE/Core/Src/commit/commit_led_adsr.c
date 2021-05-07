@@ -665,7 +665,468 @@ void _commit_led_adsr_sub_filt_env() {
 
 }
 
+void _commit_led_adsr_osc_amp_env() {
+	HAL_StatusTypeDef res;
+	uint8_t brightness = 0x80;
+
+	uint16_t a_val, d_val, s_val, r_val;
+	a_val = ctrl_value.osc_amp_env_a;
+	d_val = ctrl_value.osc_amp_env_d;
+	switch(ctrl_toggle.osc_amp_env_sustain_func) {
+	case CTRL_ENV_SUSTAIN:
+		s_val = ctrl_value.osc_amp_env_s;
+		break;
+	case CTRL_ENV_AMOUNT:
+		s_val = ctrl_value.osc_amp_env_amt;
+		break;
+	default:
+		s_val = 0;
+	}
+	r_val = ctrl_value.osc_amp_env_r;
+
+	switch (ctrl_toggle.osc_amp_env_sustain_func) {
+	case CTRL_ENV_SUSTAIN:
+		brightness = DEFAULT_BRIGHTNESS;
+		break;
+	case CTRL_ENV_AMOUNT:
+		brightness = HALF_BRIGHTNESS;
+		break;
+	default:
+		break;
+	}
+
+
+	// I2C Right 2
+	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	/* Osc 1 ADSR LEDs
+	 *
+	 * A: RIGHT2:00
+	 *
+	 * [0,2=2=20][1,2=4=22][2,2=5=23]
+	 * [0,1=1=19][1,1=3=21]
+	 * [0,0=0=18]
+	 */
+
+	_adsr_led_set_grid_curve(a_val);
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 18, grid[0][0], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 19, grid[0][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 20, grid[0][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 21, grid[1][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 22, grid[1][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 23, grid[2][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	/* D: G1Cx
+	 *
+	 * [0,2][1,2][2,2]
+	 * [0,1][1,1]
+	 * [0,0]
+	 *
+	 * transposes to:
+	 *
+	 * [0,0=08=12]
+	 * [0,1=07=14][1,1=10=13]
+	 * [0,2=06=15][1,2=09=16][2,2=11=17]
+	 *
+	 */
+
+	_adsr_led_set_grid_curve(d_val);
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 17, grid[2][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 13, grid[1][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 16, grid[1][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 12, grid[0][0], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 14, grid[0][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 15, grid[0][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+
+	/*
+	 *
+	 * S: G1Cx
+	 *
+	 * [0,2=14=11][1,2=17=08]
+	 * [0,1=13=10][1,1=16=07]
+	 * [0,0=12=09][1,0=15=06]
+	 *
+	 */
+
+	switch (ctrl_toggle.osc_amp_env_sustain_func) {
+	case CTRL_ENV_SUSTAIN:
+		_adsr_led_set_grid_bar(s_val);
+		break;
+	case CTRL_ENV_AMOUNT:
+		_adsr_led_set_grid_stack(s_val);
+		break;
+	default:
+		break;
+	}
+
+	// Sustain graph is always DEFAULT_BRIGHTNESS
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 11, grid[0][2], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 10, grid[0][1], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 9, grid[0][0], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 6, grid[1][0], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 7, grid[1][1], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 8, grid[1][2], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+
+	/*
+	 * R: G1Cx
+	 *
+	 * [0,2][1,2][2,2]
+	 * [0,1][1,1]
+	 * [0,0]
+	 *
+	 * transposes to:
+	 *
+	 *
+	 * [0,0=20=2]
+	 * [0,1=19=1][1,1=22=4]
+	 * [0,2=18=0][1,2=21=3][2,2=23=5]
+	 *
+	 */
+
+	_adsr_led_set_grid_curve(r_val);
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 5, grid[2][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 4, grid[1][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 3, grid[1][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 2, grid[0][0], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 1, grid[0][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 0, 0, grid[0][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+}
+
+void _commit_led_adsr_sub_amp_env() {
+	HAL_StatusTypeDef res;
+	uint8_t brightness = 0x80;
+
+	uint16_t a_val, d_val, s_val, r_val;
+	a_val = ctrl_value.sub_amp_env_a;
+	d_val = ctrl_value.sub_amp_env_d;
+	switch(ctrl_toggle.sub_amp_env_sustain_func) {
+	case CTRL_ENV_SUSTAIN:
+		s_val = ctrl_value.sub_amp_env_s;
+		break;
+	case CTRL_ENV_AMOUNT:
+		s_val = ctrl_value.sub_amp_env_amt;
+		break;
+	default:
+		s_val = 0;
+	}
+	r_val = ctrl_value.sub_amp_env_r;
+
+	switch (ctrl_toggle.sub_amp_env_sustain_func) {
+	case CTRL_ENV_SUSTAIN:
+		brightness = DEFAULT_BRIGHTNESS;
+		break;
+	case CTRL_ENV_AMOUNT:
+		brightness = HALF_BRIGHTNESS;
+		break;
+	default:
+		break;
+	}
+
+
+	// I2C Right 1
+	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	/* Osc 1 ADSR LEDs
+	 *
+	 * A: RIGHT1:10
+	 *
+	 * [0,2=2=08][1,2=4=10][2,2=5=11]
+	 * [0,1=1=07][1,1=3=09]
+	 * [0,0=0=06]
+	 */
+
+	_adsr_led_set_grid_curve(a_val);
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 6, grid[0][0], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 7, grid[0][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 8, grid[0][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 9, grid[1][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 10, grid[1][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 11, grid[2][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	/* D: G1Cx
+	 *
+	 * [0,2][1,2][2,2]
+	 * [0,1][1,1]
+	 * [0,0]
+	 *
+	 * transposes to:
+	 *
+	 * [0,0=08=02]
+	 * [0,1=07=01][1,1=10=04]
+	 * [0,2=06=00][1,2=09=03][2,2=11=05]
+	 *
+	 */
+
+	_adsr_led_set_grid_curve(d_val);
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 5, grid[2][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 4, grid[1][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 3, grid[1][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 2, grid[0][0], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 1, grid[0][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 0, grid[0][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+
+	/*
+	 *
+	 * S: G1Cx
+	 *
+	 * [0,2=14=14][1,2=17=17]
+	 * [0,1=13=13][1,1=16=16]
+	 * [0,0=12=12][1,0=15=15]
+	 *
+	 */
+
+	switch (ctrl_toggle.sub_amp_env_sustain_func) {
+	case CTRL_ENV_SUSTAIN:
+		_adsr_led_set_grid_bar(s_val);
+		break;
+	case CTRL_ENV_AMOUNT:
+		_adsr_led_set_grid_stack(s_val);
+		break;
+	default:
+		break;
+	}
+
+	// Sustain graph is always DEFAULT_BRIGHTNESS
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 14, grid[0][2], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 13, grid[0][1], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 12, grid[0][0], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 15, grid[1][0], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 16, grid[1][1], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 17, grid[1][2], DEFAULT_BRIGHTNESS);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+
+	/*
+	 * R: G1Cx
+	 *
+	 * [0,2][1,2][2,2]
+	 * [0,1][1,1]
+	 * [0,0]
+	 *
+	 * transposes to:
+	 *
+	 *
+	 * [0,0=20=20]
+	 * [0,1=19=19][1,1=22=22]
+	 * [0,2=18=18][1,2=21=21][2,2=23=23]
+	 *
+	 */
+
+	_adsr_led_set_grid_curve(r_val);
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 23, grid[2][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 22, grid[1][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 21, grid[1][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 20, grid[0][0], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 19, grid[0][1], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	res = is32_turn_on_led_single(I2C_RIGHT, 2, 18, grid[0][2], brightness);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+}
+
+
 void commit_led_adsr() {
 	_commit_led_adsr_osc_filt_env();
 	_commit_led_adsr_sub_filt_env();
+	_commit_led_adsr_osc_amp_env();
+	_commit_led_adsr_sub_amp_env();
 }
