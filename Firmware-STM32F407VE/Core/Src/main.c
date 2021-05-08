@@ -29,7 +29,6 @@
 #include "is32.h"
 #include "osc.h"
 #include "rotpic.h"
-#include "dac.h"
 #include "ctrl.h"
 #include "pca9555.h"
 #include "note.h"
@@ -161,7 +160,7 @@ int main(void)
   midi_rx_set_uart(&huart1);
 
   // Reset DACs
-  dac_init();
+  dac7678_init();
 
   // Calibrate oscillators
   osc_calibrate(I2C_LEFT, &hspi1, &htim1);
