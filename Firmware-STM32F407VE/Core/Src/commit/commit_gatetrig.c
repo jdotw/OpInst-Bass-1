@@ -12,7 +12,7 @@
 
 #define TRIGGER_LENGTH 5
 
-void _commit_gatetrig(void) {
+void commit_gatetrig(void) {
 	uint8_t outputs[2] = { 0, 0 };
 
 	// Select I2C Right 2

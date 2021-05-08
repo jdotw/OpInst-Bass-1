@@ -97,6 +97,6 @@ void _commit_led_osc1() {
 
 }
 
-void _commit_led_osc() {
+void commit_led_osc() {
 	_commit_led_osc1();
 }

@@ -14,7 +14,7 @@
 #include "rotpic.h"
 #include <math.h>
 
-void commit_rotic_led() {
+void commit_led_rotpic() {
 
 	uint8_t led = 0x0;
 	HAL_StatusTypeDef res;
