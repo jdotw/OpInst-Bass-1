@@ -10,9 +10,11 @@
 #include <i2c.h>
 #include "tca9544a.h"
 
-#define I2C_MUX_INVALID 0xFF
-
+#define LEFT_I2C_MUX_ADDR 0x70
+#define RIGHT_I2C_MUX_ADDR 0x71
 uint8_t i2c_mux_addr[2] = { 0x70, 0x71 };
+
+#define I2C_MUX_INVALID 0xFF
 uint8_t i2c_mux_selected[2] = { 0xFF, 0xFF };
 uint8_t i2c_mux_pushed[2] = { 0xFF, 0xFF };
 bool i2c_mux_popped[2] = { true, true };
@@ -21,9 +23,9 @@ HAL_StatusTypeDef i2c_mux_reset(I2C_HandleTypeDef *bus, uint8_t mux_addr, EXTI_H
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef i2c_mux_select(uint8_t bus, uint8_t mux, uint8_t channel) {
+HAL_StatusTypeDef i2c_mux_select(uint8_t bus, uint8_t channel) {
 	if (i2c_mux_pushed[bus] == channel) return HAL_OK;
-	else return tca9544a_select(i2c_bus[bus], i2c_mux_addr[mux], channel);
+	else return tca9544a_select(i2c_bus[bus], i2c_mux_addr[bus], channel);
 }
 
 uint8_t i2c_mux_get_int_status(I2C_HandleTypeDef *bus, uint8_t mux_addr) {

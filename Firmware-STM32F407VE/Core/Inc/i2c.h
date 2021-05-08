@@ -17,12 +17,7 @@
 extern I2C_HandleTypeDef *i2c_bus[2];
 
 /* i2c_mux.c */
-#define I2C_LEFT_MUX 0
-#define I2C_RIGHT_MUX 1
-extern uint8_t i2c_mux_addr[2]; // TODO: Hide this (use index instead)
-#define LEFT_I2C_MUX_ADDR 0x70  // TODO: Hide these (use index instead)
-#define RIGHT_I2C_MUX_ADDR 0x71 // TODO: Hide these (use index instead)
-HAL_StatusTypeDef i2c_mux_select(uint8_t bus, uint8_t mux, uint8_t channel);
+HAL_StatusTypeDef i2c_mux_select(uint8_t bus, uint8_t channel);
 #define I2C_MUX_INT_3_SET 0b10000000
 #define I2C_MUX_INT_2_SET 0b01000000
 #define I2C_MUX_INT_1_SET 0b00100000

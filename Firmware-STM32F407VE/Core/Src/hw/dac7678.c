@@ -49,7 +49,7 @@ void dac7678_init(void) {
 	if (res != HAL_OK) Error_Handler();
 
 	res = dac7678_reset(0, 0); // Left 0:000
-	if (res != HAL_OK) Error_Handler();\
+	if (res != HAL_OK) Error_Handler();
 
   res = dac7678_reset(0, 2); // Left 0:010
 	if (res != HAL_OK) Error_Handler();
