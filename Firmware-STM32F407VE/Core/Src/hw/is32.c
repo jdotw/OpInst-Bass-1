@@ -15,11 +15,26 @@
 void is32_init() {
 	HAL_StatusTypeDef res;
 
+	// I2C Left 0
+	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 0);
+	if (res != HAL_OK) {
+		Error_Handler();
+	}
+
+	// LEFT0:00
+	is32_enable(I2C_LEFT, 0);
+
+	// LEFT0:11
+	is32_enable(I2C_LEFT, 3);
+
 	// I2C Left 1
 	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 1);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
+
+	// LEFT1:00
+	is32_enable(I2C_LEFT, 0);
 
 	// LEFT1:11
 	is32_enable(I2C_LEFT, 3);
@@ -166,10 +181,15 @@ HAL_StatusTypeDef is32_turn_on_led_single(uint8_t bus, uint8_t unit, uint8_t led
 }
 
 
-#define PATTERN_LENGTH 12
-
-void is32_flux_cap(I2C_HandleTypeDef *bus, uint8_t address) {
+//#define PATTERN_LENGTH 12
+//
+//void is32_flux_cap(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t unit) {
 //	uint8_t red, green, blue;
+//
+//	HAL_StatusTypeDef res = i2c_mux_select(bus, mux, channel);
+//	if (res != HAL_OK) {
+//		Error_Handler();
+//	}
 //
 ////	uint8_t brightness[PATTERN_LENGTH] = { 10, 10, 15, 20, 30, 45, 65, 90, 130, 90, 65, 45, 30, 20, 10, 10, 10, 10, 10, 5  };
 //	uint8_t brightness[PATTERN_LENGTH] = { 10, 10, 15, 20, 30, 45, 65, 90, 130, 90, 65, 45, };
@@ -183,7 +203,7 @@ void is32_flux_cap(I2C_HandleTypeDef *bus, uint8_t address) {
 //		uint8_t offset;
 //		for (offset=0; offset < PATTERN_LENGTH; offset++) {
 //			for (i=0; i < 10; i++) {
-//				HAL_StatusTypeDef result = is32_turn_on_led_rgb(bus, address, i, red, green, blue, brightness[(i+offset)%PATTERN_LENGTH]);
+//				HAL_StatusTypeDef result = is32_turn_on_led_rgb(bus, unit, i, red, green, blue, brightness[(i+offset)%PATTERN_LENGTH]);
 //				if (result != HAL_OK) {
 //					printf("Failed...");
 //				}
@@ -191,5 +211,5 @@ void is32_flux_cap(I2C_HandleTypeDef *bus, uint8_t address) {
 //			HAL_Delay(48);
 //		}
 //	}
-}
-
+//}
+//

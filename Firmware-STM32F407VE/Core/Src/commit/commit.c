@@ -17,6 +17,7 @@
 void commit_rotic_led(void);
 void commit_led_adsr(void);
 void _commit_gatetrig(void);
+void _commit_led_osc(void);
 
 uint16_t _dac_lin_to_log(uint16_t input) {
 	// Converts a linear scale to the logarithmic scale
@@ -137,7 +138,8 @@ void _commit_dac() {
 
 void commit_30hz_timer(void) {
 	_commit_dac();
+	_commit_gatetrig();
 	commit_rotic_led();
 	commit_led_adsr();
-	_commit_gatetrig();
+	_commit_led_osc();
 }

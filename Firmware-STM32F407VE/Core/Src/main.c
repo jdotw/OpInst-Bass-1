@@ -198,11 +198,6 @@ int main(void)
 	midi_rx_resume();
   while (1)
   {
-  	// Do the light show!
-//    tca9544a_select(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
-//    is32_enable(&hi2c2, 0x34);
-//    is32_flux_cap(&hi2c2, 0x34);
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -10,7 +10,7 @@
 #include "i2c.h"
 #include "pca9555.h"
 
-#define TRIGGER_LENGTH 30
+#define TRIGGER_LENGTH 5
 
 void _commit_gatetrig(void) {
 	uint8_t outputs[2] = { 0, 0 };
@@ -38,10 +38,11 @@ void _commit_gatetrig(void) {
 			trig_state = true;
 		} else if (tick < (note_trig.triggered_at + TRIGGER_LENGTH)) {
 			// Hold trigger high
-			trig_state = false;
+			trig_state = true;
 		} else {
 			// Let trig go
-			note_trig.ping_trigger = 0;
+			note_trig.ping_trigger = false;
+			note_trig.triggered_at = 0;
 		}
 
 		outputs[0] |= trig_state << 2;
