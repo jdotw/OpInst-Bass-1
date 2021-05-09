@@ -26,8 +26,8 @@ bool i2c_tx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data, uint8_
 	// Select channel
 	// NOTE: Will return HAL_OK if already on channel
 	if (channel != I2C_CHANNEL_DIRECT) {
-		res = i2c_mux_select(bus, channel);
-		if (res != HAL_OK) Error_Handler();
+		bool did_select = i2c_mux_select(bus, channel);
+		if (!did_select) Error_Handler();
 	}
 
 	// Transmit via DMA
