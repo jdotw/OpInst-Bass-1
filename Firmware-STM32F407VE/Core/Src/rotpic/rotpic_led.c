@@ -16,7 +16,7 @@
 #include "osc.h"
 #include "ctrl.h"
 
-HAL_StatusTypeDef rotpic_led_set_state(uint8_t bus, uint8_t pic, uint8_t led_state) {
+bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic, uint8_t led_state) {
 	// led_state is a single-byte bit array:
 	// 0 = LED 1 On=1 Off=0
 	// 1 = LED 2 On=1 Off=0
@@ -26,11 +26,10 @@ HAL_StatusTypeDef rotpic_led_set_state(uint8_t bus, uint8_t pic, uint8_t led_sta
 	// 5 = LED 6 On=1 Off=0
 	// 6 = Unused
 	// 7 = Unused
-	//
-	// NOTE: Assumed mux channel is alredy select
 
-	HAL_StatusTypeDef result = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_ROTPIC_ADDR + pic) << 1, &led_state, 1, HAL_MAX_DELAY);
-	if (result != HAL_OK) return result;
+	bool res;
 
-	return result;
+	res = i2c_tx(bus, channel, (DEFAULT_ROTPIC_ADDR + pic), &led_state, 1);
+
+	return res;
 }

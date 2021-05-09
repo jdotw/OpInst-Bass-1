@@ -214,7 +214,7 @@ void _commit_led_adsr_osc_filt_env() {
 
 
 	// I2C Left 3
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 3);
+	res = i2c_mux_select(I2C_LEFT, 3);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -468,7 +468,7 @@ void _commit_led_adsr_sub_filt_env() {
 
 
 	// I2C Left 1
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 1);
+	res = i2c_mux_select(I2C_LEFT, 1);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -697,7 +697,7 @@ void _commit_led_adsr_osc_amp_env() {
 
 
 	// I2C Right 2
-	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	res = i2c_mux_select(I2C_RIGHT, 2);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -926,7 +926,7 @@ void _commit_led_adsr_sub_amp_env() {
 
 
 	// I2C Right 1
-	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
+	res = i2c_mux_select(I2C_RIGHT, 1);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}

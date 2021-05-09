@@ -8,7 +8,6 @@
 #include "midi.h"
 #include "main.h"
 #include "stdbool.h"
-#include "dac.h"
 
 // MARK: - Message Handlers
 

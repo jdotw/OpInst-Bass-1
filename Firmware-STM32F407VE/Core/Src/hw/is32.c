@@ -16,7 +16,7 @@ void is32_init() {
 	HAL_StatusTypeDef res;
 
 	// I2C Left 0
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 0);
+	res = i2c_mux_select(I2C_LEFT, 0);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -28,7 +28,7 @@ void is32_init() {
 	is32_enable(I2C_LEFT, 3);
 
 	// I2C Left 1
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 1);
+	res = i2c_mux_select(I2C_LEFT, 1);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -40,7 +40,7 @@ void is32_init() {
 	is32_enable(I2C_LEFT, 3);
 
 	// I2C Left 3
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 3);
+	res = i2c_mux_select(I2C_LEFT, 3);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -49,7 +49,7 @@ void is32_init() {
 	is32_enable(I2C_LEFT, 1);
 
 	// I2C Right 1
-	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
+	res = i2c_mux_select(I2C_RIGHT, 1);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -58,7 +58,7 @@ void is32_init() {
 	is32_enable(I2C_RIGHT, 2);
 
 	// I2C Right 2
-	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	res = i2c_mux_select(I2C_RIGHT, 2);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}

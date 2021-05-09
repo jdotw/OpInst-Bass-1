@@ -24,7 +24,7 @@ void _commit_led_osc1() {
 	HAL_StatusTypeDef res;
 
 	// I2C Left 0
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 0);
+	res = i2c_mux_select(I2C_LEFT, 0);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}
@@ -74,7 +74,7 @@ void _commit_led_osc1() {
 	/* LEFT1:00 */
 
 	// I2C Left 1
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 1);
+	res = i2c_mux_select(I2C_LEFT, 1);
 	if (res != HAL_OK) {
 		Error_Handler();
 	}

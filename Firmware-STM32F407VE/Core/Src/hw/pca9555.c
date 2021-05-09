@@ -66,7 +66,7 @@ void pca9555_init() {
 	HAL_StatusTypeDef res;
 
 	// I2C Left 2
-	res = i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 2);
+	res = i2c_mux_select(I2C_LEFT, 2);
 	if (res != HAL_OK) {
 		printf("Failed to select I2C Left 2\n");
 		Error_Handler();
@@ -81,7 +81,7 @@ void pca9555_init() {
 	}
 
 	// I2C Right 2
-	res = i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	res = i2c_mux_select(I2C_RIGHT, 2);
 	if (res != HAL_OK) {
 		printf("Failed to select I2C Left 2\n");
 		Error_Handler();

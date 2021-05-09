@@ -27,7 +27,7 @@ typedef struct {
 	bool sw2_changed;
 } rotpic_state;
 
-void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel);
+void rotpic_poll_all(uint8_t bus, uint8_t channel);
 
 /* rotpic_led.c */
 
@@ -39,6 +39,6 @@ void rotpic_poll_all(uint8_t bus, uint8_t mux, uint8_t channel);
 #define ROTPIC_LED6_BIT_SHIFT 5
 #define ROTPIC_LED7_BIT_SHIFT 6
 
-HAL_StatusTypeDef rotpic_led_set_state(uint8_t bus, uint8_t pic, uint8_t led_state);
+bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic, uint8_t led_state);
 
 #endif /* INC_ROTPIC_H_ */

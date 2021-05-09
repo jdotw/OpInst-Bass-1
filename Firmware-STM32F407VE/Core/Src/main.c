@@ -52,6 +52,8 @@
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 I2C_HandleTypeDef hi2c2;
+DMA_HandleTypeDef hdma_i2c1_tx;
+DMA_HandleTypeDef hdma_i2c2_tx;
 
 SPI_HandleTypeDef hspi1;
 
@@ -141,14 +143,14 @@ int main(void)
 
   // Poll all rotary encoder PICs
   // This will clear any interrupts
-  rotpic_poll_all(I2C_LEFT, 0, 0);
-  rotpic_poll_all(I2C_LEFT, 0, 1);
-  rotpic_poll_all(I2C_LEFT, 0, 2);
-  rotpic_poll_all(I2C_LEFT, 0, 3);
-  rotpic_poll_all(I2C_RIGHT, 1, 0);
-  rotpic_poll_all(I2C_RIGHT, 1, 1);
-  rotpic_poll_all(I2C_RIGHT, 1, 2);
-  rotpic_poll_all(I2C_RIGHT, 1, 3);
+  rotpic_poll_all(I2C_LEFT, 0);
+  rotpic_poll_all(I2C_LEFT, 1);
+  rotpic_poll_all(I2C_LEFT, 2);
+  rotpic_poll_all(I2C_LEFT, 3);
+  rotpic_poll_all(I2C_RIGHT, 0);
+  rotpic_poll_all(I2C_RIGHT, 1);
+  rotpic_poll_all(I2C_RIGHT, 2);
+  rotpic_poll_all(I2C_RIGHT, 3);
 
   // Init controls and toggles
   ctrl_enabled = false;
@@ -163,21 +165,21 @@ int main(void)
   dac7678_init();
 
   // Calibrate oscillators
-  osc_calibrate(I2C_LEFT, &hspi1, &htim1);
+  osc_calibrate(&hspi1, &htim1);
 
   // Enable RGB LED drivers
 //  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
 
   // Poll all rotary encoder PICs
   // This will clear any interrupts
-  rotpic_poll_all(I2C_LEFT, 0, 0);
-  rotpic_poll_all(I2C_LEFT, 0, 1);
-  rotpic_poll_all(I2C_LEFT, 0, 2);
-  rotpic_poll_all(I2C_LEFT, 0, 3);
-  rotpic_poll_all(I2C_RIGHT, 1, 0);
-  rotpic_poll_all(I2C_RIGHT, 1, 1);
-  rotpic_poll_all(I2C_RIGHT, 1, 2);
-  rotpic_poll_all(I2C_RIGHT, 1, 3);
+  rotpic_poll_all(I2C_LEFT, 0);
+  rotpic_poll_all(I2C_LEFT, 1);
+  rotpic_poll_all(I2C_LEFT, 2);
+  rotpic_poll_all(I2C_LEFT, 3);
+  rotpic_poll_all(I2C_RIGHT, 0);
+  rotpic_poll_all(I2C_RIGHT, 1);
+  rotpic_poll_all(I2C_RIGHT, 2);
+  rotpic_poll_all(I2C_RIGHT, 3);
 
   // Re-enable controls
   ctrl_value_init();
@@ -485,8 +487,15 @@ static void MX_DMA_Init(void)
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream6_IRQn);
+  /* DMA1_Stream7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
   /* DMA2_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
@@ -592,53 +601,23 @@ void Error_Handler(void)
   	uint8_t led = (cycle % 2) ? 0xFF : 0x00;
   	led = 0xFF;
 
-  	// I2C Left 0
-  	i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 0);
-
   	// LEFT0:000
-  	rotpic_led_set_state(I2C_LEFT, 0b000, led);
+  	rotpic_led_set_state(I2C_LEFT, 0, 0b000, led);
 
   	// LEFT0:001
-  	rotpic_led_set_state(I2C_LEFT, 0b001, led);
-
-  	// LEFT0:010
-  	// No LEDs
+  	rotpic_led_set_state(I2C_LEFT, 0, 0b001, led);
 
   	// LEFT0:011
-  	rotpic_led_set_state(I2C_LEFT, 0b011, led);
-
-  	// LEFT0:100
-  	// No LEDs
-
-  	// I2C Left 2
-  	i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 2);
+  	rotpic_led_set_state(I2C_LEFT, 0, 0b011, led);
 
   	// LEFT2:000
-  	rotpic_led_set_state(I2C_LEFT, 0b000, led);
-
-  	// LEFT2:001
-  	// No LEDs
-
-  	// I2C Left 3
-  	i2c_mux_select(I2C_LEFT, I2C_LEFT_MUX, 3);
-
-  	// LEFT3:000
-  	// No LEDs
-
-  	// I2C Right 0
-  	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 0);
+  	rotpic_led_set_state(I2C_LEFT, 2, 0b000, led);
 
   	// RIGHT0:000
-  	rotpic_led_set_state(I2C_LEFT, 0b000, led);
-
-  	// I2C Right 1
-  	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 1);
-
-  	// RIGHT1:000
-  	// No LEDs
+  	rotpic_led_set_state(I2C_RIGHT, 0, 0b000, led);
 
   	// RIGHT1:001
-  	rotpic_led_set_state(I2C_LEFT, 0b001, led);
+  	rotpic_led_set_state(I2C_LEFT, 1, 0b001, led);
 
 //  	// Wait and cycle
 //  	HAL_Delay(1000);

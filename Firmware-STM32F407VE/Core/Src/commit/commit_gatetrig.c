@@ -16,7 +16,7 @@ void commit_gatetrig(void) {
 	uint8_t outputs[2] = { 0, 0 };
 
 	// Select I2C Right 2
-	i2c_mux_select(I2C_RIGHT, I2C_RIGHT_MUX, 2);
+	i2c_mux_select(I2C_RIGHT, 2);
 
 	// Configure Gates
 	outputs[0] |= note_value.note_on << 3;
