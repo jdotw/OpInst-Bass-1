@@ -74,8 +74,8 @@ void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel)
 uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value) {
 
 	// Set the DAC value
-	HAL_StatusTypeDef res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, near_dac_value);
-	if (res != HAL_OK) { Error_Handler(); }
+	bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, near_dac_value);
+	if (!res) { Error_Handler(); }
 
 	// Listen to the frequency produced
 	uint32_t observed_frequency = _get_frequency(timer, timer_channel);
@@ -190,7 +190,8 @@ _calibration_result _dpot_value_for_tracking(osc_t osc, uint8_t dac_bus, uint8_t
 	dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
 	dac_value += dac_tuning_offset;
 	expected_frequency = 22000;
-	dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
+	bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
+	if (!res) Error_Handler();
 
 	// Listen to achieved frequency
 	uint32_t actual_freq =  _get_frequency(timer, timer_channel);
