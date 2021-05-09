@@ -13,10 +13,8 @@
 #define TRIGGER_LENGTH 5
 
 void commit_gatetrig(void) {
+	bool res;
 	uint8_t outputs[2] = { 0, 0 };
-
-	// Select I2C Right 2
-	i2c_mux_select(I2C_RIGHT, 2);
 
 	// Configure Gates
 	outputs[0] |= note_value.note_on << 3;
@@ -53,5 +51,6 @@ void commit_gatetrig(void) {
 		outputs[1] |= trig_state << 4;
 	}
 
-	pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, outputs);
+	res = pca9555_set_port_output(I2C_RIGHT, 2, 0, outputs);
+	if (!res) Error_Handler();
 }

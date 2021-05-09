@@ -7,10 +7,11 @@
 
 #include <tca9544a.h>
 #include "main.h"
+#include "i2c.h"
 
-HAL_StatusTypeDef tca9544a_select (I2C_HandleTypeDef *bus, uint8_t mux_addr, uint8_t channel) {
+bool tca9544a_select (uint8_t bus, uint8_t channel, uint8_t mux_addr) {
 	uint8_t data = (channel & 0b11) | 0b100;
-	HAL_StatusTypeDef res = HAL_I2C_Master_Transmit(bus, mux_addr << 1, &data, 1, HAL_MAX_DELAY);
+	bool res = i2c_tx(bus, I2C_CHANNEL_DIRECT, mux_addr, &data, 1);
 	return res;
 }
 

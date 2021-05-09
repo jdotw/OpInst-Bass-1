@@ -158,7 +158,7 @@ void _adsr_led_set_grid_bar(uint16_t val) {
 #define HALF_BRIGHTNESS 0x05
 
 void _commit_led_adsr_osc_filt_env() {
-	HAL_StatusTypeDef res;
+	bool res;
 	uint8_t brightness = 0x80;
 
 	uint16_t a_val, d_val, s_val, r_val;
@@ -213,12 +213,6 @@ void _commit_led_adsr_osc_filt_env() {
 	}
 
 
-	// I2C Left 3
-	res = i2c_mux_select(I2C_LEFT, 3);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
 	/* Osc 1 ADSR LEDs
 	 *
 	 * A: LEFT3:001
@@ -230,35 +224,23 @@ void _commit_led_adsr_osc_filt_env() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	res = is32_turn_on_led_single(0, 1, 5, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 5, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 4, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 4, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 3, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 3, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 2, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 2, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 1, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 1, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 0, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 0, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
 	/* D: G1Cx
 	 *
@@ -276,35 +258,23 @@ void _commit_led_adsr_osc_filt_env() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	res = is32_turn_on_led_single(0, 1, 24, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 24, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 25, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 25, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 26, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 26, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 27, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 27, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 28, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 28, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 29, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 29, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -330,35 +300,23 @@ void _commit_led_adsr_osc_filt_env() {
 
 	// Sustain graph is always DEFAULT_BRIGHTNESS
 
-	res = is32_turn_on_led_single(0, 1, 23, grid[0][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 23, grid[0][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 22, grid[0][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 22, grid[0][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 21, grid[0][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 21, grid[0][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 20, grid[1][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 20, grid[1][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 19, grid[1][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 19, grid[1][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 18, grid[1][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 18, grid[1][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -379,40 +337,28 @@ void _commit_led_adsr_osc_filt_env() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	res = is32_turn_on_led_single(0, 1, 12, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 12, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 13, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 13, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 14, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 14, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 17, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 17, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 16, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 16, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 1, 15, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 3, 1, 15, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 }
 
 void _commit_led_adsr_sub_filt_env() {
-	HAL_StatusTypeDef res;
+	bool res;
 	uint8_t brightness = 0x80;
 
 	uint16_t a_val, d_val, s_val, r_val;
@@ -467,12 +413,6 @@ void _commit_led_adsr_sub_filt_env() {
 	}
 
 
-	// I2C Left 1
-	res = i2c_mux_select(I2C_LEFT, 1);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
 	/* Osc 1 ADSR LEDs
 	 *
 	 * A: LEFT1:11
@@ -484,35 +424,23 @@ void _commit_led_adsr_sub_filt_env() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	res = is32_turn_on_led_single(0, 3, 0, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 0, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 1, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 1, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 2, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 2, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 3, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 3, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 4, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 4, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 5, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 5, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
 	/* D: G1Cx
 	 *
@@ -530,35 +458,23 @@ void _commit_led_adsr_sub_filt_env() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	res = is32_turn_on_led_single(0, 3, 11, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 11, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 10, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 10, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 9, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 9, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 8, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 8, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 7, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 7, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 6, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 6, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -584,35 +500,23 @@ void _commit_led_adsr_sub_filt_env() {
 
 	// Sustain graph is always DEFAULT_BRIGHTNESS
 
-	res = is32_turn_on_led_single(0, 3, 14, grid[0][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 14, grid[0][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 13, grid[0][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 13, grid[0][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 12, grid[0][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 12, grid[0][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 15, grid[1][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 15, grid[1][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 16, grid[1][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 16, grid[1][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 17, grid[1][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 17, grid[1][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -633,40 +537,28 @@ void _commit_led_adsr_sub_filt_env() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	res = is32_turn_on_led_single(0, 3, 23, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 23, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 22, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 22, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 21, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 21, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 20, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 20, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 19, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 19, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(0, 3, 18, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_LEFT, 1, 3, 18, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 }
 
 void _commit_led_adsr_osc_amp_env() {
-	HAL_StatusTypeDef res;
+	bool res;
 	uint8_t brightness = 0x80;
 
 	uint16_t a_val, d_val, s_val, r_val;
@@ -696,12 +588,6 @@ void _commit_led_adsr_osc_amp_env() {
 	}
 
 
-	// I2C Right 2
-	res = i2c_mux_select(I2C_RIGHT, 2);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
 	/* Osc 1 ADSR LEDs
 	 *
 	 * A: RIGHT2:00
@@ -713,35 +599,23 @@ void _commit_led_adsr_osc_amp_env() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 18, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 18, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 19, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 19, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 20, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 20, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 21, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 21, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 22, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 22, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 23, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 23, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
 	/* D: G1Cx
 	 *
@@ -759,35 +633,23 @@ void _commit_led_adsr_osc_amp_env() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 17, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 17, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 13, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 13, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 16, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 16, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 12, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 12, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 14, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 14, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 15, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 15, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -813,35 +675,23 @@ void _commit_led_adsr_osc_amp_env() {
 
 	// Sustain graph is always DEFAULT_BRIGHTNESS
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 11, grid[0][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 11, grid[0][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 10, grid[0][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 10, grid[0][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 9, grid[0][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 9, grid[0][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 6, grid[1][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 6, grid[1][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 7, grid[1][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 7, grid[1][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 8, grid[1][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 8, grid[1][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -862,40 +712,28 @@ void _commit_led_adsr_osc_amp_env() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 5, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 5, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 4, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 4, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 3, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 3, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 2, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 2, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 1, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 1, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 0, 0, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 2, 0, 0, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 }
 
 void _commit_led_adsr_sub_amp_env() {
-	HAL_StatusTypeDef res;
+	bool res;
 	uint8_t brightness = 0x80;
 
 	uint16_t a_val, d_val, s_val, r_val;
@@ -925,12 +763,6 @@ void _commit_led_adsr_sub_amp_env() {
 	}
 
 
-	// I2C Right 1
-	res = i2c_mux_select(I2C_RIGHT, 1);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
 	/* Osc 1 ADSR LEDs
 	 *
 	 * A: RIGHT1:10
@@ -942,35 +774,23 @@ void _commit_led_adsr_sub_amp_env() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 6, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 6, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 7, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 7, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 8, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 8, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 9, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 9, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 10, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 10, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 11, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 11, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
 	/* D: G1Cx
 	 *
@@ -988,35 +808,23 @@ void _commit_led_adsr_sub_amp_env() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 5, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 5, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 4, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 4, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 3, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 3, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 2, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 2, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 1, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 1, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 0, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 0, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -1042,35 +850,23 @@ void _commit_led_adsr_sub_amp_env() {
 
 	// Sustain graph is always DEFAULT_BRIGHTNESS
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 14, grid[0][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 14, grid[0][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 13, grid[0][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 13, grid[0][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 12, grid[0][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 12, grid[0][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 15, grid[1][0], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 15, grid[1][0], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 16, grid[1][1], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 16, grid[1][1], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 17, grid[1][2], DEFAULT_BRIGHTNESS);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 17, grid[1][2], DEFAULT_BRIGHTNESS);
+	if (!res) Error_Handler();
 
 
 	/*
@@ -1091,35 +887,23 @@ void _commit_led_adsr_sub_amp_env() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 23, grid[2][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 23, grid[2][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 22, grid[1][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 22, grid[1][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 21, grid[1][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 21, grid[1][2], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 20, grid[0][0], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 20, grid[0][0], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 19, grid[0][1], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 19, grid[0][1], brightness);
+	if (!res) Error_Handler();
 
-	res = is32_turn_on_led_single(I2C_RIGHT, 2, 18, grid[0][2], brightness);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
+	res = is32_set_single(I2C_RIGHT, 1, 2, 18, grid[0][2], brightness);
+	if (!res) Error_Handler();
 
 }
 

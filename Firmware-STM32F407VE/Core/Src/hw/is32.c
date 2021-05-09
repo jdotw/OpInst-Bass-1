@@ -12,172 +12,130 @@
 
 #define DEFAULT_IS32_ADDR 0x34
 
-void is32_init() {
-	HAL_StatusTypeDef res;
-
-	// I2C Left 0
-	res = i2c_mux_select(I2C_LEFT, 0);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
-	// LEFT0:00
-	is32_enable(I2C_LEFT, 0);
-
-	// LEFT0:11
-	is32_enable(I2C_LEFT, 3);
-
-	// I2C Left 1
-	res = i2c_mux_select(I2C_LEFT, 1);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
-	// LEFT1:00
-	is32_enable(I2C_LEFT, 0);
-
-	// LEFT1:11
-	is32_enable(I2C_LEFT, 3);
-
-	// I2C Left 3
-	res = i2c_mux_select(I2C_LEFT, 3);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
-	// LEFT3:01
-	is32_enable(I2C_LEFT, 1);
-
-	// I2C Right 1
-	res = i2c_mux_select(I2C_RIGHT, 1);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
-	// RIGHT1:10
-	is32_enable(I2C_RIGHT, 2);
-
-	// I2C Right 2
-	res = i2c_mux_select(I2C_RIGHT, 2);
-	if (res != HAL_OK) {
-		Error_Handler();
-	}
-
-	// RIGHT2:00
-	is32_enable(I2C_RIGHT, 0);
-
-}
-
-HAL_StatusTypeDef is32_enable(uint8_t bus, uint8_t unit) {
-	HAL_StatusTypeDef ret;
+bool _is32_enable(uint8_t bus, uint8_t channel, uint8_t unit) {
+	bool res;
 	uint8_t data[2] = { 0x00, 0x00 };
 
 	data[0] =  0x7F;
 	data[1] = 0x00;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+
 	data[0] = 0x00;
 	data[1] = 0b00000001;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+
 	data[0] = 0x6E;
 	data[1] = 0xFF;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
-	return HAL_OK;
+	return true;
 }
 
-HAL_StatusTypeDef is32_turn_on_led_rgb(uint8_t bus, uint8_t unit, uint8_t led, uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness) {
+
+void is32_init() {
+	bool res;
+
+	// LEFT0:00
+	res = _is32_enable(I2C_LEFT, 0, 0);
+	if (!res) Error_Handler();
+
+	// LEFT0:11
+	res = _is32_enable(I2C_LEFT, 0, 3);
+	if (!res) Error_Handler();
+
+	// LEFT1:00
+	res = _is32_enable(I2C_LEFT, 1, 0);
+	if (!res) Error_Handler();
+
+	// LEFT1:11
+	res = _is32_enable(I2C_LEFT, 1, 3);
+	if (!res) Error_Handler();
+
+	// LEFT3:01
+	res = _is32_enable(I2C_LEFT, 3, 1);
+	if (!res) Error_Handler();
+
+	// RIGHT1:10
+	res = _is32_enable(I2C_RIGHT, 1, 2);
+	if (!res) Error_Handler();
+
+	// RIGHT2:00
+	res = _is32_enable(I2C_RIGHT, 2, 0);
+	if (!res) Error_Handler();
+}
+
+
+bool is32_set_rgb(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness) {
 	uint8_t data[2] = {  0x00, 0x00 };
-	HAL_StatusTypeDef ret;
+	bool res;
 
 	// PWM
 	data[0] =  0x01 + (led * 6);
 	data[1] = red;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+
 	data[0] =  0x03 + (led * 6);
 	data[1] = green;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+
 	data[0] =  0x05 + (led * 6);
 	data[1] = blue;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
 	// Scaling (current)
 	data[0] = 0x4A + (led * 3);
 	data[1] = brightness;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+
 	data[0] = 0x4B + (led * 3);
 	data[1] = brightness;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+
 	data[0] = 0x4C + (led * 3);
 	data[1] = brightness;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
 	// Write the registers
 	data[0] = 0x49;
 	data[1] = 0x00;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
-	return HAL_OK;
+	return true;
 }
 
-HAL_StatusTypeDef is32_turn_on_led_single(uint8_t bus, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness) {
+bool is32_set_single(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness) {
 	uint8_t data[2] = {  0x00, 0x00 };
-	HAL_StatusTypeDef ret;
+	bool res;
 
 	// PWM
 	data[0] = 0x01 + (led * 2);
 	data[1] = pwm;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
 	// Scaling (current)
 	data[0] = 0x4A + led;
 	data[1] = brightness;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
 	// Write the registers
 	data[0] = 0x49;
 	data[1] = 0x00;
-	ret = HAL_I2C_Master_Transmit(i2c_bus[bus], (DEFAULT_IS32_ADDR+unit) << 1, data, 2, HAL_MAX_DELAY);
-	if (ret != HAL_OK) {
-		return ret;
-	}
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
 
-	return HAL_OK;
+	return true;
 }
 
 

@@ -21,7 +21,7 @@ extern I2C_HandleTypeDef *i2c_bus[2];
 bool i2c_tx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data, uint8_t len);
 
 /* i2c_mux.c */
-HAL_StatusTypeDef i2c_mux_select(uint8_t bus, uint8_t channel);
+bool i2c_mux_select(uint8_t bus, uint8_t channel);
 #define I2C_MUX_INT_3_SET 0b10000000
 #define I2C_MUX_INT_2_SET 0b01000000
 #define I2C_MUX_INT_1_SET 0b00100000

@@ -5,10 +5,12 @@
  *      Author: jwilson
  */
 
-#include <stdio.h>
+#include <stdbool.h>
 #include "main.h"
 #include "pca9555.h"
 #include "i2c.h"
+
+#define DEFAULT_PCA9555_ADDRESS 0x20
 
 #define ALL_INPUT 0xFF
 #define PIN0_INPUT 1 << 0
@@ -36,58 +38,41 @@
 #define CMD_CONFIG_PORT0 6
 #define CMD_CONFIG_PORT1 7
 
-HAL_StatusTypeDef pca9555_set_port_config(uint8_t bus, uint8_t addr, uint8_t ports[2]) {
-	uint8_t port_0_data[2] = { CMD_CONFIG_PORT0, ports[0] };
-	HAL_StatusTypeDef result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_0_data, 2, HAL_MAX_DELAY);
-	if (result != HAL_OK) return result;
-
-	uint8_t port_1_data[2] = { CMD_CONFIG_PORT1, ports[1] };
-	result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_1_data, 2, HAL_MAX_DELAY);
-	if (result != HAL_OK) return result;
-
-	return result;
-}
-
-HAL_StatusTypeDef pca9555_set_port_output(uint8_t bus, uint8_t addr, uint8_t outputs[2]) {
+bool pca9555_set_port_output(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t outputs[2]) {
+	bool res;
 	uint8_t port_0_data[2] = { CMD_OUTPUT_PORT0, outputs[0] };
-	HAL_StatusTypeDef result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_0_data, 2, HAL_MAX_DELAY);
-	if (result != HAL_OK) return result;
+	res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_0_data, 2);
+	if (!res) return false;
 
 	uint8_t port_1_data[2] = { CMD_OUTPUT_PORT1, outputs[1] };
-	result = HAL_I2C_Master_Transmit(i2c_bus[bus], DEFAULT_PCA9555_ADDRESS << 1, port_1_data, 2, HAL_MAX_DELAY);
-	if (result != HAL_OK) return result;
+	res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_1_data, 2);
+	if (!res) return false;
 
-	return result;
+	return true;
+}
+
+bool _pca9555_set_port_config(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t ports[2]) {
+	bool res;
+	uint8_t port_0_data[2] = { CMD_CONFIG_PORT0, ports[0] };
+	res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_0_data, 2);
+	if (!res) return false;
+
+	uint8_t port_1_data[2] = { CMD_CONFIG_PORT1, ports[1] };
+	res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_1_data, 2);
+	if (!res) return false;
+
+	return true;
 }
 
 void pca9555_init() {
+	bool res;
 
-  // Reset DACs
-	HAL_StatusTypeDef res;
-
-	// I2C Left 2
-	res = i2c_mux_select(I2C_LEFT, 2);
-	if (res != HAL_OK) {
-		printf("Failed to select I2C Left 2\n");
-		Error_Handler();
-	}
-
-	// Configure ports on Left PCA9555
+	// Configure ports on Left:2 PCA9555
 	uint8_t left_ports[2] = { ALL_INPUT, ALL_INPUT };
-	res = pca9555_set_port_config(I2C_LEFT, DEFAULT_PCA9555_ADDRESS, left_ports);
-	if (res != HAL_OK) {
-		printf("Failed to set LEFT PCA9555 port configuration");
-		Error_Handler();
-	}
+	res = _pca9555_set_port_config(I2C_LEFT, 2, 0, left_ports);
+	if (!res) Error_Handler();
 
-	// I2C Right 2
-	res = i2c_mux_select(I2C_RIGHT, 2);
-	if (res != HAL_OK) {
-		printf("Failed to select I2C Left 2\n");
-		Error_Handler();
-	}
-
-	// Configure ports on Right PCA9555
+	// Configure ports on Right:2 PCA9555
 	uint8_t right_ports[2] = { 0x0, 0x0 };
 	right_ports[0] |= PIN0_INPUT;
 	right_ports[0] |= PIN1_INPUT;
@@ -105,17 +90,11 @@ void pca9555_init() {
 	right_ports[1] |= PIN5_OUTPUT;
 	right_ports[1] |= PIN6_INPUT;
 	right_ports[1] |= PIN7_INPUT;
-	res = pca9555_set_port_config(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, right_ports);
-	if (res != HAL_OK) {
-		printf("Failed to set RIGHT PCA9555 port configuration");
-		Error_Handler();
-	}
+	res = _pca9555_set_port_config(I2C_RIGHT, 2, 0, right_ports);
+	if (!res) Error_Handler();
 
 	// Set all outputs to 0
 	uint8_t right_outputs[2] = { 0x00, 0x00 };
-	res = pca9555_set_port_output(I2C_RIGHT, DEFAULT_PCA9555_ADDRESS, right_outputs);
-	if (res != HAL_OK) {
-		printf("Failed to set RIGHT PCA9555 port outputs");
-		Error_Handler();
-	}
+	res = pca9555_set_port_output(I2C_RIGHT, 2, 0, right_outputs);
+	if (!res) Error_Handler();
 }

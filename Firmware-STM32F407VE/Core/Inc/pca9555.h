@@ -8,11 +8,9 @@
 #ifndef INC_PCA9555_H_
 #define INC_PCA9555_H_
 
-#include "stm32f4xx_hal.h"
+#include <stdbool.h>
 
-#define DEFAULT_PCA9555_ADDRESS 0x20
-
+bool pca9555_set_port_output(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t outputs[2]);
 void pca9555_init(void);
-HAL_StatusTypeDef pca9555_set_port_output(uint8_t bus, uint8_t addr, uint8_t outputs[2]);
 
 #endif /* INC_PCA9555_H_ */

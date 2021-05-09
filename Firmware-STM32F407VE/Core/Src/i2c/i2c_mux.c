@@ -18,17 +18,13 @@ uint8_t i2c_mux_addr[2] = { 0x70, 0x71 };
 uint8_t i2c_mux_selected[2] = { 0xFF, 0xFF };
 uint8_t i2c_mux_pushed[2] = { 0xFF, 0xFF };
 
-HAL_StatusTypeDef i2c_mux_reset(I2C_HandleTypeDef *bus, uint8_t mux_addr, EXTI_HandleTypeDef *irq) {
-	return HAL_OK;
-}
-
-HAL_StatusTypeDef i2c_mux_select(uint8_t bus, uint8_t channel) {
-	if (i2c_mux_selected[bus] == channel) return HAL_OK;
+bool i2c_mux_select(uint8_t bus, uint8_t channel) {
+	if (i2c_mux_selected[bus] == channel) return true;
 	else {
-		HAL_StatusTypeDef res = tca9544a_select(i2c_bus[bus], i2c_mux_addr[bus], channel);
-		if (res != HAL_OK) return res;
+		bool res = tca9544a_select(bus, i2c_mux_addr[bus], channel);
+		if (!res) return false;
 		else i2c_mux_selected[bus] = channel;
-		return res;
+		return true;
 	}
 }
 
@@ -56,7 +52,7 @@ void i2c_mux_pop(uint8_t bus) {
 		// Popped without a push!
 		Error_Handler();
 	}
-	HAL_StatusTypeDef res = i2c_mux_select(bus, i2c_mux_pushed[bus]);
-	if (res != HAL_OK) Error_Handler();
+	bool res = i2c_mux_select(bus, i2c_mux_pushed[bus]);
+	if (!res) Error_Handler();
 	i2c_mux_pushed[bus] = I2C_MUX_INVALID;
 }

@@ -8,8 +8,9 @@
 #ifndef INC_TCA9544A_H_
 #define INC_TCA9544A_H_
 
-#include "stm32f4xx_hal.h"
+#include <stdbool.h>
+#include <stdint.h>
 
-HAL_StatusTypeDef tca9544a_select (I2C_HandleTypeDef *bus, uint8_t mux_addr, uint8_t channel);
+bool tca9544a_select (uint8_t bus, uint8_t channel, uint8_t mux_addr);
 
 #endif /* INC_TCA9544A_H_ */

@@ -8,13 +8,12 @@
 #ifndef INC_IS32_H_
 #define INC_IS32_H_
 
+#include <stdbool.h>
 #include "stm32f4xx_hal.h"
 
 void is32_init();
-HAL_StatusTypeDef is32_enable(uint8_t bus, uint8_t unit);
-HAL_StatusTypeDef is32_turn_on_led_rgb(uint8_t bus, uint8_t unit, uint8_t led, uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness);
-HAL_StatusTypeDef is32_turn_on_led_single(uint8_t bus, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness);
-void is32_flux_cap(uint8_t bus, uint8_t mux, uint8_t channel, uint8_t unit);
+bool is32_set_rgb(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness);
+bool is32_set_single(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness);
 
 
 #endif /* INC_IS32_H_ */
