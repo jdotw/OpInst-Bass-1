@@ -20,17 +20,15 @@
 #define ROTPIC_SW2_STATE_MASK   0b00000100
 #define ROTPIC_SW2_CHANGED_MASK 0b00001000
 
-rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t rotpic_addr) {
+rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t rotpic_addr) {
 	rotpic_state state;
 
 	uint8_t rx[5];
-	HAL_StatusTypeDef res = HAL_I2C_Master_Receive(i2c_bus[bus], rotpic_addr << 1, rx, 5, HAL_MAX_DELAY);
-	if (res == HAL_ERROR) {
+	bool res = i2c_rx(bus, channel, rotpic_addr, rx, 5);
+	if (!res) {
 		// Rotpic doesnt exist?
 		state.success = false;
 		return state;
-	} else if (res == HAL_BUSY) {
-		Error_Handler();
 	}
 
 	state.success = true;
@@ -48,12 +46,6 @@ rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t rotpic_addr) {
 
 void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_state state) {
 	// Depending on which PIC this is, update actual state values
-	if (state.enc1_delta != 0 || state.enc2_delta != 0 || state.enc3_delta != 0 || state.enc4_delta != 0) {
-		printf("ENC CHANGE!");
-	}
-	if (state.sw1_changed || state.sw2_changed) {
-		printf("SW CHANGE!");
-	}
 	if (bus == I2C_LEFT) {
 		// Left I2C
 		switch (channel) {
@@ -171,13 +163,9 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
 }
 
 void rotpic_poll_all(uint8_t bus, uint8_t channel) {
-	// Select the mux channel
-	bool res = i2c_mux_select(bus, channel);
-	if (!res)	Error_Handler();
-
 	// Poll all (possible) 8 rotary PICs on that bus
-	for (uint8_t i=0; i < 8; i++) {
-		rotpic_state state = _rotpic_poll_selected(bus, DEFAULT_ROTPIC_ADDR + i);
+	for (uint8_t i=0; i < 1; i++) {
+		rotpic_state state = _rotpic_poll_selected(bus, channel, DEFAULT_ROTPIC_ADDR + i);
 		if (state.success) {
 			_rotpic_handle_state(bus, channel, i, state);
 		}

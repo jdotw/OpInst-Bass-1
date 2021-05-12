@@ -30,8 +30,8 @@ bool i2c_mux_select(uint8_t bus, uint8_t channel) {
 
 uint8_t i2c_mux_get_int_status(uint8_t bus) {
 	uint8_t rx;
-	HAL_StatusTypeDef res = HAL_I2C_Master_Receive(i2c_bus[bus], i2c_mux_addr[bus] << 1, &rx, 1, HAL_MAX_DELAY);
-	if (res != HAL_OK) {
+	bool res = i2c_rx(bus, I2C_CHANNEL_DIRECT, i2c_mux_addr[bus], &rx, 1);
+	if (!res) {
 		Error_Handler();	// FATAL -- We must be able to get our status!
 	}
 

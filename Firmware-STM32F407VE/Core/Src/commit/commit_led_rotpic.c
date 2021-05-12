@@ -15,7 +15,6 @@
 #include <math.h>
 
 void commit_led_rotpic() {
-
 	uint8_t led = 0x0;
 	bool res;
 

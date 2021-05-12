@@ -256,21 +256,17 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
 	_init_dpot();
 
   uint32_t freq = _get_frequency(timer, timer_channel);
-  printf("Osc 1 Starting Frequency: %lu\n", freq);
 
 	_calibration_result result = _dpot_value_for_tracking(osc, dac_bus, dac_bus_channel, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, DPOT_VALUE_MIN, DPOT_VALUE_MAX, (DPOT_VALUE_MAX - DPOT_VALUE_MIN)/2);
 	if (!result.success) {
-		printf("Failed to calibrate oscillator at %i:%i:%i", dac_bus, dac_addr, dac_channel);
 		Error_Handler();
 	}
-  printf("Osc Final dpot value: %u\n", result.dpot_val);
 
   osc_dac_offset[osc] = result.dac_offset;
 
   uint16_t dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A2);
 	dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  printf("Osc A2 Frequency: %lu\n", freq);
   if (freq < 10700 || freq > 11300) {
   	// Not scaling properly
   	Error_Handler();
@@ -279,7 +275,6 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
 	dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  printf("Osc A3 Frequency: %lu\n", freq);
   if (freq < 21700 || freq > 22300) {
   	// Not scaling properly
   	Error_Handler();
@@ -288,7 +283,6 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A4);
 	dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  printf("Osc A4 Frequency: %lu\n", freq);
   if (freq < 43700 || freq > 44300) {
   	// Not scaling properly
   	Error_Handler();

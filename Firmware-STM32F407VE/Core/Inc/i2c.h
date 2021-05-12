@@ -19,6 +19,7 @@
 /* i2c.c */
 extern I2C_HandleTypeDef *i2c_bus[2];
 bool i2c_tx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data, uint8_t len);
+bool i2c_rx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data, uint8_t len);
 
 /* i2c_mux.c */
 bool i2c_mux_select(uint8_t bus, uint8_t channel);
