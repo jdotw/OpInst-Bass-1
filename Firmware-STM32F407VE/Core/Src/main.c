@@ -101,7 +101,7 @@ int main(void)
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+   HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -169,9 +169,6 @@ int main(void)
   // Calibrate oscillators
   osc_calibrate(&hspi1, &htim1);
 
-  // Enable RGB LED drivers
-//  tca9544a_select(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
-
   // Poll all rotary encoder PICs
   // This will clear any interrupts
   rotpic_poll_all(I2C_LEFT, 0);
@@ -192,7 +189,7 @@ int main(void)
   is32_init();
 
   // Start commit timer
-  HAL_TIM_Base_Start_IT(&htim7);
+//  HAL_TIM_Base_Start_IT(&htim7);
 
   /* USER CODE END 2 */
 

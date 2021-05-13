@@ -1,11 +1,11 @@
 /**
-  Generated Interrupt Manager Source File
+  Generated Interrupt Manager Header File
 
   @Company:
     Microchip Technology Inc.
 
   @File Name:
-    interrupt_manager.c
+    interrupt_manager.h
 
   @Summary:
     This is the Interrupt Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
@@ -17,7 +17,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.81.7
         Device            :  PIC18F26Q10
-        Driver Version    :  2.04
+        Driver Version    :  2.12
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.31 and above or later
         MPLAB 	          :  MPLAB X 5.45
@@ -51,68 +51,110 @@
 
 void  INTERRUPT_Initialize (void)
 {
-    // Disable Interrupt Priority Vectors (16CXXX Compatibility Mode)
-    INTCONbits.IPEN = 0;
+    // Enable Interrupt Priority Vectors
+    INTCONbits.IPEN = 1;
+
+    // Assign peripheral interrupt priority vectors
+
+    // SSPI - high priority
+    IPR3bits.SSP1IP = 1;
+
+    // BCLI - high priority
+    IPR3bits.BCL1IP = 1;
+
+
+    // TMRI - low priority
+    IPR0bits.TMR0IP = 0;    
+
+    // CLCI - low priority
+    IPR5bits.CLC1IP = 0;    
+
+    // CLCI - low priority
+    IPR5bits.CLC2IP = 0;    
+
+    // CLCI - low priority
+    IPR5bits.CLC3IP = 0;    
+
+    // CLCI - low priority
+    IPR5bits.CLC4IP = 0;    
+
+    // CLCI - low priority
+    IPR6bits.CLC5IP = 0;    
+
+    // CLCI - low priority
+    IPR6bits.CLC6IP = 0;    
+
+    // CLCI - low priority
+    IPR6bits.CLC7IP = 0;    
+
+    // CLCI - low priority
+    IPR6bits.CLC8IP = 0;    
+
+    // IOCI - low priority
+    IPR0bits.IOCIP = 0;    
+
 }
 
-void __interrupt() INTERRUPT_InterruptManager (void)
+void __interrupt() INTERRUPT_InterruptManagerHigh (void)
+{
+   // interrupt handler
+    if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
+    {
+        MSSP1_InterruptHandler();
+    }
+    else if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
+    {
+        MSSP1_InterruptHandler();
+    }
+    else
+    {
+        //Unhandled Interrupt
+    }
+}
+
+void __interrupt(low_priority) INTERRUPT_InterruptManagerLow (void)
 {
     // interrupt handler
     if(PIE0bits.TMR0IE == 1 && PIR0bits.TMR0IF == 1)
     {
         TMR0_ISR();
     }
+    else if(PIE5bits.CLC1IE == 1 && PIR5bits.CLC1IF == 1)
+    {
+        CLC1_ISR();
+    }
+    else if(PIE5bits.CLC2IE == 1 && PIR5bits.CLC2IF == 1)
+    {
+        CLC2_ISR();
+    }
+    else if(PIE5bits.CLC3IE == 1 && PIR5bits.CLC3IF == 1)
+    {
+        CLC3_ISR();
+    }
+    else if(PIE5bits.CLC4IE == 1 && PIR5bits.CLC4IF == 1)
+    {
+        CLC4_ISR();
+    }
+    else if(PIE6bits.CLC5IE == 1 && PIR6bits.CLC5IF == 1)
+    {
+        CLC5_ISR();
+    }
+    else if(PIE6bits.CLC6IE == 1 && PIR6bits.CLC6IF == 1)
+    {
+        CLC6_ISR();
+    }
+    else if(PIE6bits.CLC7IE == 1 && PIR6bits.CLC7IF == 1)
+    {
+        CLC7_ISR();
+    }
+    else if(PIE6bits.CLC8IE == 1 && PIR6bits.CLC8IF == 1)
+    {
+        CLC8_ISR();
+    }
     else if(PIE0bits.IOCIE == 1 && PIR0bits.IOCIF == 1)
     {
         PIN_MANAGER_IOC();
     }
-    else if(INTCONbits.PEIE == 1)
-    {
-        if(PIE6bits.CLC8IE == 1 && PIR6bits.CLC8IF == 1)
-        {
-            CLC8_ISR();
-        } 
-        else if(PIE6bits.CLC7IE == 1 && PIR6bits.CLC7IF == 1)
-        {
-            CLC7_ISR();
-        } 
-        else if(PIE6bits.CLC6IE == 1 && PIR6bits.CLC6IF == 1)
-        {
-            CLC6_ISR();
-        } 
-        else if(PIE6bits.CLC5IE == 1 && PIR6bits.CLC5IF == 1)
-        {
-            CLC5_ISR();
-        } 
-        else if(PIE5bits.CLC4IE == 1 && PIR5bits.CLC4IF == 1)
-        {
-            CLC4_ISR();
-        } 
-        else if(PIE5bits.CLC3IE == 1 && PIR5bits.CLC3IF == 1)
-        {
-            CLC3_ISR();
-        } 
-        else if(PIE5bits.CLC2IE == 1 && PIR5bits.CLC2IF == 1)
-        {
-            CLC2_ISR();
-        } 
-        else if(PIE5bits.CLC1IE == 1 && PIR5bits.CLC1IF == 1)
-        {
-            CLC1_ISR();
-        } 
-        else if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
-        {
-            MSSP1_InterruptHandler();
-        } 
-        else if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
-        {
-            MSSP1_InterruptHandler();
-        } 
-        else
-        {
-            //Unhandled Interrupt
-        }
-    }      
     else
     {
         //Unhandled Interrupt

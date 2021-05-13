@@ -48,7 +48,7 @@
 
 // CONFIG1L
 #pragma config FEXTOSC = OFF    // External Oscillator mode Selection bits->Oscillator not enabled
-#pragma config RSTOSC = HFINTOSC_1MHZ    // Power-up default value for COSC bits->HFINTOSC with HFFRQ = 4 MHz and CDIV = 4:1
+#pragma config RSTOSC = HFINTOSC_64MHZ    // Power-up default value for COSC bits->HFINTOSC with HFFRQ = 64 MHz and CDIV = 1:1
 
 // CONFIG1H
 #pragma config CLKOUTEN = OFF    // Clock Out Enable bit->CLKOUT function is disabled

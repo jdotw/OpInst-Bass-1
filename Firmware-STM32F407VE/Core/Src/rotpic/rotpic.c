@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #include "main.h"
 #include "rotpic.h"
@@ -163,11 +164,20 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
 }
 
 void rotpic_poll_all(uint8_t bus, uint8_t channel) {
-	// Poll all (possible) 8 rotary PICs on that bus
-	for (uint8_t i=0; i < 1; i++) {
-		rotpic_state state = _rotpic_poll_selected(bus, channel, DEFAULT_ROTPIC_ADDR + i);
-		if (state.success) {
-			_rotpic_handle_state(bus, channel, i, state);
+	for (uint8_t i=0; i < 8; i++) {
+		bool poll = false;
+		switch(bus) {
+		case 2:
+			switch (channel) {
+			case 0:
+				poll = true;
+			}
+		}
+		if (poll) {
+			rotpic_state state = _rotpic_poll_selected(bus, channel, DEFAULT_ROTPIC_ADDR + i);
+			if (state.success) {
+				_rotpic_handle_state(bus, channel, i, state);
+			}
 		}
 	}
 }

@@ -213,6 +213,11 @@
         <property key="stack-type" value="compiled"/>
         <property key="user-pack-device-support" value=""/>
       </XC8-config-global>
+      <pk4hybrid>
+        <property key="memories.programmemory.ranges" value="0-ffff"/>
+        <property key="programmerToGoFilePath"
+                  value="/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/debug/default/Firmware-PIC18F26Q10_ptg"/>
+      </pk4hybrid>
     </conf>
   </confs>
 </configurationDescriptor>
