@@ -908,9 +908,21 @@ void _commit_led_adsr_sub_amp_env() {
 }
 
 
-void commit_led_adsr() {
-	_commit_led_adsr_osc_filt_env();
-	_commit_led_adsr_sub_filt_env();
-	_commit_led_adsr_osc_amp_env();
-	_commit_led_adsr_sub_amp_env();
+void commit_led_adsr(commit_cycle_t cycle) {
+	switch(cycle) {
+	case COMMIT_LED_ADSR_OSC_FILT:
+		_commit_led_adsr_osc_filt_env();
+		break;
+	case COMMIT_LED_ADSR_SUB_FILT:
+		_commit_led_adsr_sub_filt_env();
+		break;
+	case COMMIT_LED_ADSR_OSC_AMP:
+		_commit_led_adsr_osc_amp_env();
+		break;
+	case COMMIT_LED_ADSR_SUB_AMP:
+		_commit_led_adsr_sub_amp_env();
+		break;
+	default:
+		break;
+	}
 }
