@@ -44,32 +44,30 @@ static void _i2c_rx_callback() {
     rx_index++;
 }
 
-static inline void _i2c_tx_callback() {
-    SSP1BUF = 0x37;
-    
+static void _i2c_tx_callback() {
     // Called when master wants data from us
-//    switch (tx_index) {
-//        case 0:
-//        case 1:
-//        case 2:
-//        case 3:
-//            SSP1BUF = (uint8_t)enc_value[tx_index];
-//            enc_value[tx_index] = 0;
-//            break;
-//        case 4: {
-//            uint8_t tx = 0;
-//            tx |= sw_state[0] << 0;
-//            tx |= sw_changed[0] << 1;
-//            tx |= sw_state[1] << 2;
-//            tx |= sw_changed[1] << 3;            
-//            SSP1BUF = tx;
-//            sw_changed[0] = 0;
-//            sw_changed[1] = 0;
-//            break;
-//        }
-//    }    
-//    tx_index++;
-//    
+    switch (tx_index) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+            SSP1BUF = (uint8_t)enc_value[tx_index];
+            enc_value[tx_index] = 0;
+            break;
+        case 4: {
+            uint8_t tx = 0;
+            tx |= sw_state[0] << 0;
+            tx |= sw_changed[0] << 1;
+            tx |= sw_state[1] << 2;
+            tx |= sw_changed[1] << 3;            
+            SSP1BUF = tx;
+            sw_changed[0] = 0;
+            sw_changed[1] = 0;
+            break;
+        }
+    }    
+    tx_index++;
+    
     // Reset interrupt (inactive)
     I2CINT_SetHigh();
 }

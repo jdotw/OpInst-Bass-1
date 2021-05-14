@@ -33,9 +33,9 @@ void encoder_init() {
 #define DEBOUNCE_MIN 5
 
 void encoder_clc_isr(uint8_t enc, int8_t dir) {
-//    if (enc_direction[enc] != dir && debounce[enc] < DEBOUNCE_MIN) {
-//        return;
-//    }
+    if (enc_direction[enc] != dir && debounce[enc] < DEBOUNCE_MIN) {
+        return;
+    }
     
     enc_value[enc] += dir;
     debounce[enc] = 0;
