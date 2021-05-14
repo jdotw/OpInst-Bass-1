@@ -6,6 +6,7 @@
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/main.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/i2c.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/interrupt_manager.c</file>
+            <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/pin_manager.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/encoder.c</file>
             <file>file:/Users/jwilson/Source/Opinionated-Boom-1/Firmware-PIC18F26Q10.X/mcc_generated_files/i2c1_slave.c</file>
         </group>

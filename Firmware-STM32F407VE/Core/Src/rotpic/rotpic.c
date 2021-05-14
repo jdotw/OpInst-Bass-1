@@ -21,11 +21,11 @@
 #define ROTPIC_SW2_STATE_MASK   0b00000100
 #define ROTPIC_SW2_CHANGED_MASK 0b00001000
 
-rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t rotpic_addr) {
+rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t pic) {
 	rotpic_state state;
 
 	uint8_t rx[5];
-	bool res = i2c_rx(bus, channel, rotpic_addr, rx, 5);
+	bool res = i2c_rx(bus, channel, DEFAULT_ROTPIC_ADDR + pic, rx, 5);
 	if (!res) {
 		// Rotpic doesnt exist?
 		state.success = false;
@@ -163,20 +163,67 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
 	}
 }
 
-void rotpic_poll_all(uint8_t bus, uint8_t channel) {
-	for (uint8_t i=0; i < 8; i++) {
-		bool poll = true; // JW FIX
-		switch(bus) {
-		case 2:
-			switch (channel) {
-			case 0:
-				poll = true;
+bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
+	switch(bus) {
+	case I2C_LEFT:
+		switch(channel) {
+		case 0: // LEFT0
+			switch (pic) {
+			case 0b000: // LEFT0:000
+				return true;
+			case 0b001: // LEFT0:001
+				return true;
+			case 0b010: // LEFT0:010
+				return true;
+			case 0b011: // LEFT0:011
+				return true;
+			case 0b100: // LEFT0:100
+				return true;
 			}
+			break;
+		case 2: // LEFT2
+			switch(pic) {
+			case 0b000: // LEFT2:000
+				return true;
+			case 0b001: // LEFT2:001
+				return true;
+			}
+			break;
+		case 3: // LEFT3
+			switch(pic) {
+			case 0b000: // LEFT3:000
+				return true;
+			}
+			break;
 		}
+	case I2C_RIGHT:
+		switch(channel) {
+		case 0: // RIGHT0
+			switch (pic) {
+			case 0b000: // RIGHT0:000
+				return true;
+			}
+			break;
+		case 1: // RIGHT1
+			switch (pic) {
+			case 0b000: // RIGHT1:000
+				return true;
+			case 0b001: // RIGHT1:001
+				return true;
+			}
+			break;
+		}
+	}
+	return false;
+}
+
+void rotpic_poll_all(uint8_t bus, uint8_t channel) {
+	for (uint8_t pic=0; pic < 8; pic++) {
+		bool poll = _rotpic_exists(bus, channel, pic);
 		if (poll) {
-			rotpic_state state = _rotpic_poll_selected(bus, channel, DEFAULT_ROTPIC_ADDR + i);
+			rotpic_state state = _rotpic_poll_selected(bus, channel, pic);
 			if (state.success) {
-				_rotpic_handle_state(bus, channel, i, state);
+				_rotpic_handle_state(bus, channel, pic, state);
 			}
 		}
 	}
