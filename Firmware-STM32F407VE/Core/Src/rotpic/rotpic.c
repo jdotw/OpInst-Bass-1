@@ -165,7 +165,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
 
 void rotpic_poll_all(uint8_t bus, uint8_t channel) {
 	for (uint8_t i=0; i < 8; i++) {
-		bool poll = false;
+		bool poll = true; // JW FIX
 		switch(bus) {
 		case 2:
 			switch (channel) {
