@@ -37,10 +37,22 @@ void commit_30hz_timer(void) {
 		ticks_cost = ticks_after - ticks_before;
 		cycle++;
 		break;
-	case COMMIT_LED_ADSR_OSC_FILT:
-	case COMMIT_LED_ADSR_SUB_FILT:
-	case COMMIT_LED_ADSR_OSC_AMP:
-	case COMMIT_LED_ADSR_SUB_AMP:
+		case COMMIT_LED_ADSR_OSC_FILT_A:
+		case COMMIT_LED_ADSR_OSC_FILT_D:
+		case COMMIT_LED_ADSR_OSC_FILT_S:
+		case COMMIT_LED_ADSR_OSC_FILT_R:
+		case COMMIT_LED_ADSR_SUB_FILT_A:
+		case COMMIT_LED_ADSR_SUB_FILT_D:
+		case COMMIT_LED_ADSR_SUB_FILT_S:
+		case COMMIT_LED_ADSR_SUB_FILT_R:
+		case COMMIT_LED_ADSR_OSC_AMP_A:
+		case COMMIT_LED_ADSR_OSC_AMP_D:
+		case COMMIT_LED_ADSR_OSC_AMP_S:
+		case COMMIT_LED_ADSR_OSC_AMP_R:
+		case COMMIT_LED_ADSR_SUB_AMP_A:
+		case COMMIT_LED_ADSR_SUB_AMP_D:
+		case COMMIT_LED_ADSR_SUB_AMP_S:
+		case COMMIT_LED_ADSR_SUB_AMP_R:
 		ticks_before = HAL_GetTick();
 		commit_led_adsr(cycle);
 		ticks_after = HAL_GetTick();
@@ -57,4 +69,5 @@ void commit_30hz_timer(void) {
 	default:
 		cycle = 0;
 	}
+	UNUSED(ticks_cost);
 }

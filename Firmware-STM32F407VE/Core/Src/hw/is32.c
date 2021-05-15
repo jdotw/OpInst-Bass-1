@@ -39,32 +39,73 @@ void is32_init() {
 	bool res;
 
 	// LEFT0:00
-	res = _is32_enable(I2C_LEFT, 0, 0);
+	res = _is32_enable(I2C_LEFT, 0, 0b00);
+	if (!res) Error_Handler();
+
+	// LEFT0:10
+	res = _is32_enable(I2C_LEFT, 0, 0b10);
+	if (!res) Error_Handler();
+
+	// RIGHT1:00
+	res = _is32_enable(I2C_RIGHT, 1, 0b00);
 	if (!res) Error_Handler();
 
 	// LEFT0:11
-	res = _is32_enable(I2C_LEFT, 0, 3);
+	res = _is32_enable(I2C_LEFT, 0, 0b11);
+	if (!res) Error_Handler();
+
+	// LEFT3:10
+	res = _is32_enable(I2C_LEFT, 3, 0b10);
+	if (!res) Error_Handler();
+
+	// LEFT3:00
+	res = _is32_enable(I2C_LEFT, 3, 0b00);
 	if (!res) Error_Handler();
 
 	// LEFT1:00
-	res = _is32_enable(I2C_LEFT, 1, 0);
+	res = _is32_enable(I2C_LEFT, 1, 0b00);
 	if (!res) Error_Handler();
 
-	// LEFT1:11
-	res = _is32_enable(I2C_LEFT, 1, 3);
+	// LEFT1:10
+	res = _is32_enable(I2C_LEFT, 1, 0b10);
+	if (!res) Error_Handler();
+
+	// RIGHT2:01
+	res = _is32_enable(I2C_RIGHT, 2, 0b01);
+	if (!res) Error_Handler();
+
+	// RIGHT1:01
+	res = _is32_enable(I2C_RIGHT, 1, 0b01);
+	if (!res) Error_Handler();
+
+	// RIGHT2:10
+	res = _is32_enable(I2C_RIGHT, 2, 0b10);
+	if (!res) Error_Handler();
+
+	// LEFT0:01
+	res = _is32_enable(I2C_LEFT, 0, 0b01);
 	if (!res) Error_Handler();
 
 	// LEFT3:01
-	res = _is32_enable(I2C_LEFT, 3, 1);
-	if (!res) Error_Handler();
-
-	// RIGHT1:10
-	res = _is32_enable(I2C_RIGHT, 1, 2);
+	res = _is32_enable(I2C_LEFT, 3, 0b01);
 	if (!res) Error_Handler();
 
 	// RIGHT2:00
-	res = _is32_enable(I2C_RIGHT, 2, 0);
+	res = _is32_enable(I2C_RIGHT, 2, 0b00);
 	if (!res) Error_Handler();
+
+	// LEFT1:11
+	res = _is32_enable(I2C_LEFT, 1, 0b11);
+	if (!res) Error_Handler();
+
+	// RIGHT1:10
+	res = _is32_enable(I2C_RIGHT, 1, 0b10);
+	if (!res) Error_Handler();
+
+	// LEFT1:01
+	res = _is32_enable(I2C_LEFT, 1, 0b01);
+	if (!res) Error_Handler();
+
 }
 
 
@@ -113,29 +154,122 @@ bool is32_set_rgb(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8
 	return true;
 }
 
-bool is32_set_single(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness) {
+bool is32_write_registers(uint8_t bus, uint8_t channel, uint8_t unit) {
+	// Write the registers
 	uint8_t data[2] = {  0x00, 0x00 };
 	bool res;
-
-	// PWM
-	data[0] = 0x01 + (led * 2);
-	data[1] = pwm;
-	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
-	if (!res) return false;
-
-	// Scaling (current)
-	data[0] = 0x4A + led;
-	data[1] = brightness;
-	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
-	if (!res) return false;
-
-	// Write the registers
 	data[0] = 0x49;
 	data[1] = 0x00;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
 	if (!res) return false;
+	return true;
+}
+
+bool is32_set_single_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm) {
+	// PWM
+	uint8_t data[2] = {  0x00, 0x00 };
+	bool res;
+	data[0] = 0x01 + (led * 2);
+	data[1] = pwm;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+	return true;
+}
+
+bool is32_set_single_scale(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t brightness) {
+	// Scaling (current)
+	uint8_t data[2] = {  0x00, 0x00 };
+	bool res;
+	data[0] = 0x4A + led;
+	data[1] = brightness;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	if (!res) return false;
+	return true;
+}
+
+bool _is32_set_single(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness, bool write_registers) {
+	bool res;
+
+	// PWM
+	res = is32_set_single_pwm(bus, channel, unit, led, pwm);
+	if (!res) return false;
+
+	// Scaling (current)
+	res = is32_set_single_scale(bus, channel, unit, led, brightness);
+	if (!res) return false;
+
+	// Write the registers
+	if (write_registers) {
+		res = is32_write_registers(bus, channel, unit);
+		if (!res) return false;
+	}
 
 	return true;
+}
+
+bool is32_set_single(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness) {
+	return _is32_set_single(bus, channel, unit, led, pwm, brightness, true);
+}
+
+bool is32_set_single_uncommitted(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm, uint8_t brightness) {
+	return _is32_set_single(bus, channel, unit, led, pwm, brightness, false);
+}
+
+bool is32_set_sequence_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint8_t *seq, uint8_t len) {
+	const uint8_t data_len = 1+(len*2);
+	uint8_t data[data_len];
+	data[0] = 0x01 + (start * 2);	// Registry address (start)
+	for (uint8_t i=0; i < len; i++) {
+		data[(i*2)+1] = seq[i]; // PWM_L
+		data[(i*2)+2] = 0x00;		// PWM_H
+	}
+	bool res;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, data_len);
+	if (!res) return false;
+	return true;
+}
+
+bool is32_set_sequence_scale(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint8_t *seq, uint8_t len) {
+	const uint8_t data_len = 1+len;
+	uint8_t data[data_len];
+	data[0] = 0x4A + start; // Registry address (start)
+	for (uint8_t i=0; i < len; i++) {
+		data[i+1] = seq[i];
+	}
+	bool res;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, data_len);
+	if (!res) return false;
+	return true;
+}
+
+/*
+ * Test
+ */
+
+void _is32_test_led(uint8_t bus, uint8_t channel, uint8_t unit) {
+	for (uint8_t i=0; i < 12; i++) {
+		is32_set_rgb(bus, channel, unit, i, 0x40, 0x40, 0x40, 0x30);
+	}
+}
+
+void is32_test() {
+	_is32_test_led(I2C_LEFT,  0, 0b00); // ** Nothing
+	_is32_test_led(I2C_LEFT,  0, 0b10); // OK
+	_is32_test_led(I2C_RIGHT, 1, 0b00); // OK
+	_is32_test_led(I2C_LEFT,  0, 0b11); // ** Some pins missing
+	_is32_test_led(I2C_LEFT,  3, 0b10); // OK
+	_is32_test_led(I2C_LEFT,  3, 0b00); // OK
+	_is32_test_led(I2C_LEFT,  1, 0b00); // OK
+	_is32_test_led(I2C_LEFT,  1, 0b10); // OK
+	_is32_test_led(I2C_RIGHT, 2, 0b01); // OK
+	_is32_test_led(I2C_RIGHT, 1, 0b01); // OK
+	_is32_test_led(I2C_RIGHT, 2, 0b10); // OK
+	_is32_test_led(I2C_LEFT,  0, 0b01); // OK
+	_is32_test_led(I2C_LEFT,  3, 0b01); // OK (Graph)
+	_is32_test_led(I2C_RIGHT, 2, 0b00); // OK (Graph)
+	_is32_test_led(I2C_LEFT,  1, 0b11); // OK (Graph)
+	_is32_test_led(I2C_RIGHT, 1, 0b10); // OK (Graph + Steps)
+	_is32_test_led(I2C_LEFT,  1, 0b01); // OK (Steps)
 }
 
 

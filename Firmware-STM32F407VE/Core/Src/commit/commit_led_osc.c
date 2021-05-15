@@ -23,8 +23,6 @@ uint8_t _12_to_8(uint16_t a) {
 void _commit_led_osc1() {
 	bool res;
 
-	/* LEFT0:00 */
-
 	/* Osc1 Saw */
 	res = is32_set_rgb(I2C_LEFT, 0, 0, 0, 0xFF, 0x00, 0x00, _12_to_8(ctrl_value.osc1_saw_lvl));
 	if (!res) Error_Handler();

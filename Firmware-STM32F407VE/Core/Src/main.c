@@ -166,6 +166,17 @@ int main(void)
   // Reset DACs
   dac7678_init();
 
+  // Enable RGB/Graph LED Controllers
+  is32_init();
+
+  // Check for test mode (Shift held)
+  bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
+  if (test_mode) {
+  	is32_test();
+    while (1)
+    { }
+  }
+
   // Calibrate oscillators
   osc_calibrate(&hspi1, &htim1);
 
@@ -184,9 +195,6 @@ int main(void)
   ctrl_value_init();
   ctrl_toggle_init();
   ctrl_enabled = true;
-
-  // Enable RGB/Graph LED Controllers
-  is32_init();
 
   // Start commit timer
   HAL_TIM_Base_Start_IT(&htim7);
