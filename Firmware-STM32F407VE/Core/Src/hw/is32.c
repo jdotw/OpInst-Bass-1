@@ -246,9 +246,12 @@ bool is32_set_sequence_scale(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t
  * Test
  */
 
+#define TEST_PWM 0x28
+#define TEST_SCALE 0x10
+
 void _is32_test_led(uint8_t bus, uint8_t channel, uint8_t unit) {
 	for (uint8_t i=0; i < 12; i++) {
-		is32_set_rgb(bus, channel, unit, i, 0x40, 0x40, 0x40, 0x30);
+		is32_set_rgb(bus, channel, unit, i, TEST_PWM, TEST_PWM, TEST_PWM, TEST_SCALE);
 	}
 }
 

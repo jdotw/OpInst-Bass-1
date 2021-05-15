@@ -154,7 +154,7 @@ void _adsr_led_set_grid_bar(uint16_t val) {
 	}
 }
 
-#define DEFAULT_BRIGHTNESS 0x30
+#define DEFAULT_BRIGHTNESS 0x20
 #define HALF_BRIGHTNESS 0x05
 
 /*
