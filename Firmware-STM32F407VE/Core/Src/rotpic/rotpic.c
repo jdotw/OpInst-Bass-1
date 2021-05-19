@@ -57,7 +57,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
 				// Left 0:000
 				ctrl_apply_delta(CTRL_OSC1_SAW, state.enc1_delta);
 				ctrl_apply_delta(CTRL_OSC1_SQU, state.enc2_delta);
-				ctrl_apply_delta(CTRL_OSC1_TO_OSC2, (state.enc4_delta * -1));
+				ctrl_apply_delta(CTRL_OSC1_TO_OSC2, state.enc4_delta);
 				ctrl_apply_toggle(CTRL_OSC1_SQU, state.sw2_changed, state.sw2_state);
 				break;
 			case 1:
