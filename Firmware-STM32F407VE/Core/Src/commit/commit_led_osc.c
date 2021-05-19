@@ -12,9 +12,15 @@
 #include "ctrl.h"
 
 uint8_t _max(uint16_t a, uint16_t b) {
-	if (a > b) return a >> 4;
-	else return b >> 4;
+	if (a > b) return a;
+	else return b;
 }
+
+uint8_t _min(uint16_t a, uint16_t b) {
+	if (a < b) return a;
+	else return b;
+}
+
 
 uint8_t _12_to_8(uint16_t a) {
 	return a >> 4;
@@ -235,7 +241,7 @@ void _commit_led_osc1() {
 	if (!res) Error_Handler();
 
 	/* Osc2-Only Mix
-	 * LEFT0:00
+	 * LEFT0:11
 	 * 5, 6, 7, 8
 	 */
 
@@ -271,6 +277,43 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
+
+	/* Osc2-PreFilter Mix
+	 * LEFT0:11
+	 * 9, 10
+	 */
+
+	uint16_t osc2_prefilt_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+	uint16_t osc2_prefilt_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	uint16_t osc2_prefilt_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+
+	pwm_seq[0] = _12_to_8(osc2_prefilt_r);
+	pwm_seq[1] = _12_to_8(osc2_prefilt_g);
+	pwm_seq[2] = _12_to_8(osc2_prefilt_b);
+	pwm_seq[3] = _12_to_8(osc2_prefilt_r);
+	pwm_seq[4] = _12_to_8(osc2_prefilt_g);
+	pwm_seq[5] = _12_to_8(osc2_prefilt_b);
+	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (9*3), pwm_seq, (2*3));
+	if (!res) Error_Handler();
+
+	scale_seq[0] = DEFAULT_SCALE;
+	scale_seq[1] = DEFAULT_SCALE;
+	scale_seq[2] = DEFAULT_SCALE;
+	scale_seq[3] = DEFAULT_SCALE;
+	scale_seq[4] = DEFAULT_SCALE;
+	scale_seq[5] = DEFAULT_SCALE;
+	scale_seq[6] = DEFAULT_SCALE;
+	scale_seq[7] = DEFAULT_SCALE;
+	scale_seq[8] = DEFAULT_SCALE;
+	scale_seq[9] = DEFAULT_SCALE;
+	scale_seq[10] = DEFAULT_SCALE;
+	scale_seq[11] = DEFAULT_SCALE;
+	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b11, (9*3), scale_seq, (2*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 0, 0b11);
+	if (!res) Error_Handler();
+
 
 	/* Sub Squ
 	 * LEFT1:00
