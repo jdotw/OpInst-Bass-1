@@ -36,7 +36,7 @@ void _commit_led_osc1() {
 	 * 0, 1
 	 */
 
-	uint8_t pwm_seq[24];
+	uint8_t pwm_seq[36];
 	pwm_seq[0] = _12_to_8(ctrl_value.osc1_saw_lvl);
 	pwm_seq[1] = 0;
 	pwm_seq[2] = 0;
@@ -46,7 +46,7 @@ void _commit_led_osc1() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 6);
 	if (!res) Error_Handler();
 
-	uint8_t scale_seq[24];
+	uint8_t scale_seq[36];
 	scale_seq[0] = DEFAULT_SCALE;
 	scale_seq[1] = DEFAULT_SCALE;
 	scale_seq[2] = DEFAULT_SCALE;
@@ -140,6 +140,85 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0);
 	if (!res) Error_Handler();
+
+	/* Osc1 Filter
+	 * LEFT0:10
+	 * Freq: 3, 4
+	 * Reso: 5, 6
+	 */
+
+	pwm_seq[0] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[1] = 0;
+	pwm_seq[2] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	pwm_seq[3] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[4] = 0;
+	pwm_seq[5] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	pwm_seq[6] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[7] = 0;
+	pwm_seq[8] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	pwm_seq[9] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[10] = 0;
+	pwm_seq[11] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (3*3), pwm_seq, (4*3));
+	if (!res) Error_Handler();
+
+	scale_seq[0] = DEFAULT_SCALE;
+	scale_seq[1] = DEFAULT_SCALE;
+	scale_seq[2] = DEFAULT_SCALE;
+	scale_seq[3] = DEFAULT_SCALE;
+	scale_seq[4] = DEFAULT_SCALE;
+	scale_seq[5] = DEFAULT_SCALE;
+	scale_seq[6] = DEFAULT_SCALE;
+	scale_seq[7] = DEFAULT_SCALE;
+	scale_seq[8] = DEFAULT_SCALE;
+	scale_seq[9] = DEFAULT_SCALE;
+	scale_seq[10] = DEFAULT_SCALE;
+	scale_seq[11] = DEFAULT_SCALE;
+	res = is32_set_sequence_scale(I2C_LEFT, 0, 2, (3*3), scale_seq, (4*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 0, 2);
+	if (!res) Error_Handler();
+
+	/* Osc1 Drive
+	 * RIGHT1:00
+	 * 0, 1, 3, 2 <--- Note 3 before 2
+	 *
+	 */
+
+	pwm_seq[0] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[1] = 0;
+	pwm_seq[2] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	pwm_seq[3] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[4] = 0;
+	pwm_seq[5] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	pwm_seq[6] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[7] = 0;
+	pwm_seq[8] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	pwm_seq[9] = _12_to_8(ctrl_value.osc1_saw_lvl);
+	pwm_seq[10] = 0;
+	pwm_seq[11] = _12_to_8(ctrl_value.osc1_squ_lvl);
+	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (0*3), pwm_seq, (4*3));
+	if (!res) Error_Handler();
+
+	scale_seq[0] = DEFAULT_SCALE;
+	scale_seq[1] = DEFAULT_SCALE;
+	scale_seq[2] = DEFAULT_SCALE;
+	scale_seq[3] = DEFAULT_SCALE;
+	scale_seq[4] = DEFAULT_SCALE;
+	scale_seq[5] = DEFAULT_SCALE;
+	scale_seq[6] = DEFAULT_SCALE;
+	scale_seq[7] = DEFAULT_SCALE;
+	scale_seq[8] = DEFAULT_SCALE;
+	scale_seq[9] = DEFAULT_SCALE;
+	scale_seq[10] = DEFAULT_SCALE;
+	scale_seq[11] = DEFAULT_SCALE;
+	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0, (0*3), scale_seq, (4*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_RIGHT, 1, 0);
+	if (!res) Error_Handler();
+
 
 	/* Osc1toOsc2 Mix Level
 	 * LEFT0:10
@@ -314,6 +393,118 @@ void _commit_led_osc1() {
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
 
+	/* Osc2 Filt
+	 * LEFT3:000
+	 * Freq: 0, 1
+	 * Reso: 2, 3
+	 */
+
+	uint16_t osc2_filt_freq_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+	uint16_t osc2_filt_freq_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	uint16_t osc2_filt_freq_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	uint16_t osc2_filt_reso_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+	uint16_t osc2_filt_reso_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	uint16_t osc2_filt_reso_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+
+	pwm_seq[0] =  _12_to_8(osc2_filt_freq_r);
+	pwm_seq[1] =  _12_to_8(osc2_filt_freq_g);
+	pwm_seq[2] =  _12_to_8(osc2_filt_freq_b);
+	pwm_seq[3] =  _12_to_8(osc2_filt_freq_r);
+	pwm_seq[4]  = _12_to_8(osc2_filt_freq_g);
+	pwm_seq[5]  = _12_to_8(osc2_filt_freq_b);
+	pwm_seq[6]  = _12_to_8(osc2_filt_reso_r);
+	pwm_seq[7]  = _12_to_8(osc2_filt_reso_g);
+	pwm_seq[8]  = _12_to_8(osc2_filt_reso_b);
+	pwm_seq[9]  = _12_to_8(osc2_filt_reso_r);
+	pwm_seq[10] = _12_to_8(osc2_filt_reso_g);
+	pwm_seq[11] = _12_to_8(osc2_filt_reso_b);
+	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (0*3), pwm_seq, (4*3));
+	if (!res) Error_Handler();
+
+	scale_seq[0] = DEFAULT_SCALE;
+	scale_seq[1] = DEFAULT_SCALE;
+	scale_seq[2] = DEFAULT_SCALE;
+	scale_seq[3] = DEFAULT_SCALE;
+	scale_seq[4] = DEFAULT_SCALE;
+	scale_seq[5] = DEFAULT_SCALE;
+	scale_seq[6] = DEFAULT_SCALE;
+	scale_seq[7] = DEFAULT_SCALE;
+	scale_seq[8] = DEFAULT_SCALE;
+	scale_seq[9] = DEFAULT_SCALE;
+	scale_seq[10] = DEFAULT_SCALE;
+	scale_seq[11] = DEFAULT_SCALE;
+	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b00, (0*3), scale_seq, (4*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 3, 0b00);
+	if (!res) Error_Handler();
+
+	/* Osc2 Drive
+	 * LEFT3:10
+	 * 3, 4, 5, 6, 7, 8, 9, 10
+	 */
+
+	uint16_t osc2_drive_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+	uint16_t osc2_drive_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	uint16_t osc2_drive_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+
+	pwm_seq[0] =  _12_to_8(osc2_drive_r);
+	pwm_seq[1] =  _12_to_8(osc2_drive_g);
+	pwm_seq[2] =  _12_to_8(osc2_drive_b);
+	pwm_seq[3] =  _12_to_8(osc2_drive_r);
+	pwm_seq[4]  = _12_to_8(osc2_drive_g);
+	pwm_seq[5]  = _12_to_8(osc2_drive_b);
+	pwm_seq[6]  = _12_to_8(osc2_drive_r);
+	pwm_seq[7]  = _12_to_8(osc2_drive_g);
+	pwm_seq[8]  = _12_to_8(osc2_drive_b);
+	pwm_seq[9]  = _12_to_8(osc2_drive_r);
+	pwm_seq[10] = _12_to_8(osc2_drive_g);
+	pwm_seq[11] = _12_to_8(osc2_drive_b);
+	pwm_seq[12]  = _12_to_8(osc2_drive_r);
+	pwm_seq[13] = _12_to_8(osc2_drive_g);
+	pwm_seq[14] = _12_to_8(osc2_drive_b);
+	pwm_seq[15]  = _12_to_8(osc2_drive_r);
+	pwm_seq[16] = _12_to_8(osc2_drive_g);
+	pwm_seq[17] = _12_to_8(osc2_drive_b);
+	pwm_seq[18]  = _12_to_8(osc2_drive_r);
+	pwm_seq[19] = _12_to_8(osc2_drive_g);
+	pwm_seq[20] = _12_to_8(osc2_drive_b);
+	pwm_seq[21]  = _12_to_8(osc2_drive_r);
+	pwm_seq[22] = _12_to_8(osc2_drive_g);
+	pwm_seq[23] = _12_to_8(osc2_drive_b);
+	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b10, (3*3), pwm_seq, (8*3));
+	if (!res) Error_Handler();
+
+	scale_seq[0] = DEFAULT_SCALE;
+	scale_seq[1] = DEFAULT_SCALE;
+	scale_seq[2] = DEFAULT_SCALE;
+	scale_seq[3] = DEFAULT_SCALE;
+	scale_seq[4] = DEFAULT_SCALE;
+	scale_seq[5] = DEFAULT_SCALE;
+	scale_seq[6] = DEFAULT_SCALE;
+	scale_seq[7] = DEFAULT_SCALE;
+	scale_seq[8] = DEFAULT_SCALE;
+	scale_seq[9] = DEFAULT_SCALE;
+	scale_seq[10] = DEFAULT_SCALE;
+	scale_seq[11] = DEFAULT_SCALE;
+	scale_seq[12] = DEFAULT_SCALE;
+	scale_seq[13] = DEFAULT_SCALE;
+	scale_seq[14] = DEFAULT_SCALE;
+	scale_seq[15] = DEFAULT_SCALE;
+	scale_seq[16] = DEFAULT_SCALE;
+	scale_seq[17] = DEFAULT_SCALE;
+	scale_seq[18] = DEFAULT_SCALE;
+	scale_seq[19] = DEFAULT_SCALE;
+	scale_seq[20] = DEFAULT_SCALE;
+	scale_seq[21] = DEFAULT_SCALE;
+	scale_seq[22] = DEFAULT_SCALE;
+	scale_seq[23] = DEFAULT_SCALE;
+	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b10, (3*3), scale_seq, (8*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 3, 0b10);
+	if (!res) Error_Handler();
+
 
 	/* Sub Squ
 	 * LEFT1:00
@@ -447,6 +638,74 @@ void _commit_led_osc1() {
 	if (!res) Error_Handler();
 
 	res = is32_write_registers(I2C_LEFT, 3, 0b00);
+	if (!res) Error_Handler();
+
+	/* Sub Filter
+	 * LEFT1:10
+	 * 0, 1, 2, 3, 4, 5, 6, 7, 8
+	 */
+
+	pwm_seq[0] = 0;
+	pwm_seq[1] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[2] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[3] = 0;
+	pwm_seq[4] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[5] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[6] = 0;
+	pwm_seq[7] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[8] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[9] = 0;
+	pwm_seq[10] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[11] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[12] = 0;
+	pwm_seq[13] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[14] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[15] = 0;
+	pwm_seq[16] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[17] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[18] = 0;
+	pwm_seq[19] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[20] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[21] = 0;
+	pwm_seq[22] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[23] = _12_to_8(ctrl_value.sub_lvl);
+	pwm_seq[24] = 0;
+	pwm_seq[25] = _12_to_8(ctrl_value.sub_noise_lvl);
+	pwm_seq[26] = _12_to_8(ctrl_value.sub_lvl);
+	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (9 * 3));
+	if (!res) Error_Handler();
+
+	scale_seq[0] = DEFAULT_SCALE;
+	scale_seq[1] = DEFAULT_SCALE;
+	scale_seq[2] = DEFAULT_SCALE;
+	scale_seq[3] = DEFAULT_SCALE;
+	scale_seq[4] = DEFAULT_SCALE;
+	scale_seq[5] = DEFAULT_SCALE;
+	scale_seq[6] = DEFAULT_SCALE;
+	scale_seq[7] = DEFAULT_SCALE;
+	scale_seq[8] = DEFAULT_SCALE;
+	scale_seq[9] = DEFAULT_SCALE;
+	scale_seq[10] = DEFAULT_SCALE;
+	scale_seq[11] = DEFAULT_SCALE;
+	scale_seq[12] = DEFAULT_SCALE;
+	scale_seq[13] = DEFAULT_SCALE;
+	scale_seq[14] = DEFAULT_SCALE;
+	scale_seq[15] = DEFAULT_SCALE;
+	scale_seq[16] = DEFAULT_SCALE;
+	scale_seq[17] = DEFAULT_SCALE;
+	scale_seq[18] = DEFAULT_SCALE;
+	scale_seq[19] = DEFAULT_SCALE;
+	scale_seq[20] = DEFAULT_SCALE;
+	scale_seq[21] = DEFAULT_SCALE;
+	scale_seq[22] = DEFAULT_SCALE;
+	scale_seq[23] = DEFAULT_SCALE;
+	scale_seq[24] = DEFAULT_SCALE;
+	scale_seq[25] = DEFAULT_SCALE;
+	scale_seq[26] = DEFAULT_SCALE;
+	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b10, (0 * 3), scale_seq, (9 * 3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 1, 0b10);
 	if (!res) Error_Handler();
 
 
