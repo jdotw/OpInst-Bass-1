@@ -376,7 +376,7 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 		_ctrl_apply_delta(&ctrl_value.fx_val3, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, UINT8_MAX);
 		break;
 	case CTRL_FX_VAL4:
-		_ctrl_apply_delta(&ctrl_value.fx_feedback, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, UINT8_MAX);
+		_ctrl_apply_delta(&ctrl_value.fx_feedback, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	}
 

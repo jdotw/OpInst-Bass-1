@@ -219,6 +219,34 @@ void _commit_led_osc1() {
 	res = is32_write_registers(I2C_RIGHT, 1, 0);
 	if (!res) Error_Handler();
 
+	/* Osc Amp Out
+	 * RIGHT1:00
+	 * 4, 5, 6, 7, 8
+	 *
+	 */
+
+	uint16_t osc_amp_out_r = ctrl_value.osc1_saw_lvl | ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+	uint16_t osc_amp_out_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	uint16_t osc_amp_out_b = ctrl_value.osc1_squ_lvl | ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+
+	for (uint8_t i=0; i < 5; i++) {
+		pwm_seq[(i*3)] = _12_to_8(osc_amp_out_r);
+		pwm_seq[(i*3)+1] = _12_to_8(osc_amp_out_g);
+		pwm_seq[(i*3)+2] = _12_to_8(osc_amp_out_b);
+		scale_seq[i*3] = DEFAULT_SCALE;
+		scale_seq[(i*3)+1] = DEFAULT_SCALE;
+		scale_seq[(i*3)+2] = DEFAULT_SCALE;
+	}
+
+	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (4*3), pwm_seq, (5*3));
+	if (!res) Error_Handler();
+
+	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0, (4*3), scale_seq, (5*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_RIGHT, 1, 0);
+	if (!res) Error_Handler();
+
 
 	/* Osc1toOsc2 Mix Level
 	 * LEFT0:10
@@ -706,6 +734,139 @@ void _commit_led_osc1() {
 	if (!res) Error_Handler();
 
 	res = is32_write_registers(I2C_LEFT, 1, 0b10);
+	if (!res) Error_Handler();
+
+	/* Sub Amp Out
+	 * RIGHT1:01
+	 * 7, 8, 9, 10, 11
+	 *
+	 */
+
+	uint16_t sub_amp_out_r = 0;
+	uint16_t sub_amp_out_g = ctrl_value.sub_noise_lvl;
+	uint16_t sub_amp_out_b = ctrl_value.sub_lvl;
+
+	for (uint8_t i=0; i < 5; i++) {
+		pwm_seq[(i*3)] = _12_to_8(sub_amp_out_r);
+		pwm_seq[(i*3)+1] = _12_to_8(sub_amp_out_g);
+		pwm_seq[(i*3)+2] = _12_to_8(sub_amp_out_b);
+		scale_seq[i*3] = DEFAULT_SCALE;
+		scale_seq[(i*3)+1] = DEFAULT_SCALE;
+		scale_seq[(i*3)+2] = DEFAULT_SCALE;
+	}
+
+	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (7*3), pwm_seq, (5*3));
+	if (!res) Error_Handler();
+
+	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0b01, (7*3), scale_seq, (5*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_RIGHT, 1, 0b01);
+	if (!res) Error_Handler();
+
+	/* FX Dry
+	 * RIGHT2:01
+	 * 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+	 *
+	 */
+
+//	uint16_t osc_amp_out_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+//	uint16_t osc_amp_out_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+//	uint16_t osc_amp_out_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+//	uint16_t sub_amp_out_r = 0;
+//	uint16_t sub_amp_out_g = ctrl_value.sub_noise_lvl;
+//	uint16_t sub_amp_out_b = ctrl_value.sub_lvl;
+	uint16_t fx_dry_r = (osc_amp_out_r | sub_amp_out_r) * ((double)(4095-ctrl_value.fx_wetdry) / 4095);
+	uint16_t fx_dry_g = (osc_amp_out_g | sub_amp_out_g) * ((double)(4095-ctrl_value.fx_wetdry) / 4095);
+	uint16_t fx_dry_b = (osc_amp_out_b | sub_amp_out_b) * ((double)(4095-ctrl_value.fx_wetdry) / 4095);
+
+	for (uint8_t i=0; i < 11; i++) {
+		pwm_seq[(i*3)] = _12_to_8(fx_dry_r);
+		pwm_seq[(i*3)+1] = _12_to_8(fx_dry_g);
+		pwm_seq[(i*3)+2] = _12_to_8(fx_dry_b);
+		scale_seq[i*3] = DEFAULT_SCALE;
+		scale_seq[(i*3)+1] = DEFAULT_SCALE;
+		scale_seq[(i*3)+2] = DEFAULT_SCALE;
+	}
+
+	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b01, (0*3), pwm_seq, (11*3));
+	if (!res) Error_Handler();
+
+	res = is32_set_sequence_scale(I2C_RIGHT, 2, 0b01, (0*3), scale_seq, (11*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_RIGHT, 2, 0b01);
+	if (!res) Error_Handler();
+
+	/* FX Wet
+	 * RIGHT1:01
+	 * 0, 1, 2, 3, 4, 5, 6
+	 *
+	 */
+
+//	uint16_t osc_amp_out_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+//	uint16_t osc_amp_out_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+//	uint16_t osc_amp_out_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+//	uint16_t sub_amp_out_r = 0;
+//	uint16_t sub_amp_out_g = ctrl_value.sub_noise_lvl;
+//	uint16_t sub_amp_out_b = ctrl_value.sub_lvl;
+	uint16_t fx_wet_r = (osc_amp_out_r | sub_amp_out_r) * ((double)ctrl_value.fx_wetdry / 4095);
+	uint16_t fx_wet_g = (osc_amp_out_g | sub_amp_out_g) * ((double)ctrl_value.fx_wetdry / 4095);
+	uint16_t fx_wet_b = (osc_amp_out_b | sub_amp_out_b) * ((double)ctrl_value.fx_wetdry / 4095);
+
+	for (uint8_t i=0; i < 7; i++) {
+		pwm_seq[(i*3)] = _12_to_8(fx_wet_r);
+		pwm_seq[(i*3)+1] = _12_to_8(fx_wet_g);
+		pwm_seq[(i*3)+2] = _12_to_8(fx_wet_b);
+		scale_seq[i*3] = DEFAULT_SCALE;
+		scale_seq[(i*3)+1] = DEFAULT_SCALE;
+		scale_seq[(i*3)+2] = DEFAULT_SCALE;
+	}
+
+	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (0*3), pwm_seq, (7*3));
+	if (!res) Error_Handler();
+
+	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0b01, (0*3), scale_seq, (7*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_RIGHT, 1, 0b01);
+	if (!res) Error_Handler();
+
+	/* FX Feedback
+	 * RIGHT2:10
+	 * 0, 1, 2, 3, 4, 5, 7
+	 *
+	 */
+
+//	uint16_t osc_amp_out_r = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
+//	uint16_t osc_amp_out_g = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+//	uint16_t osc_amp_out_b = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+//	uint16_t sub_amp_out_r = 0;
+//	uint16_t sub_amp_out_g = ctrl_value.sub_noise_lvl;
+//	uint16_t sub_amp_out_b = ctrl_value.sub_lvl;
+//	uint16_t fx_wet_r = (osc_amp_out_r | sub_amp_out_r) * ((double)ctrl_value.fx_wetdry / 4095);
+//	uint16_t fx_wet_g = (osc_amp_out_g | sub_amp_out_g) * ((double)ctrl_value.fx_wetdry / 4095);
+//	uint16_t fx_wet_b = (osc_amp_out_b | sub_amp_out_b) * ((double)ctrl_value.fx_wetdry / 4095);
+	uint16_t fx_feedback_r = (fx_wet_r) * ((double)ctrl_value.fx_feedback / 4095);
+	uint16_t fx_feedback_g = (fx_wet_g) * ((double)ctrl_value.fx_feedback / 4095);
+	uint16_t fx_feedback_b = (fx_wet_b) * ((double)ctrl_value.fx_feedback / 4095);
+
+	for (uint8_t i=0; i < 8; i++) {
+		pwm_seq[(i*3)] = _12_to_8(fx_feedback_r);
+		pwm_seq[(i*3)+1] = _12_to_8(fx_feedback_g);
+		pwm_seq[(i*3)+2] = _12_to_8(fx_feedback_b);
+		scale_seq[i*3] = DEFAULT_SCALE;
+		scale_seq[(i*3)+1] = DEFAULT_SCALE;
+		scale_seq[(i*3)+2] = DEFAULT_SCALE;
+	}
+
+	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, (0*3), pwm_seq, (8*3));
+	if (!res) Error_Handler();
+
+	res = is32_set_sequence_scale(I2C_RIGHT, 2, 0b10, (0*3), scale_seq, (8*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_RIGHT, 2, 0b10);
 	if (!res) Error_Handler();
 
 
