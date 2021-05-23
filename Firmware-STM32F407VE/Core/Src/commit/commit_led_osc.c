@@ -27,9 +27,9 @@ uint8_t _12_to_8(uint16_t a) {
 }
 
 #define DEFAULT_SCALE 0x15
-#define DEFAULT_SCALE_R 0x15
-#define DEFAULT_SCALE_G 0x15
-#define DEFAULT_SCALE_B 0x15
+#define DEFAULT_SCALE_R 0x17
+#define DEFAULT_SCALE_G 0x07
+#define DEFAULT_SCALE_B 0x16
 
 void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len) {
 	for (uint8_t i=0; i < len; i++) {
