@@ -31,6 +31,10 @@ uint8_t _12_to_8(uint16_t a) {
 #define DEFAULT_SCALE_G 0x07
 #define DEFAULT_SCALE_B 0x16
 
+/*
+ * Utilities
+ */
+
 void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len) {
 	for (uint8_t i=0; i < len; i++) {
 		pwm_seq[i] = _12_to_8(rgb[i%3]);
@@ -52,6 +56,10 @@ void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
 		}
 	}
 }
+
+/*
+ * RGB Calculations
+ */
 
 static uint16_t val[3];
 
@@ -230,7 +238,11 @@ uint16_t* _fx_feedback_rgb() {
 	return val;
 }
 
-void _commit_led_osc1() {
+/*
+ * Commit Functions
+ */
+
+void _commit_led_osc1_saw() {
 	bool res;
 	uint8_t pwm_seq[36];
 	uint8_t scale_seq[36];
@@ -250,6 +262,13 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc1_squ() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
 
 	/* Osc1 Squ
 	 * LEFT0:00
@@ -273,6 +292,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc1_mix() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc1 Mix
 	 * LEFT0:00
@@ -289,6 +314,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc1_filt() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc1 Filter
 	 * LEFT0:10
@@ -306,6 +337,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 2);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc1_drive() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc1 Drive
 	 * RIGHT1:00
@@ -323,6 +360,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_RIGHT, 1, 0);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc1_to_osc2() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc1toOsc2 Mix Level
 	 * LEFT0:10
@@ -339,6 +382,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b10);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_saw() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 
 	/* Osc2 Saw
@@ -356,6 +405,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_squ() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc2 Squ
 	 * LEFT0:11
@@ -372,6 +427,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_noise() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc2 Noise
 	 * LEFT0:11
@@ -388,6 +449,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_only() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc2-Only Mix
 	 * LEFT0:11
@@ -404,6 +471,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_prefilt() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc2-PreFilter Mix
 	 * LEFT0:11
@@ -420,6 +493,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 0, 0b11);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_filt() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc2 Filt
 	 * LEFT3:000
@@ -445,6 +524,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 3, 0b00);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc2_drive() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Osc2 Drive
 	 * LEFT3:10
@@ -461,6 +546,13 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_LEFT, 3, 0b10);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_osc_amp_out() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
 
 	/* Osc Amp Out
 	 * RIGHT1:00
@@ -478,86 +570,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_RIGHT, 1, 0);
 	if (!res) Error_Handler();
+}
 
-	/* Sub Squ
-	 * LEFT1:00
-	 * 0, 1
-	 */
-
-	_set_pwm_seq(_sub_squ_rgb(), pwm_seq, 2*3);
-	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (0*3), pwm_seq, (2*3));
-	if (!res) Error_Handler();
-
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
-	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (0*3), scale_seq, (2*3));
-	if (!res) Error_Handler();
-
-	res = is32_write_registers(I2C_LEFT, 1, 0b00);
-	if (!res) Error_Handler();
-
-	/* Sub Noise
-	 * LEFT1:00
-	 * 2, 3
-	 */
-
-	_set_pwm_seq(_sub_noise_rgb(), pwm_seq, 2*3);
-	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (2*3), pwm_seq, (2*3));
-	if (!res) Error_Handler();
-
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
-	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (2*3), scale_seq, (2*3));
-	if (!res) Error_Handler();
-
-	res = is32_write_registers(I2C_LEFT, 1, 0b00);
-	if (!res) Error_Handler();
-
-	/* Sub Mix
-	 * LEFT1:00
-	 * 4, 5, 6, 7, 8, 9, 10
-	 */
-
-	_set_pwm_seq(_sub_mix_rgb(), pwm_seq, 7*3);
-	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (4 * 3), pwm_seq, (7 * 3));
-	if (!res) Error_Handler();
-
-	_set_scale_seq(pwm_seq, scale_seq, 7*3);
-	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (4 * 3), scale_seq, (7 * 3));
-	if (!res) Error_Handler();
-
-	res = is32_write_registers(I2C_LEFT, 1, 0b00);
-	if (!res) Error_Handler();
-
-	/* SubToOsc2 Mix Level
-	 * LEFT3:00
-	 * 7, 8
-	 */
-
-	_set_pwm_seq(_sub_to_osc2_mix_rgb(), pwm_seq, 2*3);
-	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (7*3), pwm_seq, (2*3));
-	if (!res) Error_Handler();
-
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
-	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b00, (7*3), scale_seq, (2*3));
-	if (!res) Error_Handler();
-
-	res = is32_write_registers(I2C_LEFT, 3, 0b00);
-	if (!res) Error_Handler();
-
-	/* Sub Filter Out
-	 * LEFT1:10
-	 * 0, 1, 2, 3, 4, 5, 6, 7, 8
-	 */
-
-	_set_pwm_seq(_sub_filt_out_rgb(), pwm_seq, 9*3);
-	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (9 * 3));
-	if (!res) Error_Handler();
-
-	_set_scale_seq(pwm_seq, scale_seq, 9*3);
-	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b10, (0 * 3), scale_seq, (9 * 3));
-	if (!res) Error_Handler();
-
-	res = is32_write_registers(I2C_LEFT, 1, 0b10);
-	if (!res) Error_Handler();
+void _commit_led_sub_amp_out() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* Sub Amp Out
 	 * RIGHT1:01
@@ -575,6 +593,122 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_RIGHT, 1, 0b01);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_sub_squ() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
+	/* Sub Squ
+	 * LEFT1:00
+	 * 0, 1
+	 */
+
+	_set_pwm_seq(_sub_squ_rgb(), pwm_seq, 2*3);
+	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (0*3), pwm_seq, (2*3));
+	if (!res) Error_Handler();
+
+	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (0*3), scale_seq, (2*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 1, 0b00);
+	if (!res) Error_Handler();
+}
+
+void _commit_led_sub_noise() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
+	/* Sub Noise
+	 * LEFT1:00
+	 * 2, 3
+	 */
+
+	_set_pwm_seq(_sub_noise_rgb(), pwm_seq, 2*3);
+	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (2*3), pwm_seq, (2*3));
+	if (!res) Error_Handler();
+
+	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (2*3), scale_seq, (2*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 1, 0b00);
+	if (!res) Error_Handler();
+}
+
+void _commit_led_sub_mix() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
+	/* Sub Mix
+	 * LEFT1:00
+	 * 4, 5, 6, 7, 8, 9, 10
+	 */
+
+	_set_pwm_seq(_sub_mix_rgb(), pwm_seq, 7*3);
+	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (4 * 3), pwm_seq, (7 * 3));
+	if (!res) Error_Handler();
+
+	_set_scale_seq(pwm_seq, scale_seq, 7*3);
+	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (4 * 3), scale_seq, (7 * 3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 1, 0b00);
+	if (!res) Error_Handler();
+}
+
+void _commit_led_sub_to_osc2() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
+	/* SubToOsc2 Mix Level
+	 * LEFT3:00
+	 * 7, 8
+	 */
+
+	_set_pwm_seq(_sub_to_osc2_mix_rgb(), pwm_seq, 2*3);
+	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (7*3), pwm_seq, (2*3));
+	if (!res) Error_Handler();
+
+	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b00, (7*3), scale_seq, (2*3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 3, 0b00);
+	if (!res) Error_Handler();
+}
+
+void _commit_led_sub_filt_out() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
+
+	/* Sub Filter Out
+	 * LEFT1:10
+	 * 0, 1, 2, 3, 4, 5, 6, 7, 8
+	 */
+
+	_set_pwm_seq(_sub_filt_out_rgb(), pwm_seq, 9*3);
+	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (9 * 3));
+	if (!res) Error_Handler();
+
+	_set_scale_seq(pwm_seq, scale_seq, 9*3);
+	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b10, (0 * 3), scale_seq, (9 * 3));
+	if (!res) Error_Handler();
+
+	res = is32_write_registers(I2C_LEFT, 1, 0b10);
+	if (!res) Error_Handler();
+}
+
+void _commit_led_fx_dry() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* FX Dry
 	 * RIGHT2:01
@@ -592,6 +726,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_RIGHT, 2, 0b01);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_fx_wet() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* FX Wet
 	 * RIGHT1:01
@@ -609,6 +749,12 @@ void _commit_led_osc1() {
 
 	res = is32_write_registers(I2C_RIGHT, 1, 0b01);
 	if (!res) Error_Handler();
+}
+
+void _commit_led_fx_feedback() {
+	bool res;
+	uint8_t pwm_seq[36];
+	uint8_t scale_seq[36];
 
 	/* FX Feedback
 	 * RIGHT2:10
@@ -629,6 +775,138 @@ void _commit_led_osc1() {
 
 }
 
-void commit_led_osc() {
-	_commit_led_osc1();
+void commit_led_osc(commit_cycle_t cycle) {
+	uint32_t ticks_before = HAL_GetTick();
+
+	switch(cycle) {
+	case COMMIT_LED_OSC1_SAW:
+		_commit_led_osc1_saw();
+		break;
+	case COMMIT_LED_OSC1_SQU:
+		_commit_led_osc1_squ();
+		break;
+	case COMMIT_LED_OSC1_MIX:
+		_commit_led_osc1_mix();
+		break;
+	case COMMIT_LED_OSC1_FILT:
+		_commit_led_osc1_filt();
+		break;
+	case COMMIT_LED_OSC1_DRIVE:
+		_commit_led_osc1_drive();
+		break;
+	case COMMIT_LED_OSC1_TO_OSC2:
+		_commit_led_osc1_to_osc2();
+		break;
+
+	case COMMIT_LED_OSC2_SAW:
+		_commit_led_osc2_saw();
+		break;
+	case COMMIT_LED_OSC2_SQU:
+		_commit_led_osc2_squ();
+		break;
+	case COMMIT_LED_OSC2_NOISE:
+		_commit_led_osc2_noise();
+		break;
+
+	case COMMIT_LED_OSC2_ONLY:
+		_commit_led_osc2_only();
+		break;
+	case COMMIT_LED_OSC2_PREFILT:
+		_commit_led_osc2_prefilt();
+		break;
+	case COMMIT_LED_OSC2_FILT:
+		_commit_led_osc2_filt();
+		break;
+	case COMMIT_LED_OSC2_DRIVE:
+		_commit_led_osc2_drive();
+		break;
+
+	case COMMIT_LED_OSC_AMP_OUT:
+		_commit_led_osc_amp_out();
+		break;
+	case COMMIT_LED_SUB_AMP_OUT:
+		break;
+		_commit_led_sub_amp_out();
+
+	case COMMIT_LED_SUB_SQU:
+		_commit_led_sub_squ();
+		break;
+	case COMMIT_LED_SUB_NOISE:
+		_commit_led_sub_noise();
+		break;
+	case COMMIT_LED_SUB_MIX:
+		_commit_led_sub_mix();
+	case COMMIT_LED_SUB_TO_OSC2:
+		break;
+		_commit_led_sub_to_osc2();
+	case COMMIT_LED_SUB_FILT_OUT:
+		_commit_led_sub_filt_out();
+		break;
+
+	case COMMIT_LED_FX_DRY:
+		_commit_led_fx_dry();
+		break;
+	case COMMIT_LED_FX_WET:
+		_commit_led_fx_wet();
+		break;
+	case COMMIT_LED_FX_FEEDBACK:
+		_commit_led_fx_feedback();
+		break;
+
+	default:
+		break;
+	}
+
+	uint32_t ticks_after = HAL_GetTick();
+	uint32_t ticks_cost = ticks_after - ticks_before;
+
+//
+//	_commit_led_osc1_saw();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_osc1_squ();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_osc1_mix();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_osc1_filt();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_osc1_drive();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_osc1_to_osc2();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_osc2();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_amp();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_sub();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
+//
+//	ticks_before = HAL_GetTick();
+//	_commit_led_fx();
+//	ticks_after = HAL_GetTick();
+//	ticks_cost = ticks_after - ticks_before;
 }
