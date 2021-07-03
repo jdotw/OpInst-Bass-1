@@ -63,66 +63,99 @@ void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
 
 static uint16_t val[3];
 
+// osc1_saw
+
 uint16_t* _osc1_saw_rgb() {
-	val[0] = ctrl_value.osc1_saw_lvl;
+	val[0] = commit_ctrl_value.osc1_saw_lvl;
 	val[1] = 0;
 	val[2] = 0;
 	return val;
 }
 
 bool _osc1_saw_changed() {
-  return ctrl_changed.osc1_saw_lvl_changed;
+  return commit_ctrl_changed.osc1_saw_lvl_changed;
 }
+
+// osc1_squ
 
 uint16_t* _osc1_squ_rgb() {
 	val[0] = 0;
 	val[1] = 0;
-	val[2] = ctrl_value.osc1_squ_lvl;
+	val[2] = commit_ctrl_value.osc1_squ_lvl;
 	return val;
+
 }
 
 bool _osc1_squ_changed() {
-  return ctrl_changed.osc1_squ_lvl_changed;
+  return commit_ctrl_changed.osc1_squ_lvl_changed;
 }
 
+// osc1_mix
+
 uint16_t* _osc1_mix_rgb() {
-	val[0] = ctrl_value.osc1_saw_lvl;
+	val[0] = commit_ctrl_value.osc1_saw_lvl;
 	val[1] = 0;
-	val[2] = ctrl_value.osc1_squ_lvl;
+	val[2] = commit_ctrl_value.osc1_squ_lvl;
 	return val;
 }
 
 bool _osc1_mix_changed() {
-  return ctrl_changed.osc1_saw_lvl_changed || ctrl_changed.osc1_squ_lvl_changed;
+  return commit_ctrl_changed.osc1_saw_lvl_changed || commit_ctrl_changed.osc1_squ_lvl_changed;
 }
 
+// osc1_to_osc2_mix
+
 uint16_t* _osc1_to_2_mix() {
-	val[0] = (double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0);
+	val[0] = (double)commit_ctrl_value.osc1_saw_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0);
 	val[1] = 0;
-	val[2] = (double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0);
+	val[2] = (double)commit_ctrl_value.osc1_squ_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0);
 	return val;
 }
 
+bool _osc1_to_2_mix_changed() {
+  return commit_ctrl_changed.osc1_saw_lvl_changed || commit_ctrl_changed.osc1_squ_lvl_changed || commit_ctrl_changed.osc1_to_osc2_changed;
+}
+
+// osc2_saw
+
 uint16_t* _osc2_saw_rgb() {
-	val[0] = ctrl_value.osc2_saw_lvl;
+	val[0] = commit_ctrl_value.osc2_saw_lvl;
 	val[1] = 0;
 	val[2] = 0;
 	return val;
 }
+
+bool _osc2_saw_changed() {
+  return commit_ctrl_changed.osc2_saw_lvl_changed;
+}
+
+// osc2_squ
 
 uint16_t* _osc2_squ_rgb() {
 	val[0] = 0;
 	val[1] = 0;
-	val[2] = ctrl_value.osc2_squ_lvl;
+	val[2] = commit_ctrl_value.osc2_squ_lvl;
 	return val;
 }
 
+bool _osc2_squ_changed() {
+  return commit_ctrl_changed.osc2_squ_lvl_changed;
+}
+
+// osc2_noise
+
 uint16_t* _osc2_noise_rgb() {
 	val[0] = 0;
-	val[1] = ctrl_value.osc2_noise_lvl;
+	val[1] = commit_ctrl_value.osc2_noise_lvl;
 	val[2] = 0;
 	return val;
 }
+
+bool _osc2_noise_changed() {
+  return commit_ctrl_changed.osc2_noise_lvl_changed;
+}
+
+// osc2_mix
 
 uint16_t* _osc2_mix() {
 	/* Osc2-Only Mix
@@ -130,88 +163,188 @@ uint16_t* _osc2_mix() {
 	 * 5, 6, 7, 8
 	 */
 
-	val[0] = ctrl_value.osc2_saw_lvl;
-	val[1] = ctrl_value.osc2_noise_lvl;
-	val[2] = ctrl_value.osc2_squ_lvl;
+	val[0] = commit_ctrl_value.osc2_saw_lvl;
+	val[1] = commit_ctrl_value.osc2_noise_lvl;
+	val[2] = commit_ctrl_value.osc2_squ_lvl;
 	return val;
 }
+
+bool _osc2_mix_changed() {
+  return commit_ctrl_changed.osc2_saw_lvl_changed || commit_ctrl_changed.osc2_noise_lvl_changed || commit_ctrl_changed.osc2_squ_lvl_changed;
+}
+
+// osc2_prefilt
 
 uint16_t* _osc2_prefilt_rgb() {
-	val[0] = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
-	val[1] = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
-	val[2] = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	val[0] = commit_ctrl_value.osc2_saw_lvl | (uint16_t)((double)commit_ctrl_value.osc1_saw_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0));
+	val[1] = commit_ctrl_value.osc2_noise_lvl | (uint16_t)((double)commit_ctrl_value.sub_noise_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
+	val[2] = commit_ctrl_value.osc2_squ_lvl | (uint16_t)((double)commit_ctrl_value.osc1_squ_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)commit_ctrl_value.sub_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
 	return val;
 }
+
+bool _osc2_prefilt_changed() {
+  return commit_ctrl_changed.osc2_saw_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed
+      || commit_ctrl_changed.osc2_noise_lvl_changed
+      || commit_ctrl_changed.sub_to_osc2_changed
+      || commit_ctrl_changed.osc2_squ_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed;
+}
+
+// osc2_filt_freq
 
 uint16_t* _osc2_filt_freq_rgb() {
-	val[0] = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
-	val[1] = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
-	val[2] = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	val[0] = commit_ctrl_value.osc2_saw_lvl | (uint16_t)((double)commit_ctrl_value.osc1_saw_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0));
+	val[1] = commit_ctrl_value.osc2_noise_lvl | (uint16_t)((double)commit_ctrl_value.sub_noise_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
+	val[2] = commit_ctrl_value.osc2_squ_lvl | (uint16_t)((double)commit_ctrl_value.osc1_squ_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)commit_ctrl_value.sub_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
 	return val;
 }
+
+bool _osc2_filt_freq_changed() {
+  return commit_ctrl_changed.osc2_saw_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed
+      || commit_ctrl_changed.osc2_noise_lvl_changed
+      || commit_ctrl_changed.sub_to_osc2_changed
+      || commit_ctrl_changed.osc2_squ_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed;
+}
+
+// osc2_filt_reso
 
 uint16_t* _osc2_filt_reso_rgb() {
-	val[0] = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
-	val[1] = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
-	val[2] = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	val[0] = commit_ctrl_value.osc2_saw_lvl | (uint16_t)((double)commit_ctrl_value.osc1_saw_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0));
+	val[1] = commit_ctrl_value.osc2_noise_lvl | (uint16_t)((double)commit_ctrl_value.sub_noise_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
+	val[2] = commit_ctrl_value.osc2_squ_lvl | (uint16_t)((double)commit_ctrl_value.osc1_squ_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)commit_ctrl_value.sub_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
 	return val;
 }
+
+bool _osc2_filt_reso_changed() {
+  return commit_ctrl_changed.osc2_saw_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed
+      || commit_ctrl_changed.osc2_noise_lvl_changed
+      || commit_ctrl_changed.sub_to_osc2_changed
+      || commit_ctrl_changed.osc2_squ_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed;
+}
+
+// osc2_drive
 
 uint16_t* _osc2_drive_rgb() {
-	val[0] = ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
-	val[1] = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
-	val[2] = ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	val[0] = commit_ctrl_value.osc2_saw_lvl | (uint16_t)((double)commit_ctrl_value.osc1_saw_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0));
+	val[1] = commit_ctrl_value.osc2_noise_lvl | (uint16_t)((double)commit_ctrl_value.sub_noise_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
+	val[2] = commit_ctrl_value.osc2_squ_lvl | (uint16_t)((double)commit_ctrl_value.osc1_squ_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)commit_ctrl_value.sub_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
 	return val;
 }
 
+bool _osc2_drive_changed() {
+  return commit_ctrl_changed.osc2_saw_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed
+      || commit_ctrl_changed.osc2_noise_lvl_changed
+      || commit_ctrl_changed.sub_to_osc2_changed
+      || commit_ctrl_changed.osc2_squ_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed;
+}
+
+// osc_amp
+
 uint16_t* _osc_amp_out_rgb() {
-	val[0] = ctrl_value.osc1_saw_lvl | ctrl_value.osc2_saw_lvl | (uint16_t)((double)ctrl_value.osc1_saw_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0));
-	val[1] = ctrl_value.osc2_noise_lvl | (uint16_t)((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
-	val[2] = ctrl_value.osc1_squ_lvl | ctrl_value.osc2_squ_lvl | (uint16_t)((double)ctrl_value.osc1_squ_lvl * ((double)ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	val[0] = commit_ctrl_value.osc1_saw_lvl | commit_ctrl_value.osc2_saw_lvl | (uint16_t)((double)commit_ctrl_value.osc1_saw_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0));
+	val[1] = commit_ctrl_value.osc2_noise_lvl | (uint16_t)((double)commit_ctrl_value.sub_noise_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
+	val[2] = commit_ctrl_value.osc1_squ_lvl | commit_ctrl_value.osc2_squ_lvl | (uint16_t)((double)commit_ctrl_value.osc1_squ_lvl * ((double)commit_ctrl_value.osc1_to_osc2 / 4095.0)) | (uint16_t)((double)commit_ctrl_value.sub_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
 	return val;
 }
+
+bool _osc_amp_out_changed() {
+  return commit_ctrl_changed.osc1_saw_lvl_changed
+      || commit_ctrl_changed.osc2_saw_lvl_changed
+      || commit_ctrl_changed.osc1_to_osc2_changed
+      || commit_ctrl_changed.osc2_noise_lvl_changed
+      || commit_ctrl_changed.sub_noise_lvl_changed
+      || commit_ctrl_changed.osc1_squ_lvl_changed
+      || commit_ctrl_changed.osc2_squ_lvl_changed
+      || commit_ctrl_changed.sub_lvl_changed
+      || commit_ctrl_changed.sub_to_osc2_changed;
+}
+
+// sub_squ
 
 uint16_t* _sub_squ_rgb() {
 	val[0] = 0;
 	val[1] = 0;
-	val[2] = ctrl_value.sub_lvl;
+	val[2] = commit_ctrl_value.sub_lvl;
 	return val;
 }
 
+bool _sub_squ_changed() {
+  return commit_ctrl_changed.sub_lvl_changed;
+}
+
+// sub_noise
+
 uint16_t* _sub_noise_rgb() {
 	val[0] = 0;
-	val[1] = ctrl_value.sub_noise_lvl;
+	val[1] = commit_ctrl_value.sub_noise_lvl;
 	val[2] = 0;
 	return val;
 }
 
+bool _sub_noise_changed() {
+  return commit_ctrl_changed.sub_noise_lvl_changed;
+}
+
+// sub_mix
+
 uint16_t* _sub_mix_rgb() {
 	val[0] = 0;
-	val[1] = ctrl_value.sub_noise_lvl;
-	val[2] = ctrl_value.sub_lvl;
+	val[1] = commit_ctrl_value.sub_noise_lvl;
+	val[2] = commit_ctrl_value.sub_lvl;
 	return val;
 }
+
+bool _sub_mix_changed() {
+  return commit_ctrl_changed.sub_noise_lvl_changed || commit_ctrl_changed.sub_lvl_changed;
+}
+
+// sub_to_osc2_mix
 
 uint16_t* _sub_to_osc2_mix_rgb() {
 	val[0] = 0;
-	val[1] = ((double)ctrl_value.sub_noise_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
-	val[2] = ((double)ctrl_value.sub_lvl * ((double)ctrl_value.sub_to_osc2 / 4095.0));
+	val[1] = ((double)commit_ctrl_value.sub_noise_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
+	val[2] = ((double)commit_ctrl_value.sub_lvl * ((double)commit_ctrl_value.sub_to_osc2 / 4095.0));
 	return val;
 }
 
+bool _sub_to_osc2_mix_changed() {
+  return commit_ctrl_changed.sub_noise_lvl_changed
+      || commit_ctrl_changed.sub_to_osc2_changed
+      || commit_ctrl_changed.sub_lvl_changed;
+}
+
+// sub_filt
+
 uint16_t* _sub_filt_out_rgb() {
 	val[0] = 0;
-	val[1] = ctrl_value.sub_noise_lvl;
-	val[2] = ctrl_value.sub_lvl;
+	val[1] = commit_ctrl_value.sub_noise_lvl;
+	val[2] = commit_ctrl_value.sub_lvl;
 	return val;
+}
+
+bool _sub_filt_out_changed() {
+  return commit_ctrl_changed.sub_noise_lvl_changed || commit_ctrl_changed.sub_lvl_changed;
 }
 
 uint16_t* _sub_amp_out_rgb() {
 	val[0] = 0;
-	val[1] = ctrl_value.sub_noise_lvl;
-	val[2] = ctrl_value.sub_lvl;
+	val[1] = commit_ctrl_value.sub_noise_lvl;
+	val[2] = commit_ctrl_value.sub_lvl;
 	return val;
 }
+
+bool _sub_amp_out_changed() {
+  return commit_ctrl_changed.sub_noise_lvl_changed || commit_ctrl_changed.sub_lvl_changed;
+}
+
+// fx
 
 void _rgb_copy(uint16_t *dst, uint16_t *src) {
 	dst[0] = src[0];
@@ -219,15 +352,21 @@ void _rgb_copy(uint16_t *dst, uint16_t *src) {
 	dst[2] = src[2];
 }
 
+// fx_dry
+
 uint16_t* _fx_dry_rgb() {
 	uint16_t osc_amp_out_rgb[3];
 	_rgb_copy(osc_amp_out_rgb, _osc_amp_out_rgb());
 	uint16_t sub_amp_out_rgb[3];
 	_rgb_copy(sub_amp_out_rgb, _sub_amp_out_rgb());
-	val[0] = (osc_amp_out_rgb[0] | sub_amp_out_rgb[0]) * ((double)(4095-ctrl_value.fx_wetdry) / 4095);
-	val[1] = (osc_amp_out_rgb[1] | sub_amp_out_rgb[1]) * ((double)(4095-ctrl_value.fx_wetdry) / 4095);
-	val[2] = (osc_amp_out_rgb[2] | sub_amp_out_rgb[2]) * ((double)(4095-ctrl_value.fx_wetdry) / 4095);
+	val[0] = (osc_amp_out_rgb[0] | sub_amp_out_rgb[0]) * ((double)(4095-commit_ctrl_value.fx_wetdry) / 4095);
+	val[1] = (osc_amp_out_rgb[1] | sub_amp_out_rgb[1]) * ((double)(4095-commit_ctrl_value.fx_wetdry) / 4095);
+	val[2] = (osc_amp_out_rgb[2] | sub_amp_out_rgb[2]) * ((double)(4095-commit_ctrl_value.fx_wetdry) / 4095);
 	return val;
+}
+
+bool _fx_dry_changed() {
+  return _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl_changed.fx_wetdry_changed;
 }
 
 uint16_t* _fx_wet_rgb() {
@@ -235,19 +374,27 @@ uint16_t* _fx_wet_rgb() {
 	_rgb_copy(osc_amp_out_rgb, _osc_amp_out_rgb());
 	uint16_t sub_amp_out_rgb[3];
 	_rgb_copy(sub_amp_out_rgb, _sub_amp_out_rgb());
-	val[0] = (osc_amp_out_rgb[0] | sub_amp_out_rgb[0]) * ((double)ctrl_value.fx_wetdry / 4095);
-	val[1] = (osc_amp_out_rgb[1] | sub_amp_out_rgb[1]) * ((double)ctrl_value.fx_wetdry / 4095);
-	val[2] = (osc_amp_out_rgb[2] | sub_amp_out_rgb[2]) * ((double)ctrl_value.fx_wetdry / 4095);
+	val[0] = (osc_amp_out_rgb[0] | sub_amp_out_rgb[0]) * ((double)commit_ctrl_value.fx_wetdry / 4095);
+	val[1] = (osc_amp_out_rgb[1] | sub_amp_out_rgb[1]) * ((double)commit_ctrl_value.fx_wetdry / 4095);
+	val[2] = (osc_amp_out_rgb[2] | sub_amp_out_rgb[2]) * ((double)commit_ctrl_value.fx_wetdry / 4095);
 	return val;
+}
+
+bool _fx_wet_changed() {
+  return _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl_changed.fx_wetdry_changed;
 }
 
 uint16_t* _fx_feedback_rgb() {
 	uint16_t fx_wet_rgb[3];
 	_rgb_copy(fx_wet_rgb, _fx_wet_rgb());
-	val[0] = (fx_wet_rgb[0]) * ((double)ctrl_value.fx_feedback / 4095);
-	val[1] = (fx_wet_rgb[1]) * ((double)ctrl_value.fx_feedback / 4095);
-	val[2] = (fx_wet_rgb[2]) * ((double)ctrl_value.fx_feedback / 4095);
+	val[0] = (fx_wet_rgb[0]) * ((double)commit_ctrl_value.fx_feedback / 4095);
+	val[1] = (fx_wet_rgb[1]) * ((double)commit_ctrl_value.fx_feedback / 4095);
+	val[2] = (fx_wet_rgb[2]) * ((double)commit_ctrl_value.fx_feedback / 4095);
 	return val;
+}
+
+bool _fx_feedback_changed() {
+  return _fx_wet_changed() || commit_ctrl_changed.fx_feedback_changed;
 }
 
 /*
@@ -263,6 +410,8 @@ void _commit_led_osc1_saw() {
 	 * LEFT0:00
 	 * 0, 1
 	 */
+
+	if (!_osc1_saw_changed()) return;
 
 	_set_pwm_seq(_osc1_saw_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 2*3);
@@ -281,11 +430,12 @@ void _commit_led_osc1_squ() {
 	uint8_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
-
 	/* Osc1 Squ
 	 * LEFT0:00
 	 * 2, 3
 	 */
+
+	if (!_osc1_squ_changed()) return;
 
 	_set_pwm_seq(_osc1_squ_rgb(), pwm_seq, 2*3);
 
@@ -316,6 +466,8 @@ void _commit_led_osc1_mix() {
 	 * 4, 5, 6, 7, 8, 9, 10
 	 */
 
+	if (!_osc1_mix_changed()) return;
+
 	_set_pwm_seq(_osc1_mix_rgb(), pwm_seq, 7*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 12, pwm_seq, 7*3);
 	if (!res) Error_Handler();
@@ -338,6 +490,8 @@ void _commit_led_osc1_filt() {
 	 * Freq: 3, 4
 	 * Reso: 5, 6
 	 */
+
+	if (!_osc1_mix_changed()) return;
 
 	_set_pwm_seq(_osc1_mix_rgb(), pwm_seq, 4*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (3*3), pwm_seq, (4*3));
@@ -362,6 +516,8 @@ void _commit_led_osc1_drive() {
 	 *
 	 */
 
+	if (!_osc1_mix_changed()) return;
+
 	_set_pwm_seq(_osc1_mix_rgb(), pwm_seq, 4*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (0*3), pwm_seq, (4*3));
 	if (!res) Error_Handler();
@@ -383,6 +539,8 @@ void _commit_led_osc1_to_osc2() {
 	 * LEFT0:10
 	 * 0, 1
 	 */
+
+	if (!_osc1_to_2_mix_changed()) return;
 
 	_set_pwm_seq(_osc1_to_2_mix(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b10, (0*3), pwm_seq, (2*3));
@@ -407,6 +565,8 @@ void _commit_led_osc2_saw() {
 	 * 1, 2
 	 */
 
+	if (!_osc2_saw_changed()) return;
+
 	_set_pwm_seq(_osc2_saw_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (1*3), pwm_seq, 2*3);
 	if (!res) Error_Handler();
@@ -428,6 +588,8 @@ void _commit_led_osc2_squ() {
 	 * LEFT0:11
 	 * 0
 	 */
+
+	if (!_osc2_squ_changed()) return;
 
 	_set_pwm_seq(_osc2_squ_rgb(), pwm_seq, 1*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (0*3), pwm_seq, 1*3);
@@ -451,6 +613,8 @@ void _commit_led_osc2_noise() {
 	 * 3, 4
 	 */
 
+	if(!_osc2_noise_changed()) return;
+
 	_set_pwm_seq(_osc2_noise_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (3*3), pwm_seq, 2*3);
 	if (!res) Error_Handler();
@@ -472,6 +636,8 @@ void _commit_led_osc2_only() {
 	 * LEFT0:11
 	 * 5, 6, 7, 8
 	 */
+
+	if (!_osc2_mix_changed()) return;
 
 	_set_pwm_seq(_osc2_mix(), pwm_seq, 4*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (5*3), pwm_seq, (4*3));
@@ -495,6 +661,8 @@ void _commit_led_osc2_prefilt() {
 	 * 9, 10
 	 */
 
+	if (!_osc2_prefilt_changed()) return;
+
 	_set_pwm_seq(_osc2_prefilt_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (9*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
@@ -517,6 +685,8 @@ void _commit_led_osc2_filt() {
 	 * Freq: 0, 1
 	 * Reso: 2, 3
 	 */
+
+	if (!_osc2_filt_freq_changed()) return;
 
 	_set_pwm_seq(_osc2_filt_freq_rgb(), pwm_seq, 4*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (0*3), pwm_seq, (2*3));
@@ -548,6 +718,8 @@ void _commit_led_osc2_drive() {
 	 * 3, 4, 5, 6, 7, 8, 9, 10
 	 */
 
+	if (!_osc2_drive_changed()) return;
+
 	_set_pwm_seq(_osc2_drive_rgb(), pwm_seq, 8*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b10, (3*3), pwm_seq, (8*3));
 	if (!res) Error_Handler();
@@ -572,6 +744,8 @@ void _commit_led_osc_amp_out() {
 	 *
 	 */
 
+	if (!_osc_amp_out_changed()) return;
+
 	_set_pwm_seq(_osc_amp_out_rgb(), pwm_seq, 5*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (4*3), pwm_seq, (5*3));
 	if (!res) Error_Handler();
@@ -595,6 +769,8 @@ void _commit_led_sub_amp_out() {
 	 *
 	 */
 
+	if (!_sub_amp_out_changed()) return;
+
 	_set_pwm_seq(_sub_amp_out_rgb(), pwm_seq, 5*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (7*3), pwm_seq, (5*3));
 	if (!res) Error_Handler();
@@ -616,6 +792,8 @@ void _commit_led_sub_squ() {
 	 * LEFT1:00
 	 * 0, 1
 	 */
+
+	if (!_sub_squ_changed()) return;
 
 	_set_pwm_seq(_sub_squ_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (0*3), pwm_seq, (2*3));
@@ -639,6 +817,8 @@ void _commit_led_sub_noise() {
 	 * 2, 3
 	 */
 
+	if (!_sub_noise_changed()) return;
+
 	_set_pwm_seq(_sub_noise_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (2*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
@@ -660,6 +840,8 @@ void _commit_led_sub_mix() {
 	 * LEFT1:00
 	 * 4, 5, 6, 7, 8, 9, 10
 	 */
+
+	if (!_sub_mix_changed()) return;
 
 	_set_pwm_seq(_sub_mix_rgb(), pwm_seq, 7*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (4 * 3), pwm_seq, (7 * 3));
@@ -683,6 +865,8 @@ void _commit_led_sub_to_osc2() {
 	 * 7, 8
 	 */
 
+	if (!_sub_to_osc2_mix_changed()) return;
+
 	_set_pwm_seq(_sub_to_osc2_mix_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (7*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
@@ -704,6 +888,8 @@ void _commit_led_sub_filt_out() {
 	 * LEFT1:10
 	 * 0, 1, 2, 3, 4, 5, 6, 7, 8
 	 */
+
+	if (!_sub_filt_out_changed()) return;
 
 	_set_pwm_seq(_sub_filt_out_rgb(), pwm_seq, 9*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (9 * 3));
@@ -728,6 +914,8 @@ void _commit_led_fx_dry() {
 	 *
 	 */
 
+	if (!_fx_dry_changed()) return;
+
 	_set_pwm_seq(_fx_dry_rgb(), pwm_seq, 11*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b01, (0*3), pwm_seq, (11*3));
 	if (!res) Error_Handler();
@@ -750,6 +938,8 @@ void _commit_led_fx_wet() {
 	 * 0, 1, 2, 3, 4, 5, 6
 	 *
 	 */
+
+	if (!_fx_wet_changed()) return;
 
 	_set_pwm_seq(_fx_wet_rgb(), pwm_seq, 7*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (0*3), pwm_seq, (7*3));
@@ -774,6 +964,8 @@ void _commit_led_fx_feedback() {
 	 *
 	 */
 
+	if (!_fx_feedback_changed()) return;
+
 	_set_pwm_seq(_fx_feedback_rgb(), pwm_seq, 8*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, (0*3), pwm_seq, (8*3));
 	if (!res) Error_Handler();
@@ -792,14 +984,10 @@ void commit_led_osc(commit_cycle_t cycle) {
 
 	switch(cycle) {
 	case COMMIT_LED_OSC1_SAW:
-	  if (_osc1_saw_changed()) {
-	    _commit_led_osc1_saw();
-	  }
+	  _commit_led_osc1_saw();
 		break;
 	case COMMIT_LED_OSC1_SQU:
-    if (_osc1_squ_changed()) {
-      _commit_led_osc1_squ();
-    }
+	  _commit_led_osc1_squ();
 		break;
 	case COMMIT_LED_OSC1_MIX:
 		_commit_led_osc1_mix();
@@ -875,6 +1063,8 @@ void commit_led_osc(commit_cycle_t cycle) {
 
 	uint32_t ticks_after = HAL_GetTick();
 	uint32_t ticks_cost = ticks_after - ticks_before;
+
+	UNUSED(ticks_cost);
 
 //
 //	_commit_led_osc1_saw();

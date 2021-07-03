@@ -8,8 +8,12 @@
 #ifndef INC_COMMIT_H_
 #define INC_COMMIT_H_
 
+#include "ctrl.h"
+
 typedef enum uint8_t {
-	COMMIT_LED_ROTPIC = 0,
+  COMMIT_INIT = 0,
+
+	COMMIT_LED_ROTPIC,
 
 	COMMIT_LED_ADSR_OSC_FILT_A,
 	COMMIT_LED_ADSR_OSC_FILT_D,
@@ -52,7 +56,15 @@ typedef enum uint8_t {
 	COMMIT_LED_FX_WET,
 	COMMIT_LED_FX_FEEDBACK,
 
+	// MUST Be last
+	COMMIT_RESET
+
 } commit_cycle_t;
+
+extern ctrl_value_t commit_ctrl_value;
+extern ctrl_changed_t commit_ctrl_changed;
+extern ctrl_toggle_t commit_ctrl_toggle;
+
 
 void commit_30hz_timer(void);
 
