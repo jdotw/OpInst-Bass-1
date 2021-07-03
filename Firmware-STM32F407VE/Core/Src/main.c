@@ -157,6 +157,7 @@ int main(void)
   // Init controls and toggles
   ctrl_enabled = false;
   ctrl_value_init();
+  ctrl_changed_init();
   ctrl_toggle_init();
 
   // Init MIDI

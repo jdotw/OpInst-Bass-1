@@ -91,6 +91,7 @@ void commit_30hz_timer(void) {
 		break;
 	default:
 		cycle = 0;
+		ctrl_changed_reset();
 	}
 	uint32_t total_ticks_after = HAL_GetTick();
 	uint32_t total_ticks_cost = total_ticks_after - total_ticks_before;

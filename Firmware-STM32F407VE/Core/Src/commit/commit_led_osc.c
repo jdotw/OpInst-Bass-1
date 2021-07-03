@@ -70,6 +70,10 @@ uint16_t* _osc1_saw_rgb() {
 	return val;
 }
 
+bool _osc1_saw_changed() {
+  return ctrl_changed.osc1_saw_lvl_changed;
+}
+
 uint16_t* _osc1_squ_rgb() {
 	val[0] = 0;
 	val[1] = 0;
@@ -77,11 +81,19 @@ uint16_t* _osc1_squ_rgb() {
 	return val;
 }
 
+bool _osc1_squ_changed() {
+  return ctrl_changed.osc1_squ_lvl_changed;
+}
+
 uint16_t* _osc1_mix_rgb() {
 	val[0] = ctrl_value.osc1_saw_lvl;
 	val[1] = 0;
 	val[2] = ctrl_value.osc1_squ_lvl;
 	return val;
+}
+
+bool _osc1_mix_changed() {
+  return ctrl_changed.osc1_saw_lvl_changed || ctrl_changed.osc1_squ_lvl_changed;
 }
 
 uint16_t* _osc1_to_2_mix() {
@@ -243,7 +255,7 @@ uint16_t* _fx_feedback_rgb() {
  */
 
 void _commit_led_osc1_saw() {
-	bool res;
+  bool res;
 	uint8_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
@@ -780,10 +792,14 @@ void commit_led_osc(commit_cycle_t cycle) {
 
 	switch(cycle) {
 	case COMMIT_LED_OSC1_SAW:
-		_commit_led_osc1_saw();
+	  if (_osc1_saw_changed()) {
+	    _commit_led_osc1_saw();
+	  }
 		break;
 	case COMMIT_LED_OSC1_SQU:
-		_commit_led_osc1_squ();
+    if (_osc1_squ_changed()) {
+      _commit_led_osc1_squ();
+    }
 		break;
 	case COMMIT_LED_OSC1_MIX:
 		_commit_led_osc1_mix();
