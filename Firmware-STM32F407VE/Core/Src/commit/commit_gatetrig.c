@@ -9,6 +9,7 @@
 #include "main.h"
 #include "i2c.h"
 #include "pca9555.h"
+#include "commit.h"
 
 #define TRIGGER_LENGTH 5
 
@@ -17,12 +18,12 @@ void commit_gatetrig(void) {
 	uint8_t outputs[2] = { 0, 0 };
 
 	// Configure Gates
-	outputs[0] |= note_value.note_on << 3;
-	outputs[0] |= note_value.note_on << 5;
-	outputs[0] |= note_value.note_on << 7;
-	outputs[1] |= note_value.note_on << 1;
-	outputs[1] |= note_value.note_on << 3;
-	outputs[1] |= note_value.note_on << 5;
+	outputs[0] |= commit_note_value.note_on << 3;
+	outputs[0] |= commit_note_value.note_on << 5;
+	outputs[0] |= commit_note_value.note_on << 7;
+	outputs[1] |= commit_note_value.note_on << 1;
+	outputs[1] |= commit_note_value.note_on << 3;
+	outputs[1] |= commit_note_value.note_on << 5;
 
 	// Configure Triggers
 	uint32_t tick = HAL_GetTick();
