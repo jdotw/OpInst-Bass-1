@@ -37,15 +37,17 @@ void commit_dac() {
 	if (commit_ctrl_changed.osc1_filt_cutoff_changed)
 	  dac7678_set_value(I2C_LEFT, 0, 0, 1, commit_ctrl_value.osc1_filt_cutoff);
 
-	// TODO: Add a changed flag for this
-  uint8_t osc1_note = note_value.note_number + ctrl_value.osc1_tune_coarse;
-  uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
-  osc1_note_dac_val += ctrl_value.osc1_tune_fine; // TODO: Handle wrapping, maybe add it to osc1_note_dac_val?
-  dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val);
+	if (commit_note_changed.note_number
+	    || commit_ctrl_changed.osc1_tune_coarse_changed
+	    || commit_ctrl_changed.osc1_tune_fine_changed) {
+	  uint8_t osc1_note = commit_note_value.note_number + commit_ctrl_value.osc1_tune_coarse;
+	  uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
+	  osc1_note_dac_val += commit_ctrl_value.osc1_tune_fine; // TODO: Handle wrapping, maybe add it to osc1_note_dac_val?
+	  dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val);
+	}
 
-  // TODO: How do we delta this?
-  dac7678_set_value(I2C_LEFT, 0, 0, 3, _dac_lin_to_log(commit_ctrl_value.osc1_to_osc1));
-
+  if (commit_ctrl_changed.osc1_to_osc2_changed)
+    dac7678_set_value(I2C_LEFT, 0, 0, 3, _dac_lin_to_log(commit_ctrl_value.osc1_to_osc1));
   if (commit_ctrl_changed.osc1_to_osc2_changed)
     dac7678_set_value(I2C_LEFT, 0, 0, 4, _dac_lin_to_log(commit_ctrl_value.osc1_to_osc2));
   if (commit_ctrl_changed.osc1_squ_pwm_changed)
@@ -80,10 +82,8 @@ void commit_dac() {
     dac7678_set_value(I2C_LEFT, 0, 2, 2, _dac_lin_to_log(commit_ctrl_value.sub_lvl));
   if (commit_ctrl_changed.sub_to_osc2_changed)
     dac7678_set_value(I2C_LEFT, 0, 2, 3, _dac_lin_to_log(commit_ctrl_value.sub_to_osc2));
-
-  // TODO: Need a changed flag for this
-  dac7678_set_value(I2C_LEFT, 0, 2, 4, osc_dac_value_for_note(OSC2, note_value.note_number));
-
+  if (commit_note_changed.note_number)
+    dac7678_set_value(I2C_LEFT, 0, 2, 4, osc_dac_value_for_note(OSC2, commit_note_value.note_number));
   if (commit_ctrl_changed.osc2_squ_pwm_changed)
     dac7678_set_value(I2C_LEFT, 0, 2, 5, commit_ctrl_value.osc2_squ_pwm);
   if (commit_ctrl_changed.osc2_squ_lvl_changed)
