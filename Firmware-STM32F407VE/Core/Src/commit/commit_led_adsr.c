@@ -166,6 +166,10 @@ void _commit_led_adsr_osc_filt_env_a() {
 	 * LEFT3:001
 	 */
 
+  if (!ctrl_changed.osc_filt_env1_a_changed && !ctrl_changed.osc_filt_env2_a_changed) {
+    return;
+  }
+
 	uint8_t brightness = 0x80;
 	uint16_t a_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
@@ -215,6 +219,10 @@ void _commit_led_adsr_osc_filt_env_d() {
 	/* Osc Filter ADSR Decay LEDs
 	 * LEFT3:001
 	 */
+
+  if (!ctrl_changed.osc_filt_env1_d_changed && !ctrl_changed.osc_filt_env2_d_changed) {
+    return;
+  }
 
 	uint16_t d_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
@@ -269,6 +277,13 @@ void _commit_led_adsr_osc_filt_env_s() {
 	/* Osc Filter ADSR Sustain LEDs
 	 * LEFT3:001
 	 */
+
+  if (!ctrl_changed.osc_filt_env1_s_changed
+      && !ctrl_changed.osc_filt_env1_amt_changed
+      && !ctrl_changed.osc_filt_env2_s_changed
+      && !ctrl_changed.osc_filt_env2_amt_changed) {
+    return;
+  }
 
 	uint16_t s_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
@@ -335,6 +350,10 @@ void _commit_led_adsr_osc_filt_env_r() {
 	 * LEFT3:001
 	 */
 
+  if (!ctrl_changed.osc_filt_env1_r_changed && !ctrl_changed.osc_filt_env2_r_changed) {
+    return;
+  }
+
 	uint16_t r_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
 	case CTRL_SELECT_ENV_1:
@@ -394,6 +413,10 @@ void _commit_led_adsr_sub_filt_env_a() {
 	 * LEFT1:11
 	 */
 
+  if (!ctrl_changed.sub_filt_env1_a_changed && !ctrl_changed.sub_filt_env2_a_changed) {
+    return;
+  }
+
 	uint16_t a_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
 	case CTRL_SELECT_ENV_1:
@@ -441,6 +464,10 @@ void _commit_led_adsr_sub_filt_env_d() {
 	/* Sub Filter Decay ADSR LEDs
 	 * LEFT1:11
 	 */
+
+  if (!ctrl_changed.sub_filt_env1_d_changed && !ctrl_changed.sub_filt_env2_d_changed) {
+    return;
+  }
 
 	uint16_t d_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
@@ -495,6 +522,13 @@ void _commit_led_adsr_sub_filt_env_s() {
 	/* Sub Filter ADSR Sustain LEDs
 	 * LEFT1:11
 	 */
+
+  if (!ctrl_changed.sub_filt_env1_s_changed
+      && !ctrl_changed.sub_filt_env1_amt_changed
+      && !ctrl_changed.sub_filt_env2_s_changed
+      && !ctrl_changed.sub_filt_env2_amt_changed) {
+    return;
+  }
 
 	uint16_t s_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
@@ -559,6 +593,10 @@ void _commit_led_adsr_sub_filt_env_r() {
 	 * LEFT1:11
 	 */
 
+  if (!ctrl_changed.sub_filt_env1_r_changed && !ctrl_changed.sub_filt_env2_r_changed) {
+    return;
+  }
+
 	uint16_t r_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
 	case CTRL_SELECT_ENV_1:
@@ -619,6 +657,10 @@ void _commit_led_adsr_osc_amp_env_a() {
 	 * RIGHT2:00
 	 */
 
+  if (!ctrl_changed.osc_amp_env_a_changed) {
+    return;
+  }
+
 	uint16_t a_val = ctrl_value.osc_amp_env_a;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.osc_amp_env_sustain_func) {
@@ -656,6 +698,9 @@ void _commit_led_adsr_osc_amp_env_d() {
 	 * RIGHT2:00
 	 */
 
+  if (!ctrl_changed.osc_amp_env_d_changed) {
+    return;
+  }
 
 	uint16_t d_val = ctrl_value.osc_amp_env_d;
 	uint8_t brightness = 0x80;
@@ -700,6 +745,11 @@ void _commit_led_adsr_osc_amp_env_s() {
 	 *
 	 * RIGHT2:00
 	 */
+
+  if (!ctrl_changed.osc_amp_env_s_changed && !ctrl_changed.osc_amp_env_amt_changed) {
+    return;
+  }
+
 	uint8_t brightness = DEFAULT_BRIGHTNESS;
 	uint16_t s_val;
 	switch(ctrl_toggle.osc_amp_env_sustain_func) {
@@ -746,6 +796,10 @@ void _commit_led_adsr_osc_amp_env_r() {
 	/* Osc Amp ADSR Release LEDs
 	 * RIGHT2:00
 	 */
+
+  if (!ctrl_changed.osc_amp_env_r_changed) {
+    return;
+  }
 
 	uint16_t r_val = ctrl_value.osc_amp_env_r;
 	uint8_t brightness = 0x80;
@@ -794,6 +848,10 @@ void _commit_led_adsr_sub_amp_env_a() {
 	 * RIGHT1:10
 	 */
 
+  if (!ctrl_changed.sub_amp_env_a_changed) {
+    return;
+  }
+
 	uint16_t a_val = ctrl_value.sub_amp_env_a;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_amp_env_sustain_func) {
@@ -831,6 +889,10 @@ void _commit_led_adsr_sub_amp_env_d() {
 	/* Sub Amp ADSR Decay LEDs
 	 * RIGHT1:10
 	 */
+
+  if (!ctrl_changed.sub_amp_env_d_changed) {
+    return;
+  }
 
 	uint16_t d_val = ctrl_value.sub_amp_env_d;
 	uint8_t brightness = 0x80;
@@ -874,6 +936,10 @@ void _commit_led_adsr_sub_amp_env_s() {
 	/* Sub Amp ADSR Sustain LEDs
 	 * RIGHT1:10
 	 */
+
+  if (!ctrl_changed.sub_amp_env_s_changed && !ctrl_changed.sub_amp_env_amt_changed) {
+    return;
+  }
 
 	uint8_t brightness = DEFAULT_BRIGHTNESS;
 	uint16_t s_val = 0;
@@ -920,6 +986,10 @@ void _commit_led_adsr_sub_amp_env_r() {
 	/* Sub Amp ADSR Release LEDs
 	 * A: RIGHT1:10
 	 */
+
+  if (!ctrl_changed.sub_amp_env_r_changed) {
+    return;
+  }
 
 	uint16_t r_val = ctrl_value.sub_amp_env_r;
 	uint8_t brightness = 0x80;

@@ -57,10 +57,10 @@ void commit_30hz_timer(void) {
     cycle++;
 	  break;
 	case COMMIT_LED_ROTPIC:
-//		ticks_before = HAL_GetTick();
-//		commit_led_rotpic();
-//		ticks_after = HAL_GetTick();
-//		ticks_cost = ticks_after - ticks_before;
+		ticks_before = HAL_GetTick();
+		commit_led_rotpic();
+		ticks_after = HAL_GetTick();
+		ticks_cost = ticks_after - ticks_before;
 		cycle++;
 		break;
 	case COMMIT_LED_ADSR_OSC_FILT_A:
@@ -79,10 +79,10 @@ void commit_30hz_timer(void) {
 	case COMMIT_LED_ADSR_SUB_AMP_D:
 	case COMMIT_LED_ADSR_SUB_AMP_S:
 	case COMMIT_LED_ADSR_SUB_AMP_R:
-//		ticks_before = HAL_GetTick();
-//		commit_led_adsr(cycle);
-//		ticks_after = HAL_GetTick();
-//		ticks_cost = ticks_after - ticks_before;
+		ticks_before = HAL_GetTick();
+		commit_led_adsr(cycle);
+		ticks_after = HAL_GetTick();
+		ticks_cost = ticks_after - ticks_before;
 		cycle++;
 		break;
 	case COMMIT_LED_OSC1_SAW:
