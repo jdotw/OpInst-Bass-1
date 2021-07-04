@@ -41,9 +41,10 @@ void handle_midi_note_on_msg(uint8_t status_msg, uint8_t *data) {
 		midi->prev_note_velocity = MIDI_NOTE_VELOCITY_NONE;
 	}
 
-	note_trig.ping_trigger = true;
-	note_value.note_number = note;
-	note_value.note_on = true;
+	note_set_on(note);
+//	note_trig.ping_trigger = true;
+//	note_value.note_number = note;
+//	note_value.note_on = true;
 
 	// LEGACY
 	midi->cur_note_time_ticks = HAL_GetTick();
@@ -56,7 +57,8 @@ void handle_midi_note_off_msg(uint8_t status_msg, uint8_t *data) {
 	midi_state *midi = _midi_state_ptr();
 	uint8_t note = data[0];
 	if (note == midi->cur_note_number) {
-		note_value.note_on = false;
+	  note_set_off();
+//	  note_value.note_on = false;
 		// LEGACY
 		midi->note_on = false;
 	} else if (note == midi->prev_note_number) {

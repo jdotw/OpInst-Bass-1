@@ -25,12 +25,18 @@ static commit_cycle_t cycle;
 ctrl_value_t commit_ctrl_value;
 ctrl_changed_t commit_ctrl_changed;
 ctrl_toggle_t commit_ctrl_toggle;
+note_value_t commit_note_value;
+note_changed_t commit_note_changed;
 
 void commit_30hz_timer(void) {
 	uint32_t total_ticks_before = HAL_GetTick();
 	uint32_t ticks_before = 0;
 	uint32_t ticks_after = 0;
 	uint32_t ticks_cost = 0;
+
+  commit_note_value = note_value;
+  commit_note_changed = note_changed;
+  note_changed_reset();
 
   ticks_before = HAL_GetTick();
   commit_dac();

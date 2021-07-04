@@ -9,6 +9,7 @@
 #define INC_COMMIT_H_
 
 #include "ctrl.h"
+#include "note.h"
 
 typedef enum uint8_t {
   COMMIT_INIT = 0,
@@ -64,7 +65,8 @@ typedef enum uint8_t {
 extern ctrl_value_t commit_ctrl_value;
 extern ctrl_changed_t commit_ctrl_changed;
 extern ctrl_toggle_t commit_ctrl_toggle;
-
+extern note_value_t commit_note_value;
+extern note_changed_t commit_note_changed;
 
 void commit_30hz_timer(void);
 
