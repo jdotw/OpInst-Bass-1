@@ -25,5 +25,6 @@ typedef struct {
 extern seq_state_t seq_state;
 
 void seq_poll_gpio(uint8_t bus, uint8_t channel);
+void seq_poll_mcu_gpio();
 
 #endif /* INC_SEQ_H_ */

@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include "i2c.h"
 #include "commit.h"
+#include "seq.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -351,6 +352,7 @@ void EXTI15_10_IRQHandler(void)
   // Otherwise a race condition seems to exist
   // which causes the interrupt to stay low
 	i2c_isr(I2C_RIGHT);
+	seq_poll_mcu_gpio();
   /* USER CODE END EXTI15_10_IRQn 1 */
 }
 

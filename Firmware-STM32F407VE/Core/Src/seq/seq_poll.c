@@ -41,7 +41,7 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
     Error_Handler();
   }
 
-  // Handle step sequenecer switches
+  // Handle step sequencer switches
   if (channel == 2) {
     // The steps are awkwardly wired across both the LEFT and RIGH I/O
     // Steps 1-15 are on LEFT:2, but 16 is on RIGHT:2
@@ -62,8 +62,24 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
   // Handle modifier switches
   if (bus == I2C_LEFT && channel == 2) {
     if (!(pin_state & START_PIN)) {
+      printf("START");
     }
   } else if (bus == I2C_RIGHT && channel == 2) {
+    if (!(pin_state & AUX_PIN)) {
+      printf("AUX");
+    }
+    if (!(pin_state & UP_PIN)) {
+      printf("UP");
+    }
+    if (!(pin_state & DOWN_PIN)) {
+      printf("DOWN");
+    }
+  }
+}
 
+void seq_poll_mcu_gpio() {
+  bool shift_pressed = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
+  if (shift_pressed) {
+    printf("SHIFT");
   }
 }
