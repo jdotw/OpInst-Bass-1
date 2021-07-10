@@ -10,6 +10,7 @@
 
 #include "ctrl.h"
 #include "note.h"
+#include "seq.h"
 
 typedef enum uint8_t {
   COMMIT_INIT = 0,
@@ -57,6 +58,9 @@ typedef enum uint8_t {
 	COMMIT_LED_FX_WET,
 	COMMIT_LED_FX_FEEDBACK,
 
+	COMMIT_LED_BUTTON_STEP1TO12,
+	COMMIT_LED_BUTTON_STEP13TO16,
+
 	// MUST Be last
 	COMMIT_RESET
 
@@ -67,7 +71,22 @@ extern ctrl_changed_t commit_ctrl_changed;
 extern ctrl_toggle_t commit_ctrl_toggle;
 extern note_value_t commit_note_value;
 extern note_changed_t commit_note_changed;
+extern seq_state_t commit_seq_state;
 
 void commit_30hz_timer(void);
+
+// Internal methods for RGB LED commit
+
+#define DEFAULT_SCALE 0x15
+#define DEFAULT_SCALE_R 0x17
+#define DEFAULT_SCALE_G 0x07
+#define DEFAULT_SCALE_B 0x16
+
+uint8_t _max(uint16_t a, uint16_t b);
+uint8_t _min(uint16_t a, uint16_t b);
+uint8_t _12_to_8(uint16_t a);
+void _rgb_copy(uint16_t *dst, uint16_t *src);
+void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len);
+void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
 
 #endif /* INC_COMMIT_H_ */

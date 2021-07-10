@@ -6,5 +6,10 @@
  */
 
 #include "seq.h"
+#include "string.h"
 
 seq_state_t seq_state;
+
+void seq_changed_reset() {
+  memset(&seq_state.button_changed, 0, 16);
+}
