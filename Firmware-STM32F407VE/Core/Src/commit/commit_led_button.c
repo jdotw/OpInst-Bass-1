@@ -21,9 +21,34 @@ static uint8_t val[3];
 
 uint8_t* _button_led_rgb(seq_button_state_t button) {
   val[0] = button.pressed ? 0xFF : 0x00;
-  val[1] = 0;
-  val[2] = 0;
+  val[1] = button.pressed ? 0xFF : 0x00;
+  val[2] = button.pressed ? 0xFF : 0x00;
   return val;
+}
+
+/*
+ * Utils
+ */
+
+#define DEFAULT_BUTTON_SCALE 0x15
+#define DEFAULT_BUTTON_SCALE_R 0x27
+#define DEFAULT_BUTTON_SCALE_G 0x17
+#define DEFAULT_BUTTON_SCALE_B 0x26
+
+void _set_button_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
+  for (uint8_t i=0; i < len; i++) {
+    switch(i%3) {
+    case 0:
+      scale_seq[i] = DEFAULT_BUTTON_SCALE_R;
+      break;
+    case 1:
+      scale_seq[i] = DEFAULT_BUTTON_SCALE_G;
+      break;
+    case 2:
+      scale_seq[i] = DEFAULT_BUTTON_SCALE_B;
+      break;
+    }
+  }
 }
 
 /*
@@ -74,7 +99,7 @@ void _commit_led_button_steps1to12() {
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 1, 0, pwm_seq, 12*3);
   if (!res) Error_Handler();
 
-  _set_scale_seq(pwm_seq, scale_seq, 12*3);
+  _set_button_scale_seq(pwm_seq, scale_seq, 12*3);
   res = is32_set_sequence_scale(I2C_LEFT, 1, 1, 0, scale_seq, 12*3);
   if (!res) Error_Handler();
 
@@ -100,7 +125,7 @@ void _commit_led_button_steps13to16() {
   res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b10, 24, pwm_seq, 4*3);
   if (!res) Error_Handler();
 
-  _set_scale_seq(pwm_seq, scale_seq, 4*3);
+  _set_button_scale_seq(pwm_seq, scale_seq, 4*3);
   res = is32_set_sequence_scale(I2C_RIGHT, 1, 0b10, 24, scale_seq, 4*3);
   if (!res) Error_Handler();
 
