@@ -32,6 +32,9 @@
 #define PIN6_OUTPUT 0 << 6
 #define PIN7_OUTPUT 0 << 7
 
+#define CMD_INPUT_PORT0 0
+#define CMD_INPUT_PORT1 1
+
 #define CMD_OUTPUT_PORT0 2
 #define CMD_OUTPUT_PORT1 3
 
@@ -62,6 +65,19 @@ bool _pca9555_set_port_config(uint8_t bus, uint8_t channel, uint8_t unit, uint8_
 	if (!res) return false;
 
 	return true;
+}
+
+bool pca9555_read_pin_state(uint8_t bus, uint8_t channel, uint8_t unit, uint16_t *stateptr) {
+  bool res;
+
+  uint8_t cmd = CMD_INPUT_PORT0;
+  res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, &cmd, 1);
+  if (!res) return false;
+
+  res = i2c_rx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, stateptr, 2);
+  if (!res) return false;
+
+  return res;
 }
 
 void pca9555_init() {

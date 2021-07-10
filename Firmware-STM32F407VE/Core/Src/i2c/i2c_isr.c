@@ -30,6 +30,7 @@ void i2c_isr(uint8_t bus) {
 	if (int_status & I2C_MUX_INT_2_SET) {
 		// Channel 2 Interrupt
 		rotpic_poll_all(bus, 2);
+		seq_poll_gpio(bus, 2);
 	}
 	if (int_status & I2C_MUX_INT_3_SET) {
 		// Channel 3 Interrupt
