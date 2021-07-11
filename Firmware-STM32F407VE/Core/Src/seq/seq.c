@@ -58,6 +58,11 @@ void seq_set_step(uint8_t step) {
 }
 
 void seq_advance_step() {
+  if (!seq_state.running) {
+    // Mustve booted mid-sequence!
+    seq_state.running = true;
+    seq_changed.running = true;
+  }
   if (seq_state.active_step == SEQ_MAX_STEP) {
     seq_set_step(0);
   } else {

@@ -70,6 +70,7 @@ void commit_30hz_timer(void) {
     ctrl_changed_reset();
     seq_changed_reset();
     mod_state_changed_reset();
+    blink_reset();
 
     cycle++;
 	  break;

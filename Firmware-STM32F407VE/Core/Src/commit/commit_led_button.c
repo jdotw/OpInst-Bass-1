@@ -12,6 +12,7 @@
 #include "i2c.h"
 #include "ctrl.h"
 #include "string.h"
+#include "blink.h"
 
 /*
  * RGB Calculations
@@ -117,7 +118,8 @@ bool _commit_led_shiftpage_changed() {
   return commit_mod_state.button_changed.shift
       || commit_mod_state.button_changed.page
       || commit_seq_changed.active_page
-      || commit_seq_changed.running;
+      || commit_seq_changed.running
+      || blink_changed;
 }
 
 bool _commit_led_start_changed() {
@@ -204,17 +206,18 @@ void _commit_led_button_mod_shiftpage() {
   _set_button_scale_seq(pwm_seq, scale_seq, 4*3);
 
   // Page is 8,9,10,11 [actually 32,33,34,35]
-  pwm_seq[8] = 0;
-  pwm_seq[9] = 0;
-  pwm_seq[10] = 0;
-  pwm_seq[11] = 0;
-  scale_seq[8] = 0;
-  scale_seq[9] = 0;
-  scale_seq[10] = 0;
-  scale_seq[11] = 0;
-  uint8_t page = commit_seq_state.selected_page;
-  pwm_seq[8+page] = 0xFF;
-  scale_seq[8+page] = 0x80;
+  for (uint8_t i=0; i < 4; i++) {
+    if (i == commit_seq_state.selected_page) {
+      pwm_seq[i+8] = 0xFF;
+      scale_seq[i+8] = 0x90;
+    } else if (i == commit_seq_state.active_page) {
+      pwm_seq[i+8] = 0xFF;
+      scale_seq[i+8] = blink ? 0x10 : 0x00;
+    } else {
+      pwm_seq[i+8] = 0x00;
+      scale_seq[i+8] = 0x00;
+    }
+  }
 
   res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, 24, pwm_seq, 4*3);
   if (!res) Error_Handler();
