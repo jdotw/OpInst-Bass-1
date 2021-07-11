@@ -25,7 +25,7 @@ uint8_t* _button_step_rgb(uint8_t i) {
     val[0] = 0xFF;
     val[1] = 0xFF;
     val[2] = 0xFF;
-  } else if (commit_seq_state.active_step == i) {
+  } else if ((commit_seq_state.active_step % 16) == i) {
     val[0] = 0x00;
     val[1] = 0xFF;
     val[2] = 0x00;
@@ -111,7 +111,9 @@ bool _commit_led_steps13to16_changed() {
 }
 
 bool _commit_led_shiftpage_changed() {
-  return commit_mod_state.button_changed.shift || commit_mod_state.button_changed.page;
+  return commit_mod_state.button_changed.shift
+      || commit_mod_state.button_changed.page
+      || commit_seq_changed.active_page;
 }
 
 bool _commit_led_start_changed() {
@@ -198,15 +200,17 @@ void _commit_led_button_mod_shiftpage() {
   _set_button_scale_seq(pwm_seq, scale_seq, 4*3);
 
   // Page is 8,9,10,11 [actually 32,33,34,35]
-  // TODO: Page LEDs
-  pwm_seq[8] = commit_mod_state.button_state.page ? 0x80 : 0x00;
+  pwm_seq[8] = 0;
   pwm_seq[9] = 0;
   pwm_seq[10] = 0;
   pwm_seq[11] = 0;
-  scale_seq[8] = commit_mod_state.button_state.page ? 0x80 : 0x00;
+  scale_seq[8] = 0;
   scale_seq[9] = 0;
   scale_seq[10] = 0;
   scale_seq[11] = 0;
+  uint8_t page = (commit_seq_state.active_step / 16) % 4;
+  pwm_seq[8+page] = 0xFF;
+  scale_seq[8+page] = 0x80;
 
   res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, 24, pwm_seq, 4*3);
   if (!res) Error_Handler();

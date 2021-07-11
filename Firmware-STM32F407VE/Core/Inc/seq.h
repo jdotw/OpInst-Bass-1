@@ -28,6 +28,7 @@ typedef struct {
 typedef struct {
   bool running;
   bool active_step;
+  bool active_page;
 } seq_changed_t;
 
 extern seq_state_t seq_state;

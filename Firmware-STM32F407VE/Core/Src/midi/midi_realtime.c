@@ -43,7 +43,7 @@ void handle_midi_continue_msg(uint8_t status_msg) {
 
 void handle_midi_song_position_msg(uint8_t status_msg, uint8_t *data) {
   uint16_t beat_count = data[0] | (data[1] << 7);
-  seq_set_step(beat_count % 16);
+  seq_set_step(beat_count % 64);
   clock_count = 0;
 }
 
