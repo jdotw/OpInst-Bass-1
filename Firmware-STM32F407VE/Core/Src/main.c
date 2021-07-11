@@ -160,6 +160,9 @@ int main(void)
   ctrl_changed_init();
   ctrl_toggle_init();
 
+  // Init sequencer
+  seq_init();
+
   // Init MIDI
   midi_init();
   midi_rx_set_uart(&huart1);

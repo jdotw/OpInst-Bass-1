@@ -25,20 +25,16 @@ void handle_midi_clock_msg(uint8_t status_msg) {
 
 void handle_midi_start_msg(uint8_t status_msg) {
   clock_count = 0;
-  seq_reset();
-  seq_state.running = true;
-  seq_changed.running = true;
+  seq_start();
 }
 
 void handle_midi_stop_msg(uint8_t status_msg) {
   clock_count = 0;
-  seq_state.running = false;
-  seq_changed.running = true;
+  seq_stop();
 }
 
 void handle_midi_continue_msg(uint8_t status_msg) {
-  seq_state.running = true;
-  seq_changed.running = true;
+  seq_continue();
 }
 
 void handle_midi_song_position_msg(uint8_t status_msg, uint8_t *data) {

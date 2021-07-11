@@ -25,9 +25,10 @@ uint8_t* _button_step_rgb(uint8_t i) {
     val[0] = 0xFF;
     val[1] = 0xFF;
     val[2] = 0xFF;
-  } else if ((commit_seq_state.active_step % 16) == i) {
+  } else if (commit_seq_state.active_page == commit_seq_state.selected_page) {
+    bool isActive = i == commit_seq_state.active_step % 16;
     val[0] = 0x00;
-    val[1] = 0xFF;
+    val[1] = isActive ? 0xFF : 0x00;
     val[2] = 0x00;
   } else {
     val[0] = 0x00;
@@ -92,7 +93,8 @@ bool _commit_led_steps1to12_changed() {
       return true;
     }
   }
-  if (commit_seq_changed.active_step) {
+  if (commit_seq_changed.active_step
+      || commit_seq_changed.running) {
     return true;
   }
   return false;
@@ -104,7 +106,8 @@ bool _commit_led_steps13to16_changed() {
       return true;
     }
   }
-  if (commit_seq_changed.active_step) {
+  if (commit_seq_changed.active_step
+      || commit_seq_changed.running) {
     return true;
   }
   return false;
@@ -113,7 +116,8 @@ bool _commit_led_steps13to16_changed() {
 bool _commit_led_shiftpage_changed() {
   return commit_mod_state.button_changed.shift
       || commit_mod_state.button_changed.page
-      || commit_seq_changed.active_page;
+      || commit_seq_changed.active_page
+      || commit_seq_changed.running;
 }
 
 bool _commit_led_start_changed() {
@@ -208,7 +212,7 @@ void _commit_led_button_mod_shiftpage() {
   scale_seq[9] = 0;
   scale_seq[10] = 0;
   scale_seq[11] = 0;
-  uint8_t page = (commit_seq_state.active_step / 16) % 4;
+  uint8_t page = commit_seq_state.selected_page;
   pwm_seq[8+page] = 0xFF;
   scale_seq[8+page] = 0x80;
 

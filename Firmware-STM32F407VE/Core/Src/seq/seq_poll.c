@@ -71,6 +71,9 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
       if (mod_state.button_state.page != !(pin_state & AUX_PIN)) {
         mod_state.button_state.page = !(pin_state & AUX_PIN);
         mod_state.button_changed.page = true;
+        if (mod_state.button_state.page) {
+          seq_advance_selected_page();
+        }
       }
       if (mod_state.button_state.up != !(pin_state & UP_PIN)) {
         mod_state.button_state.up = !(pin_state & UP_PIN);
