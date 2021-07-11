@@ -52,7 +52,6 @@ void ctrl_value_init() {
 
 void ctrl_changed_init() {
   memset(&ctrl_changed, 1, sizeof(ctrl_changed_t));
-//  ctrl_changed = (const ctrl_changed_t){1.};
 }
 
 void ctrl_changed_reset() {
