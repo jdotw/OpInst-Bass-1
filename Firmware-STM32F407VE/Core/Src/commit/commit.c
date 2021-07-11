@@ -31,6 +31,7 @@ ctrl_toggle_t commit_ctrl_toggle;
 note_value_t commit_note_value;
 note_changed_t commit_note_changed;
 seq_state_t commit_seq_state;
+seq_changed_t commit_seq_changed;
 mod_state_t commit_mod_state;
 
 void commit_30hz_timer(void) {
@@ -61,6 +62,7 @@ void commit_30hz_timer(void) {
 	  commit_ctrl_changed = ctrl_changed;
 	  commit_ctrl_toggle = ctrl_toggle;
 	  commit_seq_state = seq_state;
+	  commit_seq_changed = seq_changed;
 	  commit_mod_state = mod_state;
 
 	  // Then reset the change flag so that any further changes

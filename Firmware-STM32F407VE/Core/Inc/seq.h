@@ -20,9 +20,22 @@ typedef struct {
 typedef struct {
   seq_button_state_t button_state[16];
   bool button_changed[16];
+
+  bool running;
+  uint8_t active_step;
 } seq_state_t;
 
+typedef struct {
+  bool running;
+  bool active_step;
+} seq_changed_t;
+
 extern seq_state_t seq_state;
+extern seq_changed_t seq_changed;
+
+void seq_reset(void);
+void seq_set_step(uint8_t step);
+void seq_advance_step(void);
 
 void seq_poll_gpio(uint8_t bus, uint8_t channel);
 void seq_poll_mcu_gpio();

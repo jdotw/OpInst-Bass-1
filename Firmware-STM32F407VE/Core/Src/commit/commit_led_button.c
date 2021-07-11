@@ -19,17 +19,34 @@
 
 static uint8_t val[3];
 
-uint8_t* _button_led_rgb(seq_button_state_t button) {
-  val[0] = button.pressed ? 0xFF : 0x00;
-  val[1] = button.pressed ? 0xFF : 0x00;
-  val[2] = button.pressed ? 0xFF : 0x00;
+uint8_t* _button_step_rgb(uint8_t i) {
+  seq_button_state_t button = commit_seq_state.button_state[i];
+  if (button.pressed) {
+    val[0] = 0xFF;
+    val[1] = 0xFF;
+    val[2] = 0xFF;
+  } else if (commit_seq_state.active_step == i) {
+    val[0] = 0x00;
+    val[1] = 0xFF;
+    val[2] = 0x00;
+  } else {
+    val[0] = 0x00;
+    val[1] = 0x00;
+    val[2] = 0x00;
+  }
   return val;
 }
 
 uint8_t* _button_start_rgb(bool pressed) {
-  val[0] = pressed ? 0xFF : 0x00;
-  val[1] = pressed ? 0xFF : 0x00;
-  val[2] = pressed ? 0xFF : 0x00;
+  if (pressed) {
+    val[0] = 0xFF;
+    val[1] = 0xFF;
+    val[2] = 0xFF;
+  } else {
+    val[0] = 0;
+    val[1] = commit_seq_state.running ? 0xFF : 0x00;
+    val[2] = 0;
+  }
   return val;
 }
 
@@ -45,9 +62,9 @@ uint8_t* _button_shift_rgb(bool pressed) {
  */
 
 #define DEFAULT_BUTTON_SCALE 0x15
-#define DEFAULT_BUTTON_SCALE_R 0x27
-#define DEFAULT_BUTTON_SCALE_G 0x17
-#define DEFAULT_BUTTON_SCALE_B 0x26
+#define DEFAULT_BUTTON_SCALE_R 0x37
+#define DEFAULT_BUTTON_SCALE_G 0x27
+#define DEFAULT_BUTTON_SCALE_B 0x36
 
 void _set_button_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
   for (uint8_t i=0; i < len; i++) {
@@ -75,6 +92,9 @@ bool _commit_led_steps1to12_changed() {
       return true;
     }
   }
+  if (commit_seq_changed.active_step) {
+    return true;
+  }
   return false;
 }
 
@@ -84,6 +104,9 @@ bool _commit_led_steps13to16_changed() {
       return true;
     }
   }
+  if (commit_seq_changed.active_step) {
+    return true;
+  }
   return false;
 }
 
@@ -92,7 +115,7 @@ bool _commit_led_shiftpage_changed() {
 }
 
 bool _commit_led_start_changed() {
-  return commit_mod_state.button_changed.start;
+  return commit_mod_state.button_changed.start || commit_seq_changed.running;
 }
 
 /*
@@ -115,7 +138,7 @@ void _commit_led_button_steps1to12() {
   if (!_commit_led_steps1to12_changed()) return;
 
   for (uint8_t i=0; i < 12; i++) {
-    _set_pwm_single(pwm_seq+(i*3), _button_led_rgb(commit_seq_state.button_state[i]));
+    _set_pwm_single(pwm_seq+(i*3), _button_step_rgb(i));
   }
 
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 1, 0, pwm_seq, 12*3);
@@ -141,7 +164,7 @@ void _commit_led_button_steps13to16() {
   if (!_commit_led_steps13to16_changed()) return;
 
   for (uint8_t i=0; i < 4; i++) {
-    _set_pwm_single(pwm_seq+(i*3), _button_led_rgb(commit_seq_state.button_state[i+12]));
+    _set_pwm_single(pwm_seq+(i*3), _button_step_rgb(i+12));
   }
 
   res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b10, 24, pwm_seq, 4*3);

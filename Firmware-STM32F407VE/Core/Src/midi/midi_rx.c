@@ -13,11 +13,14 @@
 // Messsge Type Masks
 #define MIDI_STATUS_MASK 0b10000000
 #define MIDI_STATUS_MSG 0b10000000
-#define MIDI_STATUS_MSG_TYPE_MASK 0b11110000
+#define MIDI_STATUS_CHANNEL_MSG_MASK 0b11110000
 
 // Status Message Types
 #define MIDI_STATUS_MSG_CLOCK 0b11111000
 #define MIDI_STATUS_MSG_START 0b11111010
+#define MIDI_STATUS_MSG_STOP 0b11111100
+#define MIDI_STATUS_MSG_CONTINUE 0b11111011
+#define MIDI_STATUS_MSG_SONG_POSITION 0b11110010
 
 // Channel Message Types
 #define MIDI_CHANNEL_VOICE_NOTE_OFF 0b10000000
@@ -107,7 +110,8 @@ void midi_rx_dma_rxcomplete_callback() {
 // MARK: - Status Message Handling
 
 uint8_t midi_data_bytes_count_for_status(uint8_t status_msg) {
-	switch ((status_msg & MIDI_STATUS_MSG_TYPE_MASK)) {
+  // Handle channel-specific messages
+	switch ((status_msg & MIDI_STATUS_CHANNEL_MSG_MASK)) {
 	case MIDI_CHANNEL_VOICE_NOTE_OFF:
 	case MIDI_CHANNEL_VOICE_NOTE_ON:
 	case MIDI_CHANNEL_VOICE_POLYPHONIC_AFTERTOUCH:
@@ -115,22 +119,32 @@ uint8_t midi_data_bytes_count_for_status(uint8_t status_msg) {
 	case MIDI_CHANNEL_VOICE_PITCH_BEND:
 		// These all have 2 data bytes
 		return 2;
-	default:
-		return 0;
 	}
+	// Handle all other status messages
+	switch(status_msg) {
+  case MIDI_STATUS_MSG_SONG_POSITION:
+    return 2;
+	}
+	return 0;
 }
 
 uint8_t handle_midi_rx_status(uint8_t status_msg) {
 	// Returns the status_msg if we've requested
 	// data-bytes be read from the UART
 	uint8_t data_byte_count = 0;
-	switch ((status_msg & MIDI_STATUS_MSG_TYPE_MASK)) {
+	switch (status_msg) {
 	case MIDI_STATUS_MSG_CLOCK:
 		handle_midi_clock_msg(status_msg);
 		return STATUS_MSG_NONE;
 	case MIDI_STATUS_MSG_START:
 		handle_midi_start_msg(status_msg);
 		return STATUS_MSG_NONE;
+  case MIDI_STATUS_MSG_STOP:
+    handle_midi_stop_msg(status_msg);
+    return STATUS_MSG_NONE;
+  case MIDI_STATUS_MSG_CONTINUE:
+    handle_midi_continue_msg(status_msg);
+    return STATUS_MSG_NONE;
 	default:
 		data_byte_count = midi_data_bytes_count_for_status(status_msg);
 		if (data_byte_count > 0) {
@@ -150,7 +164,8 @@ uint8_t handle_midi_rx_data(uint8_t status_msg, uint8_t *data, uint8_t recv_coun
 	uint8_t actual_data_byte_count = offset + recv_count;
 	uint8_t expected_data_byte_count = midi_data_bytes_count_for_status(status_msg);
 	if (actual_data_byte_count == expected_data_byte_count) {
-		switch ((status_msg & MIDI_STATUS_MSG_TYPE_MASK)) {
+	  // Handle channel-specific messages
+		switch ((status_msg & MIDI_STATUS_CHANNEL_MSG_MASK)) {
 		case MIDI_CHANNEL_VOICE_NOTE_OFF:
 			handle_midi_note_off_msg(status_msg, data);
 			return STATUS_MSG_NONE;
@@ -163,9 +178,14 @@ uint8_t handle_midi_rx_data(uint8_t status_msg, uint8_t *data, uint8_t recv_coun
 		case MIDI_CHANNEL_VOICE_CONTROL_CHANGE:
 			handle_midi_cc_msg(status_msg, data);
 			return STATUS_MSG_NONE;
-		default:
-			return STATUS_MSG_NONE;
 		}
+		// Handle all status messages
+		switch (status_msg) {
+		case MIDI_STATUS_MSG_SONG_POSITION:
+		  handle_midi_song_position_msg(status_msg, data);
+		  return STATUS_MSG_NONE;
+		}
+		return STATUS_MSG_NONE;
 	} else if (actual_data_byte_count < expected_data_byte_count) {
 		// We don't yet have all the expected data bytes.
 		// This can happen if Running Status is used to transmit updated
