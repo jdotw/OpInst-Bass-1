@@ -298,4 +298,3 @@ PB12.GPIOParameters=GPIO_Label,GPIO_ModeDefaultEXTI
 PB12.Signal=GPXTI12
 ProjectManager.LibraryCopy=1
 PA7.Signal=SPI1_MOSI
-isbadioc=false

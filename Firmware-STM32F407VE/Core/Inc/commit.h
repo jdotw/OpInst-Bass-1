@@ -11,6 +11,7 @@
 #include "ctrl.h"
 #include "note.h"
 #include "seq.h"
+#include "mod.h"
 
 typedef enum uint8_t {
   COMMIT_INIT = 0,
@@ -60,6 +61,8 @@ typedef enum uint8_t {
 
 	COMMIT_LED_BUTTON_STEP1TO12,
 	COMMIT_LED_BUTTON_STEP13TO16,
+	COMMIT_LED_BUTTON_SHIFTPAGE,
+	COMMIT_LED_BUTTON_START,
 
 	// MUST Be last
 	COMMIT_RESET
@@ -72,6 +75,7 @@ extern ctrl_toggle_t commit_ctrl_toggle;
 extern note_value_t commit_note_value;
 extern note_changed_t commit_note_changed;
 extern seq_state_t commit_seq_state;
+extern mod_state_t commit_mod_state;
 
 void commit_30hz_timer(void);
 

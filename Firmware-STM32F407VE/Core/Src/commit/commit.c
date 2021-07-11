@@ -14,6 +14,7 @@
 #include "osc.h"
 #include "note.h"
 #include "seq.h"
+#include "mod.h"
 #include <math.h>
 
 void commit_dac(void);
@@ -30,6 +31,7 @@ ctrl_toggle_t commit_ctrl_toggle;
 note_value_t commit_note_value;
 note_changed_t commit_note_changed;
 seq_state_t commit_seq_state;
+mod_state_t commit_mod_state;
 
 void commit_30hz_timer(void) {
 	uint32_t total_ticks_before = HAL_GetTick();
@@ -59,11 +61,13 @@ void commit_30hz_timer(void) {
 	  commit_ctrl_changed = ctrl_changed;
 	  commit_ctrl_toggle = ctrl_toggle;
 	  commit_seq_state = seq_state;
+	  commit_mod_state = mod_state;
 
 	  // Then reset the change flag so that any further changes
 	  // will be waiting for us on the next cycle
     ctrl_changed_reset();
     seq_changed_reset();
+    mod_state_changed_reset();
 
     cycle++;
 	  break;
@@ -127,6 +131,8 @@ void commit_30hz_timer(void) {
 		break;
 	case COMMIT_LED_BUTTON_STEP1TO12:
 	case COMMIT_LED_BUTTON_STEP13TO16:
+	case COMMIT_LED_BUTTON_SHIFTPAGE:
+  case COMMIT_LED_BUTTON_START:
 	  commit_led_button(cycle);
     cycle++;
 	  break;

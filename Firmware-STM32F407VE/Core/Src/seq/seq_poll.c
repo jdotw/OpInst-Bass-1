@@ -9,6 +9,7 @@
 #include "pca9555.h"
 #include "main.h"
 #include "i2c.h"
+#include "mod.h"
 
 // LEFT2:0 PCA9555 IO Mux
 #define START_PIN 1 << 0
@@ -61,19 +62,23 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
     // Handle modifier switches
     switch (bus) {
     case I2C_LEFT:
-      if (!(pin_state & START_PIN)) {
-        printf("START");
+      if (mod_state.button_state.start != !(pin_state & START_PIN)) {
+        mod_state.button_state.start = !(pin_state & START_PIN);
+        mod_state.button_changed.start = true;
       }
       break;
     case I2C_RIGHT:
-      if (!(pin_state & AUX_PIN)) {
-        printf("AUX");
+      if (mod_state.button_state.page != !(pin_state & AUX_PIN)) {
+        mod_state.button_state.page = !(pin_state & AUX_PIN);
+        mod_state.button_changed.page = true;
       }
-      if (!(pin_state & UP_PIN)) {
-        printf("UP");
+      if (mod_state.button_state.up != !(pin_state & UP_PIN)) {
+        mod_state.button_state.up = !(pin_state & UP_PIN);
+        mod_state.button_changed.up = true;
       }
-      if (!(pin_state & DOWN_PIN)) {
-        printf("DOWN");
+      if (mod_state.button_state.down != !(pin_state & DOWN_PIN)) {
+        mod_state.button_state.down = !(pin_state & DOWN_PIN);
+        mod_state.button_changed.down = true;
       }
       break;
     }
@@ -83,7 +88,8 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
 
 void seq_poll_mcu_gpio() {
   bool shift_pressed = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
-  if (shift_pressed) {
-    printf("SHIFT");
+  if (mod_state.button_state.shift != shift_pressed) {
+    mod_state.button_state.shift = shift_pressed;
+    mod_state.button_changed.shift = true;
   }
 }

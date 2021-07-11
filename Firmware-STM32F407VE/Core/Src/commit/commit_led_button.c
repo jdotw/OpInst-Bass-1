@@ -26,6 +26,20 @@ uint8_t* _button_led_rgb(seq_button_state_t button) {
   return val;
 }
 
+uint8_t* _button_start_rgb(bool pressed) {
+  val[0] = pressed ? 0xFF : 0x00;
+  val[1] = pressed ? 0xFF : 0x00;
+  val[2] = pressed ? 0xFF : 0x00;
+  return val;
+}
+
+uint8_t* _button_shift_rgb(bool pressed) {
+  val[0] = pressed ? 0xFF : 0x00;
+  val[1] = pressed ? 0xFF : 0x00;
+  val[2] = pressed ? 0xFF : 0x00;
+  return val;
+}
+
 /*
  * Utils
  */
@@ -71,6 +85,14 @@ bool _commit_led_steps13to16_changed() {
     }
   }
   return false;
+}
+
+bool _commit_led_shiftpage_changed() {
+  return commit_mod_state.button_changed.shift || commit_mod_state.button_changed.page;
+}
+
+bool _commit_led_start_changed() {
+  return commit_mod_state.button_changed.start;
 }
 
 /*
@@ -133,6 +155,71 @@ void _commit_led_button_steps13to16() {
   if (!res) Error_Handler();
 }
 
+void _commit_led_button_mod_shiftpage() {
+  bool res;
+  uint8_t pwm_seq[36];
+  uint8_t scale_seq[36];
+
+  /*
+   * RIGHT2:10
+   * - Shift is 24,25,26
+   * - Page is 32,33,34,35
+   * - NOTE: Channels 27,28,29,30,31 are unused
+   *         This allows a contiguous write to set these LED value
+   */
+
+  if (!_commit_led_shiftpage_changed()) return;
+
+  // Shift is 0,1,2 [actually 24,25,26]
+  _set_pwm_single(pwm_seq, _button_shift_rgb(commit_mod_state.button_state.shift));
+  _set_button_scale_seq(pwm_seq, scale_seq, 4*3);
+
+  // Page is 8,9,10,11 [actually 32,33,34,35]
+  // TODO: Page LEDs
+  pwm_seq[8] = commit_mod_state.button_state.page ? 0x80 : 0x00;
+  pwm_seq[9] = 0;
+  pwm_seq[10] = 0;
+  pwm_seq[11] = 0;
+  scale_seq[8] = commit_mod_state.button_state.page ? 0x80 : 0x00;
+  scale_seq[9] = 0;
+  scale_seq[10] = 0;
+  scale_seq[11] = 0;
+
+  res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, 24, pwm_seq, 4*3);
+  if (!res) Error_Handler();
+
+  res = is32_set_sequence_scale(I2C_RIGHT, 2, 0b10, 24, scale_seq, 4*3);
+  if (!res) Error_Handler();
+
+  res = is32_write_registers(I2C_RIGHT, 2, 0b10);
+  if (!res) Error_Handler();
+}
+
+void _commit_led_button_mod_start() {
+  bool res;
+  uint8_t pwm_seq[36];
+  uint8_t scale_seq[36];
+
+  /* Start LED
+   * LEFT1:00 Channels 33,34,35
+   */
+
+  if (!_commit_led_start_changed()) return;
+
+  _set_pwm_single(pwm_seq, _button_start_rgb(commit_mod_state.button_state.start));
+
+  res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, 33, pwm_seq, 1*3);
+  if (!res) Error_Handler();
+
+  _set_button_scale_seq(pwm_seq, scale_seq, 1*3);
+  res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, 33, scale_seq, 1*3);
+  if (!res) Error_Handler();
+
+  res = is32_write_registers(I2C_LEFT, 1, 0b00);
+  if (!res) Error_Handler();
+}
+
+
 void commit_led_button(commit_cycle_t cycle) {
   uint32_t ticks_before = HAL_GetTick();
 
@@ -142,6 +229,12 @@ void commit_led_button(commit_cycle_t cycle) {
     break;
   case COMMIT_LED_BUTTON_STEP13TO16:
     _commit_led_button_steps13to16();
+    break;
+  case COMMIT_LED_BUTTON_SHIFTPAGE:
+    _commit_led_button_mod_shiftpage();
+    break;
+  case COMMIT_LED_BUTTON_START:
+    _commit_led_button_mod_start();
     break;
   default:
     break;
