@@ -31,8 +31,7 @@ typedef struct {
   uint8_t selected_page;
   uint8_t selected_step;
 
-  ctrl_value_t step_ctrl_value[64];
-  ctrl_changed_t step_ctrl_changed[64];
+  ctrl_t step_ctrl[64];
 } seq_state_t;
 
 typedef struct {
@@ -58,6 +57,6 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel);
 void seq_poll_mcu_gpio();
 void seq_changed_reset();
 
-void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_value_t *ctrl_value_ptr, ctrl_changed_t *ctrl_changed_ptr);
+void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_t *ctrl_ptr);
 
 #endif /* INC_SEQ_H_ */

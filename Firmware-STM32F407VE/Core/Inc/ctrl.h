@@ -178,154 +178,154 @@ typedef enum {
 	ENC_ENV_SUSTAIN_FUNC_MAX,
 } env_sustain_func_t;
 
-typedef struct {
-  bool osc1_saw_lvl_changed;
-  bool osc1_squ_lvl_changed;
-  bool osc1_squ_pwm_changed;
-  bool osc1_to_osc1_changed;
-  bool osc1_to_osc2_changed;
-
-  bool osc1_tune_coarse_changed;
-  bool osc1_tune_fine_changed;
-  bool osc1_filt_cutoff_changed;
-  bool osc1_filt_res_changed;
-  bool osc1_drive_changed;
-
-  bool osc2_saw_lvl_changed;
-  bool osc2_squ_lvl_changed;
-  bool osc2_squ_pwm_changed;
-  bool osc2_noise_lvl_changed;
-
-  bool osc2_filt_cutoff_changed;
-  bool osc2_filt_res_changed;
-  bool osc2_drive_changed;
-
-  bool osc_filt_env1_a_changed;
-  bool osc_filt_env1_d_changed;
-  bool osc_filt_env1_s_changed;
-  bool osc_filt_env1_r_changed;
-  bool osc_filt_env1_amt_changed;
-
-  bool osc_filt_env2_a_changed;
-  bool osc_filt_env2_d_changed;
-  bool osc_filt_env2_s_changed;
-  bool osc_filt_env2_r_changed;
-  bool osc_filt_env2_amt_changed;
-
-  bool osc_amp_env_a_changed;
-  bool osc_amp_env_d_changed;
-  bool osc_amp_env_s_changed;
-  bool osc_amp_env_r_changed;
-  bool osc_amp_env_amt_changed;
-  bool sub_lvl_changed;
-  bool sub_noise_lvl_changed;
-  bool sub_to_osc2_changed;
-
-  bool sub_filt_cutoff_changed;
-  bool sub_filt_res_changed;
-
-  bool sub_filt_env1_a_changed;
-  bool sub_filt_env1_d_changed;
-  bool sub_filt_env1_s_changed;
-  bool sub_filt_env1_r_changed;
-  bool sub_filt_env1_amt_changed;
-
-  bool sub_filt_env2_a_changed;
-  bool sub_filt_env2_d_changed;
-  bool sub_filt_env2_s_changed;
-  bool sub_filt_env2_r_changed;
-  bool sub_filt_env2_amt_changed;
-
-  bool sub_amp_env_a_changed;
-  bool sub_amp_env_d_changed;
-  bool sub_amp_env_s_changed;
-  bool sub_amp_env_r_changed;
-  bool sub_amp_env_amt_changed;
-
-  bool fx_wetdry_changed;
-  bool fx_val1_changed;
-  bool fx_val2_changed;
-  bool fx_val3_changed;
-  bool fx_feedback_changed;
-
-} ctrl_changed_t;
+//typedef struct {
+//  bool osc1_saw_lvl_changed;
+//  bool osc1_squ_lvl_changed;
+//  bool osc1_squ_pwm_changed;
+//  bool osc1_to_osc1_changed;
+//  bool osc1_to_osc2_changed;
+//
+//  bool osc1_tune_coarse_changed;
+//  bool osc1_tune_fine_changed;
+//  bool osc1_filt_cutoff_changed;
+//  bool osc1_filt_res_changed;
+//  bool osc1_drive_changed;
+//
+//  bool osc2_saw_lvl_changed;
+//  bool osc2_squ_lvl_changed;
+//  bool osc2_squ_pwm_changed;
+//  bool osc2_noise_lvl_changed;
+//
+//  bool osc2_filt_cutoff_changed;
+//  bool osc2_filt_res_changed;
+//  bool osc2_drive_changed;
+//
+//  bool osc_filt_env1_a_changed;
+//  bool osc_filt_env1_d_changed;
+//  bool osc_filt_env1_s_changed;
+//  bool osc_filt_env1_r_changed;
+//  bool osc_filt_env1_amt_changed;
+//
+//  bool osc_filt_env2_a_changed;
+//  bool osc_filt_env2_d_changed;
+//  bool osc_filt_env2_s_changed;
+//  bool osc_filt_env2_r_changed;
+//  bool osc_filt_env2_amt_changed;
+//
+//  bool osc_amp_env_a_changed;
+//  bool osc_amp_env_d_changed;
+//  bool osc_amp_env_s_changed;
+//  bool osc_amp_env_r_changed;
+//  bool osc_amp_env_amt_changed;
+//  bool sub_lvl_changed;
+//  bool sub_noise_lvl_changed;
+//  bool sub_to_osc2_changed;
+//
+//  bool sub_filt_cutoff_changed;
+//  bool sub_filt_res_changed;
+//
+//  bool sub_filt_env1_a_changed;
+//  bool sub_filt_env1_d_changed;
+//  bool sub_filt_env1_s_changed;
+//  bool sub_filt_env1_r_changed;
+//  bool sub_filt_env1_amt_changed;
+//
+//  bool sub_filt_env2_a_changed;
+//  bool sub_filt_env2_d_changed;
+//  bool sub_filt_env2_s_changed;
+//  bool sub_filt_env2_r_changed;
+//  bool sub_filt_env2_amt_changed;
+//
+//  bool sub_amp_env_a_changed;
+//  bool sub_amp_env_d_changed;
+//  bool sub_amp_env_s_changed;
+//  bool sub_amp_env_r_changed;
+//  bool sub_amp_env_amt_changed;
+//
+//  bool fx_wetdry_changed;
+//  bool fx_val1_changed;
+//  bool fx_val2_changed;
+//  bool fx_val3_changed;
+//  bool fx_feedback_changed;
+//
+//} ctrl_changed_t;
 
 typedef struct {
 
   uint16_t value[CTRL_ENUM_MAX];
   bool changed[CTRL_ENUM_MAX];
 
-	uint16_t osc1_saw_lvl;
-	uint16_t osc1_squ_lvl;
-  uint16_t osc1_squ_pwm;
-  uint16_t osc1_to_osc1;
-  uint16_t osc1_to_osc2;
+//	uint16_t osc1_saw_lvl;
+//	uint16_t osc1_squ_lvl;
+//  uint16_t osc1_squ_pwm;
+//  uint16_t osc1_to_osc1;
+//  uint16_t osc1_to_osc2;
+//
+//  int16_t osc1_tune_coarse;
+//  int16_t osc1_tune_fine;
+//  uint16_t osc1_filt_cutoff;
+//  uint16_t osc1_filt_res;
+//  uint16_t osc1_drive;
+//
+//  uint16_t osc2_saw_lvl;
+//  uint16_t osc2_squ_lvl;
+//  uint16_t osc2_squ_pwm;
+//  uint16_t osc2_noise_lvl;
+//
+//  uint16_t osc2_filt_cutoff;
+//  uint16_t osc2_filt_res;
+//  uint16_t osc2_drive;
+//
+//  uint16_t osc_filt_env1_a;
+//  uint16_t osc_filt_env1_d;
+//  uint16_t osc_filt_env1_s;
+//  uint16_t osc_filt_env1_r;
+//  uint16_t osc_filt_env1_amt;
+//
+//  uint16_t osc_filt_env2_a;
+//  uint16_t osc_filt_env2_d;
+//  uint16_t osc_filt_env2_s;
+//  uint16_t osc_filt_env2_r;
+//  uint16_t osc_filt_env2_amt;
+//
+//  uint16_t osc_amp_env_a;
+//  uint16_t osc_amp_env_d;
+//  uint16_t osc_amp_env_s;
+//  uint16_t osc_amp_env_r;
+//  uint16_t osc_amp_env_amt;
+//
+//  uint16_t sub_lvl;
+//  uint16_t sub_noise_lvl;
+//  uint16_t sub_to_osc2;
+//
+//  uint16_t sub_filt_cutoff;
+//  uint16_t sub_filt_res;
+//
+//  uint16_t sub_filt_env1_a;
+//  uint16_t sub_filt_env1_d;
+//  uint16_t sub_filt_env1_s;
+//  uint16_t sub_filt_env1_r;
+//  uint16_t sub_filt_env1_amt;
+//
+//  uint16_t sub_filt_env2_a;
+//  uint16_t sub_filt_env2_d;
+//  uint16_t sub_filt_env2_s;
+//  uint16_t sub_filt_env2_r;
+//  uint16_t sub_filt_env2_amt;
+//
+//  uint16_t sub_amp_env_a;
+//  uint16_t sub_amp_env_d;
+//  uint16_t sub_amp_env_s;
+//  uint16_t sub_amp_env_r;
+//  uint16_t sub_amp_env_amt;
+//
+//  uint16_t fx_wetdry;
+//  uint16_t fx_val1;
+//  uint16_t fx_val2;
+//  uint16_t fx_val3;
+//  uint16_t fx_feedback;
 
-  int16_t osc1_tune_coarse;
-  int16_t osc1_tune_fine;
-  uint16_t osc1_filt_cutoff;
-  uint16_t osc1_filt_res;
-  uint16_t osc1_drive;
-
-  uint16_t osc2_saw_lvl;
-  uint16_t osc2_squ_lvl;
-  uint16_t osc2_squ_pwm;
-  uint16_t osc2_noise_lvl;
-
-  uint16_t osc2_filt_cutoff;
-  uint16_t osc2_filt_res;
-  uint16_t osc2_drive;
-
-  uint16_t osc_filt_env1_a;
-  uint16_t osc_filt_env1_d;
-  uint16_t osc_filt_env1_s;
-  uint16_t osc_filt_env1_r;
-  uint16_t osc_filt_env1_amt;
-
-  uint16_t osc_filt_env2_a;
-  uint16_t osc_filt_env2_d;
-  uint16_t osc_filt_env2_s;
-  uint16_t osc_filt_env2_r;
-  uint16_t osc_filt_env2_amt;
-
-  uint16_t osc_amp_env_a;
-  uint16_t osc_amp_env_d;
-  uint16_t osc_amp_env_s;
-  uint16_t osc_amp_env_r;
-  uint16_t osc_amp_env_amt;
-
-  uint16_t sub_lvl;
-  uint16_t sub_noise_lvl;
-  uint16_t sub_to_osc2;
-
-  uint16_t sub_filt_cutoff;
-  uint16_t sub_filt_res;
-
-  uint16_t sub_filt_env1_a;
-  uint16_t sub_filt_env1_d;
-  uint16_t sub_filt_env1_s;
-  uint16_t sub_filt_env1_r;
-  uint16_t sub_filt_env1_amt;
-
-  uint16_t sub_filt_env2_a;
-  uint16_t sub_filt_env2_d;
-  uint16_t sub_filt_env2_s;
-  uint16_t sub_filt_env2_r;
-  uint16_t sub_filt_env2_amt;
-
-  uint16_t sub_amp_env_a;
-  uint16_t sub_amp_env_d;
-  uint16_t sub_amp_env_s;
-  uint16_t sub_amp_env_r;
-  uint16_t sub_amp_env_amt;
-
-  uint16_t fx_wetdry;
-  uint16_t fx_val1;
-  uint16_t fx_val2;
-  uint16_t fx_val3;
-  uint16_t fx_feedback;
-
-} ctrl_value_t;
+} ctrl_t;
 
 typedef struct {
 	osc_pwm_func_t osc1_squ_func;
@@ -342,8 +342,9 @@ typedef struct {
 
 } ctrl_toggle_t;
 
-extern ctrl_value_t ctrl_value;
-extern ctrl_changed_t ctrl_changed;
+extern ctrl_t ctrl;
+//extern ctrl_value_t ctrl_value;
+//extern ctrl_changed_t ctrl_changed;
 extern ctrl_toggle_t ctrl_toggle;
 extern bool ctrl_enabled;
 

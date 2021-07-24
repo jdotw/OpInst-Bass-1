@@ -69,8 +69,7 @@ typedef enum uint8_t {
 
 } commit_cycle_t;
 
-extern ctrl_value_t commit_ctrl_value;
-extern ctrl_changed_t commit_ctrl_changed;
+extern ctrl_t commit_ctrl;
 extern ctrl_toggle_t commit_ctrl_toggle;
 extern note_value_t commit_note_value;
 extern note_changed_t commit_note_changed;

@@ -26,8 +26,7 @@ void commit_led_osc(commit_cycle_t cycle);
 void commit_led_button(commit_cycle_t cycle);
 
 static commit_cycle_t cycle;
-ctrl_value_t commit_ctrl_value;
-ctrl_changed_t commit_ctrl_changed;
+ctrl_t commit_ctrl;
 ctrl_toggle_t commit_ctrl_toggle;
 note_value_t commit_note_value;
 note_changed_t commit_note_changed;
@@ -59,15 +58,14 @@ void commit_30hz_timer(void) {
 	case COMMIT_INIT:
 	  // Copy the control values, changed and toggle structs
 	  // Our commit functions will then work off these values
-	  commit_ctrl_value = ctrl_value;
-	  commit_ctrl_changed = ctrl_changed;
+	  commit_ctrl = ctrl;
 	  commit_ctrl_toggle = ctrl_toggle;
 	  commit_seq_state = seq_state;
 	  commit_seq_changed = seq_changed;
 	  commit_mod_state = mod_state;
 
 	  // Apply p-lock
-	  seq_apply_active_step_ctrl(&seq_state, &commit_ctrl_value, &commit_ctrl_changed);
+	  seq_apply_active_step_ctrl(&seq_state, &commit_ctrl);
 
 	  // Then reset the change flag so that any further changes
 	  // will be waiting for us on the next cycle

@@ -83,7 +83,7 @@ void seq_advance_selected_page() {
   seq_changed.selected_page = true;
 }
 
-void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_value_t *ctrl_value_ptr, ctrl_changed_t *ctrl_changed_ptr) {
+void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_t *ctrl_ptr) {
   // Using the state in state_ptr, overlays the control values
   // that are set for that step (p-locks) onto the
   // ctrl_value_ptr and ctrl_changed_ptr
@@ -94,23 +94,33 @@ void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_value_t *ctrl_value
   //
   // This is gonna be a lot of code :|
 
-
-
-  ctrl_value_t *step_value_ptr = &state_ptr->step_ctrl_value[state_ptr->active_step];
-  ctrl_changed_t *step_changed_ptr = &state_ptr->step_ctrl_changed[state_ptr->active_step];
-  ctrl_value_t *prev_value_ptr = NULL;
-  ctrl_changed_t *prev_changed_ptr = NULL;
+  ctrl_t *step_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->active_step];
+//  ctrl_value_t *step_value_ptr = &state_ptr->step_ctrl_value[state_ptr->active_step];
+//  ctrl_changed_t *step_changed_ptr = &state_ptr->step_ctrl_changed[state_ptr->active_step];
+  ctrl_t *prev_ctrl_ptr = NULL;
+//  ctrl_value_t *prev_value_ptr = NULL;
+//  ctrl_changed_t *prev_changed_ptr = NULL;
 
   if (state_ptr->prev_step != UINT8_MAX) {
-    prev_value_ptr = &state_ptr->step_ctrl_value[state_ptr->prev_step];
-    prev_changed_ptr = &state_ptr->step_ctrl_changed[state_ptr->prev_step];
+    prev_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->prev_step];
+//    prev_value_ptr = &state_ptr->step_ctrl_value[state_ptr->prev_step];
+//    prev_changed_ptr = &state_ptr->step_ctrl_changed[state_ptr->prev_step];
   }
 
-  // osc1_saw_lvl
-  if (step_changed_ptr->osc1_saw_lvl_changed) {
-    ctrl_value_ptr->osc1_saw_lvl = step_value_ptr->osc1_saw_lvl;
-    ctrl_changed_ptr->osc1_saw_lvl_changed = state_ptr->active_step_changed;
-  } else if (prev_changed_ptr->osc1_saw_lvl_changed) {
-    ctrl_changed_ptr->osc1_saw_lvl_changed = true;
+  for (uint8_t i=0; i < CTRL_ENUM_MAX; i++) {
+    if (step_ctrl_ptr->changed[i]) {
+      ctrl_ptr->value[i] = step_ctrl_ptr->value[i];
+      ctrl_ptr->changed[i] = state_ptr->active_step_changed;
+    } else if (prev_ctrl_ptr->changed[i]) {
+      ctrl_ptr->changed[i] = true;
+    }
   }
+
+//  // osc1_saw_lvl
+//  if (step_changed_ptr->osc1_saw_lvl_changed) {
+//    ctrl_value_ptr->osc1_saw_lvl = step_value_ptr->osc1_saw_lvl;
+//    ctrl_changed_ptr->osc1_saw_lvl_changed = state_ptr->active_step_changed;
+//  } else if (prev_changed_ptr->osc1_saw_lvl_changed) {
+//    ctrl_changed_ptr->osc1_saw_lvl_changed = true;
+//  }
 }
