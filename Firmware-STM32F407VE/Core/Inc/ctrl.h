@@ -63,7 +63,7 @@ typedef enum {
 	ENC_FX_VAL3,
 	ENC_FX_VAL4,
 
-} ctrl_enum_t;
+} enc_enum_t;
 
 #define CTRL_DEFAULT_SCALE 4096
 #define CTRL_SCALE_HALT_TURN 100 * (4096/12)
@@ -272,7 +272,7 @@ void ctrl_changed_init(void);
 void ctrl_changed_reset(void);
 void ctrl_toggle_init(void);
 
-void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta);
-void ctrl_apply_toggle(ctrl_enum_t ctrl, bool changed, bool state);
+void ctrl_apply_delta(enc_enum_t ctrl, int8_t delta);
+void ctrl_apply_toggle(enc_enum_t ctrl, bool changed, bool state);
 
 #endif /* INC_CTRL_H_ */

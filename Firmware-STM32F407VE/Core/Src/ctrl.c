@@ -91,7 +91,7 @@ void _ctrl_apply_delta(uint16_t *ctrl_ptr, int16_t delta, int16_t scale_percent,
 	}
 }
 
-void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
+void ctrl_apply_delta(enc_enum_t ctrl, int8_t delta) {
 	if (!ctrl_enabled || delta == 0) return;
 
 	ctrl_value_t *ctrl_value_ptr = &ctrl_value;
@@ -464,7 +464,7 @@ void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 
 }
 
-void ctrl_apply_toggle(ctrl_enum_t ctrl, bool changed, bool state) {
+void ctrl_apply_toggle(enc_enum_t ctrl, bool changed, bool state) {
 	if (ctrl_enabled && state && changed) {
 		switch(ctrl) {
 		case ENC_OSC1_SQU:
