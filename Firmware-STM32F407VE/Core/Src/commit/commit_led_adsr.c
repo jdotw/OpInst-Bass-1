@@ -173,20 +173,20 @@ void _commit_led_adsr_osc_filt_env_a() {
 	uint8_t brightness = 0x80;
 	uint16_t a_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		a_val = commit_ctrl_value.osc_filt_env1_a;
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		a_val = commit_ctrl_value.osc_filt_env2_a;
 		break;
 	default:
 		break;
 	}
 	switch (ctrl_toggle.osc_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -226,10 +226,10 @@ void _commit_led_adsr_osc_filt_env_d() {
 
 	uint16_t d_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		d_val = commit_ctrl_value.osc_filt_env1_d;
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		d_val = commit_ctrl_value.osc_filt_env2_d;
 		break;
 	default:
@@ -238,10 +238,10 @@ void _commit_led_adsr_osc_filt_env_d() {
 
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.osc_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -287,24 +287,24 @@ void _commit_led_adsr_osc_filt_env_s() {
 
 	uint16_t s_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		switch(ctrl_toggle.osc_filt_env_sustain_func) {
-		case CTRL_ENV_SUSTAIN:
+		case ENC_ENV_SUSTAIN:
 			s_val = commit_ctrl_value.osc_filt_env1_s;
 			break;
-		case CTRL_ENV_AMOUNT:
+		case ENC_ENV_AMOUNT:
 			s_val = commit_ctrl_value.osc_filt_env1_amt;
 			break;
 		default:
 			break;
 		}
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		switch(ctrl_toggle.osc_filt_env_sustain_func) {
-		case CTRL_ENV_SUSTAIN:
+		case ENC_ENV_SUSTAIN:
 			s_val = commit_ctrl_value.osc_filt_env2_s;
 			break;
-		case CTRL_ENV_AMOUNT:
+		case ENC_ENV_AMOUNT:
 			s_val = commit_ctrl_value.osc_filt_env2_amt;
 			break;
 		default:
@@ -321,10 +321,10 @@ void _commit_led_adsr_osc_filt_env_s() {
 	 */
 
 	switch (ctrl_toggle.osc_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		_adsr_led_set_grid_bar(s_val);
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		_adsr_led_set_grid_stack(s_val);
 		break;
 	default:
@@ -356,10 +356,10 @@ void _commit_led_adsr_osc_filt_env_r() {
 
 	uint16_t r_val = 0;
 	switch (ctrl_toggle.osc_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		r_val = commit_ctrl_value.osc_filt_env1_r;
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		r_val = commit_ctrl_value.osc_filt_env2_r;
 		break;
 	default:
@@ -368,10 +368,10 @@ void _commit_led_adsr_osc_filt_env_r() {
 
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.osc_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -419,10 +419,10 @@ void _commit_led_adsr_sub_filt_env_a() {
 
 	uint16_t a_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		a_val = commit_ctrl_value.sub_filt_env1_a;
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		a_val = commit_ctrl_value.sub_filt_env2_a;
 		break;
 	default:
@@ -431,10 +431,10 @@ void _commit_led_adsr_sub_filt_env_a() {
 
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -471,10 +471,10 @@ void _commit_led_adsr_sub_filt_env_d() {
 
 	uint16_t d_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		d_val = commit_ctrl_value.sub_filt_env1_d;
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		d_val = commit_ctrl_value.sub_filt_env2_d;
 		break;
 	default:
@@ -483,10 +483,10 @@ void _commit_led_adsr_sub_filt_env_d() {
 
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -532,24 +532,24 @@ void _commit_led_adsr_sub_filt_env_s() {
 
 	uint16_t s_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		switch(ctrl_toggle.sub_filt_env_sustain_func) {
-		case CTRL_ENV_SUSTAIN:
+		case ENC_ENV_SUSTAIN:
 			s_val = commit_ctrl_value.sub_filt_env1_s;
 			break;
-		case CTRL_ENV_AMOUNT:
+		case ENC_ENV_AMOUNT:
 			s_val = commit_ctrl_value.sub_filt_env1_amt;
 			break;
 		default:
 			break;
 		}
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		switch(ctrl_toggle.sub_filt_env_sustain_func) {
-		case CTRL_ENV_SUSTAIN:
+		case ENC_ENV_SUSTAIN:
 			s_val = commit_ctrl_value.sub_filt_env2_s;
 			break;
-		case CTRL_ENV_AMOUNT:
+		case ENC_ENV_AMOUNT:
 			s_val = commit_ctrl_value.sub_filt_env2_amt;
 			break;
 		default:
@@ -566,10 +566,10 @@ void _commit_led_adsr_sub_filt_env_s() {
 	 */
 
 	switch (ctrl_toggle.sub_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		_adsr_led_set_grid_bar(s_val);
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		_adsr_led_set_grid_stack(s_val);
 		break;
 	default:
@@ -599,10 +599,10 @@ void _commit_led_adsr_sub_filt_env_r() {
 
 	uint16_t r_val = 0;
 	switch (ctrl_toggle.sub_filt_env_attack_func) {
-	case CTRL_SELECT_ENV_1:
+	case ENC_SELECT_ENV_1:
 		r_val = commit_ctrl_value.sub_filt_env1_r;
 		break;
-	case CTRL_SELECT_ENV_2:
+	case ENC_SELECT_ENV_2:
 		r_val = commit_ctrl_value.sub_filt_env2_r;
 		break;
 	default:
@@ -611,10 +611,10 @@ void _commit_led_adsr_sub_filt_env_r() {
 
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_filt_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -664,10 +664,10 @@ void _commit_led_adsr_osc_amp_env_a() {
 	uint16_t a_val = commit_ctrl_value.osc_amp_env_a;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.osc_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -705,10 +705,10 @@ void _commit_led_adsr_osc_amp_env_d() {
 	uint16_t d_val = commit_ctrl_value.osc_amp_env_d;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.osc_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -753,10 +753,10 @@ void _commit_led_adsr_osc_amp_env_s() {
 	uint8_t brightness = DEFAULT_BRIGHTNESS;
 	uint16_t s_val;
 	switch(ctrl_toggle.osc_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		s_val = commit_ctrl_value.osc_amp_env_s;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		s_val = commit_ctrl_value.osc_amp_env_amt;
 		break;
 	default:
@@ -769,10 +769,10 @@ void _commit_led_adsr_osc_amp_env_s() {
 	 */
 
 	switch (ctrl_toggle.osc_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		_adsr_led_set_grid_bar(s_val);
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		_adsr_led_set_grid_stack(s_val);
 		break;
 	default:
@@ -804,10 +804,10 @@ void _commit_led_adsr_osc_amp_env_r() {
 	uint16_t r_val = commit_ctrl_value.osc_amp_env_r;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.osc_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -855,10 +855,10 @@ void _commit_led_adsr_sub_amp_env_a() {
 	uint16_t a_val = commit_ctrl_value.sub_amp_env_a;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -897,10 +897,10 @@ void _commit_led_adsr_sub_amp_env_d() {
 	uint16_t d_val = commit_ctrl_value.sub_amp_env_d;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
@@ -944,10 +944,10 @@ void _commit_led_adsr_sub_amp_env_s() {
 	uint8_t brightness = DEFAULT_BRIGHTNESS;
 	uint16_t s_val = 0;
 	switch(ctrl_toggle.sub_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		s_val = commit_ctrl_value.sub_amp_env_s;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		s_val = commit_ctrl_value.sub_amp_env_amt;
 		break;
 	default:
@@ -960,10 +960,10 @@ void _commit_led_adsr_sub_amp_env_s() {
 	 */
 
 	switch (ctrl_toggle.sub_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		_adsr_led_set_grid_bar(s_val);
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		_adsr_led_set_grid_stack(s_val);
 		break;
 	default:
@@ -994,10 +994,10 @@ void _commit_led_adsr_sub_amp_env_r() {
 	uint16_t r_val = commit_ctrl_value.sub_amp_env_r;
 	uint8_t brightness = 0x80;
 	switch (ctrl_toggle.sub_amp_env_sustain_func) {
-	case CTRL_ENV_SUSTAIN:
+	case ENC_ENV_SUSTAIN:
 		brightness = DEFAULT_BRIGHTNESS;
 		break;
-	case CTRL_ENV_AMOUNT:
+	case ENC_ENV_AMOUNT:
 		brightness = HALF_BRIGHTNESS;
 		break;
 	default:
