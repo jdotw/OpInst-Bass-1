@@ -10,6 +10,7 @@
 #include <string.h>
 #include "ctrl.h"
 #include "midi.h"
+#include "seq.h"
 
 static const ctrl_value_t _init_ctrl_value = {
 		.osc1_saw_lvl = CTRL_DEFAULT_MAX,
@@ -92,12 +93,27 @@ void _ctrl_apply_delta(uint16_t *ctrl_ptr, int16_t delta, int16_t scale_percent,
 
 void ctrl_apply_delta(ctrl_enum_t ctrl, int8_t delta) {
 	if (!ctrl_enabled || delta == 0) return;
+
+	ctrl_value_t *ctrl_value_ptr = &ctrl_value;
+	ctrl_changed_t *ctrl_changed_ptr = &ctrl_changed;
+	if (seq_state.selected_step != UINT8_MAX) {
+	  // We have a selected step
+	  // The ctrl struct should be the struct
+	  // specific for that step -- i.e p-lock
+    ctrl_value_ptr = &seq_state.step_ctrl_value[seq_state.selected_step];
+    ctrl_changed_ptr = &seq_state.step_ctrl_changed[seq_state.selected_step];
+	}
 	switch (ctrl) {
 
 	/* OSC 1 */
 	case CTRL_OSC1_SAW:
-		_ctrl_apply_delta(&ctrl_value.osc1_saw_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
-		ctrl_changed.osc1_saw_lvl_changed = true;
+	  if (seq_state.selected_step != UINT8_MAX) {
+	    if (!ctrl_changed_ptr->osc1_saw_lvl_changed) {
+	      ctrl_value_ptr->osc1_saw_lvl = ctrl_value.osc1_saw_lvl;
+	    }
+	  }
+		_ctrl_apply_delta(&ctrl_value_ptr->osc1_saw_lvl, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		ctrl_changed_ptr->osc1_saw_lvl_changed = true;
 		break;
 	case CTRL_OSC1_SQU:
 		switch(ctrl_toggle.osc1_squ_func) {

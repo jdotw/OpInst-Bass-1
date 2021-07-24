@@ -17,6 +17,8 @@ seq_changed_t seq_changed;
 
 void seq_init() {
   memset(&seq_changed, 1, sizeof(seq_changed_t));
+  seq_state.selected_step = UINT8_MAX;
+  seq_state.prev_step = UINT8_MAX;
 }
 
 void seq_changed_reset() {
@@ -47,7 +49,9 @@ void seq_reset() {
 
 void seq_set_step(uint8_t step) {
   if (seq_state.active_step != step) {
+    seq_state.prev_step = seq_state.active_step;
     seq_state.active_step = step;
+    seq_state.active_step_changed = true;
     seq_changed.active_step = true;
     uint8_t page = step / SEQ_STEPS_PER_PAGE;
     if (seq_state.active_page != page) {
@@ -77,4 +81,36 @@ void seq_advance_selected_page() {
     seq_state.selected_page++;
   }
   seq_changed.selected_page = true;
+}
+
+void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_value_t *ctrl_value_ptr, ctrl_changed_t *ctrl_changed_ptr) {
+  // Using the state in state_ptr, overlays the control values
+  // that are set for that step (p-locks) onto the
+  // ctrl_value_ptr and ctrl_changed_ptr
+  // That is, if the step has a value set for any control
+  // (noted by _changed = true flag for that value) then it
+  // overrides the state in the ctrl_value_ptr struct and causes
+  // the corresponding ctrl_changed_ptr flag to be set.
+  //
+  // This is gonna be a lot of code :|
+
+
+
+  ctrl_value_t *step_value_ptr = &state_ptr->step_ctrl_value[state_ptr->active_step];
+  ctrl_changed_t *step_changed_ptr = &state_ptr->step_ctrl_changed[state_ptr->active_step];
+  ctrl_value_t *prev_value_ptr = NULL;
+  ctrl_changed_t *prev_changed_ptr = NULL;
+
+  if (state_ptr->prev_step != UINT8_MAX) {
+    prev_value_ptr = &state_ptr->step_ctrl_value[state_ptr->prev_step];
+    prev_changed_ptr = &state_ptr->step_ctrl_changed[state_ptr->prev_step];
+  }
+
+  // osc1_saw_lvl
+  if (step_changed_ptr->osc1_saw_lvl_changed) {
+    ctrl_value_ptr->osc1_saw_lvl = step_value_ptr->osc1_saw_lvl;
+    ctrl_changed_ptr->osc1_saw_lvl_changed = state_ptr->active_step_changed;
+  } else if (prev_changed_ptr->osc1_saw_lvl_changed) {
+    ctrl_changed_ptr->osc1_saw_lvl_changed = true;
+  }
 }

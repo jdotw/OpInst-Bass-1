@@ -15,6 +15,7 @@
 #include "note.h"
 #include "seq.h"
 #include "mod.h"
+#include "blink.h"
 #include <math.h>
 
 void commit_dac(void);
@@ -64,6 +65,9 @@ void commit_30hz_timer(void) {
 	  commit_seq_state = seq_state;
 	  commit_seq_changed = seq_changed;
 	  commit_mod_state = mod_state;
+
+	  // Apply p-lock
+	  seq_apply_active_step_ctrl(&seq_state, &commit_ctrl_value, &commit_ctrl_changed);
 
 	  // Then reset the change flag so that any further changes
 	  // will be waiting for us on the next cycle

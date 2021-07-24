@@ -85,7 +85,23 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
       }
       break;
     }
+
+    if (seq_state.selected_step == UINT8_MAX
+        || (seq_state.selected_step / 4) != seq_state.selected_page
+        || !seq_state.button_state[(seq_state.selected_step%16)].pressed) {
+      // Selected step has changed
+      seq_state.selected_step = UINT8_MAX;  // Default to no selection
+      for(uint8_t i=0; i < 16; i++) {
+        if (seq_state.button_state[i].pressed) {
+          // Set new selection
+          seq_state.selected_step = i * (seq_state.selected_page + 1);
+          break;  // Always select the lowest button
+        }
+      }
+    }
   }
+
+
 
 }
 
