@@ -119,7 +119,7 @@ uint16_t* _osc2_mix() {
 
 	val[0] = commit_ctrl.value[CTRL_OSC2_SAW_LVL];
 	val[1] = commit_ctrl.value[CTRL_OSC2_NOISE_LVL];
-	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_PWM];
+	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_LVL];
 	return val;
 }
 
@@ -132,7 +132,7 @@ bool _osc2_mix_changed() {
 uint16_t* _osc2_prefilt_rgb() {
 	val[0] = commit_ctrl.value[CTRL_OSC2_SAW_LVL] | (uint16_t)((double)commit_ctrl.value[CTRL_OSC1_SAW_LVL] * ((double)commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX] / 4095.0));
 	val[1] = commit_ctrl.value[CTRL_OSC2_NOISE_LVL] | (uint16_t)((double)commit_ctrl.value[CTRL_SUB_NOISE_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
-	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_PWM] | (uint16_t)((double)commit_ctrl.value[CTRL_OSC1_SQU_LVL] * ((double)commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX] / 4095.0)) | (uint16_t)((double)commit_ctrl.value[CTRL_SUB_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
+	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_LVL] | (uint16_t)((double)commit_ctrl.value[CTRL_OSC1_SQU_LVL] * ((double)commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX] / 4095.0)) | (uint16_t)((double)commit_ctrl.value[CTRL_SUB_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
 	return val;
 }
 
@@ -975,8 +975,8 @@ void commit_led_osc(commit_cycle_t cycle) {
 		_commit_led_osc_amp_out();
 		break;
 	case COMMIT_LED_SUB_AMP_OUT:
-		break;
 		_commit_led_sub_amp_out();
+    break;
 
 	case COMMIT_LED_SUB_SQU:
 		_commit_led_sub_squ();

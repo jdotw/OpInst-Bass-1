@@ -65,7 +65,7 @@ void commit_30hz_timer(void) {
 	  commit_mod_state = mod_state;
 
 	  // Apply p-lock
-	  seq_apply_active_step_ctrl(&seq_state, &commit_ctrl);
+	  seq_apply_active_step_ctrl(&seq_state, &seq_changed, &commit_ctrl);
 
 	  // Then reset the change flag so that any further changes
 	  // will be waiting for us on the next cycle

@@ -45,11 +45,11 @@ void ctrl_value_init() {
 }
 
 void ctrl_changed_init() {
-  memset(&ctrl.changed, 1, sizeof(CTRL_ENUM_MAX));
+  memset(&ctrl.changed, 1, sizeof(ctrl.changed));
 }
 
 void ctrl_changed_reset() {
-  memset(&ctrl.changed, 0, sizeof(CTRL_ENUM_MAX));
+  memset(&ctrl.changed, 0, sizeof(ctrl.changed));
 }
 
 void ctrl_toggle_init() {

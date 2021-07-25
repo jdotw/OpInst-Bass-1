@@ -23,21 +23,27 @@ typedef struct {
   bool button_changed[16];
 
   bool running;
-  uint8_t prev_step;
+
+  uint8_t last_step;
+
+  uint8_t prev_active_step;
   uint8_t active_step;
-  bool active_step_changed;
   uint8_t active_page;
 
   uint8_t selected_page;
   uint8_t selected_step;
+  uint8_t prev_selected_page;
+  uint8_t prev_selected_step;
 
   ctrl_t step_ctrl[64];
 } seq_state_t;
 
 typedef struct {
   bool running;
+  bool last_step;
   bool active_step;
   bool active_page;
+  bool selected_step;
   bool selected_page;
 } seq_changed_t;
 
@@ -57,6 +63,6 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel);
 void seq_poll_mcu_gpio();
 void seq_changed_reset();
 
-void seq_apply_active_step_ctrl(seq_state_t *state_ptr, ctrl_t *ctrl_ptr);
+void seq_apply_active_step_ctrl(seq_state_t *state_ptr, seq_changed_t *change_ptr, ctrl_t *ctrl_ptr);
 
 #endif /* INC_SEQ_H_ */

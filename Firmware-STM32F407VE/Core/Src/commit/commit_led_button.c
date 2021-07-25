@@ -27,7 +27,7 @@ uint8_t* _button_step_rgb(uint8_t i) {
     val[1] = 0xFF;
     val[2] = 0xFF;
   } else if (commit_seq_state.active_page == commit_seq_state.selected_page) {
-    bool isActive = i == commit_seq_state.active_step % 16;
+    bool isActive = i == commit_seq_state.active_step % 16 && commit_seq_state.running;
     val[0] = 0x00;
     val[1] = isActive ? 0xFF : 0x00;
     val[2] = 0x00;
