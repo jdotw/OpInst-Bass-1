@@ -42,12 +42,33 @@ static const ctrl_toggle_t _init_ctrl_toggle = {
 		0
 };
 
-ctrl_value_t ctrl_value;
-ctrl_changed_t ctrl_changed;
+ctrl_t ctrl;
 ctrl_toggle_t ctrl_toggle;
 bool ctrl_enabled = true;
 
 void ctrl_value_init() {
+  .osc1_saw_lvl = CTRL_DEFAULT_MAX,
+  .osc1_squ_pwm = CTRL_DEFAULT_MID,
+  .osc1_to_osc1 = CTRL_DEFAULT_MAX,
+  .osc1_to_osc2 = CTRL_DEFAULT_MIN,
+
+  .osc2_squ_lvl = CTRL_DEFAULT_MAX,
+  .osc2_squ_pwm = CTRL_DEFAULT_MID,
+
+  .sub_lvl = CTRL_DEFAULT_MAX,
+  .sub_to_osc2 = CTRL_DEFAULT_MIN,
+
+  .osc1_filt_cutoff = CTRL_DEFAULT_MAX,
+  .osc2_filt_cutoff = CTRL_DEFAULT_MAX,
+  .sub_filt_cutoff = CTRL_DEFAULT_MAX,
+
+  .fx_wetdry = CTRL_DEFAULT_MID,
+
+  .osc_amp_env_s = CTRL_DEFAULT_MAX,
+  .osc_amp_env_amt = CTRL_DEFAULT_MAX,
+  .sub_amp_env_s = CTRL_DEFAULT_MAX,
+  .sub_amp_env_amt = CTRL_DEFAULT_MAX,
+
 	ctrl_value = _init_ctrl_value;
 }
 
@@ -91,7 +112,7 @@ void _ctrl_apply_delta(uint16_t *ctrl_ptr, int16_t delta, int16_t scale_percent,
 	}
 }
 
-void ctrl_apply_delta(enc_enum_t ctrl, int8_t delta) {
+void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
 	if (!ctrl_enabled || delta == 0) return;
 
 	ctrl_value_t *ctrl_value_ptr = &ctrl_value;
@@ -103,12 +124,13 @@ void ctrl_apply_delta(enc_enum_t ctrl, int8_t delta) {
     ctrl_value_ptr = &seq_state.step_ctrl_value[seq_state.selected_step];
     ctrl_changed_ptr = &seq_state.step_ctrl_changed[seq_state.selected_step];
 	}
-	switch (ctrl) {
+	switch (enc) {
 
 	/* OSC 1 */
 	case ENC_OSC1_SAW:
 	  if (seq_state.selected_step != UINT8_MAX) {
 	    if (!ctrl_changed_ptr->osc1_saw_lvl_changed) {
+	      // Establish initial value for the step based on global state
 	      ctrl_value_ptr->osc1_saw_lvl = ctrl.value[CTRL_OSC1_SAW_LVL];
 	    }
 	  }
