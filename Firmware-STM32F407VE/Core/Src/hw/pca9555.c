@@ -74,7 +74,7 @@ bool pca9555_read_pin_state(uint8_t bus, uint8_t channel, uint8_t unit, uint16_t
   res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, &cmd, 1);
   if (!res) return false;
 
-  res = i2c_rx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, stateptr, 2);
+  res = i2c_rx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, (uint8_t *)stateptr, 2);
   if (!res) return false;
 
   return res;

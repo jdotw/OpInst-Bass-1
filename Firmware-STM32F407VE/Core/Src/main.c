@@ -33,6 +33,7 @@
 #include "pca9555.h"
 #include "note.h"
 #include "midi.h"
+#include "seq.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

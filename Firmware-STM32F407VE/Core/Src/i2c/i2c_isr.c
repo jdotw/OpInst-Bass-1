@@ -10,6 +10,7 @@
 #include "main.h"
 #include "i2c.h"
 #include "rotpic.h"
+#include "seq.h"
 
 void i2c_isr(uint8_t bus) {
 	// Called when any of the I2C interrupt lines go active-low

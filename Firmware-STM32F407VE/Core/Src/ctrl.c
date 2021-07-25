@@ -106,7 +106,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
 	switch (enc) {
 	/* OSC 1 */
 	case ENC_OSC1_SAW:
-		_ctrl_apply_delta(&ctrl, CTRL_OSC1_SAW_LVL, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(CTRL_OSC1_SAW_LVL, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case ENC_OSC1_SQU:
 		switch(ctrl_toggle.osc1_squ_func) {
@@ -121,17 +121,17 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
 		}
 		break;
 	case ENC_OSC1_TO_OSC2:
-		_ctrl_apply_delta(CTRL_OSC1_TO_OSC2, delta, CTRL_SCALE_HALT_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(CTRL_OSC1_TO_OSC2_MIX, delta, CTRL_SCALE_HALT_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC 1 TUNING */
 	case ENC_OSC1_TUNE:
 		switch(ctrl_toggle.osc1_tune_func) {
 		case ENC_OSC_TUNE_COARSE:
-			_ctrl_apply_delta((uint16_t*)&ctrl.value[CTRL_OSC1_TUNE_COARSE], delta, 100, -12, 12);
+			_ctrl_apply_delta(CTRL_OSC1_TUNE_COARSE, delta, 100, -12, 12);
 			break;
 		case ENC_OSC_TUNE_FINE:
-			_ctrl_apply_delta((uint16_t*)&ctrl.value[CTRL_OSC1_TUNE_FINE], delta, 100, INT16_MIN, INT16_MAX);
+			_ctrl_apply_delta(CTRL_OSC1_TUNE_FINE, delta, 100, INT16_MIN, INT16_MAX);
 			break;
 		default:
 			break;
@@ -146,7 +146,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
 		_ctrl_apply_delta(CTRL_OSC1_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case ENC_OSC1_DRIVE:
-		_ctrl_apply_delta(CTRL_OSC1_DRIVE, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(CTRL_OSC1_DRIVE_AMT, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* OSC 2 */
@@ -177,7 +177,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
 		_ctrl_apply_delta(CTRL_OSC2_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case ENC_OSC2_DRIVE:
-		_ctrl_apply_delta(CTRL_OSC2_DRIVE, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(CTRL_OSC2_DRIVE_AMT, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* SUB */
@@ -188,7 +188,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
 		_ctrl_apply_delta(CTRL_SUB_NOISE_LVL, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 	case ENC_SUB_TO_OSC2:
-		_ctrl_apply_delta(CTRL_SUB_TO_OSC2, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+		_ctrl_apply_delta(CTRL_SUB_TO_OSC2_MIX, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
 		break;
 
 	/* SUB FILTER */

@@ -330,7 +330,7 @@ bool _fx_wet_changed() {
   return _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl.changed[CTRL_FX_WETDRY];
 }
 
-uint16_t* ctrl_fx_feedback_rgb() {
+uint16_t* _fx_feedback_rgb() {
 	uint16_t fx_wet_rgb[3];
 	_rgb_copy(fx_wet_rgb, _fx_wet_rgb());
 	val[0] = (fx_wet_rgb[0]) * ((double)commit_ctrl.value[CTRL_FX_FEEDBACK] / 4095);
@@ -339,7 +339,7 @@ uint16_t* ctrl_fx_feedback_rgb() {
 	return val;
 }
 
-bool ctrl_fx_feedback_changed() {
+bool _fx_feedback_changed() {
   return _fx_wet_changed() || commit_ctrl.changed[CTRL_FX_FEEDBACK];
 }
 
@@ -811,9 +811,9 @@ void _commit_led_sub_to_osc2_mix() {
 	 * 7, 8
 	 */
 
-	if (!_ctrl_sub_to_osc2_mix_changed()) return;
+	if (!_sub_to_osc2_mix_changed()) return;
 
-	_set_pwm_seq(_ctrl_sub_to_osc2_mix_rgb(), pwm_seq, 2*3);
+	_set_pwm_seq(_sub_to_osc2_mix_rgb(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (7*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -910,9 +910,9 @@ void _commit_led_fx_feedback() {
 	 *
 	 */
 
-	if (!_ctrl_fx_feedback_changed()) return;
+	if (!_fx_feedback_changed()) return;
 
-	_set_pwm_seq(_ctrl_fx_feedback_rgb(), pwm_seq, 8*3);
+	_set_pwm_seq(_fx_feedback_rgb(), pwm_seq, 8*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, (0*3), pwm_seq, (8*3));
 	if (!res) Error_Handler();
 
@@ -986,9 +986,10 @@ void commit_led_osc(commit_cycle_t cycle) {
 		break;
 	case COMMIT_LED_SUB_MIX:
 		_commit_led_sub_mix();
+    break;
 	case COMMIT_LED_SUB_TO_OSC2:
-		break;
-		_commit_led_sub_to_osc2();
+		_commit_led_sub_to_osc2_mix();
+    break;
 	case COMMIT_LED_SUB_FILT_OUT:
 		_commit_led_sub_filt_out();
 		break;
