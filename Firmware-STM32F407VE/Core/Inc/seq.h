@@ -18,6 +18,8 @@ typedef struct {
   bool set;     // set = this step has parameters set
 } seq_button_state_t;
 
+#define SEQ_MAX_STEPS 64
+
 typedef struct {
   seq_button_state_t button_state[16];
   bool button_changed[16];
