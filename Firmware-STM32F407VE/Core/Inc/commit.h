@@ -84,16 +84,31 @@ void commit_30hz_timer(void);
 
 // Internal methods for RGB LED commit
 
-#define DEFAULT_SCALE 0x15
-#define DEFAULT_SCALE_R 0x17
-#define DEFAULT_SCALE_G 0x07
-#define DEFAULT_SCALE_B 0x16
+typedef struct {
+  uint16_t r;     // 14bit 0-4095
+  uint16_t g;     // 14bit 0-4095
+  uint16_t b;     // 14bit 0-4095
+} rgb_14;
+
+typedef struct {
+  double h;       // angle in degrees
+  double s;       // a fraction between 0 and 1
+  double v;       // a fraction between 0 and 1
+} hsv;
 
 uint8_t _max(uint16_t a, uint16_t b);
 uint8_t _min(uint16_t a, uint16_t b);
 uint8_t _12_to_8(uint16_t a);
 void _rgb_copy(uint16_t *dst, uint16_t *src);
+rgb_14 _hsv_to_rgb(hsv hsv);
+hsv _rgb_to_hsv(rgb_14 in14bit);
+hsv _interpolate_hsv(hsv in1, hsv in2);
+rgb_14 _interpolate_rgb(rgb_14 in1, rgb_14 in2);
+double _interpolate_h(hsv a, hsv b);
+double _interpolate_s(hsv in1, hsv in2);
+double _interpolate_v(hsv in1, hsv in2);
 void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len);
+void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len);
 void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
 
 #endif /* INC_COMMIT_H_ */

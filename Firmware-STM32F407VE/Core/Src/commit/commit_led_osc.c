@@ -10,12 +10,23 @@
 #include "is32.h"
 #include "i2c.h"
 #include "ctrl.h"
+#include <math.h>
+
+// Defaults
+
+#define DEFAULT_HSV_V 1.0
+#define MAX_HSV_V 1.0
+
+//#define SAW_HSV_H 0.0
+//#define SQU_HSV_H 240.0
+#define SAW_HSV_H 60.0
+#define SQU_HSV_H 180.0
 
 /*
  * RGB Calculations
  */
 
-static uint16_t val[3];
+static uint16_t val[3]; // TODO: Get rid of this
 
 // utils
 
@@ -24,13 +35,18 @@ uint16_t _max16(uint16_t a, uint16_t b) {
   else return b;
 }
 
+double _ctrl_double(ctrl_enum_t in) {
+  return (double)(commit_ctrl.value[in] / 4095.0);
+}
+
 // osc1_saw
 
-uint16_t* _osc1_saw_rgb() {
-	val[0] = commit_ctrl.value[CTRL_OSC1_SAW_LVL];
-	val[1] = 0;
-	val[2] = 0;
-	return val;
+hsv _osc1_saw_hsv() {
+  hsv hsv;
+  hsv.h = SAW_HSV_H;
+  hsv.s = 1.0;
+  hsv.v = DEFAULT_HSV_V * _ctrl_double(CTRL_OSC1_SAW_LVL);
+  return hsv;
 }
 
 bool _osc1_saw_changed() {
@@ -39,12 +55,12 @@ bool _osc1_saw_changed() {
 
 // osc1_squ
 
-uint16_t* _osc1_squ_rgb() {
-	val[0] = 0;
-	val[1] = 0;
-	val[2] = commit_ctrl.value[CTRL_OSC1_SQU_LVL];
-	return val;
-
+hsv _osc1_squ_hsv() {
+  hsv hsv;
+  hsv.h = SQU_HSV_H;
+  hsv.s = 1.0;
+  hsv.v = DEFAULT_HSV_V * _ctrl_double(CTRL_OSC1_SQU_LVL);
+	return hsv;
 }
 
 bool _osc1_squ_changed() {
@@ -60,6 +76,22 @@ uint16_t* _osc1_mix_rgb() {
 	return val;
 }
 
+hsv _osc1_mix_hsv() {
+//  rgb_14 saw_rgb = _hsv_to_rgb(_osc1_saw_hsv());
+//  rgb_14 squ_rgb = _hsv_to_rgb(_osc1_squ_hsv());
+//  rgb_14 mix_rgb = _interpolate_rgb(saw_rgb, squ_rgb);
+//  return _rgb_to_hsv(mix_rgb);
+  hsv saw_hsv = _osc1_saw_hsv();
+  hsv squ_hsv = _osc1_squ_hsv();
+  hsv mix = {
+      .h = _interpolate_h(saw_hsv, squ_hsv),
+      .s = 1.0,
+      .v = fmax(saw_hsv.v, squ_hsv.v),
+  };
+  return mix;
+}
+
+
 bool _osc1_mix_changed() {
   return commit_ctrl.changed[CTRL_OSC1_SAW_LVL] || commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
 }
@@ -70,6 +102,17 @@ uint16_t* _osc1_filt_freq_rgb() {
   val[1] = 0;
   val[2] = (double)val[2] * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF] / 4095.0));
   return val;
+}
+
+hsv _osc1_filt_freq_hsv() {
+  hsv mix = _osc1_mix_hsv();
+  double cutoff = _ctrl_double(CTRL_OSC1_FILT_CUTOFF);
+  mix.s = cutoff;
+  mix.v *= (cutoff * cutoff);
+  if (mix.v < 0.01) {
+    mix.v = 0.01;
+  }
+  return mix;
 }
 
 bool _osc1_filt_freq_changed() {
@@ -84,13 +127,34 @@ uint16_t* _osc1_filt_reso_rgb() {
   return val;
 }
 
+hsv _osc1_filt_reso_hsv() {
+  hsv out = _osc1_filt_freq_hsv();
+  double res = _ctrl_double(CTRL_OSC1_FILT_RES);
+  out.h += 90.0 * res;
+  if (out.h >= 360.0) out.h -= 360.0;
+  out.s += (MAX_HSV_V - out.s) * res;
+  out.v += ((1.0 - out.v) * 0.75) * res;
+  return out;
+}
+
 bool _osc1_filt_reso_changed() {
-  return _osc1_filt_freq_rgb() || commit_ctrl.changed[CTRL_OSC1_FILT_RES];
+  return _osc1_filt_freq_changed() || commit_ctrl.changed[CTRL_OSC1_FILT_RES];
 }
 
 uint16_t* _osc1_drive_rgb() {
   _osc1_filt_reso_rgb();
   return val;
+}
+
+hsv _osc1_drive_hsv() {
+  hsv out = _osc1_filt_reso_hsv();
+  double drive = _ctrl_double(CTRL_OSC1_DRIVE_AMT);
+  out.h -= 120.0 * drive;
+  if (out.h >= 360.0) out.h -= 360.0;
+  if (out.h < 0.0) out.h += 360.0;
+  out.s += (MAX_HSV_V - out.s) * drive;
+  out.v += ((1.0 - out.v) * 0.75) * drive;
+  return out;
 }
 
 bool _osc1_drive_changed() {
@@ -409,7 +473,7 @@ void _commit_led_osc1_saw() {
 
 	if (!_osc1_saw_changed()) return;
 
-	_set_pwm_seq(_osc1_saw_rgb(), pwm_seq, 2*3);
+	_set_pwm_seq_hsv(_osc1_saw_hsv(), pwm_seq, 2*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 2*3);
 	if (!res) Error_Handler();
 
@@ -433,7 +497,7 @@ void _commit_led_osc1_squ() {
 
 	if (!_osc1_squ_changed()) return;
 
-	_set_pwm_seq(_osc1_squ_rgb(), pwm_seq, 2*3);
+	_set_pwm_seq_hsv(_osc1_squ_hsv(), pwm_seq, 2*3);
 
 	// Work around Red and Blue pins being transposed
 	pwm_seq[0] = pwm_seq[2];
@@ -464,7 +528,7 @@ void _commit_led_osc1_mix() {
 
 	if (!_osc1_mix_changed()) return;
 
-	_set_pwm_seq(_osc1_mix_rgb(), pwm_seq, 7*3);
+	_set_pwm_seq_hsv(_osc1_mix_hsv(), pwm_seq, 7*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 12, pwm_seq, 7*3);
 	if (!res) Error_Handler();
 
@@ -488,7 +552,7 @@ void _commit_led_osc1_filt_freq() {
 
 	if (!_osc1_filt_freq_changed()) return;
 
-	_set_pwm_seq(_osc1_filt_freq_rgb(), pwm_seq, 4*3);
+	_set_pwm_seq_hsv(_osc1_filt_freq_hsv(), pwm_seq, 4*3);
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (3*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -512,7 +576,7 @@ void _commit_led_osc1_filt_reso() {
 
   if (!_osc1_filt_reso_changed()) return;
 
-  _set_pwm_seq(_osc1_filt_reso_rgb(), pwm_seq, 4*3);
+  _set_pwm_seq_hsv(_osc1_filt_reso_hsv(), pwm_seq, 4*3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (5*3), pwm_seq, (2*3));
   if (!res) Error_Handler();
 
@@ -538,7 +602,7 @@ void _commit_led_osc1_drive() {
 
 	if (!_osc1_drive_changed()) return;
 
-	_set_pwm_seq(_osc1_drive_rgb(), pwm_seq, 4*3);
+	_set_pwm_seq_hsv(_osc1_drive_hsv(), pwm_seq, 4*3);
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (0*3), pwm_seq, (4*3));
 	if (!res) Error_Handler();
 
