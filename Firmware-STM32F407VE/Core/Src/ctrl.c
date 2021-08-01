@@ -36,7 +36,7 @@ void ctrl_value_init() {
   ctrl.value[CTRL_OSC2_FILT_CUTOFF] = CTRL_DEFAULT_MAX;
   ctrl.value[CTRL_SUB_FILT_CUTOFF] = CTRL_DEFAULT_MAX;
 
-  ctrl.value[CTRL_FX_WETDRY] = CTRL_DEFAULT_MID;
+  ctrl.value[CTRL_FX_WETDRY] = CTRL_DEFAULT_MIN;
 
   ctrl.value[CTRL_OSC_AMP_ENV_S] = CTRL_DEFAULT_MAX;
   ctrl.value[CTRL_OSC_AMP_ENV_AMT] = CTRL_DEFAULT_MAX;

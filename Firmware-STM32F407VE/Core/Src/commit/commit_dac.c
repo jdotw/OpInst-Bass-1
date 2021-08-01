@@ -15,14 +15,35 @@
 #include "commit.h"
 #include <math.h>
 
-uint16_t _dac_lin_to_log(uint16_t input) {
+#define VCA_LIN_LOG_OFFSET 2500
+#define ENV_AMT_LIN_LOG_OFFSET 0
+
+uint16_t _vca_lin_to_log(uint16_t input) {
 	// Converts a linear scale to the logarithmic scale
 	// That is needed to provide linear control through a VCA
-	// I worked this out in Number
+  // This value has been tuned/tweaked for audio-path VCAs
+	// I worked this out in Numbers
 	// *shrug*
-
 	if (input == 0) return 0;
-	else return (log10(input)/log10(2))*(4095/12);
+	else return ((log10(input)/log10(2))*((4095-VCA_LIN_LOG_OFFSET)/12))+VCA_LIN_LOG_OFFSET;
+}
+
+uint16_t _env_amt_lin_to_log(uint16_t input) {
+  // Converts a linear scale to the logarithmic scale
+  // That is needed to provide linear control through a VCA
+  // This value has been tuned/tweaked for env amt path VCAs
+  // I worked this out in Numbers
+  // *shrug*
+  if (input == 0) return 0;
+  else return ((log10(input)/log10(2))*((4095-ENV_AMT_LIN_LOG_OFFSET)/12))+ENV_AMT_LIN_LOG_OFFSET;
+}
+
+#define FILT_CUTOFF_OFFSET 800.0
+
+uint16_t _filt_cutoff_scale(uint16_t input) {
+  if (input == 0) return 0;
+  double dbl = (((double)input / 4095.0) * (4095.0-FILT_CUTOFF_OFFSET)) + FILT_CUTOFF_OFFSET;
+  return (uint16_t) dbl;
 }
 
 void commit_dac() {
@@ -35,7 +56,7 @@ void commit_dac() {
 	if (commit_ctrl.changed[CTRL_OSC1_FILT_RES])
 	  dac7678_set_value(I2C_LEFT, 0, 0, 0, commit_ctrl.value[CTRL_OSC1_FILT_RES]);
 	if (commit_ctrl.changed[CTRL_OSC1_FILT_CUTOFF])
-	  dac7678_set_value(I2C_LEFT, 0, 0, 1, commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF]);
+	  dac7678_set_value(I2C_LEFT, 0, 0, 1, _filt_cutoff_scale(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF]));
 
 	if (commit_note_value.note_number
 	    || commit_ctrl.changed[CTRL_OSC1_TUNE_COARSE]
@@ -47,63 +68,63 @@ void commit_dac() {
 	}
 
   if (commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX])
-    dac7678_set_value(I2C_LEFT, 0, 0, 3, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC1_TO_OSC1_MIX]));
+    dac7678_set_value(I2C_LEFT, 0, 0, 3, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC1_TO_OSC1_MIX]));
   if (commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX])
-    dac7678_set_value(I2C_LEFT, 0, 0, 4, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX]));
+    dac7678_set_value(I2C_LEFT, 0, 0, 4, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX]));
   if (commit_ctrl.changed[CTRL_OSC1_SQU_PWM])
     dac7678_set_value(I2C_LEFT, 0, 0, 5, commit_ctrl.value[CTRL_OSC1_SQU_PWM]);
   if (commit_ctrl.changed[CTRL_OSC1_SAW_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 0, 6, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC1_SAW_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 0, 6, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC1_SAW_LVL]));
   if (commit_ctrl.changed[CTRL_OSC1_SQU_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 0, 7, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC1_SQU_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 0, 7, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC1_SQU_LVL]));
 
 
 	// Left0:010
 
   if (commit_ctrl.changed[CTRL_OSC2_NOISE_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 2, 0, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC2_NOISE_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 2, 0, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC2_NOISE_LVL]));
   if (commit_ctrl.changed[CTRL_SUB_NOISE_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 2, 1, _dac_lin_to_log(commit_ctrl.value[CTRL_SUB_NOISE_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 2, 1, _vca_lin_to_log(commit_ctrl.value[CTRL_SUB_NOISE_LVL]));
   if (commit_ctrl.changed[CTRL_SUB_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 2, 2, _dac_lin_to_log(commit_ctrl.value[CTRL_SUB_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 2, 2, _vca_lin_to_log(commit_ctrl.value[CTRL_SUB_LVL]));
   if (commit_ctrl.changed[CTRL_SUB_TO_OSC2_MIX])
-    dac7678_set_value(I2C_LEFT, 0, 2, 3, _dac_lin_to_log(commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX]));
+    dac7678_set_value(I2C_LEFT, 0, 2, 3, _vca_lin_to_log(commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX]));
   if (commit_note_value.note_number)
     dac7678_set_value(I2C_LEFT, 0, 2, 4, osc_dac_value_for_note(OSC2, commit_note_value.note_number));
   if (commit_ctrl.changed[CTRL_OSC2_SQU_PWM])
     dac7678_set_value(I2C_LEFT, 0, 2, 5, commit_ctrl.value[CTRL_OSC2_SQU_PWM]);
   if (commit_ctrl.changed[CTRL_OSC2_SQU_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 2, 6, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC2_SQU_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 2, 6, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC2_SQU_LVL]));
   if (commit_ctrl.changed[CTRL_OSC2_SAW_LVL])
-    dac7678_set_value(I2C_LEFT, 0, 2, 7, _dac_lin_to_log(commit_ctrl.value[CTRL_OSC2_SAW_LVL]));
+    dac7678_set_value(I2C_LEFT, 0, 2, 7, _vca_lin_to_log(commit_ctrl.value[CTRL_OSC2_SAW_LVL]));
 
 	// Left0:100
   if (commit_ctrl.changed[CTRL_OSC_FILT_ENV1_AMT])
-    dac7678_set_value(I2C_LEFT, 0, 4, 0, _dac_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_OSC_FILT_ENV1_AMT]));
+    dac7678_set_value(I2C_LEFT, 0, 4, 0, _env_amt_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_OSC_FILT_ENV1_AMT]));
   if (commit_ctrl.changed[  CTRL_OSC_FILT_ENV2_AMT])
-    dac7678_set_value(I2C_LEFT, 0, 4, 1, _dac_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_OSC_FILT_ENV2_AMT]));
+    dac7678_set_value(I2C_LEFT, 0, 4, 1, _env_amt_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_OSC_FILT_ENV2_AMT]));
   if (commit_ctrl.changed[CTRL_OSC_AMP_ENV_AMT])
-    dac7678_set_value(I2C_LEFT, 0, 4, 2, _dac_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_OSC_AMP_ENV_AMT]));
+    dac7678_set_value(I2C_LEFT, 0, 4, 2, _env_amt_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_OSC_AMP_ENV_AMT]));
   if (commit_ctrl.changed[CTRL_SUB_AMP_ENV_AMT])
-    dac7678_set_value(I2C_LEFT, 0, 4, 3, _dac_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_SUB_AMP_ENV_AMT]));
+    dac7678_set_value(I2C_LEFT, 0, 4, 3, _env_amt_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_SUB_AMP_ENV_AMT]));
   if (commit_ctrl.changed[CTRL_SUB_FILT_ENV2_AMT])
-    dac7678_set_value(I2C_LEFT, 0, 4, 4, _dac_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_SUB_FILT_ENV2_AMT]));
+    dac7678_set_value(I2C_LEFT, 0, 4, 4, _env_amt_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_SUB_FILT_ENV2_AMT]));
   if (commit_ctrl.changed[CTRL_SUB_FILT_ENV1_AMT])
-    dac7678_set_value(I2C_LEFT, 0, 4, 5, _dac_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_SUB_FILT_ENV1_AMT]));
+    dac7678_set_value(I2C_LEFT, 0, 4, 5, _env_amt_lin_to_log(CTRL_DEFAULT_MAX - commit_ctrl.value[CTRL_SUB_FILT_ENV1_AMT]));
   if (commit_ctrl.changed[CTRL_FX_WETDRY])
-    dac7678_set_value(I2C_LEFT, 0, 4, 6, commit_ctrl.value[CTRL_FX_WETDRY]);
+    dac7678_set_value(I2C_LEFT, 0, 4, 6, _vca_lin_to_log(commit_ctrl.value[CTRL_FX_WETDRY]));
   if (commit_ctrl.changed[CTRL_FX_FEEDBACK])
-    dac7678_set_value(I2C_LEFT, 0, 4, 7, commit_ctrl.value[CTRL_FX_FEEDBACK]);
+    dac7678_set_value(I2C_LEFT, 0, 4, 7, _vca_lin_to_log(commit_ctrl.value[CTRL_FX_FEEDBACK]));
 
 	// Left2:000
   if (commit_ctrl.changed[CTRL_OSC2_FILT_RES])
     dac7678_set_value(I2C_LEFT, 2, 0, 0, commit_ctrl.value[CTRL_OSC2_FILT_RES]);
   if (commit_ctrl.changed[CTRL_SUB_FILT_CUTOFF])
-     dac7678_set_value(I2C_LEFT, 2, 0, 2, commit_ctrl.value[CTRL_SUB_FILT_CUTOFF]);
+     dac7678_set_value(I2C_LEFT, 2, 0, 2, _filt_cutoff_scale(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF]));
   if (commit_ctrl.changed[CTRL_SUB_FILT_RES])
      dac7678_set_value(I2C_LEFT, 2, 0, 4, commit_ctrl.value[CTRL_SUB_FILT_RES]);
   if (commit_ctrl.changed[CTRL_OSC2_FILT_CUTOFF])
-     dac7678_set_value(I2C_LEFT, 2, 0, 5, commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF]);
+     dac7678_set_value(I2C_LEFT, 2, 0, 5, _filt_cutoff_scale(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF]));
 
 	// Right2:000
   if (commit_ctrl.changed[CTRL_OSC_FILT_ENV1_R])
