@@ -579,6 +579,8 @@ void _commit_led_osc1_to_osc2() {
 	if (!res) Error_Handler();
 }
 
+#define OSC2_PATTERN_OFFSET -8
+
 void _commit_led_osc2_saw() {
 	bool res;
 	uint8_t pwm_seq[36];
@@ -596,7 +598,7 @@ void _commit_led_osc2_saw() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (1*3), pwm_seq, 2*3);
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 0+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b11, (1*3), scale_seq, 6);
 	if (!res) Error_Handler();
 
@@ -620,7 +622,7 @@ void _commit_led_osc2_squ() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (0*3), pwm_seq, 1*3);
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 1*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 1*3, 1+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b11, (0*3), scale_seq, 1*3);
 	if (!res) Error_Handler();
 
@@ -644,7 +646,7 @@ void _commit_led_osc2_noise() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (3*3), pwm_seq, 2*3);
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 0+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b11, (3*3), scale_seq, 2*3);
 	if (!res) Error_Handler();
 
@@ -668,7 +670,7 @@ void _commit_led_osc2_only() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (5*3), pwm_seq, (4*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 4*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 4*3, 2+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b11, (5*3), scale_seq, (4*3));
 	if (!res) Error_Handler();
 
@@ -692,7 +694,7 @@ void _commit_led_osc2_prefilt() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (9*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 6+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b11, (9*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -716,7 +718,7 @@ void _commit_led_osc2_filt_freq() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (0*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 8+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b00, (0*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -740,7 +742,7 @@ void _commit_led_osc2_filt_reso() {
   res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (2*3), pwm_seq, (2*3));
   if (!res) Error_Handler();
 
-  _set_scale_seq(pwm_seq, scale_seq, 2*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 10+OSC2_PATTERN_OFFSET, false);
   res = is32_set_sequence_scale(I2C_LEFT, 3, 0b00, (2*3), scale_seq, (2*3));
   if (!res) Error_Handler();
 
@@ -765,7 +767,7 @@ void _commit_led_osc2_drive() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b10, (3*3), pwm_seq, (8*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 8*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 8*3, 12+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b10, (3*3), scale_seq, (8*3));
 	if (!res) Error_Handler();
 
@@ -791,13 +793,15 @@ void _commit_led_osc_amp_out() {
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (4*3), pwm_seq, (5*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 5*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 5*3, 20+OSC2_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0, (4*3), scale_seq, (5*3));
 	if (!res) Error_Handler();
 
 	res = is32_write_registers(I2C_RIGHT, 1, 0);
 	if (!res) Error_Handler();
 }
+
+#define SUB_PATTERN_OFFSET 0
 
 void _commit_led_sub_amp_out() {
 	bool res;
@@ -816,13 +820,14 @@ void _commit_led_sub_amp_out() {
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (7*3), pwm_seq, (5*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 5*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 5*3, 16+SUB_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0b01, (7*3), scale_seq, (5*3));
 	if (!res) Error_Handler();
 
 	res = is32_write_registers(I2C_RIGHT, 1, 0b01);
 	if (!res) Error_Handler();
 }
+
 
 void _commit_led_sub_squ() {
 	bool res;
@@ -840,7 +845,7 @@ void _commit_led_sub_squ() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (0*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 0+SUB_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (0*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -864,7 +869,7 @@ void _commit_led_sub_noise() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (2*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 0+SUB_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (2*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -888,7 +893,8 @@ void _commit_led_sub_mix() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (4 * 3), pwm_seq, (7 * 3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 7*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 5*3, 2+SUB_PATTERN_OFFSET, false);
+  _set_scale_seq_animated(pwm_seq+(5*3), scale_seq+(5*3), 2*3, 4+SUB_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b00, (4 * 3), scale_seq, (7 * 3));
 	if (!res) Error_Handler();
 
@@ -912,7 +918,7 @@ void _commit_led_sub_to_osc2_mix() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (7*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 6+SUB_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 3, 0b00, (7*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -936,7 +942,7 @@ void _commit_led_sub_filt_freq() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (2 * 3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 1*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 7+SUB_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 1, 0b10, (0 * 3), scale_seq, (2 * 3));
 	if (!res) Error_Handler();
 
@@ -960,7 +966,7 @@ void _commit_led_sub_filt_reso() {
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (2 * 3), pwm_seq, (7 * 3));
   if (!res) Error_Handler();
 
-  _set_scale_seq(pwm_seq, scale_seq, 7*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 7*3, 9+SUB_PATTERN_OFFSET, false);
   res = is32_set_sequence_scale(I2C_LEFT, 1, 0b10, (2 * 3), scale_seq, (7 * 3));
   if (!res) Error_Handler();
 
@@ -968,30 +974,7 @@ void _commit_led_sub_filt_reso() {
   if (!res) Error_Handler();
 }
 
-void _commit_led_sub_filt_out() {
-  bool res;
-  uint8_t pwm_seq[36];
-  uint8_t scale_seq[36];
-
-  /* Sub Filter Out
-   * LEFT1:10
-   * 0, 1, 2, 3, 4, 5, 6, 7, 8
-   */
-
-  if (!_sub_filt_out_changed()) return;
-
-  _set_pwm_seq_hsv(_sub_filt_out_hsv(), pwm_seq, 9*3);
-  res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (9 * 3));
-  if (!res) Error_Handler();
-
-  _set_scale_seq(pwm_seq, scale_seq, 9*3);
-  res = is32_set_sequence_scale(I2C_LEFT, 1, 0b10, (0 * 3), scale_seq, (9 * 3));
-  if (!res) Error_Handler();
-
-  res = is32_write_registers(I2C_LEFT, 1, 0b10);
-  if (!res) Error_Handler();
-}
-
+#define FX_PATTERN_OFFSET 2
 
 void _commit_led_fx_dry() {
 	bool res;
@@ -1010,7 +993,7 @@ void _commit_led_fx_dry() {
 	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b01, (0*3), pwm_seq, (11*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 11*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 11*3, 0+FX_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_RIGHT, 2, 0b01, (0*3), scale_seq, (11*3));
 	if (!res) Error_Handler();
 
@@ -1035,7 +1018,7 @@ void _commit_led_fx_wet() {
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (0*3), pwm_seq, (7*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 7*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 7*3, 0+FX_PATTERN_OFFSET, false);
 	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0b01, (0*3), scale_seq, (7*3));
 	if (!res) Error_Handler();
 
@@ -1060,7 +1043,7 @@ void _commit_led_fx_feedback() {
 	res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, (0*3), pwm_seq, (8*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 8*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 8*3, 5+FX_PATTERN_OFFSET, true);
 	res = is32_set_sequence_scale(I2C_RIGHT, 2, 0b10, (0*3), scale_seq, (8*3));
 	if (!res) Error_Handler();
 
