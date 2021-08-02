@@ -235,23 +235,24 @@ double _interpolate_h(hsv in1, hsv in2) {
 }
 
 double _interpolate_v(hsv in1, hsv in2) {
-
-  hsv a;
-  hsv b;
-
-  if (in1.v > in2.v) {
-    a = in2;
-    b = in1;
-  } else {
-    a = in1;
-    b = in2;
-  }
-
-  double v_delta = b.v - a.v;
-
-  double t = 0.5;
-  double v = (v_delta * t) + a.v;
-  return v;
+  return fmax(in1.v, in2.v);
+//
+//  hsv a;
+//  hsv b;
+//
+//  if (in1.v > in2.v) {
+//    a = in2;
+//    b = in1;
+//  } else {
+//    a = in1;
+//    b = in2;
+//  }
+//
+//  double v_delta = b.v - a.v;
+//
+//  double t = 0.5;
+//  double v = (v_delta * t) + a.v;
+//  return v;
 }
 
 double _interpolate_s(hsv in1, hsv in2) {
