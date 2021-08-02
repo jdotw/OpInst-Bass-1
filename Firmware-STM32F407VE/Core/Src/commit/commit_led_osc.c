@@ -223,7 +223,14 @@ bool _osc2_mix_changed() {
 hsv _sub_to_osc2_mix_hsv(void);
 
 hsv _osc2_prefilt_hsv() {
-  return _interpolate_hsv(_interpolate_hsv(_osc2_mix_hsv(), _osc1_to_2_mix_hsv()), _sub_to_osc2_mix_hsv());
+  hsv osc2 = _osc2_mix_hsv();
+  hsv osc1 = _osc1_to_2_mix_hsv();
+  hsv sub = _sub_to_osc2_mix_hsv();
+
+  hsv osc1_and_2 = _interpolate_hsv(osc2, osc1);
+  hsv osc_and_sub = _interpolate_hsv(osc1_and_2, sub);
+
+  return osc_and_sub;
 }
 
 bool _osc2_prefilt_changed() {
