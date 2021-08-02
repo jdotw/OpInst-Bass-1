@@ -77,7 +77,7 @@ void commit_30hz_timer(void) {
     blink_reset();
 
     pattern_cycle_count++;
-    if (pattern_cycle_count > 5) {
+    if (pattern_cycle_count > 1) {
       increment_pattern_step();
       pattern_cycle_count = 0;
     }

@@ -325,8 +325,8 @@ void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len) {
 #define DEFAULT_SCALE_G 0x27
 #define DEFAULT_SCALE_B 0x36
 
-#define PATTERN_STEPS 5
-double pattern[PATTERN_STEPS] = { 0.1, 0.2, 0.4, 0.6, 1.0, };
+#define PATTERN_STEPS 10
+double pattern[PATTERN_STEPS] = { 0.5, 0.5, 0.5, 0.5, 0.6, 0.7, 1.0, 0.5, 0.5, 0.5 };
 uint8_t pattern_step = 0;
 void increment_pattern_step() {
   pattern_step--;
