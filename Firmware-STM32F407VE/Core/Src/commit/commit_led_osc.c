@@ -23,6 +23,8 @@
 #define SQU_HSV_H 180.0
 #define NOISE_HSV_H 297.0
 
+#define ALWAYS_UPDATE 1
+
 /*
  * RGB Calculations
  */
@@ -56,7 +58,7 @@ hsv _osc1_saw_hsv() {
 }
 
 bool _osc1_saw_changed() {
-  return commit_ctrl.changed[CTRL_OSC1_SAW_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SAW_LVL];
 }
 
 // osc1_squ
@@ -70,17 +72,10 @@ hsv _osc1_squ_hsv() {
 }
 
 bool _osc1_squ_changed() {
-  return commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
 }
 
 // osc1_mix
-
-uint16_t* _osc1_mix_rgb() {
-	val[0] = commit_ctrl.value[CTRL_OSC1_SAW_LVL];
-	val[1] = 0;
-	val[2] = commit_ctrl.value[CTRL_OSC1_SQU_LVL];
-	return val;
-}
 
 hsv _osc1_mix_hsv() {
   hsv saw_hsv = _osc1_saw_hsv();
@@ -90,15 +85,7 @@ hsv _osc1_mix_hsv() {
 }
 
 bool _osc1_mix_changed() {
-  return commit_ctrl.changed[CTRL_OSC1_SAW_LVL] || commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
-}
-
-uint16_t* _osc1_filt_freq_rgb() {
-  _osc1_mix_rgb();
-  val[0] = (double)val[0] * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF] / 4095.0));
-  val[1] = 0;
-  val[2] = (double)val[2] * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF] / 4095.0));
-  return val;
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SAW_LVL] || commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
 }
 
 hsv _filt_freq_hsv(hsv in, ctrl_enum_t cutoff_enum) {
@@ -113,15 +100,7 @@ hsv _osc1_filt_freq_hsv() {
 }
 
 bool _osc1_filt_freq_changed() {
-  return _osc1_mix_changed() || commit_ctrl.changed[CTRL_OSC1_FILT_CUTOFF];
-}
-
-uint16_t* _osc1_filt_reso_rgb() {
-  _osc1_filt_freq_rgb();
-  val[0] += (double)(CTRL_DEFAULT_MAX - val[0]) * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF] / 4095.0));
-  val[1] += (double)(CTRL_DEFAULT_MAX - val[1]) * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF] / 4095.0));
-  val[2] += (double)(CTRL_DEFAULT_MAX - val[2]) * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_OSC1_FILT_CUTOFF] / 4095.0));
-  return val;
+  return ALWAYS_UPDATE || _osc1_mix_changed() || commit_ctrl.changed[CTRL_OSC1_FILT_CUTOFF];
 }
 
 hsv _filt_reso_hsv(hsv in, ctrl_enum_t res_enum) {
@@ -139,12 +118,7 @@ hsv _osc1_filt_reso_hsv() {
 }
 
 bool _osc1_filt_reso_changed() {
-  return _osc1_filt_freq_changed() || commit_ctrl.changed[CTRL_OSC1_FILT_RES];
-}
-
-uint16_t* _osc1_drive_rgb() {
-  _osc1_filt_reso_rgb();
-  return val;
+  return ALWAYS_UPDATE || _osc1_filt_freq_changed() || commit_ctrl.changed[CTRL_OSC1_FILT_RES];
 }
 
 hsv _drive_hsv(hsv in, ctrl_enum_t drive_enum) {
@@ -163,7 +137,7 @@ hsv _osc1_drive_hsv() {
 }
 
 bool _osc1_drive_changed() {
-  return _osc1_filt_reso_changed() || commit_ctrl.changed[CTRL_OSC1_DRIVE_AMT];
+  return ALWAYS_UPDATE || _osc1_filt_reso_changed() || commit_ctrl.changed[CTRL_OSC1_DRIVE_AMT];
 }
 
 // CTRL_OSC1_TO_OSC2_MIX
@@ -182,17 +156,10 @@ hsv _osc1_to_2_mix_hsv() {
 }
 
 bool _osc1_to_2_mix_changed() {
-  return commit_ctrl.changed[CTRL_OSC1_SAW_LVL] || commit_ctrl.changed[CTRL_OSC1_SQU_LVL] || commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SAW_LVL] || commit_ctrl.changed[CTRL_OSC1_SQU_LVL] || commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX];
 }
 
 // osc2_saw
-
-uint16_t* _osc2_saw_rgb() {
-	val[0] = commit_ctrl.value[CTRL_OSC2_SAW_LVL];
-	val[1] = 0;
-	val[2] = 0;
-	return val;
-}
 
 hsv _osc2_saw_hsv() {
   hsv hsv;
@@ -204,18 +171,10 @@ hsv _osc2_saw_hsv() {
 
 
 bool _osc2_saw_changed() {
-  return commit_ctrl.changed[CTRL_OSC2_SAW_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SAW_LVL];
 }
 
 // osc2_squ
-
-uint16_t* _osc2_squ_rgb() {
-	val[0] = 0;
-	val[1] = 0;
-	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_LVL];
-	return val;
-}
-
 
 hsv _osc2_squ_hsv() {
   hsv hsv;
@@ -227,17 +186,10 @@ hsv _osc2_squ_hsv() {
 
 
 bool _osc2_squ_changed() {
-  return commit_ctrl.changed[CTRL_OSC2_SQU_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SQU_LVL];
 }
 
 // osc2_noise
-
-uint16_t* _osc2_noise_rgb() {
-	val[0] = 0;
-	val[1] = commit_ctrl.value[CTRL_OSC2_NOISE_LVL];
-	val[2] = 0;
-	return val;
-}
 
 hsv _osc2_noise_hsv() {
   hsv hsv;
@@ -248,22 +200,10 @@ hsv _osc2_noise_hsv() {
 }
 
 bool _osc2_noise_changed() {
-  return commit_ctrl.changed[CTRL_OSC2_NOISE_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_NOISE_LVL];
 }
 
 // osc2_mix
-
-uint16_t* _osc2_mix() {
-	/* Osc2-Only Mix
-	 * LEFT0:11
-	 * 5, 6, 7, 8
-	 */
-
-	val[0] = commit_ctrl.value[CTRL_OSC2_SAW_LVL];
-	val[1] = commit_ctrl.value[CTRL_OSC2_NOISE_LVL];
-	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_LVL];
-	return val;
-}
 
 hsv _osc2_mix_hsv() {
   hsv saw_hsv = _osc2_saw_hsv();
@@ -275,17 +215,10 @@ hsv _osc2_mix_hsv() {
 
 
 bool _osc2_mix_changed() {
-  return commit_ctrl.changed[CTRL_OSC2_SAW_LVL] || commit_ctrl.changed[CTRL_OSC2_NOISE_LVL] || commit_ctrl.changed[CTRL_OSC2_SQU_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SAW_LVL] || commit_ctrl.changed[CTRL_OSC2_NOISE_LVL] || commit_ctrl.changed[CTRL_OSC2_SQU_LVL];
 }
 
 // osc2_prefilt
-
-uint16_t* _osc2_prefilt_rgb() {
-	val[0] = commit_ctrl.value[CTRL_OSC2_SAW_LVL] | (uint16_t)((double)commit_ctrl.value[CTRL_OSC1_SAW_LVL] * ((double)commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX] / 4095.0));
-	val[1] = commit_ctrl.value[CTRL_OSC2_NOISE_LVL] | (uint16_t)((double)commit_ctrl.value[CTRL_SUB_NOISE_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
-	val[2] = commit_ctrl.value[CTRL_OSC2_SQU_LVL] | (uint16_t)((double)commit_ctrl.value[CTRL_OSC1_SQU_LVL] * ((double)commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX] / 4095.0)) | (uint16_t)((double)commit_ctrl.value[CTRL_SUB_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
-	return val;
-}
 
 hsv _sub_to_osc2_mix_hsv(void);
 
@@ -294,7 +227,8 @@ hsv _osc2_prefilt_hsv() {
 }
 
 bool _osc2_prefilt_changed() {
-  return commit_ctrl.changed[CTRL_OSC2_SAW_LVL]
+  return ALWAYS_UPDATE
+      || commit_ctrl.changed[CTRL_OSC2_SAW_LVL]
       || commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX]
       || commit_ctrl.changed[CTRL_OSC2_NOISE_LVL]
       || commit_ctrl.changed[CTRL_SUB_TO_OSC2_MIX]
@@ -304,96 +238,45 @@ bool _osc2_prefilt_changed() {
 
 // osc2_filt_freq
 
-uint16_t* _osc2_filt_freq_rgb() {
-  _osc2_prefilt_rgb();
-  val[0] = (double)val[0] * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF] / 4095.0));
-  val[1] = (double)val[1] * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF] / 4095.0));
-  val[2] = (double)val[2] * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF] / 4095.0));
-	return val;
-}
-
 hsv _osc2_filt_freq_hsv() {
   return _filt_freq_hsv(_osc2_prefilt_hsv(), CTRL_OSC2_FILT_CUTOFF);
 }
 
 bool _osc2_filt_freq_changed() {
-  return _osc2_prefilt_changed() || commit_ctrl.changed[CTRL_OSC2_FILT_CUTOFF];
+  return ALWAYS_UPDATE || _osc2_prefilt_changed() || commit_ctrl.changed[CTRL_OSC2_FILT_CUTOFF];
 }
 
 // osc2_filt_reso
-
-uint16_t* _osc2_filt_reso_rgb() {
-  _osc2_filt_freq_rgb();
-  val[0] += (double)(CTRL_DEFAULT_MAX - val[0]) * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF] / 4095.0));
-  val[1] += (double)(CTRL_DEFAULT_MAX - val[1]) * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF] / 4095.0));
-  val[2] += (double)(CTRL_DEFAULT_MAX - val[2]) * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_OSC2_FILT_CUTOFF] / 4095.0));
-  return val;
-}
 
 hsv _osc2_filt_reso_hsv() {
   return _filt_reso_hsv(_osc2_filt_freq_hsv(), CTRL_OSC2_FILT_RES);
 }
 
 bool _osc2_filt_reso_changed() {
-  return _osc2_filt_freq_changed() || commit_ctrl.changed[CTRL_OSC2_FILT_RES];
+  return ALWAYS_UPDATE || _osc2_filt_freq_changed() || commit_ctrl.changed[CTRL_OSC2_FILT_RES];
 }
 
 // osc2_drive
-
-uint16_t* _osc2_drive_rgb() {
-  _osc2_filt_reso_rgb();
-	return val;
-}
 
 hsv _osc2_drive_hsv() {
   return _drive_hsv(_osc2_filt_reso_hsv(), CTRL_OSC2_DRIVE_AMT);
 }
 
 bool _osc2_drive_changed() {
-  return _osc2_filt_reso_changed() || commit_ctrl.changed[CTRL_OSC2_DRIVE_AMT];
+  return ALWAYS_UPDATE || _osc2_filt_reso_changed() || commit_ctrl.changed[CTRL_OSC2_DRIVE_AMT];
 }
 
 // osc_amp
 
-uint16_t* _osc_amp_out_rgb() {
-  _osc1_drive_rgb();
-  uint16_t osc1_drive[3];
-  osc1_drive[0] = val[0];
-  osc1_drive[1] = val[1];
-  osc1_drive[2] = val[2];
-  _osc2_drive_rgb();
-  uint16_t osc2_drive[3];
-  osc2_drive[0] = val[0];
-  osc2_drive[1] = val[1];
-  osc2_drive[2] = val[2];
-  val[0] = osc1_drive[0] | osc2_drive[0];
-  val[1] = osc1_drive[1] | osc2_drive[1];
-  val[2] = osc1_drive[2] | osc2_drive[2];
-	return val;
-}
-
 hsv _osc_amp_out_hsv() {
   return _interpolate_hsv(_osc1_drive_hsv(), _osc2_drive_hsv());
-//  hsv osc1 = _osc1_drive_hsv();
-//  hsv osc2 = _osc2_drive_hsv();
-//  rgb_14 osc1_rgb = _hsv_to_rgb(osc1);
-//  rgb_14 osc2_rgb = _hsv_to_rgb(osc2);
-//  rgb_14 mix_rgb = _interpolate_rgb(osc1_rgb, osc2_rgb);
-//  return _rgb_to_hsv(mix_rgb);
 }
 
 bool _osc_amp_out_changed() {
-  return _osc1_drive_changed() || _osc2_drive_changed();
+  return ALWAYS_UPDATE || _osc1_drive_changed() || _osc2_drive_changed();
 }
 
 // sub_squ
-
-uint16_t* _sub_squ_rgb() {
-	val[0] = 0;
-	val[1] = 0;
-	val[2] = commit_ctrl.value[CTRL_SUB_LVL];
-	return val;
-}
 
 hsv _sub_squ_hsv() {
   hsv hsv;
@@ -404,17 +287,10 @@ hsv _sub_squ_hsv() {
 }
 
 bool _sub_squ_changed() {
-  return commit_ctrl.changed[CTRL_SUB_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_LVL];
 }
 
 // sub_noise
-
-uint16_t* _sub_noise_rgb() {
-	val[0] = 0;
-	val[1] = commit_ctrl.value[CTRL_SUB_NOISE_LVL];
-	val[2] = 0;
-	return val;
-}
 
 hsv _sub_noise_hsv() {
   hsv hsv;
@@ -426,34 +302,20 @@ hsv _sub_noise_hsv() {
 
 
 bool _sub_noise_changed() {
-  return commit_ctrl.changed[CTRL_SUB_NOISE_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL];
 }
 
 // sub_mix
-
-uint16_t* _sub_mix_rgb() {
-	val[0] = 0;
-	val[1] = commit_ctrl.value[CTRL_SUB_NOISE_LVL];
-	val[2] = commit_ctrl.value[CTRL_SUB_LVL];
-	return val;
-}
 
 hsv _sub_mix_hsv() {
   return _interpolate_hsv(_sub_squ_hsv(), _sub_noise_hsv());
 }
 
 bool _sub_mix_changed() {
-  return commit_ctrl.changed[CTRL_SUB_NOISE_LVL] || commit_ctrl.changed[CTRL_SUB_LVL];
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL] || commit_ctrl.changed[CTRL_SUB_LVL];
 }
 
 // CTRL_SUB_TO_OSC2_MIX]_mix
-
-uint16_t* _sub_to_osc2_mix_rgb() {
-	val[0] = 0;
-	val[1] = ((double)commit_ctrl.value[CTRL_SUB_NOISE_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
-	val[2] = ((double)commit_ctrl.value[CTRL_SUB_LVL] * ((double)commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX] / 4095.0));
-	return val;
-}
 
 hsv _sub_to_osc2_mix_hsv() {
   hsv out = _sub_mix_hsv();
@@ -462,35 +324,20 @@ hsv _sub_to_osc2_mix_hsv() {
 }
 
 bool _sub_to_osc2_mix_changed() {
-  return commit_ctrl.changed[CTRL_SUB_NOISE_LVL]
+  return ALWAYS_UPDATE
+      || commit_ctrl.changed[CTRL_SUB_NOISE_LVL]
       || commit_ctrl.changed[CTRL_SUB_TO_OSC2_MIX]
       || commit_ctrl.changed[CTRL_SUB_LVL];
 }
 
 // sub_filt
 
-uint16_t* _sub_filt_freq_rgb() {
-  _sub_mix_rgb();
-  val[0] = (double)val[0] * ((double)(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF] / 4095.0));
-  val[1] = (double)val[1] * ((double)(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF] / 4095.0));
-  val[2] = (double)val[2] * ((double)(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF] / 4095.0));
-  return val;
-}
-
 hsv _sub_filt_freq_hsv() {
   return _filt_freq_hsv(_sub_mix_hsv(), CTRL_SUB_FILT_CUTOFF);
 }
 
 bool _sub_filt_freq_changed() {
-  return _sub_mix_changed() || commit_ctrl.changed[CTRL_SUB_FILT_CUTOFF];
-}
-
-uint16_t* _sub_filt_reso_rgb() {
-  _sub_filt_freq_rgb();
-  val[0] += (double)(CTRL_DEFAULT_MAX - val[0]) * ((double)(commit_ctrl.value[CTRL_SUB_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF] / 4095.0));
-  val[1] += (double)(CTRL_DEFAULT_MAX - val[1]) * ((double)(commit_ctrl.value[CTRL_SUB_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF] / 4095.0));
-  val[2] += (double)(CTRL_DEFAULT_MAX - val[2]) * ((double)(commit_ctrl.value[CTRL_SUB_FILT_RES] / 4095.0)) * ((double)(commit_ctrl.value[CTRL_SUB_FILT_CUTOFF] / 4095.0));
-  return val;
+  return ALWAYS_UPDATE || _sub_mix_changed() || commit_ctrl.changed[CTRL_SUB_FILT_CUTOFF];
 }
 
 hsv _sub_filt_reso_hsv() {
@@ -498,14 +345,7 @@ hsv _sub_filt_reso_hsv() {
 }
 
 bool _sub_filt_reso_changed() {
-  return _sub_filt_freq_changed() || commit_ctrl.changed[CTRL_SUB_FILT_RES];
-}
-
-uint16_t* _sub_filt_out_rgb() {
-	val[0] = 0;
-	val[1] = commit_ctrl.value[CTRL_SUB_NOISE_LVL];
-	val[2] = commit_ctrl.value[CTRL_SUB_LVL];
-	return val;
+  return ALWAYS_UPDATE || _sub_filt_freq_changed() || commit_ctrl.changed[CTRL_SUB_FILT_RES];
 }
 
 hsv _sub_filt_out_hsv() {
@@ -513,12 +353,7 @@ hsv _sub_filt_out_hsv() {
 }
 
 bool _sub_filt_out_changed() {
-  return commit_ctrl.changed[CTRL_SUB_NOISE_LVL] || commit_ctrl.changed[CTRL_SUB_LVL];
-}
-
-uint16_t* _sub_amp_out_rgb() {
-  _sub_filt_reso_rgb();
-	return val;
+  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL] || commit_ctrl.changed[CTRL_SUB_LVL];
 }
 
 hsv _sub_amp_out_hsv() {
@@ -526,21 +361,10 @@ hsv _sub_amp_out_hsv() {
 }
 
 bool _sub_amp_out_changed() {
-  return _sub_filt_reso_changed();
+  return ALWAYS_UPDATE || _sub_filt_reso_changed();
 }
 
 // fx_dry
-
-uint16_t* _fx_dry_rgb() {
-  uint16_t osc_amp_out_rgb[3];
-	_rgb_copy(osc_amp_out_rgb, _osc_amp_out_rgb());
-	uint16_t sub_amp_out_rgb[3];
-	_rgb_copy(sub_amp_out_rgb, _sub_amp_out_rgb());
-	val[0] = (osc_amp_out_rgb[0] | sub_amp_out_rgb[0]) * ((double)(4095-commit_ctrl.value[CTRL_FX_WETDRY]) / 4095);
-	val[1] = (osc_amp_out_rgb[1] | sub_amp_out_rgb[1]) * ((double)(4095-commit_ctrl.value[CTRL_FX_WETDRY]) / 4095);
-	val[2] = (osc_amp_out_rgb[2] | sub_amp_out_rgb[2]) * ((double)(4095-commit_ctrl.value[CTRL_FX_WETDRY]) / 4095);
-	return val;
-}
 
 hsv _fx_dry_hsv() {
   hsv out = _interpolate_hsv(_osc_amp_out_hsv(), _sub_amp_out_hsv());
@@ -549,18 +373,7 @@ hsv _fx_dry_hsv() {
 }
 
 bool _fx_dry_changed() {
-  return _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl.changed[CTRL_FX_WETDRY];
-}
-
-uint16_t* _fx_wet_rgb() {
-	uint16_t osc_amp_out_rgb[3];
-	_rgb_copy(osc_amp_out_rgb, _osc_amp_out_rgb());
-	uint16_t sub_amp_out_rgb[3];
-	_rgb_copy(sub_amp_out_rgb, _sub_amp_out_rgb());
-	val[0] = (osc_amp_out_rgb[0] | sub_amp_out_rgb[0]) * ((double)commit_ctrl.value[CTRL_FX_WETDRY] / 4095);
-	val[1] = (osc_amp_out_rgb[1] | sub_amp_out_rgb[1]) * ((double)commit_ctrl.value[CTRL_FX_WETDRY] / 4095);
-	val[2] = (osc_amp_out_rgb[2] | sub_amp_out_rgb[2]) * ((double)commit_ctrl.value[CTRL_FX_WETDRY] / 4095);
-	return val;
+  return ALWAYS_UPDATE || _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl.changed[CTRL_FX_WETDRY];
 }
 
 hsv _fx_wet_hsv() {
@@ -570,16 +383,7 @@ hsv _fx_wet_hsv() {
 }
 
 bool _fx_wet_changed() {
-  return _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl.changed[CTRL_FX_WETDRY];
-}
-
-uint16_t* _fx_feedback_rgb() {
-	uint16_t fx_wet_rgb[3];
-	_rgb_copy(fx_wet_rgb, _fx_wet_rgb());
-	val[0] = (fx_wet_rgb[0]) * ((double)commit_ctrl.value[CTRL_FX_FEEDBACK] / 4095);
-	val[1] = (fx_wet_rgb[1]) * ((double)commit_ctrl.value[CTRL_FX_FEEDBACK] / 4095);
-	val[2] = (fx_wet_rgb[2]) * ((double)commit_ctrl.value[CTRL_FX_FEEDBACK] / 4095);
-	return val;
+  return ALWAYS_UPDATE || _osc_amp_out_changed() || _sub_amp_out_changed() || commit_ctrl.changed[CTRL_FX_WETDRY];
 }
 
 hsv _fx_feedback_hsv() {
@@ -589,7 +393,7 @@ hsv _fx_feedback_hsv() {
 }
 
 bool _fx_feedback_changed() {
-  return _fx_wet_changed() || commit_ctrl.changed[CTRL_FX_FEEDBACK];
+  return ALWAYS_UPDATE || _fx_wet_changed() || commit_ctrl.changed[CTRL_FX_FEEDBACK];
 }
 
 /*
@@ -612,7 +416,7 @@ void _commit_led_osc1_saw() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 2*3);
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 6);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 6, 0, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0, 0, scale_seq, 2*3);
 	if (!res) Error_Handler();
 
@@ -643,7 +447,7 @@ void _commit_led_osc1_squ() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 2*3, pwm_seq, 2*3);
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 0, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0, 2*3, scale_seq, 2*3);
 	if (!res) Error_Handler();
 
@@ -667,7 +471,8 @@ void _commit_led_osc1_mix() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 12, pwm_seq, 7*3);
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 7*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 5*3, 2, false);
+  _set_scale_seq_animated(pwm_seq + (5*3), scale_seq + (5*3), 2*3, 4, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0, 12, scale_seq, 7*3);
 	if (!res) Error_Handler();
 
@@ -691,7 +496,7 @@ void _commit_led_osc1_filt_freq() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (3*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 4*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 4*3, 7, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 2, (3*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 
@@ -715,7 +520,7 @@ void _commit_led_osc1_filt_reso() {
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (5*3), pwm_seq, (2*3));
   if (!res) Error_Handler();
 
-  _set_scale_seq(pwm_seq, scale_seq, 4*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 4*3, 9, false);
   res = is32_set_sequence_scale(I2C_LEFT, 0, 2, (5*3), scale_seq, (2*3));
   if (!res) Error_Handler();
 
@@ -741,7 +546,8 @@ void _commit_led_osc1_drive() {
 	res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (0*3), pwm_seq, (4*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 4*3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 11, false);
+  _set_scale_seq_animated(pwm_seq + (2*3), scale_seq + (2*3), 2*3, 13, true);
 	res = is32_set_sequence_scale(I2C_RIGHT, 1, 0, (0*3), scale_seq, (4*3));
 	if (!res) Error_Handler();
 
@@ -765,7 +571,7 @@ void _commit_led_osc1_to_osc2() {
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b10, (0*3), pwm_seq, (2*3));
 	if (!res) Error_Handler();
 
-	_set_scale_seq(pwm_seq, scale_seq, 2*3);
+	_set_scale_seq_animated(pwm_seq, scale_seq, 2*3, 6, false);
 	res = is32_set_sequence_scale(I2C_LEFT, 0, 0b10, (0*3), scale_seq, (2*3));
 	if (!res) Error_Handler();
 

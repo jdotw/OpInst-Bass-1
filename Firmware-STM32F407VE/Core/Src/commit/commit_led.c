@@ -318,23 +318,39 @@ void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len) {
  */
 
 #define DEFAULT_SCALE 0x15
-#define DEFAULT_SCALE_R 0x27
-#define DEFAULT_SCALE_G 0x17
-#define DEFAULT_SCALE_B 0x26
+//#define DEFAULT_SCALE_R 0x27
+//#define DEFAULT_SCALE_G 0x17
+//#define DEFAULT_SCALE_B 0x26
+#define DEFAULT_SCALE_R 0x37
+#define DEFAULT_SCALE_G 0x27
+#define DEFAULT_SCALE_B 0x36
 
+#define PATTERN_STEPS 5
+double pattern[PATTERN_STEPS] = { 0.1, 0.2, 0.4, 0.6, 1.0, };
+uint8_t pattern_step = 0;
+void increment_pattern_step() {
+  pattern_step--;
+}
 
-void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
+void _set_scale_seq_animated(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert) {
+  uint8_t pattern_offset = pattern_step + offset;
   for (uint8_t i=0; i < len; i++) {
+    uint8_t bank_offset = (pattern_offset+(i/3)) % PATTERN_STEPS;
+    double pattern_modulation = pattern[bank_offset];
     switch(i%3) {
     case 0:
-      scale_seq[i] = DEFAULT_SCALE_R;
+      scale_seq[invert ? (len-1)-i : i] = ((double)DEFAULT_SCALE_R * pattern_modulation);
       break;
     case 1:
-      scale_seq[i] = DEFAULT_SCALE_G;
+      scale_seq[invert ? (len-1)-i : i] = ((double)DEFAULT_SCALE_G * pattern_modulation);
       break;
     case 2:
-      scale_seq[i] = DEFAULT_SCALE_B;
+      scale_seq[invert ? (len-1)-i : i] = ((double)DEFAULT_SCALE_B * pattern_modulation);
       break;
     }
   }
+}
+
+void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
+  _set_scale_seq_animated(pwm_seq, scale_seq, len, 0, false);
 }

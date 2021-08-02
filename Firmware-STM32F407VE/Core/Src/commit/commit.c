@@ -34,6 +34,8 @@ seq_state_t commit_seq_state;
 seq_changed_t commit_seq_changed;
 mod_state_t commit_mod_state;
 
+uint16_t pattern_cycle_count = 0;
+
 void commit_30hz_timer(void) {
 	uint32_t total_ticks_before = HAL_GetTick();
 	uint32_t ticks_before = 0;
@@ -73,6 +75,12 @@ void commit_30hz_timer(void) {
     seq_changed_reset();
     mod_state_changed_reset();
     blink_reset();
+
+    pattern_cycle_count++;
+    if (pattern_cycle_count > 0) {
+      increment_pattern_step();
+      pattern_cycle_count = 0;
+    }
 
     cycle++;
 	  break;

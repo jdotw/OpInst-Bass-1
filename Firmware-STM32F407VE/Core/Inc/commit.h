@@ -110,5 +110,7 @@ double _interpolate_v(hsv in1, hsv in2);
 void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len);
 void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len);
 void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
+void _set_scale_seq_animated(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert);
+void increment_pattern_step();
 
 #endif /* INC_COMMIT_H_ */
