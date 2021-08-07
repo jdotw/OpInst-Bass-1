@@ -314,7 +314,7 @@ bool _sub_mix_changed() {
 lab_t _sub_to_osc2_mix_lab() {
   lab_t out = _sub_mix_lab();
   out.L *= _ctrl_double(CTRL_SUB_TO_OSC2_MIX);
-  out.v = commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX];
+  out.v = commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX];
   return out;
 }
 
