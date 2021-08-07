@@ -50,24 +50,17 @@ void _rgb_copy(uint16_t *dst, uint16_t *src) {
  * HSV to RGB conversion
  */
 
-typedef struct {
-  double r;       // a fraction between 0 and 1
-  double g;       // a fraction between 0 and 1
-  double b;       // a fraction between 0 and 1
-} rgb_double;
-
-rgb_14 _hsv_to_rgb(hsv hsv)
+rgb_t _hsv_to_rgb(hsv hsv)
 {
-  double      hh, p, q, t, ff;
-  long        i;
-  rgb_double  rgb_d;  // internal 0.0-1.0 RGB struct
-  rgb_14      out = { .r = 0, .g = 0, .b = 0 };    // 0-4095 RGB data returned
+  double hh, p, q, t, ff;
+  long i;
+  rgb_t rgb;
 
   if(hsv.s <= 0.0) {       // < is bogus, just shuts up warnings
-    out.r = hsv.v * 4095.0;
-    out.g = hsv.v * 4095.0;
-    out.b = hsv.v * 4095.0;
-    return out;
+    rgb.r = hsv.v;
+    rgb.g = hsv.v;
+    rgb.b = hsv.v;
+    return rgb;
   }
   hh = hsv.h;
   if(hh >= 360.0) hh = 0.0;
@@ -80,53 +73,44 @@ rgb_14 _hsv_to_rgb(hsv hsv)
 
   switch(i) {
   case 0:
-    rgb_d.r = hsv.v;
-    rgb_d.g = t;
-    rgb_d.b = p;
+    rgb.r = hsv.v;
+    rgb.g = t;
+    rgb.b = p;
     break;
   case 1:
-    rgb_d.r = q;
-    rgb_d.g = hsv.v;
-    rgb_d.b = p;
+    rgb.r = q;
+    rgb.g = hsv.v;
+    rgb.b = p;
     break;
   case 2:
-    rgb_d.r = p;
-    rgb_d.g = hsv.v;
-    rgb_d.b = t;
+    rgb.r = p;
+    rgb.g = hsv.v;
+    rgb.b = t;
     break;
 
   case 3:
-    rgb_d.r = p;
-    rgb_d.g = q;
-    rgb_d.b = hsv.v;
+    rgb.r = p;
+    rgb.g = q;
+    rgb.b = hsv.v;
     break;
   case 4:
-    rgb_d.r = t;
-    rgb_d.g = p;
-    rgb_d.b = hsv.v;
+    rgb.r = t;
+    rgb.g = p;
+    rgb.b = hsv.v;
     break;
   case 5:
   default:
-    rgb_d.r = hsv.v;
-    rgb_d.g = p;
-    rgb_d.b = q;
+    rgb.r = hsv.v;
+    rgb.g = p;
+    rgb.b = q;
     break;
   }
 
-  out.r = rgb_d.r * 4095.0;
-  out.g = rgb_d.g * 4095.0;
-  out.b = rgb_d.b * 4095.0;
-
-  return out;
+  return rgb;
 }
 
-hsv _rgb_to_hsv(rgb_14 in14bit)
+hsv _rgb_to_hsv(rgb_t in)
 {
-  rgb_double in = {
-      .r = (double)in14bit.r / 4095.0,
-      .g = (double)in14bit.g / 4095.0,
-      .b = (double)in14bit.b / 4095.0,
-  };
   hsv out;
   double min, max, delta;
 
@@ -285,6 +269,74 @@ rgb_14 _interpolate_rgb(rgb_14 in1, rgb_14 in2) {
   return out;
 }
 
+/*
+ * Oklab Color Space
+ */
+
+lab_t _rgb_to_oklab(rgb_t rgb)
+{
+  float l = 0.4122214708f * rgb.r + 0.5363325363f * rgb.g + 0.0514459929f * rgb.b;
+  float m = 0.2119034982f * rgb.r + 0.6806995451f * rgb.g + 0.1073969566f * rgb.b;
+  float s = 0.0883024619f * rgb.r + 0.2817188376f * rgb.g + 0.6299787005f * rgb.b;
+
+  float l_ = cbrtf(l);
+  float m_ = cbrtf(m);
+  float s_ = cbrtf(s);
+
+  lab_t out = {
+    .L = 0.2104542553f*l_ + 0.7936177850f*m_ - 0.0040720468f*s_,
+    .a = 1.9779984951f*l_ - 2.4285922050f*m_ + 0.4505937099f*s_,
+    .b = 0.0259040371f*l_ + 0.7827717662f*m_ - 0.8086757660f*s_,
+  };
+
+  return out;
+}
+
+rgb_t _oklab_to_rgb(lab_t lab)
+{
+  float l_ = lab.L + 0.3963377774f * lab.a + 0.2158037573f * lab.b;
+  float m_ = lab.L - 0.1055613458f * lab.a - 0.0638541728f * lab.b;
+  float s_ = lab.L - 0.0894841775f * lab.a - 1.2914855480f * lab.b;
+
+  float l = l_*l_*l_;
+  float m = m_*m_*m_;
+  float s = s_*s_*s_;
+
+  rgb_t out = {
+      .r = +4.0767416621f * l - 3.3077115913f * m + 0.2309699292f * s,
+      .g = -1.2684380046f * l + 2.6097574011f * m - 0.3413193965f * s,
+      .b = -0.0041960863f * l - 0.7034186147f * m + 1.7076147010f * s,
+  };
+  return out;
+}
+
+lab_t _interpolate_lab(lab_t c0, lab_t c1) {
+  double a = c0.v / 4095.0;
+  double b = c1.v / 4095.0;
+  double t;
+
+  if (a <= 0.0) t = 1.0;
+  else if (b <= 0.0) t = 0.0;
+  else if (a > b) t = 0.5 * (b / a);
+  else t = 1.0-(0.5 * (a / b));
+
+  lab_t out = {
+      L: (1 - t) * c0.L + t * c1.L,
+      a: (1 - t) * c0.a + t * c1.a,
+      b: (1 - t) * c0.b + t * c1.b,
+      v: (1 - t) * c0.v + t * c1.v,
+  };
+
+  return out;
+}
+
+hsv _oklab_to_hsv(lab_t in) {
+  return _rgb_to_hsv(_oklab_to_rgb(in));
+}
+
+lab_t _hsv_to_oklab(hsv in) {
+  return _rgb_to_oklab(_hsv_to_rgb(in));
+}
 
 /*
  * Pulse Width Modulation (Color)
@@ -298,21 +350,55 @@ void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len) {
 }
 
 void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len) {
-  rgb_14 rgb = _hsv_to_rgb(in);
+  rgb_t rgb = _hsv_to_rgb(in);
+  rgb_14 rgb14 = {
+      .r = rgb.r * 4095.0,
+      .b = rgb.b * 4095.0,
+      .g = rgb.g * 4095.0,
+  };
   for (uint8_t i=0; i < len; i++) {
     switch (i%3) {
     case 0:
-      pwm_seq[i] = _12_to_8(rgb.r);
+      pwm_seq[i] = _12_to_8(rgb14.r);
       break;
     case 1:
-      pwm_seq[i] = _12_to_8(rgb.g);
+      pwm_seq[i] = _12_to_8(rgb14.g);
       break;
     case 2:
-      pwm_seq[i] = _12_to_8(rgb.b);
+      pwm_seq[i] = _12_to_8(rgb14.b);
       break;
     }
   }
 }
+
+void _set_pwm_seq_lab(lab_t in, uint8_t *pwm_seq, uint8_t len) {
+  rgb_t rgb = _oklab_to_rgb(in);
+  if (rgb.r < 0.0) rgb.r = 0.0;
+  if (rgb.g < 0.0) rgb.g = 0.0;
+  if (rgb.b < 0.0) rgb.b = 0.0;
+  if (rgb.r > 1.0) rgb.r = 1.0;
+  if (rgb.g > 1.0) rgb.g = 1.0;
+  if (rgb.b > 1.0) rgb.b = 1.0;
+  rgb_14 rgb14 = {
+      .r = rgb.r * 4095.0,
+      .b = rgb.b * 4095.0,
+      .g = rgb.g * 4095.0,
+  };
+  for (uint8_t i=0; i < len; i++) {
+    switch (i%3) {
+    case 0:
+      pwm_seq[i] = _12_to_8(rgb14.r);
+      break;
+    case 1:
+      pwm_seq[i] = _12_to_8(rgb14.g);
+      break;
+    case 2:
+      pwm_seq[i] = _12_to_8(rgb14.b);
+      break;
+    }
+  }
+}
+
 
 /*
  * Scaling (current / brightness)
@@ -325,6 +411,10 @@ void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len) {
 #define DEFAULT_SCALE_R 0x37
 #define DEFAULT_SCALE_G 0x27
 #define DEFAULT_SCALE_B 0x36
+
+//#define DEFAULT_SCALE_R 0x37
+//#define DEFAULT_SCALE_G 0x37
+//#define DEFAULT_SCALE_B 0x37
 
 #define PATTERN_STEPS 10
 double pattern[PATTERN_STEPS] = { 0.5, 0.5, 0.5, 0.5, 0.6, 0.7, 1.0, 0.5, 0.5, 0.5 };

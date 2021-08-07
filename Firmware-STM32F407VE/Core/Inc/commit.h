@@ -96,19 +96,38 @@ typedef struct {
   double v;       // a fraction between 0 and 1
 } hsv;
 
+typedef struct {
+  float L;
+  float a;
+  float b;
+  uint16_t v;     // 14-bit control value
+} lab_t;
+
+typedef struct {
+  float r;
+  float g;
+  float b;
+} rgb_t;
+
 uint8_t _max(uint16_t a, uint16_t b);
 uint8_t _min(uint16_t a, uint16_t b);
 uint8_t _12_to_8(uint16_t a);
 void _rgb_copy(uint16_t *dst, uint16_t *src);
-rgb_14 _hsv_to_rgb(hsv hsv);
-hsv _rgb_to_hsv(rgb_14 in14bit);
+rgb_t _hsv_to_rgb(hsv hsv);
+hsv _rgb_to_hsv(rgb_t rgb);
 hsv _interpolate_hsv(hsv in1, hsv in2);
 rgb_14 _interpolate_rgb(rgb_14 in1, rgb_14 in2);
 double _interpolate_h(hsv a, hsv b);
 double _interpolate_s(hsv in1, hsv in2);
 double _interpolate_v(hsv in1, hsv in2);
+lab_t _rgb_to_oklab(rgb_t rgb);
+rgb_t _oklab_to_rgb(lab_t lab);
+lab_t _interpolate_lab(lab_t in1, lab_t in2);
+hsv _oklab_to_hsv(lab_t in);
+lab_t _hsv_to_oklab(hsv in);
 void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len);
 void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len);
+void _set_pwm_seq_lab(lab_t in, uint8_t *pwm_seq, uint8_t len);
 void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
 void _set_scale_seq_animated(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert);
 void increment_pattern_step();
