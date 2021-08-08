@@ -389,7 +389,7 @@ const uint8_t gamma8[] = {
   177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
   215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255 };
 
-void _set_pwm_seq_lab(lab_t in, uint8_t *pwm_seq, uint8_t len) {
+void _set_pwm_seq_lab(lab_t in, uint16_t *pwm_seq, uint8_t len) {
   rgb_t rgb = _oklab_to_rgb(in);
   if (rgb.r < 0.0) rgb.r = 0.0;
   if (rgb.g < 0.0) rgb.g = 0.0;
@@ -405,13 +405,19 @@ void _set_pwm_seq_lab(lab_t in, uint8_t *pwm_seq, uint8_t len) {
   for (uint8_t i=0; i < len; i++) {
     switch (i%3) {
     case 0:
-      pwm_seq[i] = gamma8[_12_to_8(rgb14.r)];
+//      pwm_seq[i] = gamma8[_12_to_8(rgb14.r)];
+//      pwm_seq[i] = _12_to_8(rgb14.r);
+      pwm_seq[i] = rgb.r * 65535.0;
       break;
     case 1:
-      pwm_seq[i] = gamma8[_12_to_8(rgb14.g)];
+//      pwm_seq[i] = gamma8[_12_to_8(rgb14.g)];
+//      pwm_seq[i] = _12_to_8(rgb14.g);
+      pwm_seq[i] = rgb.g * 65535.0;
       break;
     case 2:
-      pwm_seq[i] = gamma8[_12_to_8(rgb14.b)];
+//      pwm_seq[i] = gamma8[_12_to_8(rgb14.b)];
+//      pwm_seq[i] = _12_to_8(rgb14.b);
+      pwm_seq[i] = rgb.b * 65535.0;
       break;
     }
   }
@@ -423,17 +429,18 @@ void _set_pwm_seq_lab(lab_t in, uint8_t *pwm_seq, uint8_t len) {
  */
 
 #define DEFAULT_SCALE 0x15
-//#define DEFAULT_SCALE_R 0x27
-//#define DEFAULT_SCALE_G 0x17
-//#define DEFAULT_SCALE_B 0x26
+
+#define DEFAULT_SCALE_R 0x27
+#define DEFAULT_SCALE_G 0x17
+#define DEFAULT_SCALE_B 0x26
 
 //#define DEFAULT_SCALE_R 0x37
 //#define DEFAULT_SCALE_G 0x27
 //#define DEFAULT_SCALE_B 0x36
 
-#define DEFAULT_SCALE_R 0x57
-#define DEFAULT_SCALE_G 0x47
-#define DEFAULT_SCALE_B 0x56
+//#define DEFAULT_SCALE_R 0x57
+//#define DEFAULT_SCALE_G 0x47
+//#define DEFAULT_SCALE_B 0x56
 
 //#define DEFAULT_SCALE_R 0x37
 //#define DEFAULT_SCALE_G 0x37
@@ -446,7 +453,7 @@ void increment_pattern_step() {
   pattern_step--;
 }
 
-void _set_scale_seq_animated(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert) {
+void _set_scale_seq_animated(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert) {
   uint8_t pattern_offset = pattern_step + offset;
   for (uint8_t i=0; i < len; i++) {
     uint8_t bank_offset = (pattern_offset+(i/3)) % PATTERN_STEPS;
@@ -465,6 +472,6 @@ void _set_scale_seq_animated(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len, 
   }
 }
 
-void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
+void _set_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
   _set_scale_seq_animated(pwm_seq, scale_seq, len, 0, false);
 }

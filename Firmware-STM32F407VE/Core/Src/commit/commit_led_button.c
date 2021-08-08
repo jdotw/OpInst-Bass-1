@@ -18,44 +18,47 @@
  * RGB Calculations
  */
 
-static uint8_t val[3];
+static uint16_t val[3];
 
-uint8_t* _button_step_rgb(uint8_t i) {
+#define MIN_PWM (uint16_t)0x0000
+#define MAX_PWM (uint16_t)0xFFFF // 16bit
+
+uint16_t* _button_step_rgb(uint8_t i) {
   seq_button_state_t button = commit_seq_state.button_state[i];
   if (button.pressed) {
-    val[0] = 0xFF;
-    val[1] = 0xFF;
-    val[2] = 0xFF;
+    val[0] = MAX_PWM;
+    val[1] = MAX_PWM;
+    val[2] = MAX_PWM;
   } else if (commit_seq_state.active_page == commit_seq_state.selected_page) {
     bool isActive = i == commit_seq_state.active_step % 16 && commit_seq_state.running;
-    val[0] = 0x00;
-    val[1] = isActive ? 0xFF : 0x00;
-    val[2] = 0x00;
+    val[0] = MIN_PWM;
+    val[1] = isActive ? MAX_PWM : MIN_PWM;
+    val[2] = MIN_PWM;
   } else {
-    val[0] = 0x00;
-    val[1] = 0x00;
-    val[2] = 0x00;
+    val[0] = MIN_PWM;
+    val[1] = MIN_PWM;
+    val[2] = MIN_PWM;
   }
   return val;
 }
 
-uint8_t* _button_start_rgb(bool pressed) {
+uint16_t* _button_start_rgb(bool pressed) {
   if (pressed) {
-    val[0] = 0xFF;
-    val[1] = 0xFF;
-    val[2] = 0xFF;
+    val[0] = MAX_PWM;
+    val[1] = MAX_PWM;
+    val[2] = MAX_PWM;
   } else {
-    val[0] = 0;
-    val[1] = commit_seq_state.running ? 0xFF : 0x00;
-    val[2] = 0;
+    val[0] = MIN_PWM;
+    val[1] = commit_seq_state.running ? MAX_PWM : MIN_PWM;
+    val[2] = MIN_PWM;
   }
   return val;
 }
 
-uint8_t* _button_shift_rgb(bool pressed) {
-  val[0] = pressed ? 0xFF : 0x00;
-  val[1] = pressed ? 0xFF : 0x00;
-  val[2] = pressed ? 0xFF : 0x00;
+uint16_t* _button_shift_rgb(bool pressed) {
+  val[0] = pressed ? MAX_PWM : MIN_PWM;
+  val[1] = pressed ? MAX_PWM : MIN_PWM;
+  val[2] = pressed ? MAX_PWM : MIN_PWM;
   return val;
 }
 
@@ -68,7 +71,7 @@ uint8_t* _button_shift_rgb(bool pressed) {
 #define DEFAULT_BUTTON_SCALE_G 0x27
 #define DEFAULT_BUTTON_SCALE_B 0x36
 
-void _set_button_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
+void _set_button_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
   for (uint8_t i=0; i < len; i++) {
     switch(i%3) {
     case 0:
@@ -130,13 +133,13 @@ bool _commit_led_start_changed() {
  * Commit Functions
  */
 
-void _set_pwm_single(uint8_t *seqptr, uint8_t *val) {
-  memcpy(seqptr, val, 3);
+void _set_pwm_single(uint16_t *seqptr, uint16_t *val) {
+  memcpy(seqptr, val, 3*(sizeof(uint16_t)));
 }
 
 void _commit_led_button_steps1to12() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /* Steps 1 to 12
@@ -162,7 +165,7 @@ void _commit_led_button_steps1to12() {
 
 void _commit_led_button_steps13to16() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /* Steps 13 to 16
@@ -188,7 +191,7 @@ void _commit_led_button_steps13to16() {
 
 void _commit_led_button_mod_shiftpage() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /*
@@ -208,13 +211,13 @@ void _commit_led_button_mod_shiftpage() {
   // Page is 8,9,10,11 [actually 32,33,34,35]
   for (uint8_t i=0; i < 4; i++) {
     if (i == commit_seq_state.selected_page) {
-      pwm_seq[i+8] = 0xFF;
+      pwm_seq[i+8] = 0xFFFF;
       scale_seq[i+8] = 0x90;
     } else if (i == commit_seq_state.active_page) {
-      pwm_seq[i+8] = 0xFF;
+      pwm_seq[i+8] = 0xFFFF;
       scale_seq[i+8] = blink ? 0x10 : 0x00;
     } else {
-      pwm_seq[i+8] = 0x00;
+      pwm_seq[i+8] = 0x0000;
       scale_seq[i+8] = 0x00;
     }
   }
@@ -231,7 +234,7 @@ void _commit_led_button_mod_shiftpage() {
 
 void _commit_led_button_mod_start() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /* Start LED

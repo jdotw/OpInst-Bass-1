@@ -18,9 +18,9 @@
 #define THIRD_2    0b100000000000
 #define THIRD_3    0b110000000000
 
-#define MAX_PWM 0x80
+#define MAX_PWM 0xFFFF  // 12bit
 
-static uint8_t grid[3][3];
+static uint16_t grid[3][3];
 
 void _adsr_led_set_grid_curve(uint16_t val) {
 	/* Produces graph like this:
@@ -41,30 +41,33 @@ void _adsr_led_set_grid_curve(uint16_t val) {
 	grid[2][1] = 0;
 	grid[2][2] = 0;
 
-	grid[0][0] = 0xFF;	// Always on
+	grid[0][0] = MAX_PWM;	// Always on
 
-	if (val <= 1365) {
+	double v = val / 4095.0;
+
+	if (v < 0.33) {
 		// 0% - 33%
 		// [0,2] -> [1,2]
-		uint8_t delta = (val * 3) >> 4;
-		grid[0][2] = 0xFF - delta;
-		grid[1][2] = delta;
-		grid[0][1] = 0xFF;
+	  double d = v / 0.33;
+		grid[0][2] = MAX_PWM * (1.0-d);
+		grid[1][2] = MAX_PWM * d;
+		grid[0][1] = MAX_PWM;
 	}
-	else if (val <= (1365 * 2)) {
+	else if (v < 0.66) {
 		// 33% - 66%
 		// [0,1] -> [1,1]
-		uint8_t delta = ((val - 1365) * 3) >> 4;
-		grid[0][1] = 0xFF - delta;
-		grid[1][1] = delta;
-		grid[1][2] = 0xFF;
+    double d = (v - 0.33) / 0.33;
+		grid[0][1] = MAX_PWM * (1.0-d);
+		grid[1][1] = MAX_PWM * d;
+		grid[1][2] = MAX_PWM;
 	} else {
 		// 66% - 100%
-		// [2,1] -> [2,2]
-		uint8_t delta = ((val - (1365 * 2)) * 3) >> 4;
-		grid[1][2] = 0xFF - delta;
-		grid[2][2] = delta;
-		grid[1][1] = 0xFF;
+		// [1,2] -> [2,2]
+    double d = (v - 0.66) / 0.33;
+    if (d > 1.0) d = 1.0;
+		grid[1][2] = MAX_PWM * (1.0-d);
+		grid[2][2] = MAX_PWM * d;
+		grid[1][1] = MAX_PWM;
 	}
 }
 
@@ -87,31 +90,34 @@ void _adsr_led_set_grid_stack(uint16_t val) {
 	grid[2][1] = 0;
 	grid[2][2] = 0;
 
-	if (val <= 1365) {
+  double v = val / 4095.0;
+
+	if (v < 0.33) {
 		// 0% - 33%
 		// [0,2] -> [1,2]
-		uint8_t delta = (val * 3) >> 4;
-		grid[0][0] = delta;
-		grid[1][0] = delta;
+    double d = v / 0.33;
+		grid[0][0] = MAX_PWM * d;
+		grid[1][0] = MAX_PWM * d;
 	}
-	else if (val <= (1365 * 2)) {
+	else if (v < 0.66) {
 		// 33% - 66%
 		// [0,1] -> [1,1]
-		uint8_t delta = ((val - 1365) * 3) >> 4;
-		grid[0][0] = 0xFF;
-		grid[1][0] = 0xFF;
-		grid[0][1] = delta;
-		grid[1][1] = delta;
+    double d = (v - 0.33) / 0.33;
+		grid[0][0] = MAX_PWM;
+		grid[1][0] = MAX_PWM;
+		grid[0][1] = MAX_PWM * d;
+		grid[1][1] = MAX_PWM * d;
 	} else {
 		// 66% - 100%
 		// [2,1] -> [2,2]
-		uint8_t delta = ((val - (1365 * 2)) * 3) >> 4;
-		grid[0][0] = 0xFF;
-		grid[1][0] = 0xFF;
-		grid[0][1] = 0xFF;
-		grid[1][1] = 0xFF;
-		grid[0][2] = delta;
-		grid[1][2] = delta;
+    double d = (v - 0.66) / 0.33;
+    if (d > 1.0) d = 1.0;
+		grid[0][0] = MAX_PWM;
+		grid[1][0] = MAX_PWM;
+		grid[0][1] = MAX_PWM;
+		grid[1][1] = MAX_PWM;
+		grid[0][2] = MAX_PWM * d;
+		grid[1][2] = MAX_PWM * d;
 	}
 }
 
@@ -124,6 +130,8 @@ void _adsr_led_set_grid_bar(uint16_t val) {
 	 *
 	 */
 
+  double v = val / 4095.0;
+
 	grid[0][0] = 0;
 	grid[0][1] = 0;
 	grid[0][2] = 0;
@@ -134,23 +142,23 @@ void _adsr_led_set_grid_bar(uint16_t val) {
 	grid[2][1] = 0;
 	grid[2][2] = 0;
 
-	if (val <= 2048) {
+	if (v < 0.5) {
 		// 0% - 50%
 		// [0,0][1,0] -> [0,1][1,1]
-		uint8_t delta = (val * 2) >> 4;
-		grid[0][0] = 0xFF - delta;
-		grid[1][0] = 0xFF - delta;
-		grid[0][1] = delta;
-		grid[1][1] = delta;
+    double d = v / 0.50;
+		grid[0][0] = MAX_PWM * (1.0-d);
+		grid[1][0] = MAX_PWM * (1.0-d);
+		grid[0][1] = MAX_PWM * d;
+		grid[1][1] = MAX_PWM * d;
 	}
 	else {
 		// 50-100%
 		// [0,1][1,1] -> [0,2][1,2]
-		uint8_t delta = ((val - 2048) * 2) >> 4;
-		grid[0][1] = 0xFF - delta;
-		grid[1][1] = 0xFF - delta;
-		grid[0][2] = delta;
-		grid[1][2] = delta;
+    double d = (v - 0.50) / 0.50;
+		grid[0][1] = MAX_PWM * (1.0-d);
+		grid[1][1] = MAX_PWM * (1.0-d);
+		grid[0][2] = MAX_PWM * d;
+		grid[1][2] = MAX_PWM * d;
 	}
 }
 
@@ -199,7 +207,7 @@ void _commit_led_adsr_osc_filt_env_a() {
 	 */
 
 	_adsr_led_set_grid_curve(a_val);
-	uint8_t pwm_seq[6] = {
+	uint16_t pwm_seq[6] = {
 			grid[2][2], grid[1][2], grid[1][1], grid[0][2], grid[0][1], grid[0][0]
 	};
 	uint8_t scale_seq[6] = {
@@ -260,7 +268,7 @@ void _commit_led_adsr_osc_filt_env_d() {
 	 */
 
 	_adsr_led_set_grid_curve(d_val);
-	uint8_t pwm_seq[6] = { grid[2][2], grid[1][1], grid[1][2], grid[0][0], grid[0][1], grid[0][2] };
+	uint16_t pwm_seq[6] = { grid[2][2], grid[1][1], grid[1][2], grid[0][0], grid[0][1], grid[0][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -333,7 +341,7 @@ void _commit_led_adsr_osc_filt_env_s() {
 
 	// Sustain graph is always DEFAULT_BRIGHTNESS
 	uint8_t brightness = DEFAULT_BRIGHTNESS;
-	uint8_t pwm_seq[6] = { grid[1][2], grid[1][1], grid[1][0], grid[0][0], grid[0][1], grid[0][2] };
+	uint16_t pwm_seq[6] = { grid[1][2], grid[1][1], grid[1][0], grid[0][0], grid[0][1], grid[0][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -392,7 +400,7 @@ void _commit_led_adsr_osc_filt_env_r() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	uint8_t pwm_seq[6] = { grid[2][2], grid[1][1], grid[1][2], grid[0][2], grid[0][1], grid[0][0] };
+	uint16_t pwm_seq[6] = { grid[2][2], grid[1][1], grid[1][2], grid[0][2], grid[0][1], grid[0][0] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -448,7 +456,7 @@ void _commit_led_adsr_sub_filt_env_a() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	uint8_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][1], grid[1][2], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][1], grid[1][2], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -506,7 +514,7 @@ void _commit_led_adsr_sub_filt_env_d() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	uint8_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -576,7 +584,7 @@ void _commit_led_adsr_sub_filt_env_s() {
 		break;
 	}
 
-	uint8_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][0], grid[1][1], grid[1][2] };
+	uint16_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][0], grid[1][1], grid[1][2] };
 	uint8_t scale_seq[6] = { DEFAULT_BRIGHTNESS, DEFAULT_BRIGHTNESS, DEFAULT_BRIGHTNESS, DEFAULT_BRIGHTNESS, DEFAULT_BRIGHTNESS, DEFAULT_BRIGHTNESS };
 
 	bool res;
@@ -635,7 +643,7 @@ void _commit_led_adsr_sub_filt_env_r() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	uint8_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -681,7 +689,7 @@ void _commit_led_adsr_osc_amp_env_a() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	uint8_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][1], grid[1][2], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][1], grid[1][2], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -728,7 +736,7 @@ void _commit_led_adsr_osc_amp_env_d() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	uint8_t pwm_seq[6] = { grid[0][0], grid[1][1], grid[0][1], grid[0][2], grid[1][2], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][0], grid[1][1], grid[0][1], grid[0][2], grid[1][2], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -779,7 +787,7 @@ void _commit_led_adsr_osc_amp_env_s() {
 		break;
 	}
 
-	uint8_t pwm_seq[6] = { grid[1][0], grid[1][1], grid[1][2], grid[0][0], grid[0][1], grid[0][2] };
+	uint16_t pwm_seq[6] = { grid[1][0], grid[1][1], grid[1][2], grid[0][0], grid[0][1], grid[0][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -827,7 +835,7 @@ void _commit_led_adsr_osc_amp_env_r() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	uint8_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -872,7 +880,7 @@ void _commit_led_adsr_sub_amp_env_a() {
 
 	_adsr_led_set_grid_curve(a_val);
 
-	uint8_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][1], grid[1][2], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][1], grid[1][2], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -920,7 +928,7 @@ void _commit_led_adsr_sub_amp_env_d() {
 
 	_adsr_led_set_grid_curve(d_val);
 
-	uint8_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -970,7 +978,7 @@ void _commit_led_adsr_sub_amp_env_s() {
 		break;
 	}
 
-	uint8_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][0], grid[1][1], grid[1][2] };
+	uint16_t pwm_seq[6] = { grid[0][0], grid[0][1], grid[0][2], grid[1][0], grid[1][1], grid[1][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;
@@ -1018,7 +1026,7 @@ void _commit_led_adsr_sub_amp_env_r() {
 
 	_adsr_led_set_grid_curve(r_val);
 
-	uint8_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
+	uint16_t pwm_seq[6] = { grid[0][2], grid[0][1], grid[0][0], grid[1][2], grid[1][1], grid[2][2] };
 	uint8_t scale_seq[6] = { brightness, brightness, brightness, brightness, brightness, brightness };
 
 	bool res;

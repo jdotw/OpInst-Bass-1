@@ -16,16 +16,22 @@ bool _is32_enable(uint8_t bus, uint8_t channel, uint8_t unit) {
 	bool res;
 	uint8_t data[2] = { 0x00, 0x00 };
 
+	// 0x7F = RESET
 	data[0] =  0x7F;
 	data[1] = 0x00;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
 	if (!res) return false;
 
+	// 0x00 = CONTROL
 	data[0] = 0x00;
-	data[1] = 0b00000001;
+	data[1] = 0x00;
+	data[1] |= 0b1 << 0;    // Enable normal operation
+	data[1] |= 0b11 << 1;   // 16bit PWM Resolution
+	data[1] |= 0b000 << 4;  // 16Mhz oscillator clock
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
 	if (!res) return false;
 
+	// 0x6e = GLOBAL CURRENT
 	data[0] = 0x6E;
 	data[1] = 0xFF;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
@@ -215,13 +221,13 @@ bool is32_set_single_uncommitted(uint8_t bus, uint8_t channel, uint8_t unit, uin
 	return _is32_set_single(bus, channel, unit, led, pwm, brightness, false);
 }
 
-bool is32_set_sequence_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint8_t *seq, uint8_t len) {
+bool is32_set_sequence_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint16_t *seq, uint8_t len) {
 	const uint8_t data_len = 1+(len*2);
 	uint8_t data[data_len];
 	data[0] = 0x01 + (start * 2);	// Registry address (start)
 	for (uint8_t i=0; i < len; i++) {
-		data[(i*2)+1] = seq[i]; // PWM_L
-		data[(i*2)+2] = 0x00;		// PWM_H
+	  data[(i*2)+1] = 0x00FF & seq[i];        // PWM_L
+	  data[(i*2)+2] = (0xFF00 & seq[i]) >> 8;	// PWM_H
 	}
 	bool res;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, data_len);

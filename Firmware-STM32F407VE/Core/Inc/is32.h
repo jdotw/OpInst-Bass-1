@@ -18,7 +18,7 @@ bool is32_set_single_uncommitted(uint8_t bus, uint8_t channel, uint8_t unit, uin
 bool is32_write_registers(uint8_t bus, uint8_t channel, uint8_t unit);
 bool is32_set_single_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t pwm);
 bool is32_set_single_scale(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t brightness);
-bool is32_set_sequence_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint8_t *seq, uint8_t len);
+bool is32_set_sequence_pwm(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint16_t *seq, uint8_t len);
 bool is32_set_sequence_scale(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t start, uint8_t *seq, uint8_t len);
 void is32_test(void);
 

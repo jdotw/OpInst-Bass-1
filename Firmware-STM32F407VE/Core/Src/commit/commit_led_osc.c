@@ -402,7 +402,7 @@ bool _fx_feedback_changed() {
 
 void _commit_led_osc1_saw() {
   bool res;
-	uint8_t pwm_seq[36];
+	uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc1 Saw
@@ -426,7 +426,7 @@ void _commit_led_osc1_saw() {
 
 void _commit_led_osc1_squ() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc1 Squ
@@ -457,7 +457,7 @@ void _commit_led_osc1_squ() {
 
 void _commit_led_osc1_mix() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc1 Mix
@@ -482,7 +482,7 @@ void _commit_led_osc1_mix() {
 
 void _commit_led_osc1_filt_freq() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc1 Filter
@@ -506,7 +506,7 @@ void _commit_led_osc1_filt_freq() {
 
 void _commit_led_osc1_filt_reso() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /* Osc1 Filter
@@ -531,7 +531,7 @@ void _commit_led_osc1_filt_reso() {
 
 void _commit_led_osc1_drive() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc1 Drive
@@ -557,7 +557,7 @@ void _commit_led_osc1_drive() {
 
 void _commit_led_osc1_to_osc2() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc1toOsc2 Mix Level
@@ -583,7 +583,7 @@ void _commit_led_osc1_to_osc2() {
 
 void _commit_led_osc2_saw() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 
@@ -608,7 +608,7 @@ void _commit_led_osc2_saw() {
 
 void _commit_led_osc2_squ() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc2 Squ
@@ -632,7 +632,7 @@ void _commit_led_osc2_squ() {
 
 void _commit_led_osc2_noise() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc2 Noise
@@ -656,7 +656,7 @@ void _commit_led_osc2_noise() {
 
 void _commit_led_osc2_only() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc2-Only Mix
@@ -680,7 +680,7 @@ void _commit_led_osc2_only() {
 
 void _commit_led_osc2_prefilt() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc2-PreFilter Mix
@@ -704,7 +704,7 @@ void _commit_led_osc2_prefilt() {
 
 void _commit_led_osc2_filt_freq() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc2 Filt
@@ -728,7 +728,7 @@ void _commit_led_osc2_filt_freq() {
 
 void _commit_led_osc2_filt_reso() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /* Osc2 Filt
@@ -753,7 +753,7 @@ void _commit_led_osc2_filt_reso() {
 
 void _commit_led_osc2_drive() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Osc2 Drive
@@ -777,7 +777,7 @@ void _commit_led_osc2_drive() {
 
 void _commit_led_osc_amp_out() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 
@@ -805,7 +805,7 @@ void _commit_led_osc_amp_out() {
 
 void _commit_led_sub_amp_out() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Sub Amp Out
@@ -831,7 +831,7 @@ void _commit_led_sub_amp_out() {
 
 void _commit_led_sub_squ() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Sub Squ
@@ -855,7 +855,7 @@ void _commit_led_sub_squ() {
 
 void _commit_led_sub_noise() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Sub Noise
@@ -879,7 +879,7 @@ void _commit_led_sub_noise() {
 
 void _commit_led_sub_mix() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Sub Mix
@@ -904,7 +904,7 @@ void _commit_led_sub_mix() {
 
 void _commit_led_sub_to_osc2_mix() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* SubToOsc2 Mix Level
@@ -928,7 +928,7 @@ void _commit_led_sub_to_osc2_mix() {
 
 void _commit_led_sub_filt_freq() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* Sub Filter Freq Cutoff
@@ -952,7 +952,7 @@ void _commit_led_sub_filt_freq() {
 
 void _commit_led_sub_filt_reso() {
   bool res;
-  uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
 
   /* Sub Filter Out
@@ -978,7 +978,7 @@ void _commit_led_sub_filt_reso() {
 
 void _commit_led_fx_dry() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* FX Dry
@@ -1003,7 +1003,7 @@ void _commit_led_fx_dry() {
 
 void _commit_led_fx_wet() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* FX Wet
@@ -1028,7 +1028,7 @@ void _commit_led_fx_wet() {
 
 void _commit_led_fx_feedback() {
 	bool res;
-	uint8_t pwm_seq[36];
+  uint16_t pwm_seq[36];
 	uint8_t scale_seq[36];
 
 	/* FX Feedback

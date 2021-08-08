@@ -127,9 +127,9 @@ hsv _oklab_to_hsv(lab_t in);
 lab_t _hsv_to_oklab(hsv in);
 void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len);
 void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len);
-void _set_pwm_seq_lab(lab_t in, uint8_t *pwm_seq, uint8_t len);
-void _set_scale_seq(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
-void _set_scale_seq_animated(uint8_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert);
+void _set_pwm_seq_lab(lab_t in, uint16_t *pwm_seq, uint8_t len);
+void _set_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
+void _set_scale_seq_animated(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert);
 void increment_pattern_step();
 
 #endif /* INC_COMMIT_H_ */
