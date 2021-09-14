@@ -114,40 +114,42 @@ void is32_init() {
 
 }
 
-
-bool is32_set_rgb(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint8_t red, uint8_t green, uint8_t blue, uint8_t brightness) {
-	uint8_t data[2] = {  0x00, 0x00 };
+bool is32_set_rgb(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led, uint16_t red, uint16_t green, uint16_t blue, uint8_t red_scale, uint8_t green_scale, uint8_t blue_scale) {
+	uint8_t data[3] = {  0x00, 0x00, 0x00 };
 	bool res;
 
 	// PWM
 	data[0] =  0x01 + (led * 6);
-	data[1] = red;
-	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+	data[1] = red & 0x00FF;
+	data[2] = (red & 0xFF00) >> 8;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 3);
 	if (!res) return false;
 
 	data[0] =  0x03 + (led * 6);
-	data[1] = green;
-	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+  data[1] = green & 0x00FF;
+  data[2] = (green & 0xFF00) >> 8;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 3);
 	if (!res) return false;
 
 	data[0] =  0x05 + (led * 6);
-	data[1] = blue;
-	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
+  data[1] = blue & 0x00FF;
+  data[2] = (blue & 0xFF00) >> 8;
+	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 3);
 	if (!res) return false;
 
 	// Scaling (current)
 	data[0] = 0x4A + (led * 3);
-	data[1] = brightness;
+	data[1] = red_scale;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
 	if (!res) return false;
 
 	data[0] = 0x4B + (led * 3);
-	data[1] = brightness;
+	data[1] = green_scale;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
 	if (!res) return false;
 
 	data[0] = 0x4C + (led * 3);
-	data[1] = brightness;
+	data[1] = blue_scale;
 	res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR+unit), data, 2);
 	if (!res) return false;
 
@@ -252,33 +254,53 @@ bool is32_set_sequence_scale(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t
  * Test
  */
 
-#define TEST_PWM 0x28
+#define TEST_PWM 0x8000
 #define TEST_SCALE 0x10
 
+#define TEST_RED_SCALE 0x37
+#define TEST_GREEN_SCALE 0x25
+#define TEST_BLUE_SCALE 0x25
+
+#define TEST_GAMMA_R 1.0
+#define TEST_GAMMA_G 2.2
+#define TEST_GAMMA_B 2.8
+
+uint16_t test_gamma_correct(float gamma, uint16_t val) {
+  const uint16_t max_in = 0xFFFF;
+  const uint16_t max_out = 0xFFFF;
+  return (uint16_t)(pow((float)val / (float)max_in, gamma) * max_out + 0.5);
+}
+
 void _is32_test_led(uint8_t bus, uint8_t channel, uint8_t unit) {
+  bool shift_key = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
+//  uint16_t pwm = shift_key ? 0x4000 : 0xFFFF;
+  uint16_t pwm = 0x4000;
+  uint16_t red = shift_key ? test_gamma_correct(TEST_GAMMA_R, pwm) : pwm;
+  uint16_t green = shift_key ? test_gamma_correct(TEST_GAMMA_G, pwm) : pwm;
+  uint16_t blue = shift_key ? test_gamma_correct(TEST_GAMMA_B, pwm) : pwm;
 	for (uint8_t i=0; i < 12; i++) {
-		is32_set_rgb(bus, channel, unit, i, TEST_PWM, TEST_PWM, TEST_PWM, TEST_SCALE);
+		is32_set_rgb(bus, channel, unit, i, red, green, blue, TEST_RED_SCALE, TEST_GREEN_SCALE, TEST_BLUE_SCALE);
 	}
 }
 
 void is32_test() {
 	_is32_test_led(I2C_LEFT,  0, 0b00); // ** Nothing
 	_is32_test_led(I2C_LEFT,  0, 0b10); // OK
-	_is32_test_led(I2C_RIGHT, 1, 0b00); // OK
-	_is32_test_led(I2C_LEFT,  0, 0b11); // ** Some pins missing
-	_is32_test_led(I2C_LEFT,  3, 0b10); // OK
-	_is32_test_led(I2C_LEFT,  3, 0b00); // OK
-	_is32_test_led(I2C_LEFT,  1, 0b00); // OK
-	_is32_test_led(I2C_LEFT,  1, 0b10); // OK
-	_is32_test_led(I2C_RIGHT, 2, 0b01); // OK
-	_is32_test_led(I2C_RIGHT, 1, 0b01); // OK
-	_is32_test_led(I2C_RIGHT, 2, 0b10); // OK
-	_is32_test_led(I2C_LEFT,  0, 0b01); // OK
-	_is32_test_led(I2C_LEFT,  3, 0b01); // OK (Graph)
-	_is32_test_led(I2C_RIGHT, 2, 0b00); // OK (Graph)
-	_is32_test_led(I2C_LEFT,  1, 0b11); // OK (Graph)
-	_is32_test_led(I2C_RIGHT, 1, 0b10); // OK (Graph + Steps)
-	_is32_test_led(I2C_LEFT,  1, 0b01); // OK (Steps)
+//	_is32_test_led(I2C_RIGHT, 1, 0b00); // OK
+//	_is32_test_led(I2C_LEFT,  0, 0b11); // ** Some pins missing
+//	_is32_test_led(I2C_LEFT,  3, 0b10); // OK
+//	_is32_test_led(I2C_LEFT,  3, 0b00); // OK
+//	_is32_test_led(I2C_LEFT,  1, 0b00); // OK
+//	_is32_test_led(I2C_LEFT,  1, 0b10); // OK
+//	_is32_test_led(I2C_RIGHT, 2, 0b01); // OK
+//	_is32_test_led(I2C_RIGHT, 1, 0b01); // OK
+//	_is32_test_led(I2C_RIGHT, 2, 0b10); // OK
+//	_is32_test_led(I2C_LEFT,  0, 0b01); // OK
+//	_is32_test_led(I2C_LEFT,  3, 0b01); // OK (Graph)
+//	_is32_test_led(I2C_RIGHT, 2, 0b00); // OK (Graph)
+//	_is32_test_led(I2C_LEFT,  1, 0b11); // OK (Graph)
+//	_is32_test_led(I2C_RIGHT, 1, 0b10); // OK (Graph + Steps)
+//	_is32_test_led(I2C_LEFT,  1, 0b01); // OK (Steps)
 }
 
 

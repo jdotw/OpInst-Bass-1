@@ -177,9 +177,10 @@ int main(void)
   // Check for test mode (Shift held)
   bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
   if (test_mode) {
-  	is32_test();
     while (1)
-    { }
+    {
+      is32_test();
+    }
   }
 
   // Calibrate oscillators

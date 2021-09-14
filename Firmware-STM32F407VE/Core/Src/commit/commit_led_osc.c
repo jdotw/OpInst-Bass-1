@@ -14,14 +14,7 @@
 
 // Defaults
 
-#define DEFAULT_HSV_V 1.0
 #define MAX_HSV_V 1.0
-
-//#define SAW_HSV_H 0.0
-//#define SQU_HSV_H 240.0
-#define SAW_HSV_H 60.0
-#define SQU_HSV_H 180.0
-#define NOISE_HSV_H 297.0
 
 #define ALWAYS_UPDATE 1
 
@@ -91,7 +84,8 @@ lab_t _drive_lab(lab_t in, ctrl_enum_t drive_enum) {
 // osc1_saw
 
 lab_t _osc1_saw_lab() {
-  return _primitive_lab(1.0, 1.0, 0.0, CTRL_OSC1_SAW_LVL);
+//  return _primitive_lab(1.0, 1.0, 0.0, CTRL_OSC1_SAW_LVL);
+  return _primitive_lab(1.0, 0.0, 0.0, CTRL_OSC1_SAW_LVL);
 }
 
 bool _osc1_saw_changed() {
@@ -101,7 +95,8 @@ bool _osc1_saw_changed() {
 // osc1_squ
 
 lab_t _osc1_squ_lab() {
-  return _primitive_lab(0.0, 1.0, 1.0, CTRL_OSC1_SQU_LVL);
+//  return _primitive_lab(0.0, 1.0, 1.0, CTRL_OSC1_SQU_LVL);
+  return _primitive_lab(0.0, 1.0, 0.0, CTRL_OSC1_SQU_LVL);
 }
 
 bool _osc1_squ_changed() {
@@ -165,7 +160,8 @@ bool _osc1_to_2_mix_changed() {
 // osc2_saw
 
 lab_t _osc2_saw_lab() {
-  return _primitive_lab(1.0, 1.0, 0.0, CTRL_OSC2_SAW_LVL);
+//  return _primitive_lab(1.0, 1.0, 0.0, CTRL_OSC2_SAW_LVL);
+  return _primitive_lab(1.0, 0.0, 0.0, CTRL_OSC2_SAW_LVL);
 }
 
 
@@ -176,7 +172,8 @@ bool _osc2_saw_changed() {
 // osc2_squ
 
 lab_t _osc2_squ_lab() {
-  return _primitive_lab(0.0, 1.0, 1.0, CTRL_OSC2_SQU_LVL);
+//  return _primitive_lab(0.0, 1.0, 1.0, CTRL_OSC2_SQU_LVL);
+  return _primitive_lab(0.0, 1.0, 0.0, CTRL_OSC2_SQU_LVL);
 }
 
 
@@ -187,7 +184,8 @@ bool _osc2_squ_changed() {
 // osc2_noise
 
 lab_t _osc2_noise_lab() {
-  return _primitive_lab(1.0, 0.0, 1.0, CTRL_OSC2_NOISE_LVL);
+//  return _primitive_lab(1.0, 0.0, 1.0, CTRL_OSC2_NOISE_LVL);
+  return _primitive_lab(0.0, 0.0, 1.0, CTRL_OSC2_NOISE_LVL);
 }
 
 bool _osc2_noise_changed() {
@@ -439,10 +437,13 @@ void _commit_led_osc1_squ() {
 	_set_pwm_seq_lab(_osc1_squ_lab(), pwm_seq, 2*3);
 
 	// Work around Red and Blue pins being transposed
+	uint16_t tmp;
+	tmp = pwm_seq[0];
 	pwm_seq[0] = pwm_seq[2];
-	pwm_seq[2] = 0;
+	pwm_seq[2] = tmp;
+	tmp = pwm_seq[3];
 	pwm_seq[3] = pwm_seq[5];
-	pwm_seq[5] = 0;
+	pwm_seq[5] = tmp;
 
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 2*3, pwm_seq, 2*3);
 	if (!res) Error_Handler();
@@ -643,6 +644,16 @@ void _commit_led_osc2_noise() {
 	if(!_osc2_noise_changed()) return;
 
 	_set_pwm_seq_lab(_osc2_noise_lab(), pwm_seq, 2*3);
+
+  // Work around Red and Blue pins being transposed
+	uint16_t tmp;
+	tmp = pwm_seq[0];
+  pwm_seq[0] = pwm_seq[2];
+  pwm_seq[2] = tmp;
+  tmp = pwm_seq[3];
+  pwm_seq[3] = pwm_seq[5];
+  pwm_seq[5] = tmp;
+
 	res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (3*3), pwm_seq, 2*3);
 	if (!res) Error_Handler();
 

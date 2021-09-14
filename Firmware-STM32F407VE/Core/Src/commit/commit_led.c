@@ -371,25 +371,21 @@ void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len) {
   }
 }
 
-const uint8_t gamma8[] = {
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,
-    1,  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  2,  2,  2,
-    2,  3,  3,  3,  3,  3,  3,  3,  4,  4,  4,  4,  4,  5,  5,  5,
-    5,  6,  6,  6,  6,  7,  7,  7,  7,  8,  8,  8,  9,  9,  9, 10,
-   10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16, 16,
-   17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 24, 24, 25,
-   25, 26, 27, 27, 28, 29, 29, 30, 31, 32, 32, 33, 34, 35, 35, 36,
-   37, 38, 39, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50,
-   51, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 67, 68,
-   69, 70, 72, 73, 74, 75, 77, 78, 79, 81, 82, 83, 85, 86, 87, 89,
-   90, 92, 93, 95, 96, 98, 99,101,102,104,105,107,109,110,112,114,
-  115,117,119,120,122,124,126,127,129,131,133,135,137,138,140,142,
-  144,146,148,150,152,154,156,158,160,162,164,167,169,171,173,175,
-  177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
-  215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255 };
+#define GAMMA_R 1.2
+#define GAMMA_G 1.5
+#define GAMMA_B 1.8
+
+uint16_t gamma_correct(float gamma, uint16_t val) {
+  const uint16_t max_in = 0xFFFF;
+  const uint16_t max_out = 0xFFFF;
+  return (uint16_t)(pow((float)val / (float)max_in, gamma) * max_out);
+}
+
+
 
 void _set_pwm_seq_lab(lab_t in, uint16_t *pwm_seq, uint8_t len) {
+  bool use_gamma = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) != GPIO_PIN_RESET; // Pulled down
+
   rgb_t rgb = _oklab_to_rgb(in);
   if (rgb.r < 0.0) rgb.r = 0.0;
   if (rgb.g < 0.0) rgb.g = 0.0;
@@ -397,27 +393,22 @@ void _set_pwm_seq_lab(lab_t in, uint16_t *pwm_seq, uint8_t len) {
   if (rgb.r > 1.0) rgb.r = 1.0;
   if (rgb.g > 1.0) rgb.g = 1.0;
   if (rgb.b > 1.0) rgb.b = 1.0;
-  rgb_14 rgb14 = {
-      .r = rgb.r * 4095.0,
-      .b = rgb.b * 4095.0,
-      .g = rgb.g * 4095.0,
-  };
   for (uint8_t i=0; i < len; i++) {
     switch (i%3) {
     case 0:
 //      pwm_seq[i] = gamma8[_12_to_8(rgb14.r)];
 //      pwm_seq[i] = _12_to_8(rgb14.r);
-      pwm_seq[i] = rgb.r * 65535.0;
+      pwm_seq[i] = use_gamma ? gamma_correct(GAMMA_R, rgb.r * 65535.0) : rgb.r * 65535.0;
       break;
     case 1:
 //      pwm_seq[i] = gamma8[_12_to_8(rgb14.g)];
 //      pwm_seq[i] = _12_to_8(rgb14.g);
-      pwm_seq[i] = rgb.g * 65535.0;
+      pwm_seq[i] = use_gamma ? gamma_correct(GAMMA_G, rgb.g * 65535.0) : rgb.g * 65535.0;
       break;
     case 2:
 //      pwm_seq[i] = gamma8[_12_to_8(rgb14.b)];
 //      pwm_seq[i] = _12_to_8(rgb14.b);
-      pwm_seq[i] = rgb.b * 65535.0;
+      pwm_seq[i] = use_gamma ? gamma_correct(GAMMA_B, rgb.b * 65535.0) : rgb.b * 65535.0;
       break;
     }
   }
@@ -430,13 +421,13 @@ void _set_pwm_seq_lab(lab_t in, uint16_t *pwm_seq, uint8_t len) {
 
 #define DEFAULT_SCALE 0x15
 
-#define DEFAULT_SCALE_R 0x27
-#define DEFAULT_SCALE_G 0x17
-#define DEFAULT_SCALE_B 0x26
+//#define DEFAULT_SCALE_R 0x27
+//#define DEFAULT_SCALE_G 0x17
+//#define DEFAULT_SCALE_B 0x26
 
-//#define DEFAULT_SCALE_R 0x37
-//#define DEFAULT_SCALE_G 0x27
-//#define DEFAULT_SCALE_B 0x36
+#define DEFAULT_SCALE_R 0x35
+#define DEFAULT_SCALE_G 0x12
+#define DEFAULT_SCALE_B 0x18
 
 //#define DEFAULT_SCALE_R 0x57
 //#define DEFAULT_SCALE_G 0x47
