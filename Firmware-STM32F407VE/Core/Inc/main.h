@@ -57,6 +57,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define OLED_RESET_Pin GPIO_PIN_15
+#define OLED_RESET_GPIO_Port GPIOC
 #define OSC1SCALEDPOTCS_Pin GPIO_PIN_4
 #define OSC1SCALEDPOTCS_GPIO_Port GPIOC
 #define OSC2SCALEDPOTCS_Pin GPIO_PIN_5
@@ -67,6 +69,10 @@ void Error_Handler(void);
 #define SHIFTSW_Pin GPIO_PIN_10
 #define SHIFTSW_GPIO_Port GPIOD
 #define SHIFTSW_EXTI_IRQn EXTI15_10_IRQn
+#define OLED_DATA_SELECT_Pin GPIO_PIN_6
+#define OLED_DATA_SELECT_GPIO_Port GPIOC
+#define OLED_SPI_CS_Pin GPIO_PIN_7
+#define OLED_SPI_CS_GPIO_Port GPIOC
 #define MIDI_TX_Pin GPIO_PIN_9
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
