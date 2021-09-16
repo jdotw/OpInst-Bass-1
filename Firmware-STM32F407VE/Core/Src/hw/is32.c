@@ -6,6 +6,7 @@
  */
 
 #include <stdio.h>
+#include <math.h>
 #include "main.h"
 #include "is32.h"
 #include "i2c.h"

@@ -18,7 +18,6 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
 
 void elw2701aa_test(SPI_HandleTypeDef *hspi) {
   HAL_StatusTypeDef res;
-  uint8_t buf[4];
 
   uint8_t cmds[32][2] = {
 		  { 0x05, 0xB6 },
@@ -118,7 +117,5 @@ void elw2701aa_test(SPI_HandleTypeDef *hspi) {
 
 
   while(1) {
-    // Send Command
-    printf("Test");
   }
 }
