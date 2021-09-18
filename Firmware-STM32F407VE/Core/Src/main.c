@@ -179,7 +179,7 @@ int main(void)
   elw2701aa_init(&hspi1);
 
   // Test OLED Display
-  elw2701aa_test(&hspi1);
+  elw2701aa_test(&hspi1, false);
 
   // Check for test mode (Shift held)
   bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
