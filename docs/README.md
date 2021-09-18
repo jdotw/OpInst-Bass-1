@@ -1,5 +1,6 @@
-# Boom-1 Documentation
+# Opinionated Instruments
+## Bass-1 Documentation
 
-# PIC Firmware
+### PIC Firmware
 
 [Rotary PIC](./rotpic/README.md)
