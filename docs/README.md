@@ -1,6 +1,5 @@
-# Opinionated Instruments
-## Bass-1 Documentation
+# Bass-1 by Opinionated Instruments
 
-### PIC Firmware
+## PIC Firmware
 
 [Rotary PIC](./rotpic/README.md)
