@@ -394,6 +394,110 @@
     [
       "b21b96db-f1b6-4f4b-8437-af14eaa9d9d5",
       "Rotary Encoders"
+    ],
+    [
+      "46275a28-8307-4690-960d-ea5be1dc4a89",
+      "I2C Muxers"
+    ],
+    [
+      "4c98bd10-c8c5-4a64-8484-332c71e09e77",
+      "USB"
+    ],
+    [
+      "93fec110-c160-4935-95cc-0d6b655a76f7",
+      "LEDs"
+    ],
+    [
+      "c467f67c-dfef-45a6-9fe5-51dce470d714",
+      "Group 12"
+    ],
+    [
+      "e4c1dfc4-2649-45dc-8234-28a5fe99f89b",
+      "Group 3"
+    ],
+    [
+      "765322a1-6868-45c8-86ce-587b108afbba",
+      "Group 11"
+    ],
+    [
+      "4ccb1467-9691-44d2-9600-6235b4c3bedf",
+      "Group 10"
+    ],
+    [
+      "f5b5176d-c546-4437-99b9-e459ef5b178b",
+      "Group 8"
+    ],
+    [
+      "da74f1eb-1972-4608-b26e-3be9b1ff2357",
+      "Group 9"
+    ],
+    [
+      "b2ffe96e-ec37-488d-b282-80365358f24d",
+      "Group 1"
+    ],
+    [
+      "4c3cff0e-41b0-496f-8cdd-415793b0dc5c",
+      "Group 2"
+    ],
+    [
+      "b5fc5a02-5fc0-48bb-b704-365c986186f2",
+      "Group 4"
+    ],
+    [
+      "6d685fa9-b8cd-4ffa-ab00-41416a1aec20",
+      "Group 5"
+    ],
+    [
+      "6847b3ed-6d38-4848-a07f-ab1b86b49422",
+      "Group 6"
+    ],
+    [
+      "a9e90fe5-7b09-40cb-b02f-c0726b34b066",
+      "Group 7"
+    ],
+    [
+      "145018df-d3fb-4653-9644-bdea609d1bb9",
+      "Group G1"
+    ],
+    [
+      "0f149270-7142-42d6-ac5b-c0e364a95d83",
+      "Group G2"
+    ],
+    [
+      "a80f3405-e00a-4b6f-99bc-23121850e50b",
+      "Group G3"
+    ],
+    [
+      "125e28f9-178d-48f7-8da0-a1f6e3d2da8f",
+      "Group G4"
+    ],
+    [
+      "edf6cf9a-b00e-43c6-9e30-e0063a5d828d",
+      "Group SW"
+    ],
+    [
+      "2f543683-239c-445c-bb2b-626a118f4105",
+      "Switches"
+    ],
+    [
+      "ca5e89cf-84bd-4acf-ae00-7dda65697336",
+      "MCU"
+    ],
+    [
+      "c6b3cd62-5279-42a9-98ac-d5598d95defb",
+      "Bluetooth"
+    ],
+    [
+      "f8bc82e3-32ec-4167-9e24-1a10c15ee846",
+      "OLED Display"
+    ],
+    [
+      "482b294a-b1e4-4f63-be44-c400b6bd9746",
+      "MIDI"
+    ],
+    [
+      "e90e9a2c-ac4b-4f9b-934b-1d4a411f3a70",
+      "DACs"
     ]
   ],
   "text_variables": {}
