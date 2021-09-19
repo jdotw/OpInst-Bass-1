@@ -390,6 +390,10 @@
     [
       "f3ecb756-1428-423c-be3b-e8f0396f89bd",
       "SD IO"
+    ],
+    [
+      "b21b96db-f1b6-4f4b-8437-af14eaa9d9d5",
+      "Rotary Encoders"
     ]
   ],
   "text_variables": {}
