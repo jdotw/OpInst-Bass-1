@@ -4747,7 +4747,7 @@
     (path "/46275a28-8307-4690-960d-ea5be1dc4a89/e5ee9986-f6f0-40de-b4a4-76dc3f2396a6"
       (reference "J25") (unit 1) (value "LeftI2C0Test") (footprint "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical")
     )
-    (path "/e90e9a2c-ac4b-4f9b-934b-1d4a411f3a70/3506fce6-a355-49a0-b6db-37a402a61fc7"
+    (path "/e90e9a2c-ac4b-4f9b-934b-1d4a411f3a70/20bac48d-0b36-4ae2-84e4-27008a4cd5d9/cdabd67c-8f16-4d92-9ff3-452e572bec1f"
       (reference "J26") (unit 1) (value "AudioOutConn") (footprint "Connector_PinSocket_2.54mm:PinSocket_2x02_P2.54mm_Vertical")
     )
     (path "/e90e9a2c-ac4b-4f9b-934b-1d4a411f3a70/c8566647-d618-4b61-a821-14182b39967a"
