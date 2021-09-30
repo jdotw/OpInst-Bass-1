@@ -59,6 +59,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define OLED_RESET_Pin GPIO_PIN_15
 #define OLED_RESET_GPIO_Port GPIOC
+#define BT_SPI_IRQ_Pin GPIO_PIN_0
+#define BT_SPI_IRQ_GPIO_Port GPIOA
+#define BT_SPI_CS_Pin GPIO_PIN_1
+#define BT_SPI_CS_GPIO_Port GPIOA
 #define OSC1SCALEDPOTCS_Pin GPIO_PIN_4
 #define OSC1SCALEDPOTCS_GPIO_Port GPIOC
 #define OSC2SCALEDPOTCS_Pin GPIO_PIN_5
@@ -73,6 +77,8 @@ void Error_Handler(void);
 #define OLED_DATA_SELECT_GPIO_Port GPIOC
 #define OLED_SPI_CS_Pin GPIO_PIN_7
 #define OLED_SPI_CS_GPIO_Port GPIOC
+#define BT_RESET_Pin GPIO_PIN_8
+#define BT_RESET_GPIO_Port GPIOA
 #define MIDI_TX_Pin GPIO_PIN_9
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
