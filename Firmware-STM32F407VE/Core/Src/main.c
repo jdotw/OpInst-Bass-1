@@ -546,16 +546,23 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, OLED_RESET_Pin|OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin|OLED_DATA_SELECT_Pin
-                          |OLED_SPI_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, OLED_RESET_Pin|OLED_DATA_SELECT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, BT_SPI_CS_Pin|BT_RESET_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(BT_SPI_CS_GPIO_Port, BT_SPI_CS_Pin, GPIO_PIN_SET);
 
-  /*Configure GPIO pins : OLED_RESET_Pin OLED_DATA_SELECT_Pin OLED_SPI_CS_Pin */
-  GPIO_InitStruct.Pin = OLED_RESET_Pin|OLED_DATA_SELECT_Pin|OLED_SPI_CS_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin|OLED_SPI_CS_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : OLED_RESET_Pin OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin OLED_DATA_SELECT_Pin
+                           OLED_SPI_CS_Pin */
+  GPIO_InitStruct.Pin = OLED_RESET_Pin|OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin|OLED_DATA_SELECT_Pin
+                          |OLED_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
@@ -571,13 +578,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin */
-  GPIO_InitStruct.Pin = OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : I2C2_INT_Pin I2C1_INT_Pin */
   GPIO_InitStruct.Pin = I2C2_INT_Pin|I2C1_INT_Pin;
