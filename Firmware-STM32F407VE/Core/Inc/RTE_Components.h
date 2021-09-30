@@ -37,6 +37,7 @@
 
 /* Defines ------------------------------------------------------------------*/
 /* STMicroelectronics.X-CUBE-BLE2.3.2.1 */
+#define SAMPLE_APP
 #define HCI_TL
 #define HCI_TL_INTERFACE
 

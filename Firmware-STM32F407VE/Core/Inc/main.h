@@ -31,6 +31,7 @@ extern "C" {
 #include "stm32f4xx_hal.h"
 
 #include "hci_tl_interface.h"
+#include "custom.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -74,6 +75,7 @@ void Error_Handler(void);
 #define SHIFTSW_Pin GPIO_PIN_10
 #define SHIFTSW_GPIO_Port GPIOD
 #define SHIFTSW_EXTI_IRQn EXTI15_10_IRQn
+#define BSP_BUTTON_EXTI_IRQn EXTI15_10_IRQn
 #define OLED_DATA_SELECT_Pin GPIO_PIN_6
 #define OLED_DATA_SELECT_GPIO_Port GPIOC
 #define OLED_SPI_CS_Pin GPIO_PIN_7
