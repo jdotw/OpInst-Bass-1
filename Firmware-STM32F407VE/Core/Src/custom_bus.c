@@ -190,10 +190,33 @@ int32_t BSP_SPI1_SendRecv(uint8_t *pTxData, uint8_t *pRxData, uint16_t Length)
 {
   int32_t ret = BSP_ERROR_NONE;
 
+  WRITE_REG(hspi1.Instance->CR1, ((hspi1.Init.Mode & (SPI_CR1_MSTR | SPI_CR1_SSI)) |
+                                  (hspi1.Init.Direction & (SPI_CR1_RXONLY | SPI_CR1_BIDIMODE)) |
+                                  (hspi1.Init.DataSize & SPI_CR1_DFF) |
+                                  (hspi1.Init.CLKPolarity & SPI_CR1_CPOL) |
+                                  (SPI_PHASE_2EDGE & SPI_CR1_CPHA) |
+                                  (hspi1.Init.NSS & SPI_CR1_SSM) |
+                                  (hspi1.Init.BaudRatePrescaler & SPI_CR1_BR_Msk) |
+                                  (hspi1.Init.FirstBit  & SPI_CR1_LSBFIRST) |
+                                  (hspi1.Init.CRCCalculation & SPI_CR1_CRCEN)));
+
+
   if(HAL_SPI_TransmitReceive(&hspi1, pTxData, pRxData, Length, BUS_SPI1_POLL_TIMEOUT) != HAL_OK)
   {
       ret = BSP_ERROR_UNKNOWN_FAILURE;
   }
+
+  WRITE_REG(hspi1.Instance->CR1, ((hspi1.Init.Mode & (SPI_CR1_MSTR | SPI_CR1_SSI)) |
+                                  (hspi1.Init.Direction & (SPI_CR1_RXONLY | SPI_CR1_BIDIMODE)) |
+                                  (hspi1.Init.DataSize & SPI_CR1_DFF) |
+                                  (hspi1.Init.CLKPolarity & SPI_CR1_CPOL) |
+                                  (hspi1.Init.CLKPhase & SPI_CR1_CPHA) |
+                                  (hspi1.Init.NSS & SPI_CR1_SSM) |
+                                  (hspi1.Init.BaudRatePrescaler & SPI_CR1_BR_Msk) |
+                                  (hspi1.Init.FirstBit  & SPI_CR1_LSBFIRST) |
+                                  (hspi1.Init.CRCCalculation & SPI_CR1_CRCEN)));
+
+
   return ret;
 }
 

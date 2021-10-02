@@ -135,7 +135,7 @@ void MX_BlueNRG_2_Init(void)
   if (ret != BLE_STATUS_SUCCESS)
   {
     PRINT_DBG("SampleAppInit()--> Failed 0x%02x\r\n", ret);
-    while(1);
+//    while(1);
   }
 
   PRINT_DBG("BLE Stack Initialized & Device Configured\r\n");

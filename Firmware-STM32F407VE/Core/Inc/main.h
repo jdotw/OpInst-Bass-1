@@ -63,6 +63,7 @@ void Error_Handler(void);
 #define OLED_RESET_GPIO_Port GPIOC
 #define BT_SPI_IRQ_Pin GPIO_PIN_0
 #define BT_SPI_IRQ_GPIO_Port GPIOA
+#define BT_SPI_IRQ_EXTI_IRQn EXTI0_IRQn
 #define BT_SPI_CS_Pin GPIO_PIN_1
 #define BT_SPI_CS_GPIO_Port GPIOA
 #define OSC1SCALEDPOTCS_Pin GPIO_PIN_4
