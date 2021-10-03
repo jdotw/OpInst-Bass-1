@@ -36,6 +36,8 @@
 #include "midi.h"
 #include "seq.h"
 #include "elw2701aa.h"
+#include "oled.h"
+#include "../../lvgl/lvgl.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -125,7 +127,6 @@ int main(void)
   MX_BlueNRG_2_Init();
   /* USER CODE BEGIN 2 */
 
-
   // Set i2c buses
   i2c_bus[0] = &hi2c1; // Left
   i2c_bus[1] = &hi2c2; // Right
@@ -174,10 +175,8 @@ int main(void)
   is32_init();
 
   // Init OLED Display
-  elw2701aa_init(&hspi1);
-
-  // Test OLED Display
-  elw2701aa_test(&hspi1, false);
+  oled_init(&hspi1);
+  oled_test();
 
   // Check for test mode (Shift held)
   bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
@@ -219,7 +218,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-  MX_BlueNRG_2_Process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

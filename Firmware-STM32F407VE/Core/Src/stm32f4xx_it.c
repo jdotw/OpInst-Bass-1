@@ -28,6 +28,7 @@
 #include "commit.h"
 #include "seq.h"
 #include "blink.h"
+#include "../../lvgl/lvgl.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -200,6 +201,7 @@ void SysTick_Handler(void)
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
   blink_systick();
+  lv_tick_inc(1);
   /* USER CODE END SysTick_IRQn 1 */
 }
 

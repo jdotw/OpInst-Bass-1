@@ -13,15 +13,9 @@
 #define GPIO_HIGH 1
 #define GPIO_LOW 0
 
-#define MIN_X 0x00
-#define MAX_X 0x57 // 87
-#define MIN_Y 0x00
-#define MAX_Y 0x33 // 51
-
 // NOTE: The x and y values here are memory addresses
 // Each byte in GDRAM is 2 4-bit pixels.
 
-void _elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_len, uint8_t start_y, uint8_t y_len, uint8_t (*data_callback)(uint16_t));
 void _elw2701aa_write_zero_data(SPI_HandleTypeDef *hspi);
 
 /*
@@ -128,19 +122,15 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
 }
 
 
-void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_len, uint8_t start_y, uint8_t y_len, uint8_t *data) {
-  uint8_t _data_from_buf(uint16_t i) {
-    return data[i];
-  }
-
-  _elw2701aa_write_data(hspi, start_x, x_len, start_y, y_len, _data_from_buf);
-}
-
 /*
  * GDRAM Write
  */
 
-void _elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_len, uint8_t start_y, uint8_t y_len, uint8_t (*data_callback)(uint16_t)) {
+// NOTE: The x and y coordinates here are in pixel-space
+//       When writing data to the OLED display we must
+//       divide the x value by 2 for two-pixels-per-byte
+
+void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_len, uint8_t start_y, uint8_t y_len, uint8_t (*data_callback)(uint16_t)) {
   HAL_StatusTypeDef res;
 
   // Pull OLD_DATA_SELECT LOW (Command)
@@ -150,10 +140,10 @@ void _elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_l
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_LOW);
 
   uint8_t write_cmds[4][2] = {
-      { 0x30, start_x },
-      { 0x32, (start_x + (x_len-1)) },
-      { 0x31, start_y },
-      { 0x33, (start_y + (y_len-1)) },
+      { 0x30, ((175 - start_x)-(x_len-1))/2 },
+      { 0x32, (175 - start_x)/2 },
+      { 0x31, (51 - start_y)-(y_len-1) },
+      { 0x33, (51 - start_y) },
   };
 
   for (uint8_t i=0; i < (sizeof(write_cmds)/sizeof(uint8_t[2])); i++) {
@@ -173,9 +163,14 @@ void _elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_l
   // Pull OLED_SPI_CS LOW (Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_LOW);
 
-  uint16_t num_bytes = (uint16_t)x_len * (uint16_t)y_len;
+  uint16_t num_bytes = ((uint16_t)x_len * (uint16_t)y_len)/2;
   for (uint16_t i=0; i < num_bytes; i++) {
-    uint8_t data = data_callback(i);
+    uint16_t reverse_i = (num_bytes-1)-i;
+    uint16_t remainder = reverse_i % 88;
+    uint16_t row_reversed_i = (reverse_i - remainder) + (87 - remainder);    // Always gets us start of row!
+    uint8_t data = data_callback(row_reversed_i);
+//    uint8_t reversed = (data & 0xF0) >> 4;
+//    reversed |= (data & 0x0F) << 4;
     res = HAL_SPI_Transmit(hspi, &data, 1, HAL_MAX_DELAY);
     if (res != HAL_OK) {
       Error_Handler();
@@ -196,7 +191,7 @@ void _elw2701aa_write_zero_data(SPI_HandleTypeDef *hspi) {
   uint8_t _data_from_buf(uint16_t i) {
     return 0x00;
   }
-  _elw2701aa_write_data(hspi, MIN_X, MAX_X+1, MIN_Y, MAX_Y+1, _data_from_buf);
+  elw2701aa_write_data(hspi, 0, 176, 0, 52, _data_from_buf);
 }
 
 
@@ -788,7 +783,7 @@ void _elw2701aa_write_test_data(SPI_HandleTypeDef *hspi) {
 //    return data;
     return image[i];
   }
-  _elw2701aa_write_data(hspi, MIN_X, MAX_X+1, MIN_Y, MAX_Y+1, _data_from_buf);
+  elw2701aa_write_data(hspi, 0, 176, 0, 52, _data_from_buf);
 }
 
 void elw2701aa_test(SPI_HandleTypeDef *hspi, bool loop) {
