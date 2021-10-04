@@ -87,6 +87,8 @@ void Error_Handler(void);
 #define MIDI_TX_GPIO_Port GPIOA
 #define MIDI_RX_Pin GPIO_PIN_10
 #define MIDI_RX_GPIO_Port GPIOA
+#define SD_DETECT_Pin GPIO_PIN_11
+#define SD_DETECT_GPIO_Port GPIOA
 #define I2C1_INT_Pin GPIO_PIN_5
 #define I2C1_INT_GPIO_Port GPIOB
 #define I2C1_INT_EXTI_IRQn EXTI9_5_IRQn

@@ -1,24 +1,25 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : main.c
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fatfs.h"
 #include "app_bluenrg_2.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -62,6 +63,10 @@ DMA_HandleTypeDef hdma_i2c1_rx;
 DMA_HandleTypeDef hdma_i2c2_tx;
 DMA_HandleTypeDef hdma_i2c2_rx;
 
+SD_HandleTypeDef hsd;
+DMA_HandleTypeDef hdma_sdio_rx;
+DMA_HandleTypeDef hdma_sdio_tx;
+
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim7;
 
@@ -81,6 +86,7 @@ static void MX_TIM1_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_TIM7_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_SDIO_SD_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -91,9 +97,9 @@ static void MX_USART1_UART_Init(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+ * @brief  The application entry point.
+ * @retval int
+ */
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -124,6 +130,8 @@ int main(void)
   MX_I2C2_Init();
   MX_TIM7_Init();
   MX_USART1_UART_Init();
+  MX_SDIO_SD_Init();
+  MX_FATFS_Init();
   MX_BlueNRG_2_Init();
   /* USER CODE BEGIN 2 */
 
@@ -132,14 +140,14 @@ int main(void)
   i2c_bus[1] = &hi2c2; // Right
 
   // Scan all i2c buses
-//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
-//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 1);
-//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 2);
-//  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 3);
-//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 0);
-//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
-//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
-//  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
+  //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
+  //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 1);
+  //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 2);
+  //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 3);
+  //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 0);
+  //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 1);
+  //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 2);
+  //  i2c_scan_bus(&hi2c2, RIGHT_I2C_MUX_ADDR, 3);
 
   // Reset GPIO Extenders
   pca9555_init();
@@ -201,6 +209,9 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 2);
   rotpic_poll_all(I2C_RIGHT, 3);
 
+  // Test FatFS/SD-Card
+  fatfs_write_test_file();
+
   // Re-enable controls
   ctrl_value_init();
   ctrl_toggle_init();
@@ -213,32 +224,36 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	midi_rx_resume();
+  midi_rx_resume();
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+    // NOTE: Never let MX_BlueNRG_2_Process(); be called here
+    //       We call it from commit so that it's on an
+    //       even interrupt plane with other SPI operations
   }
   /* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+ * @brief System Clock Configuration
+ * @retval None
+ */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
   /** Configure the main internal regulator output voltage
-  */
+   */
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
   /** Initializes the RCC Oscillators according to the specified parameters
-  * in the RCC_OscInitTypeDef structure.
-  */
+   * in the RCC_OscInitTypeDef structure.
+   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -246,15 +261,15 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLM = 8;
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 4;
+  RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
   /** Initializes the CPU, AHB and APB buses clocks
-  */
+   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+      |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -267,10 +282,10 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief I2C1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief I2C1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C1_Init(void)
 {
 
@@ -301,10 +316,10 @@ static void MX_I2C1_Init(void)
 }
 
 /**
-  * @brief I2C2 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief I2C2 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_I2C2_Init(void)
 {
 
@@ -335,10 +350,38 @@ static void MX_I2C2_Init(void)
 }
 
 /**
-  * @brief TIM1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief SDIO Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_SDIO_SD_Init(void)
+{
+
+  /* USER CODE BEGIN SDIO_Init 0 */
+
+  /* USER CODE END SDIO_Init 0 */
+
+  /* USER CODE BEGIN SDIO_Init 1 */
+
+  /* USER CODE END SDIO_Init 1 */
+  hsd.Instance = SDIO;
+  hsd.Init.ClockEdge = SDIO_CLOCK_EDGE_RISING;
+  hsd.Init.ClockBypass = SDIO_CLOCK_BYPASS_DISABLE;
+  hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
+  hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
+  hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
+  hsd.Init.ClockDiv = 0;
+  /* USER CODE BEGIN SDIO_Init 2 */
+
+  /* USER CODE END SDIO_Init 2 */
+
+}
+
+/**
+ * @brief TIM1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM1_Init(void)
 {
 
@@ -388,10 +431,10 @@ static void MX_TIM1_Init(void)
 }
 
 /**
-  * @brief TIM7 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief TIM7 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_TIM7_Init(void)
 {
 
@@ -426,10 +469,10 @@ static void MX_TIM7_Init(void)
 }
 
 /**
-  * @brief USART1 Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief USART1 Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_USART1_UART_Init(void)
 {
 
@@ -459,8 +502,8 @@ static void MX_USART1_UART_Init(void)
 }
 
 /**
-  * Enable DMA controller clock
-  */
+ * Enable DMA controller clock
+ */
 static void MX_DMA_Init(void)
 {
 
@@ -484,14 +527,20 @@ static void MX_DMA_Init(void)
   /* DMA2_Stream2_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+  /* DMA2_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream3_IRQn);
+  /* DMA2_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
 
 }
 
 /**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
+ * @brief GPIO Initialization Function
+ * @param None
+ * @retval None
+ */
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -519,7 +568,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : OLED_RESET_Pin OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin OLED_DATA_SELECT_Pin
                            OLED_SPI_CS_Pin */
   GPIO_InitStruct.Pin = OLED_RESET_Pin|OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin|OLED_DATA_SELECT_Pin
-                          |OLED_SPI_CS_Pin;
+      |OLED_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -550,6 +599,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(SHIFTSW_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : SD_DETECT_Pin */
+  GPIO_InitStruct.Pin = SD_DETECT_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(SD_DETECT_GPIO_Port, &GPIO_InitStruct);
+
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
@@ -565,38 +620,38 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
-	{
-		// DAC Tuning channel (oscillator 1)
-		osc_calibrate_timercallback(htim, TIM_CHANNEL_1);
-	}
-	else if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
-	{
-		// DAC Tuning channel (oscillator 2)
-		osc_calibrate_timercallback(htim, TIM_CHANNEL_2);
-	}
+  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+  {
+    // DAC Tuning channel (oscillator 1)
+    osc_calibrate_timercallback(htim, TIM_CHANNEL_1);
+  }
+  else if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+  {
+    // DAC Tuning channel (oscillator 2)
+    osc_calibrate_timercallback(htim, TIM_CHANNEL_2);
+  }
 }
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	midi_rx_dma_rxcomplete_callback();
+  midi_rx_dma_rxcomplete_callback();
 }
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
-	if (huart->ErrorCode != HAL_UART_ERROR_NONE) {
-		if (huart->ErrorCode == HAL_UART_ERROR_ORE) {
-			// Clear overrun
-			huart->ErrorCode = HAL_UART_ERROR_NONE;
-		} else {
-			Error_Handler();
-		}
-	}
+  if (huart->ErrorCode != HAL_UART_ERROR_NONE) {
+    if (huart->ErrorCode == HAL_UART_ERROR_ORE) {
+      // Clear overrun
+      huart->ErrorCode = HAL_UART_ERROR_NONE;
+    } else {
+      Error_Handler();
+    }
+  }
 }
 
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
+ * @brief  This function is executed in case of error occurrence.
+ * @retval None
+ */
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
@@ -605,30 +660,30 @@ void Error_Handler(void)
   uint8_t cycle = 0;
   while (1)
   {
-  	uint8_t led = (cycle % 2) ? 0xFF : 0x00;
-  	led = 0xFF;
+    uint8_t led = (cycle % 2) ? 0xFF : 0x00;
+    led = 0xFF;
 
-  	// LEFT0:000
-  	rotpic_led_set_state(I2C_LEFT, 0, 0b000, led);
+    // LEFT0:000
+    rotpic_led_set_state(I2C_LEFT, 0, 0b000, led);
 
-  	// LEFT0:001
-  	rotpic_led_set_state(I2C_LEFT, 0, 0b001, led);
+    // LEFT0:001
+    rotpic_led_set_state(I2C_LEFT, 0, 0b001, led);
 
-  	// LEFT0:011
-  	rotpic_led_set_state(I2C_LEFT, 0, 0b011, led);
+    // LEFT0:011
+    rotpic_led_set_state(I2C_LEFT, 0, 0b011, led);
 
-  	// LEFT2:000
-  	rotpic_led_set_state(I2C_LEFT, 2, 0b000, led);
+    // LEFT2:000
+    rotpic_led_set_state(I2C_LEFT, 2, 0b000, led);
 
-  	// RIGHT0:000
-  	rotpic_led_set_state(I2C_RIGHT, 0, 0b000, led);
+    // RIGHT0:000
+    rotpic_led_set_state(I2C_RIGHT, 0, 0b000, led);
 
-  	// RIGHT1:001
-  	rotpic_led_set_state(I2C_LEFT, 1, 0b001, led);
+    // RIGHT1:001
+    rotpic_led_set_state(I2C_LEFT, 1, 0b001, led);
 
-//  	// Wait and cycle
-//  	HAL_Delay(1000);
-//  	cycle++;
+    //  	// Wait and cycle
+    //  	HAL_Delay(1000);
+    //  	cycle++;
 
 
   }
@@ -637,12 +692,12 @@ void Error_Handler(void)
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+ * @brief  Reports the name of the source file and the source line number
+ *         where the assert_param error has occurred.
+ * @param  file: pointer to the source file name
+ * @param  line: assert_param error line source number
+ * @retval None
+ */
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
