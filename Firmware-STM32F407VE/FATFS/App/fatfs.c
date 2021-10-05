@@ -49,17 +49,6 @@ DWORD get_fattime(void)
 }
 
 /* USER CODE BEGIN Application */
-void fatfs_write_test_file(void) {
-  uint32_t wbytes; /* File write counts */
-  uint8_t wtext[] = "Wrote to test file."; /* File write buffer */
-  if(f_mount(&SDFatFS, (TCHAR const*)SDPath, 0) == FR_OK) {
-    if(f_open(&SDFile, "BASS-1.TXT", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK) {
-      if(f_write(&SDFile, wtext, sizeof(wtext), (void *)&wbytes) == FR_OK) {
-        f_close(&SDFile);
-      }
-    }
-  }
-}
 /* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

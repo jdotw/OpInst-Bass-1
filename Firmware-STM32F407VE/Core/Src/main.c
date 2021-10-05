@@ -210,7 +210,7 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 3);
 
   // Test FatFS/SD-Card
-  fatfs_write_test_file();
+  sd_test();
 
   // Re-enable controls
   ctrl_value_init();
