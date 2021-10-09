@@ -14,6 +14,7 @@ void oled_init(SPI_HandleTypeDef *hspi);
 void oled_test(void);
 
 // Preset Screens
+void oled_preset_init(void);
 lv_obj_t* oled_preset_select_screen(void);
 
 #endif /* INC_OLED_H_ */

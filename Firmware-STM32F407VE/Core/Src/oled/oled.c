@@ -56,6 +56,8 @@ void oled_init(SPI_HandleTypeDef *hspi) {
   // Register driver
   disp = lv_disp_drv_register(&disp_drv);
 
+  // Init Screens
+  oled_preset_init();
 }
 
 void oled_test() {
