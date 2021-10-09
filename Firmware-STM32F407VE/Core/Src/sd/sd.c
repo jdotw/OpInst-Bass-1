@@ -85,15 +85,15 @@ void sd_test(void) {
         f_close(&SDFile);
       }
     }
-    if(f_open(&SDFile, "BASS-1.TXT", FA_READ) == FR_OK) {
-      uint8_t buf[1024] = {0};
-      unsigned int num_read = 0;
-      if (f_read(&SDFile, buf, 1023, &num_read) == FR_OK) {
-        _sd_test_json_parse(buf);
-      }
-      f_close(&SDFile);
-
-    }
+//    if(f_open(&SDFile, "BASS-1.TXT", FA_READ) == FR_OK) {
+//      uint8_t buf[1024] = {0};
+//      unsigned int num_read = 0;
+//      if (f_read(&SDFile, buf, 1023, &num_read) == FR_OK) {
+//        _sd_test_json_parse(buf);
+//      }
+//      f_close(&SDFile);
+//
+//    }
   }
 
 }

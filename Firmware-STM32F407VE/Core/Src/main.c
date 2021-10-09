@@ -39,6 +39,7 @@
 #include "elw2701aa.h"
 #include "oled.h"
 #include "../../lvgl/lvgl.h"
+#include "preset.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -163,6 +164,9 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 2);
   rotpic_poll_all(I2C_RIGHT, 3);
 
+  // Init preset
+  preset_init();
+
   // Init controls and toggles
   ctrl_enabled = false;
   ctrl_value_init();
@@ -184,7 +188,6 @@ int main(void)
 
   // Init OLED Display
   oled_init(&hspi1);
-  oled_test();
 
   // Check for test mode (Shift held)
   bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
@@ -196,7 +199,7 @@ int main(void)
   }
 
   // Calibrate oscillators
-  osc_calibrate(&hspi1, &htim1);
+//  osc_calibrate(&hspi1, &htim1);
 
   // Poll all rotary encoder PICs
   // This will clear any interrupts
@@ -216,6 +219,10 @@ int main(void)
   ctrl_value_init();
   ctrl_toggle_init();
   ctrl_enabled = true;
+
+  // Set initial screen
+  lv_obj_t *default_screen = oled_preset_select_screen();
+  lv_scr_load(default_screen);
 
   // Start commit timer
   HAL_TIM_Base_Start_IT(&htim7);
