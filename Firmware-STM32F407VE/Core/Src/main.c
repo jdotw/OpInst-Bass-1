@@ -38,6 +38,7 @@
 #include "seq.h"
 #include "elw2701aa.h"
 #include "oled.h"
+#include "sd.h"
 #include "../../lvgl/lvgl.h"
 #include "preset.h"
 /* USER CODE END Includes */
@@ -191,7 +192,8 @@ int main(void)
 
   // Check for test mode (Shift held)
   bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
-  if (test_mode) {
+  if (test_mode)
+  {
     while (1)
     {
       is32_test();
@@ -199,7 +201,7 @@ int main(void)
   }
 
   // Calibrate oscillators
-//  osc_calibrate(&hspi1, &htim1);
+  //  osc_calibrate(&hspi1, &htim1);
 
   // Poll all rotary encoder PICs
   // This will clear any interrupts
@@ -219,10 +221,6 @@ int main(void)
   ctrl_value_init();
   ctrl_toggle_init();
   ctrl_enabled = true;
-
-  // Set initial screen
-  lv_obj_t *default_screen = oled_preset_select_screen();
-  lv_scr_load(default_screen);
 
   // Start commit timer
   HAL_TIM_Base_Start_IT(&htim7);
@@ -275,8 +273,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the CPU, AHB and APB buses clocks
    */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-      |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
@@ -319,7 +316,6 @@ static void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
-
 }
 
 /**
@@ -353,7 +349,6 @@ static void MX_I2C2_Init(void)
   /* USER CODE BEGIN I2C2_Init 2 */
 
   /* USER CODE END I2C2_Init 2 */
-
 }
 
 /**
@@ -381,7 +376,6 @@ static void MX_SDIO_SD_Init(void)
   /* USER CODE BEGIN SDIO_Init 2 */
 
   /* USER CODE END SDIO_Init 2 */
-
 }
 
 /**
@@ -434,7 +428,6 @@ static void MX_TIM1_Init(void)
   /* USER CODE BEGIN TIM1_Init 2 */
 
   /* USER CODE END TIM1_Init 2 */
-
 }
 
 /**
@@ -472,7 +465,6 @@ static void MX_TIM7_Init(void)
   /* USER CODE BEGIN TIM7_Init 2 */
 
   /* USER CODE END TIM7_Init 2 */
-
 }
 
 /**
@@ -505,7 +497,6 @@ static void MX_USART1_UART_Init(void)
   /* USER CODE BEGIN USART1_Init 2 */
 
   /* USER CODE END USART1_Init 2 */
-
 }
 
 /**
@@ -540,7 +531,6 @@ static void MX_DMA_Init(void)
   /* DMA2_Stream6_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
-
 }
 
 /**
@@ -561,21 +551,20 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, OLED_RESET_Pin|OLED_DATA_SELECT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, OLED_RESET_Pin | OLED_DATA_SELECT_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BT_SPI_CS_GPIO_Port, BT_SPI_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin|OLED_SPI_CS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC, OSC1SCALEDPOTCS_Pin | OSC2SCALEDPOTCS_Pin | OLED_SPI_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : OLED_RESET_Pin OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin OLED_DATA_SELECT_Pin
                            OLED_SPI_CS_Pin */
-  GPIO_InitStruct.Pin = OLED_RESET_Pin|OSC1SCALEDPOTCS_Pin|OSC2SCALEDPOTCS_Pin|OLED_DATA_SELECT_Pin
-      |OLED_SPI_CS_Pin;
+  GPIO_InitStruct.Pin = OLED_RESET_Pin | OSC1SCALEDPOTCS_Pin | OSC2SCALEDPOTCS_Pin | OLED_DATA_SELECT_Pin | OLED_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -588,14 +577,14 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(BT_SPI_IRQ_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : BT_SPI_CS_Pin BT_RESET_Pin */
-  GPIO_InitStruct.Pin = BT_SPI_CS_Pin|BT_RESET_Pin;
+  GPIO_InitStruct.Pin = BT_SPI_CS_Pin | BT_RESET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : I2C2_INT_Pin I2C1_INT_Pin */
-  GPIO_InitStruct.Pin = I2C2_INT_Pin|I2C1_INT_Pin;
+  GPIO_InitStruct.Pin = I2C2_INT_Pin | I2C1_INT_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -621,7 +610,6 @@ static void MX_GPIO_Init(void)
 
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
-
 }
 
 /* USER CODE BEGIN 4 */
@@ -638,16 +626,21 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
     osc_calibrate_timercallback(htim, TIM_CHANNEL_2);
   }
 }
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
   midi_rx_dma_rxcomplete_callback();
 }
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 {
-  if (huart->ErrorCode != HAL_UART_ERROR_NONE) {
-    if (huart->ErrorCode == HAL_UART_ERROR_ORE) {
+  if (huart->ErrorCode != HAL_UART_ERROR_NONE)
+  {
+    if (huart->ErrorCode == HAL_UART_ERROR_ORE)
+    {
       // Clear overrun
       huart->ErrorCode = HAL_UART_ERROR_NONE;
-    } else {
+    }
+    else
+    {
       Error_Handler();
     }
   }
@@ -691,13 +684,11 @@ void Error_Handler(void)
     //  	// Wait and cycle
     //  	HAL_Delay(1000);
     //  	cycle++;
-
-
   }
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
  * @brief  Reports the name of the source file and the source line number
  *         where the assert_param error has occurred.
