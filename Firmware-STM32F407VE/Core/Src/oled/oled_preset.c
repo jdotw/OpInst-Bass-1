@@ -206,3 +206,8 @@ void oled_preset_apply_index_delta(int8_t delta)
     lv_scr_load(oled_preset_name_screen());
   }
 }
+
+void oled_preset_name_save()
+{
+  preset_save(preset_to_name);
+}

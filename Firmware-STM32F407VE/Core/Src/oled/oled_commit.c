@@ -30,6 +30,7 @@ void oled_commit()
     else if (commit_mod_state.button_changed.down && commit_mod_state.button_state.down)
     {
       // Save preset to SDCard
+      oled_preset_name_save();
       new_state = OLED_SELECT_PRESET;
     }
   }

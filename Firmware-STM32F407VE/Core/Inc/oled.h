@@ -31,5 +31,6 @@ lv_obj_t *oled_preset_name_screen(void);
 void oled_preset_name_set_preset(preset_t *preset);
 void oled_preset_apply_char_delta(int8_t delta);
 void oled_preset_apply_index_delta(int8_t delta);
+void oled_preset_name_save(void);
 
 #endif /* INC_OLED_H_ */

@@ -13,17 +13,16 @@
 #include "fatfs.h"
 #include "cJSON.h"
 
-void sd_init() {
-
+void sd_init()
+{
 }
 
-char* _sd_test_json(void)
+char *_sd_test_json(void)
 {
   const unsigned int resolution_numbers[3][2] = {
       {1280, 720},
       {1920, 1080},
-      {3840, 2160}
-  };
+      {3840, 2160}};
   char *string = NULL;
   cJSON *resolutions = NULL;
   size_t index = 0;
@@ -64,36 +63,56 @@ char* _sd_test_json(void)
     fprintf(stderr, "Failed to print monitor.\n");
   }
 
-  end:
+end:
   cJSON_Delete(monitor);
   return string;
 }
 
-void _sd_test_json_parse(uint8_t *buf) {
+void _sd_test_json_parse(uint8_t *buf)
+{
   uint8_t *parse_end = 0;
   cJSON *parsed = cJSON_ParseWithOpts(buf, &parse_end, true);
-
 }
 
-void sd_test(void) {
+bool sd_write(char *filename, char *content, uint32_t content_len)
+{
+  uint32_t wbytes;
+  if (f_mount(&SDFatFS, (TCHAR const *)SDPath, 0) == FR_OK)
+  {
+    if (f_open(&SDFile, filename, FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
+    {
+      if (f_write(&SDFile, content, content_len, (void *)&wbytes) == FR_OK)
+      {
+        f_close(&SDFile);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+void sd_test(void)
+{
   uint32_t wbytes; /* File write counts */
-  char *wtext =  _sd_test_json();
+  char *wtext = _sd_test_json();
   uint32_t wtext_len = strlen((const char *)wtext);
-  if(f_mount(&SDFatFS, (TCHAR const*)SDPath, 0) == FR_OK) {
-    if(f_open(&SDFile, "BASS-1.TXT", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK) {
-      if(f_write(&SDFile, wtext, wtext_len, (void *)&wbytes) == FR_OK) {
+  if (f_mount(&SDFatFS, (TCHAR const *)SDPath, 0) == FR_OK)
+  {
+    if (f_open(&SDFile, "BASS-1.TXT", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
+    {
+      if (f_write(&SDFile, wtext, wtext_len, (void *)&wbytes) == FR_OK)
+      {
         f_close(&SDFile);
       }
     }
-//    if(f_open(&SDFile, "BASS-1.TXT", FA_READ) == FR_OK) {
-//      uint8_t buf[1024] = {0};
-//      unsigned int num_read = 0;
-//      if (f_read(&SDFile, buf, 1023, &num_read) == FR_OK) {
-//        _sd_test_json_parse(buf);
-//      }
-//      f_close(&SDFile);
-//
-//    }
+    //    if(f_open(&SDFile, "BASS-1.TXT", FA_READ) == FR_OK) {
+    //      uint8_t buf[1024] = {0};
+    //      unsigned int num_read = 0;
+    //      if (f_read(&SDFile, buf, 1023, &num_read) == FR_OK) {
+    //        _sd_test_json_parse(buf);
+    //      }
+    //      f_close(&SDFile);
+    //
+    //    }
   }
-
 }
