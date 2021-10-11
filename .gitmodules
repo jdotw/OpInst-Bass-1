@@ -1,9 +1,0 @@
-[submodule "Firmware-STM32F407VE/lvgl"]
-	path = Firmware-STM32F407VE/lvgl
-	url = https://github.com/lvgl/lvgl
-[submodule "cJSON"]
-	path = cJSON
-	url = git@github.com:DaveGamble/cJSON.git
-[submodule "Firmware-STM32F407VE/cJSON"]
-	path = Firmware-STM32F407VE/cJSON
-	url = git@github.com:DaveGamble/cJSON.git
