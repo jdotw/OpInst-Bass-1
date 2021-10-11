@@ -1,0 +1,3 @@
+[submodule "Firmware-STM32F407VE/lvgl"]
+	path = Firmware-STM32F407VE/lvgl
+	url = git@github.com:lvgl/lvgl.git
