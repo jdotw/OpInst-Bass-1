@@ -1,5 +1,6 @@
 .DS_Store
 .metadata
+.vscode
 /RotaryEncoder.X/build/
 /RotaryEncoder.X/dist/
 /Firmware-PIC18F26Q10.X/build/

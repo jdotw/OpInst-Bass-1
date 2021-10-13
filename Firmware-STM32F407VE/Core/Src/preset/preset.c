@@ -5,9 +5,14 @@
  *      Author: jwilson
  */
 
+#include <string.h>
+#include <stdio.h>
+#include <ctype.h>
+
 #include "main.h"
 #include "preset.h"
 #include "cJSON.h"
+#include "sd.h"
 
 #define str(x) #x
 #define xstr(x) str(x)
@@ -63,6 +68,6 @@ bool preset_save(preset_t preset)
 {
   char buf[128] = {0};
   char *json = _preset_json(preset);
-  snprintf(buf, 128 - 1, "%s.JSN", preset.name);
-  sd_write(buf, json, strlen(json));
+  snprintf(buf, 128 - 1, "\\PRESETS\\USER\\%02d.JSN", preset.index);
+  return sd_write(buf, json, strlen(json));
 }

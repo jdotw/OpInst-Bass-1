@@ -12,6 +12,7 @@
 
 typedef struct
 {
+  uint8_t index;
   char *name;
   ctrl_t *ctrl;
 } preset_t;
