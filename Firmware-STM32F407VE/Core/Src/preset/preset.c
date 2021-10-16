@@ -178,6 +178,20 @@ static const char *_preset_ctrl_name_func(uint8_t i)
   }
 }
 
+ctrl_enum_t _preset_ctrl_enum(char *name)
+{
+  for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++)
+  {
+    const char *candidate = _preset_ctrl_name_func(i);
+    if (strcmp(candidate, name) == 0)
+    {
+      return i;
+    }
+  }
+  Error_Handler();
+  return CTRL_ENUM_MAX;
+}
+
 // static const char *
 //     _preset_ctrl_name_array[] = {
 //         "osc1_saw_lvl",
@@ -299,7 +313,7 @@ char *_preset_step_json_string(preset_t preset, uint8_t step)
     if (preset.seq->step_ctrl[step].changed[i])
     {
       const char *name = _preset_ctrl_name_func(i);
-      int16_t value = preset.ctrl->value[i];
+      int16_t value = preset.seq->step_ctrl[step].value[i];
       cJSON_AddNumberToObject(step_obj, name, (double)value);
     }
   }
@@ -359,11 +373,23 @@ bool preset_save(preset_t preset)
   return true;
 }
 
+void _preset_load_ctrl(cJSON *ctrl_obj, ctrl_t *ctrlptr)
+{
+  memset(&ctrlptr->value, 0, sizeof(ctrlptr->value));
+  memset(&ctrlptr->changed, 0, sizeof(ctrlptr->changed));
+
+  for (cJSON *ctrl_value = ctrl_obj->child; ctrl_value; ctrl_value = ctrl_value->next)
+  {
+    ctrl_enum_t ctrl_enum = _preset_ctrl_enum(ctrl_value->string);
+    ctrlptr->value[ctrl_enum] = ctrl_value->valueint;
+    ctrlptr->changed[ctrl_enum] = true;
+  }
+}
+
 void preset_load(bool system, uint8_t index)
 {
   char path[128] = {0};
   char filename[128] = {0};
-  char *json;
   bool result;
   size_t read_len = 0;
   char read_buf[2048] = {0};
@@ -373,10 +399,75 @@ void preset_load(bool system, uint8_t index)
   sd_mkdir(path);
 
   // Load Controls
-  snprintf(filename, 128 - 1, "%s\\CONTROLS.JSN", path);
+  snprintf(filename, 128 - 1, "\\PRESETS\\%s\\%02d\\CONTROLS.JSN", system ? "SYSTEM" : "USER", index);
   result = sd_read(filename, read_buf, 2047, &read_len);
-  if (!result)
+  if (result)
   {
-    Error_Handler();
+    const char *parse_end = 0;
+    cJSON *ctrl_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
+    if (ctrl_obj)
+    {
+      _preset_load_ctrl(ctrl_obj, &ctrl);
+    }
+  }
+
+  // Load Toggles
+  snprintf(filename, 128 - 1, "\\PRESETS\\%s\\%02d\\TOGGLES.JSN", system ? "SYSTEM" : "USER", index);
+  memset(read_buf, 0, sizeof(read_buf));
+  result = sd_read(filename, read_buf, 2047, &read_len);
+  if (result)
+  {
+    const char *parse_end = 0;
+    cJSON *toggles_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
+
+    cJSON *osc1_squ_func_obj = cJSON_GetObjectItem(toggles_obj, "osc1_squ_func");
+    if (osc1_squ_func_obj)
+      ctrl_toggle.osc1_squ_func = osc1_squ_func_obj->valueint;
+
+    cJSON *osc2_squ_func_obj = cJSON_GetObjectItem(toggles_obj, "osc2_squ_func");
+    if (osc2_squ_func_obj)
+      ctrl_toggle.osc2_squ_func = osc2_squ_func_obj->valueint;
+
+    cJSON *osc1_tune_func_obj = cJSON_GetObjectItem(toggles_obj, "osc1_tune_func");
+    if (osc1_tune_func_obj)
+      ctrl_toggle.osc1_tune_func = osc1_tune_func_obj->valueint;
+
+    cJSON *osc_filt_env_attack_func_obj = cJSON_GetObjectItem(toggles_obj, "osc_filt_env_attack_func");
+    if (osc_filt_env_attack_func_obj)
+      ctrl_toggle.osc_filt_env_attack_func = osc_filt_env_attack_func_obj->valueint;
+
+    cJSON *osc_filt_env_sustain_func_obj = cJSON_GetObjectItem(toggles_obj, "osc_filt_env_sustain_func");
+    if (osc_filt_env_sustain_func_obj)
+      ctrl_toggle.osc_filt_env_sustain_func = osc_filt_env_sustain_func_obj->valueint;
+
+    cJSON *osc_amp_env_sustain_func_obj = cJSON_GetObjectItem(toggles_obj, "osc_amp_env_sustain_func");
+    if (osc_amp_env_sustain_func_obj)
+      ctrl_toggle.osc_amp_env_sustain_func = osc_amp_env_sustain_func_obj->valueint;
+
+    cJSON *sub_filt_env_attack_func_obj = cJSON_GetObjectItem(toggles_obj, "sub_filt_env_attack_func");
+    if (sub_filt_env_attack_func_obj)
+      ctrl_toggle.sub_filt_env_attack_func = sub_filt_env_attack_func_obj->valueint;
+
+    cJSON *sub_filt_env_sustain_func_obj = cJSON_GetObjectItem(toggles_obj, "sub_filt_env_sustain_func");
+    if (sub_filt_env_sustain_func_obj)
+      ctrl_toggle.sub_filt_env_sustain_func = sub_filt_env_sustain_func_obj->valueint;
+
+    cJSON *sub_amp_env_sustain_func_obj = cJSON_GetObjectItem(toggles_obj, "sub_amp_env_sustain_func");
+    if (sub_amp_env_sustain_func_obj)
+      ctrl_toggle.sub_amp_env_sustain_func = sub_amp_env_sustain_func_obj->valueint;
+  }
+
+  // Load Steps
+  for (uint8_t i = 0; i < SEQ_MAX_STEPS; i++)
+  {
+    snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\STEPS\\STEP_%d.JSN", index, i + 1);
+    memset(read_buf, 0, sizeof(read_buf));
+    result = sd_read(filename, read_buf, 2047, &read_len);
+    if (result)
+    {
+      const char *parse_end = 0;
+      cJSON *step_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
+      _preset_load_ctrl(step_obj, &seq_state.step_ctrl[i]);
+    }
   }
 }

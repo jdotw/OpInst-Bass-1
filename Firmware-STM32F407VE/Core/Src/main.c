@@ -215,11 +215,11 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 3);
 
   // Load Default Preset
+  ctrl_value_init();
+  ctrl_toggle_init();
   preset_load(false, 0);
 
   // Re-enable controls
-  ctrl_value_init();
-  ctrl_toggle_init();
   ctrl_enabled = true;
 
   // Start commit timer
