@@ -11,76 +11,90 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define FOREACH_CTRL(CTRL)     \
-  CTRL(CTRL_OSC1_SAW_LVL)      \
-  CTRL(CTRL_OSC1_SQU_LVL)      \
-  CTRL(CTRL_OSC1_SQU_PWM)      \
-  CTRL(CTRL_OSC1_TO_OSC1_MIX)  \
-  CTRL(CTRL_OSC1_TO_OSC2_MIX)  \
-  CTRL(CTRL_OSC1_TUNE_COARSE)  \
-  CTRL(CTRL_OSC1_TUNE_FINE)    \
-  CTRL(CTRL_OSC1_FILT_CUTOFF)  \
-  CTRL(CTRL_OSC1_FILT_RES)     \
-  CTRL(CTRL_OSC1_DRIVE_AMT)    \
-  CTRL(CTRL_OSC2_SAW_LVL)      \
-  CTRL(CTRL_OSC2_SQU_LVL)      \
-  CTRL(CTRL_OSC2_SQU_PWM)      \
-  CTRL(CTRL_OSC2_NOISE_LVL)    \
-  CTRL(CTRL_OSC2_FILT_CUTOFF)  \
-  CTRL(CTRL_OSC2_FILT_RES)     \
-  CTRL(CTRL_OSC2_DRIVE_AMT)    \
-  CTRL(CTRL_SUB_LVL)           \
-  CTRL(CTRL_SUB_NOISE_LVL)     \
-  CTRL(CTRL_SUB_TO_OSC2_MIX)   \
-  CTRL(CTRL_SUB_FILT_CUTOFF)   \
-  CTRL(CTRL_SUB_FILT_RES)      \
-  CTRL(CTRL_OSC_FILT_ENV1_A)   \
-  CTRL(CTRL_OSC_FILT_ENV1_D)   \
-  CTRL(CTRL_OSC_FILT_ENV1_S)   \
-  CTRL(CTRL_OSC_FILT_ENV1_R)   \
-  CTRL(CTRL_OSC_FILT_ENV1_AMT) \
-  CTRL(CTRL_OSC_FILT_ENV2_A)   \
-  CTRL(CTRL_OSC_FILT_ENV2_D)   \
-  CTRL(CTRL_OSC_FILT_ENV2_S)   \
-  CTRL(CTRL_OSC_FILT_ENV2_R)   \
-  CTRL(CTRL_OSC_FILT_ENV2_AMT) \
-  CTRL(CTRL_SUB_FILT_ENV1_A)   \
-  CTRL(CTRL_SUB_FILT_ENV1_D)   \
-  CTRL(CTRL_SUB_FILT_ENV1_S)   \
-  CTRL(CTRL_SUB_FILT_ENV1_R)   \
-  CTRL(CTRL_SUB_FILT_ENV1_AMT) \
-  CTRL(CTRL_SUB_FILT_ENV2_A)   \
-  CTRL(CTRL_SUB_FILT_ENV2_D)   \
-  CTRL(CTRL_SUB_FILT_ENV2_S)   \
-  CTRL(CTRL_SUB_FILT_ENV2_R)   \
-  CTRL(CTRL_SUB_FILT_ENV2_AMT) \
-  CTRL(CTRL_OSC_AMP_ENV_A)     \
-  CTRL(CTRL_OSC_AMP_ENV_D)     \
-  CTRL(CTRL_OSC_AMP_ENV_S)     \
-  CTRL(CTRL_OSC_AMP_ENV_R)     \
-  CTRL(CTRL_OSC_AMP_ENV_AMT)   \
-  CTRL(CTRL_SUB_AMP_ENV_A)     \
-  CTRL(CTRL_SUB_AMP_ENV_D)     \
-  CTRL(CTRL_SUB_AMP_ENV_S)     \
-  CTRL(CTRL_SUB_AMP_ENV_R)     \
-  CTRL(CTRL_SUB_AMP_ENV_AMT)   \
-  CTRL(CTRL_FX_WETDRY)         \
-  CTRL(CTRL_FX_VAL1)           \
-  CTRL(CTRL_FX_VAL2)           \
-  CTRL(CTRL_FX_VAL3)           \
-  CTRL(CTRL_FX_FEEDBACK)       \
-  CTRL(CTRL_ENUM_MAX) // Must be last
-
-#define GENERATE_ENUM(ENUM) ENUM,
-#define GENERATE_STRING(STRING) #STRING,
-
 typedef enum
 {
-  FOREACH_CTRL(GENERATE_ENUM)
+  CTRL_OSC1_SAW_LVL,
+  CTRL_OSC1_SQU_LVL,
+  CTRL_OSC1_SQU_PWM,
+  CTRL_OSC1_TO_OSC1_MIX,
+  CTRL_OSC1_TO_OSC2_MIX,
+
+  CTRL_OSC1_TUNE_COARSE,
+  CTRL_OSC1_TUNE_FINE,
+
+  CTRL_OSC1_FILT_CUTOFF,
+  CTRL_OSC1_FILT_RES,
+  CTRL_OSC1_DRIVE_AMT,
+
+  CTRL_OSC2_SAW_LVL,
+  CTRL_OSC2_SQU_LVL,
+  CTRL_OSC2_SQU_PWM,
+  CTRL_OSC2_NOISE_LVL,
+
+  CTRL_OSC2_FILT_CUTOFF,
+  CTRL_OSC2_FILT_RES,
+  CTRL_OSC2_DRIVE_AMT,
+
+  CTRL_SUB_LVL,
+  CTRL_SUB_NOISE_LVL,
+  CTRL_SUB_TO_OSC2_MIX,
+
+  CTRL_SUB_FILT_CUTOFF,
+  CTRL_SUB_FILT_RES,
+
+  CTRL_OSC_FILT_ENV1_A,
+  CTRL_OSC_FILT_ENV1_D,
+  CTRL_OSC_FILT_ENV1_S,
+  CTRL_OSC_FILT_ENV1_R,
+  CTRL_OSC_FILT_ENV1_AMT,
+
+  CTRL_OSC_FILT_ENV2_A,
+  CTRL_OSC_FILT_ENV2_D,
+  CTRL_OSC_FILT_ENV2_S,
+  CTRL_OSC_FILT_ENV2_R,
+  CTRL_OSC_FILT_ENV2_AMT,
+
+  CTRL_SUB_FILT_ENV1_A,
+  CTRL_SUB_FILT_ENV1_D,
+  CTRL_SUB_FILT_ENV1_S,
+  CTRL_SUB_FILT_ENV1_R,
+  CTRL_SUB_FILT_ENV1_AMT,
+
+  CTRL_SUB_FILT_ENV2_A,
+  CTRL_SUB_FILT_ENV2_D,
+  CTRL_SUB_FILT_ENV2_S,
+  CTRL_SUB_FILT_ENV2_R,
+  CTRL_SUB_FILT_ENV2_AMT,
+
+  CTRL_OSC_AMP_ENV_A,
+  CTRL_OSC_AMP_ENV_D,
+  CTRL_OSC_AMP_ENV_S,
+  CTRL_OSC_AMP_ENV_R,
+  CTRL_OSC_AMP_ENV_AMT,
+
+  CTRL_SUB_AMP_ENV_A,
+  CTRL_SUB_AMP_ENV_D,
+  CTRL_SUB_AMP_ENV_S,
+  CTRL_SUB_AMP_ENV_R,
+  CTRL_SUB_AMP_ENV_AMT,
+
+  CTRL_FX_WETDRY,
+  CTRL_FX_VAL1,
+  CTRL_FX_VAL2,
+  CTRL_FX_VAL3,
+  CTRL_FX_FEEDBACK,
+
+  CTRL_ENUM_MAX // MUST BE LAST
+
 } ctrl_enum_t;
 
-static const char *ctrl_name[] = {
-    FOREACH_CTRL(GENERATE_STRING)};
+#define CTRL_DEFAULT_SCALE 4096
+#define CTRL_SCALE_HALT_TURN 100 * (4096 / 12)
+#define CTRL_SCALE_WHOLE_TURN 100 * (4096 / 24)
+#define CTRL_SCALE_TWO_TURNS 100 * (4096 / 48)
+#define CTRL_DEFAULT_MIN 0
+#define CTRL_DEFAULT_MID 0x800
+#define CTRL_DEFAULT_MAX 0xFFF // 12-bit
 
 typedef enum
 {
@@ -137,91 +151,6 @@ typedef enum
 
 } enc_enum_t;
 
-// typedef enum
-// {
-//   CTRL_OSC1_SAW_LVL,
-//   CTRL_OSC1_SQU_LVL,
-//   CTRL_OSC1_SQU_PWM,
-//   CTRL_OSC1_TO_OSC1_MIX,
-//   CTRL_OSC1_TO_OSC2_MIX,
-
-//   CTRL_OSC1_TUNE_COARSE,
-//   CTRL_OSC1_TUNE_FINE,
-
-//   CTRL_OSC1_FILT_CUTOFF,
-//   CTRL_OSC1_FILT_RES,
-//   CTRL_OSC1_DRIVE_AMT,
-
-//   CTRL_OSC2_SAW_LVL,
-//   CTRL_OSC2_SQU_LVL,
-//   CTRL_OSC2_SQU_PWM,
-//   CTRL_OSC2_NOISE_LVL,
-
-//   CTRL_OSC2_FILT_CUTOFF,
-//   CTRL_OSC2_FILT_RES,
-//   CTRL_OSC2_DRIVE_AMT,
-
-//   CTRL_SUB_LVL,
-//   CTRL_SUB_NOISE_LVL,
-//   CTRL_SUB_TO_OSC2_MIX,
-
-//   CTRL_SUB_FILT_CUTOFF,
-//   CTRL_SUB_FILT_RES,
-
-//   CTRL_OSC_FILT_ENV1_A,
-//   CTRL_OSC_FILT_ENV1_D,
-//   CTRL_OSC_FILT_ENV1_S,
-//   CTRL_OSC_FILT_ENV1_R,
-//   CTRL_OSC_FILT_ENV1_AMT,
-
-//   CTRL_OSC_FILT_ENV2_A,
-//   CTRL_OSC_FILT_ENV2_D,
-//   CTRL_OSC_FILT_ENV2_S,
-//   CTRL_OSC_FILT_ENV2_R,
-//   CTRL_OSC_FILT_ENV2_AMT,
-
-//   CTRL_SUB_FILT_ENV1_A,
-//   CTRL_SUB_FILT_ENV1_D,
-//   CTRL_SUB_FILT_ENV1_S,
-//   CTRL_SUB_FILT_ENV1_R,
-//   CTRL_SUB_FILT_ENV1_AMT,
-
-//   CTRL_SUB_FILT_ENV2_A,
-//   CTRL_SUB_FILT_ENV2_D,
-//   CTRL_SUB_FILT_ENV2_S,
-//   CTRL_SUB_FILT_ENV2_R,
-//   CTRL_SUB_FILT_ENV2_AMT,
-
-//   CTRL_OSC_AMP_ENV_A,
-//   CTRL_OSC_AMP_ENV_D,
-//   CTRL_OSC_AMP_ENV_S,
-//   CTRL_OSC_AMP_ENV_R,
-//   CTRL_OSC_AMP_ENV_AMT,
-
-//   CTRL_SUB_AMP_ENV_A,
-//   CTRL_SUB_AMP_ENV_D,
-//   CTRL_SUB_AMP_ENV_S,
-//   CTRL_SUB_AMP_ENV_R,
-//   CTRL_SUB_AMP_ENV_AMT,
-
-//   CTRL_FX_WETDRY,
-//   CTRL_FX_VAL1,
-//   CTRL_FX_VAL2,
-//   CTRL_FX_VAL3,
-//   CTRL_FX_FEEDBACK,
-
-//   CTRL_ENUM_MAX // MUST BE LAST
-
-// } old_ctrl_enum_t;
-
-#define CTRL_DEFAULT_SCALE 4096
-#define CTRL_SCALE_HALT_TURN 100 * (4096 / 12)
-#define CTRL_SCALE_WHOLE_TURN 100 * (4096 / 24)
-#define CTRL_SCALE_TWO_TURNS 100 * (4096 / 48)
-#define CTRL_DEFAULT_MIN 0
-#define CTRL_DEFAULT_MID 0x800
-#define CTRL_DEFAULT_MAX 0xFFF // 12-bit
-
 typedef enum
 {
   ENC_OSC_SQU_LEVEL,
@@ -254,154 +183,10 @@ typedef enum
   ENC_ENV_SUSTAIN_FUNC_MAX,
 } env_sustain_func_t;
 
-//typedef struct {
-//  bool osc1_saw_lvl_changed;
-//  bool osc1_squ_lvl_changed;
-//  bool osc1_squ_pwm_changed;
-//  bool osc1_to_osc1_changed;
-//  bool osc1_to_osc2_changed;
-//
-//  bool osc1_tune_coarse_changed;
-//  bool osc1_tune_fine_changed;
-//  bool osc1_filt_cutoff_changed;
-//  bool osc1_filt_res_changed;
-//  bool osc1_drive_changed;
-//
-//  bool osc2_saw_lvl_changed;
-//  bool osc2_squ_lvl_changed;
-//  bool osc2_squ_pwm_changed;
-//  bool osc2_noise_lvl_changed;
-//
-//  bool osc2_filt_cutoff_changed;
-//  bool osc2_filt_res_changed;
-//  bool osc2_drive_changed;
-//
-//  bool osc_filt_env1_a_changed;
-//  bool osc_filt_env1_d_changed;
-//  bool osc_filt_env1_s_changed;
-//  bool osc_filt_env1_r_changed;
-//  bool osc_filt_env1_amt_changed;
-//
-//  bool osc_filt_env2_a_changed;
-//  bool osc_filt_env2_d_changed;
-//  bool osc_filt_env2_s_changed;
-//  bool osc_filt_env2_r_changed;
-//  bool osc_filt_env2_amt_changed;
-//
-//  bool osc_amp_env_a_changed;
-//  bool osc_amp_env_d_changed;
-//  bool osc_amp_env_s_changed;
-//  bool osc_amp_env_r_changed;
-//  bool osc_amp_env_amt_changed;
-//  bool sub_lvl_changed;
-//  bool sub_noise_lvl_changed;
-//  bool sub_to_osc2_changed;
-//
-//  bool sub_filt_cutoff_changed;
-//  bool sub_filt_res_changed;
-//
-//  bool sub_filt_env1_a_changed;
-//  bool sub_filt_env1_d_changed;
-//  bool sub_filt_env1_s_changed;
-//  bool sub_filt_env1_r_changed;
-//  bool sub_filt_env1_amt_changed;
-//
-//  bool sub_filt_env2_a_changed;
-//  bool sub_filt_env2_d_changed;
-//  bool sub_filt_env2_s_changed;
-//  bool sub_filt_env2_r_changed;
-//  bool sub_filt_env2_amt_changed;
-//
-//  bool sub_amp_env_a_changed;
-//  bool sub_amp_env_d_changed;
-//  bool sub_amp_env_s_changed;
-//  bool sub_amp_env_r_changed;
-//  bool sub_amp_env_amt_changed;
-//
-//  bool fx_wetdry_changed;
-//  bool fx_val1_changed;
-//  bool fx_val2_changed;
-//  bool fx_val3_changed;
-//  bool fx_feedback_changed;
-//
-//} ctrl_changed_t;
-
 typedef struct
 {
-
   uint16_t value[CTRL_ENUM_MAX];
   bool changed[CTRL_ENUM_MAX];
-
-  //	uint16_t osc1_saw_lvl;
-  //	uint16_t osc1_squ_lvl;
-  //  uint16_t osc1_squ_pwm;
-  //  uint16_t osc1_to_osc1;
-  //  uint16_t osc1_to_osc2;
-  //
-  //  int16_t osc1_tune_coarse;
-  //  int16_t osc1_tune_fine;
-  //  uint16_t osc1_filt_cutoff;
-  //  uint16_t osc1_filt_res;
-  //  uint16_t osc1_drive;
-  //
-  //  uint16_t osc2_saw_lvl;
-  //  uint16_t osc2_squ_lvl;
-  //  uint16_t osc2_squ_pwm;
-  //  uint16_t osc2_noise_lvl;
-  //
-  //  uint16_t osc2_filt_cutoff;
-  //  uint16_t osc2_filt_res;
-  //  uint16_t osc2_drive;
-  //
-  //  uint16_t osc_filt_env1_a;
-  //  uint16_t osc_filt_env1_d;
-  //  uint16_t osc_filt_env1_s;
-  //  uint16_t osc_filt_env1_r;
-  //  uint16_t osc_filt_env1_amt;
-  //
-  //  uint16_t osc_filt_env2_a;
-  //  uint16_t osc_filt_env2_d;
-  //  uint16_t osc_filt_env2_s;
-  //  uint16_t osc_filt_env2_r;
-  //  uint16_t osc_filt_env2_amt;
-  //
-  //  uint16_t osc_amp_env_a;
-  //  uint16_t osc_amp_env_d;
-  //  uint16_t osc_amp_env_s;
-  //  uint16_t osc_amp_env_r;
-  //  uint16_t osc_amp_env_amt;
-  //
-  //  uint16_t sub_lvl;
-  //  uint16_t sub_noise_lvl;
-  //  uint16_t sub_to_osc2;
-  //
-  //  uint16_t sub_filt_cutoff;
-  //  uint16_t sub_filt_res;
-  //
-  //  uint16_t sub_filt_env1_a;
-  //  uint16_t sub_filt_env1_d;
-  //  uint16_t sub_filt_env1_s;
-  //  uint16_t sub_filt_env1_r;
-  //  uint16_t sub_filt_env1_amt;
-  //
-  //  uint16_t sub_filt_env2_a;
-  //  uint16_t sub_filt_env2_d;
-  //  uint16_t sub_filt_env2_s;
-  //  uint16_t sub_filt_env2_r;
-  //  uint16_t sub_filt_env2_amt;
-  //
-  //  uint16_t sub_amp_env_a;
-  //  uint16_t sub_amp_env_d;
-  //  uint16_t sub_amp_env_s;
-  //  uint16_t sub_amp_env_r;
-  //  uint16_t sub_amp_env_amt;
-  //
-  //  uint16_t fx_wetdry;
-  //  uint16_t fx_val1;
-  //  uint16_t fx_val2;
-  //  uint16_t fx_val3;
-  //  uint16_t fx_feedback;
-
 } ctrl_t;
 
 typedef struct
@@ -421,8 +206,6 @@ typedef struct
 } ctrl_toggle_t;
 
 extern ctrl_t ctrl;
-//extern ctrl_value_t ctrl_value;
-//extern ctrl_changed_t ctrl_changed;
 extern ctrl_toggle_t ctrl_toggle;
 extern bool ctrl_enabled;
 

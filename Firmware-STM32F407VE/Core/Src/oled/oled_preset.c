@@ -146,8 +146,6 @@ lv_obj_t *oled_preset_name_screen()
 void oled_preset_apply_char_delta(int8_t delta)
 {
   bool is_valid = false;
-  bool did_apply = false;
-  uint8_t cur_char = (uint8_t)name_buf[selected_char_index];
   uint8_t new_char = ((uint8_t)name_buf[selected_char_index]) + delta;
 
   if ((new_char >= 48 && new_char <= 57) || (new_char >= 65 && new_char <= 90) || (new_char >= 97 && new_char <= 122))

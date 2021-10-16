@@ -9,12 +9,15 @@
 #define INC_PRESET_H_
 
 #include "ctrl.h"
+#include "seq.h"
 
 typedef struct
 {
   uint8_t index;
   char *name;
   ctrl_t *ctrl;
+  ctrl_toggle_t *toggle;
+  seq_state_t *seq;
 } preset_t;
 
 void preset_init(void);

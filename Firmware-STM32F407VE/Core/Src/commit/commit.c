@@ -16,6 +16,8 @@
 #include "seq.h"
 #include "mod.h"
 #include "blink.h"
+#include "oled.h"
+#include "app_bluenrg_2.h"
 #include "../../lvgl/lvgl.h"
 #include <math.h>
 

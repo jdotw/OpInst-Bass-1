@@ -24,6 +24,9 @@ extern oled_state_t oled_state;
 void oled_init(SPI_HandleTypeDef *hspi);
 void oled_test(void);
 
+// Commit
+void oled_commit(void);
+
 // Preset Screens
 void oled_preset_init(void);
 lv_obj_t *oled_preset_select_screen(void);

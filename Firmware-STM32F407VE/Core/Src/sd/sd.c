@@ -68,10 +68,23 @@ end:
   return string;
 }
 
-void _sd_test_json_parse(uint8_t *buf)
+void _sd_test_json_parse(char *buf)
 {
-  uint8_t *parse_end = 0;
+  const char *parse_end = 0;
   cJSON *parsed = cJSON_ParseWithOpts(buf, &parse_end, true);
+  if (!parsed)
+  {
+    Error_Handler();
+  }
+}
+
+bool sd_mkdir(char *path)
+{
+  if (f_mount(&SDFatFS, (TCHAR const *)SDPath, 0) == FR_OK)
+  {
+    f_mkdir(path);
+  }
+  return false;
 }
 
 bool sd_write(char *filename, char *content, uint32_t content_len)
