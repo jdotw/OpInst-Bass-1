@@ -214,8 +214,8 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 2);
   rotpic_poll_all(I2C_RIGHT, 3);
 
-  // Test FatFS/SD-Card
-  sd_test();
+  // Load Default Preset
+  preset_load(false, 0);
 
   // Re-enable controls
   ctrl_value_init();

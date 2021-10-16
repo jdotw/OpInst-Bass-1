@@ -358,3 +358,25 @@ bool preset_save(preset_t preset)
 
   return true;
 }
+
+void preset_load(bool system, uint8_t index)
+{
+  char path[128] = {0};
+  char filename[128] = {0};
+  char *json;
+  bool result;
+  size_t read_len = 0;
+  char read_buf[2048] = {0};
+
+  // Create Root Path
+  snprintf(path, 128 - 1, "\\PRESETS\\%s\\%02d", system ? "SYSTEM" : "USER", index);
+  sd_mkdir(path);
+
+  // Load Controls
+  snprintf(filename, 128 - 1, "%s\\CONTROLS.JSN", path);
+  result = sd_read(filename, read_buf, 2047, &read_len);
+  if (!result)
+  {
+    Error_Handler();
+  }
+}

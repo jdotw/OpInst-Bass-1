@@ -23,5 +23,6 @@ typedef struct
 void preset_init(void);
 preset_t *preset_get_active(void);
 bool preset_save(preset_t preset);
+void preset_load(bool system, uint8_t index);
 
 #endif /* INC_PRESET_H_ */

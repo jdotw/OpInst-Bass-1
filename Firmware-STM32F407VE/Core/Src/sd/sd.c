@@ -104,6 +104,22 @@ bool sd_write(char *filename, char *content, uint32_t content_len)
   return false;
 }
 
+bool sd_read(char *filename, char *buf, size_t len, size_t *num_read)
+{
+  uint32_t rbytes;
+  if (f_mount(&SDFatFS, (TCHAR const *)SDPath, 0) == FR_OK)
+  {
+    if (f_open(&SDFile, filename, FA_READ) == FR_OK)
+    {
+      if (f_read(&SDFile, buf, len, num_read) == FR_OK)
+      {
+        f_close(&SDFile);
+        return true;
+      }
+    }
+  }
+}
+
 void sd_test(void)
 {
   uint32_t wbytes; /* File write counts */
