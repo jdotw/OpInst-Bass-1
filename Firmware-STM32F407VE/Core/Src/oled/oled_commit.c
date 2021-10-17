@@ -4,6 +4,7 @@
 #include "preset.h"
 
 oled_state_t oled_state = OLED_NONE;
+bool reload_oled = false;
 
 void oled_commit()
 {
@@ -36,7 +37,7 @@ void oled_commit()
   }
 
   // Handle screen changes
-  if (oled_state != new_state)
+  if (oled_state != new_state || reload_oled)
   {
     lv_obj_t *screen;
     switch (new_state)
@@ -55,6 +56,7 @@ void oled_commit()
       lv_scr_load(screen);
     }
     oled_state = new_state;
+    reload_oled = false;
   }
 
   // LAST: Let LVGL render updates

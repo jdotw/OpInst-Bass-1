@@ -13,6 +13,7 @@
 #include "preset.h"
 #include "cJSON.h"
 #include "sd.h"
+#include "oled.h"
 
 #define str(x) #x
 #define xstr(x) str(x)
@@ -126,11 +127,12 @@ uint8_t preset_get_active_index(void)
 
 void preset_select_apply_delta(uint8_t delta)
 {
-  state.selected_index++;
+  state.selected_index += delta;
   if (state.selected_index >= PRESET_CATALOG_MAX)
   {
     state.selected_index = 0;
   }
+  reload_oled = true;
 }
 
 static const char *_preset_ctrl_name_func(uint8_t i)

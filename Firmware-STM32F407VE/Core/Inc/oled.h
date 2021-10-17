@@ -19,6 +19,7 @@ typedef enum
   OLED_NAME_PRESET,
 } oled_state_t;
 extern oled_state_t oled_state;
+extern bool reload_oled;
 
 // Init
 void oled_init(SPI_HandleTypeDef *hspi);

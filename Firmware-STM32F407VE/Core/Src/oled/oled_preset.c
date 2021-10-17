@@ -77,12 +77,34 @@ lv_obj_t *oled_preset_select_screen()
   // Bottom Row
   _preset_select_bottom_bar(container);
 
+  // Preset Number Label
+  char *number_buf[3];
+  lv_obj_t *number_label = lv_label_create(container);
+  lv_obj_align(number_label, LV_ALIGN_LEFT_MID, 0, 0);
+  lv_obj_add_style(number_label, &large_label_style, LV_STATE_DEFAULT);
+  lv_label_set_long_mode(number_label, LV_LABEL_LONG_DOT);
+  snprintf(number_buf, 3, "%02d", preset_get_active_index());
+  lv_label_set_text(number_label, number_buf);
+
+  // Preset Separator Label
+  lv_obj_t *separator_label = lv_label_create(container);
+  lv_obj_align(separator_label, LV_ALIGN_LEFT_MID, 22, 0);
+  lv_obj_add_style(separator_label, &large_label_style, LV_STATE_DEFAULT);
+  lv_label_set_long_mode(separator_label, LV_LABEL_LONG_DOT);
+  lv_label_set_text(separator_label, "-");
+
+  char *preset_name = "Untitled";
+  if (active_preset && active_preset->name && strlen(active_preset->name) > 0)
+  {
+    preset_name = active_preset->name;
+  }
+
   // Preset Name Label
   lv_obj_t *name_label = lv_label_create(container);
-  lv_obj_align(name_label, LV_ALIGN_LEFT_MID, 0, 0);
+  lv_obj_align(name_label, LV_ALIGN_LEFT_MID, 32, 0);
   lv_obj_add_style(name_label, &large_label_style, LV_STATE_DEFAULT);
   lv_label_set_long_mode(name_label, LV_LABEL_LONG_DOT);
-  lv_label_set_text(name_label, active_preset->name);
+  lv_label_set_text(name_label, preset_name);
 
   return container;
 }

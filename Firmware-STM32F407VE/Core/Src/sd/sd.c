@@ -118,6 +118,7 @@ bool sd_read(char *filename, char *buf, size_t len, size_t *num_read)
       }
     }
   }
+  return false;
 }
 
 void sd_test(void)
