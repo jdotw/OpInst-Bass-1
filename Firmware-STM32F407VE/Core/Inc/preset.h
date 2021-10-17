@@ -11,13 +11,12 @@
 #include "ctrl.h"
 #include "seq.h"
 
+#define PRESET_MAX_NAME_LENGTH 128
+
 typedef struct
 {
   uint8_t index;
-  char *name;
-  ctrl_t *ctrl;
-  ctrl_toggle_t *toggle;
-  seq_state_t *seq;
+  char name[PRESET_MAX_NAME_LENGTH];
 } preset_t;
 
 void preset_init(void);
