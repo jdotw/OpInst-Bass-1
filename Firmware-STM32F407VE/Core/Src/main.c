@@ -201,7 +201,7 @@ int main(void)
   }
 
   // Calibrate oscillators
-  //  osc_calibrate(&hspi1, &htim1);
+  osc_calibrate(&hspi1, &htim1);
 
   // Poll all rotary encoder PICs
   // This will clear any interrupts
