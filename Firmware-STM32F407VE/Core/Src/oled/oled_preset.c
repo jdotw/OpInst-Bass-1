@@ -91,7 +91,6 @@ lv_obj_t *oled_preset_select_screen()
 
 char name_buf[NAME_BUF_SIZE] = {0};
 uint8_t name_buf_len = 0;
-preset_t preset_to_name;
 
 uint8_t selected_char_index = 0;
 
@@ -102,13 +101,15 @@ uint8_t selected_char_index = 0;
 #define MAX(a, b) ((a) > (b)) ? (a) : (b)
 #endif
 
-void oled_preset_name_set_preset(preset_t *preset)
+uint8_t preset_index;
+
+void oled_preset_name_set_preset(preset_t *preset, uint8_t index)
 {
-  preset_to_name = *preset;
   memset(name_buf, 0, 128);
-  name_buf_len = MIN(strlen(preset_to_name.name), NAME_BUF_SIZE - 1);
-  strncpy(name_buf, preset_to_name.name, name_buf_len);
+  name_buf_len = MIN(strlen(preset->name), NAME_BUF_SIZE - 1);
+  strncpy(name_buf, preset->name, name_buf_len);
   selected_char_index = 0;
+  preset_index = index;
 }
 
 lv_obj_t *oled_preset_name_screen()
@@ -207,5 +208,5 @@ void oled_preset_apply_index_delta(int8_t delta)
 
 void oled_preset_name_save()
 {
-  preset_save(preset_to_name);
+  preset_save(preset_index, name_buf);
 }

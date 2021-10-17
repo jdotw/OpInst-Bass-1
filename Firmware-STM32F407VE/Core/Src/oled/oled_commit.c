@@ -19,7 +19,7 @@ void oled_commit()
     if (commit_mod_state.button_changed.down && commit_mod_state.button_state.down)
     {
       new_state = OLED_NAME_PRESET;
-      oled_preset_name_set_preset(preset_get_active());
+      oled_preset_name_set_preset(preset_get_active(), preset_get_active_index());
     }
     break;
   case OLED_NAME_PRESET:

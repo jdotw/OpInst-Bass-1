@@ -31,7 +31,7 @@ void oled_commit(void);
 void oled_preset_init(void);
 lv_obj_t *oled_preset_select_screen(void);
 lv_obj_t *oled_preset_name_screen(void);
-void oled_preset_name_set_preset(preset_t *preset);
+void oled_preset_name_set_preset(preset_t *preset, uint8_t index);
 void oled_preset_apply_char_delta(int8_t delta);
 void oled_preset_apply_index_delta(int8_t delta);
 void oled_preset_name_save(void);

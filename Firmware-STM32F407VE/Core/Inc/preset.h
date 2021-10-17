@@ -11,22 +11,18 @@
 #include "ctrl.h"
 #include "seq.h"
 
-#define PRESET_MAX_NAME_LENGTH 128
+#define PRESET_NAME_MAX_LENGTH 128
 
 typedef struct preset_struct
 {
-  uint8_t index;
-  char name[PRESET_MAX_NAME_LENGTH];
-
-  preset_t *prev;
-  preset_t *next;
-
+  char name[PRESET_NAME_MAX_LENGTH];
 } preset_t;
 
 void preset_init(void);
 preset_t *preset_get_active(void);
+uint8_t preset_get_active_index(void);
 void preset_select_apply_delta(uint8_t delta);
-bool preset_save(preset_t preset);
+bool preset_save(uint8_t index, char *name);
 void preset_load(bool system, uint8_t index);
 
 #endif /* INC_PRESET_H_ */
