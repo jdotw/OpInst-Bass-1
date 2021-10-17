@@ -15,9 +15,6 @@
 #include "sd.h"
 #include "oled.h"
 
-#define str(x) #x
-#define xstr(x) str(x)
-
 typedef struct
 {
   uint8_t selected_index;
