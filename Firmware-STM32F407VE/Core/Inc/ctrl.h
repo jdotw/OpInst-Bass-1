@@ -183,6 +183,14 @@ typedef enum
   ENC_ENV_SUSTAIN_FUNC_MAX,
 } env_sustain_func_t;
 
+typedef enum
+{
+  ENC_FX_WETDRY_FX,
+  ENC_FX_WETDRY_PRESET,
+
+  ENC_FX_WETDRY_FUNC_MAX,
+} fx_wetdry_func_t;
+
 typedef struct
 {
   uint16_t value[CTRL_ENUM_MAX];
@@ -202,6 +210,8 @@ typedef struct
   env_attack_func_t sub_filt_env_attack_func;
   env_sustain_func_t sub_filt_env_sustain_func;
   env_sustain_func_t sub_amp_env_sustain_func;
+
+  fx_wetdry_func_t fx_wetdry_func;
 
 } ctrl_toggle_t;
 

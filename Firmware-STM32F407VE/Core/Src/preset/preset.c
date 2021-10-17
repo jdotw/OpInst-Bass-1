@@ -40,6 +40,11 @@ preset_t *preset_get_active(void)
   return state.active;
 }
 
+void preset_select_apply_delta(uint8_t delta)
+{
+  state.active->index++;
+}
+
 static const char *_preset_ctrl_name_func(uint8_t i)
 {
   switch (i)

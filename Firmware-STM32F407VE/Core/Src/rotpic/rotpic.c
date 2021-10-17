@@ -134,9 +134,17 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
         }
         else
         {
-          // ENC_FX_WETDRY = FX Wet / Dry (Normal)
-          ctrl_apply_delta(ENC_FX_WETDRY, (state.enc4_delta * -1));
           ctrl_apply_toggle(ENC_FX_WETDRY, state.sw1_changed, state.sw1_state);
+          if (ctrl_toggle.fx_wetdry_func == ENC_FX_WETDRY_PRESET)
+          {
+            // ENC_FX_WETDRY = Select Preset (Pressed)
+            preset_select_apply_delta((state.enc4_delta * -1));
+          }
+          else
+          {
+            // ENC_FX_WETDRY = FX Wet / Dry (Normal)
+            ctrl_apply_delta(ENC_FX_WETDRY, (state.enc4_delta * -1));
+          }
         }
         break;
       }

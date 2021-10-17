@@ -22,6 +22,7 @@ typedef struct
 
 void preset_init(void);
 preset_t *preset_get_active(void);
+void preset_select_apply_delta(uint8_t delta);
 bool preset_save(preset_t preset);
 void preset_load(bool system, uint8_t index);
 
