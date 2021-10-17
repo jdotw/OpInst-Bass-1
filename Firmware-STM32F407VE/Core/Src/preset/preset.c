@@ -64,21 +64,6 @@ void preset_catalog_load(bool system)
   }
 }
 
-char *_preset_catalog_json_string(preset_t *catalog)
-{
-  cJSON *catalog_array = cJSON_CreateArray();
-  for (ctrl_enum_t i = 0; i < PRESET_CATALOG_MAX; i++)
-  {
-    cJSON *preset_obj = cJSON_CreateObject();
-    cJSON_AddStringToObject(preset_obj, "name", catalog[i].name);
-    cJSON_AddNumberToObject(preset_obj, "index", (double)i);
-    cJSON_AddItemToArray(catalog_array, preset_obj);
-  }
-  char *string = cJSON_Print(catalog_array);
-  cJSON_Delete(catalog_array);
-  return string;
-}
-
 void preset_catalog_save()
 {
   char path[128] = {0};
@@ -90,8 +75,24 @@ void preset_catalog_save()
   snprintf(path, 128 - 1, "\\PRESETS\\USER");
   sd_mkdir(path);
 
-  // Controls
-  json = _preset_catalog_json_string(user_presets);
+  // Create Catalog
+  cJSON *catalog_array = cJSON_CreateArray();
+  for (ctrl_enum_t i = 0; i < PRESET_CATALOG_MAX; i++)
+  {
+    if (user_presets[i].present)
+    {
+      cJSON *preset_obj = cJSON_CreateObject();
+      cJSON_AddStringToObject(preset_obj, "name", user_presets[i].name);
+      cJSON_AddNumberToObject(preset_obj, "index", (double)i);
+      cJSON_AddItemToArray(catalog_array, preset_obj);
+    }
+  }
+
+  // Encode
+  json = cJSON_Print(catalog_array);
+  cJSON_Delete(catalog_array);
+
+  // Write to disk
   snprintf(filename, 128 - 1, "\\PRESETS\\USER\\PRESETS.JSN");
   result = sd_write(filename, json, strlen(json));
   if (!result)
