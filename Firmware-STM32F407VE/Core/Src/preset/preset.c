@@ -30,6 +30,23 @@ preset_state_t state = {0};
 preset_t user_presets[PRESET_CATALOG_MAX] = {0};
 preset_t system_presets[PRESET_CATALOG_MAX] = {0};
 
+void preset_catalog_load(bool system);
+
+/*
+ * Init
+ */
+
+void preset_init(void)
+{
+  // Get list of presets from SDcard
+  preset_catalog_load(true);  // System
+  preset_catalog_load(false); // User
+}
+
+/*
+ * Catalog
+ */
+
 void preset_catalog_load(bool system)
 {
   char path[128] = {0};
@@ -102,12 +119,9 @@ void preset_catalog_save()
   cJSON_free(json);
 }
 
-void preset_init(void)
-{
-  // Get list of presets from SDcard
-  preset_catalog_load(true);  // System
-  preset_catalog_load(false); // User
-}
+/*
+ * State 
+ */
 
 preset_t *preset_get_active(void)
 {
@@ -126,6 +140,10 @@ uint8_t preset_get_active_index(void)
   return state.selected_index;
 }
 
+/*
+ * Selection
+ */
+
 void preset_select_apply_delta(uint8_t delta)
 {
   state.selected_index += delta;
@@ -135,6 +153,10 @@ void preset_select_apply_delta(uint8_t delta)
   }
   reload_oled = true;
 }
+
+/*
+ * Mapping
+ */
 
 static const char *_preset_ctrl_name_func(uint8_t i)
 {
@@ -362,8 +384,22 @@ ctrl_enum_t _preset_ctrl_enum(char *name)
 //         "fx_feedback",
 // };
 
-char *_preset_ctrl_json_string()
+/*
+ * Preset Save
+ */
+
+bool preset_save(uint8_t index, char *name)
 {
+  char path[128] = {0};
+  char filename[128] = {0};
+  char *json;
+  bool result;
+
+  // Create Root Path
+  snprintf(path, 128 - 1, "\\PRESETS\\USER\\%02d", index);
+  sd_mkdir(path);
+
+  // Encode Controls
   cJSON *ctrl_obj = cJSON_CreateObject();
   for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++)
   {
@@ -371,13 +407,20 @@ char *_preset_ctrl_json_string()
     int16_t value = ctrl.value[i];
     cJSON_AddNumberToObject(ctrl_obj, name, (double)value);
   }
-  char *string = cJSON_Print(ctrl_obj);
+  json = cJSON_Print(ctrl_obj);
   cJSON_Delete(ctrl_obj);
-  return string;
-}
 
-char *_preset_toggle_json_string()
-{
+  // Write Controls
+  snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\CONTROLS.JSN", index);
+  result = sd_write(filename, json, strlen(json));
+  if (!result)
+  {
+    Error_Handler();
+  }
+  cJSON_free(json);
+  json = NULL;
+
+  // Encode Toggle
   cJSON *toggle_obj = cJSON_CreateObject();
 
   cJSON_AddNumberToObject(toggle_obj, "osc1_squ_func", ctrl_toggle.osc1_squ_func);
@@ -392,52 +435,10 @@ char *_preset_toggle_json_string()
   cJSON_AddNumberToObject(toggle_obj, "sub_filt_env_sustain_func", ctrl_toggle.sub_filt_env_sustain_func);
   cJSON_AddNumberToObject(toggle_obj, "sub_amp_env_sustain_func", ctrl_toggle.sub_amp_env_sustain_func);
 
-  char *string = cJSON_Print(toggle_obj);
+  json = cJSON_Print(toggle_obj);
   cJSON_Delete(toggle_obj);
 
-  return string;
-}
-
-char *_preset_step_json_string(uint8_t step)
-{
-  cJSON *step_obj = cJSON_CreateObject();
-  for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++)
-  {
-    if (seq_state.step_ctrl[step].changed[i])
-    {
-      const char *name = _preset_ctrl_name_func(i);
-      int16_t value = seq_state.step_ctrl[step].value[i];
-      cJSON_AddNumberToObject(step_obj, name, (double)value);
-    }
-  }
-  char *string = cJSON_Print(step_obj);
-  cJSON_Delete(step_obj);
-  return string;
-}
-
-bool preset_save(uint8_t index, char *name)
-{
-  char path[128] = {0};
-  char filename[128] = {0};
-  char *json;
-  bool result;
-
-  // Create Root Path
-  snprintf(path, 128 - 1, "\\PRESETS\\USER\\%02d", index);
-  sd_mkdir(path);
-
-  // Controls
-  json = _preset_ctrl_json_string();
-  snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\CONTROLS.JSN", index);
-  result = sd_write(filename, json, strlen(json));
-  if (!result)
-  {
-    Error_Handler();
-  }
-  cJSON_free(json);
-
-  // Toggle
-  json = _preset_toggle_json_string();
+  // Write Toggle
   snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\TOGGLES.JSN", index);
   result = sd_write(filename, json, strlen(json));
   if (!result)
@@ -445,16 +446,29 @@ bool preset_save(uint8_t index, char *name)
     Error_Handler();
   }
   cJSON_free(json);
+  json = NULL;
 
   // Create Steps Path
   snprintf(path, 128 - 1, "\\PRESETS\\USER\\%02d\\STEPS", index);
   sd_mkdir(path);
 
   // Sequencer
-  for (uint8_t i = 0; i < SEQ_MAX_STEPS; i++)
+  for (uint8_t step = 0; step < SEQ_MAX_STEPS; step++)
   {
-    json = _preset_step_json_string(i);
-    snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\STEPS\\STEP_%d.JSN", index, i + 1);
+    cJSON *step_obj = cJSON_CreateObject();
+    for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++)
+    {
+      if (seq_state.step_ctrl[step].changed[i])
+      {
+        const char *name = _preset_ctrl_name_func(i);
+        int16_t value = seq_state.step_ctrl[step].value[i];
+        cJSON_AddNumberToObject(step_obj, name, (double)value);
+      }
+    }
+    json = cJSON_Print(step_obj);
+    cJSON_Delete(step_obj);
+
+    snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\STEPS\\STEP_%d.JSN", index, step + 1);
     result = sd_write(filename, json, strlen(json));
     if (!result)
     {
@@ -465,9 +479,14 @@ bool preset_save(uint8_t index, char *name)
 
   // Update Catalog
   strncpy(user_presets[index].name, name, PRESET_NAME_MAX_LENGTH - 1);
+  preset_catalog_save();
 
   return true;
 }
+
+/*
+ * Preset Load
+ */
 
 void _preset_load_ctrl(cJSON *ctrl_obj, ctrl_t *ctrlptr)
 {
