@@ -18,15 +18,8 @@
 #define str(x) #x
 #define xstr(x) str(x)
 
-typedef enum
-{
-  PRESET_CATALOG_SYSTEM,
-  PRESET_CATALOG_USER,
-} preset_catalog_t;
-
 typedef struct
 {
-  preset_catalog_t catalog;
   uint8_t selected_index;
 } preset_state_t;
 
@@ -64,6 +57,7 @@ void preset_catalog_load(bool system)
         cJSON *index_obj = cJSON_GetObjectItem(preset_obj, "index");
         cJSON *name_obj = cJSON_GetObjectItem(preset_obj, "name");
         preset_t *preset = &presets[index_obj->valueint];
+        preset->present = true;
         snprintf(preset->name, PRESET_NAME_MAX_LENGTH, "%s", name_obj->string);
       }
     }
@@ -116,8 +110,14 @@ void preset_init(void)
 
 preset_t *preset_get_active(void)
 {
-  preset_t *catalog = state.catalog == PRESET_CATALOG_SYSTEM ? system_presets : user_presets;
-  return &catalog[state.selected_index];
+  if (user_presets[state.selected_index].present)
+  {
+    return &user_presets[state.selected_index];
+  }
+  else
+  {
+    return &system_presets[state.selected_index];
+  }
 }
 
 uint8_t preset_get_active_index(void)
@@ -412,11 +412,6 @@ char *_preset_step_json_string(uint8_t step)
   char *string = cJSON_Print(step_obj);
   cJSON_Delete(step_obj);
   return string;
-}
-
-const char *_preset_path_catalog()
-{
-  return state.catalog == PRESET_CATALOG_SYSTEM ? "SYSTEM" : "USER";
 }
 
 bool preset_save(uint8_t index, char *name)

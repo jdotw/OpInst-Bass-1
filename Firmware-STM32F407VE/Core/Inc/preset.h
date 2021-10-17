@@ -15,6 +15,7 @@
 
 typedef struct preset_struct
 {
+  bool present;
   char name[PRESET_NAME_MAX_LENGTH];
 } preset_t;
 
