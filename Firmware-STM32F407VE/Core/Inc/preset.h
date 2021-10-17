@@ -13,10 +13,14 @@
 
 #define PRESET_MAX_NAME_LENGTH 128
 
-typedef struct
+typedef struct preset_struct
 {
   uint8_t index;
   char name[PRESET_MAX_NAME_LENGTH];
+
+  preset_t *prev;
+  preset_t *next;
+
 } preset_t;
 
 void preset_init(void);
