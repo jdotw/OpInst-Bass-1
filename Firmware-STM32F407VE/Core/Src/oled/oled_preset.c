@@ -199,7 +199,7 @@ void oled_preset_apply_char_delta(int8_t delta)
   if (is_valid)
   {
     name_buf[selected_char_index] = new_char;
-    lv_scr_load(oled_preset_name_screen());
+    lv_scr_load_anim(oled_preset_name_screen(), LV_SCR_LOAD_ANIM_NONE, 0, 0, true);
   }
 }
 
@@ -224,7 +224,7 @@ void oled_preset_apply_index_delta(int8_t delta)
   }
   if (did_apply)
   {
-    lv_scr_load(oled_preset_name_screen());
+    lv_scr_load_anim(oled_preset_name_screen(), LV_SCR_LOAD_ANIM_NONE, 0, 0, true);
   }
 }
 

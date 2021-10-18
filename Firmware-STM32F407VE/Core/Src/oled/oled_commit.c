@@ -53,7 +53,8 @@ void oled_commit()
     }
     if (screen)
     {
-      lv_scr_load(screen);
+
+      lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_FADE_ON, 125, 0, true);
     }
     oled_state = new_state;
     reload_oled = false;
