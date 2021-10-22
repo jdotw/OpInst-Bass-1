@@ -165,8 +165,6 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 2);
   rotpic_poll_all(I2C_RIGHT, 3);
 
-  // Init preset
-  preset_init();
 
   // Init controls and toggles
   ctrl_enabled = false;
@@ -214,10 +212,10 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 2);
   rotpic_poll_all(I2C_RIGHT, 3);
 
-  // Load Default Preset
+  // Init and Load Preset
   ctrl_value_init();
   ctrl_toggle_init();
-  preset_load(false, 0);
+  preset_init();
 
   // Re-enable controls
   ctrl_enabled = true;

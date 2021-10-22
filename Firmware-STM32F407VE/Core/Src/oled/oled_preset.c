@@ -10,6 +10,7 @@
 #include "preset.h"
 #include <math.h>
 #include <stdbool.h>
+#include <string.h>
 
 lv_style_t large_label_style;
 lv_style_t small_label_style;
@@ -78,7 +79,7 @@ lv_obj_t *oled_preset_select_screen()
   _preset_select_bottom_bar(container);
 
   // Preset Number Label
-  char *number_buf[3];
+  char number_buf[3];
   lv_obj_t *number_label = lv_label_create(container);
   lv_obj_align(number_label, LV_ALIGN_LEFT_MID, 0, 0);
   lv_obj_add_style(number_label, &large_label_style, LV_STATE_DEFAULT);

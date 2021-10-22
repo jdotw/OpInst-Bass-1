@@ -38,6 +38,8 @@ void preset_init(void)
   // Get list of presets from SDcard
   preset_catalog_load(true);  // System
   preset_catalog_load(false); // User
+  state.selected_index = 0;
+  preset_load_selected();
 }
 
 /*
@@ -143,11 +145,17 @@ uint8_t preset_get_active_index(void)
 
 void preset_select_apply_delta(uint8_t delta)
 {
+  // Increment Index (and handle wrap)
   state.selected_index += delta;
   if (state.selected_index >= PRESET_CATALOG_MAX)
   {
     state.selected_index = 0;
   }
+
+  // Load the preset
+  preset_load_selected();
+
+  // Refresh OLED Screen
   reload_oled = true;
 }
 
@@ -498,7 +506,7 @@ void _preset_load_ctrl(cJSON *ctrl_obj, ctrl_t *ctrlptr)
   }
 }
 
-void preset_load(bool system, uint8_t index)
+bool preset_load(bool system, uint8_t index)
 {
   char path[128] = {0};
   char filename[128] = {0};
@@ -508,7 +516,6 @@ void preset_load(bool system, uint8_t index)
 
   // Create Root Path
   snprintf(path, 128 - 1, "\\PRESETS\\%s\\%02d", system ? "SYSTEM" : "USER", index);
-  sd_mkdir(path);
 
   // Load Controls
   snprintf(filename, 128 - 1, "\\PRESETS\\%s\\%02d\\CONTROLS.JSN", system ? "SYSTEM" : "USER", index);
@@ -521,6 +528,10 @@ void preset_load(bool system, uint8_t index)
     {
       _preset_load_ctrl(ctrl_obj, &ctrl);
     }
+  }
+  else
+  {
+    return false;
   }
 
   // Load Toggles
@@ -581,5 +592,15 @@ void preset_load(bool system, uint8_t index)
       cJSON *step_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
       _preset_load_ctrl(step_obj, &seq_state.step_ctrl[i]);
     }
+  }
+
+  return true;
+}
+
+void preset_load_selected() {
+  bool loaded_user = preset_load(false, state.selected_index);
+  if (!loaded_user)
+  {
+    preset_load(true, state.selected_index);
   }
 }

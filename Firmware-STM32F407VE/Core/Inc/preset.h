@@ -24,6 +24,6 @@ preset_t *preset_get_active(void);
 uint8_t preset_get_active_index(void);
 void preset_select_apply_delta(uint8_t delta);
 bool preset_save(uint8_t index, char *name);
-void preset_load(bool system, uint8_t index);
+bool preset_load(bool system, uint8_t index);
 
 #endif /* INC_PRESET_H_ */
