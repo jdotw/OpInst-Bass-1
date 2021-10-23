@@ -28,10 +28,10 @@
 
 /* Defines -------------------------------------------------------------------*/
 
-#define HEADER_SIZE       5U
-#define MAX_BUFFER_SIZE   255U
-#define TIMEOUT_DURATION  15U
-#define TIMEOUT_IRQ_HIGH  1000U
+#define HEADER_SIZE 5U
+#define MAX_BUFFER_SIZE 255U
+#define TIMEOUT_DURATION 15U
+#define TIMEOUT_IRQ_HIGH 1000U
 
 /* Private variables ---------------------------------------------------------*/
 EXTI_HandleTypeDef hexti0;
@@ -69,7 +69,7 @@ static void HCI_TL_SPI_Disable_IRQ(void)
  * @param  void* Pointer to configuration struct
  * @retval int32_t Status
  */
-int32_t HCI_TL_SPI_Init(void* pConf)
+int32_t HCI_TL_SPI_Init(void *pConf)
 {
   GPIO_InitTypeDef GPIO_InitStruct;
 
@@ -82,14 +82,14 @@ int32_t HCI_TL_SPI_Init(void* pConf)
   HAL_GPIO_Init(HCI_TL_SPI_EXTI_PORT, &GPIO_InitStruct);
 
   /* Configure RESET Line */
-  GPIO_InitStruct.Pin =  HCI_TL_RST_PIN ;
+  GPIO_InitStruct.Pin = HCI_TL_RST_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(HCI_TL_RST_PORT, &GPIO_InitStruct);
 
   /* Configure CS */
-  GPIO_InitStruct.Pin = HCI_TL_SPI_CS_PIN ;
+  GPIO_InitStruct.Pin = HCI_TL_SPI_CS_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -140,7 +140,7 @@ int32_t HCI_TL_SPI_Reset(void)
  * @param  size   : Buffer size
  * @retval int32_t: Number of read bytes
  */
-int32_t HCI_TL_SPI_Receive(uint8_t* buffer, uint16_t size)
+int32_t HCI_TL_SPI_Receive(uint8_t *buffer, uint16_t size)
 {
   uint16_t byte_count;
   uint8_t len = 0;
@@ -159,9 +159,9 @@ int32_t HCI_TL_SPI_Receive(uint8_t* buffer, uint16_t size)
   BSP_SPI1_SendRecv(header_master, header_slave, HEADER_SIZE);
 
   /* device is ready */
-  byte_count = (header_slave[4] << 8)| header_slave[3];
+  byte_count = (header_slave[4] << 8) | header_slave[3];
 
-  if(byte_count > 0)
+  if (byte_count > 0)
   {
 
     /* avoid to read more data than the size of the buffer */
@@ -170,9 +170,9 @@ int32_t HCI_TL_SPI_Receive(uint8_t* buffer, uint16_t size)
       byte_count = size;
     }
 
-    for(len = 0; len < byte_count; len++)
+    for (len = 0; len < byte_count; len++)
     {
-      BSP_SPI1_SendRecv(&char_00, (uint8_t*)&read_char, 1);
+      BSP_SPI1_SendRecv(&char_00, (uint8_t *)&read_char, 1);
       buffer[len] = read_char;
     }
   }
@@ -183,8 +183,10 @@ int32_t HCI_TL_SPI_Receive(uint8_t* buffer, uint16_t size)
    * to check if the header is received or not.
    */
   uint32_t tickstart = HAL_GetTick();
-  while ((HAL_GetTick() - tickstart) < TIMEOUT_IRQ_HIGH) {
-    if (HAL_GPIO_ReadPin(HCI_TL_SPI_IRQ_PORT, HCI_TL_SPI_IRQ_PIN)==GPIO_PIN_RESET) {
+  while ((HAL_GetTick() - tickstart) < TIMEOUT_IRQ_HIGH)
+  {
+    if (HAL_GPIO_ReadPin(HCI_TL_SPI_IRQ_PORT, HCI_TL_SPI_IRQ_PIN) == GPIO_PIN_RESET)
+    {
       break;
     }
   }
@@ -203,7 +205,7 @@ int32_t HCI_TL_SPI_Receive(uint8_t* buffer, uint16_t size)
  * @param  size   : size of first data buffer to be written
  * @retval int32_t: Number of read bytes
  */
-int32_t HCI_TL_SPI_Send(uint8_t* buffer, uint16_t size)
+int32_t HCI_TL_SPI_Send(uint8_t *buffer, uint16_t size)
 {
   int32_t result;
   uint16_t rx_bytes;
@@ -229,15 +231,15 @@ int32_t HCI_TL_SPI_Send(uint8_t* buffer, uint16_t size)
      * Wait until BlueNRG-2 is ready.
      * When ready it will raise the IRQ pin.
      */
-    while(!IsDataAvailable())
+    while (!IsDataAvailable())
     {
-      if((HAL_GetTick() - tickstart_data_available) > TIMEOUT_DURATION)
+      if ((HAL_GetTick() - tickstart_data_available) > TIMEOUT_DURATION)
       {
         result = -3;
         break;
       }
     }
-    if(result == -3)
+    if (result == -3)
     {
       /* The break causes the exiting from the "while", so the CS line must be released */
       HAL_GPIO_WritePin(HCI_TL_SPI_CS_PORT, HCI_TL_SPI_CS_PIN, GPIO_PIN_SET);
@@ -247,9 +249,9 @@ int32_t HCI_TL_SPI_Send(uint8_t* buffer, uint16_t size)
     /* Read header */
     BSP_SPI1_SendRecv(header_master, header_slave, HEADER_SIZE);
 
-    rx_bytes = (((uint16_t)header_slave[2])<<8) | ((uint16_t)header_slave[1]);
+    rx_bytes = (((uint16_t)header_slave[2]) << 8) | ((uint16_t)header_slave[1]);
 
-    if(rx_bytes >= size)
+    if (rx_bytes >= size)
     {
       /* Buffer is big enough */
       BSP_SPI1_SendRecv(buffer, read_char_buf, size);
@@ -263,12 +265,12 @@ int32_t HCI_TL_SPI_Send(uint8_t* buffer, uint16_t size)
     /* Release CS line */
     HAL_GPIO_WritePin(HCI_TL_SPI_CS_PORT, HCI_TL_SPI_CS_PIN, GPIO_PIN_SET);
 
-    if((HAL_GetTick() - tickstart) > TIMEOUT_DURATION)
+    if ((HAL_GetTick() - tickstart) > TIMEOUT_DURATION)
     {
       result = -3;
       break;
     }
-  } while(result < 0);
+  } while (result < 0);
 
   /**
    * To be aligned to the SPI protocol.
@@ -276,8 +278,10 @@ int32_t HCI_TL_SPI_Send(uint8_t* buffer, uint16_t size)
    * to check if the header is received or not.
    */
   tickstart = HAL_GetTick();
-  while ((HAL_GetTick() - tickstart) < TIMEOUT_IRQ_HIGH) {
-    if (HAL_GPIO_ReadPin(HCI_TL_SPI_IRQ_PORT, HCI_TL_SPI_IRQ_PIN)==GPIO_PIN_RESET) {
+  while ((HAL_GetTick() - tickstart) < TIMEOUT_IRQ_HIGH)
+  {
+    if (HAL_GPIO_ReadPin(HCI_TL_SPI_IRQ_PORT, HCI_TL_SPI_IRQ_PIN) == GPIO_PIN_RESET)
+    {
       break;
     }
   }
@@ -312,14 +316,14 @@ void hci_tl_lowlevel_init(void)
   tHciIO fops;
 
   /* Register IO bus services */
-  fops.Init    = HCI_TL_SPI_Init;
-  fops.DeInit  = HCI_TL_SPI_DeInit;
-  fops.Send    = HCI_TL_SPI_Send;
+  fops.Init = HCI_TL_SPI_Init;
+  fops.DeInit = HCI_TL_SPI_DeInit;
+  fops.Send = HCI_TL_SPI_Send;
   fops.Receive = HCI_TL_SPI_Receive;
-  fops.Reset   = HCI_TL_SPI_Reset;
+  fops.Reset = HCI_TL_SPI_Reset;
   fops.GetTick = BSP_GetTick;
 
-  hci_register_io_bus (&fops);
+  hci_register_io_bus(&fops);
 
   /* USER CODE BEGIN hci_tl_lowlevel_init 2 */
 
@@ -328,13 +332,12 @@ void hci_tl_lowlevel_init(void)
   /* Register event irq handler */
   HAL_EXTI_GetHandle(&hexti0, EXTI_LINE_0);
   HAL_EXTI_RegisterCallback(&hexti0, HAL_EXTI_COMMON_CB_ID, hci_tl_lowlevel_isr);
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  // HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
   /* USER CODE BEGIN hci_tl_lowlevel_init 3 */
 
   /* USER CODE END hci_tl_lowlevel_init 3 */
-
 }
 
 /**
@@ -346,7 +349,7 @@ void hci_tl_lowlevel_init(void)
 void hci_tl_lowlevel_isr(void)
 {
   /* Call hci_notify_asynch_evt() */
-  while(IsDataAvailable())
+  while (IsDataAvailable())
   {
     if (hci_notify_asynch_evt(NULL))
     {
