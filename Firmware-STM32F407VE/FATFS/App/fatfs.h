@@ -37,7 +37,6 @@ extern FATFS SDFatFS; /* File system object for SD logical drive */
 extern FIL SDFile; /* File object for SD */
 
 void MX_FATFS_Init(void);
-void fatfs_write_test_file(void);
 
 /* USER CODE BEGIN Prototypes */
 

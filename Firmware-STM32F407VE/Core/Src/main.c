@@ -165,7 +165,6 @@ int main(void)
   rotpic_poll_all(I2C_RIGHT, 2);
   rotpic_poll_all(I2C_RIGHT, 3);
 
-
   // Init controls and toggles
   ctrl_enabled = false;
   ctrl_value_init();
@@ -600,7 +599,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(SD_DETECT_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 1, 0);
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0);
