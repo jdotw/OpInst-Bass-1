@@ -28,6 +28,7 @@ preset_t user_presets[PRESET_CATALOG_MAX] = {0};
 preset_t system_presets[PRESET_CATALOG_MAX] = {0};
 
 void preset_catalog_load(bool system);
+void preset_load_selected(void);
 
 /*
  * Init
@@ -597,7 +598,8 @@ bool preset_load(bool system, uint8_t index)
   return true;
 }
 
-void preset_load_selected() {
+void preset_load_selected()
+{
   bool loaded_user = preset_load(false, state.selected_index);
   if (!loaded_user)
   {
