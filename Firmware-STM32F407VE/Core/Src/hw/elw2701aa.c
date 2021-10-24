@@ -133,6 +133,11 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
 void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_len, uint8_t start_y, uint8_t y_len, uint8_t (*data_callback)(uint16_t)) {
   HAL_StatusTypeDef res;
 
+  // Suppress BLUENRG-2 IRQ
+  // This prevents the bluetooth IRQ from trying to
+  // use the SPI bus while we are writing to the display
+  HAL_NVIC_DisableIRQ(EXTI0_IRQn);
+
   // Pull OLD_DATA_SELECT LOW (Command)
   HAL_GPIO_WritePin(GPIOC, OLED_DATA_SELECT_Pin, GPIO_LOW);
 
@@ -180,6 +185,8 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x, uint8_t x_le
   // Pull OLED_SPI_CS HIGH (In-Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_HIGH);
 
+  // Re-enable BLUENRG-2 IRQ
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
 
