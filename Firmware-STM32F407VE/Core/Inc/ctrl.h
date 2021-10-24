@@ -88,10 +88,11 @@ typedef enum
 
 } ctrl_enum_t;
 
-#define CTRL_DEFAULT_SCALE 4096
+#define CTRL_DEFAULT_SCALE 100
 #define CTRL_SCALE_HALT_TURN 100 * (4096 / 12)
 #define CTRL_SCALE_WHOLE_TURN 100 * (4096 / 24)
 #define CTRL_SCALE_TWO_TURNS 100 * (4096 / 48)
+#define CTRL_SCALE_FOUR_TURNS 100 * (4096 / 96)
 #define CTRL_DEFAULT_MIN 0
 #define CTRL_DEFAULT_MID 0x800
 #define CTRL_DEFAULT_MAX 0xFFF // 12-bit

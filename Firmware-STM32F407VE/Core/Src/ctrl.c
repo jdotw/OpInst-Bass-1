@@ -162,7 +162,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta)
 
   /* OSC 1 FILTER AND DRIVE */
   case ENC_OSC1_FILT_CUTOFF:
-    _ctrl_apply_delta(CTRL_OSC1_FILT_CUTOFF, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+    _ctrl_apply_delta(CTRL_OSC1_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC1_FILT_RES:
     _ctrl_apply_delta(CTRL_OSC1_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
@@ -194,7 +194,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta)
 
   /* OSC 2 FILTER AND DRIVE */
   case ENC_OSC2_FILT_CUTOFF:
-    _ctrl_apply_delta(CTRL_OSC2_FILT_CUTOFF, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+    _ctrl_apply_delta(CTRL_OSC2_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC2_FILT_RES:
     _ctrl_apply_delta(CTRL_OSC2_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
@@ -216,7 +216,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta)
 
   /* SUB FILTER */
   case ENC_SUB_FILT_CUTOFF:
-    _ctrl_apply_delta(CTRL_SUB_FILT_CUTOFF, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+    _ctrl_apply_delta(CTRL_SUB_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_SUB_FILT_RES:
     _ctrl_apply_delta(CTRL_SUB_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
