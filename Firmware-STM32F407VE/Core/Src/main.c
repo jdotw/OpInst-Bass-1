@@ -121,7 +121,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -136,6 +135,13 @@ int main(void)
   MX_FATFS_Init();
   MX_BlueNRG_2_Init();
   /* USER CODE BEGIN 2 */
+
+  // Disable I2C IRQs during startup
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+
+  // Pause for peripherals to boot
+  HAL_Delay(1000);
 
   // Set i2c buses
   i2c_bus[0] = &hi2c1; // Left
@@ -218,6 +224,10 @@ int main(void)
 
   // Re-enable controls
   ctrl_enabled = true;
+
+  // Re-Enable I2C IRQs
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   // Start commit timer
   HAL_TIM_Base_Start_IT(&htim7);
@@ -603,10 +613,10 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
   HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0);
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  // HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 1, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  // HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
 /* USER CODE BEGIN 4 */
