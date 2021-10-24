@@ -11,6 +11,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdio.h>
 
 lv_style_t large_label_style;
 lv_style_t small_label_style;
@@ -79,12 +80,12 @@ lv_obj_t *oled_preset_select_screen()
   _preset_select_bottom_bar(container);
 
   // Preset Number Label
-  char number_buf[3];
+  char number_buf[4];
   lv_obj_t *number_label = lv_label_create(container);
   lv_obj_align(number_label, LV_ALIGN_LEFT_MID, 0, 0);
   lv_obj_add_style(number_label, &large_label_style, LV_STATE_DEFAULT);
   lv_label_set_long_mode(number_label, LV_LABEL_LONG_DOT);
-  snprintf(number_buf, 3, "%02d", preset_get_active_index());
+  snprintf(number_buf, 4, "%02d", preset_get_active_index());
   lv_label_set_text(number_label, number_buf);
 
   // Preset Separator Label
