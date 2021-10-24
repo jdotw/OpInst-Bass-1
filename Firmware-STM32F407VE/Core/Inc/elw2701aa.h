@@ -8,6 +8,7 @@
 #ifndef INC_ELW2701AA_H_
 #define INC_ELW2701AA_H_
 
+#include "main.h"
 #include <stdbool.h>
 
 void elw2701aa_init(SPI_HandleTypeDef *hspi);
