@@ -141,7 +141,7 @@ int main(void)
   HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 
   // Pause for peripherals to boot
-  HAL_Delay(1000);
+  HAL_Delay(250);
 
   // Set i2c buses
   i2c_bus[0] = &hi2c1; // Left
@@ -230,7 +230,7 @@ int main(void)
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   // Start commit timer
-  HAL_TIM_Base_Start_IT(&htim7);
+  //  HAL_TIM_Base_Start_IT(&htim7);
 
   /* USER CODE END 2 */
 
@@ -240,6 +240,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    commit_30hz_timer();
+    MX_BlueNRG_2_Process();
 
     /* USER CODE BEGIN 3 */
 

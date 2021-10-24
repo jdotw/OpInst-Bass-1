@@ -50,6 +50,9 @@ void commit_30hz_timer(void)
   commit_note_changed = note_changed;
   note_changed_reset();
 
+  HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+  HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+
   ticks_before = HAL_GetTick();
   commit_dac();
   ticks_after = HAL_GetTick();
@@ -163,7 +166,6 @@ void commit_30hz_timer(void)
     cycle++;
     break;
   case COMMIT_BLUETOOTH_UPDATE:
-    MX_BlueNRG_2_Process();
     cycle++;
     break;
   default:
@@ -175,4 +177,7 @@ void commit_30hz_timer(void)
 
   UNUSED(ticks_cost);
   UNUSED(total_ticks_cost);
+
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
