@@ -8,11 +8,10 @@
 #ifndef INC_CTRL_H_
 #define INC_CTRL_H_
 
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-typedef enum
-{
+typedef enum {
   CTRL_OSC1_SAW_LVL,
   CTRL_OSC1_SQU_LVL,
   CTRL_OSC1_SQU_PWM,
@@ -97,8 +96,7 @@ typedef enum
 #define CTRL_DEFAULT_MID 0x800
 #define CTRL_DEFAULT_MAX 0xFFF // 12-bit
 
-typedef enum
-{
+typedef enum {
   ENC_OSC1_SAW,
   ENC_OSC1_SQU,
   ENC_OSC1_TO_OSC2,
@@ -152,54 +150,47 @@ typedef enum
 
 } enc_enum_t;
 
-typedef enum
-{
+typedef enum {
   ENC_OSC_SQU_LEVEL,
   ENC_OSC_SQU_PWM,
 
   ENC_OSC_SQU_MAX,
 } osc_pwm_func_t;
 
-typedef enum
-{
+typedef enum {
   ENC_OSC_TUNE_COARSE,
   ENC_OSC_TUNE_FINE,
 
   ENC_OSC_TUNE_MAX,
 } osc_tune_func_t;
 
-typedef enum
-{
+typedef enum {
   ENC_SELECT_ENV_1,
   ENC_SELECT_ENV_2,
 
   ENC_SELECT_ENV_MAX,
 } env_attack_func_t;
 
-typedef enum
-{
+typedef enum {
   ENC_ENV_SUSTAIN,
   ENC_ENV_AMOUNT,
 
   ENC_ENV_SUSTAIN_FUNC_MAX,
 } env_sustain_func_t;
 
-typedef enum
-{
+typedef enum {
   ENC_FX_WETDRY_FX,
   ENC_FX_WETDRY_PRESET,
 
   ENC_FX_WETDRY_FUNC_MAX,
 } fx_wetdry_func_t;
 
-typedef struct
-{
+typedef struct {
   uint16_t value[CTRL_ENUM_MAX];
   bool changed[CTRL_ENUM_MAX];
 } ctrl_t;
 
-typedef struct
-{
+typedef struct {
   osc_pwm_func_t osc1_squ_func;
   osc_pwm_func_t osc2_squ_func;
   osc_tune_func_t osc1_tune_func;

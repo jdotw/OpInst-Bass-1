@@ -8,8 +8,8 @@
 #ifndef INC_MOD_H_
 #define INC_MOD_H_
 
-#include "stm32f4xx_hal.h"
 #include "stdbool.h"
+#include "stm32f4xx_hal.h"
 
 typedef struct {
   bool start;

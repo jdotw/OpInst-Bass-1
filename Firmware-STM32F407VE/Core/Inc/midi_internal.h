@@ -23,7 +23,6 @@ void handle_midi_stop_msg(uint8_t status_msg);
 void handle_midi_continue_msg(uint8_t status_msg);
 void handle_midi_song_position_msg(uint8_t status_msg, uint8_t *data);
 
-
 // midi_cc.c
 void handle_midi_cc_msg(uint8_t status_msg, uint8_t *data);
 

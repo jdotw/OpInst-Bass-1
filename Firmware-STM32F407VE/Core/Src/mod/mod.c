@@ -5,7 +5,6 @@
  *      Author: jwilson
  */
 
-
 #include "mod.h"
 #include "string.h"
 

@@ -5,31 +5,29 @@
  *      Author: jwilson
  */
 
-#include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
+#include "ctrl.h"
+#include "i2c.h"
 #include "main.h"
+#include "oled.h"
+#include "osc.h"
 #include "rotpic.h"
 #include "tca9544a.h"
-#include "i2c.h"
-#include "osc.h"
-#include "ctrl.h"
-#include "oled.h"
 
 #define ROTPIC_SW1_STATE_MASK 0b00000001
 #define ROTPIC_SW1_CHANGED_MASK 0b00000010
 #define ROTPIC_SW2_STATE_MASK 0b00000100
 #define ROTPIC_SW2_CHANGED_MASK 0b00001000
 
-rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t pic)
-{
+rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t pic) {
   rotpic_state state;
 
   uint8_t rx[5];
   bool res = i2c_rx(bus, channel, DEFAULT_ROTPIC_ADDR + pic, rx, 5);
-  if (!res)
-  {
+  if (!res) {
     // Rotpic doesnt exist?
     state.success = false;
     return state;
@@ -48,18 +46,15 @@ rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t pic)
   return state;
 }
 
-void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_state state)
-{
+void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
+                          rotpic_state state) {
   // Depending on which PIC this is, update actual state values
-  if (bus == I2C_LEFT)
-  {
+  if (bus == I2C_LEFT) {
     // Left I2C
-    switch (channel)
-    {
+    switch (channel) {
     case 0:
       // Left I2C 0
-      switch (pic)
-      {
+      switch (pic) {
       case 0:
         // Left 0:000
         ctrl_apply_delta(ENC_OSC1_SAW, state.enc1_delta);
@@ -81,8 +76,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
         ctrl_apply_delta(ENC_OSC_FILT_ENV_S, (state.enc2_delta * -1));
         ctrl_apply_delta(ENC_OSC_FILT_ENV_D, (state.enc3_delta * -1));
         ctrl_apply_delta(ENC_OSC_FILT_ENV_R, (state.enc4_delta * -1));
-        ctrl_apply_toggle(ENC_OSC_FILT_ENV_A, state.sw1_changed, state.sw1_state);
-        ctrl_apply_toggle(ENC_OSC_FILT_ENV_S, state.sw2_changed, state.sw2_state);
+        ctrl_apply_toggle(ENC_OSC_FILT_ENV_A, state.sw1_changed,
+                          state.sw1_state);
+        ctrl_apply_toggle(ENC_OSC_FILT_ENV_S, state.sw2_changed,
+                          state.sw2_state);
         break;
       case 3:
         // Left 0:011
@@ -101,16 +98,17 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
       break;
     case 2:
       // Left I2C 2
-      switch (pic)
-      {
+      switch (pic) {
       case 0:
         // Left 2:000
         ctrl_apply_delta(ENC_SUB_FILT_ENV_A, state.enc3_delta);
         ctrl_apply_delta(ENC_SUB_FILT_ENV_D, state.enc1_delta);
         ctrl_apply_delta(ENC_SUB_FILT_ENV_S, state.enc4_delta);
         ctrl_apply_delta(ENC_SUB_FILT_ENV_R, state.enc2_delta);
-        ctrl_apply_toggle(ENC_SUB_FILT_ENV_A, state.sw1_changed, state.sw1_state);
-        ctrl_apply_toggle(ENC_SUB_FILT_ENV_S, state.sw2_changed, state.sw2_state);
+        ctrl_apply_toggle(ENC_SUB_FILT_ENV_A, state.sw1_changed,
+                          state.sw1_state);
+        ctrl_apply_toggle(ENC_SUB_FILT_ENV_S, state.sw2_changed,
+                          state.sw2_state);
         break;
       case 1:
         // Left 2:001
@@ -120,28 +118,21 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
       break;
     case 3:
       // Left I2C 3
-      switch (pic)
-      {
+      switch (pic) {
       case 0:
         // Left 3:000
         ctrl_apply_delta(ENC_OSC2_FILT_CUTOFF, (state.enc1_delta * -1));
         ctrl_apply_delta(ENC_OSC2_FILT_RES, state.enc3_delta);
         ctrl_apply_delta(ENC_OSC2_DRIVE, state.enc2_delta);
-        if (oled_state == OLED_NAME_PRESET)
-        {
+        if (oled_state == OLED_NAME_PRESET) {
           // ENC_FX_WETDRY = Change character
           oled_preset_apply_char_delta((state.enc4_delta * -1));
-        }
-        else
-        {
+        } else {
           ctrl_apply_toggle(ENC_FX_WETDRY, state.sw1_changed, state.sw1_state);
-          if (ctrl_toggle.fx_wetdry_func == ENC_FX_WETDRY_PRESET)
-          {
+          if (ctrl_toggle.fx_wetdry_func == ENC_FX_WETDRY_PRESET) {
             // ENC_FX_WETDRY = Select Preset (Pressed)
             preset_select_apply_delta((state.enc4_delta * -1));
-          }
-          else
-          {
+          } else {
             // ENC_FX_WETDRY = FX Wet / Dry (Normal)
             ctrl_apply_delta(ENC_FX_WETDRY, (state.enc4_delta * -1));
           }
@@ -150,39 +141,32 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
       }
       break;
     }
-  }
-  else if (bus == I2C_RIGHT)
-  {
+  } else if (bus == I2C_RIGHT) {
     // Right I2C
-    switch (channel)
-    {
+    switch (channel) {
     case 0:
       // Right I2C 0
-      switch (pic)
-      {
+      switch (pic) {
       case 0:
         // Right 0:000
         ctrl_apply_delta(ENC_OSC_AMP_ENV_D, (state.enc1_delta * -1));
         ctrl_apply_delta(ENC_OSC_AMP_ENV_R, (state.enc2_delta * -1));
         ctrl_apply_delta(ENC_OSC_AMP_ENV_A, (state.enc3_delta * -1));
         ctrl_apply_delta(ENC_OSC_AMP_ENV_S, (state.enc4_delta * -1));
-        ctrl_apply_toggle(ENC_OSC_AMP_ENV_S, state.sw2_changed, state.sw2_state);
+        ctrl_apply_toggle(ENC_OSC_AMP_ENV_S, state.sw2_changed,
+                          state.sw2_state);
         break;
       }
       break;
     case 1:
       // Right I2C 1
-      switch (pic)
-      {
+      switch (pic) {
       case 0:
         // Right 1:000
-        if (oled_state == OLED_NAME_PRESET)
-        {
+        if (oled_state == OLED_NAME_PRESET) {
           // ENC_FX_VAL1 = Character Index
           oled_preset_apply_index_delta((state.enc4_delta * -1));
-        }
-        else
-        {
+        } else {
           // ENC_FX_VAL1 = FX Value 1 (Normal)
           ctrl_apply_delta(ENC_FX_VAL1, (state.enc4_delta * -1));
         }
@@ -196,23 +180,20 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic, rotpic_stat
         ctrl_apply_delta(ENC_SUB_AMP_ENV_D, (state.enc3_delta * -1));
         ctrl_apply_delta(ENC_SUB_AMP_ENV_S, (state.enc2_delta * -1));
         ctrl_apply_delta(ENC_SUB_AMP_ENV_R, (state.enc4_delta * -1));
-        ctrl_apply_toggle(ENC_SUB_AMP_ENV_S, state.sw2_changed, state.sw2_state);
+        ctrl_apply_toggle(ENC_SUB_AMP_ENV_S, state.sw2_changed,
+                          state.sw2_state);
       }
       break;
     }
   }
 }
 
-bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic)
-{
-  switch (bus)
-  {
+bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
+  switch (bus) {
   case I2C_LEFT:
-    switch (channel)
-    {
+    switch (channel) {
     case 0: // LEFT0
-      switch (pic)
-      {
+      switch (pic) {
       case 0b000: // LEFT0:000
         return true;
       case 0b001: // LEFT0:001
@@ -226,8 +207,7 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic)
       }
       break;
     case 2: // LEFT2
-      switch (pic)
-      {
+      switch (pic) {
       case 0b000: // LEFT2:000
         return true;
       case 0b001: // LEFT2:001
@@ -235,26 +215,22 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic)
       }
       break;
     case 3: // LEFT3
-      switch (pic)
-      {
+      switch (pic) {
       case 0b000: // LEFT3:000
         return true;
       }
       break;
     }
   case I2C_RIGHT:
-    switch (channel)
-    {
+    switch (channel) {
     case 0: // RIGHT0
-      switch (pic)
-      {
+      switch (pic) {
       case 0b000: // RIGHT0:000
         return true;
       }
       break;
     case 1: // RIGHT1
-      switch (pic)
-      {
+      switch (pic) {
       case 0b000: // RIGHT1:000
         return true;
       case 0b001: // RIGHT1:001
@@ -266,16 +242,12 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic)
   return false;
 }
 
-void rotpic_poll_all(uint8_t bus, uint8_t channel)
-{
-  for (uint8_t pic = 0; pic < 8; pic++)
-  {
+void rotpic_poll_all(uint8_t bus, uint8_t channel) {
+  for (uint8_t pic = 0; pic < 8; pic++) {
     bool poll = _rotpic_exists(bus, channel, pic);
-    if (poll)
-    {
+    if (poll) {
       rotpic_state state = _rotpic_poll_selected(bus, channel, pic);
-      if (state.success)
-      {
+      if (state.success) {
         _rotpic_handle_state(bus, channel, pic, state);
       }
     }

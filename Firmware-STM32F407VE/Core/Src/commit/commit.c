@@ -5,21 +5,21 @@
  *      Author: jwilson
  */
 
-#include <stdbool.h>
 #include "commit.h"
-#include "ctrl.h"
-#include "main.h"
-#include "i2c.h"
-#include "dac7678.h"
-#include "osc.h"
-#include "note.h"
-#include "seq.h"
-#include "mod.h"
-#include "blink.h"
-#include "oled.h"
-#include "app_bluenrg_2.h"
 #include "../../lvgl/lvgl.h"
+#include "app_bluenrg_2.h"
+#include "blink.h"
+#include "ctrl.h"
+#include "dac7678.h"
+#include "i2c.h"
+#include "main.h"
+#include "mod.h"
+#include "note.h"
+#include "oled.h"
+#include "osc.h"
+#include "seq.h"
 #include <math.h>
+#include <stdbool.h>
 
 void commit_dac(void);
 void commit_gatetrig(void);
@@ -39,8 +39,7 @@ mod_state_t commit_mod_state;
 
 uint16_t pattern_cycle_count = 0;
 
-void commit_30hz_timer(void)
-{
+void commit_30hz_timer(void) {
   uint32_t total_ticks_before = HAL_GetTick();
   uint32_t ticks_before = 0;
   uint32_t ticks_after = 0;
@@ -69,8 +68,7 @@ void commit_30hz_timer(void)
   ticks_after = HAL_GetTick();
   ticks_cost = ticks_after - ticks_before;
 
-  switch (cycle)
-  {
+  switch (cycle) {
   case COMMIT_INIT:
     // Copy the control values, changed and toggle structs
     // Our commit functions will then work off these values
@@ -86,8 +84,7 @@ void commit_30hz_timer(void)
     blink_reset();
 
     pattern_cycle_count++;
-    if (pattern_cycle_count > 1)
-    {
+    if (pattern_cycle_count > 1) {
       increment_pattern_step();
       pattern_cycle_count = 0;
     }

@@ -16,15 +16,15 @@
 /* rotpic.c */
 
 typedef struct {
-	bool success;
-	int8_t enc1_delta;
-	int8_t enc2_delta;
-	int8_t enc3_delta;
-	int8_t enc4_delta;
-	bool sw1_state;
-	bool sw1_changed;
-	bool sw2_state;
-	bool sw2_changed;
+  bool success;
+  int8_t enc1_delta;
+  int8_t enc2_delta;
+  int8_t enc3_delta;
+  int8_t enc4_delta;
+  bool sw1_state;
+  bool sw1_changed;
+  bool sw2_state;
+  bool sw2_changed;
 } rotpic_state;
 
 void rotpic_poll_all(uint8_t bus, uint8_t channel);
@@ -39,6 +39,7 @@ void rotpic_poll_all(uint8_t bus, uint8_t channel);
 #define ROTPIC_LED6_BIT_SHIFT 5
 #define ROTPIC_LED7_BIT_SHIFT 6
 
-bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic, uint8_t led_state);
+bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic,
+                          uint8_t led_state);
 
 #endif /* INC_ROTPIC_H_ */

@@ -8,9 +8,9 @@
 #ifndef INC_SEQ_H_
 #define INC_SEQ_H_
 
-#include "stm32f4xx_hal.h"
-#include "stdbool.h"
 #include "ctrl.h"
+#include "stdbool.h"
+#include "stm32f4xx_hal.h"
 
 typedef struct {
   bool pressed; // pressed = button is down
@@ -53,7 +53,7 @@ extern seq_state_t seq_state;
 extern seq_changed_t seq_changed;
 
 void seq_init();
-void seq_start ();
+void seq_start();
 void seq_stop();
 void seq_continue();
 void seq_reset(void);
@@ -65,6 +65,7 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel);
 void seq_poll_mcu_gpio();
 void seq_changed_reset();
 
-void seq_apply_active_step_ctrl(seq_state_t *state_ptr, seq_changed_t *change_ptr, ctrl_t *ctrl_ptr);
+void seq_apply_active_step_ctrl(seq_state_t *state_ptr,
+                                seq_changed_t *change_ptr, ctrl_t *ctrl_ptr);
 
 #endif /* INC_SEQ_H_ */

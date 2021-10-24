@@ -8,12 +8,12 @@
 #ifndef INC_NOTE_H_
 #define INC_NOTE_H_
 
-#include <stdbool.h>
 #include "stm32f4xx_hal.h"
+#include <stdbool.h>
 
 typedef struct {
-	uint8_t note_number;
-	bool note_on;
+  uint8_t note_number;
+  bool note_on;
 } note_value_t;
 
 typedef struct {
@@ -22,8 +22,8 @@ typedef struct {
 } note_changed_t;
 
 typedef struct {
-	bool ping_trigger;
-	uint32_t triggered_at;
+  bool ping_trigger;
+  uint32_t triggered_at;
 } note_trig_t;
 
 extern note_value_t note_value;

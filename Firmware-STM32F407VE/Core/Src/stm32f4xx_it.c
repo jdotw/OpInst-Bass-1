@@ -1,34 +1,34 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    stm32f4xx_it.c
-  * @brief   Interrupt Service Routines.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    stm32f4xx_it.c
+ * @brief   Interrupt Service Routines.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under BSD 3-Clause license,
+ * the "License"; You may not use this file except in compliance with the
+ * License. You may obtain a copy of the License at:
+ *                        opensource.org/licenses/BSD-3-Clause
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 #include "stm32f4xx_it.h"
+#include "main.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
-#include "i2c.h"
-#include "commit.h"
-#include "seq.h"
-#include "blink.h"
 #include "../../lvgl/lvgl.h"
+#include "blink.h"
+#include "commit.h"
+#include "i2c.h"
+#include "seq.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -81,85 +81,74 @@ extern DMA_HandleTypeDef hdma_usart1_rx;
 /*           Cortex-M4 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
-  * @brief This function handles Non maskable interrupt.
-  */
-void NMI_Handler(void)
-{
+ * @brief This function handles Non maskable interrupt.
+ */
+void NMI_Handler(void) {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
 
   /* USER CODE END NonMaskableInt_IRQn 0 */
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-  while (1)
-  {
+  while (1) {
   }
   /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Hard fault interrupt.
-  */
-void HardFault_Handler(void)
-{
+ * @brief This function handles Hard fault interrupt.
+ */
+void HardFault_Handler(void) {
   /* USER CODE BEGIN HardFault_IRQn 0 */
 
   /* USER CODE END HardFault_IRQn 0 */
-  while (1)
-  {
+  while (1) {
     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
     /* USER CODE END W1_HardFault_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles Memory management fault.
-  */
-void MemManage_Handler(void)
-{
+ * @brief This function handles Memory management fault.
+ */
+void MemManage_Handler(void) {
   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
 
   /* USER CODE END MemoryManagement_IRQn 0 */
-  while (1)
-  {
+  while (1) {
     /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
     /* USER CODE END W1_MemoryManagement_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles Pre-fetch fault, memory access fault.
-  */
-void BusFault_Handler(void)
-{
+ * @brief This function handles Pre-fetch fault, memory access fault.
+ */
+void BusFault_Handler(void) {
   /* USER CODE BEGIN BusFault_IRQn 0 */
 
   /* USER CODE END BusFault_IRQn 0 */
-  while (1)
-  {
+  while (1) {
     /* USER CODE BEGIN W1_BusFault_IRQn 0 */
     /* USER CODE END W1_BusFault_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles Undefined instruction or illegal state.
-  */
-void UsageFault_Handler(void)
-{
+ * @brief This function handles Undefined instruction or illegal state.
+ */
+void UsageFault_Handler(void) {
   /* USER CODE BEGIN UsageFault_IRQn 0 */
 
   /* USER CODE END UsageFault_IRQn 0 */
-  while (1)
-  {
+  while (1) {
     /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
     /* USER CODE END W1_UsageFault_IRQn 0 */
   }
 }
 
 /**
-  * @brief This function handles System service call via SWI instruction.
-  */
-void SVC_Handler(void)
-{
+ * @brief This function handles System service call via SWI instruction.
+ */
+void SVC_Handler(void) {
   /* USER CODE BEGIN SVCall_IRQn 0 */
 
   /* USER CODE END SVCall_IRQn 0 */
@@ -169,10 +158,9 @@ void SVC_Handler(void)
 }
 
 /**
-  * @brief This function handles Debug monitor.
-  */
-void DebugMon_Handler(void)
-{
+ * @brief This function handles Debug monitor.
+ */
+void DebugMon_Handler(void) {
   /* USER CODE BEGIN DebugMonitor_IRQn 0 */
 
   /* USER CODE END DebugMonitor_IRQn 0 */
@@ -182,10 +170,9 @@ void DebugMon_Handler(void)
 }
 
 /**
-  * @brief This function handles Pendable request for system service.
-  */
-void PendSV_Handler(void)
-{
+ * @brief This function handles Pendable request for system service.
+ */
+void PendSV_Handler(void) {
   /* USER CODE BEGIN PendSV_IRQn 0 */
 
   /* USER CODE END PendSV_IRQn 0 */
@@ -195,10 +182,9 @@ void PendSV_Handler(void)
 }
 
 /**
-  * @brief This function handles System tick timer.
-  */
-void SysTick_Handler(void)
-{
+ * @brief This function handles System tick timer.
+ */
+void SysTick_Handler(void) {
   /* USER CODE BEGIN SysTick_IRQn 0 */
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
@@ -216,10 +202,9 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles EXTI line0 interrupt.
-  */
-void EXTI0_IRQHandler(void)
-{
+ * @brief This function handles EXTI line0 interrupt.
+ */
+void EXTI0_IRQHandler(void) {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
 
   /* USER CODE END EXTI0_IRQn 0 */
@@ -230,10 +215,9 @@ void EXTI0_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA1 stream0 global interrupt.
-  */
-void DMA1_Stream0_IRQHandler(void)
-{
+ * @brief This function handles DMA1 stream0 global interrupt.
+ */
+void DMA1_Stream0_IRQHandler(void) {
   /* USER CODE BEGIN DMA1_Stream0_IRQn 0 */
 
   /* USER CODE END DMA1_Stream0_IRQn 0 */
@@ -244,10 +228,9 @@ void DMA1_Stream0_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA1 stream2 global interrupt.
-  */
-void DMA1_Stream2_IRQHandler(void)
-{
+ * @brief This function handles DMA1 stream2 global interrupt.
+ */
+void DMA1_Stream2_IRQHandler(void) {
   /* USER CODE BEGIN DMA1_Stream2_IRQn 0 */
 
   /* USER CODE END DMA1_Stream2_IRQn 0 */
@@ -258,10 +241,9 @@ void DMA1_Stream2_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA1 stream6 global interrupt.
-  */
-void DMA1_Stream6_IRQHandler(void)
-{
+ * @brief This function handles DMA1 stream6 global interrupt.
+ */
+void DMA1_Stream6_IRQHandler(void) {
   /* USER CODE BEGIN DMA1_Stream6_IRQn 0 */
 
   /* USER CODE END DMA1_Stream6_IRQn 0 */
@@ -272,10 +254,9 @@ void DMA1_Stream6_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles EXTI line[9:5] interrupts.
-  */
-void EXTI9_5_IRQHandler(void)
-{
+ * @brief This function handles EXTI line[9:5] interrupts.
+ */
+void EXTI9_5_IRQHandler(void) {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
 
   /* USER CODE END EXTI9_5_IRQn 0 */
@@ -284,15 +265,14 @@ void EXTI9_5_IRQHandler(void)
   // Must do this after the IRQHandler call
   // Otherwise a race condition seems to exist
   // which causes the interrupt to stay low
-	i2c_isr(I2C_LEFT);
+  i2c_isr(I2C_LEFT);
   /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
 /**
-  * @brief This function handles TIM1 capture compare interrupt.
-  */
-void TIM1_CC_IRQHandler(void)
-{
+ * @brief This function handles TIM1 capture compare interrupt.
+ */
+void TIM1_CC_IRQHandler(void) {
   /* USER CODE BEGIN TIM1_CC_IRQn 0 */
 
   /* USER CODE END TIM1_CC_IRQn 0 */
@@ -303,10 +283,9 @@ void TIM1_CC_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles I2C1 event interrupt.
-  */
-void I2C1_EV_IRQHandler(void)
-{
+ * @brief This function handles I2C1 event interrupt.
+ */
+void I2C1_EV_IRQHandler(void) {
   /* USER CODE BEGIN I2C1_EV_IRQn 0 */
 
   /* USER CODE END I2C1_EV_IRQn 0 */
@@ -317,10 +296,9 @@ void I2C1_EV_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles I2C1 error interrupt.
-  */
-void I2C1_ER_IRQHandler(void)
-{
+ * @brief This function handles I2C1 error interrupt.
+ */
+void I2C1_ER_IRQHandler(void) {
   /* USER CODE BEGIN I2C1_ER_IRQn 0 */
 
   /* USER CODE END I2C1_ER_IRQn 0 */
@@ -331,10 +309,9 @@ void I2C1_ER_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles I2C2 event interrupt.
-  */
-void I2C2_EV_IRQHandler(void)
-{
+ * @brief This function handles I2C2 event interrupt.
+ */
+void I2C2_EV_IRQHandler(void) {
   /* USER CODE BEGIN I2C2_EV_IRQn 0 */
 
   /* USER CODE END I2C2_EV_IRQn 0 */
@@ -345,10 +322,9 @@ void I2C2_EV_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles I2C2 error interrupt.
-  */
-void I2C2_ER_IRQHandler(void)
-{
+ * @brief This function handles I2C2 error interrupt.
+ */
+void I2C2_ER_IRQHandler(void) {
   /* USER CODE BEGIN I2C2_ER_IRQn 0 */
 
   /* USER CODE END I2C2_ER_IRQn 0 */
@@ -359,10 +335,9 @@ void I2C2_ER_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles EXTI line[15:10] interrupts.
-  */
-void EXTI15_10_IRQHandler(void)
-{
+ * @brief This function handles EXTI line[15:10] interrupts.
+ */
+void EXTI15_10_IRQHandler(void) {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
 
   /* USER CODE END EXTI15_10_IRQn 0 */
@@ -373,16 +348,15 @@ void EXTI15_10_IRQHandler(void)
   // Must do this after the IRQHandler call
   // Otherwise a race condition seems to exist
   // which causes the interrupt to stay low
-	i2c_isr(I2C_RIGHT);
-	seq_poll_mcu_gpio();
+  i2c_isr(I2C_RIGHT);
+  seq_poll_mcu_gpio();
   /* USER CODE END EXTI15_10_IRQn 1 */
 }
 
 /**
-  * @brief This function handles DMA1 stream7 global interrupt.
-  */
-void DMA1_Stream7_IRQHandler(void)
-{
+ * @brief This function handles DMA1 stream7 global interrupt.
+ */
+void DMA1_Stream7_IRQHandler(void) {
   /* USER CODE BEGIN DMA1_Stream7_IRQn 0 */
 
   /* USER CODE END DMA1_Stream7_IRQn 0 */
@@ -393,10 +367,9 @@ void DMA1_Stream7_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles SDIO global interrupt.
-  */
-void SDIO_IRQHandler(void)
-{
+ * @brief This function handles SDIO global interrupt.
+ */
+void SDIO_IRQHandler(void) {
   /* USER CODE BEGIN SDIO_IRQn 0 */
 
   /* USER CODE END SDIO_IRQn 0 */
@@ -407,10 +380,9 @@ void SDIO_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles TIM7 global interrupt.
-  */
-void TIM7_IRQHandler(void)
-{
+ * @brief This function handles TIM7 global interrupt.
+ */
+void TIM7_IRQHandler(void) {
   /* USER CODE BEGIN TIM7_IRQn 0 */
   /* USER CODE END TIM7_IRQn 0 */
   HAL_TIM_IRQHandler(&htim7);
@@ -420,10 +392,9 @@ void TIM7_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA2 stream2 global interrupt.
-  */
-void DMA2_Stream2_IRQHandler(void)
-{
+ * @brief This function handles DMA2 stream2 global interrupt.
+ */
+void DMA2_Stream2_IRQHandler(void) {
   /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
 
   /* USER CODE END DMA2_Stream2_IRQn 0 */
@@ -434,10 +405,9 @@ void DMA2_Stream2_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA2 stream3 global interrupt.
-  */
-void DMA2_Stream3_IRQHandler(void)
-{
+ * @brief This function handles DMA2 stream3 global interrupt.
+ */
+void DMA2_Stream3_IRQHandler(void) {
   /* USER CODE BEGIN DMA2_Stream3_IRQn 0 */
 
   /* USER CODE END DMA2_Stream3_IRQn 0 */
@@ -448,10 +418,9 @@ void DMA2_Stream3_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA2 stream6 global interrupt.
-  */
-void DMA2_Stream6_IRQHandler(void)
-{
+ * @brief This function handles DMA2 stream6 global interrupt.
+ */
+void DMA2_Stream6_IRQHandler(void) {
   /* USER CODE BEGIN DMA2_Stream6_IRQn 0 */
 
   /* USER CODE END DMA2_Stream6_IRQn 0 */

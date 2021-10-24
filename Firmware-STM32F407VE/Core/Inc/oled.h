@@ -12,8 +12,7 @@
 #include "preset.h"
 
 // State
-typedef enum
-{
+typedef enum {
   OLED_NONE = 0,
   OLED_SELECT_PRESET,
   OLED_NAME_PRESET,

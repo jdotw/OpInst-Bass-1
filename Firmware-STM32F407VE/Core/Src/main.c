@@ -19,28 +19,28 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "fatfs.h"
 #include "app_bluenrg_2.h"
+#include "fatfs.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
-#include "tca9544a.h"
-#include "i2c.h"
-#include "dac7678.h"
-#include "is32.h"
-#include "osc.h"
-#include "rotpic.h"
-#include "ctrl.h"
-#include "pca9555.h"
-#include "note.h"
-#include "midi.h"
-#include "seq.h"
-#include "elw2701aa.h"
-#include "oled.h"
-#include "sd.h"
 #include "../../lvgl/lvgl.h"
+#include "ctrl.h"
+#include "dac7678.h"
+#include "elw2701aa.h"
+#include "i2c.h"
+#include "is32.h"
+#include "midi.h"
+#include "note.h"
+#include "oled.h"
+#include "osc.h"
+#include "pca9555.h"
 #include "preset.h"
+#include "rotpic.h"
+#include "sd.h"
+#include "seq.h"
+#include "tca9544a.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,15 +102,15 @@ static void MX_SDIO_SD_Init(void);
  * @brief  The application entry point.
  * @retval int
  */
-int main(void)
-{
+int main(void) {
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick.
+   */
   HAL_Init();
 
   /* USER CODE BEGIN Init */
@@ -194,11 +194,10 @@ int main(void)
   oled_init(&hspi1);
 
   // Check for test mode (Shift held)
-  bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
-  if (test_mode)
-  {
-    while (1)
-    {
+  bool test_mode = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) ==
+                   GPIO_PIN_RESET; // Pulled down
+  if (test_mode) {
+    while (1) {
       is32_test();
     }
   }
@@ -237,8 +236,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   midi_rx_resume();
-  while (1)
-  {
+  while (1) {
     /* USER CODE END WHILE */
     commit_30hz_timer();
     MX_BlueNRG_2_Process();
@@ -256,8 +254,7 @@ int main(void)
  * @brief System Clock Configuration
  * @retval None
  */
-void SystemClock_Config(void)
-{
+void SystemClock_Config(void) {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
@@ -276,20 +273,19 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 168;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
     Error_Handler();
   }
   /** Initializes the CPU, AHB and APB buses clocks
    */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK |
+                                RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-  {
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK) {
     Error_Handler();
   }
 }
@@ -299,8 +295,7 @@ void SystemClock_Config(void)
  * @param None
  * @retval None
  */
-static void MX_I2C1_Init(void)
-{
+static void MX_I2C1_Init(void) {
 
   /* USER CODE BEGIN I2C1_Init 0 */
 
@@ -318,8 +313,7 @@ static void MX_I2C1_Init(void)
   hi2c1.Init.OwnAddress2 = 0;
   hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
-  {
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN I2C1_Init 2 */
@@ -332,8 +326,7 @@ static void MX_I2C1_Init(void)
  * @param None
  * @retval None
  */
-static void MX_I2C2_Init(void)
-{
+static void MX_I2C2_Init(void) {
 
   /* USER CODE BEGIN I2C2_Init 0 */
 
@@ -351,8 +344,7 @@ static void MX_I2C2_Init(void)
   hi2c2.Init.OwnAddress2 = 0;
   hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
   hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
-  {
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN I2C2_Init 2 */
@@ -365,8 +357,7 @@ static void MX_I2C2_Init(void)
  * @param None
  * @retval None
  */
-static void MX_SDIO_SD_Init(void)
-{
+static void MX_SDIO_SD_Init(void) {
 
   /* USER CODE BEGIN SDIO_Init 0 */
 
@@ -392,8 +383,7 @@ static void MX_SDIO_SD_Init(void)
  * @param None
  * @retval None
  */
-static void MX_TIM1_Init(void)
-{
+static void MX_TIM1_Init(void) {
 
   /* USER CODE BEGIN TIM1_Init 0 */
 
@@ -412,26 +402,22 @@ static void MX_TIM1_Init(void)
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_IC_Init(&htim1) != HAL_OK)
-  {
+  if (HAL_TIM_IC_Init(&htim1) != HAL_OK) {
     Error_Handler();
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
-  {
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK) {
     Error_Handler();
   }
   sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
   sConfigIC.ICFilter = 0;
-  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
-  {
+  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_1) != HAL_OK) {
     Error_Handler();
   }
-  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
-  {
+  if (HAL_TIM_IC_ConfigChannel(&htim1, &sConfigIC, TIM_CHANNEL_2) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN TIM1_Init 2 */
@@ -444,8 +430,7 @@ static void MX_TIM1_Init(void)
  * @param None
  * @retval None
  */
-static void MX_TIM7_Init(void)
-{
+static void MX_TIM7_Init(void) {
 
   /* USER CODE BEGIN TIM7_Init 0 */
 
@@ -461,14 +446,12 @@ static void MX_TIM7_Init(void)
   htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim7.Init.Period = 65535;
   htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_Base_Init(&htim7) != HAL_OK)
-  {
+  if (HAL_TIM_Base_Init(&htim7) != HAL_OK) {
     Error_Handler();
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim7, &sMasterConfig) != HAL_OK)
-  {
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim7, &sMasterConfig) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN TIM7_Init 2 */
@@ -481,8 +464,7 @@ static void MX_TIM7_Init(void)
  * @param None
  * @retval None
  */
-static void MX_USART1_UART_Init(void)
-{
+static void MX_USART1_UART_Init(void) {
 
   /* USER CODE BEGIN USART1_Init 0 */
 
@@ -499,8 +481,7 @@ static void MX_USART1_UART_Init(void)
   huart1.Init.Mode = UART_MODE_RX;
   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-  if (HAL_UART_Init(&huart1) != HAL_OK)
-  {
+  if (HAL_UART_Init(&huart1) != HAL_OK) {
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
@@ -511,8 +492,7 @@ static void MX_USART1_UART_Init(void)
 /**
  * Enable DMA controller clock
  */
-static void MX_DMA_Init(void)
-{
+static void MX_DMA_Init(void) {
 
   /* DMA controller clock enable */
   __HAL_RCC_DMA2_CLK_ENABLE();
@@ -547,8 +527,7 @@ static void MX_DMA_Init(void)
  * @param None
  * @retval None
  */
-static void MX_GPIO_Init(void)
-{
+static void MX_GPIO_Init(void) {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
@@ -560,20 +539,25 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, OLED_RESET_Pin | OLED_DATA_SELECT_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, OLED_RESET_Pin | OLED_DATA_SELECT_Pin,
+                    GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BT_SPI_CS_GPIO_Port, BT_SPI_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, OSC1SCALEDPOTCS_Pin | OSC2SCALEDPOTCS_Pin | OLED_SPI_CS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOC,
+                    OSC1SCALEDPOTCS_Pin | OSC2SCALEDPOTCS_Pin | OLED_SPI_CS_Pin,
+                    GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BT_RESET_GPIO_Port, BT_RESET_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : OLED_RESET_Pin OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin OLED_DATA_SELECT_Pin
-                           OLED_SPI_CS_Pin */
-  GPIO_InitStruct.Pin = OLED_RESET_Pin | OSC1SCALEDPOTCS_Pin | OSC2SCALEDPOTCS_Pin | OLED_DATA_SELECT_Pin | OLED_SPI_CS_Pin;
+  /*Configure GPIO pins : OLED_RESET_Pin OSC1SCALEDPOTCS_Pin OSC2SCALEDPOTCS_Pin
+     OLED_DATA_SELECT_Pin OLED_SPI_CS_Pin */
+  GPIO_InitStruct.Pin = OLED_RESET_Pin | OSC1SCALEDPOTCS_Pin |
+                        OSC2SCALEDPOTCS_Pin | OLED_DATA_SELECT_Pin |
+                        OLED_SPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -622,34 +606,24 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
-{
-  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
-  {
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
+  if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1) {
     // DAC Tuning channel (oscillator 1)
     osc_calibrate_timercallback(htim, TIM_CHANNEL_1);
-  }
-  else if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
-  {
+  } else if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2) {
     // DAC Tuning channel (oscillator 2)
     osc_calibrate_timercallback(htim, TIM_CHANNEL_2);
   }
 }
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
   midi_rx_dma_rxcomplete_callback();
 }
-void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
-{
-  if (huart->ErrorCode != HAL_UART_ERROR_NONE)
-  {
-    if (huart->ErrorCode == HAL_UART_ERROR_ORE)
-    {
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
+  if (huart->ErrorCode != HAL_UART_ERROR_NONE) {
+    if (huart->ErrorCode == HAL_UART_ERROR_ORE) {
       // Clear overrun
       huart->ErrorCode = HAL_UART_ERROR_NONE;
-    }
-    else
-    {
+    } else {
       Error_Handler();
     }
   }
@@ -661,14 +635,12 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
-void Error_Handler(void)
-{
+void Error_Handler(void) {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   uint8_t cycle = 0;
-  while (1)
-  {
+  while (1) {
     uint8_t led = (cycle % 2) ? 0xFF : 0x00;
     led = 0xFF;
 
@@ -705,10 +677,10 @@ void Error_Handler(void)
  * @param  line: assert_param error line source number
  * @retval None
  */
-void assert_failed(uint8_t *file, uint32_t line)
-{
+void assert_failed(uint8_t *file, uint32_t line) {
   /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
+  /* User can add his own implementation to report the file name and line
+     number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }

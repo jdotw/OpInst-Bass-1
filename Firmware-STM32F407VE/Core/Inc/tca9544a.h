@@ -11,6 +11,6 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-bool tca9544a_select (uint8_t bus, uint8_t mux_addr, uint8_t channel);
+bool tca9544a_select(uint8_t bus, uint8_t mux_addr, uint8_t channel);
 
 #endif /* INC_TCA9544A_H_ */

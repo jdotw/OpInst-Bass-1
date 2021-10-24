@@ -5,6 +5,5 @@
  *      Author: jwilson
  */
 
-#include "osc.h"
 #include "ctrl.h"
-
+#include "osc.h"

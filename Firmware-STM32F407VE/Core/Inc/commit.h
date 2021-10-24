@@ -9,9 +9,9 @@
 #define INC_COMMIT_H_
 
 #include "ctrl.h"
+#include "mod.h"
 #include "note.h"
 #include "seq.h"
-#include "mod.h"
 
 typedef enum uint8_t {
   COMMIT_INIT = 0,
@@ -88,22 +88,22 @@ void commit_30hz_timer(void);
 // Internal methods for RGB LED commit
 
 typedef struct {
-  uint16_t r;     // 14bit 0-4095
-  uint16_t g;     // 14bit 0-4095
-  uint16_t b;     // 14bit 0-4095
+  uint16_t r; // 14bit 0-4095
+  uint16_t g; // 14bit 0-4095
+  uint16_t b; // 14bit 0-4095
 } rgb_14;
 
 typedef struct {
-  double h;       // angle in degrees
-  double s;       // a fraction between 0 and 1
-  double v;       // a fraction between 0 and 1
+  double h; // angle in degrees
+  double s; // a fraction between 0 and 1
+  double v; // a fraction between 0 and 1
 } hsv;
 
 typedef struct {
   float L;
   float a;
   float b;
-  uint16_t v;     // 14-bit control value
+  uint16_t v; // 14-bit control value
 } lab_t;
 
 typedef struct {
@@ -132,7 +132,8 @@ void _set_pwm_seq(uint16_t *rgb, uint8_t *pwm_seq, uint8_t len);
 void _set_pwm_seq_hsv(hsv in, uint8_t *pwm_seq, uint8_t len);
 void _set_pwm_seq_lab(lab_t in, uint16_t *pwm_seq, uint8_t len);
 void _set_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
-void _set_scale_seq_animated(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len, uint8_t offset, bool invert);
+void _set_scale_seq_animated(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len,
+                             uint8_t offset, bool invert);
 void increment_pattern_step();
 
 #endif /* INC_COMMIT_H_ */

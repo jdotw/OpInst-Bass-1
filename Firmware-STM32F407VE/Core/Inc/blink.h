@@ -8,8 +8,8 @@
 #ifndef INC_BLINK_H_
 #define INC_BLINK_H_
 
-#include <stdbool.h>
 #include "stm32f4xx_hal.h"
+#include <stdbool.h>
 
 extern bool blink;
 extern bool blink_changed;

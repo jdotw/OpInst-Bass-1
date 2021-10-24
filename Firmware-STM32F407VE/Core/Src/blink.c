@@ -19,6 +19,4 @@ void blink_systick() {
   }
 }
 
-void blink_reset() {
-  blink_changed = false;
-}
+void blink_reset() { blink_changed = false; }

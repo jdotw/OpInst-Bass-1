@@ -10,8 +10,10 @@
 
 #include <stdbool.h>
 
-bool pca9555_set_port_output(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t outputs[2]);
-bool pca9555_read_pin_state(uint8_t bus, uint8_t channel, uint8_t unit, uint16_t *stateptr);
+bool pca9555_set_port_output(uint8_t bus, uint8_t channel, uint8_t unit,
+                             uint8_t outputs[2]);
+bool pca9555_read_pin_state(uint8_t bus, uint8_t channel, uint8_t unit,
+                            uint16_t *stateptr);
 void pca9555_init(void);
 
 #endif /* INC_PCA9555_H_ */

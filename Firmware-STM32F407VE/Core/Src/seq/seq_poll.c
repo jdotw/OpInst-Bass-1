@@ -5,11 +5,11 @@
  *      Author: jwilson
  */
 
-#include "seq.h"
-#include "pca9555.h"
-#include "main.h"
 #include "i2c.h"
+#include "main.h"
 #include "mod.h"
+#include "pca9555.h"
+#include "seq.h"
 
 // LEFT2:0 PCA9555 IO Mux
 #define START_PIN 1 << 0
@@ -48,9 +48,10 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
     // Steps 1-15 are on LEFT:2, but 16 is on RIGHT:2
     // Hence the masking depending on which bus we're talking to
     // And also the off-by-one bit shifting -- fix it in software, i said. @_@
-    uint16_t step_pin_state = (bus == I2C_LEFT) ? pin_state | 0x0001 : pin_state | 0xFFFE;
-    for (uint8_t i=0; i < 16; i++) {
-      uint16_t pin_mask = i == 15 ? 1 << 0 : 1 << (i+1);
+    uint16_t step_pin_state =
+        (bus == I2C_LEFT) ? pin_state | 0x0001 : pin_state | 0xFFFE;
+    for (uint8_t i = 0; i < 16; i++) {
+      uint16_t pin_mask = i == 15 ? 1 << 0 : 1 << (i + 1);
       bool pressed = !(step_pin_state & pin_mask);
       if (seq_state.button_state[i].pressed != pressed) {
         // State change for this button
@@ -86,34 +87,33 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
       break;
     }
 
-    if (seq_state.selected_step == UINT8_MAX
-        || (seq_state.selected_step / 4) != seq_state.selected_page
-        || !seq_state.button_state[(seq_state.selected_step%16)].pressed) {
+    if (seq_state.selected_step == UINT8_MAX ||
+        (seq_state.selected_step / 4) != seq_state.selected_page ||
+        !seq_state.button_state[(seq_state.selected_step % 16)].pressed) {
       // Selected step has changed
       seq_state.prev_selected_step = seq_state.selected_step;
-      seq_state.selected_step = UINT8_MAX;  // Default to no selection
-      for(uint8_t i=0; i < 16; i++) {
+      seq_state.selected_step = UINT8_MAX; // Default to no selection
+      for (uint8_t i = 0; i < 16; i++) {
         if (seq_state.button_state[i].pressed) {
           // Set new selection
           seq_state.selected_step = i * (seq_state.selected_page + 1);
           seq_changed.selected_step = true;
-          break;  // Always select the lowest button
+          break; // Always select the lowest button
         }
       }
-      if (seq_state.selected_step == UINT8_MAX && seq_state.prev_selected_step != UINT8_MAX) {
+      if (seq_state.selected_step == UINT8_MAX &&
+          seq_state.prev_selected_step != UINT8_MAX) {
         // There was a buttons selected previously,
         // but it has now been let go.
         seq_changed.selected_step = true;
       }
     }
   }
-
-
-
 }
 
 void seq_poll_mcu_gpio() {
-  bool shift_pressed = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) == GPIO_PIN_RESET; // Pulled down
+  bool shift_pressed = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) ==
+                       GPIO_PIN_RESET; // Pulled down
   if (mod_state.button_state.shift != shift_pressed) {
     mod_state.button_state.shift = shift_pressed;
     mod_state.button_changed.shift = true;

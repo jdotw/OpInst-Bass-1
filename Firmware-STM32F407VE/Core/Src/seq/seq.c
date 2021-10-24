@@ -28,7 +28,7 @@ void seq_changed_reset() {
   memset(&seq_changed, 0, sizeof(seq_changed_t));
 }
 
-void seq_start () {
+void seq_start() {
   seq_reset();
   seq_state.running = true;
   seq_changed.running = true;
@@ -84,7 +84,8 @@ void seq_advance_selected_page() {
   seq_changed.selected_page = true;
 }
 
-void seq_apply_active_step_ctrl(seq_state_t *state_ptr, seq_changed_t *change_ptr, ctrl_t *ctrl_ptr) {
+void seq_apply_active_step_ctrl(seq_state_t *state_ptr,
+                                seq_changed_t *change_ptr, ctrl_t *ctrl_ptr) {
   // Using the state in state_ptr, overlays the control values
   // that are set for that step (p-locks) onto the
   // ctrl_value_ptr and ctrl_changed_ptr
@@ -101,7 +102,8 @@ void seq_apply_active_step_ctrl(seq_state_t *state_ptr, seq_changed_t *change_pt
   if (state_ptr->selected_step != UINT8_MAX) {
     // User is holding down a step sequence button
     // This takes precedence
-    step_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->selected_step * (state_ptr->selected_page+1)];
+    step_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->selected_step *
+                                          (state_ptr->selected_page + 1)];
   } else if (state_ptr->running) {
     // Step seqencer is running
     step_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->active_step];
@@ -109,16 +111,20 @@ void seq_apply_active_step_ctrl(seq_state_t *state_ptr, seq_changed_t *change_pt
 
   if (change_ptr->selected_step && state_ptr->prev_selected_step != UINT8_MAX) {
     // There was a change in selected (user pressed) step
-    prev_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->prev_selected_step * (state_ptr->prev_selected_page+1)];
-  } else if (change_ptr->active_step && state_ptr->prev_active_step != UINT8_MAX) {
+    prev_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->prev_selected_step *
+                                          (state_ptr->prev_selected_page + 1)];
+  } else if (change_ptr->active_step &&
+             state_ptr->prev_active_step != UINT8_MAX) {
     // The step sequencer has advance
     prev_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->prev_active_step];
   }
 
-  for (uint8_t i=0; i < CTRL_ENUM_MAX; i++) {
+  for (uint8_t i = 0; i < CTRL_ENUM_MAX; i++) {
     if (step_ctrl_ptr && step_ctrl_ptr->changed[i]) {
       ctrl_ptr->value[i] = step_ctrl_ptr->value[i];
-      ctrl_ptr->changed[i] = (change_ptr->active_step || change_ptr->selected_step || step_ctrl_ptr->changed[i]);
+      ctrl_ptr->changed[i] =
+          (change_ptr->active_step || change_ptr->selected_step ||
+           step_ctrl_ptr->changed[i]);
     } else if (prev_ctrl_ptr && prev_ctrl_ptr->changed[i]) {
       ctrl_ptr->changed[i] = true;
     }

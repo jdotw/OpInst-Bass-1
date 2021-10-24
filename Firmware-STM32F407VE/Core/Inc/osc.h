@@ -11,10 +11,7 @@
 #include "stm32f4xx_hal.h"
 
 // osc.c
-typedef enum {
-	OSC1 = 0,
-	OSC2
-} osc_t;
+typedef enum { OSC1 = 0, OSC2 } osc_t;
 extern uint16_t osc_dac_offset[2];
 uint16_t osc_dac_value_for_note(osc_t osc, uint8_t note_number);
 

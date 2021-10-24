@@ -6,12 +6,12 @@
  */
 
 #include <osc.h>
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-#include "main.h"
 #include "dac7678.h"
 #include "i2c.h"
+#include "main.h"
 #include "midi.h"
 
 /*
@@ -26,8 +26,7 @@ uint8_t Is_First_Captured = 0; // 0- not captured, 1- captured
 
 #define OSC_FREQ_COUNT_DELAY 20
 
-uint32_t _get_frequency(TIM_HandleTypeDef *htim, uint32_t channel)
-{
+uint32_t _get_frequency(TIM_HandleTypeDef *htim, uint32_t channel) {
   IC_Value1 = 0;
   IC_Value2 = 0;
   Difference = 0;
@@ -39,37 +38,27 @@ uint32_t _get_frequency(TIM_HandleTypeDef *htim, uint32_t channel)
   return Frequency;
 }
 
-void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel)
-{
-  if (!Is_First_Captured)
-  {
-    IC_Value1 = HAL_TIM_ReadCapturedValue(htim, channel); // capture the first value
-    Is_First_Captured = 1;                                // set the first value captured as true
-  }
-  else
-  {
-    IC_Value2 = HAL_TIM_ReadCapturedValue(htim, channel); // capture second value
+void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel) {
+  if (!Is_First_Captured) {
+    IC_Value1 =
+        HAL_TIM_ReadCapturedValue(htim, channel); // capture the first value
+    Is_First_Captured = 1; // set the first value captured as true
+  } else {
+    IC_Value2 =
+        HAL_TIM_ReadCapturedValue(htim, channel); // capture second value
 
-    if (IC_Value2 > IC_Value1)
-    {
+    if (IC_Value2 > IC_Value1) {
       Difference = IC_Value2 - IC_Value1; // calculate the difference
-    }
-    else if (IC_Value2 < IC_Value1)
-    {
+    } else if (IC_Value2 < IC_Value1) {
       Difference = ((0xffff - IC_Value1) + IC_Value2) + 1;
-    }
-    else
-    {
+    } else {
       Error_Handler();
     }
 
     uint32_t pclk1 = HAL_RCC_GetPCLK1Freq();
-    if (Difference > 0)
-    {
+    if (Difference > 0) {
       Frequency = pclk1 / Difference; // calculate frequency
-    }
-    else
-    {
+    } else {
       Frequency = 0;
     }
     Is_First_Captured = 0; // reset the first captured
@@ -83,37 +72,35 @@ void osc_calibrate_timercallback(TIM_HandleTypeDef *htim, uint32_t channel)
 #define TUNING_ERROR_MARGIN 0
 
 // Add the find-freq here
-uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t dac_addr, uint8_t dac_channel, TIM_HandleTypeDef *timer, uint32_t timer_channel, uint32_t expected_frequency, uint16_t near_dac_value, uint16_t min_dac_value, uint16_t max_dac_value)
-{
+uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel,
+                             uint8_t dac_addr, uint8_t dac_channel,
+                             TIM_HandleTypeDef *timer, uint32_t timer_channel,
+                             uint32_t expected_frequency,
+                             uint16_t near_dac_value, uint16_t min_dac_value,
+                             uint16_t max_dac_value) {
 
   // Set the DAC value
-  bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, near_dac_value);
-  if (!res)
-  {
+  bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel,
+                               near_dac_value);
+  if (!res) {
     Error_Handler();
   }
 
   // Listen to the frequency produced
   uint32_t observed_frequency = _get_frequency(timer, timer_channel);
-  if (observed_frequency > (expected_frequency - TUNING_ERROR_MARGIN) && observed_frequency < (expected_frequency + TUNING_ERROR_MARGIN))
-  {
+  if (observed_frequency > (expected_frequency - TUNING_ERROR_MARGIN) &&
+      observed_frequency < (expected_frequency + TUNING_ERROR_MARGIN)) {
     // Got us a tuned oscillator!
     return near_dac_value;
-  }
-  else
-  {
-    if (observed_frequency > expected_frequency)
-    {
+  } else {
+    if (observed_frequency > expected_frequency) {
       // The observed frequency is higher than expected
       // We need to try a LOWER dac value
-      if (near_dac_value <= (min_dac_value + 1))
-      {
+      if (near_dac_value <= (min_dac_value + 1)) {
         // We can't go any lower, return the min_dac_value
         // We compare to min_dac_value + 1 to avoid rounding error
         return min_dac_value;
-      }
-      else
-      {
+      } else {
         // We now know our maximum (the dac value we just used)
         max_dac_value = near_dac_value;
 
@@ -121,19 +108,14 @@ uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t d
         // half way between what we just used the and minimum
         near_dac_value -= (near_dac_value - min_dac_value) / 2;
       }
-    }
-    else if (observed_frequency < expected_frequency)
-    {
+    } else if (observed_frequency < expected_frequency) {
       // The observed frequency is lower than expected
       // We need to try a HIGHER dac value
-      if (near_dac_value >= (max_dac_value - 1))
-      {
+      if (near_dac_value >= (max_dac_value - 1)) {
         // We can't go any higher, return the max_dac_value
         // We compare to max_dac_value-1 to avoid rounding error
         return max_dac_value;
-      }
-      else
-      {
+      } else {
         // We now know our minimum (the value we just tried)
         min_dac_value = near_dac_value;
 
@@ -144,7 +126,9 @@ uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t d
     }
 
     // Recursively try the new dac against the new minimum or maximum
-    return _dac_value_for_freq(dac_bus, dac_bus_channel, dac_addr, dac_channel, timer, timer_channel, expected_frequency, near_dac_value, min_dac_value, max_dac_value);
+    return _dac_value_for_freq(dac_bus, dac_bus_channel, dac_addr, dac_channel,
+                               timer, timer_channel, expected_frequency,
+                               near_dac_value, min_dac_value, max_dac_value);
   }
 }
 
@@ -155,8 +139,8 @@ uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t d
 #define DPOT_VALUE_MIN 0
 #define DPOT_VALUE_MAX 255
 
-void _set_dpot_value(SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef *dpot_cs_port, uint16_t dpot_cs_pin, uint8_t value)
-{
+void _set_dpot_value(SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef *dpot_cs_port,
+                     uint16_t dpot_cs_pin, uint8_t value) {
   // Suppress BLUENRG-2 IRQ
   // This prevents the bluetooth IRQ from trying to
   // use the SPI bus while we are writing to the DPOT
@@ -170,9 +154,9 @@ void _set_dpot_value(SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef *dpot_cs_port, ui
   uint8_t scaled_value = DPOT_VALUE_MAX - value;
 
   // Write the new value
-  HAL_StatusTypeDef result = HAL_SPI_Transmit(dpot_bus, &scaled_value, 1, HAL_MAX_DELAY);
-  if (result != HAL_OK)
-  {
+  HAL_StatusTypeDef result =
+      HAL_SPI_Transmit(dpot_bus, &scaled_value, 1, HAL_MAX_DELAY);
+  if (result != HAL_OK) {
     Error_Handler();
   }
 
@@ -186,8 +170,7 @@ void _set_dpot_value(SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef *dpot_cs_port, ui
 #define DAC_VALUE_MAX 0xFFF
 #define DAC_VALUE_MIN 0x0
 
-typedef struct
-{
+typedef struct {
   bool success;
   uint8_t error;
   uint8_t dpot_val;
@@ -199,8 +182,11 @@ typedef struct
 #define CAL_ERROR_DAC_MAX 3
 #define CAL_ERROR_DAC_MIN 4
 
-_calibration_result _dpot_value_for_tracking(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef *dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel, uint8_t min_val, uint8_t max_val, uint8_t cur_val)
-{
+_calibration_result _dpot_value_for_tracking(
+    osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t dac_addr,
+    uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus,
+    GPIO_TypeDef *dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer,
+    uint8_t timer_channel, uint8_t min_val, uint8_t max_val, uint8_t cur_val) {
   _calibration_result result;
 
   // Set dPOT to the cur_val
@@ -211,15 +197,14 @@ _calibration_result _dpot_value_for_tracking(osc_t osc, uint8_t dac_bus, uint8_t
   uint32_t expected_frequency = 11000;
 
   // Attempt to tune oscillator
-  uint16_t tuned_dac_value = _dac_value_for_freq(dac_bus, dac_bus_channel, dac_addr, dac_channel, timer, timer_channel, expected_frequency, dac_value, DAC_VALUE_MIN, DAC_VALUE_MAX);
-  if (tuned_dac_value == DAC_VALUE_MIN)
-  {
+  uint16_t tuned_dac_value = _dac_value_for_freq(
+      dac_bus, dac_bus_channel, dac_addr, dac_channel, timer, timer_channel,
+      expected_frequency, dac_value, DAC_VALUE_MIN, DAC_VALUE_MAX);
+  if (tuned_dac_value == DAC_VALUE_MIN) {
     // Failed, minimum DAC value hit
     result.error = CAL_ERROR_DAC_MIN;
     return result;
-  }
-  else if (tuned_dac_value == DAC_VALUE_MAX)
-  {
+  } else if (tuned_dac_value == DAC_VALUE_MAX) {
     // Failed, maximum DAC value hit
     result.error = CAL_ERROR_DAC_MAX;
     return result;
@@ -231,65 +216,55 @@ _calibration_result _dpot_value_for_tracking(osc_t osc, uint8_t dac_bus, uint8_t
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
   dac_value += dac_tuning_offset;
   expected_frequency = 22000;
-  bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
+  bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel,
+                               dac_value);
   if (!res)
     Error_Handler();
 
   // Listen to achieved frequency
   uint32_t actual_freq = _get_frequency(timer, timer_channel);
-  if (actual_freq > expected_frequency)
-  {
+  if (actual_freq > expected_frequency) {
     // Too high, need to try a lower value
     uint8_t new_val = (cur_val - 1) - ((cur_val - min_val) / 2);
-    if (new_val == min_val)
-    {
+    if (new_val == min_val) {
       // Exhausted search space
-      if (new_val == DPOT_VALUE_MIN)
-      {
+      if (new_val == DPOT_VALUE_MIN) {
         // We're already at the dpot's min value, error out
         result.error = CAL_ERROR_DPOT_MIN;
-      }
-      else
-      {
+      } else {
         // Search exhausted, but within range
         result.success = true;
         result.dpot_val = cur_val;
       }
       return result;
-    }
-    else
-    {
+    } else {
       max_val = cur_val;
-      return _dpot_value_for_tracking(osc, dac_bus, dac_bus_channel, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, min_val, max_val, new_val);
+      return _dpot_value_for_tracking(osc, dac_bus, dac_bus_channel, dac_addr,
+                                      dac_channel, dpot_bus, dpot_cs_port,
+                                      dpot_cs_pin, timer, timer_channel,
+                                      min_val, max_val, new_val);
     }
-  }
-  else if (actual_freq < expected_frequency)
-  {
+  } else if (actual_freq < expected_frequency) {
     // Too low
     uint8_t new_val = (cur_val + 1) + ((max_val - cur_val) / 2);
-    if (new_val == max_val)
-    {
+    if (new_val == max_val) {
       // Exhausted search space
-      if (new_val == DPOT_VALUE_MAX)
-      {
+      if (new_val == DPOT_VALUE_MAX) {
         // We're already at the dpot's max value, error out
         result.error = CAL_ERROR_DPOT_MAX;
-      }
-      else
-      {
+      } else {
         result.success = true;
         result.dpot_val = cur_val;
       }
       return result;
-    }
-    else
-    {
+    } else {
       min_val = cur_val;
-      return _dpot_value_for_tracking(osc, dac_bus, dac_bus_channel, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, min_val, max_val, new_val);
+      return _dpot_value_for_tracking(osc, dac_bus, dac_bus_channel, dac_addr,
+                                      dac_channel, dpot_bus, dpot_cs_port,
+                                      dpot_cs_pin, timer, timer_channel,
+                                      min_val, max_val, new_val);
     }
-  }
-  else
-  {
+  } else {
     // Nailed it, we're in tune!
     result.success = true;
     result.dpot_val = cur_val;
@@ -297,14 +272,18 @@ _calibration_result _dpot_value_for_tracking(osc_t osc, uint8_t dac_bus, uint8_t
   }
 }
 
-void _init_dpot()
-{
-  HAL_GPIO_WritePin(OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, GPIO_PIN_SET);
+void _init_dpot() {
+  HAL_GPIO_WritePin(OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin,
+                    GPIO_PIN_SET);
+  HAL_GPIO_WritePin(OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin,
+                    GPIO_PIN_SET);
 }
 
-void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, uint8_t dac_addr, uint8_t dac_channel, SPI_HandleTypeDef *dpot_bus, GPIO_TypeDef *dpot_cs_port, uint16_t dpot_cs_pin, TIM_HandleTypeDef *timer, uint8_t timer_channel)
-{
+void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel,
+                          uint8_t dac_addr, uint8_t dac_channel,
+                          SPI_HandleTypeDef *dpot_bus,
+                          GPIO_TypeDef *dpot_cs_port, uint16_t dpot_cs_pin,
+                          TIM_HandleTypeDef *timer, uint8_t timer_channel) {
   // Trying to determine the correct dPOT value
   // for the scaling between 1v variance in CV
   // to produce exactly double the frequency.
@@ -318,9 +297,11 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
 
   uint32_t freq = _get_frequency(timer, timer_channel);
 
-  _calibration_result result = _dpot_value_for_tracking(osc, dac_bus, dac_bus_channel, dac_addr, dac_channel, dpot_bus, dpot_cs_port, dpot_cs_pin, timer, timer_channel, DPOT_VALUE_MIN, DPOT_VALUE_MAX, (DPOT_VALUE_MAX - DPOT_VALUE_MIN) / 2);
-  if (!result.success)
-  {
+  _calibration_result result = _dpot_value_for_tracking(
+      osc, dac_bus, dac_bus_channel, dac_addr, dac_channel, dpot_bus,
+      dpot_cs_port, dpot_cs_pin, timer, timer_channel, DPOT_VALUE_MIN,
+      DPOT_VALUE_MAX, (DPOT_VALUE_MAX - DPOT_VALUE_MIN) / 2);
+  if (!result.success) {
     Error_Handler();
   }
 
@@ -329,8 +310,7 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
   uint16_t dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A2);
   dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  if (freq < 10700 || freq > 11300)
-  {
+  if (freq < 10700 || freq > 11300) {
     // Not scaling properly
     Error_Handler();
   }
@@ -338,8 +318,7 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
   dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  if (freq < 21700 || freq > 22300)
-  {
+  if (freq < 21700 || freq > 22300) {
     // Not scaling properly
     Error_Handler();
   }
@@ -347,8 +326,7 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A4);
   dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
   freq = _get_frequency(timer, timer_channel);
-  if (freq < 43700 || freq > 44300)
-  {
+  if (freq < 43700 || freq > 44300) {
     // Not scaling properly
     Error_Handler();
   }
@@ -361,11 +339,14 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel, u
 #define OSC2_DAC 2
 #define OSC2_DAC_CHANNEL 4
 
-void osc_calibrate(SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeDef *timer)
-{
+void osc_calibrate(SPI_HandleTypeDef *dpot_bus, TIM_HandleTypeDef *timer) {
   // Calibrate Osc 1
-  _osc_calibrate_voice(OSC1, DAC_BUS, DAC_BUS_CHANNEL, OSC1_DAC, OSC1_DAC_CHANNEL, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port, OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
+  _osc_calibrate_voice(OSC1, DAC_BUS, DAC_BUS_CHANNEL, OSC1_DAC,
+                       OSC1_DAC_CHANNEL, dpot_bus, OSC1SCALEDPOTCS_GPIO_Port,
+                       OSC1SCALEDPOTCS_Pin, timer, TIM_CHANNEL_1);
 
   // Calibrate Osc 2
-  _osc_calibrate_voice(OSC2, DAC_BUS, DAC_BUS_CHANNEL, OSC2_DAC, OSC2_DAC_CHANNEL, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port, OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
+  _osc_calibrate_voice(OSC2, DAC_BUS, DAC_BUS_CHANNEL, OSC2_DAC,
+                       OSC2_DAC_CHANNEL, dpot_bus, OSC2SCALEDPOTCS_GPIO_Port,
+                       OSC2SCALEDPOTCS_Pin, timer, TIM_CHANNEL_2);
 }
