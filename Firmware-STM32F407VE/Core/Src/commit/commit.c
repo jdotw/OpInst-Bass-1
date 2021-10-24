@@ -46,6 +46,12 @@ void commit_30hz_timer(void)
   uint32_t ticks_after = 0;
   uint32_t ticks_cost = 0;
 
+  commit_ctrl = ctrl;
+  commit_ctrl_toggle = ctrl_toggle;
+  commit_seq_state = seq_state;
+  commit_seq_changed = seq_changed;
+  commit_mod_state = mod_state;
+
   commit_note_value = note_value;
   commit_note_changed = note_changed;
   note_changed_reset();
@@ -68,11 +74,6 @@ void commit_30hz_timer(void)
   case COMMIT_INIT:
     // Copy the control values, changed and toggle structs
     // Our commit functions will then work off these values
-    commit_ctrl = ctrl;
-    commit_ctrl_toggle = ctrl_toggle;
-    commit_seq_state = seq_state;
-    commit_seq_changed = seq_changed;
-    commit_mod_state = mod_state;
 
     // Apply p-lock
     seq_apply_active_step_ctrl(&seq_state, &seq_changed, &commit_ctrl);
