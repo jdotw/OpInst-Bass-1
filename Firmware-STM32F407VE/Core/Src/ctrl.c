@@ -18,6 +18,10 @@ ctrl_t ctrl;
 ctrl_toggle_t ctrl_toggle;
 bool ctrl_enabled = true;
 
+ctrl_t* ctrl_get_active() {
+  return &ctrl;
+}
+
 void ctrl_value_init() {
   ctrl.value[CTRL_OSC1_SAW_LVL] = CTRL_DEFAULT_MAX;
   ctrl.value[CTRL_OSC1_SQU_PWM] = CTRL_DEFAULT_MID;

@@ -21,7 +21,7 @@
 #include <math.h>
 #include <stdbool.h>
 
-void commit_dac(void);
+void commit_dac(ctrl_t *ctrl);
 void commit_gatetrig(void);
 void commit_led_rotpic(void);
 void commit_led_adsr(commit_cycle_t cycle);
