@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "showDevDebugOutput": false,
+      "cwd": "${workspaceRoot}",
+      "executable": "./build/Firmware-STM32F407VE.elf",
+      "name": "Debug STM32",
+      "request": "launch",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "preLaunchTask": "Build STM",
+      "device": "stlink",
+      "configFiles": [
+        "openocd.cfg"
+      ],
+      "runToMain": true
+    }
+  ]
+}
