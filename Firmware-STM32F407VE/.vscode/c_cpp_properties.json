@@ -1,0 +1,62 @@
+{
+  "configurations": [
+    {
+      "name": "STM32",
+      "includePath": [
+        "BlueNRG_2/App",
+        "BlueNRG_2/Target",
+        "Core/Inc",
+        "Drivers/BSP/custom",
+        "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+        "Drivers/CMSIS/Include",
+        "Drivers/STM32F4xx_HAL_Driver/Inc",
+        "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+        "FATFS/App",
+        "FATFS/Target",
+        "Middlewares/ST/BlueNRG-2/hci/hci_tl_patterns/Basic",
+        "Middlewares/ST/BlueNRG-2/includes",
+        "Middlewares/ST/BlueNRG-2/utils",
+        "Middlewares/Third_Party/FatFs/src",
+        "lvgl/src",
+        "lvgl/src/core",
+        "lvgl/src/draw",
+        "lvgl/src/extra",
+        "lvgl/src/extra/layouts",
+        "lvgl/src/extra/layouts/flex",
+        "lvgl/src/extra/layouts/grid",
+        "lvgl/src/extra/themes",
+        "lvgl/src/extra/themes/basic",
+        "lvgl/src/extra/themes/default",
+        "lvgl/src/extra/themes/mono",
+        "lvgl/src/extra/widgets",
+        "lvgl/src/extra/widgets/animimg",
+        "lvgl/src/extra/widgets/calendar",
+        "lvgl/src/extra/widgets/chart",
+        "lvgl/src/extra/widgets/colorwheel",
+        "lvgl/src/extra/widgets/imgbtn",
+        "lvgl/src/extra/widgets/keyboard",
+        "lvgl/src/extra/widgets/led",
+        "lvgl/src/extra/widgets/list",
+        "lvgl/src/extra/widgets/meter",
+        "lvgl/src/extra/widgets/msgbox",
+        "lvgl/src/extra/widgets/span",
+        "lvgl/src/extra/widgets/spinbox",
+        "lvgl/src/extra/widgets/spinner",
+        "lvgl/src/extra/widgets/tabview",
+        "lvgl/src/extra/widgets/tileview",
+        "lvgl/src/extra/widgets/win",
+        "lvgl/src/font",
+        "lvgl/src/gpu",
+        "lvgl/src/hal",
+        "lvgl/src/misc",
+        "lvgl/src/widgets"
+      ],
+      "defines": [
+        "STM32F407xx",
+        "USE_HAL_DRIVER"
+      ],
+      "compilerPath": "/Applications/ARM/bin/arm-none-eabi-gcc"
+    }
+  ],
+  "version": 4
+}

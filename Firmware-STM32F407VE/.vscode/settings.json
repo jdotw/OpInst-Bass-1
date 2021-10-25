@@ -1,0 +1,25 @@
+{
+  "files.associations": {
+    "math.h": "c",
+    "__bit_reference": "c",
+    "__functional_base": "c",
+    "__node_handle": "c",
+    "algorithm": "c",
+    "bitset": "c",
+    "chrono": "c",
+    "__memory": "c",
+    "functional": "c",
+    "iterator": "c",
+    "limits": "c",
+    "memory": "c",
+    "optional": "c",
+    "ratio": "c",
+    "system_error": "c",
+    "tuple": "c",
+    "type_traits": "c",
+    "vector": "c"
+  },
+  "stm32-for-vscode.openOCDPath": "/usr/local/bin/openocd",
+  "cortex-debug.armToolchainPath": "/Applications/ARM/bin",
+  "cortex-debug.openocdPath": "/usr/local/bin/openocd"
+}
