@@ -75,14 +75,6 @@ typedef enum uint8_t {
 
 } commit_cycle_t;
 
-// extern ctrl_t commit_ctrl;
-extern ctrl_toggle_t commit_ctrl_toggle;
-extern note_value_t commit_note_value;
-extern note_changed_t commit_note_changed;
-extern seq_state_t commit_seq_state;
-extern seq_changed_t commit_seq_changed;
-extern mod_state_t commit_mod_state;
-
 void commit_30hz_timer(void);
 
 // Internal methods for RGB LED commit

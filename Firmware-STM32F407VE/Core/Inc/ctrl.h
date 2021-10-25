@@ -207,9 +207,9 @@ typedef struct {
 
 } ctrl_toggle_t;
 
-extern ctrl_t ctrl;
-extern ctrl_toggle_t ctrl_toggle;
-extern bool ctrl_enabled;
+ctrl_t *ctrl_get_active(void);
+ctrl_toggle_t *ctrl_get_active_toggle(void);
+void ctrl_set_enabled(bool enabled);
 
 void ctrl_value_init(void);
 void ctrl_changed_init(void);

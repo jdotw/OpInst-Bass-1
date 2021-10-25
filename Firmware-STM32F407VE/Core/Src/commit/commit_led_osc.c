@@ -31,25 +31,26 @@ uint16_t _max16(uint16_t a, uint16_t b) {
     return b;
 }
 
-double _ctrl_double(ctrl_enum_t in) {
-  return (double)(commit_ctrl.value[in] / 4095.0);
+double _ctrl_double(ctrl_t *ctrl, ctrl_enum_t in) {
+  return (double)(ctrl->value[in] / 4095.0);
 }
 
-double _ctrl_double_inverse(ctrl_enum_t in) {
-  return (double)((4095.0 - commit_ctrl.value[in]) / 4095.0);
+double _ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in) {
+  return (double)((4095.0 - ctrl->value[in]) / 4095.0);
 }
 
-lab_t _primitive_lab(double r, double g, double b, ctrl_enum_t ctrl) {
+lab_t _primitive_lab(ctrl_t *ctrl, double r, double g, double b,
+                     ctrl_enum_t i) {
   rgb_t rgb = {.r = r, .g = g, .b = b};
   lab_t lab = _rgb_to_oklab(rgb);
-  lab.L *= _ctrl_double(ctrl);
-  lab.v = commit_ctrl.value[ctrl];
+  lab.L *= _ctrl_double(ctrl, i);
+  lab.v = ctrl->value[i];
   return lab;
 }
 
-lab_t _filt_freq_lab(lab_t in, ctrl_enum_t cutoff_enum) {
+lab_t _filt_freq_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t cutoff_enum) {
   hsv hsv = _oklab_to_hsv(in);
-  double cutoff = _ctrl_double(cutoff_enum);
+  double cutoff = _ctrl_double(ctrl, cutoff_enum);
   hsv.s *= cutoff;
   hsv.v *= (cutoff * cutoff);
   lab_t lab = _hsv_to_oklab(hsv);
@@ -57,9 +58,9 @@ lab_t _filt_freq_lab(lab_t in, ctrl_enum_t cutoff_enum) {
   return lab;
 }
 
-lab_t _filt_reso_lab(lab_t in, ctrl_enum_t res_enum) {
+lab_t _filt_reso_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t res_enum) {
   hsv hsv = _oklab_to_hsv(in);
-  double res = _ctrl_double(res_enum);
+  double res = _ctrl_double(ctrl, res_enum);
   hsv.h += 90.0 * res;
   if (hsv.h >= 360.0)
     hsv.h -= 360.0;
@@ -70,9 +71,9 @@ lab_t _filt_reso_lab(lab_t in, ctrl_enum_t res_enum) {
   return lab;
 }
 
-lab_t _drive_lab(lab_t in, ctrl_enum_t drive_enum) {
+lab_t _drive_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t drive_enum) {
   hsv hsv = _oklab_to_hsv(in);
-  double drive = _ctrl_double(drive_enum);
+  double drive = _ctrl_double(ctrl, drive_enum);
   hsv.h -= 120.0 * drive;
   if (hsv.h >= 360.0)
     hsv.h -= 360.0;
@@ -87,139 +88,138 @@ lab_t _drive_lab(lab_t in, ctrl_enum_t drive_enum) {
 
 // osc1_saw
 
-lab_t _osc1_saw_lab() {
+lab_t _osc1_saw_lab(ctrl_t *ctrl) {
   //  return _primitive_lab(1.0, 1.0, 0.0, CTRL_OSC1_SAW_LVL);
-  return _primitive_lab(1.0, 0.0, 0.0, CTRL_OSC1_SAW_LVL);
+  return _primitive_lab(ctrl, 1.0, 0.0, 0.0, CTRL_OSC1_SAW_LVL);
 }
 
-bool _osc1_saw_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SAW_LVL];
+bool _osc1_saw_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC1_SAW_LVL];
 }
 
 // osc1_squ
 
-lab_t _osc1_squ_lab() {
+lab_t _osc1_squ_lab(ctrl_t *ctrl) {
   //  return _primitive_lab(0.0, 1.0, 1.0, CTRL_OSC1_SQU_LVL);
-  return _primitive_lab(0.0, 1.0, 0.0, CTRL_OSC1_SQU_LVL);
+  return _primitive_lab(ctrl, 0.0, 1.0, 0.0, CTRL_OSC1_SQU_LVL);
 }
 
-bool _osc1_squ_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
+bool _osc1_squ_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC1_SQU_LVL];
 }
 
 // osc1_mix
 
-lab_t _osc1_mix_lab() {
-  lab_t saw = _osc1_saw_lab();
-  lab_t squ = _osc1_squ_lab();
+lab_t _osc1_mix_lab(ctrl_t *ctrl) {
+  lab_t saw = _osc1_saw_lab(ctrl);
+  lab_t squ = _osc1_squ_lab(ctrl);
   lab_t mix = _interpolate_lab(saw, squ);
   return mix;
 }
 
-bool _osc1_mix_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SAW_LVL] ||
-         commit_ctrl.changed[CTRL_OSC1_SQU_LVL];
+bool _osc1_mix_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC1_SAW_LVL] ||
+         ctrl->changed[CTRL_OSC1_SQU_LVL];
 }
 
-lab_t _osc1_filt_freq_lab() {
-  return _filt_freq_lab(_osc1_mix_lab(), CTRL_OSC1_FILT_CUTOFF);
+lab_t _osc1_filt_freq_lab(ctrl_t *ctrl) {
+  return _filt_freq_lab(ctrl, _osc1_mix_lab(ctrl), CTRL_OSC1_FILT_CUTOFF);
 }
 
-bool _osc1_filt_freq_changed() {
-  return ALWAYS_UPDATE || _osc1_mix_changed() ||
-         commit_ctrl.changed[CTRL_OSC1_FILT_CUTOFF];
+bool _osc1_filt_freq_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc1_mix_changed(ctrl) ||
+         ctrl->changed[CTRL_OSC1_FILT_CUTOFF];
 }
 
-lab_t _osc1_filt_reso_lab() {
-  return _filt_reso_lab(_osc1_filt_freq_lab(), CTRL_OSC1_FILT_RES);
+lab_t _osc1_filt_reso_lab(ctrl_t *ctrl) {
+  return _filt_reso_lab(ctrl, _osc1_filt_freq_lab(ctrl), CTRL_OSC1_FILT_RES);
 }
 
-bool _osc1_filt_reso_changed() {
-  return ALWAYS_UPDATE || _osc1_filt_freq_changed() ||
-         commit_ctrl.changed[CTRL_OSC1_FILT_RES];
+bool _osc1_filt_reso_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc1_filt_freq_changed(ctrl) ||
+         ctrl->changed[CTRL_OSC1_FILT_RES];
 }
 
-lab_t _osc1_drive_lab() {
-  return _drive_lab(_osc1_filt_reso_lab(), CTRL_OSC1_DRIVE_AMT);
+lab_t _osc1_drive_lab(ctrl_t *ctrl) {
+  return _drive_lab(ctrl, _osc1_filt_reso_lab(ctrl), CTRL_OSC1_DRIVE_AMT);
 }
 
-bool _osc1_drive_changed() {
-  return ALWAYS_UPDATE || _osc1_filt_reso_changed() ||
-         commit_ctrl.changed[CTRL_OSC1_DRIVE_AMT];
+bool _osc1_drive_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc1_filt_reso_changed(ctrl) ||
+         ctrl->changed[CTRL_OSC1_DRIVE_AMT];
 }
 
 // CTRL_OSC1_TO_OSC2_MIX
 
-lab_t _osc1_to_2_mix_lab() {
-  lab_t out = _osc1_mix_lab();
-  out.L *= _ctrl_double(CTRL_OSC1_TO_OSC2_MIX);
-  out.v = commit_ctrl.value[CTRL_OSC1_TO_OSC2_MIX];
+lab_t _osc1_to_2_mix_lab(ctrl_t *ctrl) {
+  lab_t out = _osc1_mix_lab(ctrl);
+  out.L *= _ctrl_double(ctrl, CTRL_OSC1_TO_OSC2_MIX);
+  out.v = ctrl->value[CTRL_OSC1_TO_OSC2_MIX];
   return out;
 }
 
-bool _osc1_to_2_mix_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC1_SAW_LVL] ||
-         commit_ctrl.changed[CTRL_OSC1_SQU_LVL] ||
-         commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX];
+bool _osc1_to_2_mix_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC1_SAW_LVL] ||
+         ctrl->changed[CTRL_OSC1_SQU_LVL] ||
+         ctrl->changed[CTRL_OSC1_TO_OSC2_MIX];
 }
 
 // osc2_saw
 
-lab_t _osc2_saw_lab() {
+lab_t _osc2_saw_lab(ctrl_t *ctrl) {
   //  return _primitive_lab(1.0, 1.0, 0.0, CTRL_OSC2_SAW_LVL);
-  return _primitive_lab(1.0, 0.0, 0.0, CTRL_OSC2_SAW_LVL);
+  return _primitive_lab(ctrl, 1.0, 0.0, 0.0, CTRL_OSC2_SAW_LVL);
 }
 
-bool _osc2_saw_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SAW_LVL];
+bool _osc2_saw_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC2_SAW_LVL];
 }
 
 // osc2_squ
 
-lab_t _osc2_squ_lab() {
+lab_t _osc2_squ_lab(ctrl_t *ctrl) {
   //  return _primitive_lab(0.0, 1.0, 1.0, CTRL_OSC2_SQU_LVL);
-  return _primitive_lab(0.0, 1.0, 0.0, CTRL_OSC2_SQU_LVL);
+  return _primitive_lab(ctrl, 0.0, 1.0, 0.0, CTRL_OSC2_SQU_LVL);
 }
 
-bool _osc2_squ_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SQU_LVL];
+bool _osc2_squ_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC2_SQU_LVL];
 }
 
 // osc2_noise
 
-lab_t _osc2_noise_lab() {
+lab_t _osc2_noise_lab(ctrl_t *ctrl) {
   //  return _primitive_lab(1.0, 0.0, 1.0, CTRL_OSC2_NOISE_LVL);
-  return _primitive_lab(0.0, 0.0, 1.0, CTRL_OSC2_NOISE_LVL);
+  return _primitive_lab(ctrl, 0.0, 0.0, 1.0, CTRL_OSC2_NOISE_LVL);
 }
 
-bool _osc2_noise_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_NOISE_LVL];
+bool _osc2_noise_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC2_NOISE_LVL];
 }
 
 // osc2_mix
 
-lab_t _osc2_mix_lab() {
-  lab_t saw_lab = _osc2_saw_lab();
-  lab_t squ_lab = _osc2_squ_lab();
-  lab_t noise_lab = _osc2_noise_lab();
+lab_t _osc2_mix_lab(ctrl_t *ctrl) {
+  lab_t saw_lab = _osc2_saw_lab(ctrl);
+  lab_t squ_lab = _osc2_squ_lab(ctrl);
+  lab_t noise_lab = _osc2_noise_lab(ctrl);
   lab_t mix = _interpolate_lab(_interpolate_lab(saw_lab, squ_lab), noise_lab);
   return mix;
 }
 
-bool _osc2_mix_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SAW_LVL] ||
-         commit_ctrl.changed[CTRL_OSC2_NOISE_LVL] ||
-         commit_ctrl.changed[CTRL_OSC2_SQU_LVL];
+bool _osc2_mix_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC2_SAW_LVL] ||
+         ctrl->changed[CTRL_OSC2_NOISE_LVL] || ctrl->changed[CTRL_OSC2_SQU_LVL];
 }
 
 // osc2_prefilt
 
-lab_t _sub_to_osc2_mix_lab(void);
+lab_t _sub_to_osc2_mix_lab(ctrl_t *ctrl);
 
-lab_t _osc2_prefilt_lab() {
-  lab_t osc1 = _osc1_to_2_mix_lab();
-  lab_t osc2 = _osc2_mix_lab();
-  lab_t sub = _sub_to_osc2_mix_lab();
+lab_t _osc2_prefilt_lab(ctrl_t *ctrl) {
+  lab_t osc1 = _osc1_to_2_mix_lab(ctrl);
+  lab_t osc2 = _osc2_mix_lab(ctrl);
+  lab_t sub = _sub_to_osc2_mix_lab(ctrl);
 
   lab_t osc1_and_2 = _interpolate_lab(osc2, osc1);
   lab_t osc_and_sub = _interpolate_lab(osc1_and_2, sub);
@@ -227,185 +227,187 @@ lab_t _osc2_prefilt_lab() {
   return osc_and_sub;
 }
 
-bool _osc2_prefilt_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_OSC2_SAW_LVL] ||
-         commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX] ||
-         commit_ctrl.changed[CTRL_OSC2_NOISE_LVL] ||
-         commit_ctrl.changed[CTRL_SUB_TO_OSC2_MIX] ||
-         commit_ctrl.changed[CTRL_OSC2_SQU_LVL] ||
-         commit_ctrl.changed[CTRL_OSC1_TO_OSC2_MIX];
+bool _osc2_prefilt_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_OSC2_SAW_LVL] ||
+         ctrl->changed[CTRL_OSC1_TO_OSC2_MIX] ||
+         ctrl->changed[CTRL_OSC2_NOISE_LVL] ||
+         ctrl->changed[CTRL_SUB_TO_OSC2_MIX] ||
+         ctrl->changed[CTRL_OSC2_SQU_LVL] ||
+         ctrl->changed[CTRL_OSC1_TO_OSC2_MIX];
 }
 
 // osc2_filt_freq
 
-lab_t _osc2_filt_freq_lab() {
-  return _filt_freq_lab(_osc2_prefilt_lab(), CTRL_OSC2_FILT_CUTOFF);
+lab_t _osc2_filt_freq_lab(ctrl_t *ctrl) {
+  return _filt_freq_lab(ctrl, _osc2_prefilt_lab(ctrl), CTRL_OSC2_FILT_CUTOFF);
 }
 
-bool _osc2_filt_freq_changed() {
-  return ALWAYS_UPDATE || _osc2_prefilt_changed() ||
-         commit_ctrl.changed[CTRL_OSC2_FILT_CUTOFF];
+bool _osc2_filt_freq_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc2_prefilt_changed(ctrl) ||
+         ctrl->changed[CTRL_OSC2_FILT_CUTOFF];
 }
 
 // osc2_filt_reso
 
-lab_t _osc2_filt_reso_lab() {
-  return _filt_reso_lab(_osc2_filt_freq_lab(), CTRL_OSC2_FILT_RES);
+lab_t _osc2_filt_reso_lab(ctrl_t *ctrl) {
+  return _filt_reso_lab(ctrl, _osc2_filt_freq_lab(ctrl), CTRL_OSC2_FILT_RES);
 }
 
-bool _osc2_filt_reso_changed() {
-  return ALWAYS_UPDATE || _osc2_filt_freq_changed() ||
-         commit_ctrl.changed[CTRL_OSC2_FILT_RES];
+bool _osc2_filt_reso_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc2_filt_freq_changed(ctrl) ||
+         ctrl->changed[CTRL_OSC2_FILT_RES];
 }
 
 // osc2_drive
 
-lab_t _osc2_drive_lab() {
-  return _drive_lab(_osc2_filt_reso_lab(), CTRL_OSC2_DRIVE_AMT);
+lab_t _osc2_drive_lab(ctrl_t *ctrl) {
+  return _drive_lab(ctrl, _osc2_filt_reso_lab(ctrl), CTRL_OSC2_DRIVE_AMT);
 }
 
-bool _osc2_drive_changed() {
-  return ALWAYS_UPDATE || _osc2_filt_reso_changed() ||
-         commit_ctrl.changed[CTRL_OSC2_DRIVE_AMT];
+bool _osc2_drive_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc2_filt_reso_changed(ctrl) ||
+         ctrl->changed[CTRL_OSC2_DRIVE_AMT];
 }
 
 // osc_amp
 
-lab_t _osc_amp_out_lab() {
-  lab_t osc1 = _osc1_drive_lab();
-  lab_t osc2 = _osc2_drive_lab();
+lab_t _osc_amp_out_lab(ctrl_t *ctrl) {
+  lab_t osc1 = _osc1_drive_lab(ctrl);
+  lab_t osc2 = _osc2_drive_lab(ctrl);
   return _interpolate_lab(osc1, osc2);
 }
 
-bool _osc_amp_out_changed() {
-  return ALWAYS_UPDATE || _osc1_drive_changed() || _osc2_drive_changed();
+bool _osc_amp_out_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc1_drive_changed(ctrl) ||
+         _osc2_drive_changed(ctrl);
 }
 
 // sub_squ
 
-lab_t _sub_squ_lab() { return _primitive_lab(0.0, 1.0, 1.0, CTRL_SUB_LVL); }
+lab_t _sub_squ_lab(ctrl_t *ctrl) {
+  return _primitive_lab(ctrl, 0.0, 1.0, 1.0, CTRL_SUB_LVL);
+}
 
-bool _sub_squ_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_LVL];
+bool _sub_squ_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_SUB_LVL];
 }
 
 // sub_noise
 
-lab_t _sub_noise_lab() {
-  return _primitive_lab(1.0, 0.0, 1.0, CTRL_SUB_NOISE_LVL);
+lab_t _sub_noise_lab(ctrl_t *ctrl) {
+  return _primitive_lab(ctrl, 1.0, 0.0, 1.0, CTRL_SUB_NOISE_LVL);
 }
 
-bool _sub_noise_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL];
+bool _sub_noise_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_SUB_NOISE_LVL];
 }
 
 // sub_mix
 
-lab_t _sub_mix_lab() {
-  lab_t squ = _sub_squ_lab();
-  lab_t noise = _sub_noise_lab();
+lab_t _sub_mix_lab(ctrl_t *ctrl) {
+  lab_t squ = _sub_squ_lab(ctrl);
+  lab_t noise = _sub_noise_lab(ctrl);
   lab_t out = _interpolate_lab(squ, noise);
   return out;
 }
 
-bool _sub_mix_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL] ||
-         commit_ctrl.changed[CTRL_SUB_LVL];
+bool _sub_mix_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_SUB_NOISE_LVL] ||
+         ctrl->changed[CTRL_SUB_LVL];
 }
 
 // CTRL_SUB_TO_OSC2_MIX]_mix
 
-lab_t _sub_to_osc2_mix_lab() {
-  lab_t out = _sub_mix_lab();
-  out.L *= _ctrl_double(CTRL_SUB_TO_OSC2_MIX);
-  out.v = commit_ctrl.value[CTRL_SUB_TO_OSC2_MIX];
+lab_t _sub_to_osc2_mix_lab(ctrl_t *ctrl) {
+  lab_t out = _sub_mix_lab(ctrl);
+  out.L *= _ctrl_double(ctrl, CTRL_SUB_TO_OSC2_MIX);
+  out.v = ctrl->value[CTRL_SUB_TO_OSC2_MIX];
   return out;
 }
 
-bool _sub_to_osc2_mix_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL] ||
-         commit_ctrl.changed[CTRL_SUB_TO_OSC2_MIX] ||
-         commit_ctrl.changed[CTRL_SUB_LVL];
+bool _sub_to_osc2_mix_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_SUB_NOISE_LVL] ||
+         ctrl->changed[CTRL_SUB_TO_OSC2_MIX] || ctrl->changed[CTRL_SUB_LVL];
 }
 
 // sub_filt
 
-lab_t _sub_filt_freq_lab() {
-  return _filt_freq_lab(_sub_mix_lab(), CTRL_SUB_FILT_CUTOFF);
+lab_t _sub_filt_freq_lab(ctrl_t *ctrl) {
+  return _filt_freq_lab(ctrl, _sub_mix_lab(ctrl), CTRL_SUB_FILT_CUTOFF);
 }
 
-bool _sub_filt_freq_changed() {
-  return ALWAYS_UPDATE || _sub_mix_changed() ||
-         commit_ctrl.changed[CTRL_SUB_FILT_CUTOFF];
+bool _sub_filt_freq_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _sub_mix_changed(ctrl) ||
+         ctrl->changed[CTRL_SUB_FILT_CUTOFF];
 }
 
-lab_t _sub_filt_reso_lab() {
-  return _filt_reso_lab(_sub_filt_freq_lab(), CTRL_SUB_FILT_RES);
+lab_t _sub_filt_reso_lab(ctrl_t *ctrl) {
+  return _filt_reso_lab(ctrl, _sub_filt_freq_lab(ctrl), CTRL_SUB_FILT_RES);
 }
 
-bool _sub_filt_reso_changed() {
-  return ALWAYS_UPDATE || _sub_filt_freq_changed() ||
-         commit_ctrl.changed[CTRL_SUB_FILT_RES];
+bool _sub_filt_reso_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _sub_filt_freq_changed(ctrl) ||
+         ctrl->changed[CTRL_SUB_FILT_RES];
 }
 
-lab_t _sub_filt_out_lab() { return _sub_filt_reso_lab(); }
+lab_t _sub_filt_out_lab(ctrl_t *ctrl) { return _sub_filt_reso_lab(ctrl); }
 
-bool _sub_filt_out_changed() {
-  return ALWAYS_UPDATE || commit_ctrl.changed[CTRL_SUB_NOISE_LVL] ||
-         commit_ctrl.changed[CTRL_SUB_LVL];
+bool _sub_filt_out_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || ctrl->changed[CTRL_SUB_NOISE_LVL] ||
+         ctrl->changed[CTRL_SUB_LVL];
 }
 
-lab_t _sub_amp_out_lab() { return _sub_filt_out_lab(); }
+lab_t _sub_amp_out_lab(ctrl_t *ctrl) { return _sub_filt_out_lab(ctrl); }
 
-bool _sub_amp_out_changed() {
-  return ALWAYS_UPDATE || _sub_filt_reso_changed();
+bool _sub_amp_out_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _sub_filt_reso_changed(ctrl);
 }
 
 // fx_dry
 
-lab_t _fx_dry_lab() {
-  lab_t osc = _osc_amp_out_lab();
-  lab_t sub = _sub_amp_out_lab();
+lab_t _fx_dry_lab(ctrl_t *ctrl) {
+  lab_t osc = _osc_amp_out_lab(ctrl);
+  lab_t sub = _sub_amp_out_lab(ctrl);
   lab_t out = _interpolate_lab(osc, sub);
-  out.L *= _ctrl_double_inverse(CTRL_FX_WETDRY);
-  out.v = 4095 - commit_ctrl.value[CTRL_FX_WETDRY];
+  out.L *= _ctrl_double_inverse(ctrl, CTRL_FX_WETDRY);
+  out.v = 4095 - ctrl->value[CTRL_FX_WETDRY];
   return out;
 }
 
-bool _fx_dry_changed() {
-  return ALWAYS_UPDATE || _osc_amp_out_changed() || _sub_amp_out_changed() ||
-         commit_ctrl.changed[CTRL_FX_WETDRY];
+bool _fx_dry_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc_amp_out_changed(ctrl) ||
+         _sub_amp_out_changed(ctrl) || ctrl->changed[CTRL_FX_WETDRY];
 }
 
-lab_t _fx_wet_lab() {
-  lab_t out = _interpolate_lab(_osc_amp_out_lab(), _sub_amp_out_lab());
-  out.L *= _ctrl_double(CTRL_FX_WETDRY);
-  out.v = commit_ctrl.value[CTRL_FX_WETDRY];
+lab_t _fx_wet_lab(ctrl_t *ctrl) {
+  lab_t out = _interpolate_lab(_osc_amp_out_lab(ctrl), _sub_amp_out_lab(ctrl));
+  out.L *= _ctrl_double(ctrl, CTRL_FX_WETDRY);
+  out.v = ctrl->value[CTRL_FX_WETDRY];
   return out;
 }
 
-bool _fx_wet_changed() {
-  return ALWAYS_UPDATE || _osc_amp_out_changed() || _sub_amp_out_changed() ||
-         commit_ctrl.changed[CTRL_FX_WETDRY];
+bool _fx_wet_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _osc_amp_out_changed(ctrl) ||
+         _sub_amp_out_changed(ctrl) || ctrl->changed[CTRL_FX_WETDRY];
 }
 
-lab_t _fx_feedback_lab() {
-  lab_t out = _fx_wet_lab();
-  out.L *= _ctrl_double(CTRL_FX_FEEDBACK);
-  out.v = commit_ctrl.value[CTRL_FX_FEEDBACK];
+lab_t _fx_feedback_lab(ctrl_t *ctrl) {
+  lab_t out = _fx_wet_lab(ctrl);
+  out.L *= _ctrl_double(ctrl, CTRL_FX_FEEDBACK);
+  out.v = ctrl->value[CTRL_FX_FEEDBACK];
   return out;
 }
 
-bool _fx_feedback_changed() {
-  return ALWAYS_UPDATE || _fx_wet_changed() ||
-         commit_ctrl.changed[CTRL_FX_FEEDBACK];
+bool _fx_feedback_changed(ctrl_t *ctrl) {
+  return ALWAYS_UPDATE || _fx_wet_changed(ctrl) ||
+         ctrl->changed[CTRL_FX_FEEDBACK];
 }
 
 /*
  * Commit Functions
  */
 
-void _commit_led_osc1_saw() {
+void _commit_led_osc1_saw(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -415,10 +417,10 @@ void _commit_led_osc1_saw() {
    * 0, 1
    */
 
-  if (!_osc1_saw_changed())
+  if (!_osc1_saw_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_saw_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 2 * 3);
   if (!res)
     Error_Handler();
@@ -433,7 +435,7 @@ void _commit_led_osc1_saw() {
     Error_Handler();
 }
 
-void _commit_led_osc1_squ() {
+void _commit_led_osc1_squ(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -443,10 +445,10 @@ void _commit_led_osc1_squ() {
    * 2, 3
    */
 
-  if (!_osc1_squ_changed())
+  if (!_osc1_squ_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_squ_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_osc1_squ_lab(ctrl), pwm_seq, 2 * 3);
 
   // Work around Red and Blue pins being transposed
   uint16_t tmp;
@@ -471,7 +473,7 @@ void _commit_led_osc1_squ() {
     Error_Handler();
 }
 
-void _commit_led_osc1_mix() {
+void _commit_led_osc1_mix(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -481,10 +483,10 @@ void _commit_led_osc1_mix() {
    * 4, 5, 6, 7, 8, 9, 10
    */
 
-  if (!_osc1_mix_changed())
+  if (!_osc1_mix_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_mix_lab(), pwm_seq, 7 * 3);
+  _set_pwm_seq_lab(_osc1_mix_lab(ctrl), pwm_seq, 7 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 12, pwm_seq, 7 * 3);
   if (!res)
     Error_Handler();
@@ -501,7 +503,7 @@ void _commit_led_osc1_mix() {
     Error_Handler();
 }
 
-void _commit_led_osc1_filt_freq() {
+void _commit_led_osc1_filt_freq(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -511,10 +513,10 @@ void _commit_led_osc1_filt_freq() {
    * Freq: 3, 4
    */
 
-  if (!_osc1_filt_freq_changed())
+  if (!_osc1_filt_freq_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_filt_freq_lab(), pwm_seq, 4 * 3);
+  _set_pwm_seq_lab(_osc1_filt_freq_lab(ctrl), pwm_seq, 4 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (3 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -529,7 +531,7 @@ void _commit_led_osc1_filt_freq() {
     Error_Handler();
 }
 
-void _commit_led_osc1_filt_reso() {
+void _commit_led_osc1_filt_reso(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -539,10 +541,10 @@ void _commit_led_osc1_filt_reso() {
    * Reso: 5, 6
    */
 
-  if (!_osc1_filt_reso_changed())
+  if (!_osc1_filt_reso_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_filt_reso_lab(), pwm_seq, 4 * 3);
+  _set_pwm_seq_lab(_osc1_filt_reso_lab(ctrl), pwm_seq, 4 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 2, (5 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -557,7 +559,7 @@ void _commit_led_osc1_filt_reso() {
     Error_Handler();
 }
 
-void _commit_led_osc1_drive() {
+void _commit_led_osc1_drive(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -568,10 +570,10 @@ void _commit_led_osc1_drive() {
    *
    */
 
-  if (!_osc1_drive_changed())
+  if (!_osc1_drive_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_drive_lab(), pwm_seq, 4 * 3);
+  _set_pwm_seq_lab(_osc1_drive_lab(ctrl), pwm_seq, 4 * 3);
   res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (0 * 3), pwm_seq, (4 * 3));
   if (!res)
     Error_Handler();
@@ -588,7 +590,7 @@ void _commit_led_osc1_drive() {
     Error_Handler();
 }
 
-void _commit_led_osc1_to_osc2() {
+void _commit_led_osc1_to_osc2(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -598,10 +600,10 @@ void _commit_led_osc1_to_osc2() {
    * 0, 1
    */
 
-  if (!_osc1_to_2_mix_changed())
+  if (!_osc1_to_2_mix_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc1_to_2_mix_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_osc1_to_2_mix_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b10, (0 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -618,7 +620,7 @@ void _commit_led_osc1_to_osc2() {
 
 #define OSC2_PATTERN_OFFSET -8
 
-void _commit_led_osc2_saw() {
+void _commit_led_osc2_saw(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -628,10 +630,10 @@ void _commit_led_osc2_saw() {
    * 1, 2
    */
 
-  if (!_osc2_saw_changed())
+  if (!_osc2_saw_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_saw_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_osc2_saw_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (1 * 3), pwm_seq, 2 * 3);
   if (!res)
     Error_Handler();
@@ -647,7 +649,7 @@ void _commit_led_osc2_saw() {
     Error_Handler();
 }
 
-void _commit_led_osc2_squ() {
+void _commit_led_osc2_squ(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -657,10 +659,10 @@ void _commit_led_osc2_squ() {
    * 0
    */
 
-  if (!_osc2_squ_changed())
+  if (!_osc2_squ_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_squ_lab(), pwm_seq, 1 * 3);
+  _set_pwm_seq_lab(_osc2_squ_lab(ctrl), pwm_seq, 1 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (0 * 3), pwm_seq, 1 * 3);
   if (!res)
     Error_Handler();
@@ -676,7 +678,7 @@ void _commit_led_osc2_squ() {
     Error_Handler();
 }
 
-void _commit_led_osc2_noise() {
+void _commit_led_osc2_noise(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -686,10 +688,10 @@ void _commit_led_osc2_noise() {
    * 3, 4
    */
 
-  if (!_osc2_noise_changed())
+  if (!_osc2_noise_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_noise_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_osc2_noise_lab(ctrl), pwm_seq, 2 * 3);
 
   // Work around Red and Blue pins being transposed
   uint16_t tmp;
@@ -715,7 +717,7 @@ void _commit_led_osc2_noise() {
     Error_Handler();
 }
 
-void _commit_led_osc2_only() {
+void _commit_led_osc2_only(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -725,10 +727,10 @@ void _commit_led_osc2_only() {
    * 5, 6, 7, 8
    */
 
-  if (!_osc2_mix_changed())
+  if (!_osc2_mix_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_mix_lab(), pwm_seq, 4 * 3);
+  _set_pwm_seq_lab(_osc2_mix_lab(ctrl), pwm_seq, 4 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (5 * 3), pwm_seq, (4 * 3));
   if (!res)
     Error_Handler();
@@ -744,7 +746,7 @@ void _commit_led_osc2_only() {
     Error_Handler();
 }
 
-void _commit_led_osc2_prefilt() {
+void _commit_led_osc2_prefilt(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -754,10 +756,10 @@ void _commit_led_osc2_prefilt() {
    * 9, 10
    */
 
-  if (!_osc2_prefilt_changed())
+  if (!_osc2_prefilt_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_prefilt_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_osc2_prefilt_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 0b11, (9 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -773,7 +775,7 @@ void _commit_led_osc2_prefilt() {
     Error_Handler();
 }
 
-void _commit_led_osc2_filt_freq() {
+void _commit_led_osc2_filt_freq(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -783,10 +785,10 @@ void _commit_led_osc2_filt_freq() {
    * Freq: 0, 1
    */
 
-  if (!_osc2_filt_freq_changed())
+  if (!_osc2_filt_freq_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_filt_freq_lab(), pwm_seq, 4 * 3);
+  _set_pwm_seq_lab(_osc2_filt_freq_lab(ctrl), pwm_seq, 4 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (0 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -802,7 +804,7 @@ void _commit_led_osc2_filt_freq() {
     Error_Handler();
 }
 
-void _commit_led_osc2_filt_reso() {
+void _commit_led_osc2_filt_reso(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -812,10 +814,10 @@ void _commit_led_osc2_filt_reso() {
    * Reso: 2, 3
    */
 
-  if (!_osc2_filt_reso_changed())
+  if (!_osc2_filt_reso_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_filt_reso_lab(), pwm_seq, 4 * 3);
+  _set_pwm_seq_lab(_osc2_filt_reso_lab(ctrl), pwm_seq, 4 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (2 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -831,7 +833,7 @@ void _commit_led_osc2_filt_reso() {
     Error_Handler();
 }
 
-void _commit_led_osc2_drive() {
+void _commit_led_osc2_drive(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -841,10 +843,10 @@ void _commit_led_osc2_drive() {
    * 3, 4, 5, 6, 7, 8, 9, 10
    */
 
-  if (!_osc2_drive_changed())
+  if (!_osc2_drive_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc2_drive_lab(), pwm_seq, 8 * 3);
+  _set_pwm_seq_lab(_osc2_drive_lab(ctrl), pwm_seq, 8 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b10, (3 * 3), pwm_seq, (8 * 3));
   if (!res)
     Error_Handler();
@@ -860,7 +862,7 @@ void _commit_led_osc2_drive() {
     Error_Handler();
 }
 
-void _commit_led_osc_amp_out() {
+void _commit_led_osc_amp_out(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -871,10 +873,10 @@ void _commit_led_osc_amp_out() {
    *
    */
 
-  if (!_osc_amp_out_changed())
+  if (!_osc_amp_out_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_osc_amp_out_lab(), pwm_seq, 5 * 3);
+  _set_pwm_seq_lab(_osc_amp_out_lab(ctrl), pwm_seq, 5 * 3);
   res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0, (4 * 3), pwm_seq, (5 * 3));
   if (!res)
     Error_Handler();
@@ -892,7 +894,7 @@ void _commit_led_osc_amp_out() {
 
 #define SUB_PATTERN_OFFSET 0
 
-void _commit_led_sub_amp_out() {
+void _commit_led_sub_amp_out(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -903,10 +905,10 @@ void _commit_led_sub_amp_out() {
    *
    */
 
-  if (!_sub_amp_out_changed())
+  if (!_sub_amp_out_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_amp_out_lab(), pwm_seq, 5 * 3);
+  _set_pwm_seq_lab(_sub_amp_out_lab(ctrl), pwm_seq, 5 * 3);
   res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (7 * 3), pwm_seq, (5 * 3));
   if (!res)
     Error_Handler();
@@ -923,7 +925,7 @@ void _commit_led_sub_amp_out() {
     Error_Handler();
 }
 
-void _commit_led_sub_squ() {
+void _commit_led_sub_squ(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -933,10 +935,10 @@ void _commit_led_sub_squ() {
    * 0, 1
    */
 
-  if (!_sub_squ_changed())
+  if (!_sub_squ_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_squ_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_sub_squ_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (0 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -952,7 +954,7 @@ void _commit_led_sub_squ() {
     Error_Handler();
 }
 
-void _commit_led_sub_noise() {
+void _commit_led_sub_noise(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -962,10 +964,10 @@ void _commit_led_sub_noise() {
    * 2, 3
    */
 
-  if (!_sub_noise_changed())
+  if (!_sub_noise_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_noise_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_sub_noise_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (2 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -981,7 +983,7 @@ void _commit_led_sub_noise() {
     Error_Handler();
 }
 
-void _commit_led_sub_mix() {
+void _commit_led_sub_mix(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -991,10 +993,10 @@ void _commit_led_sub_mix() {
    * 4, 5, 6, 7, 8, 9, 10
    */
 
-  if (!_sub_mix_changed())
+  if (!_sub_mix_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_mix_lab(), pwm_seq, 7 * 3);
+  _set_pwm_seq_lab(_sub_mix_lab(ctrl), pwm_seq, 7 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b00, (4 * 3), pwm_seq, (7 * 3));
   if (!res)
     Error_Handler();
@@ -1012,7 +1014,7 @@ void _commit_led_sub_mix() {
     Error_Handler();
 }
 
-void _commit_led_sub_to_osc2_mix() {
+void _commit_led_sub_to_osc2_mix(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -1022,10 +1024,10 @@ void _commit_led_sub_to_osc2_mix() {
    * 7, 8
    */
 
-  if (!_sub_to_osc2_mix_changed())
+  if (!_sub_to_osc2_mix_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_to_osc2_mix_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_sub_to_osc2_mix_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 3, 0b00, (7 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -1041,7 +1043,7 @@ void _commit_led_sub_to_osc2_mix() {
     Error_Handler();
 }
 
-void _commit_led_sub_filt_freq() {
+void _commit_led_sub_filt_freq(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -1051,10 +1053,10 @@ void _commit_led_sub_filt_freq() {
    * 0, 1,
    */
 
-  if (!_sub_filt_freq_changed())
+  if (!_sub_filt_freq_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_filt_freq_lab(), pwm_seq, 2 * 3);
+  _set_pwm_seq_lab(_sub_filt_freq_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (0 * 3), pwm_seq, (2 * 3));
   if (!res)
     Error_Handler();
@@ -1070,7 +1072,7 @@ void _commit_led_sub_filt_freq() {
     Error_Handler();
 }
 
-void _commit_led_sub_filt_reso() {
+void _commit_led_sub_filt_reso(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -1080,10 +1082,10 @@ void _commit_led_sub_filt_reso() {
    * 2, 3, 4, 5, 6, 7, 8
    */
 
-  if (!_sub_filt_reso_changed())
+  if (!_sub_filt_reso_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_sub_filt_reso_lab(), pwm_seq, 7 * 3);
+  _set_pwm_seq_lab(_sub_filt_reso_lab(ctrl), pwm_seq, 7 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 1, 0b10, (2 * 3), pwm_seq, (7 * 3));
   if (!res)
     Error_Handler();
@@ -1101,7 +1103,7 @@ void _commit_led_sub_filt_reso() {
 
 #define FX_PATTERN_OFFSET 2
 
-void _commit_led_fx_dry() {
+void _commit_led_fx_dry(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -1112,10 +1114,10 @@ void _commit_led_fx_dry() {
    *
    */
 
-  if (!_fx_dry_changed())
+  if (!_fx_dry_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_fx_dry_lab(), pwm_seq, 11 * 3);
+  _set_pwm_seq_lab(_fx_dry_lab(ctrl), pwm_seq, 11 * 3);
   res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b01, (0 * 3), pwm_seq, (11 * 3));
   if (!res)
     Error_Handler();
@@ -1132,7 +1134,7 @@ void _commit_led_fx_dry() {
     Error_Handler();
 }
 
-void _commit_led_fx_wet() {
+void _commit_led_fx_wet(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -1143,10 +1145,10 @@ void _commit_led_fx_wet() {
    *
    */
 
-  if (!_fx_wet_changed())
+  if (!_fx_wet_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_fx_wet_lab(), pwm_seq, 7 * 3);
+  _set_pwm_seq_lab(_fx_wet_lab(ctrl), pwm_seq, 7 * 3);
   res = is32_set_sequence_pwm(I2C_RIGHT, 1, 0b01, (0 * 3), pwm_seq, (7 * 3));
   if (!res)
     Error_Handler();
@@ -1163,7 +1165,7 @@ void _commit_led_fx_wet() {
     Error_Handler();
 }
 
-void _commit_led_fx_feedback() {
+void _commit_led_fx_feedback(ctrl_t *ctrl) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -1174,10 +1176,10 @@ void _commit_led_fx_feedback() {
    *
    */
 
-  if (!_fx_feedback_changed())
+  if (!_fx_feedback_changed(ctrl))
     return;
 
-  _set_pwm_seq_lab(_fx_feedback_lab(), pwm_seq, 8 * 3);
+  _set_pwm_seq_lab(_fx_feedback_lab(ctrl), pwm_seq, 8 * 3);
   res = is32_set_sequence_pwm(I2C_RIGHT, 2, 0b10, (0 * 3), pwm_seq, (8 * 3));
   if (!res)
     Error_Handler();
@@ -1194,92 +1196,92 @@ void _commit_led_fx_feedback() {
     Error_Handler();
 }
 
-void commit_led_osc(commit_cycle_t cycle) {
+void commit_led_osc(ctrl_t *ctrl, commit_cycle_t cycle) {
   uint32_t ticks_before = HAL_GetTick();
 
   switch (cycle) {
   case COMMIT_LED_OSC1_SAW:
-    _commit_led_osc1_saw();
+    _commit_led_osc1_saw(ctrl);
     break;
   case COMMIT_LED_OSC1_SQU:
-    _commit_led_osc1_squ();
+    _commit_led_osc1_squ(ctrl);
     break;
   case COMMIT_LED_OSC1_MIX:
-    _commit_led_osc1_mix();
+    _commit_led_osc1_mix(ctrl);
     break;
   case COMMIT_LED_OSC1_FILT_FREQ:
-    _commit_led_osc1_filt_freq();
+    _commit_led_osc1_filt_freq(ctrl);
     break;
   case COMMIT_LED_OSC1_FILT_RESO:
-    _commit_led_osc1_filt_reso();
+    _commit_led_osc1_filt_reso(ctrl);
     break;
   case COMMIT_LED_OSC1_DRIVE:
-    _commit_led_osc1_drive();
+    _commit_led_osc1_drive(ctrl);
     break;
   case COMMIT_LED_OSC1_TO_OSC2:
-    _commit_led_osc1_to_osc2();
+    _commit_led_osc1_to_osc2(ctrl);
     break;
 
   case COMMIT_LED_OSC2_SAW:
-    _commit_led_osc2_saw();
+    _commit_led_osc2_saw(ctrl);
     break;
   case COMMIT_LED_OSC2_SQU:
-    _commit_led_osc2_squ();
+    _commit_led_osc2_squ(ctrl);
     break;
   case COMMIT_LED_OSC2_NOISE:
-    _commit_led_osc2_noise();
+    _commit_led_osc2_noise(ctrl);
     break;
 
   case COMMIT_LED_OSC2_ONLY:
-    _commit_led_osc2_only();
+    _commit_led_osc2_only(ctrl);
     break;
   case COMMIT_LED_OSC2_PREFILT:
-    _commit_led_osc2_prefilt();
+    _commit_led_osc2_prefilt(ctrl);
     break;
   case COMMIT_LED_OSC2_FILT_FREQ:
-    _commit_led_osc2_filt_freq();
+    _commit_led_osc2_filt_freq(ctrl);
     break;
   case COMMIT_LED_OSC2_FILT_RESO:
-    _commit_led_osc2_filt_reso();
+    _commit_led_osc2_filt_reso(ctrl);
     break;
   case COMMIT_LED_OSC2_DRIVE:
-    _commit_led_osc2_drive();
+    _commit_led_osc2_drive(ctrl);
     break;
 
   case COMMIT_LED_OSC_AMP_OUT:
-    _commit_led_osc_amp_out();
+    _commit_led_osc_amp_out(ctrl);
     break;
   case COMMIT_LED_SUB_AMP_OUT:
-    _commit_led_sub_amp_out();
+    _commit_led_sub_amp_out(ctrl);
     break;
 
   case COMMIT_LED_SUB_SQU:
-    _commit_led_sub_squ();
+    _commit_led_sub_squ(ctrl);
     break;
   case COMMIT_LED_SUB_NOISE:
-    _commit_led_sub_noise();
+    _commit_led_sub_noise(ctrl);
     break;
   case COMMIT_LED_SUB_MIX:
-    _commit_led_sub_mix();
+    _commit_led_sub_mix(ctrl);
     break;
   case COMMIT_LED_SUB_TO_OSC2:
-    _commit_led_sub_to_osc2_mix();
+    _commit_led_sub_to_osc2_mix(ctrl);
     break;
   case COMMIT_LED_SUB_FILT_FREQ:
-    _commit_led_sub_filt_freq();
+    _commit_led_sub_filt_freq(ctrl);
     break;
   case COMMIT_LED_SUB_FILT_RESO:
-    _commit_led_sub_filt_reso();
+    _commit_led_sub_filt_reso(ctrl);
     break;
 
   case COMMIT_LED_FX_DRY:
-    _commit_led_fx_dry();
+    _commit_led_fx_dry(ctrl);
     break;
   case COMMIT_LED_FX_WET:
-    _commit_led_fx_wet();
+    _commit_led_fx_wet(ctrl);
     break;
   case COMMIT_LED_FX_FEEDBACK:
-    _commit_led_fx_feedback();
+    _commit_led_fx_feedback(ctrl);
     break;
 
   default:

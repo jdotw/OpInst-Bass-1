@@ -29,13 +29,6 @@ void commit_led_osc(commit_cycle_t cycle);
 void commit_led_button(commit_cycle_t cycle);
 
 static commit_cycle_t cycle;
-ctrl_t commit_ctrl;
-ctrl_toggle_t commit_ctrl_toggle;
-note_value_t commit_note_value;
-note_changed_t commit_note_changed;
-seq_state_t commit_seq_state;
-seq_changed_t commit_seq_changed;
-mod_state_t commit_mod_state;
 
 uint16_t pattern_cycle_count = 0;
 
@@ -45,21 +38,15 @@ void commit_30hz_timer(void) {
   uint32_t ticks_after = 0;
   uint32_t ticks_cost = 0;
 
-  commit_ctrl = ctrl;
-  commit_ctrl_toggle = ctrl_toggle;
-  commit_seq_state = seq_state;
-  commit_seq_changed = seq_changed;
-  commit_mod_state = mod_state;
-
-  commit_note_value = note_value;
-  commit_note_changed = note_changed;
   note_changed_reset();
 
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 
+  ctrl_t *ctrl = ctrl_get_active();
+
   ticks_before = HAL_GetTick();
-  commit_dac();
+  commit_dac(ctrl);
   ticks_after = HAL_GetTick();
   ticks_cost = ticks_after - ticks_before;
 
@@ -74,7 +61,8 @@ void commit_30hz_timer(void) {
     // Our commit functions will then work off these values
 
     // Apply p-lock
-    seq_apply_active_step_ctrl(&seq_state, &seq_changed, &commit_ctrl);
+    ctrl_t *ctrl = ctrl_get_active();
+    seq_apply_active_step_ctrl(&seq_state, &seq_changed, ctrl);
 
     // Then reset the change flag so that any further changes
     // will be waiting for us on the next cycle
