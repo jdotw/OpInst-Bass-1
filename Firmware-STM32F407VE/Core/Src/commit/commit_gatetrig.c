@@ -13,36 +13,36 @@
 
 #define TRIGGER_LENGTH 5
 
-void commit_gatetrig(void) {
+void commit_gatetrig(note_t *note) {
   bool res;
   uint8_t outputs[2] = {0, 0};
 
   // Configure Gates
-  outputs[0] |= commit_note_value.note_on << 3;
-  outputs[0] |= commit_note_value.note_on << 5;
-  outputs[0] |= commit_note_value.note_on << 7;
-  outputs[1] |= commit_note_value.note_on << 1;
-  outputs[1] |= commit_note_value.note_on << 3;
-  outputs[1] |= commit_note_value.note_on << 5;
+  outputs[0] |= note->value.note_on << 3;
+  outputs[0] |= note->value.note_on << 5;
+  outputs[0] |= note->value.note_on << 7;
+  outputs[1] |= note->value.note_on << 1;
+  outputs[1] |= note->value.note_on << 3;
+  outputs[1] |= note->value.note_on << 5;
 
   // Configure Triggers
   uint32_t tick = HAL_GetTick();
   if (tick == 0)
     tick++; // Guarantee non-zero
-  if (note_trig.ping_trigger) {
+  if (note->trig.ping_trigger) {
     // We need to ping the trigger
     bool trig_state = false;
-    if (note_trig.triggered_at == 0) {
+    if (note->trig.triggered_at == 0) {
       // This is the start of a ping
-      note_trig.triggered_at = tick;
+      note->trig.triggered_at = tick;
       trig_state = true;
-    } else if (tick < (note_trig.triggered_at + TRIGGER_LENGTH)) {
+    } else if (tick < (note->trig.triggered_at + TRIGGER_LENGTH)) {
       // Hold trigger high
       trig_state = true;
     } else {
       // Let trig go
-      note_trig.ping_trigger = false;
-      note_trig.triggered_at = 0;
+      note->trig.ping_trigger = false;
+      note->trig.triggered_at = 0;
     }
 
     outputs[0] |= trig_state << 2;

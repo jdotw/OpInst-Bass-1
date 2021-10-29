@@ -21,12 +21,13 @@
 #include <math.h>
 #include <stdbool.h>
 
-void commit_dac(ctrl_t *ctrl);
-void commit_gatetrig(void);
-void commit_led_rotpic(void);
+void commit_dac(ctrl_t *ctrl, note_t *note);
+void commit_gatetrig(note_t *note);
+void commit_led_rotpic(ctrl_toggle_t *toggle);
 void commit_led_adsr(commit_cycle_t cycle);
 void commit_led_osc(commit_cycle_t cycle);
-void commit_led_button(commit_cycle_t cycle);
+void commit_led_button(commit_cycle_t cycle, seq_state_t *seq,
+                       seq_changed_t *changed, mod_state_t *mod);
 
 static commit_cycle_t cycle;
 
@@ -44,14 +45,16 @@ void commit_30hz_timer(void) {
   HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 
   ctrl_t *ctrl = ctrl_get_active();
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  note_t *note = note_get_active();
 
   ticks_before = HAL_GetTick();
-  commit_dac(ctrl);
+  commit_dac(ctrl, note);
   ticks_after = HAL_GetTick();
   ticks_cost = ticks_after - ticks_before;
 
   ticks_before = HAL_GetTick();
-  commit_gatetrig();
+  commit_gatetrig(note);
   ticks_after = HAL_GetTick();
   ticks_cost = ticks_after - ticks_before;
 
@@ -61,7 +64,6 @@ void commit_30hz_timer(void) {
     // Our commit functions will then work off these values
 
     // Apply p-lock
-    ctrl_t *ctrl = ctrl_get_active();
     seq_apply_active_step_ctrl(&seq_state, &seq_changed, ctrl);
 
     // Then reset the change flag so that any further changes
@@ -81,7 +83,7 @@ void commit_30hz_timer(void) {
     break;
   case COMMIT_LED_ROTPIC:
     ticks_before = HAL_GetTick();
-    commit_led_rotpic();
+    commit_led_rotpic(toggle);
     ticks_after = HAL_GetTick();
     ticks_cost = ticks_after - ticks_before;
     cycle++;
