@@ -19,7 +19,7 @@
     "type_traits": "c",
     "vector": "c"
   },
-  "stm32-for-vscode.openOCDPath": "/usr/local/bin/openocd",
+  "stm32-for-vscode.openOCDPath": "/opt/homebrew/bin/openocd",
   "cortex-debug.armToolchainPath": "/Applications/ARM/bin",
-  "cortex-debug.openocdPath": "/usr/local/bin/openocd"
+  "cortex-debug.openocdPath": "/opt/homebrew/bin/openocd"
 }
