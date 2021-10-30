@@ -377,6 +377,9 @@ bool preset_save(uint8_t index, char *name) {
   char filename[128] = {0};
   char *json;
   bool result;
+  ctrl_t *ctrl = ctrl_get_active();
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  seq_t *seq = seq_get();
 
   // Create Root Path
   snprintf(path, 128 - 1, "\\PRESETS\\USER\\%02d", index);
@@ -386,7 +389,7 @@ bool preset_save(uint8_t index, char *name) {
   cJSON *ctrl_obj = cJSON_CreateObject();
   for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++) {
     const char *name = _preset_ctrl_name_func(i);
-    int16_t value = ctrl.value[i];
+    int16_t value = ctrl->value[i];
     cJSON_AddNumberToObject(ctrl_obj, name, (double)value);
   }
   json = cJSON_Print(ctrl_obj);
@@ -404,26 +407,23 @@ bool preset_save(uint8_t index, char *name) {
   // Encode Toggle
   cJSON *toggle_obj = cJSON_CreateObject();
 
-  cJSON_AddNumberToObject(toggle_obj, "osc1_squ_func",
-                          ctrl_toggle.osc1_squ_func);
-  cJSON_AddNumberToObject(toggle_obj, "osc2_squ_func",
-                          ctrl_toggle.osc2_squ_func);
-  cJSON_AddNumberToObject(toggle_obj, "osc1_tune_func",
-                          ctrl_toggle.osc1_tune_func);
+  cJSON_AddNumberToObject(toggle_obj, "osc1_squ_func", toggle->osc1_squ_func);
+  cJSON_AddNumberToObject(toggle_obj, "osc2_squ_func", toggle->osc2_squ_func);
+  cJSON_AddNumberToObject(toggle_obj, "osc1_tune_func", toggle->osc1_tune_func);
 
   cJSON_AddNumberToObject(toggle_obj, "osc_filt_env_attack_func",
-                          ctrl_toggle.osc_filt_env_attack_func);
+                          toggle->osc_filt_env_attack_func);
   cJSON_AddNumberToObject(toggle_obj, "osc_filt_env_sustain_func",
-                          ctrl_toggle.osc_filt_env_sustain_func);
+                          toggle->osc_filt_env_sustain_func);
   cJSON_AddNumberToObject(toggle_obj, "osc_amp_env_sustain_func",
-                          ctrl_toggle.osc_amp_env_sustain_func);
+                          toggle->osc_amp_env_sustain_func);
 
   cJSON_AddNumberToObject(toggle_obj, "sub_filt_env_attack_func",
-                          ctrl_toggle.sub_filt_env_attack_func);
+                          toggle->sub_filt_env_attack_func);
   cJSON_AddNumberToObject(toggle_obj, "sub_filt_env_sustain_func",
-                          ctrl_toggle.sub_filt_env_sustain_func);
+                          toggle->sub_filt_env_sustain_func);
   cJSON_AddNumberToObject(toggle_obj, "sub_amp_env_sustain_func",
-                          ctrl_toggle.sub_amp_env_sustain_func);
+                          toggle->sub_amp_env_sustain_func);
 
   json = cJSON_Print(toggle_obj);
   cJSON_Delete(toggle_obj);
@@ -445,9 +445,9 @@ bool preset_save(uint8_t index, char *name) {
   for (uint8_t step = 0; step < SEQ_MAX_STEPS; step++) {
     cJSON *step_obj = cJSON_CreateObject();
     for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++) {
-      if (seq_state.step_ctrl[step].changed[i]) {
+      if (seq->state.step_ctrl[step].changed[i]) {
         const char *name = _preset_ctrl_name_func(i);
-        int16_t value = seq_state.step_ctrl[step].value[i];
+        int16_t value = seq->state.step_ctrl[step].value[i];
         cJSON_AddNumberToObject(step_obj, name, (double)value);
       }
     }
@@ -492,6 +492,7 @@ bool preset_load(bool system, uint8_t index) {
   bool result;
   size_t read_len = 0;
   char read_buf[2048] = {0};
+  ctrl_t *ctrl = ctrl_get_active();
 
   // Create Root Path
   snprintf(path, 128 - 1, "\\PRESETS\\%s\\%02d", system ? "SYSTEM" : "USER",
@@ -505,7 +506,7 @@ bool preset_load(bool system, uint8_t index) {
     const char *parse_end = 0;
     cJSON *ctrl_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
     if (ctrl_obj) {
-      _preset_load_ctrl(ctrl_obj, &ctrl);
+      _preset_load_ctrl(ctrl_obj, ctrl);
     }
   } else {
     return false;
@@ -519,60 +520,58 @@ bool preset_load(bool system, uint8_t index) {
   if (result) {
     const char *parse_end = 0;
     cJSON *toggles_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
+    ctrl_toggle_t *toggle = ctrl_get_active_toggle();
 
     cJSON *osc1_squ_func_obj =
         cJSON_GetObjectItem(toggles_obj, "osc1_squ_func");
     if (osc1_squ_func_obj)
-      ctrl_toggle.osc1_squ_func = osc1_squ_func_obj->valueint;
+      toggle->osc1_squ_func = osc1_squ_func_obj->valueint;
 
     cJSON *osc2_squ_func_obj =
         cJSON_GetObjectItem(toggles_obj, "osc2_squ_func");
     if (osc2_squ_func_obj)
-      ctrl_toggle.osc2_squ_func = osc2_squ_func_obj->valueint;
+      toggle->osc2_squ_func = osc2_squ_func_obj->valueint;
 
     cJSON *osc1_tune_func_obj =
         cJSON_GetObjectItem(toggles_obj, "osc1_tune_func");
     if (osc1_tune_func_obj)
-      ctrl_toggle.osc1_tune_func = osc1_tune_func_obj->valueint;
+      toggle->osc1_tune_func = osc1_tune_func_obj->valueint;
 
     cJSON *osc_filt_env_attack_func_obj =
         cJSON_GetObjectItem(toggles_obj, "osc_filt_env_attack_func");
     if (osc_filt_env_attack_func_obj)
-      ctrl_toggle.osc_filt_env_attack_func =
-          osc_filt_env_attack_func_obj->valueint;
+      toggle->osc_filt_env_attack_func = osc_filt_env_attack_func_obj->valueint;
 
     cJSON *osc_filt_env_sustain_func_obj =
         cJSON_GetObjectItem(toggles_obj, "osc_filt_env_sustain_func");
     if (osc_filt_env_sustain_func_obj)
-      ctrl_toggle.osc_filt_env_sustain_func =
+      toggle->osc_filt_env_sustain_func =
           osc_filt_env_sustain_func_obj->valueint;
 
     cJSON *osc_amp_env_sustain_func_obj =
         cJSON_GetObjectItem(toggles_obj, "osc_amp_env_sustain_func");
     if (osc_amp_env_sustain_func_obj)
-      ctrl_toggle.osc_amp_env_sustain_func =
-          osc_amp_env_sustain_func_obj->valueint;
+      toggle->osc_amp_env_sustain_func = osc_amp_env_sustain_func_obj->valueint;
 
     cJSON *sub_filt_env_attack_func_obj =
         cJSON_GetObjectItem(toggles_obj, "sub_filt_env_attack_func");
     if (sub_filt_env_attack_func_obj)
-      ctrl_toggle.sub_filt_env_attack_func =
-          sub_filt_env_attack_func_obj->valueint;
+      toggle->sub_filt_env_attack_func = sub_filt_env_attack_func_obj->valueint;
 
     cJSON *sub_filt_env_sustain_func_obj =
         cJSON_GetObjectItem(toggles_obj, "sub_filt_env_sustain_func");
     if (sub_filt_env_sustain_func_obj)
-      ctrl_toggle.sub_filt_env_sustain_func =
+      toggle->sub_filt_env_sustain_func =
           sub_filt_env_sustain_func_obj->valueint;
 
     cJSON *sub_amp_env_sustain_func_obj =
         cJSON_GetObjectItem(toggles_obj, "sub_amp_env_sustain_func");
     if (sub_amp_env_sustain_func_obj)
-      ctrl_toggle.sub_amp_env_sustain_func =
-          sub_amp_env_sustain_func_obj->valueint;
+      toggle->sub_amp_env_sustain_func = sub_amp_env_sustain_func_obj->valueint;
   }
 
   // Load Steps
+  seq_t *seq = seq_get();
   for (uint8_t i = 0; i < SEQ_MAX_STEPS; i++) {
     snprintf(filename, 128 - 1, "\\PRESETS\\USER\\%02d\\STEPS\\STEP_%d.JSN",
              index, i + 1);
@@ -581,7 +580,7 @@ bool preset_load(bool system, uint8_t index) {
     if (result) {
       const char *parse_end = 0;
       cJSON *step_obj = cJSON_ParseWithOpts(read_buf, &parse_end, true);
-      _preset_load_ctrl(step_obj, &seq_state.step_ctrl[i]);
+      _preset_load_ctrl(step_obj, &seq->state.step_ctrl[i]);
     }
   }
 

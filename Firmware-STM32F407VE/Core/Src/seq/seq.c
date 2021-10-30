@@ -8,84 +8,84 @@
 #include "seq.h"
 #include "string.h"
 
-seq_state_t seq_state;
-seq_changed_t seq_changed;
+seq_t seq;
 
 #define SEQ_MAX_STEP 63
 #define SEQ_MAX_PAGE 3
 #define SEQ_STEPS_PER_PAGE 16
 #define SEQ_DEFAULT_LAST_STEP 15
 
+seq_t *seq_get(void) { return &seq; }
+
 void seq_init() {
-  memset(&seq_changed, 1, sizeof(seq_changed_t));
-  seq_state.last_step = SEQ_DEFAULT_LAST_STEP;
-  seq_state.selected_step = UINT8_MAX;
-  seq_state.prev_active_step = UINT8_MAX;
+  memset(&seq.changed, 1, sizeof(seq.changed));
+  seq.state.last_step = SEQ_DEFAULT_LAST_STEP;
+  seq.state.selected_step = UINT8_MAX;
+  seq.state.prev_active_step = UINT8_MAX;
 }
 
 void seq_changed_reset() {
-  memset(&seq_state.button_changed, 0, SEQ_STEPS_PER_PAGE);
-  memset(&seq_changed, 0, sizeof(seq_changed_t));
+  memset(&seq.state.button_changed, 0, SEQ_STEPS_PER_PAGE);
+  memset(&seq.changed, 0, sizeof(seq.changed));
 }
 
 void seq_start() {
   seq_reset();
-  seq_state.running = true;
-  seq_changed.running = true;
+  seq.state.running = true;
+  seq.changed.running = true;
 }
 
 void seq_stop() {
-  seq_state.running = false;
-  seq_changed.running = true;
+  seq.state.running = false;
+  seq.changed.running = true;
 }
 
 void seq_continue() {
-  seq_state.running = true;
-  seq_changed.running = true;
+  seq.state.running = true;
+  seq.changed.running = true;
 }
 
 void seq_reset() {
-  seq_state.active_step = 0;
-  seq_changed.active_step = true;
+  seq.state.active_step = 0;
+  seq.changed.active_step = true;
 }
 
 void seq_set_step(uint8_t step) {
-  if (seq_state.active_step != step) {
-    seq_state.prev_active_step = seq_state.active_step;
-    seq_state.active_step = step;
-    seq_changed.active_step = true;
+  if (seq.state.active_step != step) {
+    seq.state.prev_active_step = seq.state.active_step;
+    seq.state.active_step = step;
+    seq.changed.active_step = true;
     uint8_t page = step / SEQ_STEPS_PER_PAGE;
-    if (seq_state.active_page != page) {
-      seq_state.active_page = page;
-      seq_changed.active_page = true;
+    if (seq.state.active_page != page) {
+      seq.state.active_page = page;
+      seq.changed.active_page = true;
     }
   }
 }
 
 void seq_advance_step() {
-  if (!seq_state.running) {
+  if (!seq.state.running) {
     // Mustve booted mid-sequence!
-    seq_state.running = true;
-    seq_changed.running = true;
+    seq.state.running = true;
+    seq.changed.running = true;
   }
-  if (seq_state.active_step == seq_state.last_step) {
+  if (seq.state.active_step == seq.state.last_step) {
     seq_set_step(0);
   } else {
-    seq_set_step(seq_state.active_step + 1);
+    seq_set_step(seq.state.active_step + 1);
   }
 }
 
 void seq_advance_selected_page() {
-  if (seq_state.selected_page == SEQ_MAX_PAGE) {
-    seq_state.selected_page = 0;
+  if (seq.state.selected_page == SEQ_MAX_PAGE) {
+    seq.state.selected_page = 0;
   } else {
-    seq_state.selected_page++;
+    seq.state.selected_page++;
   }
-  seq_changed.selected_page = true;
+  seq.changed.selected_page = true;
 }
 
-void seq_apply_active_step_ctrl(seq_state_t *state_ptr,
-                                seq_changed_t *change_ptr, ctrl_t *ctrl_ptr) {
+void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl) {
   // Using the state in state_ptr, overlays the control values
   // that are set for that step (p-locks) onto the
   // ctrl_value_ptr and ctrl_changed_ptr
@@ -96,37 +96,37 @@ void seq_apply_active_step_ctrl(seq_state_t *state_ptr,
   //
   // This is gonna be a lot of code :|
 
-  ctrl_t *step_ctrl_ptr = NULL;
-  ctrl_t *prev_ctrl_ptr = NULL;
+  ctrl_t *step_ctrl = NULL;
+  ctrl_t *prev_ctrl = NULL;
 
-  if (state_ptr->selected_step != UINT8_MAX) {
+  if (seq->state.selected_step != UINT8_MAX) {
     // User is holding down a step sequence button
     // This takes precedence
-    step_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->selected_step *
-                                          (state_ptr->selected_page + 1)];
-  } else if (state_ptr->running) {
+    step_ctrl = &seq->state.step_ctrl[seq->state.selected_step *
+                                      (seq->state.selected_page + 1)];
+  } else if (seq->state.running) {
     // Step seqencer is running
-    step_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->active_step];
+    step_ctrl = &seq->state.step_ctrl[seq->state.active_step];
   }
 
-  if (change_ptr->selected_step && state_ptr->prev_selected_step != UINT8_MAX) {
+  if (seq->changed.selected_step &&
+      seq->state.prev_selected_step != UINT8_MAX) {
     // There was a change in selected (user pressed) step
-    prev_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->prev_selected_step *
-                                          (state_ptr->prev_selected_page + 1)];
-  } else if (change_ptr->active_step &&
-             state_ptr->prev_active_step != UINT8_MAX) {
+    prev_ctrl = &seq->state.step_ctrl[seq->state.prev_selected_step *
+                                      (seq->state.prev_selected_page + 1)];
+  } else if (seq->changed.active_step &&
+             seq->state.prev_active_step != UINT8_MAX) {
     // The step sequencer has advance
-    prev_ctrl_ptr = &state_ptr->step_ctrl[state_ptr->prev_active_step];
+    prev_ctrl = &seq->state.step_ctrl[seq->state.prev_active_step];
   }
 
   for (uint8_t i = 0; i < CTRL_ENUM_MAX; i++) {
-    if (step_ctrl_ptr && step_ctrl_ptr->changed[i]) {
-      ctrl_ptr->value[i] = step_ctrl_ptr->value[i];
-      ctrl_ptr->changed[i] =
-          (change_ptr->active_step || change_ptr->selected_step ||
-           step_ctrl_ptr->changed[i]);
-    } else if (prev_ctrl_ptr && prev_ctrl_ptr->changed[i]) {
-      ctrl_ptr->changed[i] = true;
+    if (step_ctrl && step_ctrl->changed[i]) {
+      ctrl->value[i] = step_ctrl->value[i];
+      ctrl->changed[i] = (seq->changed.active_step ||
+                          seq->changed.selected_step || step_ctrl->changed[i]);
+    } else if (prev_ctrl && prev_ctrl->changed[i]) {
+      ctrl->changed[i] = true;
     }
   }
 }

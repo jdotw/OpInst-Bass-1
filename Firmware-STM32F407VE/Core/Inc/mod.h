@@ -11,29 +11,21 @@
 #include "stdbool.h"
 #include "stm32f4xx_hal.h"
 
-typedef struct {
+struct mod_button_struct {
   bool start;
   bool shift;
   bool page;
   bool up;
   bool down;
-} mod_button_state_t;
+};
 
 typedef struct {
-  bool start;
-  bool shift;
-  bool page;
-  bool up;
-  bool down;
-} mod_button_changed_t;
+  struct mod_button_struct state;
+  struct mod_button_struct changed;
+} mod_t;
 
-typedef struct {
-  mod_button_state_t button_state;
-  mod_button_changed_t button_changed;
-} mod_state_t;
+mod_t *mod_get();
 
-extern mod_state_t mod_state;
-
-void mod_state_changed_reset(void);
+void mod_changed_reset(void);
 
 #endif /* INC_MOD_H_ */

@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "../../lvgl/lvgl.h"
+#include "commit.h"
 #include "ctrl.h"
 #include "dac7678.h"
 #include "elw2701aa.h"
@@ -172,7 +173,7 @@ int main(void) {
   rotpic_poll_all(I2C_RIGHT, 3);
 
   // Init controls and toggles
-  ctrl_enabled = false;
+  ctrl_set_enabled(false);
   ctrl_value_init();
   ctrl_changed_init();
   ctrl_toggle_init();
@@ -222,7 +223,7 @@ int main(void) {
   preset_init();
 
   // Re-enable controls
-  ctrl_enabled = true;
+  ctrl_set_enabled(true);
 
   // Re-Enable I2C IRQs
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);

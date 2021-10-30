@@ -24,10 +24,9 @@
 void commit_dac(ctrl_t *ctrl, note_t *note);
 void commit_gatetrig(note_t *note);
 void commit_led_rotpic(ctrl_toggle_t *toggle);
-void commit_led_adsr(commit_cycle_t cycle);
-void commit_led_osc(commit_cycle_t cycle);
-void commit_led_button(commit_cycle_t cycle, seq_state_t *seq,
-                       seq_changed_t *changed, mod_state_t *mod);
+void commit_led_adsr(commit_cycle_t cycle, ctrl_t *ctrl, ctrl_toggle_t *toggle);
+void commit_led_osc(commit_cycle_t cycle, ctrl_t *ctrl);
+void commit_led_button(commit_cycle_t cycle, seq_t *seq, mod_t *mod);
 
 static commit_cycle_t cycle;
 
@@ -47,6 +46,8 @@ void commit_30hz_timer(void) {
   ctrl_t *ctrl = ctrl_get_active();
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   note_t *note = note_get_active();
+  seq_t *seq = seq_get();
+  mod_t *mod = mod_get();
 
   ticks_before = HAL_GetTick();
   commit_dac(ctrl, note);
@@ -64,13 +65,13 @@ void commit_30hz_timer(void) {
     // Our commit functions will then work off these values
 
     // Apply p-lock
-    seq_apply_active_step_ctrl(&seq_state, &seq_changed, ctrl);
+    seq_apply_active_step_ctrl(seq, ctrl);
 
     // Then reset the change flag so that any further changes
     // will be waiting for us on the next cycle
     ctrl_changed_reset();
     seq_changed_reset();
-    mod_state_changed_reset();
+    mod_changed_reset();
     blink_reset();
 
     pattern_cycle_count++;
@@ -105,7 +106,7 @@ void commit_30hz_timer(void) {
   case COMMIT_LED_ADSR_SUB_AMP_S:
   case COMMIT_LED_ADSR_SUB_AMP_R:
     ticks_before = HAL_GetTick();
-    commit_led_adsr(cycle);
+    commit_led_adsr(cycle, ctrl, toggle);
     ticks_after = HAL_GetTick();
     ticks_cost = ticks_after - ticks_before;
     cycle++;
@@ -137,7 +138,7 @@ void commit_30hz_timer(void) {
   case COMMIT_LED_FX_WET:
   case COMMIT_LED_FX_FEEDBACK:
     ticks_before = HAL_GetTick();
-    commit_led_osc(cycle);
+    commit_led_osc(cycle, ctrl);
     ticks_after = HAL_GetTick();
     ticks_cost = ticks_after - ticks_before;
     cycle++;
@@ -146,11 +147,11 @@ void commit_30hz_timer(void) {
   case COMMIT_LED_BUTTON_STEP13TO16:
   case COMMIT_LED_BUTTON_SHIFTPAGE:
   case COMMIT_LED_BUTTON_START:
-    commit_led_button(cycle);
+    commit_led_button(cycle, seq, mod);
     cycle++;
     break;
   case COMMIT_OLED_UPDATE:
-    oled_commit();
+    oled_commit(ctrl, mod);
     cycle++;
     break;
   case COMMIT_BLUETOOTH_UPDATE:

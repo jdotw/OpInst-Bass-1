@@ -14,13 +14,15 @@
 
 #define SEQ_MAX_STEPS 64
 
-struct seq_state_struct {
-  struct {
-    bool pressed; // pressed = button is down
-    bool active;  // active = this step is playing now
-    bool set;     // set = this step has parameters set
-  } button_state[16];
+typedef struct {
+  bool pressed; // pressed = button is down
+  bool active;  // active = this step is playing now
+  bool set;     // set = this step has parameters set
+} seq_button_state_t;
 
+struct seq_state_struct {
+
+  seq_button_state_t button_state[16];
   bool button_changed[16];
 
   bool running;
@@ -53,6 +55,8 @@ typedef struct {
   struct seq_changed_struct changed;
 } seq_t;
 
+seq_t *seq_get(void);
+
 void seq_init();
 void seq_start();
 void seq_stop();
@@ -66,6 +70,6 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel);
 void seq_poll_mcu_gpio();
 void seq_changed_reset();
 
-void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl_ptr);
+void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl);
 
 #endif /* INC_SEQ_H_ */

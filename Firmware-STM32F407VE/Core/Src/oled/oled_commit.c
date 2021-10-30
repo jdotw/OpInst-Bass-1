@@ -6,7 +6,7 @@
 oled_state_t oled_state = OLED_NONE;
 bool reload_oled = false;
 
-void oled_commit() {
+void oled_commit(ctrl_t *ctrl, mod_t *mod) {
   oled_state_t new_state = oled_state;
 
   switch (oled_state) {
@@ -15,19 +15,16 @@ void oled_commit() {
     new_state = OLED_SELECT_PRESET;
     break;
   case OLED_SELECT_PRESET:
-    if (commit_mod_state.button_changed.down &&
-        commit_mod_state.button_state.down) {
+    if (mod->changed.down && mod->state.down) {
       new_state = OLED_NAME_PRESET;
       oled_preset_name_set_preset(preset_get_active(),
                                   preset_get_active_index());
     }
     break;
   case OLED_NAME_PRESET:
-    if (commit_mod_state.button_changed.up &&
-        commit_mod_state.button_state.up) {
+    if (mod->changed.up && mod->state.up) {
       new_state = OLED_SELECT_PRESET;
-    } else if (commit_mod_state.button_changed.down &&
-               commit_mod_state.button_state.down) {
+    } else if (mod->changed.down && mod->state.down) {
       // Save preset to SDCard
       oled_preset_name_save();
       new_state = OLED_SELECT_PRESET;

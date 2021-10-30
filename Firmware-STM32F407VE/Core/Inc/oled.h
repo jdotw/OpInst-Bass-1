@@ -9,6 +9,7 @@
 #define INC_OLED_H_
 
 #include "../../../lvgl/lvgl.h"
+#include "mod.h"
 #include "preset.h"
 
 // State
@@ -25,7 +26,7 @@ void oled_init(SPI_HandleTypeDef *hspi);
 void oled_test(void);
 
 // Commit
-void oled_commit(void);
+void oled_commit(ctrl_t *ctrl, mod_t *mod);
 
 // Preset Screens
 void oled_preset_init(void);

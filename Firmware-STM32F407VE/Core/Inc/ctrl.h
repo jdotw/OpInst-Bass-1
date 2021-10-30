@@ -216,7 +216,8 @@ void ctrl_changed_init(void);
 void ctrl_changed_reset(void);
 void ctrl_toggle_init(void);
 
-void ctrl_apply_delta(enc_enum_t ctrl, int8_t delta);
-void ctrl_apply_toggle(enc_enum_t ctrl, bool changed, bool state);
+void ctrl_apply_delta(ctrl_t *ctrl, enc_enum_t enc, int8_t delta);
+void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
+                       bool changed, bool state);
 
 #endif /* INC_CTRL_H_ */

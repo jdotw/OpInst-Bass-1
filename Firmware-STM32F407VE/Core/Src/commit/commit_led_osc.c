@@ -1196,7 +1196,7 @@ void _commit_led_fx_feedback(ctrl_t *ctrl) {
     Error_Handler();
 }
 
-void commit_led_osc(ctrl_t *ctrl, commit_cycle_t cycle) {
+void commit_led_osc(commit_cycle_t cycle, ctrl_t *ctrl) {
   uint32_t ticks_before = HAL_GetTick();
 
   switch (cycle) {

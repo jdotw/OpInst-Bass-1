@@ -36,6 +36,8 @@
 #define DOWN_PIN 1 << 15
 
 void seq_poll_gpio(uint8_t bus, uint8_t channel) {
+  seq_t *seq = seq_get();
+  mod_t *mod = mod_get();
   uint16_t pin_state;
   bool res = pca9555_read_pin_state(bus, channel, 0, &pin_state);
   if (!res) {
@@ -53,69 +55,70 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
     for (uint8_t i = 0; i < 16; i++) {
       uint16_t pin_mask = i == 15 ? 1 << 0 : 1 << (i + 1);
       bool pressed = !(step_pin_state & pin_mask);
-      if (seq_state.button_state[i].pressed != pressed) {
+      if (seq->state.button_state[i].pressed != pressed) {
         // State change for this button
-        seq_state.button_state[i].pressed = pressed;
-        seq_state.button_changed[i] = true;
+        seq->state.button_state[i].pressed = pressed;
+        seq->state.button_changed[i] = true;
       }
     }
 
     // Handle modifier switches
     switch (bus) {
     case I2C_LEFT:
-      if (mod_state.button_state.start != !(pin_state & START_PIN)) {
-        mod_state.button_state.start = !(pin_state & START_PIN);
-        mod_state.button_changed.start = true;
+      if (mod->state.start != !(pin_state & START_PIN)) {
+        mod->state.start = !(pin_state & START_PIN);
+        mod->changed.start = true;
       }
       break;
     case I2C_RIGHT:
-      if (mod_state.button_state.page != !(pin_state & AUX_PIN)) {
-        mod_state.button_state.page = !(pin_state & AUX_PIN);
-        mod_state.button_changed.page = true;
-        if (mod_state.button_state.page) {
+      if (mod->state.page != !(pin_state & AUX_PIN)) {
+        mod->state.page = !(pin_state & AUX_PIN);
+        mod->changed.page = true;
+        if (mod->state.page) {
           seq_advance_selected_page();
         }
       }
-      if (mod_state.button_state.up != !(pin_state & UP_PIN)) {
-        mod_state.button_state.up = !(pin_state & UP_PIN);
-        mod_state.button_changed.up = true;
+      if (mod->state.up != !(pin_state & UP_PIN)) {
+        mod->state.up = !(pin_state & UP_PIN);
+        mod->changed.up = true;
       }
-      if (mod_state.button_state.down != !(pin_state & DOWN_PIN)) {
-        mod_state.button_state.down = !(pin_state & DOWN_PIN);
-        mod_state.button_changed.down = true;
+      if (mod->state.down != !(pin_state & DOWN_PIN)) {
+        mod->state.down = !(pin_state & DOWN_PIN);
+        mod->changed.down = true;
       }
       break;
     }
 
-    if (seq_state.selected_step == UINT8_MAX ||
-        (seq_state.selected_step / 4) != seq_state.selected_page ||
-        !seq_state.button_state[(seq_state.selected_step % 16)].pressed) {
+    if (seq->state.selected_step == UINT8_MAX ||
+        (seq->state.selected_step / 4) != seq->state.selected_page ||
+        !seq->state.button_state[(seq->state.selected_step % 16)].pressed) {
       // Selected step has changed
-      seq_state.prev_selected_step = seq_state.selected_step;
-      seq_state.selected_step = UINT8_MAX; // Default to no selection
+      seq->state.prev_selected_step = seq->state.selected_step;
+      seq->state.selected_step = UINT8_MAX; // Default to no selection
       for (uint8_t i = 0; i < 16; i++) {
-        if (seq_state.button_state[i].pressed) {
+        if (seq->state.button_state[i].pressed) {
           // Set new selection
-          seq_state.selected_step = i * (seq_state.selected_page + 1);
-          seq_changed.selected_step = true;
+          seq->state.selected_step = i * (seq->state.selected_page + 1);
+          seq->changed.selected_step = true;
           break; // Always select the lowest button
         }
       }
-      if (seq_state.selected_step == UINT8_MAX &&
-          seq_state.prev_selected_step != UINT8_MAX) {
+      if (seq->state.selected_step == UINT8_MAX &&
+          seq->state.prev_selected_step != UINT8_MAX) {
         // There was a buttons selected previously,
         // but it has now been let go.
-        seq_changed.selected_step = true;
+        seq->changed.selected_step = true;
       }
     }
   }
 }
 
 void seq_poll_mcu_gpio() {
+  mod_t *mod = mod_get();
   bool shift_pressed = HAL_GPIO_ReadPin(SHIFTSW_GPIO_Port, SHIFTSW_Pin) ==
                        GPIO_PIN_RESET; // Pulled down
-  if (mod_state.button_state.shift != shift_pressed) {
-    mod_state.button_state.shift = shift_pressed;
-    mod_state.button_changed.shift = true;
+  if (mod->state.shift != shift_pressed) {
+    mod->state.shift = shift_pressed;
+    mod->changed.shift = true;
   }
 }
