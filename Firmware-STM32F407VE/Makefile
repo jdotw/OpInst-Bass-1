@@ -40,8 +40,9 @@ C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/custom_bus.c \
 Core/Src/blink.c \
-Core/Src/ctrl.c \
 Core/Src/note.c \
+Core/Src/ctrl/ctrl.c \
+Core/Src/ctrl/ctrl_screen.c \
 Core/Src/commit/commit.c \
 Core/Src/commit/commit_dac.c \
 Core/Src/commit/commit_gatetrig.c \
@@ -68,11 +69,14 @@ Core/Src/midi/midi_rx.c \
 Core/Src/mod/mod.c \
 Core/Src/oled/oled.c \
 Core/Src/oled/oled_commit.c \
-Core/Src/oled/oled_preset.c \
+Core/Src/oled/oled_theme.c \
 Core/Src/osc/osc.c \
 Core/Src/osc/osc_calibrate.c \
 Core/Src/osc/osc_ctrl.c \
 Core/Src/preset/preset.c \
+Core/Src/preset/preset_screen.c \
+Core/Src/preset/preset_screen_select.c \
+Core/Src/preset/preset_screen_set_name.c \
 Core/Src/rotpic/rotpic.c \
 Core/Src/rotpic/rotpic_led.c \
 Core/Src/sd/sd.c \

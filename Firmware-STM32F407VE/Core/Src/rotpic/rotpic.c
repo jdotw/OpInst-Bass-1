@@ -50,6 +50,8 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
                           rotpic_state state) {
   ctrl_t *ctrl = ctrl_get_active();
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  oled_screen_t screen = oled_get_screen();
+  preset_screen_t preset_screen = preset_get_screen();
 
   // Depending on which PIC this is, update actual state values
   if (bus == I2C_LEFT) {
@@ -130,9 +132,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
         ctrl_apply_delta(ctrl, ENC_OSC2_FILT_CUTOFF, (state.enc1_delta * -1));
         ctrl_apply_delta(ctrl, ENC_OSC2_FILT_RES, state.enc3_delta);
         ctrl_apply_delta(ctrl, ENC_OSC2_DRIVE, state.enc2_delta);
-        if (oled_state == OLED_NAME_PRESET) {
+        if (screen == OLED_SCREEN_PRESET &&
+            preset_screen == PRESET_SELECT_SCREEN) {
           // ENC_FX_WETDRY = Change character
-          oled_preset_apply_char_delta((state.enc4_delta * -1));
+          preset_set_name_screen_apply_char_delta((state.enc4_delta * -1));
         } else {
           ctrl_apply_toggle(toggle, ENC_FX_WETDRY, state.sw1_changed,
                             state.sw1_state);
@@ -170,9 +173,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
       switch (pic) {
       case 0:
         // Right 1:000
-        if (oled_state == OLED_NAME_PRESET) {
+        if (screen == OLED_SCREEN_PRESET &&
+            preset_screen == PRESET_SET_NAME_SCREEN) {
           // ENC_FX_VAL1 = Character Index
-          oled_preset_apply_index_delta((state.enc4_delta * -1));
+          preset_set_name_screen_apply_index_delta((state.enc4_delta * -1));
         } else {
           // ENC_FX_VAL1 = FX Value 1 (Normal)
           ctrl_apply_delta(ctrl, ENC_FX_VAL1, (state.enc4_delta * -1));

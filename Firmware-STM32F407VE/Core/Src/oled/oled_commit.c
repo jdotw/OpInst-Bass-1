@@ -3,53 +3,24 @@
 #include "oled.h"
 #include "preset.h"
 
-oled_state_t oled_state = OLED_NONE;
-bool reload_oled = false;
+extern uint32_t timeout;
+extern uint32_t timeout_start;
 
 void oled_commit(ctrl_t *ctrl, mod_t *mod) {
-  oled_state_t new_state = oled_state;
-
-  switch (oled_state) {
-  case OLED_NONE:
-    // Initialization
-    new_state = OLED_SELECT_PRESET;
-    break;
-  case OLED_SELECT_PRESET:
-    if (mod->changed.down && mod->state.down) {
-      new_state = OLED_NAME_PRESET;
-      oled_preset_name_set_preset(preset_get_active(),
-                                  preset_get_active_index());
-    }
-    break;
-  case OLED_NAME_PRESET:
-    if (mod->changed.up && mod->state.up) {
-      new_state = OLED_SELECT_PRESET;
-    } else if (mod->changed.down && mod->state.down) {
-      // Save preset to SDCard
-      oled_preset_name_save();
-      new_state = OLED_SELECT_PRESET;
-    }
+  // Check for timeout
+  if (timeout > 0 && HAL_GetTick() - timeout_start >= timeout) {
+    // Timed out, reset screen to default
+    oled_set_screen(OLED_SCREEN_PRESET, 0);
   }
 
-  // Handle screen changes
-  if (oled_state != new_state || reload_oled) {
-    lv_obj_t *screen;
-    switch (new_state) {
-    case OLED_SELECT_PRESET:
-      screen = oled_preset_select_screen();
-      break;
-    case OLED_NAME_PRESET:
-      screen = oled_preset_name_screen();
-      break;
-    default:
-      screen = NULL;
-    }
-    if (screen) {
-
-      lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_FADE_ON, 125, 0, true);
-    }
-    oled_state = new_state;
-    reload_oled = false;
+  // Call current screens commit function
+  oled_screen_t screen = oled_get_screen();
+  switch (screen) {
+  case OLED_SCREEN_PRESET:
+    preset_screen_commit(mod);
+    break;
+  default:
+    break;
   }
 
   // LAST: Let LVGL render updates

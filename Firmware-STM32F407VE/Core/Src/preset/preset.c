@@ -140,7 +140,7 @@ void preset_select_apply_delta(uint8_t delta) {
   preset_load_selected();
 
   // Refresh OLED Screen
-  reload_oled = true;
+  oled_reload_screen();
 }
 
 /*

@@ -7,6 +7,7 @@
 
 #include "ctrl.h"
 #include "midi.h"
+#include "oled.h"
 #include "seq.h"
 #include <stdbool.h>
 #include <stdint.h>
@@ -95,6 +96,9 @@ void _ctrl_apply_delta(ctrl_t *ctrl, ctrl_enum_t ctrl_enum, int16_t delta,
   if (did_overflow) {
     ctrl_overflow_handler();
   }
+
+  // Show control changed screen
+  oled_set_screen(OLED_SCREEN_CTRL, 2000);
 }
 
 void ctrl_apply_delta(ctrl_t *ctrl, enc_enum_t enc, int8_t delta) {

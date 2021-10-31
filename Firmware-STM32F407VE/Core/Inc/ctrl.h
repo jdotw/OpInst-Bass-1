@@ -8,6 +8,7 @@
 #ifndef INC_CTRL_H_
 #define INC_CTRL_H_
 
+#include "../../../lvgl/lvgl.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -207,6 +208,8 @@ typedef struct {
 
 } ctrl_toggle_t;
 
+// ctrl.c
+
 ctrl_t *ctrl_get_active(void);
 ctrl_toggle_t *ctrl_get_active_toggle(void);
 void ctrl_set_enabled(bool enabled);
@@ -219,5 +222,9 @@ void ctrl_toggle_init(void);
 void ctrl_apply_delta(ctrl_t *ctrl, enc_enum_t enc, int8_t delta);
 void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
                        bool changed, bool state);
+
+// ctrl_screen.c
+
+lv_obj_t *ctrl_screen();
 
 #endif /* INC_CTRL_H_ */

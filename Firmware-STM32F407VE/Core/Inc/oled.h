@@ -14,27 +14,30 @@
 
 // State
 typedef enum {
-  OLED_NONE = 0,
-  OLED_SELECT_PRESET,
-  OLED_NAME_PRESET,
-} oled_state_t;
-extern oled_state_t oled_state;
-extern bool reload_oled;
+  OLED_SCREEN_PRESET = 0,
+  OLED_SCREEN_CTRL,
+} oled_screen_t;
 
 // Init
 void oled_init(SPI_HandleTypeDef *hspi);
 void oled_test(void);
 
+// Screen
+oled_screen_t oled_get_screen(void);
+void oled_set_screen(oled_screen_t screen, uint32_t timeout_ms);
+void oled_reload_screen();
+
+// Theme
+typedef struct {
+  lv_style_t large_label_style;
+  lv_style_t small_label_style;
+  lv_style_t selection_style;
+} oled_theme_t;
+
+void oled_theme_init(void);
+oled_theme_t *oled_theme_get(void);
+
 // Commit
 void oled_commit(ctrl_t *ctrl, mod_t *mod);
-
-// Preset Screens
-void oled_preset_init(void);
-lv_obj_t *oled_preset_select_screen(void);
-lv_obj_t *oled_preset_name_screen(void);
-void oled_preset_name_set_preset(preset_t *preset, uint8_t index);
-void oled_preset_apply_char_delta(int8_t delta);
-void oled_preset_apply_index_delta(int8_t delta);
-void oled_preset_name_save(void);
 
 #endif /* INC_OLED_H_ */
