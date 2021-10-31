@@ -9,6 +9,7 @@
 #define INC_CTRL_H_
 
 #include "../../../lvgl/lvgl.h"
+#include "mod.h"
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -212,19 +213,41 @@ typedef struct {
 
 ctrl_t *ctrl_get_active(void);
 ctrl_toggle_t *ctrl_get_active_toggle(void);
+bool ctrl_get_enabled(void);
 void ctrl_set_enabled(bool enabled);
 
-void ctrl_value_init(void);
 void ctrl_changed_init(void);
 void ctrl_changed_reset(void);
 void ctrl_toggle_init(void);
 
-void ctrl_apply_delta(ctrl_t *ctrl, enc_enum_t enc, int8_t delta);
+void ctrl_overflow_handler(void);
+
+void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
+                      int8_t delta);
 void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
                        bool changed, bool state);
 
+// ctrl_name.c
+
+const char *ctrl_get_name(ctrl_enum_t ctrl_enum);
+
+// ctrl_value.c
+
+void ctrl_value_init(void);
+int8_t ctrl_value_get_percent(ctrl_enum_t ctrl_enum);
+void ctrl_value_set_min(ctrl_enum_t ctrl_enum);
+void ctrl_value_set_max(ctrl_enum_t ctrl_enum);
+
 // ctrl_screen.c
 
-lv_obj_t *ctrl_screen();
+lv_obj_t *ctrl_screen(void);
+void ctrl_screen_changed_commit(ctrl_t *ctrl, mod_t *mod);
+void ctrl_screen_commit(ctrl_t *ctrl, mod_t *mod);
+
+// ctrl_screen_changed.c
+
+lv_obj_t *ctrl_changed_screen(void);
+void ctrl_changed_screen_commit(ctrl_t *ctrl, mod_t *mod);
+void ctrl_changed_screen_push_ctrl(ctrl_enum_t ctrl_enum);
 
 #endif /* INC_CTRL_H_ */

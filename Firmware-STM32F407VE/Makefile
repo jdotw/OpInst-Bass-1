@@ -42,7 +42,11 @@ Core/Src/custom_bus.c \
 Core/Src/blink.c \
 Core/Src/note.c \
 Core/Src/ctrl/ctrl.c \
+Core/Src/ctrl/ctrl_apply.c \
+Core/Src/ctrl/ctrl_name.c \
 Core/Src/ctrl/ctrl_screen.c \
+Core/Src/ctrl/ctrl_screen_changed.c \
+Core/Src/ctrl/ctrl_value.c \
 Core/Src/commit/commit.c \
 Core/Src/commit/commit_dac.c \
 Core/Src/commit/commit_gatetrig.c \

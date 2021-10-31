@@ -15,31 +15,29 @@
 #include <stdio.h>
 #include <string.h>
 
-lv_style_t large_label_style;
-lv_style_t small_label_style;
-lv_style_t selection_style;
-
 lv_obj_t *_preset_select_top_bar(lv_obj_t *parent) {
+  oled_theme_t *theme = oled_theme_get();
   lv_obj_t *container = lv_obj_create(parent);
   lv_obj_set_size(container, LV_PCT(100), 12);
   lv_obj_align(container, LV_ALIGN_TOP_LEFT, 0, 0);
 
   lv_obj_t *save_btn_label = lv_label_create(container);
   lv_obj_align(save_btn_label, LV_ALIGN_TOP_RIGHT, -12, 0);
-  lv_obj_add_style(save_btn_label, &small_label_style, LV_STATE_DEFAULT);
+  lv_obj_add_style(save_btn_label, &theme->small_label_style, LV_STATE_DEFAULT);
   lv_label_set_text(save_btn_label, "Save");
 
   return container;
 }
 
 lv_obj_t *_preset_select_bottom_bar(lv_obj_t *parent) {
+  oled_theme_t *theme = oled_theme_get();
   lv_obj_t *container = lv_obj_create(parent);
   lv_obj_set_size(container, LV_PCT(100), 12);
   lv_obj_align(container, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 
   // Control Label
   lv_obj_t *ctrl1_label = lv_label_create(container);
-  lv_obj_add_style(ctrl1_label, &small_label_style, LV_STATE_DEFAULT);
+  lv_obj_add_style(ctrl1_label, &theme->small_label_style, LV_STATE_DEFAULT);
   lv_label_set_text(ctrl1_label, "Mix");
   lv_obj_align(ctrl1_label, LV_ALIGN_TOP_LEFT, 0, 0);
 

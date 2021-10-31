@@ -1,15 +1,22 @@
 /*
  * ctrl_screen.c
  *
- *  Created on: 20 Apr 2021
+ *  Created on: 31 Oct 2021
  *      Author: jwilson
  */
 
 #include "../../../lvgl/lvgl.h"
-#include "ctrl.h"
+#include "main.h"
+#include "mod.h"
 #include "oled.h"
+#include "preset.h"
+#include <math.h>
 #include <stdbool.h>
-#include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
-lv_obj_t *ctrl_screen() { return NULL; }
+lv_obj_t *ctrl_screen() { return ctrl_changed_screen(); }
+
+void ctrl_screen_commit(ctrl_t *ctrl, mod_t *mod) {
+  ctrl_changed_screen_commit(ctrl, mod);
+}

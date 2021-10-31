@@ -19,6 +19,7 @@ SPI_HandleTypeDef *spi;
 oled_screen_t active_screen = OLED_SCREEN_PRESET;
 uint32_t timeout = 0;
 uint32_t timeout_start = 0;
+bool reload_requested = false;
 
 void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
                           const lv_area_t *area, lv_color_t *color_p);
@@ -68,7 +69,7 @@ void oled_test() {
 
 // State
 
-lv_obj_t *_oled_render_active_screen() {
+lv_obj_t *oled_render_active_screen() {
   lv_obj_t *screen = NULL;
   switch (active_screen) {
   case OLED_SCREEN_PRESET:
@@ -84,21 +85,19 @@ lv_obj_t *_oled_render_active_screen() {
 oled_screen_t oled_get_screen() { return active_screen; }
 
 void oled_set_screen(oled_screen_t screen, uint32_t timeout_ms) {
-  active_screen = screen;
-  timeout_ms = timeout_ms;
+  timeout = timeout_ms;
   timeout_start = HAL_GetTick();
-  lv_obj_t *screen_obj = _oled_render_active_screen();
-  if (screen_obj) {
-    lv_scr_load_anim(screen_obj, LV_SCR_LOAD_ANIM_FADE_ON, 125, 0, true);
+  if (active_screen != screen) {
+    active_screen = screen;
+    lv_obj_t *screen_obj = oled_render_active_screen();
+    if (screen_obj) {
+      lv_scr_load_anim(screen_obj, LV_SCR_LOAD_ANIM_FADE_ON, 125, 0, true);
+      reload_requested = false;
+    }
   }
 }
 
-void oled_reload_screen() {
-  lv_obj_t *screen = _oled_render_active_screen();
-  if (screen) {
-    lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true);
-  }
-}
+void oled_reload_screen() { reload_requested = true; }
 
 // LVGL Flush Callback
 // This function is called by LVGL

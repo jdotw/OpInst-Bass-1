@@ -49,7 +49,11 @@ Core/Src/commit/commit_led_button.c \
 Core/Src/commit/commit_led_osc.c \
 Core/Src/commit/commit_led_rotpic.c \
 Core/Src/ctrl/ctrl.c \
+Core/Src/ctrl/ctrl_apply.c \
+Core/Src/ctrl/ctrl_name.c \
 Core/Src/ctrl/ctrl_screen.c \
+Core/Src/ctrl/ctrl_screen_changed.c \
+Core/Src/ctrl/ctrl_value.c \
 Core/Src/custom_bus.c \
 Core/Src/gpio/gpio.c \
 Core/Src/hw/dac7678.c \

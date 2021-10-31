@@ -62,27 +62,32 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
       switch (pic) {
       case 0:
         // Left 0:000
-        ctrl_apply_delta(ctrl, ENC_OSC1_SAW, state.enc1_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC1_SQU, state.enc2_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC1_TO_OSC2, state.enc4_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_SAW, state.enc1_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_SQU, state.enc2_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_TO_OSC2, state.enc4_delta);
         ctrl_apply_toggle(toggle, ENC_OSC1_SQU, state.sw2_changed,
                           state.sw2_state);
         break;
       case 1:
         // Left 0:001
-        ctrl_apply_delta(ctrl, ENC_OSC1_DRIVE, state.enc1_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC1_FILT_RES, state.enc2_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC1_TUNE, (state.enc3_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC1_FILT_CUTOFF, (state.enc4_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_DRIVE, state.enc1_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_FILT_RES, state.enc2_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_TUNE, (state.enc3_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC1_FILT_CUTOFF,
+                         (state.enc4_delta * -1));
         ctrl_apply_toggle(toggle, ENC_OSC1_TUNE, state.sw1_changed,
                           state.sw1_state);
         break;
       case 2:
         // Left 0:010
-        ctrl_apply_delta(ctrl, ENC_OSC_FILT_ENV_A, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC_FILT_ENV_S, (state.enc2_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC_FILT_ENV_D, (state.enc3_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC_FILT_ENV_R, (state.enc4_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_FILT_ENV_A,
+                         (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_FILT_ENV_S,
+                         (state.enc2_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_FILT_ENV_D,
+                         (state.enc3_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_FILT_ENV_R,
+                         (state.enc4_delta * -1));
         ctrl_apply_toggle(toggle, ENC_OSC_FILT_ENV_A, state.sw1_changed,
                           state.sw1_state);
         ctrl_apply_toggle(toggle, ENC_OSC_FILT_ENV_S, state.sw2_changed,
@@ -90,17 +95,18 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
         break;
       case 3:
         // Left 0:011
-        ctrl_apply_delta(ctrl, ENC_OSC2_SAW, state.enc1_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC2_NOISE, state.enc2_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC2_SQU, state.enc3_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC2_SAW, state.enc1_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC2_NOISE, state.enc2_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC2_SQU, state.enc3_delta);
         ctrl_apply_toggle(toggle, ENC_OSC2_SQU, state.sw1_changed,
                           state.sw1_state);
         break;
       case 4:
         // Left 0:100
-        ctrl_apply_delta(ctrl, ENC_SUB, (state.enc3_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_SUB_NOISE, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_SUB_TO_OSC2, (state.enc2_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB, (state.enc3_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_NOISE, (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_TO_OSC2,
+                         (state.enc2_delta * -1));
         break;
       }
       break;
@@ -109,10 +115,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
       switch (pic) {
       case 0:
         // Left 2:000
-        ctrl_apply_delta(ctrl, ENC_SUB_FILT_ENV_A, state.enc3_delta);
-        ctrl_apply_delta(ctrl, ENC_SUB_FILT_ENV_D, state.enc1_delta);
-        ctrl_apply_delta(ctrl, ENC_SUB_FILT_ENV_S, state.enc4_delta);
-        ctrl_apply_delta(ctrl, ENC_SUB_FILT_ENV_R, state.enc2_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_FILT_ENV_A, state.enc3_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_FILT_ENV_D, state.enc1_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_FILT_ENV_S, state.enc4_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_FILT_ENV_R, state.enc2_delta);
         ctrl_apply_toggle(toggle, ENC_SUB_FILT_ENV_A, state.sw1_changed,
                           state.sw1_state);
         ctrl_apply_toggle(toggle, ENC_SUB_FILT_ENV_S, state.sw2_changed,
@@ -120,8 +126,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
         break;
       case 1:
         // Left 2:001
-        ctrl_apply_delta(ctrl, ENC_SUB_FILT_CUTOFF, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_SUB_FILT_RES, (state.enc2_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_FILT_CUTOFF,
+                         (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_FILT_RES,
+                         (state.enc2_delta * -1));
       }
       break;
     case 3:
@@ -129,9 +137,10 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
       switch (pic) {
       case 0:
         // Left 3:000
-        ctrl_apply_delta(ctrl, ENC_OSC2_FILT_CUTOFF, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC2_FILT_RES, state.enc3_delta);
-        ctrl_apply_delta(ctrl, ENC_OSC2_DRIVE, state.enc2_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC2_FILT_CUTOFF,
+                         (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC2_FILT_RES, state.enc3_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC2_DRIVE, state.enc2_delta);
         if (screen == OLED_SCREEN_PRESET &&
             preset_screen == PRESET_SELECT_SCREEN) {
           // ENC_FX_WETDRY = Change character
@@ -144,7 +153,8 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
             preset_select_apply_delta((state.enc4_delta * -1));
           } else {
             // ENC_FX_WETDRY = FX Wet / Dry (Normal)
-            ctrl_apply_delta(ctrl, ENC_FX_WETDRY, (state.enc4_delta * -1));
+            ctrl_apply_delta(ctrl, toggle, ENC_FX_WETDRY,
+                             (state.enc4_delta * -1));
           }
         }
         break;
@@ -159,10 +169,14 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
       switch (pic) {
       case 0:
         // Right 0:000
-        ctrl_apply_delta(ctrl, ENC_OSC_AMP_ENV_D, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC_AMP_ENV_R, (state.enc2_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC_AMP_ENV_A, (state.enc3_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_OSC_AMP_ENV_S, (state.enc4_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_AMP_ENV_D,
+                         (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_AMP_ENV_R,
+                         (state.enc2_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_AMP_ENV_A,
+                         (state.enc3_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_OSC_AMP_ENV_S,
+                         (state.enc4_delta * -1));
         ctrl_apply_toggle(toggle, ENC_OSC_AMP_ENV_S, state.sw2_changed,
                           state.sw2_state);
         break;
@@ -179,18 +193,22 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
           preset_set_name_screen_apply_index_delta((state.enc4_delta * -1));
         } else {
           // ENC_FX_VAL1 = FX Value 1 (Normal)
-          ctrl_apply_delta(ctrl, ENC_FX_VAL1, (state.enc4_delta * -1));
+          ctrl_apply_delta(ctrl, toggle, ENC_FX_VAL1, (state.enc4_delta * -1));
         }
-        ctrl_apply_delta(ctrl, ENC_FX_VAL2, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_FX_VAL3, state.enc3_delta);
-        ctrl_apply_delta(ctrl, ENC_FX_VAL4, (state.enc2_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_FX_VAL2, (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_FX_VAL3, state.enc3_delta);
+        ctrl_apply_delta(ctrl, toggle, ENC_FX_VAL4, (state.enc2_delta * -1));
         break;
       case 1:
         // Right 1:001
-        ctrl_apply_delta(ctrl, ENC_SUB_AMP_ENV_A, (state.enc1_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_SUB_AMP_ENV_D, (state.enc3_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_SUB_AMP_ENV_S, (state.enc2_delta * -1));
-        ctrl_apply_delta(ctrl, ENC_SUB_AMP_ENV_R, (state.enc4_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_AMP_ENV_A,
+                         (state.enc1_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_AMP_ENV_D,
+                         (state.enc3_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_AMP_ENV_S,
+                         (state.enc2_delta * -1));
+        ctrl_apply_delta(ctrl, toggle, ENC_SUB_AMP_ENV_R,
+                         (state.enc4_delta * -1));
         ctrl_apply_toggle(toggle, ENC_SUB_AMP_ENV_S, state.sw2_changed,
                           state.sw2_state);
       }
