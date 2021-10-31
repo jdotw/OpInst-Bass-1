@@ -83,6 +83,10 @@ Core/Src/preset/preset.c \
 Core/Src/preset/preset_screen.c \
 Core/Src/preset/preset_screen_select.c \
 Core/Src/preset/preset_screen_set_name.c \
+Core/Src/preset/preset_catalog.c \
+Core/Src/preset/preset_ctrl_name.c \
+Core/Src/preset/preset_load.c \
+Core/Src/preset/preset_save.c \
 Core/Src/rotpic/rotpic.c \
 Core/Src/rotpic/rotpic_led.c \
 Core/Src/sd/sd.c \
