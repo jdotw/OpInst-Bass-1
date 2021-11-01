@@ -55,6 +55,7 @@ Core/Src/commit/commit_led_adsr.c \
 Core/Src/commit/commit_led_button.c \
 Core/Src/commit/commit_led_osc.c \
 Core/Src/commit/commit_led_rotpic.c \
+Core/Src/commit/commit_led_tuning.c \
 Core/Src/gpio/gpio.c \
 Core/Src/hw/dac7678.c \
 Core/Src/hw/elw2701aa.c \

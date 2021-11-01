@@ -27,6 +27,8 @@ void commit_led_rotpic(ctrl_toggle_t *toggle);
 void commit_led_adsr(commit_cycle_t cycle, ctrl_t *ctrl, ctrl_toggle_t *toggle);
 void commit_led_osc(commit_cycle_t cycle, ctrl_t *ctrl);
 void commit_led_button(commit_cycle_t cycle, seq_t *seq, mod_t *mod);
+void commit_led_tuning(ctrl_t *ctrl, seq_t *seq, mod_t *mod,
+                       ctrl_toggle_t *toggle);
 
 static commit_cycle_t cycle;
 
@@ -148,6 +150,10 @@ void commit_30hz_timer(void) {
   case COMMIT_LED_BUTTON_SHIFTPAGE:
   case COMMIT_LED_BUTTON_START:
     commit_led_button(cycle, seq, mod);
+    cycle++;
+    break;
+  case COMMIT_LED_TUNING:
+    commit_led_tuning(ctrl, seq, mod, toggle);
     cycle++;
     break;
   case COMMIT_OLED_UPDATE:

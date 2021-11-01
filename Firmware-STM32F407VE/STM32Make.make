@@ -48,6 +48,7 @@ Core/Src/commit/commit_led_adsr.c \
 Core/Src/commit/commit_led_button.c \
 Core/Src/commit/commit_led_osc.c \
 Core/Src/commit/commit_led_rotpic.c \
+Core/Src/commit/commit_led_tuning.c \
 Core/Src/ctrl/ctrl.c \
 Core/Src/ctrl/ctrl_apply.c \
 Core/Src/ctrl/ctrl_name.c \
@@ -80,13 +81,13 @@ Core/Src/osc/osc.c \
 Core/Src/osc/osc_calibrate.c \
 Core/Src/osc/osc_ctrl.c \
 Core/Src/preset/preset.c \
-Core/Src/preset/preset_screen.c \
-Core/Src/preset/preset_screen_select.c \
-Core/Src/preset/preset_screen_set_name.c \
 Core/Src/preset/preset_catalog.c \
 Core/Src/preset/preset_ctrl_name.c \
 Core/Src/preset/preset_load.c \
 Core/Src/preset/preset_save.c \
+Core/Src/preset/preset_screen.c \
+Core/Src/preset/preset_screen_select.c \
+Core/Src/preset/preset_screen_set_name.c \
 Core/Src/rotpic/rotpic.c \
 Core/Src/rotpic/rotpic_led.c \
 Core/Src/sd/sd.c \
