@@ -18,6 +18,7 @@ void oled_commit(ctrl_t *ctrl, mod_t *mod) {
     if (screen) {
       lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true);
     }
+    reload_requested = false;
   }
 
   // Call current screens commit function
