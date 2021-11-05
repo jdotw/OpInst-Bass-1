@@ -16,32 +16,34 @@ void commit_led_tuning(ctrl_t *ctrl, seq_t *seq, mod_t *mod,
    * 0, 1
    */
 
-  if (!ctrl->changed[CTRL_OSC1_TUNE_FINE] &&
-      !ctrl->changed[CTRL_OSC1_TUNE_COARSE]) {
-    return;
-  }
-
+  int16_t tuning_step = 0;
+  double tuning_percent = 0.0;
   switch (toggle->osc1_tune_func) {
-  case ENC_OSC_TUNE_COARSE: {
-    int8_t tuning_step = (int8_t)ctrl->value[CTRL_OSC1_TUNE_COARSE];
-    pwm_seq[6 + (tuning_step / 2)] = 0xFF;
+  case ENC_OSC_TUNE_COARSE:
+    tuning_step = (uint8_t)(ctrl->value[CTRL_OSC1_TUNE_COARSE] / 2);
+    pwm_seq[tuning_step] = 0x7000;
+    if (ctrl->value[CTRL_OSC1_TUNE_COARSE] % 2) {
+      pwm_seq[tuning_step + 1] = 0x7000;
+    }
     break;
-  }
-  case ENC_OSC_TUNE_FINE: {
-    int16_t tuning_step = (int16_t)ctrl->value[CTRL_OSC1_TUNE_FINE];
-    double tuning_percent = (double)tuning_step / 2047.0;
-    pwm_seq[6 + (int16_t)(6.0 * tuning_percent)] = 0xFF;
+
+  case ENC_OSC_TUNE_FINE:
+    tuning_step = (int16_t)ctrl->value[CTRL_OSC1_TUNE_FINE];
+    tuning_percent = (double)tuning_step / CTRL_DEFAULT_MAX;
+    pwm_seq[(uint8_t)(tuning_percent * 12.0)] = 0xFF;
     break;
-  }
+
+  default:
+    break;
   }
 
   // _set_pwm_seq_lab(_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
-  res = is32_set_sequence_pwm(I2C_LEFT, 0, 1, 0, pwm_seq, 12);
+  res = is32_set_sequence_pwm(I2C_LEFT, 0, 1, 0, pwm_seq, 13);
   if (!res)
     Error_Handler();
 
   // _set_scale_seq_animated(pwm_seq, scale_seq, 6, 0, false);
-  res = is32_set_sequence_scale(I2C_LEFT, 0, 1, 0, scale_seq, 12);
+  res = is32_set_sequence_scale(I2C_LEFT, 0, 1, 0, scale_seq, 13);
   if (!res)
     Error_Handler();
 
