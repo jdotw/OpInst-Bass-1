@@ -19,7 +19,7 @@ SPI_HandleTypeDef *spi;
 oled_screen_t active_screen = OLED_SCREEN_PRESET;
 uint32_t timeout = 0;
 uint32_t timeout_start = 0;
-bool reload_requested = false;
+bool reload_requested = true; // true to perform initial load
 
 void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
                           const lv_area_t *area, lv_color_t *color_p);
