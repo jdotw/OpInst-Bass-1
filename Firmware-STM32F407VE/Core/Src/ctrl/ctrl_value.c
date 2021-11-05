@@ -37,6 +37,9 @@ void ctrl_value_init() {
   ctrl.value[CTRL_OSC_AMP_ENV_AMT] = CTRL_DEFAULT_MAX;
   ctrl.value[CTRL_SUB_AMP_ENV_S] = CTRL_DEFAULT_MAX;
   ctrl.value[CTRL_SUB_AMP_ENV_AMT] = CTRL_DEFAULT_MAX;
+
+  ctrl.value[CTRL_OSC1_TUNE_COARSE] = 12;
+  ctrl.value[CTRL_OSC1_TUNE_FINE] = CTRL_DEFAULT_MID;
 }
 
 int8_t ctrl_value_get_percent(ctrl_enum_t ctrl_enum) {
