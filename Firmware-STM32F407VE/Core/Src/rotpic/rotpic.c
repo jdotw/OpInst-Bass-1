@@ -142,7 +142,7 @@ void _rotpic_handle_state(uint8_t bus, uint8_t channel, uint8_t pic,
         ctrl_apply_delta(ctrl, toggle, ENC_OSC2_FILT_RES, state.enc3_delta);
         ctrl_apply_delta(ctrl, toggle, ENC_OSC2_DRIVE, state.enc2_delta);
         if (screen == OLED_SCREEN_PRESET &&
-            preset_screen == PRESET_SELECT_SCREEN) {
+            preset_screen == PRESET_SET_NAME_SCREEN) {
           // ENC_FX_WETDRY = Change character
           preset_set_name_screen_apply_char_delta((state.enc4_delta * -1));
         } else {
