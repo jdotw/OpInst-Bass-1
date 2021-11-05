@@ -58,10 +58,16 @@ void _ctrl_apply_delta(ctrl_t *ctrl, ctrl_enum_t ctrl_enum, int16_t delta,
   oled_set_screen(OLED_SCREEN_CTRL, 2000);
 }
 
+#define TUNING_ENC_DEBOUNCE_TICKS 10
+bool tuning_enc_debounce_forward = false;
+uint32_t tuning_enc_debounce = 0;
+
 void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
                       int8_t delta) {
   if (!ctrl_get_enabled() || delta == 0)
     return;
+
+  bool is_forward = delta > 0 ? true : false;
 
   switch (enc) {
   /* OSC 1 */
@@ -90,17 +96,23 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
 
   /* OSC 1 TUNING */
   case ENC_OSC1_TUNE:
-    switch (toggle->osc1_tune_func) {
-    case ENC_OSC_TUNE_COARSE:
-      _ctrl_apply_delta(ctrl, CTRL_OSC1_TUNE_COARSE, delta, 100, -12, 12);
-      break;
-    case ENC_OSC_TUNE_FINE:
-      _ctrl_apply_delta(ctrl, CTRL_OSC1_TUNE_FINE, delta, 100, INT16_MIN,
-                        INT16_MAX);
-      break;
-    default:
-      break;
+    if (is_forward == tuning_enc_debounce_forward ||
+        (HAL_GetTick() - tuning_enc_debounce) > TUNING_ENC_DEBOUNCE_TICKS) {
+      tuning_enc_debounce_forward = is_forward;
+      switch (toggle->osc1_tune_func) {
+      case ENC_OSC_TUNE_COARSE:
+        _ctrl_apply_delta(ctrl, CTRL_OSC1_TUNE_COARSE, delta, 100, 0, 24);
+        break;
+      case ENC_OSC_TUNE_FINE:
+        _ctrl_apply_delta(ctrl, CTRL_OSC1_TUNE_FINE, delta,
+                          CTRL_SCALE_TWO_TURNS, CTRL_DEFAULT_MIN,
+                          CTRL_DEFAULT_MAX);
+        break;
+      default:
+        break;
+      }
     }
+    tuning_enc_debounce = HAL_GetTick();
     break;
 
   /* OSC 1 FILTER AND DRIVE */
