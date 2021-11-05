@@ -71,11 +71,12 @@ void commit_dac(ctrl_t *ctrl, note_t *note) {
   if (note->value.note_number || ctrl->changed[CTRL_OSC1_TUNE_COARSE] ||
       ctrl->changed[CTRL_OSC1_TUNE_FINE]) {
     uint8_t osc1_note =
-        note->value.note_number + ctrl->value[CTRL_OSC1_TUNE_COARSE];
+        note->value.note_number + (12 - ctrl->value[CTRL_OSC1_TUNE_COARSE]);
     uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
     osc1_note_dac_val +=
-        ctrl->value[CTRL_OSC1_TUNE_FINE]; // TODO: Handle wrapping, maybe
-                                          // add it to osc1_note_dac_val?
+        ((int16_t)CTRL_DEFAULT_MID -
+         ctrl->value[CTRL_OSC1_TUNE_FINE]); // TODO: Handle wrapping, maybe
+                                            // add it to osc1_note_dac_val?
     dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val);
   }
 
