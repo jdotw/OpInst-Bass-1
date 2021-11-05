@@ -30,7 +30,7 @@ void commit_led_tuning(ctrl_t *ctrl, seq_t *seq, mod_t *mod,
   case ENC_OSC_TUNE_FINE:
     tuning_step = (int16_t)ctrl->value[CTRL_OSC1_TUNE_FINE];
     tuning_percent = (double)tuning_step / CTRL_DEFAULT_MAX;
-    pwm_seq[(uint8_t)(tuning_percent * 12.0)] = 0xFF;
+    pwm_seq[(uint8_t)(tuning_percent * 12.0)] = 0x7000;
     break;
 
   default:
