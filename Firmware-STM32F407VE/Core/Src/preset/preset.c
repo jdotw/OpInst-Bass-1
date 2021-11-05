@@ -79,6 +79,13 @@ void preset_select_apply_delta(uint8_t delta) {
 void preset_load_selected() {
   bool loaded_user = preset_load(false, state.selected_index);
   if (!loaded_user) {
-    preset_load(true, state.selected_index);
+    bool loaded_system = preset_load(true, state.selected_index);
+    if (!loaded_system) {
+      // Fallback to init
+      ctrl_value_init();
+      ctrl_changed_reset();
+      seq_init();
+      seq_changed_reset();
+    }
   }
 }
