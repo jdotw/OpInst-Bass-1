@@ -39,6 +39,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/custom_bus.c \
+Core/Src/adsr/adsr.c \
 Core/Src/blink.c \
 Core/Src/note.c \
 Core/Src/ctrl/ctrl.c \

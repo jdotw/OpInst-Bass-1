@@ -14,6 +14,20 @@
         "openocd.cfg"
       ],
       "runToMain": true
+    },
+    {
+      "showDevDebugOutput": "parsed",
+      "cwd": "${workspaceRoot}",
+      "executable": "./build/Firmware-STM32F407VE.elf",
+      "name": "Attach STM32",
+      "request": "attach",
+      "type": "cortex-debug",
+      "servertype": "openocd",
+      "preLaunchTask": "Build STM",
+      "device": "stm32f407",
+      "configFiles": [
+        "openocd.cfg"
+      ]
     }
   ]
 }
