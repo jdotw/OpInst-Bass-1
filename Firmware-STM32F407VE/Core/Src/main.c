@@ -220,7 +220,7 @@ int main(void) {
   // Init and Load Preset
   ctrl_value_init();
   ctrl_toggle_init();
-  preset_init();
+  //  preset_init();
 
   // Re-enable controls
   ctrl_set_enabled(true);
@@ -240,7 +240,7 @@ int main(void) {
   while (1) {
     /* USER CODE END WHILE */
     commit_30hz_timer();
-    MX_BlueNRG_2_Process();
+    // MX_BlueNRG_2_Process();
 
     /* USER CODE BEGIN 3 */
 
