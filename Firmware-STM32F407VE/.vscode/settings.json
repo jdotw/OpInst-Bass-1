@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    "*.yaml": "yaml",
     "math.h": "c",
     "__bit_reference": "c",
     "__functional_base": "c",
@@ -17,7 +18,9 @@
     "system_error": "c",
     "tuple": "c",
     "type_traits": "c",
-    "vector": "c"
+    "vector": "c",
+    "stdbool.h": "c",
+    "string.h": "c"
   },
   "stm32-for-vscode.openOCDPath": "/opt/homebrew/bin/openocd",
   "cortex-debug.armToolchainPath": "/Applications/ARM/bin",
