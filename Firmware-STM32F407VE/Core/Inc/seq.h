@@ -20,10 +20,8 @@ typedef struct {
   bool set;     // set = this step has parameters set
 } seq_button_state_t;
 
-struct seq_state_struct {
-
+typedef struct seq_state_struct {
   seq_button_state_t button_state[16];
-  bool button_changed[16];
 
   bool running;
 
@@ -39,20 +37,21 @@ struct seq_state_struct {
   uint8_t prev_selected_step;
 
   ctrl_t step_ctrl[64];
-};
+} seq_state_t;
 
-struct seq_changed_struct {
+typedef struct seq_changed_struct {
+  bool button_changed[16];
   bool running;
   bool last_step;
   bool active_step;
   bool active_page;
   bool selected_step;
   bool selected_page;
-};
+} seq_changed_t;
 
 typedef struct {
-  struct seq_state_struct state;
-  struct seq_changed_struct changed;
+  seq_state_t state;
+  seq_changed_t changed;
 } seq_t;
 
 seq_t *seq_get(void);

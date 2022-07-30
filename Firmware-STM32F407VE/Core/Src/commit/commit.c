@@ -26,7 +26,7 @@ void commit_gatetrig(note_t *note);
 void commit_led_rotpic(ctrl_toggle_t *toggle);
 void commit_led_adsr(commit_cycle_t cycle, ctrl_t *ctrl, ctrl_toggle_t *toggle);
 void commit_led_osc(commit_cycle_t cycle, ctrl_t *ctrl);
-void commit_led_button(commit_cycle_t cycle, seq_t *seq, mod_t *mod);
+void commit_led_button(seq_t *seq, seq_changed_t changed, mod_t *mod);
 void commit_led_tuning(ctrl_t *ctrl, seq_t *seq, mod_t *mod,
                        ctrl_toggle_t *toggle);
 
@@ -57,7 +57,9 @@ void commit_30hz_timer(void) {
   seq_t *seq = seq_get();
 
   note_t *note = note_get_active();
-  commit_dac(ctrl, note);
+  ctrl_t dac_ctrl = *ctrl_get_active();
+  seq_apply_active_step_ctrl(seq, &dac_ctrl);
+  commit_dac(&dac_ctrl, note);
   commit_gatetrig(note);
   note_changed_reset();
 
@@ -70,7 +72,7 @@ void commit_30hz_timer(void) {
     s_mod = *mod_get();
 
     // Apply p-lock
-    seq_apply_active_step_ctrl(seq, ctrl);
+    seq_apply_active_step_ctrl(seq, &s_ctrl);
 
     // Then reset the change flag so that any further changes
     // will be waiting for us on the next cycle
@@ -147,14 +149,6 @@ void commit_30hz_timer(void) {
     ticks_cost = ticks_after - ticks_before;
     cycle++;
     break;
-  case COMMIT_LED_BUTTON_STEP1TO12:
-  case COMMIT_LED_BUTTON_STEP13TO16:
-  case COMMIT_LED_BUTTON_SHIFTPAGE:
-  case COMMIT_LED_BUTTON_START:
-    commit_led_button(cycle, seq, mod);
-    seq_changed_reset();
-    cycle++;
-    break;
   case COMMIT_LED_TUNING:
     commit_led_tuning(ctrl, seq, mod, toggle);
     cycle++;
@@ -162,6 +156,16 @@ void commit_30hz_timer(void) {
   default:
     cycle = COMMIT_INIT;
   }
+
+  // We have to suspend the MIDI Interrupt
+  // in order to grab a snapshot of the sequencer
+  // state without it advancing due to incoming
+  // MIDI data.
+  HAL_NVIC_DisableIRQ(DMA2_Stream2_IRQn);
+  seq_changed_t seq_changed = seq->changed;
+  seq_changed_reset();
+  HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+  commit_led_button(seq, seq_changed, mod);
 
   uint32_t total_ticks_after = HAL_GetTick();
   uint32_t total_ticks_cost = total_ticks_after - total_ticks_before;

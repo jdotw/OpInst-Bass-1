@@ -86,15 +86,9 @@ oled_screen_t oled_get_screen() { return active_screen; }
 
 void oled_set_screen(oled_screen_t screen, uint32_t timeout_ms) {
   timeout = timeout_ms;
-  timeout_start = HAL_GetTick();
-  if (active_screen != screen) {
-    active_screen = screen;
-    lv_obj_t *screen_obj = oled_render_active_screen();
-    if (screen_obj) {
-      lv_scr_load_anim(screen_obj, LV_SCR_LOAD_ANIM_FADE_ON, 125, 0, true);
-      reload_requested = false;
-    }
-  }
+  timeout_start = HAL_GetTick();  
+  active_screen = screen;
+  reload_requested = true;
 }
 
 void oled_reload_screen() { reload_requested = true; }

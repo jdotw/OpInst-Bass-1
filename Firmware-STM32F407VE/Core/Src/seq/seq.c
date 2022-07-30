@@ -24,10 +24,7 @@ void seq_init() {
   seq.state.prev_active_step = UINT8_MAX;
 }
 
-void seq_changed_reset() {
-  memset(&seq.state.button_changed, 0, SEQ_STEPS_PER_PAGE);
-  memset(&seq.changed, 0, sizeof(seq.changed));
-}
+void seq_changed_reset() { memset(&seq.changed, 0, sizeof(seq.changed)); }
 
 void seq_start() {
   seq_reset();
@@ -52,6 +49,7 @@ void seq_reset() {
 
 void seq_set_step(uint8_t step) {
   if (seq.state.active_step != step) {
+    seq.state.prev_selected_step = UINT8_MAX;
     seq.state.prev_active_step = seq.state.active_step;
     seq.state.active_step = step;
     seq.changed.active_step = true;
@@ -97,7 +95,7 @@ void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl) {
   // This is gonna be a lot of code :|
 
   ctrl_t *step_ctrl = NULL;
-  ctrl_t *prev_ctrl = NULL;
+  static ctrl_t *prev_ctrl = NULL;
 
   if (seq->state.selected_step != UINT8_MAX) {
     // User is holding down a step sequence button
@@ -109,24 +107,14 @@ void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl) {
     step_ctrl = &seq->state.step_ctrl[seq->state.active_step];
   }
 
-  if (seq->changed.selected_step &&
-      seq->state.prev_selected_step != UINT8_MAX) {
-    // There was a change in selected (user pressed) step
-    prev_ctrl = &seq->state.step_ctrl[seq->state.prev_selected_step *
-                                      (seq->state.prev_selected_page + 1)];
-  } else if (seq->changed.active_step &&
-             seq->state.prev_active_step != UINT8_MAX) {
-    // The step sequencer has advance
-    prev_ctrl = &seq->state.step_ctrl[seq->state.prev_active_step];
-  }
-
   for (uint8_t i = 0; i < CTRL_ENUM_MAX; i++) {
     if (step_ctrl && step_ctrl->changed[i]) {
       ctrl->value[i] = step_ctrl->value[i];
-      ctrl->changed[i] = (seq->changed.active_step ||
-                          seq->changed.selected_step || step_ctrl->changed[i]);
+      ctrl->changed[i] = step_ctrl->changed[i];
     } else if (prev_ctrl && prev_ctrl->changed[i]) {
       ctrl->changed[i] = true;
     }
   }
+
+  prev_ctrl = step_ctrl;
 }

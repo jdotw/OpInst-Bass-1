@@ -89,37 +89,38 @@ void _set_button_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len) {
  * Change Detection
  */
 
-bool _commit_led_steps1to12_changed(seq_t *seq) {
+bool _commit_led_steps1to12_changed(seq_t *seq, seq_changed_t changed) {
   for (uint8_t i = 0; i < 12; i++) {
-    if (seq->state.button_changed[i]) {
+    if (changed.button_changed[i]) {
       return true;
     }
   }
-  if (seq->changed.active_step || seq->changed.running) {
+  if (changed.active_step || changed.running) {
     return true;
   }
   return false;
 }
 
-bool _commit_led_steps13to16_changed(seq_t *seq) {
+bool _commit_led_steps13to16_changed(seq_t *seq, seq_changed_t changed) {
   for (uint8_t i = 11; i < 16; i++) {
-    if (seq->state.button_changed[i]) {
+    if (changed.button_changed[i]) {
       return true;
     }
   }
-  if (seq->changed.active_step || seq->changed.running) {
+  if (changed.active_step || changed.running) {
     return true;
   }
   return false;
 }
 
-bool _commit_led_shiftpage_changed(mod_t *mod, seq_t *seq) {
-  return mod->changed.shift || mod->changed.page || seq->changed.active_page ||
-         seq->changed.running || blink_changed;
+bool _commit_led_shiftpage_changed(mod_t *mod, seq_t *seq,
+                                   seq_changed_t changed) {
+  return mod->changed.shift || mod->changed.page || changed.active_page ||
+         changed.running || blink_changed;
 }
 
-bool _commit_led_start_changed(mod_t *mod, seq_t *seq) {
-  return mod->changed.start || seq->changed.running;
+bool _commit_led_start_changed(mod_t *mod, seq_t *seq, seq_changed_t changed) {
+  return mod->changed.start || changed.running;
 }
 
 /*
@@ -130,7 +131,7 @@ void _set_pwm_single(uint16_t *seqptr, uint16_t *val) {
   memcpy(seqptr, val, 3 * (sizeof(uint16_t)));
 }
 
-void _commit_led_button_steps1to12(seq_t *seq, mod_t *mod) {
+void _commit_led_button_steps1to12(seq_t *seq, seq_changed_t changed) {
   bool res;
   uint16_t pwm_seq[36];
 
@@ -140,7 +141,7 @@ void _commit_led_button_steps1to12(seq_t *seq, mod_t *mod) {
    * LEFT1:01 - Channels 0-35
    */
 
-  if (!_commit_led_steps1to12_changed(seq))
+  if (!_commit_led_steps1to12_changed(seq, changed))
     return;
 
   for (uint8_t i = 0; i < 12; i++) {
@@ -161,7 +162,7 @@ void _commit_led_button_steps1to12(seq_t *seq, mod_t *mod) {
     Error_Handler();
 }
 
-void _commit_led_button_steps13to16(seq_t *seq) {
+void _commit_led_button_steps13to16(seq_t *seq, seq_changed_t changed) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -170,7 +171,7 @@ void _commit_led_button_steps13to16(seq_t *seq) {
    * RIGHT1:10 - Channels 24-35
    */
 
-  if (!_commit_led_steps13to16_changed(seq))
+  if (!_commit_led_steps13to16_changed(seq, changed))
     return;
 
   for (uint8_t i = 0; i < 4; i++) {
@@ -191,7 +192,8 @@ void _commit_led_button_steps13to16(seq_t *seq) {
     Error_Handler();
 }
 
-void _commit_led_button_mod_shiftpage(seq_t *seq, mod_t *mod) {
+void _commit_led_button_mod_shiftpage(seq_t *seq, seq_changed_t changed,
+                                      mod_t *mod) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -204,7 +206,7 @@ void _commit_led_button_mod_shiftpage(seq_t *seq, mod_t *mod) {
    *         This allows a contiguous write to set these LED value
    */
 
-  if (!_commit_led_shiftpage_changed(mod, seq))
+  if (!_commit_led_shiftpage_changed(mod, seq, changed))
     return;
 
   // Shift is 0,1,2 [actually 24,25,26]
@@ -238,7 +240,8 @@ void _commit_led_button_mod_shiftpage(seq_t *seq, mod_t *mod) {
     Error_Handler();
 }
 
-void _commit_led_button_mod_start(seq_t *seq, mod_t *mod) {
+void _commit_led_button_mod_start(seq_t *seq, seq_changed_t changed,
+                                  mod_t *mod) {
   bool res;
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
@@ -247,7 +250,7 @@ void _commit_led_button_mod_start(seq_t *seq, mod_t *mod) {
    * LEFT1:00 Channels 33,34,35
    */
 
-  if (!_commit_led_start_changed(mod, seq))
+  if (!_commit_led_start_changed(mod, seq, changed))
     return;
 
   _set_pwm_single(pwm_seq, _button_start_rgb(seq, mod->state.start));
@@ -266,25 +269,13 @@ void _commit_led_button_mod_start(seq_t *seq, mod_t *mod) {
     Error_Handler();
 }
 
-void commit_led_button(commit_cycle_t cycle, seq_t *seq, mod_t *mod) {
+void commit_led_button(seq_t *seq, seq_changed_t changed, mod_t *mod) {
   uint32_t ticks_before = HAL_GetTick();
 
-  switch (cycle) {
-  case COMMIT_LED_BUTTON_STEP1TO12:
-    _commit_led_button_steps1to12(seq, mod);
-    break;
-  case COMMIT_LED_BUTTON_STEP13TO16:
-    _commit_led_button_steps13to16(seq);
-    break;
-  case COMMIT_LED_BUTTON_SHIFTPAGE:
-    _commit_led_button_mod_shiftpage(seq, mod);
-    break;
-  case COMMIT_LED_BUTTON_START:
-    _commit_led_button_mod_start(seq, mod);
-    break;
-  default:
-    break;
-  }
+  _commit_led_button_steps1to12(seq, changed);
+  _commit_led_button_steps13to16(seq, changed);
+  _commit_led_button_mod_shiftpage(seq, changed, mod);
+  _commit_led_button_mod_start(seq, changed, mod);
 
   uint32_t ticks_after = HAL_GetTick();
   uint32_t ticks_cost = ticks_after - ticks_before;

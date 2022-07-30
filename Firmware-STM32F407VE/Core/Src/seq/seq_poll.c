@@ -58,7 +58,7 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
       if (seq->state.button_state[i].pressed != pressed) {
         // State change for this button
         seq->state.button_state[i].pressed = pressed;
-        seq->state.button_changed[i] = true;
+        seq->changed.button_changed[i] = true;
       }
     }
 
