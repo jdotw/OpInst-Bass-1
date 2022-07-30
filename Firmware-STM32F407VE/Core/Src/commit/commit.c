@@ -161,7 +161,7 @@ void commit_30hz_timer(void) {
     cycle++;
     break;
   case COMMIT_OLED_UPDATE:
-    oled_commit(ctrl, mod);
+    // oled_commit(ctrl, mod);
     cycle++;
     break;
   // case COMMIT_BLUETOOTH_UPDATE:

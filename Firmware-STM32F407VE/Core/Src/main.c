@@ -230,7 +230,7 @@ int main(void) {
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   // Start commit timer
-  //  HAL_TIM_Base_Start_IT(&htim7);
+  HAL_TIM_Base_Start_IT(&htim7);
 
   /* USER CODE END 2 */
 
@@ -239,8 +239,12 @@ int main(void) {
   midi_rx_resume();
   while (1) {
     /* USER CODE END WHILE */
-    commit_30hz_timer();
+    // commit_30hz_timer();
     // MX_BlueNRG_2_Process();
+    
+    ctrl_t *ctrl = ctrl_get_active();
+    mod_t *mod = mod_get();
+    oled_commit(ctrl, mod);
 
     /* USER CODE BEGIN 3 */
 
