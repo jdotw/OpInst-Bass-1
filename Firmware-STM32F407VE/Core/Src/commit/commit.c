@@ -35,36 +35,40 @@ static commit_cycle_t cycle;
 uint16_t pattern_cycle_count = 0;
 
 void commit_30hz_timer(void) {
+  static ctrl_t s_ctrl;
+  static ctrl_toggle_t s_toggle;
+  //  static seq_t s_seq;
+  static mod_t s_mod;
+
   uint32_t total_ticks_before = HAL_GetTick();
   uint32_t ticks_before = 0;
   uint32_t ticks_after = 0;
   uint32_t ticks_cost = 0;
 
-  note_changed_reset();
-
   HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
   HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 
-  ctrl_t *ctrl = ctrl_get_active();
-  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
-  note_t *note = note_get_active();
+  ctrl_t *ctrl = &s_ctrl;
+  ctrl_toggle_t *toggle = &s_toggle;
+  mod_t *mod = &s_mod;
+
+  // To save memory, we always use the 'live'
+  // seq struct, otherwise we end up duplicating
+  // this large struct in memory
   seq_t *seq = seq_get();
-  mod_t *mod = mod_get();
 
-  ticks_before = HAL_GetTick();
+  note_t *note = note_get_active();
   commit_dac(ctrl, note);
-  ticks_after = HAL_GetTick();
-  ticks_cost = ticks_after - ticks_before;
-
-  ticks_before = HAL_GetTick();
   commit_gatetrig(note);
-  ticks_after = HAL_GetTick();
-  ticks_cost = ticks_after - ticks_before;
+  note_changed_reset();
 
   switch (cycle) {
   case COMMIT_INIT:
     // Copy the control values, changed and toggle structs
     // Our commit functions will then work off these values
+    s_ctrl = *ctrl_get_active();
+    s_toggle = *ctrl_get_active_toggle();
+    s_mod = *mod_get();
 
     // Apply p-lock
     seq_apply_active_step_ctrl(seq, ctrl);
@@ -72,7 +76,6 @@ void commit_30hz_timer(void) {
     // Then reset the change flag so that any further changes
     // will be waiting for us on the next cycle
     ctrl_changed_reset();
-    seq_changed_reset();
     mod_changed_reset();
     blink_reset();
 
@@ -150,6 +153,7 @@ void commit_30hz_timer(void) {
   case COMMIT_LED_BUTTON_SHIFTPAGE:
   case COMMIT_LED_BUTTON_START:
     commit_led_button(cycle, seq, mod);
+    seq_changed_reset();
     cycle++;
     break;
   case COMMIT_LED_TUNING:
@@ -160,11 +164,11 @@ void commit_30hz_timer(void) {
     oled_commit(ctrl, mod);
     cycle++;
     break;
-  case COMMIT_BLUETOOTH_UPDATE:
-    cycle++;
-    break;
+  // case COMMIT_BLUETOOTH_UPDATE:
+  //   cycle++;
+  //   break;
   default:
-    cycle = 0;
+    cycle = COMMIT_INIT;
   }
 
   uint32_t total_ticks_after = HAL_GetTick();
