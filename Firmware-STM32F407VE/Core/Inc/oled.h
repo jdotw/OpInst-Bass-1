@@ -39,6 +39,6 @@ oled_theme_t *oled_theme_get(void);
 
 // Commit
 lv_obj_t *oled_render_active_screen();
-void oled_commit(ctrl_t *ctrl, mod_t *mod);
+void oled_commit(void);
 
 #endif /* INC_OLED_H_ */

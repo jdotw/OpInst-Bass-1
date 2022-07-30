@@ -37,7 +37,6 @@ uint16_t pattern_cycle_count = 0;
 void commit_30hz_timer(void) {
   static ctrl_t s_ctrl;
   static ctrl_toggle_t s_toggle;
-  //  static seq_t s_seq;
   static mod_t s_mod;
 
   uint32_t total_ticks_before = HAL_GetTick();
@@ -160,13 +159,6 @@ void commit_30hz_timer(void) {
     commit_led_tuning(ctrl, seq, mod, toggle);
     cycle++;
     break;
-  case COMMIT_OLED_UPDATE:
-    // oled_commit(ctrl, mod);
-    cycle++;
-    break;
-  // case COMMIT_BLUETOOTH_UPDATE:
-  //   cycle++;
-  //   break;
   default:
     cycle = COMMIT_INIT;
   }

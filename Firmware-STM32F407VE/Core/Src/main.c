@@ -239,12 +239,10 @@ int main(void) {
   midi_rx_resume();
   while (1) {
     /* USER CODE END WHILE */
-    // commit_30hz_timer();
     // MX_BlueNRG_2_Process();
-    
-    ctrl_t *ctrl = ctrl_get_active();
-    mod_t *mod = mod_get();
-    oled_commit(ctrl, mod);
+
+    // Render OLED Display    
+    oled_commit();
 
     /* USER CODE BEGIN 3 */
 

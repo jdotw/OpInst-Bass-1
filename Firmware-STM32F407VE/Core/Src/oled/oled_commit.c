@@ -8,7 +8,10 @@ extern uint32_t timeout;
 extern uint32_t timeout_start;
 extern bool reload_requested;
 
-void oled_commit(ctrl_t *ctrl, mod_t *mod) {
+void oled_commit(void) {
+  ctrl_t *ctrl = ctrl_get_active();
+  mod_t *mod = mod_get();
+
   // Check for timeout or pending reload
   if (timeout > 0 && (HAL_GetTick() - timeout_start) >= timeout) {
     // Timed out, reset screen to default
