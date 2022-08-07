@@ -63,6 +63,23 @@ void dac7678_init(void) {
   if (!res)
     Error_Handler();
 
+  // UNUSED: The osc and sub filter env amount DAC channels
+  //         are not used (due to switching to programatic envelopes)
+  //         but the DAC channel must be initialized to CTRL_DEFAULT_MAX
+  //         to effectively disable the analog envelope generators
+  res = dac7678_set_value(I2C_LEFT, 0, 4, 0, 4095);
+  if (!res)
+    Error_Handler();
+  res = dac7678_set_value(I2C_LEFT, 0, 4, 1, 4095);
+  if (!res)
+    Error_Handler();
+  res = dac7678_set_value(I2C_LEFT, 0, 4, 4, 4095);
+  if (!res)
+    Error_Handler();
+  res = dac7678_set_value(I2C_LEFT, 0, 4, 5, 4095);
+  if (!res)
+    Error_Handler();
+
   res = dac7678_reset(I2C_LEFT, 2, 0); // Left 2:000
   if (!res)
     Error_Handler();

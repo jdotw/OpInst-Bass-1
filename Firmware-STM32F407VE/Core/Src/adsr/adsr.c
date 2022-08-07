@@ -8,13 +8,6 @@
 #include "adsr.h"
 #include <math.h>
 
-typedef struct adsr_s {
-  uint8_t attack;
-  uint8_t decay;
-  uint8_t sustain;
-  uint8_t release;
-} adsr;
-
 typedef enum {
   ADSR_STATE_ATTACK,
   ADSR_STATE_DECAY,
@@ -26,7 +19,7 @@ typedef enum {
 #define DECAY_MAX_TICKS 2000
 #define RELEASE_MAX_TICKS 2000
 
-#define PARAM_MAX 127
+#define PARAM_MAX 4095
 #define CV_MAX 4095
 
 uint32_t _adsr_get_attack_ticks(adsr envelope) {
@@ -35,12 +28,12 @@ uint32_t _adsr_get_attack_ticks(adsr envelope) {
 }
 
 uint32_t _adsr_get_decay_ticks(adsr envelope) {
-  return (uint16_t)((double)ATTACK_MAX_TICKS *
+  return (uint16_t)((double)DECAY_MAX_TICKS *
                     ((double)envelope.decay / (double)PARAM_MAX));
 }
 
 uint32_t _adsr_get_release_ticks(adsr envelope) {
-  return (uint16_t)((double)ATTACK_MAX_TICKS *
+  return (uint16_t)((double)RELEASE_MAX_TICKS *
                     ((double)envelope.release / (double)PARAM_MAX));
 }
 
@@ -79,8 +72,13 @@ uint16_t adsr_control_voltage(adsr envelope, bool note_on,
   case ADSR_STATE_DECAY: {
     step -= _adsr_get_attack_ticks(envelope);
     uint16_t max_steps = _adsr_get_decay_ticks(envelope);
-    uint16_t cv = (uint16_t)pow(
-        (double)CV_MAX, (double)(((max_steps - step) + 1) / (double)max_steps));
+    uint16_t sustain_cv =
+        (uint16_t)((double)CV_MAX *
+                   ((double)envelope.sustain / (double)PARAM_MAX));
+    uint16_t attack_sustain_delta = CV_MAX - sustain_cv;
+    double step_exponent = (double)(((max_steps - step)) / (double)max_steps);
+    uint16_t cv = ((uint16_t)pow(attack_sustain_delta, step_exponent));
+    cv += sustain_cv; // offset
     return cv;
   }
   case ADSR_STATE_SUSTAIN: {
@@ -89,10 +87,12 @@ uint16_t adsr_control_voltage(adsr envelope, bool note_on,
     return cv;
   }
   case ADSR_STATE_RELEASE: {
-    uint16_t max_steps = _adsr_get_attack_ticks(envelope);
-    uint16_t cv =
-        (uint16_t)pow((double)CV_MAX,
-                      ((double)(((max_steps - step) + 1) / (double)max_steps)));
+    uint16_t max_steps = _adsr_get_release_ticks(envelope);
+    uint16_t sustain_cv =
+        (uint16_t)((double)CV_MAX *
+                   ((double)envelope.sustain / (double)PARAM_MAX));
+    double step_exponent = (double)(((max_steps - step)) / (double)max_steps);
+    uint16_t cv = (uint16_t)pow((double)sustain_cv, step_exponent);
     return cv;
   }
   default:

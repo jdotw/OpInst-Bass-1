@@ -30,6 +30,7 @@ typedef struct {
   struct note_trig_struct trig;
   struct note_changed_struct changed;
   struct note_value_struct value;
+  uint32_t event_ticks;
 } note_t;
 
 note_t *note_get_active(void);

@@ -42,9 +42,6 @@ void handle_midi_note_on_msg(uint8_t status_msg, uint8_t *data) {
   }
 
   note_set_on(note);
-  //	note_trig.ping_trigger = true;
-  //	note_value.note_number = note;
-  //	note_value.note_on = true;
 
   // LEGACY
   midi->cur_note_time_ticks = HAL_GetTick();

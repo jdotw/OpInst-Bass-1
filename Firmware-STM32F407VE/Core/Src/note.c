@@ -24,6 +24,7 @@ void note_set_on(uint8_t note_number) {
     note.trig.ping_trigger = true;
     note.value.note_on = true;
     note.changed.note_on = true;
+    note.event_ticks = HAL_GetTick();
   }
 }
 
@@ -31,6 +32,7 @@ void note_set_off() {
   if (note.value.note_on) {
     note.value.note_on = false;
     note.changed.note_on = true;
+    note.event_ticks = HAL_GetTick();
   }
 }
 
