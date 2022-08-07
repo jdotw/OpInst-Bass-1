@@ -56,10 +56,9 @@ uint16_t _filt_cutoff_scale(uint16_t input) {
   return (uint16_t)dbl;
 }
 
-uint16_t _commit_filt_cutoff_dac_value(note_t *note, uint16_t cutoff,
-                                       uint16_t attack, uint16_t decay,
-                                       uint16_t sustain, uint16_t release,
-                                       uint16_t amount) {
+uint16_t _commit_filt_cutoff_env_delta(note_t *note, uint16_t attack,
+                                       uint16_t decay, uint16_t sustain,
+                                       uint16_t release, uint16_t amount) {
   adsr adsr;
   adsr.attack = attack;
   adsr.decay = decay;
@@ -70,6 +69,25 @@ uint16_t _commit_filt_cutoff_dac_value(note_t *note, uint16_t cutoff,
       adsr_control_voltage(adsr, note->value.note_on, note->event_ticks);
   uint16_t env_delta =
       (uint16_t)((double)env * ((double)amount / (double)CTRL_DEFAULT_MAX));
+
+  return env_delta;
+}
+
+uint16_t _commit_filt_cutoff_dac_value(
+    note_t *note, uint16_t cutoff, uint16_t env1_attack, uint16_t env1_decay,
+    uint16_t env1_sustain, uint16_t env1_release, uint16_t env1_amount,
+    uint16_t env2_attack, uint16_t env2_decay, uint16_t env2_sustain,
+    uint16_t env2_release, uint16_t env2_amount) {
+  uint16_t env1_delta = _commit_filt_cutoff_env_delta(
+      note, env1_attack, env1_decay, env1_sustain, env1_release, env1_amount);
+  uint16_t env2_delta = _commit_filt_cutoff_env_delta(
+      note, env2_attack, env2_decay, env2_sustain, env2_release, env2_amount);
+
+  uint16_t env_delta = 0;
+  if (env2_delta < env1_delta) {
+    env_delta = env1_delta - env2_delta;
+  }
+
   if (cutoff + env_delta > CTRL_DEFAULT_MAX) {
     // Has hit max
     cutoff = CTRL_DEFAULT_MAX;
@@ -93,13 +111,14 @@ void commit_dac(ctrl_t *ctrl, note_t *note) {
 
   // CTRL_OSC1_FILT_CUTOFF is always applied
   // due to the use of programatic ADSR envelopes
+  // Note: OSC1's Filter Envelop is set using ENV1 only
   dac7678_set_value(
       I2C_LEFT, 0, 0, 1,
       _commit_filt_cutoff_dac_value(
           note, ctrl->value[CTRL_OSC1_FILT_CUTOFF],
           ctrl->value[CTRL_OSC_FILT_ENV1_A], ctrl->value[CTRL_OSC_FILT_ENV1_D],
           ctrl->value[CTRL_OSC_FILT_ENV1_S], ctrl->value[CTRL_OSC_FILT_ENV1_R],
-          ctrl->value[CTRL_OSC_FILT_ENV1_AMT]));
+          ctrl->value[CTRL_OSC_FILT_ENV1_AMT], 0, 0, 0, 0, 0));
 
   if (note->value.note_number || ctrl->changed[CTRL_OSC1_TUNE_COARSE] ||
       ctrl->changed[CTRL_OSC1_TUNE_FINE]) {
@@ -176,26 +195,32 @@ void commit_dac(ctrl_t *ctrl, note_t *note) {
 
   // CTRL_SUB_FILT_CUTOFF is always applied as it
   // uses a programatic envelope
+  // Note: SUB's Filter Envelop is set using
+  //       both ENV1(+) and ENV2(-)
   dac7678_set_value(
       I2C_LEFT, 2, 0, 2,
       _commit_filt_cutoff_dac_value(
           note, ctrl->value[CTRL_SUB_FILT_CUTOFF],
           ctrl->value[CTRL_SUB_FILT_ENV1_A], ctrl->value[CTRL_SUB_FILT_ENV1_D],
           ctrl->value[CTRL_SUB_FILT_ENV1_S], ctrl->value[CTRL_SUB_FILT_ENV1_R],
-          ctrl->value[CTRL_SUB_FILT_ENV1_AMT]));
+          ctrl->value[CTRL_SUB_FILT_ENV1_AMT],
+          ctrl->value[CTRL_SUB_FILT_ENV2_A], ctrl->value[CTRL_SUB_FILT_ENV2_D],
+          ctrl->value[CTRL_SUB_FILT_ENV2_S], ctrl->value[CTRL_SUB_FILT_ENV2_R],
+          ctrl->value[CTRL_SUB_FILT_ENV2_AMT]));
 
   if (ctrl->changed[CTRL_SUB_FILT_RES])
     dac7678_set_value(I2C_LEFT, 2, 0, 4, ctrl->value[CTRL_SUB_FILT_RES]);
 
   // CTRL_OSC2_FILT_CUTOFF is always applied as it
   // uses a programatic envelope
+  // Note: OSC2's Filter Envelop is set using ENV2 only
   dac7678_set_value(
       I2C_LEFT, 2, 0, 5,
       _commit_filt_cutoff_dac_value(
           note, ctrl->value[CTRL_OSC2_FILT_CUTOFF],
-          ctrl->value[CTRL_OSC_FILT_ENV1_A], ctrl->value[CTRL_OSC_FILT_ENV1_D],
-          ctrl->value[CTRL_OSC_FILT_ENV1_S], ctrl->value[CTRL_OSC_FILT_ENV1_R],
-          ctrl->value[CTRL_OSC_FILT_ENV1_AMT]));
+          ctrl->value[CTRL_OSC_FILT_ENV2_A], ctrl->value[CTRL_OSC_FILT_ENV2_D],
+          ctrl->value[CTRL_OSC_FILT_ENV2_S], ctrl->value[CTRL_OSC_FILT_ENV2_R],
+          ctrl->value[CTRL_OSC_FILT_ENV2_AMT], 0, 0, 0, 0, 0));
 
   // Right2:010
   if (ctrl->changed[CTRL_OSC_AMP_ENV_R])
