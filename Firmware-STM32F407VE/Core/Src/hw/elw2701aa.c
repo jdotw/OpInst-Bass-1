@@ -133,6 +133,7 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
                           uint8_t x_len, uint8_t start_y, uint8_t y_len,
                           uint8_t (*data_callback)(uint16_t)) {
   HAL_StatusTypeDef res;
+  uint8_t buf[176 * 52];
 
   // Suppress BLUENRG-2 IRQ
   // This prevents the bluetooth IRQ from trying to
@@ -178,10 +179,12 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
     uint8_t data = data_callback(row_reversed_i);
     //    uint8_t reversed = (data & 0xF0) >> 4;
     //    reversed |= (data & 0x0F) << 4;
-    res = HAL_SPI_Transmit(hspi, &data, 1, HAL_MAX_DELAY);
-    if (res != HAL_OK) {
-      Error_Handler();
-    }
+    buf[i] = data;
+  }
+
+  res = HAL_SPI_Transmit_DMA(hspi, buf, num_bytes);
+  if (res != HAL_OK) {
+    Error_Handler();
   }
 
   // Pull OLED_SPI_CS HIGH (In-Active)
