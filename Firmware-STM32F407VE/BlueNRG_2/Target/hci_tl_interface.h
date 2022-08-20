@@ -5,7 +5,7 @@
   *          BlueNRG HCI Transport Layer interface
   ******************************************************************************
   *
-  * COPYRIGHT 2021 STMicroelectronics
+  * COPYRIGHT 2022 STMicroelectronics
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

@@ -5,7 +5,7 @@
  ******************************************************************************
  * @attention
  *
- * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
  * All rights reserved.</center></h2>
  *
  * This software component is licensed by ST under Ultimate Liberty license
@@ -111,6 +111,10 @@ int32_t BSP_SPI1_SendRecv(uint8_t *pTxData, uint8_t *pRxData, uint16_t Length);
 int32_t BSP_SPI1_RegisterDefaultMspCallbacks(void);
 int32_t BSP_SPI1_RegisterMspCallbacks(BSP_SPI_Cb_t *Callbacks);
 #endif /* (USE_HAL_SPI_REGISTER_CALLBACKS == 1U) */
+int32_t BSP_SPI1_Send_DMA(uint8_t *pData, uint16_t Length);
+int32_t BSP_SPI1_Recv_DMA(uint8_t *pData, uint16_t Length);
+int32_t BSP_SPI1_SendRecv_DMA(uint8_t *pTxData, uint8_t *pRxData,
+                              uint16_t Length);
 
 int32_t BSP_GetTick(void);
 

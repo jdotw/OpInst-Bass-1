@@ -5,7 +5,86 @@
 	<projects>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>com.st.stm32cube.ide.mcu.MCUProjectNature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUCubeIdeServicesRevAev2ProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUNonUnderRootProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUCubeProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUAdvancedStructureProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCUSingleCpuProjectNature</nature>
+		<nature>com.st.stm32cube.ide.mcu.MCURootProjectNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Application/User/Core/custom_bus.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/Core/Src/custom_bus.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/main.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/Core/Src/main.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/stm32f4xx_hal_msp.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/Core/Src/stm32f4xx_hal_msp.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/stm32f4xx_it.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/Core/Src/stm32f4xx_it.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/BlueNRG_2/App/app_bluenrg_2.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/BlueNRG_2/App/app_bluenrg_2.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/BlueNRG_2/App/gatt_db.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/BlueNRG_2/App/gatt_db.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/BlueNRG_2/Target/hci_tl_interface.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/BlueNRG_2/Target/hci_tl_interface.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/App/fatfs.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/FATFS/App/fatfs.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/Target/bsp_driver_sd.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/FATFS/Target/bsp_driver_sd.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/Target/fatfs_platform.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/FATFS/Target/fatfs_platform.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/FATFS/Target/sd_diskio.c</name>
+			<type>1</type>
+			<locationURI>PROJECT_LOC/FATFS/Target/sd_diskio.c</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
