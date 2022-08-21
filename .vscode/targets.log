@@ -10,12 +10,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sat Jul 30 10:55:53 2022
+# Make data base, printed on Sun Aug 21 10:12:52 2022
 
 # Variables
 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
@@ -38,13 +37,13 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/make
 # environment
-STARSHIP_SESSION_KEY = 7516120631119311
+STARSHIP_SESSION_KEY = 3214718303302612
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 VSCODE_CWD = /Users/jwilson/Source/opinst
 # environment
-PATH = ./bin:/usr/local/bin:/usr/local/sbin:/Users/jwilson/.dotfiles/bin:/opt/homebrew/bin:/Users/jwilson/.nvm/versions/node/v16.13.2/bin:/Users/jwilson/Source/go/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/python@3.9/libexec/bin:/Applications/ARM/bin
+PATH = ./bin:/usr/local/bin:/usr/local/sbin:/Users/jwilson/.dotfiles/bin:/opt/homebrew/bin:/Users/jwilson/.nvm/versions/node/v16.13.2/bin:/Users/jwilson/Source/go/bin:bin:Scripts/bin:/Users/jwilson/dev/commbankmobile.ios:/Users/jwilson/bin:/usr/local/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/python@3.9/libexec/bin:/Applications/ARM/bin
 # environment
 LSCOLORS = exfxcxdxbxegedabagacad
 # makefile
@@ -60,7 +59,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.WLnZrLcJlL/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.3iM4YDtlPw/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -74,11 +73,11 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/jwilson
 # default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+MAKEFILEPATH := /Applications/Xcode-beta.app/Contents/Developer/Makefiles
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/jwilson/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
+VSCODE_CODE_CACHE_PATH = /Users/jwilson/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 LOGNAME = jwilson
 # environment
@@ -110,11 +109,11 @@ USER = jwilson
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:58438840-3764-402A-B43C-E5FD6B0C2FE2
+TERM_SESSION_ID = w0t0p0:01E3DC85-EF13-4085-960C-81ADDC35F020
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+MAKE_COMMAND := /Applications/Xcode-beta.app/Contents/Developer/usr/bin/make
 # environment
 TERM_PROGRAM = iTerm.app
 # default
@@ -124,7 +123,7 @@ TMPDIR = /var/folders/5v/46hbmsyx7js5_g051z5clm_m0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/jwilson/Library/Application Support/Code/1.69.2-main.sock
+VSCODE_IPC_HOOK = /Users/jwilson/Library/Application Support/Code/1.70.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -135,11 +134,10 @@ MFLAGS = -Rrqp
 *D = $(patsubst %/,%,$(dir $*))
 # environment
 TERM_PROGRAM_VERSION = 3.4.16
- 
 # environment
 NVM_DIR = /Users/jwilson/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.49680725.49680731.1B479A87-4CD9-4ECD-B576-4741E10E1742
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.54392571.54392577.58D478A3-F649-447F-8788-D4162FE92AD2
 # environment
 LC_TERMINAL_VERSION = 3.4.16
 # automatic
@@ -147,7 +145,7 @@ LC_TERMINAL_VERSION = 3.4.16
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:58438840-3764-402A-B43C-E5FD6B0C2FE2
+ITERM_SESSION_ID = w0t0p0:01E3DC85-EF13-4085-960C-81ADDC35F020
 # environment
 COLORFGBG = 7;0
 # environment
@@ -181,7 +179,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 2372
+VSCODE_PID = 19357
 # environment
 STARSHIP_SHELL = zsh
 # variable set hash-table stats:
@@ -193,7 +191,7 @@ STARSHIP_SHELL = zsh
 
 # Directories
 
-# . (device 16777231, inode 50043158): 12 files, no impossibilities.
+# . (device 16777234, inode 50043158): 12 files, no impossibilities.
 
 # 12 files, no impossibilities in 1 directories.
 
@@ -267,6 +265,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sat Jul 30 10:55:53 2022
+# Finished Make data base on Sun Aug 21 10:12:52 2022
 
  
