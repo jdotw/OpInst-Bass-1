@@ -64,6 +64,8 @@ typedef enum uint8_t {
 
   COMMIT_LED_TUNING,
 
+  COMMIT_OLED,
+
   // MUST Be last
   COMMIT_RESET
 

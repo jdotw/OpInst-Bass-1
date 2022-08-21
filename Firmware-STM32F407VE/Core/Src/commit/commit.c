@@ -153,6 +153,11 @@ void commit_30hz_timer(void) {
     commit_led_tuning(ctrl, seq, mod, toggle);
     cycle++;
     break;
+  case COMMIT_OLED:
+    // Render OLED Display
+    oled_commit();
+    cycle++;
+    break;
   default:
     cycle = COMMIT_INIT;
   }
