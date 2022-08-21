@@ -26,7 +26,7 @@ void oled_commit(void) {
   } else if (reload_requested) {
     lv_obj_t *screen = oled_render_active_screen();
     if (screen) {
-      lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, true);
+      lv_scr_load_anim(screen, LV_SCR_LOAD_ANIM_NONE, 0, 0, false);
     }
     reload_requested = false;
   }
