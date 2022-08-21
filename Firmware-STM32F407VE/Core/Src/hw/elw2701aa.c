@@ -20,6 +20,18 @@ void _elw2701aa_write_zero_data(SPI_HandleTypeDef *hspi);
 void _elw2701aa_wait_for_ready(SPI_HandleTypeDef *hspi);
 
 /*
+ * State Machine
+ */
+
+typedef enum {
+  STATE_IDLE = 0,
+  STATE_COMMAND,
+  STATE_DATA,
+} _elw2701aa_state_enum_t;
+
+_elw2701aa_state_enum_t _state = STATE_IDLE;
+
+/*
  * API
  */
 
@@ -78,14 +90,12 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
   // Pull OLED_SPI_CS LOW (Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_LOW);
 
-  for (uint8_t i = 0; i < (sizeof(cmds) / sizeof(uint8_t[2])); i++) {
-    uint8_t *cmd = cmds[i];
-    res = HAL_SPI_Transmit_DMA(hspi, cmd, 2);
-    if (res != HAL_OK) {
-      Error_Handler();
-    }
-    _elw2701aa_wait_for_ready(hspi);
+  // Send Commands
+  res = HAL_SPI_Transmit_DMA(hspi, *cmds, sizeof(cmds));
+  if (res != HAL_OK) {
+    Error_Handler();
   }
+  _elw2701aa_wait_for_ready(hspi);
 
   // Pull OLD_DATA_SELECT HIGH (Data)
   HAL_GPIO_WritePin(GPIOC, OLED_DATA_SELECT_Pin, GPIO_HIGH);
@@ -98,6 +108,11 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
   //
 
   _elw2701aa_write_zero_data(hspi);
+  while (_state != STATE_IDLE) {
+    // Wait for the write operation to finish
+    // This is necessary because _elw2701aa_write_zero_data
+    // uses elw2701aa_write_data which is asynchronous
+  }
 
   //
   // Send Display-On Command
@@ -129,17 +144,24 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
  * GDRAM Write
  */
 
-// NOTE: The x and y coordinates here are in pixel-space
-//       When writing data to the OLED display we must
-//       divide the x value by 2 for two-pixels-per-byte
+elw2701aa_write_data_cb_t _completion_callback = NULL;
+void *_completion_userdata = NULL;
+uint8_t _frame_buf[176 * 52];
+uint16_t _frame_buf_len = 0;
 
-void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
-                          uint8_t x_len, uint8_t start_y, uint8_t y_len,
-                          uint8_t (*data_callback)(uint16_t),
-                          elw2701aa_write_data_cb_t completion_callback,
-                          void *completion_userdata) {
+uint8_t _write_cmds[4][2] = {
+    {0x30, 0},
+    {0x32, 0},
+    {0x31, 0},
+    {0x33, 0},
+};
+
+void _elw2701aa_write_data_commands(SPI_HandleTypeDef *hspi, uint8_t start_x,
+                                    uint8_t x_len, uint8_t start_y,
+                                    uint8_t y_len) {
   HAL_StatusTypeDef res;
-  uint8_t buf[176 * 52];
+
+  _state = STATE_COMMAND;
 
   // Suppress BLUENRG-2 IRQ
   // This prevents the bluetooth IRQ from trying to
@@ -152,22 +174,21 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
   // Pull OLED_SPI_CS LOW (Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_LOW);
 
-  uint8_t write_cmds[4][2] = {
-      {0x30, ((175 - start_x) - (x_len - 1)) / 2},
-      {0x32, (175 - start_x) / 2},
-      {0x31, (51 - start_y) - (y_len - 1)},
-      {0x33, (51 - start_y)},
-  };
+  _write_cmds[0][1] = ((175 - start_x) - (x_len - 1)) / 2;
+  _write_cmds[1][1] = (175 - start_x) / 2;
+  _write_cmds[2][1] = (51 - start_y) - (y_len - 1);
+  _write_cmds[3][1] = (51 - start_y);
 
-  _elw2701aa_wait_for_ready(hspi);
-  for (uint8_t i = 0; i < (sizeof(write_cmds) / sizeof(uint8_t[2])); i++) {
-    uint8_t *cmd = write_cmds[i];
-    res = HAL_SPI_Transmit_DMA(hspi, cmd, 2);
-    if (res != HAL_OK) {
-      Error_Handler();
-    }
-    _elw2701aa_wait_for_ready(hspi);
+  res = HAL_SPI_Transmit_DMA(hspi, *_write_cmds, sizeof(_write_cmds));
+  if (res != HAL_OK) {
+    Error_Handler();
   }
+}
+
+void _elw2701aa_write_data_bytes(SPI_HandleTypeDef *hspi) {
+  HAL_StatusTypeDef res;
+
+  _state = STATE_DATA;
 
   // Pull OLED_SPI_CS HIGH (In-Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_HIGH);
@@ -178,32 +199,77 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
   // Pull OLED_SPI_CS LOW (Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_LOW);
 
-  uint16_t num_bytes = ((uint16_t)x_len * (uint16_t)y_len) / 2;
-  for (uint16_t i = 0; i < num_bytes; i++) {
-    uint16_t reverse_i = (num_bytes - 1) - i;
-    uint16_t remainder = reverse_i % 88;
-    uint16_t row_reversed_i = (reverse_i - remainder) +
-                              (87 - remainder); // Always gets us start of row!
-    uint8_t data = data_callback(row_reversed_i);
-    //    uint8_t reversed = (data & 0xF0) >> 4;
-    //    reversed |= (data & 0x0F) << 4;
-    buf[i] = data;
-  }
-
-  res = HAL_SPI_Transmit_DMA(hspi, buf, num_bytes);
+  // Write bytes
+  res = HAL_SPI_Transmit_DMA(hspi, _frame_buf, _frame_buf_len);
   if (res != HAL_OK) {
     Error_Handler();
   }
-  _elw2701aa_wait_for_ready(hspi);
+}
 
+void _elw2701aa_write_data_cleanup() {
   // Pull OLED_SPI_CS HIGH (In-Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_HIGH);
 
   // Re-enable BLUENRG-2 IRQ
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 
-  if (completion_callback) {
-    completion_callback(completion_userdata);
+  _state = STATE_IDLE;
+}
+
+// NOTE: The x and y coordinates here are in pixel-space
+//       When writing data to the OLED display we must
+//       divide the x value by 2 for two-pixels-per-byte
+
+void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
+                          uint8_t x_len, uint8_t start_y, uint8_t y_len,
+                          uint8_t (*data_callback)(uint16_t),
+                          elw2701aa_write_data_cb_t completion_callback,
+                          void *completion_userdata) {
+  if (_state != STATE_IDLE) {
+    // Must not be called when an existing
+    // operation is already in progress
+    Error_Handler();
+  }
+
+  _completion_callback = completion_callback;
+  _completion_userdata = completion_userdata;
+
+  _frame_buf_len = ((uint16_t)x_len * (uint16_t)y_len) / 2;
+  for (uint16_t i = 0; i < _frame_buf_len; i++) {
+    uint16_t reverse_i = (_frame_buf_len - 1) - i;
+    uint16_t remainder = reverse_i % 88;
+    uint16_t row_reversed_i = (reverse_i - remainder) +
+                              (87 - remainder); // Always gets us start of row!
+    uint8_t data = data_callback(row_reversed_i);
+    //    uint8_t reversed = (data & 0xF0) >> 4;
+    //    reversed |= (data & 0x0F) << 4;
+    _frame_buf[i] = data;
+  }
+
+  _elw2701aa_write_data_commands(hspi, start_x, x_len, start_y, y_len);
+}
+
+/*
+ * Callback
+ */
+
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
+  switch (_state) {
+  case STATE_COMMAND:
+    // Move on to data
+    _elw2701aa_write_data_bytes(hspi);
+    break;
+  case STATE_DATA:
+    // Clean up
+    _elw2701aa_write_data_cleanup();
+
+    // Fire callback
+    if (_completion_callback) {
+      _completion_callback(_completion_userdata);
+    }
+    break;
+  default:
+    break;
   }
 }
 

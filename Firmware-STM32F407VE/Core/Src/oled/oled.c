@@ -26,6 +26,12 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
 
 // Init
 
+#define BUFFER_SIZE (OLED_HORIZ_RES * 10)
+static lv_disp_draw_buf_t _disp_buf;
+static lv_color_t _buf_1[BUFFER_SIZE];
+static lv_color_t _buf_2[BUFFER_SIZE];
+static lv_disp_drv_t disp_drv;
+
 void oled_init(SPI_HandleTypeDef *hspi) {
 
   // Init OLED Display Hardware
@@ -36,16 +42,11 @@ void oled_init(SPI_HandleTypeDef *hspi) {
   lv_init();
 
   // Create draw buffers (x2)
-  static lv_disp_draw_buf_t disp_buf;
-  static lv_color_t buf_1[OLED_HORIZ_RES * OLED_VERT_RES];
-  static lv_color_t buf_2[OLED_HORIZ_RES * OLED_VERT_RES];
-  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2,
-                        OLED_HORIZ_RES * OLED_VERT_RES);
+  lv_disp_draw_buf_init(&_disp_buf, _buf_1, _buf_2, BUFFER_SIZE);
 
   // Create driver
-  static lv_disp_drv_t disp_drv;
   lv_disp_drv_init(&disp_drv);
-  disp_drv.draw_buf = &disp_buf;
+  disp_drv.draw_buf = &_disp_buf;
   disp_drv.hor_res = OLED_HORIZ_RES;
   disp_drv.ver_res = OLED_VERT_RES;
   disp_drv.flush_cb = _oled_flush_callback;
@@ -99,6 +100,12 @@ void _oled_flush_callback_write_completed(void *userdata) {
 
 void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
                           const lv_area_t *area, lv_color_t *color_p) {
+
+  uint32_t total_ticks_before = HAL_GetTick();
+  uint32_t ticks_before = 0;
+  uint32_t ticks_after = 0;
+  uint32_t ticks_cost = 0;
+
   uint8_t _data_from_color(uint16_t i) {
     // Returns the 2x 4bit pixels as one byte
     uint16_t color_index = i * 2;
@@ -107,11 +114,6 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
     byte |= color_p[color_index + 1].full >> 4;
     return byte;
   }
-
-  uint32_t total_ticks_before = HAL_GetTick();
-  uint32_t ticks_before = 0;
-  uint32_t ticks_after = 0;
-  uint32_t ticks_cost = 0;
 
   ticks_before = HAL_GetTick();
   elw2701aa_write_data(spi, area->x1, (area->x2 - area->x1) + 1, area->y1,
