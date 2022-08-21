@@ -26,7 +26,7 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
 
 // Init
 
-#define BUFFER_SIZE (OLED_HORIZ_RES * 10)
+#define BUFFER_SIZE (OLED_HORIZ_RES * OLED_VERT_RES)
 static lv_disp_draw_buf_t _disp_buf;
 static lv_color_t _buf_1[BUFFER_SIZE];
 static lv_color_t _buf_2[BUFFER_SIZE];

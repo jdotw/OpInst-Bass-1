@@ -243,6 +243,7 @@ int main(void) {
     // MX_BlueNRG_2_Process();
 
     /* USER CODE BEGIN 3 */
+    commit_30hz_timer();
 
     // NOTE: Never let MX_BlueNRG_2_Process(); be called here
     //       We call it from commit so that it's on an
