@@ -14,9 +14,3 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
-
-lv_obj_t *ctrl_screen() { return ctrl_changed_screen(); }
-
-void ctrl_screen_commit(ctrl_t *ctrl, mod_t *mod) {
-  ctrl_changed_screen_commit(ctrl, mod);
-}

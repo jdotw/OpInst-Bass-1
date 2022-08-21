@@ -9,6 +9,13 @@ extern uint32_t timeout_start;
 extern bool reload_requested;
 
 void oled_commit(void) {
+  uint32_t total_ticks_before = HAL_GetTick();
+  uint32_t ticks_before = 0;
+  uint32_t ticks_after = 0;
+  uint32_t ticks_cost = 0;
+
+  ticks_before = HAL_GetTick();
+
   ctrl_t *ctrl = ctrl_get_active();
   mod_t *mod = mod_get();
 
@@ -31,12 +38,24 @@ void oled_commit(void) {
     preset_screen_commit(mod);
     break;
   case OLED_SCREEN_CTRL:
-    ctrl_screen_commit(ctrl, mod);
+    ctrl_changed_screen_commit(ctrl, mod);
     break;
   default:
     break;
   }
 
+  ticks_after = HAL_GetTick();
+  ticks_cost = ticks_after - ticks_before;
+  if (reload_requested) {
+    printf("%li", ticks_cost);
+  }
+
   // LAST: Let LVGL render updates
   lv_timer_handler();
+
+  ticks_after = HAL_GetTick();
+  ticks_cost = ticks_after - ticks_before;
+  if (reload_requested) {
+    printf("%li", ticks_cost);
+  }
 }

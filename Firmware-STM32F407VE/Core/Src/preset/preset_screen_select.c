@@ -15,81 +15,96 @@
 #include <stdio.h>
 #include <string.h>
 
-lv_obj_t *_preset_select_top_bar(lv_obj_t *parent) {
-  oled_theme_t *theme = oled_theme_get();
-  lv_obj_t *container = lv_obj_create(parent);
-  lv_obj_set_size(container, LV_PCT(100), 12);
-  lv_obj_align(container, LV_ALIGN_TOP_LEFT, 0, 0);
+lv_obj_t *_preset_top_bar = NULL;
 
-  lv_obj_t *save_btn_label = lv_label_create(container);
+void _preset_select_top_bar_init(lv_obj_t *parent) {
+  oled_theme_t *theme = oled_theme_get();
+
+  _preset_top_bar = lv_obj_create(parent);
+  lv_obj_set_size(_preset_top_bar, LV_PCT(100), 12);
+  lv_obj_align(_preset_top_bar, LV_ALIGN_TOP_LEFT, 0, 0);
+
+  lv_obj_t *save_btn_label = lv_label_create(_preset_top_bar);
   lv_obj_align(save_btn_label, LV_ALIGN_TOP_RIGHT, -12, 0);
   lv_obj_add_style(save_btn_label, &theme->small_label_style, LV_STATE_DEFAULT);
   lv_label_set_text(save_btn_label, "Save");
-
-  return container;
 }
 
-lv_obj_t *_preset_select_bottom_bar(lv_obj_t *parent) {
+lv_obj_t *_preset_bottom_bar = NULL;
+
+void _preset_select_bottom_bar_init(lv_obj_t *parent) {
   oled_theme_t *theme = oled_theme_get();
-  lv_obj_t *container = lv_obj_create(parent);
-  lv_obj_set_size(container, LV_PCT(100), 12);
-  lv_obj_align(container, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+
+  _preset_bottom_bar = lv_obj_create(parent);
+  lv_obj_set_size(_preset_bottom_bar, LV_PCT(100), 12);
+  lv_obj_align(_preset_bottom_bar, LV_ALIGN_BOTTOM_LEFT, 0, 0);
 
   // Control Label
-  lv_obj_t *ctrl1_label = lv_label_create(container);
+  lv_obj_t *ctrl1_label = lv_label_create(_preset_bottom_bar);
   lv_obj_add_style(ctrl1_label, &theme->small_label_style, LV_STATE_DEFAULT);
   lv_label_set_text(ctrl1_label, "Mix");
   lv_obj_align(ctrl1_label, LV_ALIGN_TOP_LEFT, 0, 0);
-
-  return container;
 }
 
-lv_obj_t *preset_select_screen() {
+lv_obj_t *_preset_container = NULL;
+lv_obj_t *_preset_number_label = NULL;
+lv_obj_t *_preset_name_label = NULL;
+
+void preset_select_screen_init() {
   oled_theme_t *theme = oled_theme_get();
 
+  // Container
+  _preset_container = lv_obj_create(NULL);
+  lv_obj_align(_preset_container, LV_ALIGN_TOP_LEFT, 0, 0);
+
+  // Top Row
+  _preset_select_top_bar_init(_preset_container);
+
+  // Bottom Row
+  _preset_select_bottom_bar_init(_preset_container);
+
+  // Preset Number Label
+  _preset_number_label = lv_label_create(_preset_container);
+  lv_obj_align(_preset_number_label, LV_ALIGN_LEFT_MID, 0, 0);
+  lv_obj_add_style(_preset_number_label, &theme->large_label_style,
+                   LV_STATE_DEFAULT);
+  lv_label_set_long_mode(_preset_number_label, LV_LABEL_LONG_DOT);
+
+  // Preset Separator Label
+  lv_obj_t *separator = lv_label_create(_preset_container);
+  lv_obj_align(separator, LV_ALIGN_LEFT_MID, 22, 0);
+  lv_obj_add_style(separator, &theme->large_label_style, LV_STATE_DEFAULT);
+  lv_label_set_long_mode(separator, LV_LABEL_LONG_DOT);
+  lv_label_set_text(separator, "-");
+
+  // Preset Name Label
+  _preset_name_label = lv_label_create(_preset_container);
+  lv_obj_align(_preset_name_label, LV_ALIGN_LEFT_MID, 32, 0);
+  lv_obj_add_style(_preset_name_label, &theme->large_label_style,
+                   LV_STATE_DEFAULT);
+  lv_label_set_long_mode(_preset_name_label, LV_LABEL_LONG_DOT);
+}
+
+void _preset_select_screen_update() {
   // Get active preset
   preset_t *active_preset = preset_get_active();
 
-  // Container
-  lv_obj_t *container = lv_obj_create(NULL);
-  lv_obj_align(container, LV_ALIGN_TOP_LEFT, 0, 0);
-
-  // Top Row
-  _preset_select_top_bar(container);
-
-  // Bottom Row
-  _preset_select_bottom_bar(container);
-
   // Preset Number Label
   char number_buf[4];
-  lv_obj_t *number_label = lv_label_create(container);
-  lv_obj_align(number_label, LV_ALIGN_LEFT_MID, 0, 0);
-  lv_obj_add_style(number_label, &theme->large_label_style, LV_STATE_DEFAULT);
-  lv_label_set_long_mode(number_label, LV_LABEL_LONG_DOT);
   snprintf(number_buf, 4, "%02d", preset_get_active_index());
-  lv_label_set_text(number_label, number_buf);
+  lv_label_set_text(_preset_number_label, number_buf);
 
-  // Preset Separator Label
-  lv_obj_t *separator_label = lv_label_create(container);
-  lv_obj_align(separator_label, LV_ALIGN_LEFT_MID, 22, 0);
-  lv_obj_add_style(separator_label, &theme->large_label_style,
-                   LV_STATE_DEFAULT);
-  lv_label_set_long_mode(separator_label, LV_LABEL_LONG_DOT);
-  lv_label_set_text(separator_label, "-");
-
+  // Preset Name Label
   char *preset_name = "Untitled";
   if (active_preset && active_preset->name && strlen(active_preset->name) > 0) {
     preset_name = active_preset->name;
   }
+  lv_label_set_text(_preset_name_label, preset_name);
+}
 
-  // Preset Name Label
-  lv_obj_t *name_label = lv_label_create(container);
-  lv_obj_align(name_label, LV_ALIGN_LEFT_MID, 32, 0);
-  lv_obj_add_style(name_label, &theme->large_label_style, LV_STATE_DEFAULT);
-  lv_label_set_long_mode(name_label, LV_LABEL_LONG_DOT);
-  lv_label_set_text(name_label, preset_name);
-
-  return container;
+lv_obj_t *preset_select_screen() {
+  _preset_select_screen_update();
+  return _preset_container;
 }
 
 void preset_select_screen_commit(mod_t *mod) {

@@ -37,9 +37,10 @@ void oled_init(SPI_HandleTypeDef *hspi) {
 
   // Create draw buffers (x2)
   static lv_disp_draw_buf_t disp_buf;
-  static lv_color_t buf_1[OLED_HORIZ_RES * 10];
-  static lv_color_t buf_2[OLED_HORIZ_RES * 10];
-  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2, OLED_HORIZ_RES * 10);
+  static lv_color_t buf_1[OLED_HORIZ_RES * OLED_VERT_RES];
+  static lv_color_t buf_2[OLED_HORIZ_RES * OLED_VERT_RES];
+  lv_disp_draw_buf_init(&disp_buf, buf_1, buf_2,
+                        OLED_HORIZ_RES * OLED_VERT_RES);
 
   // Create driver
   static lv_disp_drv_t disp_drv;
@@ -54,17 +55,11 @@ void oled_init(SPI_HandleTypeDef *hspi) {
 
   // Init Theme
   oled_theme_init();
-}
 
-// Test
-
-void oled_test() {
-  lv_obj_t *label2 = lv_label_create(lv_scr_act());
-  lv_label_set_long_mode(label2,
-                         LV_LABEL_LONG_SCROLL_CIRCULAR); /*Circular scroll*/
-  lv_obj_set_width(label2, 176);
-  lv_label_set_text(label2, "Bass-1 Synth");
-  lv_obj_align(label2, LV_ALIGN_CENTER, 0, 0);
+  // Init Screens
+  preset_select_screen_init();
+  preset_set_name_screen_init();
+  ctrl_changed_screen_init();
 }
 
 // State
@@ -86,7 +81,7 @@ oled_screen_t oled_get_screen() { return active_screen; }
 
 void oled_set_screen(oled_screen_t screen, uint32_t timeout_ms) {
   timeout = timeout_ms;
-  timeout_start = HAL_GetTick();  
+  timeout_start = HAL_GetTick();
   active_screen = screen;
   reload_requested = true;
 }
@@ -108,8 +103,17 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
     return byte;
   }
 
+  uint32_t total_ticks_before = HAL_GetTick();
+  uint32_t ticks_before = 0;
+  uint32_t ticks_after = 0;
+  uint32_t ticks_cost = 0;
+
+  ticks_before = HAL_GetTick();
   elw2701aa_write_data(spi, area->x1, (area->x2 - area->x1) + 1, area->y1,
                        (area->y2 - area->y1) + 1, _data_from_color);
+  ticks_after = HAL_GetTick();
+  ticks_cost = ticks_after - ticks_before;
+  printf("%li", ticks_cost);
 
   lv_disp_flush_ready(disp_drv);
 }

@@ -48,6 +48,7 @@ void preset_screen_commit(mod_t *mod);
 
 // preset_screen_set_name.c
 lv_obj_t *preset_set_name_screen();
+void preset_set_name_screen_init();
 void preset_set_name_screen_commit(mod_t *mod);
 void preset_set_name_screen_set_preset(preset_t *preset, uint8_t index);
 void preset_set_name_screen_apply_char_delta(int8_t delta);
@@ -55,6 +56,7 @@ void preset_set_name_screen_apply_index_delta(int8_t delta);
 
 // preset_screen_select.c
 lv_obj_t *preset_select_screen();
+void preset_select_screen_init();
 void preset_select_screen_commit(mod_t *mod);
 
 #endif /* INC_PRESET_H_ */

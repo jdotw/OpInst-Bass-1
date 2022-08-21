@@ -39,39 +39,54 @@ void preset_set_name_screen_set_preset(preset_t *preset, uint8_t index) {
   preset_index = index;
 }
 
-lv_obj_t *preset_set_name_screen() {
+lv_obj_t *_preset_set_name_container = NULL;
+lv_obj_t *_preset_set_name_label = NULL;
+
+void preset_set_name_screen_init() {
   oled_theme_t *theme = oled_theme_get();
 
   // Container
-  lv_obj_t *container = lv_obj_create(NULL);
-  lv_obj_align(container, LV_ALIGN_TOP_LEFT, 0, 0);
+  _preset_set_name_container = lv_obj_create(NULL);
+  lv_obj_align(_preset_set_name_container, LV_ALIGN_TOP_LEFT, 0, 0);
 
   // Top Row
-  lv_obj_t *save_btn_label = lv_label_create(container);
+  lv_obj_t *save_btn_label = lv_label_create(_preset_set_name_container);
   lv_obj_align(save_btn_label, LV_ALIGN_TOP_RIGHT, -5, 0);
   lv_obj_add_style(save_btn_label, &theme->small_label_style, LV_STATE_DEFAULT);
   lv_label_set_text(save_btn_label, "Save");
 
-  lv_obj_t *cancel_btn_label = lv_label_create(container);
+  lv_obj_t *cancel_btn_label = lv_label_create(_preset_set_name_container);
   lv_obj_align(cancel_btn_label, LV_ALIGN_TOP_RIGHT, -40, 0);
   lv_obj_add_style(cancel_btn_label, &theme->small_label_style,
                    LV_STATE_DEFAULT);
   lv_label_set_text(cancel_btn_label, "Cancel");
 
   // Preset Name Label
-  lv_obj_t *name_label = lv_label_create(container);
-  lv_obj_align(name_label, LV_ALIGN_LEFT_MID, 0, 0);
-  lv_obj_add_style(name_label, &theme->large_label_style, LV_STATE_DEFAULT);
-  lv_obj_add_style(name_label, &theme->selection_style,
+  _preset_set_name_label = lv_label_create(_preset_set_name_container);
+  lv_obj_align(_preset_set_name_label, LV_ALIGN_LEFT_MID, 0, 0);
+  lv_obj_add_style(_preset_set_name_label, &theme->large_label_style,
+                   LV_STATE_DEFAULT);
+  lv_obj_add_style(_preset_set_name_label, &theme->selection_style,
                    LV_PART_SELECTED | LV_STATE_DEFAULT);
-  lv_label_set_long_mode(name_label, LV_LABEL_LONG_DOT);
-  lv_label_set_text(name_label, name_buf);
+  lv_label_set_long_mode(_preset_set_name_label, LV_LABEL_LONG_DOT);
 
   // Set Selection
-  lv_label_set_text_sel_start(name_label, selected_char_index);
-  lv_label_set_text_sel_end(name_label, selected_char_index + 1);
+  lv_label_set_text_sel_start(_preset_set_name_label, selected_char_index);
+  lv_label_set_text_sel_end(_preset_set_name_label, selected_char_index + 1);
+}
 
-  return container;
+void _preset_set_name_screen_update() {
+  // Preset Name Label
+  lv_label_set_text(_preset_set_name_label, name_buf);
+
+  // Set Selection
+  lv_label_set_text_sel_start(_preset_set_name_label, selected_char_index);
+  lv_label_set_text_sel_end(_preset_set_name_label, selected_char_index + 1);
+}
+
+lv_obj_t *preset_set_name_screen() {
+  _preset_set_name_screen_update();
+  return _preset_set_name_container;
 }
 
 void preset_set_name_screen_commit(mod_t *mod) {

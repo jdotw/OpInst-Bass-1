@@ -116,6 +116,7 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
   if (res != HAL_OK) {
     Error_Handler();
   }
+  _elw2701aa_wait_for_ready(hspi);
 
   // Pull OLED_SPI_CS HIGH (In-Active)
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_HIGH);

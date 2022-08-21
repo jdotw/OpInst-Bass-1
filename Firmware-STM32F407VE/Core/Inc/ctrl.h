@@ -238,16 +238,11 @@ int8_t ctrl_value_get_percent(ctrl_enum_t ctrl_enum);
 void ctrl_value_set_min(ctrl_enum_t ctrl_enum);
 void ctrl_value_set_max(ctrl_enum_t ctrl_enum);
 
-// ctrl_screen.c
-
-lv_obj_t *ctrl_screen(void);
-void ctrl_screen_changed_commit(ctrl_t *ctrl, mod_t *mod);
-void ctrl_screen_commit(ctrl_t *ctrl, mod_t *mod);
-
 // ctrl_screen_changed.c
 
-lv_obj_t *ctrl_changed_screen(void);
-void ctrl_changed_screen_commit(ctrl_t *ctrl, mod_t *mod);
+lv_obj_t *ctrl_screen(void);
+lv_obj_t *ctrl_changed_screen_init();
 void ctrl_changed_screen_push_ctrl(ctrl_enum_t ctrl_enum);
+void ctrl_changed_screen_commit(ctrl_t *ctrl, mod_t *mod);
 
 #endif /* INC_CTRL_H_ */

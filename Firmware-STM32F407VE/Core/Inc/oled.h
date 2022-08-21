@@ -20,7 +20,6 @@ typedef enum {
 
 // Init
 void oled_init(SPI_HandleTypeDef *hspi);
-void oled_test(void);
 
 // Screen
 oled_screen_t oled_get_screen(void);
