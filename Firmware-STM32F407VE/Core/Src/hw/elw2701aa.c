@@ -135,7 +135,9 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
 
 void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
                           uint8_t x_len, uint8_t start_y, uint8_t y_len,
-                          uint8_t (*data_callback)(uint16_t)) {
+                          uint8_t (*data_callback)(uint16_t),
+                          elw2701aa_write_data_cb_t completion_callback,
+                          void *completion_userdata) {
   HAL_StatusTypeDef res;
   uint8_t buf[176 * 52];
 
@@ -199,6 +201,10 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
 
   // Re-enable BLUENRG-2 IRQ
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  if (completion_callback) {
+    completion_callback(completion_userdata);
+  }
 }
 
 /*
@@ -218,5 +224,5 @@ void _elw2701aa_wait_for_ready(SPI_HandleTypeDef *hspi) {
 
 void _elw2701aa_write_zero_data(SPI_HandleTypeDef *hspi) {
   uint8_t _data_from_buf(uint16_t i) { return 0x00; }
-  elw2701aa_write_data(hspi, 0, 176, 0, 52, _data_from_buf);
+  elw2701aa_write_data(hspi, 0, 176, 0, 52, _data_from_buf, NULL, NULL);
 }

@@ -92,6 +92,11 @@ void oled_reload_screen() { reload_requested = true; }
 // This function is called by LVGL
 // to write the graphics buffer to the display
 
+void _oled_flush_callback_write_completed(void *userdata) {
+  struct _lv_disp_drv_t *disp_drv = userdata;
+  lv_disp_flush_ready(disp_drv);
+}
+
 void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
                           const lv_area_t *area, lv_color_t *color_p) {
   uint8_t _data_from_color(uint16_t i) {
@@ -110,10 +115,9 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
 
   ticks_before = HAL_GetTick();
   elw2701aa_write_data(spi, area->x1, (area->x2 - area->x1) + 1, area->y1,
-                       (area->y2 - area->y1) + 1, _data_from_color);
+                       (area->y2 - area->y1) + 1, _data_from_color,
+                       &_oled_flush_callback_write_completed, disp_drv);
   ticks_after = HAL_GetTick();
   ticks_cost = ticks_after - ticks_before;
   printf("%li", ticks_cost);
-
-  lv_disp_flush_ready(disp_drv);
 }
