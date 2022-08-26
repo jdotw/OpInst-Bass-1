@@ -417,13 +417,12 @@ void _commit_led_osc1_saw(ctrl_t *ctrl) {
    * 0, 1
    */
 
-  if (!_osc1_saw_changed(ctrl))
-    return;
-
-  _set_pwm_seq_lab(_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
-  res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 2 * 3);
-  if (!res)
-    Error_Handler();
+  if (_osc1_saw_changed(ctrl)) {
+    _set_pwm_seq_lab(_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
+    res = is32_set_sequence_pwm(I2C_LEFT, 0, 0, 0, pwm_seq, 2 * 3);
+    if (!res)
+      Error_Handler();
+  }
 
   _set_scale_seq_animated(pwm_seq, scale_seq, 6, 0, false);
   res = is32_set_sequence_scale(I2C_LEFT, 0, 0, 0, scale_seq, 2 * 3);
