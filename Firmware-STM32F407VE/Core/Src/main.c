@@ -649,30 +649,6 @@ void Error_Handler(void) {
   __disable_irq();
   uint8_t cycle = 0;
   while (1) {
-    uint8_t led = (cycle % 2) ? 0xFF : 0x00;
-    led = 0xFF;
-
-    // LEFT0:000
-    rotpic_led_set_state(I2C_LEFT, 0, 0b000, led);
-
-    // LEFT0:001
-    rotpic_led_set_state(I2C_LEFT, 0, 0b001, led);
-
-    // LEFT0:011
-    rotpic_led_set_state(I2C_LEFT, 0, 0b011, led);
-
-    // LEFT2:000
-    rotpic_led_set_state(I2C_LEFT, 2, 0b000, led);
-
-    // RIGHT0:000
-    rotpic_led_set_state(I2C_RIGHT, 0, 0b000, led);
-
-    // RIGHT1:001
-    rotpic_led_set_state(I2C_LEFT, 1, 0b001, led);
-
-    //  	// Wait and cycle
-    //  	HAL_Delay(1000);
-    //  	cycle++;
   }
   /* USER CODE END Error_Handler_Debug */
 }
