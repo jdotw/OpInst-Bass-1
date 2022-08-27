@@ -10,9 +10,6 @@
 #include "elw2701aa.h"
 #include "main.h"
 
-#define OLED_HORIZ_RES 176
-#define OLED_VERT_RES 52
-
 lv_disp_t *disp;
 SPI_HandleTypeDef *spi;
 
@@ -26,10 +23,9 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
 
 // Init
 
-#define BUFFER_SIZE (OLED_HORIZ_RES * OLED_VERT_RES)
 static lv_disp_draw_buf_t _disp_buf;
-static lv_color_t _buf_1[BUFFER_SIZE];
-static lv_color_t _buf_2[BUFFER_SIZE];
+static lv_color_t _buf_1[OLED_BUFFER_SIZE];
+static lv_color_t _buf_2[OLED_BUFFER_SIZE];
 static lv_disp_drv_t disp_drv;
 
 void oled_init(SPI_HandleTypeDef *hspi) {
@@ -42,7 +38,7 @@ void oled_init(SPI_HandleTypeDef *hspi) {
   lv_init();
 
   // Create draw buffers (x2)
-  lv_disp_draw_buf_init(&_disp_buf, _buf_1, _buf_2, BUFFER_SIZE);
+  lv_disp_draw_buf_init(&_disp_buf, _buf_1, _buf_2, OLED_BUFFER_SIZE);
 
   // Create driver
   lv_disp_drv_init(&disp_drv);
@@ -101,24 +97,21 @@ void _oled_flush_callback_write_completed(void *userdata) {
 void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
                           const lv_area_t *area, lv_color_t *color_p) {
 
-  uint32_t total_ticks_before = HAL_GetTick();
   uint32_t ticks_before = 0;
   uint32_t ticks_after = 0;
   uint32_t ticks_cost = 0;
-
-  uint8_t _data_from_color(uint16_t i) {
-    // Returns the 2x 4bit pixels as one byte
-    uint16_t color_index = i * 2;
-    uint8_t byte = 0x00;
-    byte |= color_p[color_index].full & 0xf0;
-    byte |= color_p[color_index + 1].full >> 4;
-    return byte;
-  }
-
   ticks_before = HAL_GetTick();
-  elw2701aa_write_data(spi, area->x1, (area->x2 - area->x1) + 1, area->y1,
-                       (area->y2 - area->y1) + 1, _data_from_color,
+
+  uint8_t x_len = (area->x2 - area->x1) + 1;
+  uint8_t y_len = (area->y2 - area->y1) + 1;
+
+  // color_p is essentially an array of uint8_t's
+  // therefore we cast it as uint8_t* when passing
+  // it to elw2701aa_write_data as our data buffer
+  elw2701aa_write_data(spi, area->x1, x_len, area->y1, y_len,
+                       (uint8_t *)color_p, x_len * y_len,
                        &_oled_flush_callback_write_completed, disp_drv);
+
   ticks_after = HAL_GetTick();
   ticks_cost = ticks_after - ticks_before;
   printf("%li", ticks_cost);

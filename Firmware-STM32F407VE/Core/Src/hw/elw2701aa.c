@@ -7,6 +7,7 @@
 
 #include "elw2701aa.h"
 #include "main.h"
+#include "oled.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -16,7 +17,6 @@
 // NOTE: The x and y values here are memory addresses
 // Each byte in GDRAM is 2 4-bit pixels.
 
-void _elw2701aa_write_zero_data(SPI_HandleTypeDef *hspi);
 void _elw2701aa_wait_for_ready(SPI_HandleTypeDef *hspi);
 
 /*
@@ -104,17 +104,6 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
   HAL_GPIO_WritePin(GPIOC, OLED_SPI_CS_Pin, GPIO_HIGH);
 
   //
-  // Write zeros to GDRAM
-  //
-
-  _elw2701aa_write_zero_data(hspi);
-  while (_state != STATE_IDLE) {
-    // Wait for the write operation to finish
-    // This is necessary because _elw2701aa_write_zero_data
-    // uses elw2701aa_write_data which is asynchronous
-  }
-
-  //
   // Send Display-On Command
   //
 
@@ -146,7 +135,7 @@ void elw2701aa_init(SPI_HandleTypeDef *hspi) {
 
 elw2701aa_write_data_cb_t _completion_callback = NULL;
 void *_completion_userdata = NULL;
-uint8_t _frame_buf[176 * 52];
+uint8_t *_frame_buf;
 uint16_t _frame_buf_len = 0;
 
 uint8_t _write_cmds[4][2] = {
@@ -186,7 +175,7 @@ void _elw2701aa_write_data_commands(SPI_HandleTypeDef *hspi, uint8_t start_x,
 }
 
 void _elw2701aa_write_data_bytes(SPI_HandleTypeDef *hspi) {
-  HAL_StatusTypeDef res;
+  static HAL_StatusTypeDef res;
 
   _state = STATE_DATA;
 
@@ -220,9 +209,18 @@ void _elw2701aa_write_data_cleanup() {
 //       When writing data to the OLED display we must
 //       divide the x value by 2 for two-pixels-per-byte
 
+uint8_t _gdram_byte_from_framebuffer(uint16_t i, uint8_t *color_p) {
+  // Returns the 2x 4bit pixels as one byte
+  uint16_t color_index = i * 2;
+  uint8_t byte = 0x00;
+  byte |= color_p[color_index] & 0xf0;
+  byte |= color_p[color_index + 1] >> 4;
+  return byte;
+}
+
 void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
                           uint8_t x_len, uint8_t start_y, uint8_t y_len,
-                          uint8_t (*data_callback)(uint16_t),
+                          uint8_t *data, uint16_t data_len,
                           elw2701aa_write_data_cb_t completion_callback,
                           void *completion_userdata) {
   if (_state != STATE_IDLE) {
@@ -234,18 +232,54 @@ void elw2701aa_write_data(SPI_HandleTypeDef *hspi, uint8_t start_x,
   _completion_callback = completion_callback;
   _completion_userdata = completion_userdata;
 
-  _frame_buf_len = ((uint16_t)x_len * (uint16_t)y_len) / 2;
-  for (uint16_t i = 0; i < _frame_buf_len; i++) {
-    uint16_t reverse_i = (_frame_buf_len - 1) - i;
+  // Use local buffer that represents what will
+  // be written to the GDRAM to do the row reversing
+  // and bit packing.
+  // This buffer is half data_len because we're writing
+  // 2 x 4-bit pixels per 8-bit uint8_t byte
+  uint16_t buf_len = (data_len / 2);
+  uint8_t buf[buf_len];
+
+  // Check that we won't overflow the buffer
+  _frame_buf_len = buf_len;
+  if (_frame_buf_len > OLED_BUFFER_SIZE) {
+    // Asked to write more then we can handle
+    Error_Handler();
+  }
+
+  // Iterate over buf_len. Remember, this
+  // is in GDRAM space where 1 byte is
+  // two 4-bit pixels
+  for (uint16_t i = 0; i < buf_len; i++) {
+    // First row-reverse the index so that
+    // we're reading from the back of the buffer
+    // first, and with the row content
+    // flipped horizontally
+    uint16_t reverse_i = (buf_len - 1) - i;
     uint16_t remainder = reverse_i % 88;
     uint16_t row_reversed_i = (reverse_i - remainder) +
                               (87 - remainder); // Always gets us start of row!
-    uint8_t data = data_callback(row_reversed_i);
-    //    uint8_t reversed = (data & 0xF0) >> 4;
-    //    reversed |= (data & 0x0F) << 4;
-    _frame_buf[i] = data;
+
+    // Pack two consecutive 4-bit pixels (stored at 2 bytes)
+    // from the data buffer that's passed in, into the
+    // GDRAM 2-pixel per-byte local buffer
+    uint16_t color_index = row_reversed_i * 2;
+    uint8_t byte = 0x00;
+    byte |= data[color_index] & 0xf0;
+    byte |= data[color_index + 1] >> 4;
+    buf[i] = byte;
   }
 
+  // Write the local buffer back to the frame
+  // buffer because this will persist long enough
+  // for the SPI peripheral to read it from DRAM
+  for (uint16_t i = 0; i < buf_len; i++) {
+    data[i] = buf[i];
+  }
+  _frame_buf = data;
+
+  // Begin the write process with command first
+  // Data will be done once the commands write completes
   _elw2701aa_write_data_commands(hspi, start_x, x_len, start_y, y_len);
 }
 
@@ -282,13 +316,4 @@ void _elw2701aa_wait_for_ready(SPI_HandleTypeDef *hspi) {
   while (hspi->State != HAL_SPI_STATE_READY) {
     // Do nothing...
   }
-}
-
-/*
- * Zero-Data
- */
-
-void _elw2701aa_write_zero_data(SPI_HandleTypeDef *hspi) {
-  uint8_t _data_from_buf(uint16_t i) { return 0x00; }
-  elw2701aa_write_data(hspi, 0, 176, 0, 52, _data_from_buf, NULL, NULL);
 }

@@ -12,6 +12,10 @@
 #include "mod.h"
 #include "preset.h"
 
+#define OLED_HORIZ_RES 176
+#define OLED_VERT_RES 52
+#define OLED_BUFFER_SIZE ((OLED_HORIZ_RES * OLED_VERT_RES) / 10)
+
 // State
 typedef enum {
   OLED_SCREEN_PRESET = 0,
