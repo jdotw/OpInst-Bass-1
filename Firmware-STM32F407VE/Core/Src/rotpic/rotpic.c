@@ -223,13 +223,9 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
     case 0: // LEFT0
       switch (pic) {
       case 0b000: // LEFT0:000
-        return true;
       case 0b001: // LEFT0:001
-        return true;
       case 0b010: // LEFT0:010
-        return true;
       case 0b011: // LEFT0:011
-        return true;
       case 0b100: // LEFT0:100
         return true;
       }
@@ -237,7 +233,6 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
     case 2: // LEFT2
       switch (pic) {
       case 0b000: // LEFT2:000
-        return true;
       case 0b001: // LEFT2:001
         return true;
       }
@@ -249,6 +244,7 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
       }
       break;
     }
+    break;
   case I2C_RIGHT:
     switch (channel) {
     case 0: // RIGHT0
@@ -260,12 +256,12 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
     case 1: // RIGHT1
       switch (pic) {
       case 0b000: // RIGHT1:000
-        return true;
       case 0b001: // RIGHT1:001
         return true;
       }
       break;
     }
+    break;
   }
   return false;
 }

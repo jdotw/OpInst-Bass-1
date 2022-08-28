@@ -31,10 +31,7 @@ bool _i2c_mux_select_channel(uint8_t bus, uint8_t channel) {
     HAL_StatusTypeDef res;
     res =
         HAL_I2C_Master_Transmit_DMA(hi2c, i2c_bus[bus].mux_addr << 1, &data, 1);
-    if (!res)
-      return false;
-    else
-      return true;
+    return (res == HAL_OK);
   }
 }
 
@@ -82,12 +79,12 @@ void _i2c_txrx_complete_callback(I2C_HandleTypeDef *hi2c) {
     i2c_bus[bus].mux_selected_channel = i2c_bus[bus].mux_desired_channel;
     i2c_bus[bus].state = I2C_STATE_DATA;
     switch (i2c_bus[bus].direction) {
-    case I2C_DIRECTION_TRANSMIT:
+    case I2C_DIRECTION_TX:
       if (!_i2c_tx_bytes(bus)) {
         Error_Handler();
       }
       break;
-    case I2C_DIRECTION_RECEIVE:
+    case I2C_DIRECTION_RX:
       if (!_i2c_rx_bytes(bus)) {
         Error_Handler();
       }
@@ -129,6 +126,7 @@ bool i2c_tx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
   }
 
   // Setup state
+  i2c_bus[bus].dest_addr = address;
   i2c_bus[bus].data = data;
   i2c_bus[bus].data_len = len;
   i2c_bus[bus].direction = I2C_DIRECTION_TX;
@@ -154,6 +152,7 @@ bool i2c_rx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
   }
 
   // Setup state
+  i2c_bus[bus].dest_addr = address;
   i2c_bus[bus].data = data;
   i2c_bus[bus].data_len = len;
   i2c_bus[bus].direction = I2C_DIRECTION_RX;
