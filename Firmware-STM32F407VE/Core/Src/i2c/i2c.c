@@ -7,15 +7,36 @@
 
 #include "i2c.h"
 #include "main.h"
+#include "tca9544a.h"
 #include <stdbool.h>
 
 I2C_HandleTypeDef *i2c_bus[2];
+
+#define LEFT_I2C_MUX_ADDR 0x70
+#define RIGHT_I2C_MUX_ADDR 0x71
+uint8_t i2c_mux_addr[2] = {0x70, 0x71};
+
+#define I2C_MUX_INVALID 0xFF
+uint8_t i2c_mux_selected[2] = {0xFF, 0xFF};
 
 void _i2c_wait_for_ready(uint8_t bus) {
   // Wait for bus to become available again
   I2C_HandleTypeDef *hi2c = i2c_bus[bus];
   while (hi2c->State != HAL_I2C_STATE_READY) {
     // Do nothing...
+  }
+}
+
+bool _i2c_mux_select(uint8_t bus, uint8_t channel) {
+  if (i2c_mux_selected[bus] == channel)
+    return true;
+  else {
+    bool res = tca9544a_select(bus, i2c_mux_addr[bus], channel);
+    if (!res)
+      return false;
+    else
+      i2c_mux_selected[bus] = channel;
+    return true;
   }
 }
 
@@ -26,7 +47,7 @@ void _i2c_wait_and_select_channel(uint8_t bus, uint8_t channel) {
   // Select channel
   // NOTE: Will return HAL_OK if already on channel
   if (channel != I2C_CHANNEL_DIRECT) {
-    bool did_select = i2c_mux_select(bus, channel);
+    bool did_select = _i2c_mux_select(bus, channel);
     if (!did_select)
       Error_Handler();
   }
