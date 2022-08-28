@@ -40,7 +40,6 @@
 #include "rotpic.h"
 #include "sd.h"
 #include "seq.h"
-#include "tca9544a.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 

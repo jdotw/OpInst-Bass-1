@@ -9,7 +9,6 @@
 
 #include "i2c.h"
 #include "main.h"
-#include "tca9544a.h"
 
 char *_i2c_scan_mux_label(uint8_t bus) {
   switch (bus) {

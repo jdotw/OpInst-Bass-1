@@ -63,7 +63,6 @@ Core/Src/hw/dac7678.c \
 Core/Src/hw/elw2701aa.c \
 Core/Src/hw/is32.c \
 Core/Src/hw/pca9555.c \
-Core/Src/hw/tca9544a.c \
 Core/Src/i2c/i2c.c \
 Core/Src/i2c/i2c_isr.c \
 Core/Src/i2c/i2c_scan.c \

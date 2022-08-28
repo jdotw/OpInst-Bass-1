@@ -7,7 +7,6 @@
 
 #include "i2c.h"
 #include "main.h"
-#include "tca9544a.h"
 #include <stdbool.h>
 
 I2C_HandleTypeDef *i2c_bus[2];
@@ -18,6 +17,12 @@ uint8_t i2c_mux_addr[2] = {0x70, 0x71};
 
 #define I2C_MUX_INVALID 0xFF
 uint8_t i2c_mux_selected[2] = {0xFF, 0xFF};
+
+typedef enum {
+  I2C_STATE_IDLE = 0,
+  I2C_STATE_CHANNEL_STATE,
+  I2C_STATE_TXRX,
+} i2c_state_enum_t;
 
 void _i2c_wait_for_ready(uint8_t bus) {
   // Wait for bus to become available again
@@ -31,7 +36,8 @@ bool _i2c_mux_select(uint8_t bus, uint8_t channel) {
   if (i2c_mux_selected[bus] == channel)
     return true;
   else {
-    bool res = tca9544a_select(bus, i2c_mux_addr[bus], channel);
+    uint8_t data = (channel & 0b11) | 0b100;
+    bool res = i2c_tx(bus, I2C_CHANNEL_DIRECT, i2c_mux_addr[bus], &data, 1);
     if (!res)
       return false;
     else

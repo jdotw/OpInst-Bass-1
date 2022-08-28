@@ -15,7 +15,6 @@
 #include "oled.h"
 #include "osc.h"
 #include "rotpic.h"
-#include "tca9544a.h"
 
 #define ROTPIC_SW1_STATE_MASK 0b00000001
 #define ROTPIC_SW1_CHANGED_MASK 0b00000010

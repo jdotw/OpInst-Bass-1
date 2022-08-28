@@ -13,7 +13,6 @@
 #include "main.h"
 #include "osc.h"
 #include "rotpic.h"
-#include "tca9544a.h"
 
 bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic,
                           uint8_t led_state) {
