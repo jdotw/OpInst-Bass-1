@@ -65,7 +65,6 @@ Core/Src/hw/pca9555.c \
 Core/Src/hw/tca9544a.c \
 Core/Src/i2c/i2c.c \
 Core/Src/i2c/i2c_isr.c \
-Core/Src/i2c/i2c_mux.c \
 Core/Src/i2c/i2c_scan.c \
 Core/Src/main.c \
 Core/Src/midi/midi.c \
