@@ -14,14 +14,40 @@
 #define I2C_LEFT 0
 #define I2C_RIGHT 1
 
-#define I2C_CHANNEL_DIRECT 0xFF // Skip setting the channel before TX/RX
+typedef enum {
+  I2C_STATE_IDLE = 0,
+  I2C_STATE_CHANNEL_SELECT,
+  I2C_STATE_DATA,
+} i2c_state_enum_t;
+
+typedef enum {
+  I2C_DIRECTION_UNKNOWN = 0,
+  I2C_DIRECTION_TX,
+  I2C_DIRECTION_RX,
+} i2c_direction_enum_t;
+
+typedef void (*i2c_callback_t)();
+
+typedef struct i2c_bus_s {
+  i2c_state_enum_t state;
+  i2c_direction_enum_t direction;
+  uint8_t mux_addr;
+  uint8_t mux_desired_channel;
+  uint8_t mux_selected_channel;
+  uint8_t dest_addr;
+  uint8_t *data;
+  uint16_t data_len;
+  I2C_HandleTypeDef *hi2c;
+  i2c_callback_t callback;
+  void *callback_userdata;
+} i2c_bus_t;
 
 /* i2c.c */
-extern I2C_HandleTypeDef *i2c_bus[2];
+extern i2c_bus_t i2c_bus[];
 bool i2c_tx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
-            uint8_t len);
+            uint8_t len, i2c_callback_t callback, void *userdata);
 bool i2c_rx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
-            uint8_t len);
+            uint8_t len, i2c_callback_t callback, void *userdata);
 
 /* i2c_scan.c */
 void i2c_scan_bus(uint8_t bus, uint8_t channel);

@@ -19,11 +19,12 @@
 #define I2C_MUX_INT_MASK 0b11110000
 #define I2C_MUX_INT_ERROR 0b00001000 // Data sheet says this bit is unused
 
-extern uint8_t *i2c_mux_addr;
+#define I2C_CHANNEL_DIRECT 0xFF // Skip setting the channel before TX/RX
 
 uint8_t _i2c_mux_get_int_status(uint8_t bus) {
   uint8_t rx;
-  bool res = i2c_rx(bus, I2C_CHANNEL_DIRECT, i2c_mux_addr[bus], &rx, 1);
+  bool res = i2c_rx(bus, I2C_CHANNEL_DIRECT, i2c_bus[bus].mux_addr, &rx, 1,
+                    NULL, NULL);
   if (!res) {
     Error_Handler(); // FATAL -- We must be able to get our status!
   }

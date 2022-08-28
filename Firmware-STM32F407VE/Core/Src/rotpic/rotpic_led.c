@@ -28,7 +28,8 @@ bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic,
 
   bool res;
 
-  res = i2c_tx(bus, channel, (DEFAULT_ROTPIC_ADDR + pic), &led_state, 1);
+  res = i2c_tx(bus, channel, (DEFAULT_ROTPIC_ADDR + pic), &led_state, 1, NULL,
+               NULL);
 
   return res;
 }

@@ -25,7 +25,7 @@ rotpic_state _rotpic_poll_selected(uint8_t bus, uint8_t channel, uint8_t pic) {
   rotpic_state state;
 
   uint8_t rx[5];
-  bool res = i2c_rx(bus, channel, DEFAULT_ROTPIC_ADDR + pic, rx, 5);
+  bool res = i2c_rx(bus, channel, DEFAULT_ROTPIC_ADDR + pic, rx, 5, NULL, NULL);
   if (!res) {
     // Rotpic doesnt exist?
     state.success = false;

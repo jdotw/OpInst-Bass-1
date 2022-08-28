@@ -116,7 +116,6 @@ lv_obj_t *value2_label = NULL;
 lv_obj_t *name2_label = NULL;
 
 lv_obj_t *ctrl_changed_screen_init() {
-  uint32_t total_ticks_before = HAL_GetTick();
   uint32_t ticks_before = 0;
   uint32_t ticks_after = 0;
   uint32_t ticks_cost = 0;
@@ -173,8 +172,6 @@ lv_obj_t *ctrl_changed_screen_init() {
 }
 
 lv_obj_t *_ctrl_changed_screen_update() {
-
-  uint32_t total_ticks_before = HAL_GetTick();
   uint32_t ticks_before = 0;
   uint32_t ticks_after = 0;
   uint32_t ticks_cost = 0;

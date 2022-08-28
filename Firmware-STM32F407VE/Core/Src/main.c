@@ -145,8 +145,8 @@ int main(void) {
   HAL_Delay(250);
 
   // Set i2c buses
-  i2c_bus[0] = &hi2c1; // Left
-  i2c_bus[1] = &hi2c2; // Right
+  i2c_bus[0].hi2c = &hi2c1; // Left
+  i2c_bus[1].hi2c = &hi2c2; // Right
 
   // Scan all i2c buses
   //  i2c_scan_bus(&hi2c1, LEFT_I2C_MUX_ADDR, 0);
@@ -646,7 +646,6 @@ void Error_Handler(void) {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
-  uint8_t cycle = 0;
   while (1) {
   }
   /* USER CODE END Error_Handler_Debug */
