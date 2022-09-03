@@ -66,6 +66,8 @@ Core/Src/hw/pca9555.c \
 Core/Src/i2c/i2c.c \
 Core/Src/i2c/i2c_isr.c \
 Core/Src/i2c/i2c_scan.c \
+Core/Src/i2c/i2c_resume.c \
+Core/Src/i2c/i2c_resume_left.c \
 Core/Src/main.c \
 Core/Src/midi/midi.c \
 Core/Src/midi/midi_cc.c \

@@ -10,11 +10,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sun Aug 21 10:12:52 2022
+# Make data base, printed on Fri Sep  2 10:55:16 2022
 
 # Variables
 
 # automatic
+ 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
@@ -37,7 +38,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/make
 # environment
-STARSHIP_SESSION_KEY = 3214718303302612
+STARSHIP_SESSION_KEY = 4295108831634892
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
@@ -59,7 +60,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.3iM4YDtlPw/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.hGoCTqse6a/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -109,10 +110,11 @@ USER = jwilson
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:01E3DC85-EF13-4085-960C-81ADDC35F020
+TERM_SESSION_ID = w0t0p0:A2E99B23-2503-4503-85E1-344BC788B366
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
+ 
 MAKE_COMMAND := /Applications/Xcode-beta.app/Contents/Developer/usr/bin/make
 # environment
 TERM_PROGRAM = iTerm.app
@@ -137,7 +139,7 @@ TERM_PROGRAM_VERSION = 3.4.16
 # environment
 NVM_DIR = /Users/jwilson/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.54392571.54392577.58D478A3-F649-447F-8788-D4162FE92AD2
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.61577974.61577980.1AC31F48-5E73-47ED-9FA7-52256AB47454
 # environment
 LC_TERMINAL_VERSION = 3.4.16
 # automatic
@@ -145,7 +147,7 @@ LC_TERMINAL_VERSION = 3.4.16
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:01E3DC85-EF13-4085-960C-81ADDC35F020
+ITERM_SESSION_ID = w0t0p0:A2E99B23-2503-4503-85E1-344BC788B366
 # environment
 COLORFGBG = 7;0
 # environment
@@ -179,7 +181,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 19357
+VSCODE_PID = 2532
 # environment
 STARSHIP_SHELL = zsh
 # variable set hash-table stats:
@@ -207,6 +209,7 @@ all:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has not been updated.
+ 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -265,6 +268,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sun Aug 21 10:12:52 2022
+# Finished Make data base on Fri Sep  2 10:55:16 2022
 
  
