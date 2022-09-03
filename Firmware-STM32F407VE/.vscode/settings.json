@@ -24,5 +24,6 @@
   },
   "stm32-for-vscode.openOCDPath": "/opt/homebrew/bin/openocd",
   "cortex-debug.armToolchainPath": "/Applications/ARM/bin",
-  "cortex-debug.openocdPath": "/opt/homebrew/bin/openocd"
+  "cortex-debug.openocdPath": "/opt/homebrew/bin/openocd",
+  "cortex-debug.variableUseNaturalFormat": true
 }
