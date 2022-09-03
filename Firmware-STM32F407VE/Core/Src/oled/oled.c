@@ -97,11 +97,6 @@ void _oled_flush_callback_write_completed(void *userdata) {
 void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
                           const lv_area_t *area, lv_color_t *color_p) {
 
-  uint32_t ticks_before = 0;
-  uint32_t ticks_after = 0;
-  uint32_t ticks_cost = 0;
-  ticks_before = HAL_GetTick();
-
   uint8_t x_len = (area->x2 - area->x1) + 1;
   uint8_t y_len = (area->y2 - area->y1) + 1;
 
@@ -111,8 +106,4 @@ void _oled_flush_callback(struct _lv_disp_drv_t *disp_drv,
   elw2701aa_write_data(spi, area->x1, x_len, area->y1, y_len,
                        (uint8_t *)color_p, x_len * y_len,
                        &_oled_flush_callback_write_completed, disp_drv);
-
-  ticks_after = HAL_GetTick();
-  ticks_cost = ticks_after - ticks_before;
-  printf("%li", ticks_cost);
 }
