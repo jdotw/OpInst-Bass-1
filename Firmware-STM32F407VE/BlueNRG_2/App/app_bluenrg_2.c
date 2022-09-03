@@ -102,9 +102,9 @@ uint8_t local_name[] = {AD_TYPE_COMPLETE_LOCAL_NAME,
 /* Private function prototypes -----------------------------------------------*/
 static void User_Process(void);
 static void User_Init(void);
-static uint8_t SampleAppInit(void);
+// static uint8_t SampleAppInit(void);
 static void Reset_DiscoveryContext(void);
-static void Setup_DeviceAddress(void);
+// static void Setup_DeviceAddress(void);
 static void Connection_StateMachine(void);
 static uint8_t Find_DeviceName(uint8_t data_length, uint8_t *data_value);
 static void Attribute_Modified_CB(uint16_t handle, uint8_t data_length,
@@ -140,7 +140,7 @@ void MX_BlueNRG_2_Init(void) {
   /* USER CODE END BlueNRG_2_Init_PreTreatment */
 
   /* Initialize the peripherals and the BLE Stack */
-  uint8_t ret;
+  // uint8_t ret;
 
   User_Init();
 
@@ -262,40 +262,40 @@ static void Reset_DiscoveryContext(void) {
  * Input          : None.
  * Return         : None.
  *******************************************************************************/
-static void Setup_DeviceAddress(void) {
-  tBleStatus ret;
-  uint8_t bdaddr[] = {0x00, 0x00, 0x00, 0xE1, 0x80, 0x02};
-  uint8_t random_number[8];
+// static void Setup_DeviceAddress(void) {
+//   tBleStatus ret;
+//   uint8_t bdaddr[] = {0x00, 0x00, 0x00, 0xE1, 0x80, 0x02};
+//   uint8_t random_number[8];
 
-  /* get a random number from BlueNRG */
-  ret = hci_le_rand(random_number);
-  if (ret != BLE_STATUS_SUCCESS) {
-    PRINT_DBG("hci_le_rand() call failed: 0x%02x\r\n", ret);
-  }
+//   /* get a random number from BlueNRG */
+//   ret = hci_le_rand(random_number);
+//   if (ret != BLE_STATUS_SUCCESS) {
+//     PRINT_DBG("hci_le_rand() call failed: 0x%02x\r\n", ret);
+//   }
 
-  discovery_time = 3000; /* at least 3 seconds */
-  /* setup discovery time with random number */
-  for (uint8_t i = 0; i < 8; i++) {
-    discovery_time += (2 * random_number[i]);
-  }
+//   discovery_time = 3000; /* at least 3 seconds */
+//   /* setup discovery time with random number */
+//   for (uint8_t i = 0; i < 8; i++) {
+//     discovery_time += (2 * random_number[i]);
+//   }
 
-  /* Setup last 3 bytes of public address with random number */
-  bdaddr[0] = (uint8_t)(random_number[0]);
-  bdaddr[1] = (uint8_t)(random_number[3]);
-  bdaddr[2] = (uint8_t)(random_number[6]);
+//   /* Setup last 3 bytes of public address with random number */
+//   bdaddr[0] = (uint8_t)(random_number[0]);
+//   bdaddr[1] = (uint8_t)(random_number[3]);
+//   bdaddr[2] = (uint8_t)(random_number[6]);
 
-  ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
-                                  CONFIG_DATA_PUBADDR_LEN, bdaddr);
-  if (ret != BLE_STATUS_SUCCESS) {
-    PRINT_DBG("Setting BD_ADDR failed 0x%02x\r\n", ret);
-  } else {
-    PRINT_DBG("Public address: ");
-    for (uint8_t i = 5; i > 0; i--) {
-      PRINT_DBG("%02X-", bdaddr[i]);
-    }
-    PRINT_DBG("%02X\r\n", bdaddr[0]);
-  }
-}
+//   ret = aci_hal_write_config_data(CONFIG_DATA_PUBADDR_OFFSET,
+//                                   CONFIG_DATA_PUBADDR_LEN, bdaddr);
+//   if (ret != BLE_STATUS_SUCCESS) {
+//     PRINT_DBG("Setting BD_ADDR failed 0x%02x\r\n", ret);
+//   } else {
+//     PRINT_DBG("Public address: ");
+//     for (uint8_t i = 5; i > 0; i--) {
+//       PRINT_DBG("%02X-", bdaddr[i]);
+//     }
+//     PRINT_DBG("%02X\r\n", bdaddr[0]);
+//   }
+// }
 
 /*******************************************************************************
  * Function Name  : Find_DeviceName.
@@ -354,52 +354,53 @@ static void Attribute_Modified_CB(uint16_t handle, uint8_t data_length,
  * Input          : None.
  * Return         : Status.
  *******************************************************************************/
-static uint8_t SampleAppInit(void) {
-  uint8_t ret;
-  uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
+// static uint8_t SampleAppInit(void) {
+//   uint8_t ret;
+//   uint16_t service_handle, dev_name_char_handle, appearance_char_handle;
 
-  /* Sw reset of the device */
-  hci_reset();
-  /**
-   *  To support both the BlueNRG-2 and the BlueNRG-2N a minimum delay of 2000ms
-   * is required at device boot
-   */
-  HAL_Delay(2000);
+//   /* Sw reset of the device */
+//   hci_reset();
+//   /**
+//    *  To support both the BlueNRG-2 and the BlueNRG-2N a minimum delay of
+//    2000ms
+//    * is required at device boot
+//    */
+//   HAL_Delay(2000);
 
-  /* Setup the device address */
-  Setup_DeviceAddress();
+//   /* Setup the device address */
+//   Setup_DeviceAddress();
 
-  /* Set the TX power to -2 dBm */
-  aci_hal_set_tx_power_level(1, 4);
+//   /* Set the TX power to -2 dBm */
+//   aci_hal_set_tx_power_level(1, 4);
 
-  /* GATT Init */
-  ret = aci_gatt_init();
-  if (ret != BLE_STATUS_SUCCESS) {
-    PRINT_DBG("GATT_Init failed: 0x%02x\r\n", ret);
-    return ret;
-  }
+//   /* GATT Init */
+//   ret = aci_gatt_init();
+//   if (ret != BLE_STATUS_SUCCESS) {
+//     PRINT_DBG("GATT_Init failed: 0x%02x\r\n", ret);
+//     return ret;
+//   }
 
-  /* GAP Init */
-  ret = aci_gap_init(GAP_CENTRAL_ROLE | GAP_PERIPHERAL_ROLE, 0x0, 0x07,
-                     &service_handle, &dev_name_char_handle,
-                     &appearance_char_handle);
-  if (ret != BLE_STATUS_SUCCESS) {
-    PRINT_DBG("GAP_Init failed: 0x%02x\r\n", ret);
-    return ret;
-  }
+//   /* GAP Init */
+//   ret = aci_gap_init(GAP_CENTRAL_ROLE | GAP_PERIPHERAL_ROLE, 0x0, 0x07,
+//                      &service_handle, &dev_name_char_handle,
+//                      &appearance_char_handle);
+//   if (ret != BLE_STATUS_SUCCESS) {
+//     PRINT_DBG("GAP_Init failed: 0x%02x\r\n", ret);
+//     return ret;
+//   }
 
-  /* Add Device Service & Characteristics */
-  ret = Add_Sample_Service();
-  if (ret != BLE_STATUS_SUCCESS) {
-    PRINT_DBG("Error while adding service: 0x%02x\r\n", ret);
-    return ret;
-  }
+//   /* Add Device Service & Characteristics */
+//   ret = Add_Sample_Service();
+//   if (ret != BLE_STATUS_SUCCESS) {
+//     PRINT_DBG("Error while adding service: 0x%02x\r\n", ret);
+//     return ret;
+//   }
 
-  /* Reset the discovery context */
-  Reset_DiscoveryContext();
+//   /* Reset the discovery context */
+//   Reset_DiscoveryContext();
 
-  return BLE_STATUS_SUCCESS;
-}
+//   return BLE_STATUS_SUCCESS;
+// }
 
 /**
  * @brief  Initialize User process.
