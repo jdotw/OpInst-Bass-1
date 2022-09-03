@@ -45,14 +45,14 @@ bool pca9555_set_port_output(uint8_t bus, uint8_t channel, uint8_t unit,
                              uint8_t outputs[2]) {
   bool res;
   uint8_t port_0_data[2] = {CMD_OUTPUT_PORT0, outputs[0]};
-  res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_0_data, 2,
-               NULL, NULL);
+  res =
+      i2c_tx_sync(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_0_data, 2);
   if (!res)
     return false;
 
   uint8_t port_1_data[2] = {CMD_OUTPUT_PORT1, outputs[1]};
-  res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_1_data, 2,
-               NULL, NULL);
+  res =
+      i2c_tx_sync(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_1_data, 2);
   if (!res)
     return false;
 
@@ -63,14 +63,14 @@ bool _pca9555_set_port_config(uint8_t bus, uint8_t channel, uint8_t unit,
                               uint8_t ports[2]) {
   bool res;
   uint8_t port_0_data[2] = {CMD_CONFIG_PORT0, ports[0]};
-  res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_0_data, 2,
-               NULL, NULL);
+  res =
+      i2c_tx_sync(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_0_data, 2);
   if (!res)
     return false;
 
   uint8_t port_1_data[2] = {CMD_CONFIG_PORT1, ports[1]};
-  res = i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_1_data, 2,
-               NULL, NULL);
+  res =
+      i2c_tx_sync(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_1_data, 2);
   if (!res)
     return false;
 
@@ -82,13 +82,12 @@ bool pca9555_read_pin_state(uint8_t bus, uint8_t channel, uint8_t unit,
   bool res;
 
   uint8_t cmd = CMD_INPUT_PORT0;
-  res =
-      i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, &cmd, 1, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, &cmd, 1);
   if (!res)
     return false;
 
-  res = i2c_rx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit,
-               (uint8_t *)stateptr, 2, NULL, NULL);
+  res = i2c_rx_sync(bus, channel, DEFAULT_PCA9555_ADDRESS + unit,
+                    (uint8_t *)stateptr, 2);
   if (!res)
     return false;
 

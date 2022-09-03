@@ -124,4 +124,9 @@ void _set_scale_seq_animated(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len,
                              uint8_t offset, bool invert);
 void increment_pattern_step();
 
+// TEMP: Refactor
+lab_t _osc1_saw_lab(ctrl_t *ctrl);
+lab_t _osc1_squ_lab(ctrl_t *ctrl);
+lab_t _osc1_mix_lab(ctrl_t *ctrl);
+
 #endif /* INC_COMMIT_H_ */

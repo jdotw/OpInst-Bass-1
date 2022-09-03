@@ -237,12 +237,14 @@ int main(void) {
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   midi_rx_resume();
+  i2c_resume(I2C_LEFT);
+  i2c_resume(I2C_RIGHT);
   while (1) {
     /* USER CODE END WHILE */
     // MX_BlueNRG_2_Process();
 
     /* USER CODE BEGIN 3 */
-    commit_30hz_timer();
+    // commit_30hz_timer();
 
     // NOTE: Never let MX_BlueNRG_2_Process(); be called here
     //       We call it from commit so that it's on an

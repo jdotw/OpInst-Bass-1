@@ -20,7 +20,7 @@ bool _is32_enable(uint8_t bus, uint8_t channel, uint8_t unit) {
   // 0x7F = RESET
   data[0] = 0x7F;
   data[1] = 0x00;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
@@ -30,14 +30,14 @@ bool _is32_enable(uint8_t bus, uint8_t channel, uint8_t unit) {
   data[1] |= 0b1 << 0;   // Enable normal operation
   data[1] |= 0b11 << 1;  // 16bit PWM Resolution
   data[1] |= 0b000 << 4; // 16Mhz oscillator clock
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
   // 0x6e = GLOBAL CURRENT
   data[0] = 0x6E;
   data[1] = 0xFF;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
@@ -143,47 +143,47 @@ bool is32_set_rgb(uint8_t bus, uint8_t channel, uint8_t unit, uint8_t led,
   data[0] = 0x01 + (led * 6);
   data[1] = red & 0x00FF;
   data[2] = (red & 0xFF00) >> 8;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 3, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 3);
   if (!res)
     return false;
 
   data[0] = 0x03 + (led * 6);
   data[1] = green & 0x00FF;
   data[2] = (green & 0xFF00) >> 8;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 3, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 3);
   if (!res)
     return false;
 
   data[0] = 0x05 + (led * 6);
   data[1] = blue & 0x00FF;
   data[2] = (blue & 0xFF00) >> 8;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 3, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 3);
   if (!res)
     return false;
 
   // Scaling (current)
   data[0] = 0x4A + (led * 3);
   data[1] = red_scale;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
   data[0] = 0x4B + (led * 3);
   data[1] = green_scale;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
   data[0] = 0x4C + (led * 3);
   data[1] = blue_scale;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
   // Write the registers
   data[0] = 0x49;
   data[1] = 0x00;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
 
@@ -196,7 +196,7 @@ bool is32_write_registers(uint8_t bus, uint8_t channel, uint8_t unit) {
   bool res;
   data[0] = 0x49;
   data[1] = 0x00;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
   return true;
@@ -209,7 +209,7 @@ bool is32_set_single_pwm(uint8_t bus, uint8_t channel, uint8_t unit,
   bool res;
   data[0] = 0x01 + (led * 2);
   data[1] = pwm;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
   return true;
@@ -222,7 +222,7 @@ bool is32_set_single_scale(uint8_t bus, uint8_t channel, uint8_t unit,
   bool res;
   data[0] = 0x4A + led;
   data[1] = brightness;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2, NULL, NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, 2);
   if (!res)
     return false;
   return true;
@@ -272,8 +272,7 @@ bool is32_set_sequence_pwm(uint8_t bus, uint8_t channel, uint8_t unit,
     data[(i * 2) + 2] = (0xFF00 & seq[i]) >> 8; // PWM_H
   }
   bool res;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, data_len, NULL,
-               NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, data_len);
   if (!res)
     return false;
   return true;
@@ -288,11 +287,45 @@ bool is32_set_sequence_scale(uint8_t bus, uint8_t channel, uint8_t unit,
     data[i + 1] = seq[i];
   }
   bool res;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, data_len, NULL,
-               NULL);
+  res = i2c_tx_sync(bus, channel, (DEFAULT_IS32_ADDR + unit), data, data_len);
   if (!res)
     return false;
   return true;
+}
+
+/*
+ * Combined PWM and Scale Write
+ */
+
+bool is32_set(uint8_t bus, uint8_t channel, uint8_t unit, uint16_t *pwm,
+              uint8_t *scale, i2c_callback_t callback, void *userdata) {
+
+  // RegAddr + 2-byte PWM x 36 + WriteReg + 1-Byte Scale x 36
+  const uint8_t data_len = 1 + (36 * 2) + 1 + 36;
+  static uint8_t data[1 + (36 * 2) + 1 + 36];
+
+  // Register Address
+  data[0] = 0x01;
+
+  // Fill 2-byte PWM values
+  for (uint8_t i = 0; i < 36; i++) {
+    data[(i * 2) + 1] = 0x00FF & pwm[i];        // PWM_L
+    data[(i * 2) + 2] = (0xFF00 & pwm[i]) >> 8; // PWM_H
+  }
+
+  // Fill PWM Update Register
+  data[1 + (36 * 2)] = 0x00;
+
+  // Fill 1-byte scale value
+  for (uint8_t i = 0; i < 36; i++) {
+    data[i + ((36 * 2) + 2)] = scale[i];
+  }
+
+  // Write
+  bool res;
+  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, data_len,
+               callback, userdata);
+  return res;
 }
 
 /*

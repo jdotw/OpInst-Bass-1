@@ -10,10 +10,12 @@
 #include <stdbool.h>
 
 i2c_bus_t i2c_bus[2] = {{
+                          interrupted : false,
                           mux_addr : 0x70,
                           mux_selected_channel : 0xFF,
                         },
                         {
+                          interrupted : false,
                           mux_addr : 0x71,
                           mux_selected_channel : 0xFF,
                         }};
@@ -98,7 +100,7 @@ void _i2c_txrx_complete_callback(I2C_HandleTypeDef *hi2c) {
     i2c_bus[bus].state = I2C_STATE_IDLE;
     /* Fire callback */
     if (i2c_bus[bus].callback) {
-      i2c_bus[bus].callback(i2c_bus[bus].callback_userdata);
+      i2c_bus[bus].callback(bus, i2c_bus[bus].callback_userdata);
     }
     break;
   default:
@@ -137,11 +139,23 @@ bool i2c_tx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
   i2c_bus[bus].state = I2C_STATE_CHANNEL_SELECT;
   bool res = _i2c_mux_select_channel(bus, channel);
 
-  // HACK: Enable synchronous behavior
+  return res;
+}
+
+bool i2c_tx_sync(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
+                 uint8_t len) {
+  bool res;
+
+  res = i2c_tx(bus, channel, address, data, len, NULL, NULL);
+  if (!res) {
+    return false;
+  }
+
+  // Enable synchronous behavior by waiting for I2C_STATE_IDLE
   while (i2c_bus[bus].state != I2C_STATE_IDLE) {
   }
 
-  return res;
+  return true;
 }
 
 bool i2c_rx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
@@ -163,9 +177,21 @@ bool i2c_rx(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
   i2c_bus[bus].state = I2C_STATE_CHANNEL_SELECT;
   bool res = _i2c_mux_select_channel(bus, channel);
 
-  // HACK: Enable synchronous behavior
+  return res;
+}
+
+bool i2c_rx_sync(uint8_t bus, uint8_t channel, uint8_t address, uint8_t *data,
+                 uint8_t len) {
+  bool res;
+
+  res = i2c_rx(bus, channel, address, data, len, NULL, NULL);
+  if (!res) {
+    return false;
+  }
+
+  // Enable synchronous behavior by waiting for I2C_STATE_IDLE
   while (i2c_bus[bus].state != I2C_STATE_IDLE) {
   }
 
-  return res;
+  return true;
 }

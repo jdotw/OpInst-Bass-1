@@ -23,8 +23,8 @@
 
 uint8_t _i2c_mux_get_int_status(uint8_t bus) {
   uint8_t rx;
-  bool res = i2c_rx(bus, I2C_CHANNEL_DIRECT, i2c_bus[bus].mux_addr, &rx, 1,
-                    NULL, NULL);
+  bool res =
+      i2c_rx_sync(bus, I2C_CHANNEL_DIRECT, i2c_bus[bus].mux_addr, &rx, 1);
   if (!res) {
     Error_Handler(); // FATAL -- We must be able to get our status!
   }
@@ -36,6 +36,12 @@ void i2c_isr(uint8_t bus) {
   // Called when any of the I2C interrupt lines go active-low
   // From here we work out which line it was, then query the
   // mux on that bus to determine which channel has interrupted
+  i2c_bus[bus].interrupted = true;
+
+  while (i2c_bus[bus].state != I2C_STATE_IDLE) {
+    // Hold here until the bus is idle
+  }
+
   uint8_t int_status = _i2c_mux_get_int_status(bus);
   if (int_status & I2C_MUX_INT_ERROR) {
     Error_Handler();
@@ -57,4 +63,8 @@ void i2c_isr(uint8_t bus) {
     // Channel 3 Interrupt
     rotpic_poll_all(bus, 3);
   }
+
+  i2c_bus[bus].interrupted = false;
+
+  i2c_resume(bus);
 }

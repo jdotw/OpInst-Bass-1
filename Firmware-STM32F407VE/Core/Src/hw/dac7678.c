@@ -18,7 +18,7 @@ bool dac7678_reset(uint8_t bus, uint8_t channel, uint8_t dac) {
   // Turn on internal vref
   uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
   uint8_t data[3] = {0b10000000, 0x00, 0b00010000};
-  bool res = i2c_tx(bus, channel, dac_addr, data, 3, NULL, NULL);
+  bool res = i2c_tx_sync(bus, channel, dac_addr, data, 3);
   if (!res)
     Error_Handler();
   res = dac7678_set_value(bus, channel, dac, DAC_CHANNEL_ALL,
@@ -33,7 +33,7 @@ bool dac7678_set_value(uint8_t bus, uint8_t channel, uint8_t dac,
   uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
   uint8_t data[3] = {0b00110000 | (dac_channel & 0b1111), (val >> 4),
                      ((val & 0b1111) << 4)};
-  bool res = i2c_tx(bus, channel, dac_addr, data, 3, NULL, NULL);
+  bool res = i2c_tx_sync(bus, channel, dac_addr, data, 3);
   return res;
 }
 
