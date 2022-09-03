@@ -11,8 +11,8 @@ void commit_led_tuning(ctrl_t *ctrl, seq_t *seq, mod_t *mod,
 
   memset(scale_seq, 0xFF, 36);
 
-  /* Osc1 Saw
-   * LEFT0:00
+  /* Tuning LEDs
+   * LEFT0:01
    * 0, 1
    */
 
@@ -37,12 +37,10 @@ void commit_led_tuning(ctrl_t *ctrl, seq_t *seq, mod_t *mod,
     break;
   }
 
-  // _set_pwm_seq_lab(_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
   res = is32_set_sequence_pwm(I2C_LEFT, 0, 1, 0, pwm_seq, 13);
   if (!res)
     Error_Handler();
 
-  // _set_scale_seq_animated(pwm_seq, scale_seq, 6, 0, false);
   res = is32_set_sequence_scale(I2C_LEFT, 0, 1, 0, scale_seq, 13);
   if (!res)
     Error_Handler();
