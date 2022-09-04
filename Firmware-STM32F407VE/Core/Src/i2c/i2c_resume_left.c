@@ -262,6 +262,26 @@ void _i2c_resume_left_1_00(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_left_1_01(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  seq_t *seq = seq_get();
+
+  /* Steps 1 to 12
+   * LEFT1:01 - Channels 0-35
+   */
+
+  for (uint8_t i = 0; i < 12; i++) {
+    _set_pwm_single(pwm_seq + (i * 3), _button_step_rgb(seq, i));
+  }
+  _set_button_scale_seq(pwm_seq, scale_seq, 12 * 3);
+
+  bool res = is32_set(bus, 1, 0b01, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
   static uint8_t cycle = I2C_LEFT_START;
@@ -288,6 +308,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_1_00:
     // Sub Squ, Noise, Mix, and Start LED
     _i2c_resume_left_1_00(bus, callback, userdata);
+    break;
+  case I2C_LEFT_1_01:
+    // Sequencer Step 1 to 12
+    _i2c_resume_left_1_01(bus, callback, userdata);
     break;
   default:
     cycle = I2C_LEFT_START;
