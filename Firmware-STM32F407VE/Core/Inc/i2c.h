@@ -65,7 +65,8 @@ void i2c_resume(uint8_t bus);
 
 /* i2c_resume_left.c */
 typedef enum {
-  I2C_LEFT_0_00 = 0,
+  I2C_LEFT_START = 0,
+  I2C_LEFT_0_00,
   I2C_LEFT_0_01,
   I2C_LEFT_0_10,
   I2C_LEFT_0_11,
