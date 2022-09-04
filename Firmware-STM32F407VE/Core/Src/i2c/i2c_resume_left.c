@@ -208,6 +208,60 @@ void _i2c_resume_left_0_11(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+#define SUB_PATTERN_OFFSET 0
+
+void _i2c_resume_left_1_00(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  ctrl_t *ctrl = ctrl_get_active();
+  seq_t *seq = seq_get();
+  mod_t *mod = mod_get();
+
+  /* Sub Squ
+   * LEFT1:00
+   * 0, 1
+   */
+
+  _set_pwm_seq_lab(_sub_squ_lab(ctrl), pwm_seq, 2 * 3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 0 + SUB_PATTERN_OFFSET,
+                          false);
+
+  /* Sub Noise
+   * LEFT1:00
+   * 2, 3
+   */
+
+  _set_pwm_seq_lab(_sub_noise_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
+  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
+                          0 + SUB_PATTERN_OFFSET, false);
+
+  /* Sub Mix
+   * LEFT1:00
+   * 4, 5, 6, 7, 8, 9, 10
+   */
+
+  _set_pwm_seq_lab(_sub_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
+
+  _set_scale_seq_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
+                          2 + SUB_PATTERN_OFFSET, false);
+  _set_scale_seq_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), 2 * 3,
+                          4 + SUB_PATTERN_OFFSET, false);
+
+  /* Start LED
+   * LEFT1:00
+   * 11
+   */
+
+  _set_pwm_single(pwm_seq + (11 * 3), _button_start_rgb(seq, mod->state.start));
+
+  _set_button_scale_seq(pwm_seq + (11 * 3), scale_seq + (11 * 3), 1 * 3);
+
+  bool res = is32_set(bus, 1, 0b00, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
   static uint8_t cycle = I2C_LEFT_START;
@@ -230,6 +284,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_0_11:
     // Osc2 Saw, Squ, Noise, Osc2-Only, Osc2 Pre-Filt
     _i2c_resume_left_0_11(bus, callback, userdata);
+    break;
+  case I2C_LEFT_1_00:
+    // Sub Squ, Noise, Mix, and Start LED
+    _i2c_resume_left_1_00(bus, callback, userdata);
     break;
   default:
     cycle = I2C_LEFT_START;

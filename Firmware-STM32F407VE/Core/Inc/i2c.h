@@ -70,6 +70,7 @@ typedef enum {
   I2C_LEFT_0_01,
   I2C_LEFT_0_10,
   I2C_LEFT_0_11,
+  I2C_LEFT_1_00,
 } i2c_left_device_enum_t;
 
 #endif /* INC_I2C_H_ */

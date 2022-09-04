@@ -136,5 +136,11 @@ lab_t _osc2_squ_lab(ctrl_t *ctrl);
 lab_t _osc2_noise_lab(ctrl_t *ctrl);
 lab_t _osc2_mix_lab(ctrl_t *ctrl);
 lab_t _osc2_prefilt_lab(ctrl_t *ctrl);
+lab_t _sub_squ_lab(ctrl_t *ctrl);
+lab_t _sub_noise_lab(ctrl_t *ctrl);
+lab_t _sub_mix_lab(ctrl_t *ctrl);
+uint16_t *_button_start_rgb(seq_t *seq, bool pressed);
+void _set_pwm_single(uint16_t *seqptr, uint16_t *val);
+void _set_button_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
 
 #endif /* INC_COMMIT_H_ */
