@@ -282,6 +282,37 @@ void _i2c_resume_left_1_01(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_left_1_10(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  ctrl_t *ctrl = ctrl_get_active();
+
+  /* Sub Filter Freq Cutoff
+   * LEFT1:10
+   * 0, 1,
+   */
+
+  _set_pwm_seq_lab(_sub_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
+
+  _set_scale_seq_animated(pwm_seq, scale_seq, (2 * 3), 7 + SUB_PATTERN_OFFSET,
+                          false);
+
+  /* Sub Filter Out
+   * LEFT1:10
+   * 2, 3, 4, 5, 6, 7, 8
+   */
+
+  _set_pwm_seq_lab(_sub_filt_reso_lab(ctrl), pwm_seq + (2 * 3), 7 * 3);
+
+  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 7 * 3,
+                          9 + SUB_PATTERN_OFFSET, false);
+
+  bool res = is32_set(bus, 1, 0b10, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
   static uint8_t cycle = I2C_LEFT_START;
@@ -312,6 +343,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_1_01:
     // Sequencer Step 1 to 12
     _i2c_resume_left_1_01(bus, callback, userdata);
+    break;
+  case I2C_LEFT_1_10:
+    // Sub Filter Freq and Reso
+    _i2c_resume_left_1_10(bus, callback, userdata);
     break;
   default:
     cycle = I2C_LEFT_START;
