@@ -128,5 +128,13 @@ void increment_pattern_step();
 lab_t _osc1_saw_lab(ctrl_t *ctrl);
 lab_t _osc1_squ_lab(ctrl_t *ctrl);
 lab_t _osc1_mix_lab(ctrl_t *ctrl);
+lab_t _osc1_filt_freq_lab(ctrl_t *ctrl);
+lab_t _osc1_filt_reso_lab(ctrl_t *ctrl);
+lab_t _osc1_to_2_mix_lab(ctrl_t *ctrl);
+lab_t _osc2_saw_lab(ctrl_t *ctrl);
+lab_t _osc2_squ_lab(ctrl_t *ctrl);
+lab_t _osc2_noise_lab(ctrl_t *ctrl);
+lab_t _osc2_mix_lab(ctrl_t *ctrl);
+lab_t _osc2_prefilt_lab(ctrl_t *ctrl);
 
 #endif /* INC_COMMIT_H_ */
