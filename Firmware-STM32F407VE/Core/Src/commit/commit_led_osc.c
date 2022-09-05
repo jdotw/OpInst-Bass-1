@@ -780,7 +780,7 @@ void _commit_led_osc2_filt_freq(ctrl_t *ctrl) {
   uint8_t scale_seq[36];
 
   /* Osc2 Filt
-   * LEFT3:000
+   * LEFT3:00
    * Freq: 0, 1
    */
 
@@ -809,7 +809,7 @@ void _commit_led_osc2_filt_reso(ctrl_t *ctrl) {
   uint8_t scale_seq[36];
 
   /* Osc2 Filt
-   * LEFT3:000
+   * LEFT3:00
    * Reso: 2, 3
    */
 

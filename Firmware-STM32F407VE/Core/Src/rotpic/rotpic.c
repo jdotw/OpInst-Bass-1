@@ -239,7 +239,7 @@ bool _rotpic_exists(uint8_t bus, uint8_t channel, uint8_t pic) {
       break;
     case 3: // LEFT3
       switch (pic) {
-      case 0b000: // LEFT3:000
+      case 0b000: // LEFT3:00
         return true;
       }
       break;

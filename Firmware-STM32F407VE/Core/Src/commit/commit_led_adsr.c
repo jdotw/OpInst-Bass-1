@@ -170,7 +170,7 @@ void _adsr_led_set_grid_bar(uint16_t val) {
 
 void _commit_led_adsr_osc_filt_env_a(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
   /* Osc Filter ADSR Attack LEDs
-   * LEFT3:001
+   * LEFT3:01
    */
 
   if (!ctrl->changed[CTRL_OSC_FILT_ENV1_A] &&
@@ -226,7 +226,7 @@ void _commit_led_adsr_osc_filt_env_a(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
 
 void _commit_led_adsr_osc_filt_env_d(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
   /* Osc Filter ADSR Decay LEDs
-   * LEFT3:001
+   * LEFT3:01
    */
 
   if (!ctrl->changed[CTRL_OSC_FILT_ENV1_D] &&
@@ -289,7 +289,7 @@ void _commit_led_adsr_osc_filt_env_d(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
 
 void _commit_led_adsr_osc_filt_env_s(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
   /* Osc Filter ADSR Sustain LEDs
-   * LEFT3:001
+   * LEFT3:01
    */
 
   if (!ctrl->changed[CTRL_OSC_FILT_ENV1_S] &&
@@ -366,7 +366,7 @@ void _commit_led_adsr_osc_filt_env_s(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
 
 void _commit_led_adsr_osc_filt_env_r(ctrl_t *ctrl, ctrl_toggle_t *toggle) {
   /* Osc Filter ADSR Release LEDs
-   * LEFT3:001
+   * LEFT3:01
    */
 
   if (!ctrl->changed[CTRL_OSC_FILT_ENV1_R] &&
