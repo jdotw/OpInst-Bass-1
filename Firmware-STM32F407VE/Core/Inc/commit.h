@@ -144,5 +144,9 @@ void _set_pwm_single(uint16_t *seqptr, uint16_t *val);
 void _set_button_scale_seq(uint16_t *pwm_seq, uint8_t *scale_seq, uint8_t len);
 lab_t _sub_filt_freq_lab(ctrl_t *ctrl);
 lab_t _sub_filt_reso_lab(ctrl_t *ctrl);
+extern uint16_t grid[3][3];
+void _adsr_led_set_grid_curve(uint16_t val);
+void _adsr_led_set_grid_stack(uint16_t val);
+void _adsr_led_set_grid_bar(uint16_t val);
 
 #endif /* INC_COMMIT_H_ */

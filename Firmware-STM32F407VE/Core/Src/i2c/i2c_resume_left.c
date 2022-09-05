@@ -313,6 +313,190 @@ void _i2c_resume_left_1_10(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+#define DEFAULT_BRIGHTNESS 0x15
+#define HALF_BRIGHTNESS 0x04
+
+void _i2c_resume_left_1_11(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  ctrl_t *ctrl = ctrl_get_active();
+
+  /* Sub Filter ADSR Attack LEDs
+   * LEFT1:11
+   */
+
+  uint8_t brightness = 0x80;
+  switch (toggle->sub_filt_env_sustain_func) {
+  case ENC_ENV_SUSTAIN:
+    brightness = DEFAULT_BRIGHTNESS;
+    break;
+  case ENC_ENV_AMOUNT:
+    brightness = HALF_BRIGHTNESS;
+    break;
+  default:
+    Error_Handler();
+  }
+
+  /* Attack
+   * [0,2=2][1,2=4][2,2=5]
+   * [0,1=1][1,1=3]
+   * [0,0=0]
+   */
+
+  uint8_t scale_seq[36] = {0};
+  memset(scale_seq, brightness, 36);
+
+  uint16_t pwm_seq[36] = {0x00};
+
+  uint16_t a_val = 0;
+  switch (toggle->sub_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    a_val = ctrl->value[CTRL_SUB_FILT_ENV1_A];
+    break;
+  case ENC_SELECT_ENV_2:
+    a_val = ctrl->value[CTRL_SUB_FILT_ENV2_A];
+    break;
+  default:
+    break;
+  }
+
+  _adsr_led_set_grid_curve(a_val);
+
+  pwm_seq[0] = grid[0][0];
+  pwm_seq[1] = grid[0][1];
+  pwm_seq[2] = grid[0][2];
+  pwm_seq[3] = grid[1][1];
+  pwm_seq[4] = grid[1][2];
+  pwm_seq[5] = grid[2][2];
+
+  /* Decay:
+   * [0,2][1,2][2,2]
+   * [0,1][1,1]
+   * [0,0]
+   *
+   * transposes to:
+   *
+   * [0,0=08]
+   * [0,1=07][1,1=10]
+   * [0,2=06][1,2=09][2,2=11]
+   */
+
+  uint16_t d_val = 0;
+  switch (toggle->sub_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    d_val = ctrl->value[CTRL_SUB_FILT_ENV1_D];
+    break;
+  case ENC_SELECT_ENV_2:
+    d_val = ctrl->value[CTRL_SUB_FILT_ENV2_D];
+    break;
+  default:
+    break;
+  }
+
+  _adsr_led_set_grid_curve(d_val);
+
+  pwm_seq[6] = grid[0][2];
+  pwm_seq[7] = grid[0][1];
+  pwm_seq[8] = grid[0][0];
+  pwm_seq[9] = grid[1][2];
+  pwm_seq[10] = grid[1][1];
+  pwm_seq[11] = grid[2][2];
+
+  /* Sustain:
+   * [0,2=14=14][1,2=17=17]
+   * [0,1=13=13][1,1=16=16]
+   * [0,0=12=12][1,0=15=15]
+   */
+
+  uint16_t s_val = 0;
+  switch (toggle->sub_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    switch (toggle->sub_filt_env_sustain_func) {
+    case ENC_ENV_SUSTAIN:
+      s_val = ctrl->value[CTRL_SUB_FILT_ENV1_S];
+      break;
+    case ENC_ENV_AMOUNT:
+      s_val = ctrl->value[CTRL_SUB_FILT_ENV1_AMT];
+      break;
+    default:
+      break;
+    }
+    break;
+  case ENC_SELECT_ENV_2:
+    switch (toggle->sub_filt_env_sustain_func) {
+    case ENC_ENV_SUSTAIN:
+      s_val = ctrl->value[CTRL_SUB_FILT_ENV2_S];
+      break;
+    case ENC_ENV_AMOUNT:
+      s_val = ctrl->value[CTRL_SUB_FILT_ENV2_AMT];
+      break;
+    default:
+      break;
+    }
+    break;
+  default:
+    break;
+  }
+
+  switch (toggle->sub_filt_env_sustain_func) {
+  case ENC_ENV_SUSTAIN:
+    _adsr_led_set_grid_bar(s_val);
+    break;
+  case ENC_ENV_AMOUNT:
+    _adsr_led_set_grid_stack(s_val);
+    break;
+  default:
+    break;
+  }
+
+  pwm_seq[12] = grid[0][0];
+  pwm_seq[13] = grid[0][1];
+  pwm_seq[14] = grid[0][2];
+  pwm_seq[15] = grid[1][0];
+  pwm_seq[16] = grid[1][1];
+  pwm_seq[17] = grid[1][2];
+
+  /* Release:
+   * [0,2][1,2][2,2]
+   * [0,1][1,1]
+   * [0,0]
+   *
+   * transposes to:
+   *
+   * [0,0=20]
+   * [0,1=19][1,1=22]
+   * [0,2=18][1,2=21][2,2=23]
+   */
+
+  uint16_t r_val = 0;
+  switch (toggle->sub_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    r_val = ctrl->value[CTRL_SUB_FILT_ENV1_R];
+    break;
+  case ENC_SELECT_ENV_2:
+    r_val = ctrl->value[CTRL_SUB_FILT_ENV2_R];
+    break;
+  default:
+    break;
+  }
+
+  _adsr_led_set_grid_curve(r_val);
+
+  pwm_seq[18] = grid[0][2];
+  pwm_seq[19] = grid[0][1];
+  pwm_seq[20] = grid[0][0];
+  pwm_seq[21] = grid[1][2];
+  pwm_seq[22] = grid[1][1];
+  pwm_seq[23] = grid[2][2];
+
+  /* Write */
+
+  bool res = is32_set(bus, 1, 0b11, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
   static uint8_t cycle = I2C_LEFT_START;
@@ -347,6 +531,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_1_10:
     // Sub Filter Freq and Reso
     _i2c_resume_left_1_10(bus, callback, userdata);
+    break;
+  case I2C_LEFT_1_11:
+    // Sub Filter Env ADSR
+    _i2c_resume_left_1_11(bus, callback, userdata);
     break;
   default:
     cycle = I2C_LEFT_START;

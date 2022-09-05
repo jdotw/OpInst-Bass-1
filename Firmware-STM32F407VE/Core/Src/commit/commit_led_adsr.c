@@ -20,7 +20,7 @@
 
 #define MAX_PWM 0xFFFF // 12bit
 
-static uint16_t grid[3][3];
+uint16_t grid[3][3];
 
 void _adsr_led_set_grid_curve(uint16_t val) {
   /* Produces graph like this:
