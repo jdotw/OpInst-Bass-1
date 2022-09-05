@@ -148,5 +148,8 @@ extern uint16_t grid[3][3];
 void _adsr_led_set_grid_curve(uint16_t val);
 void _adsr_led_set_grid_stack(uint16_t val);
 void _adsr_led_set_grid_bar(uint16_t val);
+lab_t _osc2_filt_freq_lab(ctrl_t *ctrl);
+lab_t _osc2_filt_reso_lab(ctrl_t *ctrl);
+lab_t _sub_to_osc2_mix_lab(ctrl_t *ctrl);
 
 #endif /* INC_COMMIT_H_ */

@@ -497,6 +497,44 @@ void _i2c_resume_left_1_11(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_left_3_00(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  ctrl_t *ctrl = ctrl_get_active();
+
+  /* Osc2 Filt
+   * LEFT3:00
+   * Freq: 0, 1
+   */
+
+  _set_pwm_seq_lab(_osc2_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
+
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 8 + OSC2_PATTERN_OFFSET,
+                          false);
+
+  /* Osc2 Filt
+   * LEFT3:00
+   * Reso: 2, 3
+   */
+
+  _set_pwm_seq_lab(_osc2_filt_reso_lab(ctrl), pwm_seq + (2 * 3), (2 * 3));
+
+  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
+                          10 + OSC2_PATTERN_OFFSET, false);
+
+  /* SubToOsc2 Mix Level
+   * LEFT3:00
+   * 7, 8
+   */
+
+  _set_pwm_seq_lab(_sub_to_osc2_mix_lab(ctrl), pwm_seq + (7 * 3), 2 * 3);
+
+  _set_scale_seq_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 2 * 3,
+                          6 + SUB_PATTERN_OFFSET, false);
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
   static uint8_t cycle = I2C_LEFT_START;
@@ -535,6 +573,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_1_11:
     // Sub Filter Env ADSR
     _i2c_resume_left_1_11(bus, callback, userdata);
+    break;
+  case I2C_LEFT_3_00:
+    //  Osc2 Filt, Reso, and Sub to Osc2 Mix
+    _i2c_resume_left_3_00(bus, callback, userdata);
     break;
   default:
     cycle = I2C_LEFT_START;
