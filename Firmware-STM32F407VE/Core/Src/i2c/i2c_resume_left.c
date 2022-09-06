@@ -500,8 +500,8 @@ void _i2c_resume_left_1_11(uint8_t bus, i2c_callback_t callback,
 void _i2c_resume_left_3_00(uint8_t bus, i2c_callback_t callback,
                            void *userdata) {
 
-  uint16_t pwm_seq[36];
-  uint8_t scale_seq[36];
+  uint16_t pwm_seq[36] = {0};
+  uint8_t scale_seq[36] = {0};
   ctrl_t *ctrl = ctrl_get_active();
 
   /* Osc2 Filt
@@ -533,6 +533,193 @@ void _i2c_resume_left_3_00(uint8_t bus, i2c_callback_t callback,
 
   _set_scale_seq_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 2 * 3,
                           6 + SUB_PATTERN_OFFSET, false);
+
+  /* Write */
+  bool res = is32_set(bus, 3, 0b00, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
+void _i2c_resume_left_3_01(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+  uint16_t pwm_seq[36] = {0};
+  uint8_t scale_seq[36] = {0};
+  ctrl_t *ctrl = ctrl_get_active();
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+
+  /* Osc Filter ADSR Attack LEDs
+   * LEFT3:01
+   */
+
+  uint8_t brightness = 0x80;
+  switch (toggle->osc_filt_env_sustain_func) {
+  case ENC_ENV_SUSTAIN:
+    brightness = DEFAULT_BRIGHTNESS;
+    break;
+  case ENC_ENV_AMOUNT:
+    brightness = HALF_BRIGHTNESS;
+    break;
+  default:
+    break;
+  }
+  memset(scale_seq, brightness, 36);
+
+  /* Attack: 0, 1, 2, 3, 4, 5
+   * [0,2=3][1,2=1][2,2=0]
+   * [0,1=4][1,1=2]
+   * [0,0=5]
+   */
+
+  uint16_t a_val = 0;
+  switch (toggle->osc_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    a_val = ctrl->value[CTRL_OSC_FILT_ENV1_A];
+    break;
+  case ENC_SELECT_ENV_2:
+    a_val = ctrl->value[CTRL_OSC_FILT_ENV2_A];
+    break;
+  default:
+    break;
+  }
+
+  _adsr_led_set_grid_curve(a_val);
+  pwm_seq[0] = grid[2][2];
+  pwm_seq[1] = grid[1][2];
+  pwm_seq[2] = grid[1][1];
+  pwm_seq[3] = grid[0][2];
+  pwm_seq[4] = grid[0][1];
+  pwm_seq[5] = grid[0][0];
+
+  /* Decay: 24, 25, 26, 27, 28, 29
+   * [0,2][1,2][2,2]
+   * [0,1][1,1]
+   * [0,0]
+   *
+   * transposes to:
+   *
+   * [0,0=27]
+   * [0,1=28][1,1=25]
+   * [0,2=29][1,2=26][2,2=24]
+   */
+
+  uint16_t d_val = 0;
+  switch (toggle->osc_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    d_val = ctrl->value[CTRL_OSC_FILT_ENV1_D];
+    break;
+  case ENC_SELECT_ENV_2:
+    d_val = ctrl->value[CTRL_OSC_FILT_ENV2_D];
+    break;
+  default:
+    break;
+  }
+
+  _adsr_led_set_grid_curve(d_val);
+  pwm_seq[24] = grid[2][2];
+  pwm_seq[25] = grid[1][1];
+  pwm_seq[26] = grid[1][2];
+  pwm_seq[27] = grid[0][0];
+  pwm_seq[28] = grid[0][1];
+  pwm_seq[29] = grid[0][2];
+
+  /* Sustain: 18, 19, 20, 21, 22, 23
+   * [0,2=14=23][1,2=17=18]
+   * [0,1=13=22][1,1=16=19]
+   * [0,0=12=21][1,0=15=20]
+   */
+
+  uint16_t s_val = 0;
+  switch (toggle->osc_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    switch (toggle->osc_filt_env_sustain_func) {
+    case ENC_ENV_SUSTAIN:
+      s_val = ctrl->value[CTRL_OSC_FILT_ENV1_S];
+      break;
+    case ENC_ENV_AMOUNT:
+      s_val = ctrl->value[CTRL_OSC_FILT_ENV1_AMT];
+      break;
+    default:
+      break;
+    }
+    break;
+  case ENC_SELECT_ENV_2:
+    switch (toggle->osc_filt_env_sustain_func) {
+    case ENC_ENV_SUSTAIN:
+      s_val = ctrl->value[CTRL_OSC_FILT_ENV2_S];
+      break;
+    case ENC_ENV_AMOUNT:
+      s_val = ctrl->value[CTRL_OSC_FILT_ENV2_AMT];
+      break;
+    default:
+      break;
+    }
+    break;
+  default:
+    break;
+  }
+
+  switch (toggle->osc_filt_env_sustain_func) {
+  case ENC_ENV_SUSTAIN:
+    _adsr_led_set_grid_bar(s_val);
+    break;
+  case ENC_ENV_AMOUNT:
+    _adsr_led_set_grid_stack(s_val);
+    break;
+  default:
+    break;
+  }
+
+  // Sustain graph is always DEFAULT_BRIGHTNESS
+  scale_seq[18] = DEFAULT_BRIGHTNESS;
+  scale_seq[19] = DEFAULT_BRIGHTNESS;
+  scale_seq[20] = DEFAULT_BRIGHTNESS;
+  scale_seq[21] = DEFAULT_BRIGHTNESS;
+  scale_seq[22] = DEFAULT_BRIGHTNESS;
+  scale_seq[23] = DEFAULT_BRIGHTNESS;
+
+  pwm_seq[18] = grid[1][2];
+  pwm_seq[19] = grid[1][1];
+  pwm_seq[20] = grid[1][0];
+  pwm_seq[21] = grid[0][0];
+  pwm_seq[22] = grid[0][1];
+  pwm_seq[23] = grid[0][2];
+
+  /* Release: 12, 13, 14, 15, 16, 17
+   * [0,2][1,2][2,2]
+   * [0,1][1,1]
+   * [0,0]
+   *
+   * transposes to:
+   *
+   * [0,0=20=17]
+   * [0,1=19=16][1,1=22=13]
+   * [0,2=18=15][1,2=21=14][2,2=23=12]
+   */
+
+  uint16_t r_val = 0;
+  switch (toggle->osc_filt_env_attack_func) {
+  case ENC_SELECT_ENV_1:
+    r_val = ctrl->value[CTRL_OSC_FILT_ENV1_R];
+    break;
+  case ENC_SELECT_ENV_2:
+    r_val = ctrl->value[CTRL_OSC_FILT_ENV2_R];
+    break;
+  default:
+    break;
+  }
+
+  _adsr_led_set_grid_curve(r_val);
+  pwm_seq[12] = grid[2][2];
+  pwm_seq[13] = grid[1][1];
+  pwm_seq[14] = grid[1][2];
+  pwm_seq[15] = grid[0][2];
+  pwm_seq[16] = grid[0][1];
+  pwm_seq[17] = grid[0][0];
+
+  /* Write */
+  bool res = is32_set(bus, 3, 0b01, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
 }
 
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
@@ -577,6 +764,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_3_00:
     //  Osc2 Filt, Reso, and Sub to Osc2 Mix
     _i2c_resume_left_3_00(bus, callback, userdata);
+    break;
+  case I2C_LEFT_3_01:
+    // Osc2 Filter ADSR
+    _i2c_resume_left_3_01(bus, callback, userdata);
     break;
   default:
     cycle = I2C_LEFT_START;
