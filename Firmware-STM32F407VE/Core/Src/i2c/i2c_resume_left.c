@@ -12,8 +12,8 @@
 #include "main.h"
 #include <stdbool.h>
 
-void _i2c_resume_left_0_00(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
 
   bool res;
   uint16_t pwm_seq[36] = {0};
@@ -60,8 +60,8 @@ void _i2c_resume_left_0_00(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_left_0_01(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_0_01(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
 
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
@@ -103,8 +103,8 @@ void _i2c_resume_left_0_01(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_left_0_10(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_0_10(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
   ctrl_t *ctrl = ctrl_get_active();
@@ -140,8 +140,8 @@ void _i2c_resume_left_0_10(uint8_t bus, i2c_callback_t callback,
 
 #define OSC2_PATTERN_OFFSET -8
 
-void _i2c_resume_left_0_11(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
   ctrl_t *ctrl = ctrl_get_active();
@@ -210,8 +210,8 @@ void _i2c_resume_left_0_11(uint8_t bus, i2c_callback_t callback,
 
 #define SUB_PATTERN_OFFSET 0
 
-void _i2c_resume_left_1_00(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
   ctrl_t *ctrl = ctrl_get_active();
@@ -262,8 +262,8 @@ void _i2c_resume_left_1_00(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_left_1_01(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
   seq_t *seq = seq_get();
@@ -282,8 +282,8 @@ void _i2c_resume_left_1_01(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_left_1_10(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
   ctrl_t *ctrl = ctrl_get_active();
@@ -316,8 +316,8 @@ void _i2c_resume_left_1_10(uint8_t bus, i2c_callback_t callback,
 #define DEFAULT_BRIGHTNESS 0x15
 #define HALF_BRIGHTNESS 0x04
 
-void _i2c_resume_left_1_11(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
 
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   ctrl_t *ctrl = ctrl_get_active();
@@ -497,8 +497,8 @@ void _i2c_resume_left_1_11(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_left_3_00(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_3_00(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
 
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
@@ -540,8 +540,8 @@ void _i2c_resume_left_3_00(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_left_3_01(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
+void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
   ctrl_t *ctrl = ctrl_get_active();
@@ -724,53 +724,53 @@ void _i2c_resume_left_3_01(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
-  static uint8_t cycle = I2C_LEFT_START;
+  static uint8_t cycle = I2C_LEFT_RGBLED_START;
 
   cycle++;
 
   switch (cycle) {
-  case I2C_LEFT_0_00:
+  case I2C_LEFT_RGBLED_0_00:
     // Osc1 Saw, Squ and Mix
-    _i2c_resume_left_0_00(bus, callback, userdata);
+    _i2c_resume_left_rgbled_0_00(bus, callback, userdata);
     break;
-  case I2C_LEFT_0_01:
+  case I2C_LEFT_RGBLED_0_01:
     // Tuning LEDs
-    _i2c_resume_left_0_01(bus, callback, userdata);
+    _i2c_resume_left_rgbled_0_01(bus, callback, userdata);
     break;
-  case I2C_LEFT_0_10:
+  case I2C_LEFT_RGBLED_0_10:
     // Osc1 Filter Freq & Res, and Osc1-to-2 Mix
-    _i2c_resume_left_0_10(bus, callback, userdata);
+    _i2c_resume_left_rgbled_0_10(bus, callback, userdata);
     break;
-  case I2C_LEFT_0_11:
+  case I2C_LEFT_RGBLED_0_11:
     // Osc2 Saw, Squ, Noise, Osc2-Only, Osc2 Pre-Filt
-    _i2c_resume_left_0_11(bus, callback, userdata);
+    _i2c_resume_left_rgbled_0_11(bus, callback, userdata);
     break;
-  case I2C_LEFT_1_00:
+  case I2C_LEFT_RGBLED_1_00:
     // Sub Squ, Noise, Mix, and Start LED
-    _i2c_resume_left_1_00(bus, callback, userdata);
+    _i2c_resume_left_rgbled_1_00(bus, callback, userdata);
     break;
-  case I2C_LEFT_1_01:
+  case I2C_LEFT_RGBLED_1_01:
     // Sequencer Step 1 to 12
-    _i2c_resume_left_1_01(bus, callback, userdata);
+    _i2c_resume_left_rgbled_1_01(bus, callback, userdata);
     break;
-  case I2C_LEFT_1_10:
+  case I2C_LEFT_RGBLED_1_10:
     // Sub Filter Freq and Reso
-    _i2c_resume_left_1_10(bus, callback, userdata);
+    _i2c_resume_left_rgbled_1_10(bus, callback, userdata);
     break;
-  case I2C_LEFT_1_11:
+  case I2C_LEFT_RGBLED_1_11:
     // Sub Filter Env ADSR
-    _i2c_resume_left_1_11(bus, callback, userdata);
+    _i2c_resume_left_rgbled_1_11(bus, callback, userdata);
     break;
-  case I2C_LEFT_3_00:
+  case I2C_LEFT_RGBLED_3_00:
     //  Osc2 Filt, Reso, and Sub to Osc2 Mix
-    _i2c_resume_left_3_00(bus, callback, userdata);
+    _i2c_resume_left_rgbled_3_00(bus, callback, userdata);
     break;
-  case I2C_LEFT_3_01:
+  case I2C_LEFT_RGBLED_3_01:
     // Osc2 Filter ADSR
-    _i2c_resume_left_3_01(bus, callback, userdata);
+    _i2c_resume_left_rgbled_3_01(bus, callback, userdata);
     break;
   default:
-    cycle = I2C_LEFT_START;
+    cycle = I2C_LEFT_RGBLED_START;
     callback(bus, userdata);
   }
 }
