@@ -18,6 +18,39 @@
 #define DEFAULT_BRIGHTNESS 0x15
 #define HALF_BRIGHTNESS 0x04
 
+#define OSC2_PATTERN_OFFSET -8
+
+void _i2c_resume_right_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  uint16_t pwm_seq[36] = {0};
+  uint8_t scale_seq[36] = {0};
+  ctrl_t *ctrl = ctrl_get_active();
+
+  /* Osc1 Drive
+   * RIGHT1:00
+   * 0, 1, 3, 2 <--- Note 3 before 2
+   */
+
+  _set_pwm_seq_lab(_osc1_drive_lab(ctrl), pwm_seq, 4 * 3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 11, false);
+  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3, 13,
+                          true);
+
+  /* Osc Amp Out
+   * RIGHT1:00
+   * 4, 5, 6, 7, 8
+   */
+
+  _set_pwm_seq_lab(_osc_amp_out_lab(ctrl), pwm_seq + (4 * 3), 5 * 3);
+  _set_scale_seq_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
+                          20 + OSC2_PATTERN_OFFSET, false);
+
+  /* Write */
+  bool res = is32_set(bus, 1, 0b00, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
                                    void *userdata) {
   uint16_t pwm_seq[36] = {0};
@@ -189,6 +222,10 @@ void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
   cycle++;
 
   switch (cycle) {
+  case I2C_RIGHT_RGBLED_1_00:
+    // Osc1 Drive and Osc Amp Out
+    _i2c_resume_right_rgbled_1_00(bus, callback, userdata);
+    break;
   case I2C_RIGHT_RGBLED_1_10:
     _i2c_resume_right_rgbled_1_10(bus, callback, userdata);
     break;
