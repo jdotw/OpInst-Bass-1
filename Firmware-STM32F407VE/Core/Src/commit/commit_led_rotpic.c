@@ -16,7 +16,7 @@
 
 void commit_led_rotpic(ctrl_toggle_t *toggle) {
   uint8_t led = 0x0;
-  bool res;
+  // bool res;
 
   // LEFT0:000
   led = 0x00;

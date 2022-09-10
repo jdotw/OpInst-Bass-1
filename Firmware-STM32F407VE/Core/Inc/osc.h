@@ -1,5 +1,5 @@
 /*
- * tuning.h
+ * osc.h
  *
  *  Created on: Apr 12, 2021
  *      Author: jwilson

@@ -151,5 +151,12 @@ void _adsr_led_set_grid_bar(uint16_t val);
 lab_t _osc2_filt_freq_lab(ctrl_t *ctrl);
 lab_t _osc2_filt_reso_lab(ctrl_t *ctrl);
 lab_t _sub_to_osc2_mix_lab(ctrl_t *ctrl);
-
+uint16_t _commit_filt_cutoff_dac_value(
+    note_t *note, uint16_t cutoff, uint16_t env1_attack, uint16_t env1_decay,
+    uint16_t env1_sustain, uint16_t env1_release, uint16_t env1_amount,
+    uint16_t env2_attack, uint16_t env2_decay, uint16_t env2_sustain,
+    uint16_t env2_release, uint16_t env2_amount);
+uint16_t *_button_step_rgb(seq_t *seq, uint8_t i);
+uint16_t _env_amt_lin_to_log(uint16_t input);
+uint16_t _vca_lin_to_log(uint16_t input);
 #endif /* INC_COMMIT_H_ */

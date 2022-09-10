@@ -7,9 +7,11 @@
 
 #include "commit.h"
 #include "ctrl.h"
+#include "dac7678.h"
 #include "i2c.h"
 #include "is32.h"
 #include "main.h"
+#include "osc.h"
 #include "rotpic.h"
 #include <stdbool.h>
 
@@ -786,6 +788,220 @@ void _i2c_resume_left_rotpic_2_000(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_left_dac_0_0_0(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 0, 0, ctrl->value[CTRL_OSC1_FILT_RES],
+                    callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_0_1(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  note_t *note = note_get_active();
+  dac7678_set_value(
+      I2C_LEFT, 0, 0, 1,
+      _commit_filt_cutoff_dac_value(
+          note, ctrl->value[CTRL_OSC1_FILT_CUTOFF],
+          ctrl->value[CTRL_OSC_FILT_ENV1_A], ctrl->value[CTRL_OSC_FILT_ENV1_D],
+          ctrl->value[CTRL_OSC_FILT_ENV1_S], ctrl->value[CTRL_OSC_FILT_ENV1_R],
+          ctrl->value[CTRL_OSC_FILT_ENV1_AMT], 0, 0, 0, 0, 0),
+      callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_0_2(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  note_t *note = note_get_active();
+  uint8_t osc1_note =
+      note->value.note_number + (12 - ctrl->value[CTRL_OSC1_TUNE_COARSE]);
+  uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
+  osc1_note_dac_val +=
+      ((int16_t)CTRL_DEFAULT_MID -
+       ctrl->value[CTRL_OSC1_TUNE_FINE]); // TODO: Handle wrapping, maybe
+                                          // add it to osc1_note_dac_val?
+  dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val, callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_0_3(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 0, 3,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_TO_OSC1_MIX]),
+                    callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_0_4(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 0, 4,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_TO_OSC2_MIX]),
+                    callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_0_5(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 0, 5, ctrl->value[CTRL_OSC1_SQU_PWM], callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_0_6(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 0, 6,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_SAW_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_0_7(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 0, 7,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_SQU_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_2_0(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 0,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC2_NOISE_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_2_1(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 1,
+                    _vca_lin_to_log(ctrl->value[CTRL_SUB_NOISE_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_2_2(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 2,
+                    _vca_lin_to_log(ctrl->value[CTRL_SUB_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_2_3(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 3,
+                    _vca_lin_to_log(ctrl->value[CTRL_SUB_TO_OSC2_MIX]),
+                    callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_2_4(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  note_t *note = note_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 4,
+                    osc_dac_value_for_note(OSC2, note->value.note_number),
+                    callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_2_5(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 5, ctrl->value[CTRL_OSC2_SQU_PWM], callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_2_6(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 6,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC2_SQU_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_2_7(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 2, 7,
+                    _vca_lin_to_log(ctrl->value[CTRL_OSC2_SAW_LVL]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_4_2(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(
+      I2C_LEFT, 0, 4, 2,
+      _env_amt_lin_to_log(CTRL_DEFAULT_MAX - ctrl->value[CTRL_OSC_AMP_ENV_AMT]),
+      callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_4_3(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(
+      I2C_LEFT, 0, 4, 3,
+      _env_amt_lin_to_log(CTRL_DEFAULT_MAX - ctrl->value[CTRL_SUB_AMP_ENV_AMT]),
+      callback, userdata);
+}
+
+void _i2c_resume_left_dac_0_4_6(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 4, 6,
+                    _vca_lin_to_log(ctrl->value[CTRL_FX_WETDRY]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_0_4_7(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 0, 4, 7,
+                    _vca_lin_to_log(ctrl->value[CTRL_FX_FEEDBACK]), callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_2_0_0(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 2, 0, 0, ctrl->value[CTRL_OSC2_FILT_RES],
+                    callback, userdata);
+}
+void _i2c_resume_left_dac_2_0_2(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  note_t *note = note_get_active();
+  dac7678_set_value(
+      I2C_LEFT, 2, 0, 2,
+      _commit_filt_cutoff_dac_value(
+          note, ctrl->value[CTRL_SUB_FILT_CUTOFF],
+          ctrl->value[CTRL_SUB_FILT_ENV1_A], ctrl->value[CTRL_SUB_FILT_ENV1_D],
+          ctrl->value[CTRL_SUB_FILT_ENV1_S], ctrl->value[CTRL_SUB_FILT_ENV1_R],
+          ctrl->value[CTRL_SUB_FILT_ENV1_AMT],
+          ctrl->value[CTRL_SUB_FILT_ENV2_A], ctrl->value[CTRL_SUB_FILT_ENV2_D],
+          ctrl->value[CTRL_SUB_FILT_ENV2_S], ctrl->value[CTRL_SUB_FILT_ENV2_R],
+          ctrl->value[CTRL_SUB_FILT_ENV2_AMT]),
+      callback, userdata);
+}
+void _i2c_resume_left_dac_2_0_4(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_LEFT, 2, 0, 4, ctrl->value[CTRL_SUB_FILT_RES], callback,
+                    userdata);
+}
+
+void _i2c_resume_left_dac_2_0_5(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  note_t *note = note_get_active();
+  dac7678_set_value(
+      I2C_LEFT, 2, 0, 5,
+      _commit_filt_cutoff_dac_value(
+          note, ctrl->value[CTRL_OSC2_FILT_CUTOFF],
+          ctrl->value[CTRL_OSC_FILT_ENV2_A], ctrl->value[CTRL_OSC_FILT_ENV2_D],
+          ctrl->value[CTRL_OSC_FILT_ENV2_S], ctrl->value[CTRL_OSC_FILT_ENV2_R],
+          ctrl->value[CTRL_OSC_FILT_ENV2_AMT], 0, 0, 0, 0, 0),
+      callback, userdata);
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
   static uint8_t cycle = I2C_LEFT_START;
@@ -834,17 +1050,119 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
     _i2c_resume_left_rgbled_3_01(bus, callback, userdata);
     break;
   case I2C_LEFT_ROTPIC_0_000:
+    // Osc1 Square Level/PWM Toggle
     _i2c_resume_left_rotpic_0_000(bus, callback, userdata);
     break;
   case I2C_LEFT_ROTPIC_0_001:
+    // Osc Envelope Toggles
     _i2c_resume_left_rotpic_0_001(bus, callback, userdata);
     break;
   case I2C_LEFT_ROTPIC_0_011:
+    // Osc2 Square Level/PWM Toggle
     _i2c_resume_left_rotpic_0_011(bus, callback, userdata);
     break;
   case I2C_LEFT_ROTPIC_2_000:
+    // Sub Envelope Toggles
     _i2c_resume_left_rotpic_2_000(bus, callback, userdata);
     break;
+  case I2C_LEFT_DAC_0_0_0:
+    // Osc1 Filt Resonance
+    _i2c_resume_left_dac_0_0_0(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_1:
+    // Osc1 Filt CUTOFF
+    _i2c_resume_left_dac_0_0_1(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_2:
+    // Osc1 Note
+    _i2c_resume_left_dac_0_0_2(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_3:
+    // Osc1 to Osc1 Mix
+    _i2c_resume_left_dac_0_0_3(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_4:
+    // Osc1 to Osc2 Mix
+    _i2c_resume_left_dac_0_0_4(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_5:
+    // Osc1 Square PWM
+    _i2c_resume_left_dac_0_0_5(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_6:
+    // Osc1 Saw Level
+    _i2c_resume_left_dac_0_0_6(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_0_7:
+    // Osc1 Square Level
+    _i2c_resume_left_dac_0_0_7(bus, callback, userdata);
+    break;
+
+  case I2C_LEFT_DAC_0_2_0:
+    // Osc2 Noise Level
+    _i2c_resume_left_dac_0_2_0(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_1:
+    // Sub Noise Level
+    _i2c_resume_left_dac_0_2_1(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_2:
+    // Sub Level
+    _i2c_resume_left_dac_0_2_2(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_3:
+    // Sub to Osc 2 Mix
+    _i2c_resume_left_dac_0_2_3(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_4:
+    // Osc2 Note
+    _i2c_resume_left_dac_0_2_4(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_5:
+    // Osc2 Square PWM
+    _i2c_resume_left_dac_0_2_5(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_6:
+    // Osc2 Square Level
+    _i2c_resume_left_dac_0_2_6(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_7:
+    // Osc2 Saw Level
+    _i2c_resume_left_dac_0_2_7(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_4_2:
+    // Osc Amp Envelope Amount
+    _i2c_resume_left_dac_0_4_2(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_4_3:
+    // Sub Amp Envelope Amount
+    _i2c_resume_left_dac_0_4_3(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_4_6:
+    // FX Wet/Dry
+    _i2c_resume_left_dac_0_4_6(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_4_7:
+    // FX Feedback
+    _i2c_resume_left_dac_0_4_7(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_2_0_0:
+    // Osc2 Filt Resonance
+    _i2c_resume_left_dac_2_0_0(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_2_0_2:
+    // Sub Filt Cutoff
+    _i2c_resume_left_dac_2_0_2(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_2_0_4:
+    // Sub Filt Resonance
+    _i2c_resume_left_dac_2_0_4(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_2_0_5:
+    // Osc2 Filt Cutoff
+    _i2c_resume_left_dac_2_0_5(bus, callback, userdata);
+    break;
+
   default:
     cycle = I2C_LEFT_START;
     callback(bus, userdata);

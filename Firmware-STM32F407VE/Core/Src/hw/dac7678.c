@@ -14,22 +14,8 @@
 #define DAC_CHANNEL_ALL 15
 #define DAC_CHANNEL_DEFAULT_VALUE 0
 
-bool dac7678_reset(uint8_t bus, uint8_t channel, uint8_t dac) {
-  // Turn on internal vref
-  uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
-  uint8_t data[3] = {0b10000000, 0x00, 0b00010000};
-  bool res = i2c_tx_sync(bus, channel, dac_addr, data, 3);
-  if (!res)
-    Error_Handler();
-  res = dac7678_set_value(bus, channel, dac, DAC_CHANNEL_ALL,
-                          DAC_CHANNEL_DEFAULT_VALUE);
-  if (!res)
-    Error_Handler();
-  return true;
-}
-
-bool dac7678_set_value(uint8_t bus, uint8_t channel, uint8_t dac,
-                       uint8_t dac_channel, uint16_t val) {
+bool dac7678_set_value_sync(uint8_t bus, uint8_t channel, uint8_t dac,
+                            uint8_t dac_channel, uint16_t val) {
   uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
   uint8_t data[3] = {0b00110000 | (dac_channel & 0b1111), (val >> 4),
                      ((val & 0b1111) << 4)};
@@ -37,14 +23,31 @@ bool dac7678_set_value(uint8_t bus, uint8_t channel, uint8_t dac,
   return res;
 }
 
-bool dac7678_set_value_array(uint8_t bus, uint8_t channel, uint8_t dac,
-                             uint16_t val[7]) {
-  for (uint8_t i = 0; i < 8; i++) {
-    bool res = dac7678_set_value(bus, channel, dac, i, val[i]);
-    if (!res)
-      return res;
-  }
-  return true;
+bool dac7678_set_value(uint8_t bus, uint8_t channel, uint8_t dac,
+                       uint8_t dac_channel, uint16_t val,
+                       i2c_callback_t callback, void *userdata) {
+  uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
+  uint8_t data[3] = {0b00110000 | (dac_channel & 0b1111), (val >> 4),
+                     ((val & 0b1111) << 4)};
+  bool res = i2c_tx(bus, channel, dac_addr, data, 3, callback, userdata);
+  return res;
+}
+
+bool dac7678_reset(uint8_t bus, uint8_t channel, uint8_t dac) {
+  // Turn on internal vref
+  uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
+  uint8_t vref_data[3] = {0b10000000, 0x00, 0b00010000};
+  bool res = i2c_tx_sync(bus, channel, dac_addr, vref_data, 3);
+  if (!res)
+    Error_Handler();
+
+  uint8_t channel_data[3] = {0b00110000 | (DAC_CHANNEL_ALL & 0b1111),
+                             (DAC_CHANNEL_DEFAULT_VALUE >> 4),
+                             ((DAC_CHANNEL_DEFAULT_VALUE & 0b1111) << 4)};
+  res = i2c_tx_sync(bus, channel, dac_addr, channel_data, 3);
+  if (!res)
+    Error_Handler();
+  return res;
 }
 
 void dac7678_init(void) {
@@ -67,16 +70,16 @@ void dac7678_init(void) {
   //         are not used (due to switching to programatic envelopes)
   //         but the DAC channel must be initialized to CTRL_DEFAULT_MAX
   //         to effectively disable the analog envelope generators
-  res = dac7678_set_value(I2C_LEFT, 0, 4, 0, 4095);
+  res = dac7678_set_value_sync(I2C_LEFT, 0, 4, 0, 4095);
   if (!res)
     Error_Handler();
-  res = dac7678_set_value(I2C_LEFT, 0, 4, 1, 4095);
+  res = dac7678_set_value_sync(I2C_LEFT, 0, 4, 1, 4095);
   if (!res)
     Error_Handler();
-  res = dac7678_set_value(I2C_LEFT, 0, 4, 4, 4095);
+  res = dac7678_set_value_sync(I2C_LEFT, 0, 4, 4, 4095);
   if (!res)
     Error_Handler();
-  res = dac7678_set_value(I2C_LEFT, 0, 4, 5, 4095);
+  res = dac7678_set_value_sync(I2C_LEFT, 0, 4, 5, 4095);
   if (!res)
     Error_Handler();
 

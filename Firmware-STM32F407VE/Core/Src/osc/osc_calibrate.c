@@ -80,8 +80,8 @@ uint32_t _dac_value_for_freq(uint8_t dac_bus, uint8_t dac_bus_channel,
                              uint16_t max_dac_value) {
 
   // Set the DAC value
-  bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel,
-                               near_dac_value);
+  bool res = dac7678_set_value_sync(dac_bus, dac_bus_channel, dac_addr,
+                                    dac_channel, near_dac_value);
   if (!res) {
     Error_Handler();
   }
@@ -216,8 +216,8 @@ _calibration_result _dpot_value_for_tracking(
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
   dac_value += dac_tuning_offset;
   expected_frequency = 22000;
-  bool res = dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel,
-                               dac_value);
+  bool res = dac7678_set_value_sync(dac_bus, dac_bus_channel, dac_addr,
+                                    dac_channel, dac_value);
   if (!res)
     Error_Handler();
 
@@ -308,7 +308,8 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel,
   osc_dac_offset[osc] = result.dac_offset;
 
   uint16_t dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A2);
-  dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
+  dac7678_set_value_sync(dac_bus, dac_bus_channel, dac_addr, dac_channel,
+                         dac_value);
   freq = _get_frequency(timer, timer_channel);
   if (freq < 10700 || freq > 11300) {
     // Not scaling properly
@@ -316,7 +317,8 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel,
   }
 
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A3);
-  dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
+  dac7678_set_value_sync(dac_bus, dac_bus_channel, dac_addr, dac_channel,
+                         dac_value);
   freq = _get_frequency(timer, timer_channel);
   if (freq < 21700 || freq > 22300) {
     // Not scaling properly
@@ -324,7 +326,8 @@ void _osc_calibrate_voice(osc_t osc, uint8_t dac_bus, uint8_t dac_bus_channel,
   }
 
   dac_value = osc_dac_value_for_note(osc, MIDI_NOTE_A4);
-  dac7678_set_value(dac_bus, dac_bus_channel, dac_addr, dac_channel, dac_value);
+  dac7678_set_value_sync(dac_bus, dac_bus_channel, dac_addr, dac_channel,
+                         dac_value);
   freq = _get_frequency(timer, timer_channel);
   if (freq < 43700 || freq > 44300) {
     // Not scaling properly
