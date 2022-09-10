@@ -302,28 +302,28 @@ bool is32_set(uint8_t bus, uint8_t channel, uint8_t unit, uint16_t *pwm,
 
   // RegAddr + 2-byte PWM x 36 + WriteReg + 1-Byte Scale x 36
   const uint8_t data_len = 1 + (36 * 2) + 1 + 36;
-  static uint8_t data[1 + (36 * 2) + 1 + 36];
+  static uint8_t data[I2C_BUS_MAX][1 + (36 * 2) + 1 + 36];
 
   // Register Address
-  data[0] = 0x01;
+  data[bus][0] = 0x01;
 
   // Fill 2-byte PWM values
   for (uint8_t i = 0; i < 36; i++) {
-    data[(i * 2) + 1] = 0x00FF & pwm[i];        // PWM_L
-    data[(i * 2) + 2] = (0xFF00 & pwm[i]) >> 8; // PWM_H
+    data[bus][(i * 2) + 1] = 0x00FF & pwm[i];        // PWM_L
+    data[bus][(i * 2) + 2] = (0xFF00 & pwm[i]) >> 8; // PWM_H
   }
 
   // Fill PWM Update Register
-  data[1 + (36 * 2)] = 0x00;
+  data[bus][1 + (36 * 2)] = 0x00;
 
   // Fill 1-byte scale value
   for (uint8_t i = 0; i < 36; i++) {
-    data[i + ((36 * 2) + 2)] = scale[i];
+    data[bus][i + ((36 * 2) + 2)] = scale[i];
   }
 
   // Write
   bool res;
-  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data, data_len,
+  res = i2c_tx(bus, channel, (DEFAULT_IS32_ADDR + unit), data[bus], data_len,
                callback, userdata);
   return res;
 }

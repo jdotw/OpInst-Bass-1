@@ -26,8 +26,8 @@ bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic,
   // 5 = LED 6 On=1 Off=0
   // 6 = Unused
   // 7 = Unused
-  static uint8_t static_led_state = 0x0;
-  static_led_state = led_state;
-  return i2c_tx(bus, channel, (DEFAULT_ROTPIC_ADDR + pic), &static_led_state, 1,
-                callback, userdata);
+  static uint8_t static_led_state[I2C_BUS_MAX];
+  static_led_state[bus] = led_state;
+  return i2c_tx(bus, channel, (DEFAULT_ROTPIC_ADDR + pic),
+                &static_led_state[bus], 1, callback, userdata);
 }

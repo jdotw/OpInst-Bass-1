@@ -13,6 +13,7 @@
 
 #define I2C_LEFT 0
 #define I2C_RIGHT 1
+#define I2C_BUS_MAX 2
 
 typedef enum {
   I2C_STATE_IDLE = 0,
@@ -104,6 +105,13 @@ typedef enum {
   I2C_LEFT_DAC_2_0_2,
   I2C_LEFT_DAC_2_0_4,
   I2C_LEFT_DAC_2_0_5,
-} I2C_LEFT_RGBLED_device_enum_t;
+} i2c_list_device_enum_t;
+
+typedef enum {
+  I2C_RIGHT_START = 0,
+  I2C_RIGHT_RGBLED_1_10,
+  I2C_RIGHT_ROTPIC_0_000,
+  I2C_RIGHT_ROTPIC_1_001
+} i2c_right_device_enum_t;
 
 #endif /* INC_I2C_H_ */
