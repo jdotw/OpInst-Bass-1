@@ -27,9 +27,11 @@ bool dac7678_set_value(uint8_t bus, uint8_t channel, uint8_t dac,
                        uint8_t dac_channel, uint16_t val,
                        i2c_callback_t callback, void *userdata) {
   uint8_t dac_addr = DEFAULT_DAC7678_ADDRESS + dac;
-  static uint8_t data[3] = {0b00110000 | (dac_channel & 0b1111), (val >> 4),
-                            ((val & 0b1111) << 4)};
-  bool res = i2c_tx(bus, channel, dac_addr, data, 3, callback, userdata);
+  static uint8_t data[I2C_BUS_MAX][3];
+  data[bus][0] = 0b00110000 | (dac_channel & 0b1111);
+  data[bus][1] = val >> 4;
+  data[bus][2] = (val & 0b1111) << 4;
+  bool res = i2c_tx(bus, channel, dac_addr, data[bus], 3, callback, userdata);
   return res;
 }
 
