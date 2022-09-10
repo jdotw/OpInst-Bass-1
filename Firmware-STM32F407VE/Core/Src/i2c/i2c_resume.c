@@ -10,6 +10,8 @@
 #include <stdbool.h>
 
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback, void *userdata);
+void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
+                           void *userdata);
 
 void _i2c_resume_callback(uint8_t bus, void *userdata) {
   if (!i2c_bus[bus].interrupted) {
@@ -31,7 +33,7 @@ void i2c_resume(uint8_t bus) {
     _i2c_resume_left_bus(bus, _i2c_resume_callback, NULL);
     break;
   case I2C_RIGHT:
-    // _i2c_resume_right_bus(bus);
+    _i2c_resume_right_bus(bus, _i2c_resume_callback, NULL);
     break;
   default:
     Error_Handler();
