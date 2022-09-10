@@ -135,6 +135,17 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
   pwm_seq[22] = grid[1][1];
   pwm_seq[23] = grid[2][2];
 
+  /* Step Sequencer Buttons 13 to 16
+   * RIGHT1:10 - Channels 24-35
+   */
+
+  seq_t *seq = seq_get();
+
+  for (uint8_t i = 0; i < 4; i++) {
+    _set_pwm_single(pwm_seq + 24 + (i * 3), _button_step_rgb(seq, i + 12));
+  }
+  _set_button_scale_seq(pwm_seq + 24, scale_seq + 24, 4 * 3);
+
   /* Write */
   bool res = is32_set(bus, 1, 0b10, pwm_seq, scale_seq, callback, userdata);
   if (!res)
