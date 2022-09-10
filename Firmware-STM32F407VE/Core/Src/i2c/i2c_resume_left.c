@@ -10,6 +10,7 @@
 #include "i2c.h"
 #include "is32.h"
 #include "main.h"
+#include "rotpic.h"
 #include <stdbool.h>
 
 void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
@@ -722,9 +723,72 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_left_rotpic_0_000(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  // LEFT0:000
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  uint8_t led = 0x0;
+  led = 0x00;
+  led |= (toggle->osc1_squ_func == ENC_OSC_SQU_LEVEL) << ROTPIC_LED1_BIT_SHIFT;
+  led |= (toggle->osc1_squ_func == ENC_OSC_SQU_PWM) << ROTPIC_LED2_BIT_SHIFT;
+  bool res = rotpic_led_set_state(I2C_LEFT, 0, 0b000, led, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
+void _i2c_resume_left_rotpic_0_011(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  // LEFT0:011
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  uint8_t led = 0x0;
+  led = 0x00;
+  led |= (toggle->osc2_squ_func == ENC_OSC_SQU_LEVEL) << ROTPIC_LED1_BIT_SHIFT;
+  led |= (toggle->osc2_squ_func == ENC_OSC_SQU_PWM) << ROTPIC_LED2_BIT_SHIFT;
+  bool res = rotpic_led_set_state(I2C_LEFT, 0, 0b011, led, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
+void _i2c_resume_left_rotpic_0_001(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  // LEFT0:001
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  uint8_t led = 0x0;
+  led = 0x00;
+  led |= (toggle->osc_filt_env_attack_func == ENC_SELECT_ENV_1)
+         << ROTPIC_LED1_BIT_SHIFT;
+  led |= (toggle->osc_filt_env_attack_func == ENC_SELECT_ENV_2)
+         << ROTPIC_LED2_BIT_SHIFT;
+  led |= (toggle->osc_filt_env_sustain_func == ENC_ENV_SUSTAIN)
+         << ROTPIC_LED4_BIT_SHIFT;
+  led |= (toggle->osc_filt_env_sustain_func == ENC_ENV_AMOUNT)
+         << ROTPIC_LED3_BIT_SHIFT;
+  bool res = rotpic_led_set_state(I2C_LEFT, 0, 0b001, led, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
+void _i2c_resume_left_rotpic_2_000(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  // LEFT2:000
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  uint8_t led = 0x0;
+  led |= (toggle->sub_filt_env_attack_func == ENC_SELECT_ENV_1)
+         << ROTPIC_LED1_BIT_SHIFT;
+  led |= (toggle->sub_filt_env_attack_func == ENC_SELECT_ENV_2)
+         << ROTPIC_LED2_BIT_SHIFT;
+  led |= (toggle->sub_filt_env_sustain_func == ENC_ENV_SUSTAIN)
+         << ROTPIC_LED3_BIT_SHIFT;
+  led |= (toggle->sub_filt_env_sustain_func == ENC_ENV_AMOUNT)
+         << ROTPIC_LED4_BIT_SHIFT;
+  bool res = rotpic_led_set_state(I2C_LEFT, 2, 0b000, led, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
-  static uint8_t cycle = I2C_LEFT_RGBLED_START;
+  static uint8_t cycle = I2C_LEFT_START;
 
   cycle++;
 
@@ -769,8 +833,20 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
     // Osc2 Filter ADSR
     _i2c_resume_left_rgbled_3_01(bus, callback, userdata);
     break;
+  case I2C_LEFT_ROTPIC_0_000:
+    _i2c_resume_left_rotpic_0_000(bus, callback, userdata);
+    break;
+  case I2C_LEFT_ROTPIC_0_001:
+    _i2c_resume_left_rotpic_0_001(bus, callback, userdata);
+    break;
+  case I2C_LEFT_ROTPIC_0_011:
+    _i2c_resume_left_rotpic_0_011(bus, callback, userdata);
+    break;
+  case I2C_LEFT_ROTPIC_2_000:
+    _i2c_resume_left_rotpic_2_000(bus, callback, userdata);
+    break;
   default:
-    cycle = I2C_LEFT_RGBLED_START;
+    cycle = I2C_LEFT_START;
     callback(bus, userdata);
   }
 }

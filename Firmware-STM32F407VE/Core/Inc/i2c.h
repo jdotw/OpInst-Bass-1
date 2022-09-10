@@ -65,7 +65,7 @@ void i2c_resume(uint8_t bus);
 
 /* i2c_resume_left.c */
 typedef enum {
-  I2C_LEFT_RGBLED_START = 0,
+  I2C_LEFT_START = 0,
   I2C_LEFT_RGBLED_0_00,
   I2C_LEFT_RGBLED_0_01,
   I2C_LEFT_RGBLED_0_10,
@@ -76,6 +76,9 @@ typedef enum {
   I2C_LEFT_RGBLED_1_11,
   I2C_LEFT_RGBLED_3_00,
   I2C_LEFT_RGBLED_3_01,
+  I2C_LEFT_ROTPIC_0_000,
+  I2C_LEFT_ROTPIC_0_001,
+  I2C_LEFT_ROTPIC_0_011,
   I2C_LEFT_ROTPIC_2_000,
 } I2C_LEFT_RGBLED_device_enum_t;
 

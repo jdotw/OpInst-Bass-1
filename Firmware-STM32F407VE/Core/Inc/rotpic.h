@@ -40,6 +40,7 @@ void rotpic_poll_all(uint8_t bus, uint8_t channel);
 #define ROTPIC_LED7_BIT_SHIFT 6
 
 bool rotpic_led_set_state(uint8_t bus, uint8_t channel, uint8_t pic,
-                          uint8_t led_state);
+                          uint8_t led_state, i2c_callback_t callback,
+                          void *userdata);
 
 #endif /* INC_ROTPIC_H_ */

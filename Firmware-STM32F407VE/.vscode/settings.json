@@ -21,7 +21,8 @@
     "vector": "c",
     "stdbool.h": "c",
     "string.h": "c",
-    "stm32f4xx_hal.h": "c"
+    "stm32f4xx_hal.h": "c",
+    "rotpic.h": "c"
   },
   "stm32-for-vscode.openOCDPath": "/opt/homebrew/bin/openocd",
   "cortex-debug.armToolchainPath": "/Applications/ARM/bin",
