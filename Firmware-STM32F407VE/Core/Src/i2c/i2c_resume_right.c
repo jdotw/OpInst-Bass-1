@@ -51,6 +51,41 @@ void _i2c_resume_right_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+#define FX_PATTERN_OFFSET 2
+#define SUB_PATTERN_OFFSET 0
+
+void _i2c_resume_right_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  uint16_t pwm_seq[36] = {0};
+  uint8_t scale_seq[36] = {0};
+  ctrl_t *ctrl = ctrl_get_active();
+
+  /* FX Wet
+   * RIGHT1:01
+   * 0, 1, 2, 3, 4, 5, 6
+   *
+   */
+
+  _set_pwm_seq_lab(_fx_wet_lab(ctrl), pwm_seq, (7 * 3));
+  _set_scale_seq_animated(pwm_seq, scale_seq, (7 * 3), 0 + FX_PATTERN_OFFSET,
+                          false);
+
+  /* Sub Amp Out
+   * RIGHT1:01
+   * 7, 8, 9, 10, 11
+   *
+   */
+
+  _set_pwm_seq_lab(_sub_amp_out_lab(ctrl), pwm_seq + (7 * 3), 5 * 3);
+  _set_scale_seq_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 5 * 3,
+                          16 + SUB_PATTERN_OFFSET, false);
+
+  /* Write */
+  bool res = is32_set(bus, 1, 0b01, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
                                    void *userdata) {
   uint16_t pwm_seq[36] = {0};
@@ -225,6 +260,10 @@ void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_RIGHT_RGBLED_1_00:
     // Osc1 Drive and Osc Amp Out
     _i2c_resume_right_rgbled_1_00(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_RGBLED_1_01:
+    // Sub Amp Out and FX Wet
+    _i2c_resume_right_rgbled_1_01(bus, callback, userdata);
     break;
   case I2C_RIGHT_RGBLED_1_10:
     _i2c_resume_right_rgbled_1_10(bus, callback, userdata);

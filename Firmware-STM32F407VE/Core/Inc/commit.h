@@ -161,4 +161,6 @@ uint16_t _env_amt_lin_to_log(uint16_t input);
 uint16_t _vca_lin_to_log(uint16_t input);
 lab_t _osc1_drive_lab(ctrl_t *ctrl);
 lab_t _osc_amp_out_lab(ctrl_t *ctrl);
+lab_t _fx_wet_lab(ctrl_t *ctrl);
+lab_t _sub_amp_out_lab(ctrl_t *ctrl);
 #endif /* INC_COMMIT_H_ */
