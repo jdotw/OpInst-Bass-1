@@ -5,6 +5,7 @@
  *      Author: jwilson
  */
 
+#include "blink.h"
 #include "commit.h"
 #include "ctrl.h"
 #include "dac7678.h"
@@ -335,6 +336,80 @@ void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_right_rgbled_2_01(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  /* FX Dry
+   * RIGHT2:01
+   * 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+   */
+
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  ctrl_t *ctrl = ctrl_get_active();
+
+  _set_pwm_seq_lab(_fx_dry_lab(ctrl), pwm_seq, 11 * 3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 11 * 3, 0 + FX_PATTERN_OFFSET,
+                          false);
+
+  /* Write */
+  bool res = is32_set(bus, 2, 0b01, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
+void _i2c_resume_right_rgbled_2_10(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  /* RIGHT2:10
+   * FX Feedback, Page LEDs and Shift Button LED
+   */
+
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  ctrl_t *ctrl = ctrl_get_active();
+  seq_t *seq = seq_get();
+  mod_t *mod = mod_get();
+
+  /* FX Feedback
+   * RIGHT2:10
+   * 0, 1, 2, 3, 4, 5, 7
+   */
+
+  _set_pwm_seq_lab(_fx_feedback_lab(ctrl), pwm_seq, 8 * 3);
+  _set_scale_seq_animated(pwm_seq, scale_seq, 8 * 3, 5 + FX_PATTERN_OFFSET,
+                          true);
+
+  /* Shift Button and Page LEDs
+   * RIGHT2:10
+   * - Shift is 24,25,26 (RGB)
+   * - Page is 32,33,34,35 (4 x Single LED)
+   * - NOTE: Channels 27,28,29,30,31 are unused
+   *         This allows a contiguous write to set these LED value
+   */
+
+  // Shift is 0,1,2 [actually 24,25,26]
+  _set_pwm_single(pwm_seq + 24, _button_shift_rgb(mod->state.shift));
+  _set_button_scale_seq(pwm_seq + 24, scale_seq + 24, 3);
+
+  // Page is 8,9,10,11 [actually 32,33,34,35]
+  for (uint8_t i = 0; i < 4; i++) {
+    if (i == seq->state.selected_page) {
+      pwm_seq[i + 32] = 0xFFFF;
+      scale_seq[i + 32] = 0x90;
+    } else if (i == seq->state.active_page) {
+      pwm_seq[i + 32] = 0xFFFF;
+      scale_seq[i + 32] = blink ? 0x10 : 0x00;
+    } else {
+      pwm_seq[i + 32] = 0x0000;
+      scale_seq[i + 32] = 0x00;
+    }
+  }
+
+  /* Write */
+  bool res = is32_set(bus, 2, 0b10, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_right_rotpic_0_000(uint8_t bus, i2c_callback_t callback,
                                     void *userdata) {
 
@@ -387,6 +462,14 @@ void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_RIGHT_RGBLED_2_00:
     // Osc Amp ADSR
     _i2c_resume_right_rgbled_2_00(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_RGBLED_2_01:
+    // FX Dry
+    _i2c_resume_right_rgbled_2_01(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_RGBLED_2_10:
+    // Step Sequencer Buttons
+    _i2c_resume_right_rgbled_2_10(bus, callback, userdata);
     break;
   case I2C_RIGHT_ROTPIC_0_000:
     // Osc Amp Env Toggle

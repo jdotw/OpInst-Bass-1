@@ -725,6 +725,27 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_left_rgbled_3_10(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
+  /* Osc2 Drive
+   * LEFT3:10
+   * 3, 4, 5, 6, 7, 8, 9, 10
+   */
+
+  uint16_t pwm_seq[36];
+  uint8_t scale_seq[36];
+  ctrl_t *ctrl = ctrl_get_active();
+
+  _set_pwm_seq_lab(_osc2_drive_lab(ctrl), pwm_seq + (3 * 3), 8 * 3);
+  _set_scale_seq_animated(pwm_seq + (3 * 3), scale_seq + (3 * 3), 8 * 3,
+                          12 + OSC2_PATTERN_OFFSET, false);
+
+  /* Write */
+  bool res = is32_set(bus, 3, 0b10, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_left_rotpic_0_000(uint8_t bus, i2c_callback_t callback,
                                    void *userdata) {
   // LEFT0:000
@@ -1049,6 +1070,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
     // Osc2 Filter ADSR
     _i2c_resume_left_rgbled_3_01(bus, callback, userdata);
     break;
+  case I2C_LEFT_RGBLED_3_10:
+    // Osc2 Drive
+    _i2c_resume_left_rgbled_3_10(bus, callback, userdata);
+    break;
   case I2C_LEFT_ROTPIC_0_000:
     // Osc1 Square Level/PWM Toggle
     _i2c_resume_left_rotpic_0_000(bus, callback, userdata);
@@ -1097,7 +1122,6 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
     // Osc1 Square Level
     _i2c_resume_left_dac_0_0_7(bus, callback, userdata);
     break;
-
   case I2C_LEFT_DAC_0_2_0:
     // Osc2 Noise Level
     _i2c_resume_left_dac_0_2_0(bus, callback, userdata);
