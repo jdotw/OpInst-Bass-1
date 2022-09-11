@@ -6,6 +6,7 @@
  */
 
 #include "note.h"
+#include "i2c.h"
 #include "midi.h"
 #include <string.h>
 
@@ -26,6 +27,12 @@ void note_set_on(uint8_t note_number) {
     note.changed.note_on = true;
     note.event_ticks = HAL_GetTick();
   }
+
+  // Reset i2c bus handlers to ensure
+  // that the high-priority tasks are
+  // performed on the next cycle
+  i2c_resume_left_bus_reset();
+  i2c_resume_right_bus_reset();
 }
 
 void note_set_off() {
@@ -34,6 +41,11 @@ void note_set_off() {
     note.changed.note_on = true;
     note.event_ticks = HAL_GetTick();
   }
+  // Reset i2c bus handlers to ensure
+  // that the high-priority tasks are
+  // performed on the next cycle
+  i2c_resume_left_bus_reset();
+  i2c_resume_right_bus_reset();
 }
 
 void note_changed_reset() {

@@ -546,31 +546,24 @@ void _i2c_resume_right_gpio_2_0(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-i2c_right_device_phase0_enum_t phase0_cycle = I2C_RIGHT_PHASE0_START;
-i2c_right_device_phase1_enum_t phase1_cycle = I2C_RIGHT_PHASE1_START;
+i2c_right_device_enum_t right_cycle = I2C_RIGHT_START;
 
-void _i2c_resume_right_bus_phase0(uint8_t bus, i2c_callback_t callback,
-                                  void *userdata) {
+void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
 
-  phase0_cycle++;
+  right_cycle++;
 
-  switch (phase0_cycle) {
+  switch (right_cycle) {
+  /*
+   * High Priority Peripherals
+   */
   case I2C_RIGHT_GPIO_2_0:
     // Gate and Trigger GPIO
     _i2c_resume_right_gpio_2_0(bus, callback, userdata);
     break;
-  default:
-    phase0_cycle = I2C_RIGHT_PHASE0_START;
-    callback(bus, userdata);
-  }
-}
-
-void _i2c_resume_right_bus_phase1(uint8_t bus, i2c_callback_t callback,
-                                  void *userdata) {
-
-  phase1_cycle++;
-
-  switch (phase1_cycle) {
+  /*
+   * Other Peripherals
+   */
   case I2C_RIGHT_DAC_2_2_0:
     // Osc Amp Env Release
     _i2c_resume_right_dac_2_2_0(bus, callback, userdata);
@@ -636,24 +629,9 @@ void _i2c_resume_right_bus_phase1(uint8_t bus, i2c_callback_t callback,
     _i2c_resume_right_rotpic_1_001(bus, callback, userdata);
     break;
   default:
-    phase1_cycle = I2C_RIGHT_PHASE1_START;
+    i2c_resume_right_bus_reset();
     callback(bus, userdata);
   }
 }
 
-void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
-  static uint8_t phase = 0;
-  phase++;
-  switch (phase) {
-  case 1:
-    _i2c_resume_right_bus_phase0(bus, callback, userdata);
-    break;
-  case 2:
-    _i2c_resume_right_bus_phase1(bus, callback, userdata);
-    break;
-  default:
-    phase = 0;
-    callback(bus, userdata);
-  }
-}
+void i2c_resume_right_bus_reset(void) { right_cycle = I2C_RIGHT_START; }

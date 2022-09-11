@@ -67,6 +67,10 @@ void i2c_resume(uint8_t bus);
 /* i2c_resume_left.c */
 typedef enum {
   I2C_LEFT_START = 0,
+  // High Priority Peripherals
+  I2C_LEFT_DAC_0_0_2,
+  I2C_LEFT_DAC_0_2_4,
+  // Other Peripherals
   I2C_LEFT_RGBLED_0_00,
   I2C_LEFT_RGBLED_0_01,
   I2C_LEFT_RGBLED_0_10,
@@ -84,7 +88,6 @@ typedef enum {
   I2C_LEFT_ROTPIC_2_000,
   I2C_LEFT_DAC_0_0_0,
   I2C_LEFT_DAC_0_0_1,
-  I2C_LEFT_DAC_0_0_2,
   I2C_LEFT_DAC_0_0_3,
   I2C_LEFT_DAC_0_0_4,
   I2C_LEFT_DAC_0_0_5,
@@ -94,7 +97,6 @@ typedef enum {
   I2C_LEFT_DAC_0_2_1,
   I2C_LEFT_DAC_0_2_2,
   I2C_LEFT_DAC_0_2_3,
-  I2C_LEFT_DAC_0_2_4,
   I2C_LEFT_DAC_0_2_5,
   I2C_LEFT_DAC_0_2_6,
   I2C_LEFT_DAC_0_2_7,
@@ -108,13 +110,13 @@ typedef enum {
   I2C_LEFT_DAC_2_0_5,
 } i2c_list_device_enum_t;
 
-typedef enum {
-  I2C_RIGHT_PHASE0_START = 0,
-  I2C_RIGHT_GPIO_2_0,
-} i2c_right_device_phase0_enum_t;
+void i2c_resume_left_bus_reset(void);
 
 typedef enum {
-  I2C_RIGHT_PHASE1_START = 0,
+  I2C_RIGHT_START = 0,
+  // High Priority Peripherals
+  I2C_RIGHT_GPIO_2_0,
+  // Other Peripherals
   I2C_RIGHT_DAC_2_2_0,
   I2C_RIGHT_DAC_2_2_1,
   I2C_RIGHT_DAC_2_2_2,
@@ -131,6 +133,9 @@ typedef enum {
   I2C_RIGHT_RGBLED_2_10,
   I2C_RIGHT_ROTPIC_0_000,
   I2C_RIGHT_ROTPIC_1_001,
-} i2c_right_device_phase1_enum_t;
+} i2c_right_device_enum_t;
+
+void i2c_resume_right_bus_reset(void);
+void i2c_resume_left_bus_reset(void);
 
 #endif /* INC_I2C_H_ */

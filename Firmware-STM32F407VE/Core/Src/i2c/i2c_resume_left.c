@@ -1023,13 +1023,27 @@ void _i2c_resume_left_dac_2_0_5(uint8_t bus, i2c_callback_t callback,
       callback, userdata);
 }
 
+uint8_t left_cycle = I2C_LEFT_START;
+
 void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
                           void *userdata) {
-  static uint8_t cycle = I2C_LEFT_START;
+  left_cycle++;
 
-  cycle++;
-
-  switch (cycle) {
+  switch (left_cycle) {
+  /*
+   * High Priority Peripherals
+   */
+  case I2C_LEFT_DAC_0_0_2:
+    // Osc1 Note
+    _i2c_resume_left_dac_0_0_2(bus, callback, userdata);
+    break;
+  case I2C_LEFT_DAC_0_2_4:
+    // Osc2 Note
+    _i2c_resume_left_dac_0_2_4(bus, callback, userdata);
+    break;
+  /*
+   * Other Peripherals
+   */
   case I2C_LEFT_RGBLED_0_00:
     // Osc1 Saw, Squ and Mix
     _i2c_resume_left_rgbled_0_00(bus, callback, userdata);
@@ -1098,10 +1112,6 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
     // Osc1 Filt CUTOFF
     _i2c_resume_left_dac_0_0_1(bus, callback, userdata);
     break;
-  case I2C_LEFT_DAC_0_0_2:
-    // Osc1 Note
-    _i2c_resume_left_dac_0_0_2(bus, callback, userdata);
-    break;
   case I2C_LEFT_DAC_0_0_3:
     // Osc1 to Osc1 Mix
     _i2c_resume_left_dac_0_0_3(bus, callback, userdata);
@@ -1137,10 +1147,6 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
   case I2C_LEFT_DAC_0_2_3:
     // Sub to Osc 2 Mix
     _i2c_resume_left_dac_0_2_3(bus, callback, userdata);
-    break;
-  case I2C_LEFT_DAC_0_2_4:
-    // Osc2 Note
-    _i2c_resume_left_dac_0_2_4(bus, callback, userdata);
     break;
   case I2C_LEFT_DAC_0_2_5:
     // Osc2 Square PWM
@@ -1188,8 +1194,10 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
     break;
 
   default:
-    cycle = I2C_LEFT_START;
+    i2c_resume_left_bus_reset();
     increment_pattern_step();
     callback(bus, userdata);
   }
 }
+
+void i2c_resume_left_bus_reset(void) { left_cycle = I2C_LEFT_START; }
