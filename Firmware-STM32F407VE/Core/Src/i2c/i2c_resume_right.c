@@ -220,6 +220,121 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
+void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
+                                   void *userdata) {
+  /* Osc Amp ADSR Attack LEDs
+   * RIGHT2:00
+   */
+
+  uint16_t pwm_seq[36] = {0};
+  uint8_t scale_seq[36] = {0};
+  ctrl_t *ctrl = ctrl_get_active();
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+
+  uint8_t brightness = 0x80;
+  switch (toggle->osc_amp_env_sustain_func) {
+  case ENC_ENV_SUSTAIN:
+    brightness = DEFAULT_BRIGHTNESS;
+    break;
+  case ENC_ENV_AMOUNT:
+    brightness = HALF_BRIGHTNESS;
+    break;
+  default:
+    break;
+  }
+  memset(scale_seq, brightness, 36);
+
+  /* Attack: 18, 19, 20, 21, 22, 23
+   * [0,2=2=20][1,2=4=22][2,2=5=23]
+   * [0,1=1=19][1,1=3=21]
+   * [0,0=0=18]
+   */
+
+  uint16_t a_val = ctrl->value[CTRL_OSC_AMP_ENV_A];
+  _adsr_led_set_grid_curve(a_val);
+
+  pwm_seq[18] = grid[0][0];
+  pwm_seq[19] = grid[0][1];
+  pwm_seq[20] = grid[0][2];
+  pwm_seq[21] = grid[1][1];
+  pwm_seq[22] = grid[1][2];
+  pwm_seq[23] = grid[2][2];
+
+  /* Decay: 12, 13, 14, 15, 16, 17
+   * [0,2][1,2][2,2]
+   * [0,1][1,1]
+   * [0,0]
+   *
+   * transposes to:
+   *
+   * [0,0=08=12]
+   * [0,1=07=14][1,1=10=13]
+   * [0,2=06=15][1,2=09=16][2,2=11=17]
+   */
+
+  uint16_t d_val = ctrl->value[CTRL_OSC_AMP_ENV_D];
+  _adsr_led_set_grid_curve(d_val);
+  pwm_seq[12] = grid[0][0];
+  pwm_seq[13] = grid[1][1];
+  pwm_seq[14] = grid[0][1];
+  pwm_seq[15] = grid[0][2];
+  pwm_seq[16] = grid[1][2];
+  pwm_seq[17] = grid[2][2];
+
+  /* Sustain: 6, 7, 8, 9, 10, 11
+   * [0,2=14=11][1,2=17=08]
+   * [0,1=13=10][1,1=16=07]
+   * [0,0=12=09][1,0=15=06]
+   */
+
+  uint16_t s_val;
+  switch (toggle->osc_amp_env_sustain_func) {
+  case ENC_ENV_SUSTAIN:
+    s_val = ctrl->value[CTRL_OSC_AMP_ENV_S];
+    _adsr_led_set_grid_bar(s_val);
+    break;
+  case ENC_ENV_AMOUNT:
+    s_val = ctrl->value[CTRL_OSC_AMP_ENV_AMT];
+    _adsr_led_set_grid_stack(s_val);
+    break;
+  default:
+    s_val = 0;
+  }
+
+  pwm_seq[6] = grid[1][0];
+  pwm_seq[7] = grid[1][1];
+  pwm_seq[8] = grid[1][2];
+  pwm_seq[9] = grid[0][0];
+  pwm_seq[10] = grid[0][1];
+  pwm_seq[11] = grid[0][2];
+
+  /* Release: 0, 1, 2, 3, 4, 5
+   * [0,2][1,2][2,2]
+   * [0,1][1,1]
+   * [0,0]
+   *
+   * transposes to:
+   *
+   * [0,0=20=2]
+   * [0,1=19=1][1,1=22=4]
+   * [0,2=18=0][1,2=21=3][2,2=23=5]
+   */
+
+  uint16_t r_val = ctrl->value[CTRL_OSC_AMP_ENV_R];
+  _adsr_led_set_grid_curve(r_val);
+  pwm_seq[0] = grid[0][2];
+  pwm_seq[1] = grid[0][1];
+  pwm_seq[2] = grid[0][0];
+  pwm_seq[3] = grid[1][2];
+  pwm_seq[4] = grid[1][1];
+  pwm_seq[5] = grid[2][2];
+
+  /* Write */
+  bool res = is32_set(bus, 2, 0b00, pwm_seq, scale_seq, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
 void _i2c_resume_right_rotpic_0_000(uint8_t bus, i2c_callback_t callback,
                                     void *userdata) {
 
@@ -245,7 +360,7 @@ void _i2c_resume_right_rotpic_1_001(uint8_t bus, i2c_callback_t callback,
          << ROTPIC_LED1_BIT_SHIFT;
   led |= (toggle->sub_amp_env_sustain_func == ENC_ENV_AMOUNT)
          << ROTPIC_LED2_BIT_SHIFT;
-  bool res = rotpic_led_set_state(bus, 0, 0b000, led, callback, userdata);
+  bool res = rotpic_led_set_state(bus, 1, 0b001, led, callback, userdata);
   if (!res)
     Error_Handler();
 }
@@ -266,14 +381,19 @@ void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
     _i2c_resume_right_rgbled_1_01(bus, callback, userdata);
     break;
   case I2C_RIGHT_RGBLED_1_10:
+    // Sub Amp ADSR
     _i2c_resume_right_rgbled_1_10(bus, callback, userdata);
     break;
+  case I2C_RIGHT_RGBLED_2_00:
+    // Osc Amp ADSR
+    _i2c_resume_right_rgbled_2_00(bus, callback, userdata);
+    break;
   case I2C_RIGHT_ROTPIC_0_000:
-    // // Osc Amp Env Toggle
+    // Osc Amp Env Toggle
     _i2c_resume_right_rotpic_0_000(bus, callback, userdata);
     break;
   case I2C_RIGHT_ROTPIC_1_001:
-    // // Sub Amp Env Toggle
+    // Sub Amp Env Toggle
     _i2c_resume_right_rotpic_1_001(bus, callback, userdata);
     break;
   default:
