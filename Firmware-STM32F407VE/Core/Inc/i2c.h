@@ -109,7 +109,20 @@ typedef enum {
 } i2c_list_device_enum_t;
 
 typedef enum {
-  I2C_RIGHT_START = 0,
+  I2C_RIGHT_PHASE0_START = 0,
+  I2C_RIGHT_GPIO_2_0,
+} i2c_right_device_phase0_enum_t;
+
+typedef enum {
+  I2C_RIGHT_PHASE1_START = 0,
+  I2C_RIGHT_DAC_2_2_0,
+  I2C_RIGHT_DAC_2_2_1,
+  I2C_RIGHT_DAC_2_2_2,
+  I2C_RIGHT_DAC_2_2_3,
+  I2C_RIGHT_DAC_2_2_4,
+  I2C_RIGHT_DAC_2_2_5,
+  I2C_RIGHT_DAC_2_2_6,
+  I2C_RIGHT_DAC_2_2_7,
   I2C_RIGHT_RGBLED_1_00,
   I2C_RIGHT_RGBLED_1_01,
   I2C_RIGHT_RGBLED_1_10,
@@ -117,7 +130,7 @@ typedef enum {
   I2C_RIGHT_RGBLED_2_01,
   I2C_RIGHT_RGBLED_2_10,
   I2C_RIGHT_ROTPIC_0_000,
-  I2C_RIGHT_ROTPIC_1_001
-} i2c_right_device_enum_t;
+  I2C_RIGHT_ROTPIC_1_001,
+} i2c_right_device_phase1_enum_t;
 
 #endif /* INC_I2C_H_ */

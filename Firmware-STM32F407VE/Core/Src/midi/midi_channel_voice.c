@@ -5,6 +5,7 @@
  *      Author: jwilson
  */
 
+#include "i2c.h"
 #include "main.h"
 #include "midi.h"
 #include "midi_internal.h"

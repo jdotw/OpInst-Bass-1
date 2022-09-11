@@ -42,7 +42,19 @@
 #define CMD_CONFIG_PORT1 7
 
 bool pca9555_set_port_output(uint8_t bus, uint8_t channel, uint8_t unit,
-                             uint8_t outputs[2]) {
+                             uint8_t outputs[2], i2c_callback_t callback,
+                             void *userdata) {
+
+  static uint8_t port_data[I2C_BUS_MAX][3];
+  port_data[bus][0] = CMD_OUTPUT_PORT0;
+  port_data[bus][1] = outputs[0];
+  port_data[bus][2] = outputs[1];
+  return i2c_tx(bus, channel, DEFAULT_PCA9555_ADDRESS + unit, port_data[bus], 3,
+                callback, userdata);
+}
+
+bool _pca9555_set_port_output_sync(uint8_t bus, uint8_t channel, uint8_t unit,
+                                   uint8_t outputs[2]) {
   bool res;
   uint8_t port_0_data[2] = {CMD_OUTPUT_PORT0, outputs[0]};
   res =
@@ -127,7 +139,7 @@ void pca9555_init() {
 
   // Set all outputs to 0
   uint8_t right_outputs[2] = {0x00, 0x00};
-  res = pca9555_set_port_output(I2C_RIGHT, 2, 0, right_outputs);
+  res = _pca9555_set_port_output_sync(I2C_RIGHT, 2, 0, right_outputs);
   if (!res)
     Error_Handler();
 }

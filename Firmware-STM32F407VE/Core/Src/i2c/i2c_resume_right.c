@@ -13,6 +13,7 @@
 #include "is32.h"
 #include "main.h"
 #include "osc.h"
+#include "pca9555.h"
 #include "rotpic.h"
 #include <stdbool.h>
 
@@ -440,13 +441,168 @@ void _i2c_resume_right_rotpic_1_001(uint8_t bus, i2c_callback_t callback,
     Error_Handler();
 }
 
-void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
-                           void *userdata) {
-  static uint8_t cycle = I2C_RIGHT_START;
+void _i2c_resume_right_dac_2_2_0(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 0, ctrl->value[CTRL_OSC_AMP_ENV_R],
+                    callback, userdata);
+}
 
-  cycle++;
+void _i2c_resume_right_dac_2_2_1(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 1, ctrl->value[CTRL_SUB_AMP_ENV_R],
+                    callback, userdata);
+}
 
-  switch (cycle) {
+void _i2c_resume_right_dac_2_2_2(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 2, ctrl->value[CTRL_OSC_AMP_ENV_S],
+                    callback, userdata);
+}
+
+void _i2c_resume_right_dac_2_2_3(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 3, ctrl->value[CTRL_SUB_AMP_ENV_S],
+                    callback, userdata);
+}
+
+void _i2c_resume_right_dac_2_2_4(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 4, ctrl->value[CTRL_OSC_AMP_ENV_A],
+                    callback, userdata);
+}
+
+void _i2c_resume_right_dac_2_2_5(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 5, ctrl->value[CTRL_SUB_AMP_ENV_D],
+                    callback, userdata);
+}
+
+void _i2c_resume_right_dac_2_2_6(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 6, ctrl->value[CTRL_OSC_AMP_ENV_D],
+                    callback, userdata);
+}
+
+void _i2c_resume_right_dac_2_2_7(uint8_t bus, i2c_callback_t callback,
+                                 void *userdata) {
+  ctrl_t *ctrl = ctrl_get_active();
+  dac7678_set_value(I2C_RIGHT, 2, 2, 7, ctrl->value[CTRL_SUB_AMP_ENV_A],
+                    callback, userdata);
+}
+
+#define TRIGGER_LENGTH 5
+
+void _i2c_resume_right_gpio_2_0(uint8_t bus, i2c_callback_t callback,
+                                void *userdata) {
+  note_t *note = note_get_active();
+
+  // Configure Gates
+  uint8_t outputs[2] = {0, 0};
+  outputs[0] |= note->value.note_on << 3;
+  outputs[0] |= note->value.note_on << 5;
+  outputs[0] |= note->value.note_on << 7;
+  outputs[1] |= note->value.note_on << 1;
+  outputs[1] |= note->value.note_on << 3;
+  outputs[1] |= note->value.note_on << 5;
+
+  // Configure Triggers
+  uint32_t tick = HAL_GetTick();
+  if (tick == 0)
+    tick++; // Guarantee non-zero
+  if (note->trig.ping_trigger) {
+    // We need to ping the trigger
+    bool trig_state = false;
+    if (note->trig.triggered_at == 0) {
+      // This is the start of a ping
+      note->trig.triggered_at = tick;
+      trig_state = true;
+    } else if (tick < (note->trig.triggered_at + TRIGGER_LENGTH)) {
+      // Hold trigger high
+      trig_state = true;
+    } else {
+      // Let trig go
+      note->trig.ping_trigger = false;
+      note->trig.triggered_at = 0;
+    }
+
+    outputs[0] |= trig_state << 2;
+    outputs[0] |= trig_state << 4;
+    outputs[0] |= trig_state << 6;
+    outputs[1] |= trig_state << 0;
+    outputs[1] |= trig_state << 2;
+    outputs[1] |= trig_state << 4;
+  }
+
+  bool res =
+      pca9555_set_port_output(I2C_RIGHT, 2, 0, outputs, callback, userdata);
+  if (!res)
+    Error_Handler();
+}
+
+i2c_right_device_phase0_enum_t phase0_cycle = I2C_RIGHT_PHASE0_START;
+i2c_right_device_phase1_enum_t phase1_cycle = I2C_RIGHT_PHASE1_START;
+
+void _i2c_resume_right_bus_phase0(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
+
+  phase0_cycle++;
+
+  switch (phase0_cycle) {
+  case I2C_RIGHT_GPIO_2_0:
+    // Gate and Trigger GPIO
+    _i2c_resume_right_gpio_2_0(bus, callback, userdata);
+    break;
+  default:
+    phase0_cycle = I2C_RIGHT_PHASE0_START;
+    callback(bus, userdata);
+  }
+}
+
+void _i2c_resume_right_bus_phase1(uint8_t bus, i2c_callback_t callback,
+                                  void *userdata) {
+
+  phase1_cycle++;
+
+  switch (phase1_cycle) {
+  case I2C_RIGHT_DAC_2_2_0:
+    // Osc Amp Env Release
+    _i2c_resume_right_dac_2_2_0(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_1:
+    // Sub Amp Env Release
+    _i2c_resume_right_dac_2_2_1(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_2:
+    // Osc Amp Env Sustain
+    _i2c_resume_right_dac_2_2_2(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_3:
+    // Sub Amp Env Sustain
+    _i2c_resume_right_dac_2_2_3(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_4:
+    // Osc Amp Env Attack
+    _i2c_resume_right_dac_2_2_4(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_5:
+    // Sub Amp Env Decay
+    _i2c_resume_right_dac_2_2_5(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_6:
+    // Osc Amp Env Decay
+    _i2c_resume_right_dac_2_2_6(bus, callback, userdata);
+    break;
+  case I2C_RIGHT_DAC_2_2_7:
+    // Sub Amp Env Attack
+    _i2c_resume_right_dac_2_2_7(bus, callback, userdata);
+    break;
   case I2C_RIGHT_RGBLED_1_00:
     // Osc1 Drive and Osc Amp Out
     _i2c_resume_right_rgbled_1_00(bus, callback, userdata);
@@ -480,7 +636,24 @@ void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
     _i2c_resume_right_rotpic_1_001(bus, callback, userdata);
     break;
   default:
-    cycle = I2C_RIGHT_START;
+    phase1_cycle = I2C_RIGHT_PHASE1_START;
+    callback(bus, userdata);
+  }
+}
+
+void _i2c_resume_right_bus(uint8_t bus, i2c_callback_t callback,
+                           void *userdata) {
+  static uint8_t phase = 0;
+  phase++;
+  switch (phase) {
+  case 1:
+    _i2c_resume_right_bus_phase0(bus, callback, userdata);
+    break;
+  case 2:
+    _i2c_resume_right_bus_phase1(bus, callback, userdata);
+    break;
+  default:
+    phase = 0;
     callback(bus, userdata);
   }
 }
