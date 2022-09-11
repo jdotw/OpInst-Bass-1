@@ -1195,7 +1195,6 @@ void _i2c_resume_left_bus(uint8_t bus, i2c_callback_t callback,
 
   default:
     i2c_resume_left_bus_reset();
-    increment_pattern_step();
     callback(bus, userdata);
   }
 }
