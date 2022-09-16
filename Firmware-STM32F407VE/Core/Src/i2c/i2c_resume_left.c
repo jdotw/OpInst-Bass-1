@@ -816,6 +816,59 @@ void _i2c_resume_left_dac_0_0_0(uint8_t bus, i2c_callback_t callback,
                     callback, userdata);
 }
 
+#define FILT_CUTOFF_OFFSET 800.0
+
+uint16_t _filt_cutoff_scale(uint16_t input) {
+  if (input == 0)
+    return 0;
+  double dbl = (((double)input / 4095.0) * (4095.0 - FILT_CUTOFF_OFFSET)) +
+               FILT_CUTOFF_OFFSET;
+  return (uint16_t)dbl;
+}
+
+uint16_t _commit_filt_cutoff_env_delta(note_t *note, uint16_t attack,
+                                       uint16_t decay, uint16_t sustain,
+                                       uint16_t release, uint16_t amount) {
+  adsr adsr;
+  adsr.attack = attack;
+  adsr.decay = decay;
+  adsr.sustain = sustain;
+  adsr.release = release;
+
+  uint16_t env =
+      adsr_control_voltage(adsr, note->value.note_on, note->event_ticks);
+  uint16_t env_delta =
+      (uint16_t)((double)env * ((double)amount / (double)CTRL_DEFAULT_MAX));
+
+  return env_delta;
+}
+
+uint16_t commit_filt_cutoff_dac_value(
+    note_t *note, uint16_t cutoff, uint16_t env1_attack, uint16_t env1_decay,
+    uint16_t env1_sustain, uint16_t env1_release, uint16_t env1_amount,
+    uint16_t env2_attack, uint16_t env2_decay, uint16_t env2_sustain,
+    uint16_t env2_release, uint16_t env2_amount) {
+  uint16_t env1_delta = _commit_filt_cutoff_env_delta(
+      note, env1_attack, env1_decay, env1_sustain, env1_release, env1_amount);
+  uint16_t env2_delta = _commit_filt_cutoff_env_delta(
+      note, env2_attack, env2_decay, env2_sustain, env2_release, env2_amount);
+
+  uint16_t env_delta = 0;
+  if (env2_delta < env1_delta) {
+    env_delta = env1_delta - env2_delta;
+  }
+
+  if (cutoff + env_delta > CTRL_DEFAULT_MAX) {
+    // Has hit max
+    cutoff = CTRL_DEFAULT_MAX;
+  } else {
+    // Apply delta
+    cutoff += env_delta;
+  }
+
+  return _filt_cutoff_scale(cutoff);
+}
+
 void _i2c_resume_left_dac_0_0_1(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
   ctrl_t *ctrl = ctrl_get_active();
@@ -842,6 +895,21 @@ void _i2c_resume_left_dac_0_0_2(uint8_t bus, i2c_callback_t callback,
        ctrl->value[CTRL_OSC1_TUNE_FINE]); // TODO: Handle wrapping, maybe
                                           // add it to osc1_note_dac_val?
   dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val, callback, userdata);
+}
+
+#define VCA_LIN_LOG_OFFSET 2500
+
+uint16_t _vca_lin_to_log(uint16_t input) {
+  // Converts a linear scale to the logarithmic scale
+  // That is needed to provide linear control through a VCA
+  // This value has been tuned/tweaked for audio-path VCAs
+  // I worked this out in Numbers
+  // *shrug*
+  if (input == 0)
+    return 0;
+  else
+    return ((log10(input) / log10(2)) * ((4095 - VCA_LIN_LOG_OFFSET) / 12)) +
+           VCA_LIN_LOG_OFFSET;
 }
 
 void _i2c_resume_left_dac_0_0_3(uint8_t bus, i2c_callback_t callback,
@@ -944,6 +1012,22 @@ void _i2c_resume_left_dac_0_2_7(uint8_t bus, i2c_callback_t callback,
   dac7678_set_value(I2C_LEFT, 0, 2, 7,
                     _vca_lin_to_log(ctrl->value[CTRL_OSC2_SAW_LVL]), callback,
                     userdata);
+}
+
+#define ENV_AMT_LIN_LOG_OFFSET 0
+
+uint16_t _env_amt_lin_to_log(uint16_t input) {
+  // Converts a linear scale to the logarithmic scale
+  // That is needed to provide linear control through a VCA
+  // This value has been tuned/tweaked for env amt path VCAs
+  // I worked this out in Numbers
+  // *shrug*
+  if (input == 0)
+    return 0;
+  else
+    return ((log10(input) / log10(2)) *
+            ((4095 - ENV_AMT_LIN_LOG_OFFSET) / 12)) +
+           ENV_AMT_LIN_LOG_OFFSET;
 }
 
 void _i2c_resume_left_dac_0_4_2(uint8_t bus, i2c_callback_t callback,
