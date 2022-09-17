@@ -40,10 +40,9 @@ BlueNRG_2/App/app_bluenrg_2.c \
 BlueNRG_2/App/gatt_db.c \
 BlueNRG_2/Target/hci_tl_interface.c \
 Core/Src/adsr/adsr.c \
+Core/Src/adsr/adsr_led.c \
 Core/Src/blink.c \
 Core/Src/commit/commit.c \
-Core/Src/commit/commit_dac.c \
-Core/Src/commit/commit_gatetrig.c \
 Core/Src/commit/commit_led.c \
 Core/Src/commit/commit_led_adsr.c \
 Core/Src/commit/commit_led_button.c \

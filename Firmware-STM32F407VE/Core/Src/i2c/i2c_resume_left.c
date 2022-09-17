@@ -5,6 +5,7 @@
  *      Author: jwilson
  */
 
+#include "adsr.h"
 #include "commit.h"
 #include "ctrl.h"
 #include "dac7678.h"
@@ -13,6 +14,7 @@
 #include "main.h"
 #include "osc.h"
 #include "rotpic.h"
+#include <math.h>
 #include <stdbool.h>
 
 void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
@@ -324,6 +326,7 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
 
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   ctrl_t *ctrl = ctrl_get_active();
+  adsr_grid_t *grid;
 
   /* Sub Filter ADSR Attack LEDs
    * LEFT1:11
@@ -364,14 +367,14 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
     break;
   }
 
-  _adsr_led_set_grid_curve(a_val);
+  grid = adsr_led_set_grid_curve(a_val);
 
-  pwm_seq[0] = grid[0][0];
-  pwm_seq[1] = grid[0][1];
-  pwm_seq[2] = grid[0][2];
-  pwm_seq[3] = grid[1][1];
-  pwm_seq[4] = grid[1][2];
-  pwm_seq[5] = grid[2][2];
+  pwm_seq[0] = grid->led[0][0];
+  pwm_seq[1] = grid->led[0][1];
+  pwm_seq[2] = grid->led[0][2];
+  pwm_seq[3] = grid->led[1][1];
+  pwm_seq[4] = grid->led[1][2];
+  pwm_seq[5] = grid->led[2][2];
 
   /* Decay:
    * [0,2][1,2][2,2]
@@ -397,14 +400,14 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
     break;
   }
 
-  _adsr_led_set_grid_curve(d_val);
+  grid = adsr_led_set_grid_curve(d_val);
 
-  pwm_seq[6] = grid[0][2];
-  pwm_seq[7] = grid[0][1];
-  pwm_seq[8] = grid[0][0];
-  pwm_seq[9] = grid[1][2];
-  pwm_seq[10] = grid[1][1];
-  pwm_seq[11] = grid[2][2];
+  pwm_seq[6] = grid->led[0][2];
+  pwm_seq[7] = grid->led[0][1];
+  pwm_seq[8] = grid->led[0][0];
+  pwm_seq[9] = grid->led[1][2];
+  pwm_seq[10] = grid->led[1][1];
+  pwm_seq[11] = grid->led[2][2];
 
   /* Sustain:
    * [0,2=14=14][1,2=17=17]
@@ -444,21 +447,21 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
 
   switch (toggle->sub_filt_env_sustain_func) {
   case ENC_ENV_SUSTAIN:
-    _adsr_led_set_grid_bar(s_val);
+    grid = adsr_led_set_grid_bar(s_val);
     break;
   case ENC_ENV_AMOUNT:
-    _adsr_led_set_grid_stack(s_val);
+    grid = adsr_led_set_grid_stack(s_val);
     break;
   default:
     break;
   }
 
-  pwm_seq[12] = grid[0][0];
-  pwm_seq[13] = grid[0][1];
-  pwm_seq[14] = grid[0][2];
-  pwm_seq[15] = grid[1][0];
-  pwm_seq[16] = grid[1][1];
-  pwm_seq[17] = grid[1][2];
+  pwm_seq[12] = grid->led[0][0];
+  pwm_seq[13] = grid->led[0][1];
+  pwm_seq[14] = grid->led[0][2];
+  pwm_seq[15] = grid->led[1][0];
+  pwm_seq[16] = grid->led[1][1];
+  pwm_seq[17] = grid->led[1][2];
 
   /* Release:
    * [0,2][1,2][2,2]
@@ -484,14 +487,14 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
     break;
   }
 
-  _adsr_led_set_grid_curve(r_val);
+  grid = adsr_led_set_grid_curve(r_val);
 
-  pwm_seq[18] = grid[0][2];
-  pwm_seq[19] = grid[0][1];
-  pwm_seq[20] = grid[0][0];
-  pwm_seq[21] = grid[1][2];
-  pwm_seq[22] = grid[1][1];
-  pwm_seq[23] = grid[2][2];
+  pwm_seq[18] = grid->led[0][2];
+  pwm_seq[19] = grid->led[0][1];
+  pwm_seq[20] = grid->led[0][0];
+  pwm_seq[21] = grid->led[1][2];
+  pwm_seq[22] = grid->led[1][1];
+  pwm_seq[23] = grid->led[2][2];
 
   /* Write */
 
@@ -549,6 +552,7 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   uint8_t scale_seq[36] = {0};
   ctrl_t *ctrl = ctrl_get_active();
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
+  adsr_grid_t *grid;
 
   /* Osc Filter ADSR Attack LEDs
    * LEFT3:01
@@ -585,13 +589,13 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
     break;
   }
 
-  _adsr_led_set_grid_curve(a_val);
-  pwm_seq[0] = grid[2][2];
-  pwm_seq[1] = grid[1][2];
-  pwm_seq[2] = grid[1][1];
-  pwm_seq[3] = grid[0][2];
-  pwm_seq[4] = grid[0][1];
-  pwm_seq[5] = grid[0][0];
+  grid = adsr_led_set_grid_curve(a_val);
+  pwm_seq[0] = grid->led[2][2];
+  pwm_seq[1] = grid->led[1][2];
+  pwm_seq[2] = grid->led[1][1];
+  pwm_seq[3] = grid->led[0][2];
+  pwm_seq[4] = grid->led[0][1];
+  pwm_seq[5] = grid->led[0][0];
 
   /* Decay: 24, 25, 26, 27, 28, 29
    * [0,2][1,2][2,2]
@@ -617,13 +621,13 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
     break;
   }
 
-  _adsr_led_set_grid_curve(d_val);
-  pwm_seq[24] = grid[2][2];
-  pwm_seq[25] = grid[1][1];
-  pwm_seq[26] = grid[1][2];
-  pwm_seq[27] = grid[0][0];
-  pwm_seq[28] = grid[0][1];
-  pwm_seq[29] = grid[0][2];
+  grid = adsr_led_set_grid_curve(d_val);
+  pwm_seq[24] = grid->led[2][2];
+  pwm_seq[25] = grid->led[1][1];
+  pwm_seq[26] = grid->led[1][2];
+  pwm_seq[27] = grid->led[0][0];
+  pwm_seq[28] = grid->led[0][1];
+  pwm_seq[29] = grid->led[0][2];
 
   /* Sustain: 18, 19, 20, 21, 22, 23
    * [0,2=14=23][1,2=17=18]
@@ -663,10 +667,10 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
 
   switch (toggle->osc_filt_env_sustain_func) {
   case ENC_ENV_SUSTAIN:
-    _adsr_led_set_grid_bar(s_val);
+    grid = adsr_led_set_grid_bar(s_val);
     break;
   case ENC_ENV_AMOUNT:
-    _adsr_led_set_grid_stack(s_val);
+    grid = adsr_led_set_grid_stack(s_val);
     break;
   default:
     break;
@@ -680,12 +684,12 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   scale_seq[22] = DEFAULT_BRIGHTNESS;
   scale_seq[23] = DEFAULT_BRIGHTNESS;
 
-  pwm_seq[18] = grid[1][2];
-  pwm_seq[19] = grid[1][1];
-  pwm_seq[20] = grid[1][0];
-  pwm_seq[21] = grid[0][0];
-  pwm_seq[22] = grid[0][1];
-  pwm_seq[23] = grid[0][2];
+  pwm_seq[18] = grid->led[1][2];
+  pwm_seq[19] = grid->led[1][1];
+  pwm_seq[20] = grid->led[1][0];
+  pwm_seq[21] = grid->led[0][0];
+  pwm_seq[22] = grid->led[0][1];
+  pwm_seq[23] = grid->led[0][2];
 
   /* Release: 12, 13, 14, 15, 16, 17
    * [0,2][1,2][2,2]
@@ -711,13 +715,13 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
     break;
   }
 
-  _adsr_led_set_grid_curve(r_val);
-  pwm_seq[12] = grid[2][2];
-  pwm_seq[13] = grid[1][1];
-  pwm_seq[14] = grid[1][2];
-  pwm_seq[15] = grid[0][2];
-  pwm_seq[16] = grid[0][1];
-  pwm_seq[17] = grid[0][0];
+  grid = adsr_led_set_grid_curve(r_val);
+  pwm_seq[12] = grid->led[2][2];
+  pwm_seq[13] = grid->led[1][1];
+  pwm_seq[14] = grid->led[1][2];
+  pwm_seq[15] = grid->led[0][2];
+  pwm_seq[16] = grid->led[0][1];
+  pwm_seq[17] = grid->led[0][0];
 
   /* Write */
   bool res = is32_set(bus, 3, 0b01, pwm_seq, scale_seq, callback, userdata);
@@ -843,7 +847,7 @@ uint16_t _commit_filt_cutoff_env_delta(note_t *note, uint16_t attack,
   return env_delta;
 }
 
-uint16_t commit_filt_cutoff_dac_value(
+uint16_t _commit_filt_cutoff_dac_value(
     note_t *note, uint16_t cutoff, uint16_t env1_attack, uint16_t env1_decay,
     uint16_t env1_sustain, uint16_t env1_release, uint16_t env1_amount,
     uint16_t env2_attack, uint16_t env2_decay, uint16_t env2_sustain,
