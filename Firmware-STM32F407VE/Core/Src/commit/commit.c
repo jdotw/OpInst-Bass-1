@@ -17,6 +17,7 @@
 #include "note.h"
 #include "oled.h"
 #include "osc.h"
+#include "rgb.h"
 #include "seq.h"
 #include <math.h>
 #include <stdbool.h>
@@ -82,7 +83,7 @@ void commit_30hz_timer(void) {
 
     pattern_cycle_count++;
     if (pattern_cycle_count > 1) {
-      increment_pattern_step();
+      rgb_led_increment_pattern_step();
       pattern_cycle_count = 0;
     }
 

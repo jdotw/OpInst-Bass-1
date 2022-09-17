@@ -39,3 +39,16 @@ uint16_t *seq_button_led_rgb(seq_t *seq, uint8_t i) {
   }
   return val;
 }
+
+uint16_t *seq_start_button_led_rgb(seq_t *seq, bool pressed) {
+  if (pressed) {
+    val[0] = MAX_PWM;
+    val[1] = MAX_PWM;
+    val[2] = MAX_PWM;
+  } else {
+    val[0] = MIN_PWM;
+    val[1] = seq->state.running ? MAX_PWM : MIN_PWM;
+    val[2] = MIN_PWM;
+  }
+  return val;
+}

@@ -71,4 +71,7 @@ void seq_changed_reset();
 
 void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl);
 
+uint16_t *seq_button_led_rgb(seq_t *seq, uint8_t i);
+uint16_t *seq_start_button_led_rgb(seq_t *seq, bool pressed);
+
 #endif /* INC_SEQ_H_ */

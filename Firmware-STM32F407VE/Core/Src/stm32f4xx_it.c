@@ -27,6 +27,7 @@
 #include "blink.h"
 #include "commit.h"
 #include "i2c.h"
+#include "rgb.h"
 #include "seq.h"
 #include <stdio.h>
 /* USER CODE END Includes */
@@ -389,7 +390,7 @@ void TIM7_IRQHandler(void) {
   /* USER CODE END TIM7_IRQn 0 */
   HAL_TIM_IRQHandler(&htim7);
   /* USER CODE BEGIN TIM7_IRQn 1 */
-  increment_pattern_step();
+  rgb_led_increment_pattern_step();
   /* USER CODE END TIM7_IRQn 1 */
 }
 

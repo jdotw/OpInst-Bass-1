@@ -14,6 +14,7 @@
 #include "is32.h"
 #include "main.h"
 #include "osc.h"
+#include "rgb.h"
 #include "rotpic.h"
 #include <math.h>
 #include <stdbool.h>
@@ -28,10 +29,10 @@ void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
   ctrl_t *ctrl = ctrl_get_active();
 
   // Osc1 Saw: LEDs 0, 1
-  _set_pwm_seq_lab(_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
 
   // Osc1 Squ: LEDS 2, 3
-  _set_pwm_seq_lab(_osc1_squ_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_squ_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
 
   // Work around Red and Blue pins being transposed
   uint16_t tmp;
@@ -43,22 +44,22 @@ void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
   pwm_seq[11] = tmp;
 
   // Osc1 Mix: LEDs 4, 5, 6, 7, 8, 9, 10
-  _set_pwm_seq_lab(_osc1_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
 
   // Animation: Osc1 Saw (0, 1)
-  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 0, false);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 0, false);
 
   // Animation: Osc1 Squ (2, 3)
-  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3, 0,
-                          false);
+  rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3, 0,
+                             false);
 
   // Animation: Osc 1 pre-filt (4, 5, 6, 7, 8)
-  _set_scale_seq_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3, 2,
-                          false);
+  rgb_led_set_scale_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3, 2,
+                             false);
 
   // Animation: Osc1 to Osc2 pre-mix (9, 10)
-  _set_scale_seq_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), 2 * 3, 4,
-                          false);
+  rgb_led_set_scale_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), 2 * 3, 4,
+                             false);
 
   // Write to driver
   res = is32_set(I2C_LEFT, 0, 0, pwm_seq, scale_seq, callback, userdata);
@@ -120,24 +121,24 @@ void _i2c_resume_left_rgbled_0_10(uint8_t bus, i2c_callback_t callback,
    * Mix: 0, 1
    */
 
-  _set_pwm_seq_lab(_osc1_to_2_mix_lab(ctrl), pwm_seq, (2 * 3));
-  _set_scale_seq_animated(pwm_seq, scale_seq, (2 * 3), 6, false);
+  rgb_led_set_pwm_lab(rgb_osc1_to_2_mix_lab(ctrl), pwm_seq, (2 * 3));
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, (2 * 3), 6, false);
 
   /* Osc1 Filter
    * LEFT0:10
    * Freq: 3, 4
    */
 
-  _set_pwm_seq_lab(_osc1_filt_freq_lab(ctrl), pwm_seq + (3 * 3), (2 * 3));
-  _set_scale_seq_animated(pwm_seq, scale_seq + (3 * 3), (2 * 3), 7, false);
+  rgb_led_set_pwm_lab(rgb_osc1_filt_freq_lab(ctrl), pwm_seq + (3 * 3), (2 * 3));
+  rgb_led_set_scale_animated(pwm_seq, scale_seq + (3 * 3), (2 * 3), 7, false);
 
   /* Osc1 Filter
    * LEFT0:10
    * Reso: 5, 6
    */
 
-  _set_pwm_seq_lab(_osc1_filt_reso_lab(ctrl), pwm_seq + (5 * 3), (2 * 3));
-  _set_scale_seq_animated(pwm_seq, scale_seq + (5 * 3), (2 * 3), 9, false);
+  rgb_led_set_pwm_lab(rgb_osc1_filt_reso_lab(ctrl), pwm_seq + (5 * 3), (2 * 3));
+  rgb_led_set_scale_animated(pwm_seq, scale_seq + (5 * 3), (2 * 3), 9, false);
 
   bool res = is32_set(bus, 0, 0b10, pwm_seq, scale_seq, callback, userdata);
   if (!res)
@@ -157,25 +158,25 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
    * 0
    */
 
-  _set_pwm_seq_lab(_osc2_squ_lab(ctrl), pwm_seq, (1 * 3));
-  _set_scale_seq_animated(pwm_seq, scale_seq, (1 * 3), 1 + OSC2_PATTERN_OFFSET,
-                          false);
+  rgb_led_set_pwm_lab(rgb_osc2_squ_lab(ctrl), pwm_seq, (1 * 3));
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, (1 * 3),
+                             1 + OSC2_PATTERN_OFFSET, false);
 
   /* Osc2 Saw
    * LEFT0:11
    * 1, 2
    */
 
-  _set_pwm_seq_lab(_osc2_saw_lab(ctrl), pwm_seq + (1 * 3), (2 * 3));
-  _set_scale_seq_animated(pwm_seq + (1 * 3), scale_seq + (1 * 3), (2 * 3),
-                          0 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_pwm_lab(rgb_osc2_saw_lab(ctrl), pwm_seq + (1 * 3), (2 * 3));
+  rgb_led_set_scale_animated(pwm_seq + (1 * 3), scale_seq + (1 * 3), (2 * 3),
+                             0 + OSC2_PATTERN_OFFSET, false);
 
   /* Osc2 Noise
    * LEFT0:11
    * 3, 4
    */
 
-  _set_pwm_seq_lab(_osc2_noise_lab(ctrl), pwm_seq + (3 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_noise_lab(ctrl), pwm_seq + (3 * 3), (2 * 3));
 
   // Work around Red and Blue pins being transposed
   uint16_t tmp;
@@ -186,28 +187,28 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
   pwm_seq[3] = pwm_seq[5];
   pwm_seq[5] = tmp;
 
-  _set_scale_seq_animated(pwm_seq + (3 * 3), scale_seq + (3 * 3), (2 * 3),
-                          0 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (3 * 3), scale_seq + (3 * 3), (2 * 3),
+                             0 + OSC2_PATTERN_OFFSET, false);
 
   /* Osc2-Only Mix
    * LEFT0:11
    * 5, 6, 7, 8
    */
 
-  _set_pwm_seq_lab(_osc2_mix_lab(ctrl), pwm_seq + (5 * 3), (4 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_mix_lab(ctrl), pwm_seq + (5 * 3), (4 * 3));
 
-  _set_scale_seq_animated(pwm_seq + (5 * 3), scale_seq + (5 * 3), (4 * 3),
-                          2 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (5 * 3), scale_seq + (5 * 3), (4 * 3),
+                             2 + OSC2_PATTERN_OFFSET, false);
 
   /* Osc2-PreFilter Mix
    * LEFT0:11
    * 9, 10
    */
 
-  _set_pwm_seq_lab(_osc2_prefilt_lab(ctrl), pwm_seq + (9 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_prefilt_lab(ctrl), pwm_seq + (9 * 3), (2 * 3));
 
-  _set_scale_seq_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), (2 * 3),
-                          6 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), (2 * 3),
+                             6 + OSC2_PATTERN_OFFSET, false);
 
   bool res = is32_set(bus, 0, 0b11, pwm_seq, scale_seq, callback, userdata);
   if (!res)
@@ -229,30 +230,30 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 0, 1
    */
 
-  _set_pwm_seq_lab(_sub_squ_lab(ctrl), pwm_seq, 2 * 3);
-  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 0 + SUB_PATTERN_OFFSET,
-                          false);
+  rgb_led_set_pwm_lab(rgb_sub_squ_lab(ctrl), pwm_seq, 2 * 3);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 0 + SUB_PATTERN_OFFSET,
+                             false);
 
   /* Sub Noise
    * LEFT1:00
    * 2, 3
    */
 
-  _set_pwm_seq_lab(_sub_noise_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
-  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
-                          0 + SUB_PATTERN_OFFSET, false);
+  rgb_led_set_pwm_lab(rgb_sub_noise_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
+  rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
+                             0 + SUB_PATTERN_OFFSET, false);
 
   /* Sub Mix
    * LEFT1:00
    * 4, 5, 6, 7, 8, 9, 10
    */
 
-  _set_pwm_seq_lab(_sub_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
 
-  _set_scale_seq_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
-                          2 + SUB_PATTERN_OFFSET, false);
-  _set_scale_seq_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), 2 * 3,
-                          4 + SUB_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
+                             2 + SUB_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), 2 * 3,
+                             4 + SUB_PATTERN_OFFSET, false);
 
   /* Start LED
    * LEFT1:00
@@ -260,7 +261,7 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    */
 
   button_led_set_pwm_seq(pwm_seq + (11 * 3),
-                         mod_start_button_led_rgb(seq, mod->state.start));
+                         seq_start_button_led_rgb(seq, mod->state.start));
 
   button_led_set_scale_seq(pwm_seq + (11 * 3), scale_seq + (11 * 3), 1 * 3);
 
@@ -300,20 +301,20 @@ void _i2c_resume_left_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
    * 0, 1,
    */
 
-  _set_pwm_seq_lab(_sub_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
+  rgb_led_set_pwm_lab(rgb_sub_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
 
-  _set_scale_seq_animated(pwm_seq, scale_seq, (2 * 3), 7 + SUB_PATTERN_OFFSET,
-                          false);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, (2 * 3),
+                             7 + SUB_PATTERN_OFFSET, false);
 
   /* Sub Filter Out
    * LEFT1:10
    * 2, 3, 4, 5, 6, 7, 8
    */
 
-  _set_pwm_seq_lab(_sub_filt_reso_lab(ctrl), pwm_seq + (2 * 3), 7 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_filt_reso_lab(ctrl), pwm_seq + (2 * 3), 7 * 3);
 
-  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 7 * 3,
-                          9 + SUB_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 7 * 3,
+                             9 + SUB_PATTERN_OFFSET, false);
 
   bool res = is32_set(bus, 1, 0b10, pwm_seq, scale_seq, callback, userdata);
   if (!res)
@@ -517,30 +518,30 @@ void _i2c_resume_left_rgbled_3_00(uint8_t bus, i2c_callback_t callback,
    * Freq: 0, 1
    */
 
-  _set_pwm_seq_lab(_osc2_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
 
-  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 8 + OSC2_PATTERN_OFFSET,
-                          false);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 8 + OSC2_PATTERN_OFFSET,
+                             false);
 
   /* Osc2 Filt
    * LEFT3:00
    * Reso: 2, 3
    */
 
-  _set_pwm_seq_lab(_osc2_filt_reso_lab(ctrl), pwm_seq + (2 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_filt_reso_lab(ctrl), pwm_seq + (2 * 3), (2 * 3));
 
-  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
-                          10 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
+                             10 + OSC2_PATTERN_OFFSET, false);
 
   /* SubToOsc2 Mix Level
    * LEFT3:00
    * 7, 8
    */
 
-  _set_pwm_seq_lab(_sub_to_osc2_mix_lab(ctrl), pwm_seq + (7 * 3), 2 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_to_osc2_mix_lab(ctrl), pwm_seq + (7 * 3), 2 * 3);
 
-  _set_scale_seq_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 2 * 3,
-                          6 + SUB_PATTERN_OFFSET, false);
+  rgb_led_set_scale_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 2 * 3,
+                             6 + SUB_PATTERN_OFFSET, false);
 
   /* Write */
   bool res = is32_set(bus, 3, 0b00, pwm_seq, scale_seq, callback, userdata);
@@ -742,9 +743,9 @@ void _i2c_resume_left_rgbled_3_10(uint8_t bus, i2c_callback_t callback,
   uint8_t scale_seq[36];
   ctrl_t *ctrl = ctrl_get_active();
 
-  _set_pwm_seq_lab(_osc2_drive_lab(ctrl), pwm_seq + (3 * 3), 8 * 3);
-  _set_scale_seq_animated(pwm_seq + (3 * 3), scale_seq + (3 * 3), 8 * 3,
-                          12 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_pwm_lab(rgb_osc2_drive_lab(ctrl), pwm_seq + (3 * 3), 8 * 3);
+  rgb_led_set_scale_animated(pwm_seq + (3 * 3), scale_seq + (3 * 3), 8 * 3,
+                             12 + OSC2_PATTERN_OFFSET, false);
 
   /* Write */
   bool res = is32_set(bus, 3, 0b10, pwm_seq, scale_seq, callback, userdata);

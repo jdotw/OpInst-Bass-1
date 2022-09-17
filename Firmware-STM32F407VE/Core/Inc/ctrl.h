@@ -227,6 +227,9 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
 void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
                        bool changed, bool state);
 
+double ctrl_double(ctrl_t *ctrl, ctrl_enum_t in);
+double ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in);
+
 // ctrl_name.c
 
 const char *ctrl_get_name(ctrl_enum_t ctrl_enum);

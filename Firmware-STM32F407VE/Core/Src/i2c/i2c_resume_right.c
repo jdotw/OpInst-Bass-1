@@ -16,6 +16,7 @@
 #include "main.h"
 #include "osc.h"
 #include "pca9555.h"
+#include "rgb.h"
 #include "rotpic.h"
 #include <stdbool.h>
 
@@ -35,19 +36,19 @@ void _i2c_resume_right_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 0, 1, 3, 2 <--- Note 3 before 2
    */
 
-  _set_pwm_seq_lab(_osc1_drive_lab(ctrl), pwm_seq, 4 * 3);
-  _set_scale_seq_animated(pwm_seq, scale_seq, 2 * 3, 11, false);
-  _set_scale_seq_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3, 13,
-                          true);
+  rgb_led_set_pwm_lab(rgb_osc1_drive_lab(ctrl), pwm_seq, 4 * 3);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 11, false);
+  rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3, 13,
+                             true);
 
   /* Osc Amp Out
    * RIGHT1:00
    * 4, 5, 6, 7, 8
    */
 
-  _set_pwm_seq_lab(_osc_amp_out_lab(ctrl), pwm_seq + (4 * 3), 5 * 3);
-  _set_scale_seq_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
-                          20 + OSC2_PATTERN_OFFSET, false);
+  rgb_led_set_pwm_lab(rgb_osc_amp_out_lab(ctrl), pwm_seq + (4 * 3), 5 * 3);
+  rgb_led_set_scale_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
+                             20 + OSC2_PATTERN_OFFSET, false);
 
   /* Write */
   bool res = is32_set(bus, 1, 0b00, pwm_seq, scale_seq, callback, userdata);
@@ -70,9 +71,9 @@ void _i2c_resume_right_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
    *
    */
 
-  _set_pwm_seq_lab(_fx_wet_lab(ctrl), pwm_seq, (7 * 3));
-  _set_scale_seq_animated(pwm_seq, scale_seq, (7 * 3), 0 + FX_PATTERN_OFFSET,
-                          false);
+  rgb_led_set_pwm_lab(rgb_fx_wet_lab(ctrl), pwm_seq, (7 * 3));
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, (7 * 3), 0 + FX_PATTERN_OFFSET,
+                             false);
 
   /* Sub Amp Out
    * RIGHT1:01
@@ -80,9 +81,9 @@ void _i2c_resume_right_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
    *
    */
 
-  _set_pwm_seq_lab(_sub_amp_out_lab(ctrl), pwm_seq + (7 * 3), 5 * 3);
-  _set_scale_seq_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 5 * 3,
-                          16 + SUB_PATTERN_OFFSET, false);
+  rgb_led_set_pwm_lab(rgb_sub_amp_out_lab(ctrl), pwm_seq + (7 * 3), 5 * 3);
+  rgb_led_set_scale_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 5 * 3,
+                             16 + SUB_PATTERN_OFFSET, false);
 
   /* Write */
   bool res = is32_set(bus, 1, 0b01, pwm_seq, scale_seq, callback, userdata);
@@ -353,9 +354,9 @@ void _i2c_resume_right_rgbled_2_01(uint8_t bus, i2c_callback_t callback,
   uint8_t scale_seq[36];
   ctrl_t *ctrl = ctrl_get_active();
 
-  _set_pwm_seq_lab(_fx_dry_lab(ctrl), pwm_seq, 11 * 3);
-  _set_scale_seq_animated(pwm_seq, scale_seq, 11 * 3, 0 + FX_PATTERN_OFFSET,
-                          false);
+  rgb_led_set_pwm_lab(rgb_fx_dry_lab(ctrl), pwm_seq, 11 * 3);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, 11 * 3, 0 + FX_PATTERN_OFFSET,
+                             false);
 
   /* Write */
   bool res = is32_set(bus, 2, 0b01, pwm_seq, scale_seq, callback, userdata);
@@ -380,9 +381,9 @@ void _i2c_resume_right_rgbled_2_10(uint8_t bus, i2c_callback_t callback,
    * 0, 1, 2, 3, 4, 5, 7
    */
 
-  _set_pwm_seq_lab(_fx_feedback_lab(ctrl), pwm_seq, 8 * 3);
-  _set_scale_seq_animated(pwm_seq, scale_seq, 8 * 3, 5 + FX_PATTERN_OFFSET,
-                          true);
+  rgb_led_set_pwm_lab(rgb_fx_feedback_lab(ctrl), pwm_seq, 8 * 3);
+  rgb_led_set_scale_animated(pwm_seq, scale_seq, 8 * 3, 5 + FX_PATTERN_OFFSET,
+                             true);
 
   /* Shift Button and Page LEDs
    * RIGHT2:10

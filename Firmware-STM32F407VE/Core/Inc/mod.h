@@ -28,4 +28,6 @@ mod_t *mod_get();
 
 void mod_changed_reset(void);
 
+uint16_t *mod_shift_button_led_rgb(bool pressed);
+
 #endif /* INC_MOD_H_ */

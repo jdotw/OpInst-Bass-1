@@ -34,3 +34,11 @@ void ctrl_set_enabled(bool enabled) { ctrl_enabled = enabled; }
 void ctrl_overflow_handler() {
   // TODO: Buzz the haptic
 }
+
+double ctrl_double(ctrl_t *ctrl, ctrl_enum_t in) {
+  return (double)(ctrl->value[in] / 4095.0);
+}
+
+double ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in) {
+  return (double)((4095.0 - ctrl->value[in]) / 4095.0);
+}
