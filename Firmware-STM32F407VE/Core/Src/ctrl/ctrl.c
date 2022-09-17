@@ -40,5 +40,5 @@ double ctrl_double(ctrl_t *ctrl, ctrl_enum_t in) {
 }
 
 double ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in) {
-  return (double)((4095.0 - ctrl->value[in]) / 4095.0);
+  return 1.0 - ctrl_double(ctrl, in);
 }
