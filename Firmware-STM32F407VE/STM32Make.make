@@ -42,10 +42,9 @@ BlueNRG_2/Target/hci_tl_interface.c \
 Core/Src/adsr/adsr.c \
 Core/Src/adsr/adsr_led.c \
 Core/Src/blink.c \
+Core/Src/button/button_led.c \
 Core/Src/commit/commit.c \
 Core/Src/commit/commit_led.c \
-Core/Src/commit/commit_led_adsr.c \
-Core/Src/commit/commit_led_button.c \
 Core/Src/commit/commit_led_osc.c \
 Core/Src/commit/commit_led_rotpic.c \
 Core/Src/commit/commit_led_tuning.c \
@@ -74,6 +73,7 @@ Core/Src/midi/midi_channel_voice.c \
 Core/Src/midi/midi_realtime.c \
 Core/Src/midi/midi_rx.c \
 Core/Src/mod/mod.c \
+Core/Src/mod/mod_led.c \
 Core/Src/note.c \
 Core/Src/oled/oled.c \
 Core/Src/oled/oled_commit.c \
@@ -93,6 +93,7 @@ Core/Src/rotpic/rotpic.c \
 Core/Src/rotpic/rotpic_led.c \
 Core/Src/sd/sd.c \
 Core/Src/seq/seq.c \
+Core/Src/seq/seq_led.c \
 Core/Src/seq/seq_poll.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Core/Src/stm32f4xx_it.c \

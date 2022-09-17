@@ -6,6 +6,7 @@
  */
 
 #include "adsr.h"
+#include "button.h"
 #include "commit.h"
 #include "ctrl.h"
 #include "dac7678.h"
@@ -258,9 +259,10 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 11
    */
 
-  _set_pwm_single(pwm_seq + (11 * 3), _button_start_rgb(seq, mod->state.start));
+  button_led_set_pwm_seq(pwm_seq + (11 * 3),
+                         mod_start_button_led_rgb(seq, mod->state.start));
 
-  _set_button_scale_seq(pwm_seq + (11 * 3), scale_seq + (11 * 3), 1 * 3);
+  button_led_set_scale_seq(pwm_seq + (11 * 3), scale_seq + (11 * 3), 1 * 3);
 
   bool res = is32_set(bus, 1, 0b00, pwm_seq, scale_seq, callback, userdata);
   if (!res)
@@ -278,9 +280,9 @@ void _i2c_resume_left_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
    */
 
   for (uint8_t i = 0; i < 12; i++) {
-    _set_pwm_single(pwm_seq + (i * 3), _button_step_rgb(seq, i));
+    button_led_set_pwm_seq(pwm_seq + (i * 3), seq_button_led_rgb(seq, i));
   }
-  _set_button_scale_seq(pwm_seq, scale_seq, 12 * 3);
+  button_led_set_scale_seq(pwm_seq, scale_seq, 12 * 3);
 
   bool res = is32_set(bus, 1, 0b01, pwm_seq, scale_seq, callback, userdata);
   if (!res)
