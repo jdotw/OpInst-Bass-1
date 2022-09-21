@@ -21,13 +21,12 @@ void _ctrl_apply_delta(ctrl_t *ctrl, ctrl_enum_t ctrl_enum, int16_t delta,
     // We have a selected step
     // The ctrl struct should be the struct
     // specific for that step -- i.e p-lock
-    ctrl = &seq->state.step_ctrl[seq->state.selected_step];
-  }
-  if (seq->state.selected_step != UINT8_MAX) {
-    if (!ctrl->changed[ctrl_enum]) {
+    ctrl_t *step_ctrl = &seq->state.step_ctrl[seq->state.selected_step];
+    if (!step_ctrl->changed[ctrl_enum]) {
       // Establish initial value for the step based on global state
-      ctrl->value[ctrl_enum] = ctrl->value[ctrl_enum];
+      step_ctrl->value[ctrl_enum] = ctrl->value[ctrl_enum];
     }
+    ctrl = step_ctrl;
   }
 
   bool did_overflow = false;
