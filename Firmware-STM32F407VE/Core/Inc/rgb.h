@@ -50,12 +50,13 @@ void rgb_led_increment_pattern_step();
 
 lab_t rgb_primitive_lab(ctrl_t *ctrl, double r, double g, double b,
                         ctrl_enum_t i);
+lab_t rgb_primitive_lab_value(uint16_t value, double r, double g, double b);
 
 // rgb_osc1_lab.c
-lab_t rgb_osc1_saw_lab(ctrl_t *ctrl);
-lab_t rgb_osc1_squ_lab(ctrl_t *ctrl);
-lab_t rgb_osc1_mix_lab(ctrl_t *ctrl);
-lab_t rgb_osc1_to_2_mix_lab(ctrl_t *ctrl);
+lab_t rgb_osc1_saw_lab();
+lab_t rgb_osc1_squ_lab();
+lab_t rgb_osc1_mix_lab();
+lab_t rgb_osc1_to_2_mix_lab();
 
 // rgb_osc2_lab.c
 lab_t rgb_osc2_saw_lab(ctrl_t *ctrl);
