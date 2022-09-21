@@ -14,6 +14,7 @@
 #include "is32.h"
 #include "main.h"
 #include "osc.h"
+#include "param.h"
 #include "rgb.h"
 #include "rotpic.h"
 #include <math.h>
@@ -944,9 +945,8 @@ void _i2c_resume_left_dac_0_0_5(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_left_dac_0_0_6(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 0, 6,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_SAW_LVL]), callback,
+                    _vca_lin_to_log(param_value(CTRL_OSC1_SAW_LVL)), callback,
                     userdata);
 }
 
