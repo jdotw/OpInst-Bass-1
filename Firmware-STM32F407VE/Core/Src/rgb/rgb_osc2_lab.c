@@ -8,6 +8,7 @@
 #include "i2c.h"
 #include "is32.h"
 #include "main.h"
+#include "param.h"
 #include "rgb.h"
 #include <math.h>
 
