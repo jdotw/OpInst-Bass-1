@@ -77,6 +77,7 @@ Core/Src/oled/oled_theme.c \
 Core/Src/osc/osc.c \
 Core/Src/osc/osc_calibrate.c \
 Core/Src/osc/osc_ctrl.c \
+Core/Src/param/param.c \
 Core/Src/preset/preset.c \
 Core/Src/preset/preset_catalog.c \
 Core/Src/preset/preset_ctrl_name.c \
