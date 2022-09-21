@@ -69,6 +69,7 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel);
 void seq_poll_mcu_gpio();
 void seq_changed_reset();
 
+ctrl_t *seq_get_active_step_ctrl(seq_t *seq);
 void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl);
 
 uint16_t *seq_button_led_rgb(seq_t *seq, uint8_t i);

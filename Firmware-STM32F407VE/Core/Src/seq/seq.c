@@ -83,6 +83,25 @@ void seq_advance_selected_page() {
   seq.changed.selected_page = true;
 }
 
+ctrl_t *seq_get_active_step_ctrl(seq_t *seq) {
+  // Returns the ctrl_t for the step that is either
+  // active or selected. That is, this is the 'overlay'
+  // ctrl_t that is specified for this step
+  ctrl_t *step_ctrl = NULL;
+
+  if (seq->state.selected_step != UINT8_MAX) {
+    // User is holding down a step sequence button
+    // This takes precedence
+    step_ctrl = &seq->state.step_ctrl[seq->state.selected_step *
+                                      (seq->state.selected_page + 1)];
+  } else if (seq->state.running) {
+    // Step seqencer is running
+    step_ctrl = &seq->state.step_ctrl[seq->state.active_step];
+  }
+
+  return step_ctrl;
+}
+
 void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl) {
   // Using the state in state_ptr, overlays the control values
   // that are set for that step (p-locks) onto the
@@ -94,18 +113,8 @@ void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl) {
   //
   // This is gonna be a lot of code :|
 
-  ctrl_t *step_ctrl = NULL;
+  ctrl_t *step_ctrl = seq_get_active_step_ctrl(seq);
   static ctrl_t *prev_ctrl = NULL;
-
-  if (seq->state.selected_step != UINT8_MAX) {
-    // User is holding down a step sequence button
-    // This takes precedence
-    step_ctrl = &seq->state.step_ctrl[seq->state.selected_step *
-                                      (seq->state.selected_page + 1)];
-  } else if (seq->state.running) {
-    // Step seqencer is running
-    step_ctrl = &seq->state.step_ctrl[seq->state.active_step];
-  }
 
   for (uint8_t i = 0; i < CTRL_ENUM_MAX; i++) {
     if (step_ctrl && step_ctrl->changed[i]) {
