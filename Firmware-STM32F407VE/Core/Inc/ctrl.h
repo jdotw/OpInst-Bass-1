@@ -228,6 +228,7 @@ void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
                        bool changed, bool state);
 
 double ctrl_double(ctrl_t *ctrl, ctrl_enum_t in);
+double ctrl_double_value(uint16_t value);
 double ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in);
 
 // ctrl_name.c
