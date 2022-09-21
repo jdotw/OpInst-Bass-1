@@ -962,7 +962,7 @@ void _i2c_resume_left_dac_0_2_0(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
   ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 2, 0,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC2_NOISE_LVL]), callback,
+                    _vca_lin_to_log(param_value(CTRL_OSC2_NOISE_LVL)), callback,
                     userdata);
 }
 
@@ -1001,7 +1001,7 @@ void _i2c_resume_left_dac_0_2_4(uint8_t bus, i2c_callback_t callback,
 void _i2c_resume_left_dac_0_2_5(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
   ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_LEFT, 0, 2, 5, ctrl->value[CTRL_OSC2_SQU_PWM], callback,
+  dac7678_set_value(I2C_LEFT, 0, 2, 5, param_value(CTRL_OSC2_SQU_PWM), callback,
                     userdata);
 }
 
@@ -1009,7 +1009,7 @@ void _i2c_resume_left_dac_0_2_6(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
   ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 2, 6,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC2_SQU_LVL]), callback,
+                    _vca_lin_to_log(param_value(CTRL_OSC2_SQU_LVL)), callback,
                     userdata);
 }
 
@@ -1017,7 +1017,7 @@ void _i2c_resume_left_dac_0_2_7(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
   ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 2, 7,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC2_SAW_LVL]), callback,
+                    _vca_lin_to_log(param_value(CTRL_OSC2_SAW_LVL)), callback,
                     userdata);
 }
 

@@ -59,11 +59,11 @@ lab_t rgb_osc1_mix_lab();
 lab_t rgb_osc1_to_2_mix_lab();
 
 // rgb_osc2_lab.c
-lab_t rgb_osc2_saw_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_squ_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_noise_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_mix_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_prefilt_lab(ctrl_t *ctrl);
+lab_t rgb_osc2_saw_lab();
+lab_t rgb_osc2_squ_lab();
+lab_t rgb_osc2_noise_lab();
+lab_t rgb_osc2_mix_lab();
+lab_t rgb_osc2_prefilt_lab();
 
 // rgb_sub_lab.c
 lab_t rgb_sub_squ_lab(ctrl_t *ctrl);
