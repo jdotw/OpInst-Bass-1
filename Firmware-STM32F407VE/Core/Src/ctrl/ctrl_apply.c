@@ -23,7 +23,7 @@ void _ctrl_apply_delta(ctrl_enum_t ctrl_enum, int16_t delta,
     // The ctrl struct should be the struct
     // specific for that step -- i.e p-lock
     ctrl_t *step_ctrl = &seq->state.step_ctrl[seq->state.selected_step];
-    if (!step_ctrl->changed[ctrl_enum]) {
+    if (step_ctrl->value[ctrl_enum] == UINT16_MAX) {
       // Establish initial value for the step based on global state
       step_ctrl->value[ctrl_enum] = ctrl->value[ctrl_enum];
     }
