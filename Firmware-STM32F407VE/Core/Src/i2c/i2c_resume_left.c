@@ -27,13 +27,11 @@ void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
 
-  ctrl_t *ctrl = ctrl_get_active();
-
   // Osc1 Saw: LEDs 0, 1
-  rgb_led_set_pwm_lab(rgb_osc1_saw_lab(ctrl), pwm_seq, 2 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_saw_lab(), pwm_seq, 2 * 3);
 
   // Osc1 Squ: LEDS 2, 3
-  rgb_led_set_pwm_lab(rgb_osc1_squ_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_squ_lab(), pwm_seq + (2 * 3), 2 * 3);
 
   // Work around Red and Blue pins being transposed
   uint16_t tmp;
@@ -45,7 +43,7 @@ void _i2c_resume_left_rgbled_0_00(uint8_t bus, i2c_callback_t callback,
   pwm_seq[11] = tmp;
 
   // Osc1 Mix: LEDs 4, 5, 6, 7, 8, 9, 10
-  rgb_led_set_pwm_lab(rgb_osc1_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_mix_lab(), pwm_seq + (4 * 3), 7 * 3);
 
   // Animation: Osc1 Saw (0, 1)
   rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 0, false);
@@ -83,21 +81,20 @@ void _i2c_resume_left_rgbled_0_01(uint8_t bus, i2c_callback_t callback,
    */
 
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
-  ctrl_t *ctrl = ctrl_get_active();
 
   int16_t tuning_step = 0;
   double tuning_percent = 0.0;
   switch (toggle->osc1_tune_func) {
   case ENC_OSC_TUNE_COARSE:
-    tuning_step = (uint8_t)(ctrl->value[CTRL_OSC1_TUNE_COARSE] / 2);
+    tuning_step = (uint8_t)(param_value(CTRL_OSC1_TUNE_COARSE) / 2);
     pwm_seq[tuning_step] = 0x7000;
-    if (ctrl->value[CTRL_OSC1_TUNE_COARSE] % 2) {
+    if (param_value(CTRL_OSC1_TUNE_COARSE) % 2) {
       pwm_seq[tuning_step + 1] = 0x7000;
     }
     break;
 
   case ENC_OSC_TUNE_FINE:
-    tuning_step = (int16_t)ctrl->value[CTRL_OSC1_TUNE_FINE];
+    tuning_step = (int16_t)param_value(CTRL_OSC1_TUNE_FINE);
     tuning_percent = (double)tuning_step / CTRL_DEFAULT_MAX;
     pwm_seq[(uint8_t)(tuning_percent * 12.0)] = 0x7000;
     break;
@@ -115,14 +112,13 @@ void _i2c_resume_left_rgbled_0_10(uint8_t bus, i2c_callback_t callback,
                                   void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
 
   /* Osc1toOsc2 Mix Level
    * LEFT0:10
    * Mix: 0, 1
    */
 
-  rgb_led_set_pwm_lab(rgb_osc1_to_2_mix_lab(ctrl), pwm_seq, (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc1_to_2_mix_lab(), pwm_seq, (2 * 3));
   rgb_led_set_scale_animated(pwm_seq, scale_seq, (2 * 3), 6, false);
 
   /* Osc1 Filter
@@ -130,7 +126,7 @@ void _i2c_resume_left_rgbled_0_10(uint8_t bus, i2c_callback_t callback,
    * Freq: 3, 4
    */
 
-  rgb_led_set_pwm_lab(rgb_osc1_filt_freq_lab(ctrl), pwm_seq + (3 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc1_filt_freq_lab(), pwm_seq + (3 * 3), (2 * 3));
   rgb_led_set_scale_animated(pwm_seq, scale_seq + (3 * 3), (2 * 3), 7, false);
 
   /* Osc1 Filter
@@ -138,7 +134,7 @@ void _i2c_resume_left_rgbled_0_10(uint8_t bus, i2c_callback_t callback,
    * Reso: 5, 6
    */
 
-  rgb_led_set_pwm_lab(rgb_osc1_filt_reso_lab(ctrl), pwm_seq + (5 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc1_filt_reso_lab(), pwm_seq + (5 * 3), (2 * 3));
   rgb_led_set_scale_animated(pwm_seq, scale_seq + (5 * 3), (2 * 3), 9, false);
 
   bool res = is32_set(bus, 0, 0b10, pwm_seq, scale_seq, callback, userdata);
@@ -152,14 +148,13 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
                                   void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
 
   /* Osc2 Squ
    * LEFT0:11
    * 0
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_squ_lab(ctrl), pwm_seq, (1 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_squ_lab(), pwm_seq, (1 * 3));
   rgb_led_set_scale_animated(pwm_seq, scale_seq, (1 * 3),
                              1 + OSC2_PATTERN_OFFSET, false);
 
@@ -168,7 +163,7 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
    * 1, 2
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_saw_lab(ctrl), pwm_seq + (1 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_saw_lab(), pwm_seq + (1 * 3), (2 * 3));
   rgb_led_set_scale_animated(pwm_seq + (1 * 3), scale_seq + (1 * 3), (2 * 3),
                              0 + OSC2_PATTERN_OFFSET, false);
 
@@ -177,7 +172,7 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
    * 3, 4
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_noise_lab(ctrl), pwm_seq + (3 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_noise_lab(), pwm_seq + (3 * 3), (2 * 3));
 
   // Work around Red and Blue pins being transposed
   uint16_t tmp;
@@ -196,7 +191,7 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
    * 5, 6, 7, 8
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_mix_lab(ctrl), pwm_seq + (5 * 3), (4 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_mix_lab(), pwm_seq + (5 * 3), (4 * 3));
 
   rgb_led_set_scale_animated(pwm_seq + (5 * 3), scale_seq + (5 * 3), (4 * 3),
                              2 + OSC2_PATTERN_OFFSET, false);
@@ -206,7 +201,7 @@ void _i2c_resume_left_rgbled_0_11(uint8_t bus, i2c_callback_t callback,
    * 9, 10
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_prefilt_lab(ctrl), pwm_seq + (9 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_prefilt_lab(), pwm_seq + (9 * 3), (2 * 3));
 
   rgb_led_set_scale_animated(pwm_seq + (9 * 3), scale_seq + (9 * 3), (2 * 3),
                              6 + OSC2_PATTERN_OFFSET, false);
@@ -222,7 +217,6 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
                                   void *userdata) {
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
-  ctrl_t *ctrl = ctrl_get_active();
   seq_t *seq = seq_get();
   mod_t *mod = mod_get();
 
@@ -231,7 +225,7 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 0, 1
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_squ_lab(ctrl), pwm_seq, 2 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_squ_lab(), pwm_seq, 2 * 3);
   rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 0 + SUB_PATTERN_OFFSET,
                              false);
 
@@ -240,7 +234,7 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 2, 3
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_noise_lab(ctrl), pwm_seq + (2 * 3), 2 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_noise_lab(), pwm_seq + (2 * 3), 2 * 3);
   rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
                              0 + SUB_PATTERN_OFFSET, false);
 
@@ -249,7 +243,7 @@ void _i2c_resume_left_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 4, 5, 6, 7, 8, 9, 10
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_mix_lab(ctrl), pwm_seq + (4 * 3), 7 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_mix_lab(), pwm_seq + (4 * 3), 7 * 3);
 
   rgb_led_set_scale_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
                              2 + SUB_PATTERN_OFFSET, false);
@@ -295,14 +289,13 @@ void _i2c_resume_left_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
                                   void *userdata) {
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
-  ctrl_t *ctrl = ctrl_get_active();
 
   /* Sub Filter Freq Cutoff
    * LEFT1:10
    * 0, 1,
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
+  rgb_led_set_pwm_lab(rgb_sub_filt_freq_lab(), pwm_seq, (2 * 3));
 
   rgb_led_set_scale_animated(pwm_seq, scale_seq, (2 * 3),
                              7 + SUB_PATTERN_OFFSET, false);
@@ -312,7 +305,7 @@ void _i2c_resume_left_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
    * 2, 3, 4, 5, 6, 7, 8
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_filt_reso_lab(ctrl), pwm_seq + (2 * 3), 7 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_filt_reso_lab(), pwm_seq + (2 * 3), 7 * 3);
 
   rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 7 * 3,
                              9 + SUB_PATTERN_OFFSET, false);
@@ -329,7 +322,6 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
                                   void *userdata) {
 
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
-  ctrl_t *ctrl = ctrl_get_active();
   adsr_grid_t *grid;
 
   /* Sub Filter ADSR Attack LEDs
@@ -362,10 +354,10 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
   uint16_t a_val = 0;
   switch (toggle->sub_filt_env_attack_func) {
   case ENC_SELECT_ENV_1:
-    a_val = ctrl->value[CTRL_SUB_FILT_ENV1_A];
+    a_val = param_value(CTRL_SUB_FILT_ENV1_A);
     break;
   case ENC_SELECT_ENV_2:
-    a_val = ctrl->value[CTRL_SUB_FILT_ENV2_A];
+    a_val = param_value(CTRL_SUB_FILT_ENV2_A);
     break;
   default:
     break;
@@ -395,10 +387,10 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
   uint16_t d_val = 0;
   switch (toggle->sub_filt_env_attack_func) {
   case ENC_SELECT_ENV_1:
-    d_val = ctrl->value[CTRL_SUB_FILT_ENV1_D];
+    d_val = param_value(CTRL_SUB_FILT_ENV1_D);
     break;
   case ENC_SELECT_ENV_2:
-    d_val = ctrl->value[CTRL_SUB_FILT_ENV2_D];
+    d_val = param_value(CTRL_SUB_FILT_ENV2_D);
     break;
   default:
     break;
@@ -424,10 +416,10 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
   case ENC_SELECT_ENV_1:
     switch (toggle->sub_filt_env_sustain_func) {
     case ENC_ENV_SUSTAIN:
-      s_val = ctrl->value[CTRL_SUB_FILT_ENV1_S];
+      s_val = param_value(CTRL_SUB_FILT_ENV1_S);
       break;
     case ENC_ENV_AMOUNT:
-      s_val = ctrl->value[CTRL_SUB_FILT_ENV1_AMT];
+      s_val = param_value(CTRL_SUB_FILT_ENV1_AMT);
       break;
     default:
       break;
@@ -436,10 +428,10 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
   case ENC_SELECT_ENV_2:
     switch (toggle->sub_filt_env_sustain_func) {
     case ENC_ENV_SUSTAIN:
-      s_val = ctrl->value[CTRL_SUB_FILT_ENV2_S];
+      s_val = param_value(CTRL_SUB_FILT_ENV2_S);
       break;
     case ENC_ENV_AMOUNT:
-      s_val = ctrl->value[CTRL_SUB_FILT_ENV2_AMT];
+      s_val = param_value(CTRL_SUB_FILT_ENV2_AMT);
       break;
     default:
       break;
@@ -482,10 +474,10 @@ void _i2c_resume_left_rgbled_1_11(uint8_t bus, i2c_callback_t callback,
   uint16_t r_val = 0;
   switch (toggle->sub_filt_env_attack_func) {
   case ENC_SELECT_ENV_1:
-    r_val = ctrl->value[CTRL_SUB_FILT_ENV1_R];
+    r_val = param_value(CTRL_SUB_FILT_ENV1_R);
     break;
   case ENC_SELECT_ENV_2:
-    r_val = ctrl->value[CTRL_SUB_FILT_ENV2_R];
+    r_val = param_value(CTRL_SUB_FILT_ENV2_R);
     break;
   default:
     break;
@@ -512,14 +504,13 @@ void _i2c_resume_left_rgbled_3_00(uint8_t bus, i2c_callback_t callback,
 
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
 
   /* Osc2 Filt
    * LEFT3:00
    * Freq: 0, 1
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_filt_freq_lab(ctrl), pwm_seq, (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_filt_freq_lab(), pwm_seq, (2 * 3));
 
   rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 8 + OSC2_PATTERN_OFFSET,
                              false);
@@ -529,7 +520,7 @@ void _i2c_resume_left_rgbled_3_00(uint8_t bus, i2c_callback_t callback,
    * Reso: 2, 3
    */
 
-  rgb_led_set_pwm_lab(rgb_osc2_filt_reso_lab(ctrl), pwm_seq + (2 * 3), (2 * 3));
+  rgb_led_set_pwm_lab(rgb_osc2_filt_reso_lab(), pwm_seq + (2 * 3), (2 * 3));
 
   rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3,
                              10 + OSC2_PATTERN_OFFSET, false);
@@ -539,7 +530,7 @@ void _i2c_resume_left_rgbled_3_00(uint8_t bus, i2c_callback_t callback,
    * 7, 8
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_to_osc2_mix_lab(ctrl), pwm_seq + (7 * 3), 2 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_to_osc2_mix_lab(), pwm_seq + (7 * 3), 2 * 3);
 
   rgb_led_set_scale_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 2 * 3,
                              6 + SUB_PATTERN_OFFSET, false);
@@ -554,7 +545,6 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
                                   void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   adsr_grid_t *grid;
 
@@ -584,10 +574,10 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   uint16_t a_val = 0;
   switch (toggle->osc_filt_env_attack_func) {
   case ENC_SELECT_ENV_1:
-    a_val = ctrl->value[CTRL_OSC_FILT_ENV1_A];
+    a_val = param_value(CTRL_OSC_FILT_ENV1_A);
     break;
   case ENC_SELECT_ENV_2:
-    a_val = ctrl->value[CTRL_OSC_FILT_ENV2_A];
+    a_val = param_value(CTRL_OSC_FILT_ENV2_A);
     break;
   default:
     break;
@@ -616,10 +606,10 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   uint16_t d_val = 0;
   switch (toggle->osc_filt_env_attack_func) {
   case ENC_SELECT_ENV_1:
-    d_val = ctrl->value[CTRL_OSC_FILT_ENV1_D];
+    d_val = param_value(CTRL_OSC_FILT_ENV1_D);
     break;
   case ENC_SELECT_ENV_2:
-    d_val = ctrl->value[CTRL_OSC_FILT_ENV2_D];
+    d_val = param_value(CTRL_OSC_FILT_ENV2_D);
     break;
   default:
     break;
@@ -644,10 +634,10 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   case ENC_SELECT_ENV_1:
     switch (toggle->osc_filt_env_sustain_func) {
     case ENC_ENV_SUSTAIN:
-      s_val = ctrl->value[CTRL_OSC_FILT_ENV1_S];
+      s_val = param_value(CTRL_OSC_FILT_ENV1_S);
       break;
     case ENC_ENV_AMOUNT:
-      s_val = ctrl->value[CTRL_OSC_FILT_ENV1_AMT];
+      s_val = param_value(CTRL_OSC_FILT_ENV1_AMT);
       break;
     default:
       break;
@@ -656,10 +646,10 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   case ENC_SELECT_ENV_2:
     switch (toggle->osc_filt_env_sustain_func) {
     case ENC_ENV_SUSTAIN:
-      s_val = ctrl->value[CTRL_OSC_FILT_ENV2_S];
+      s_val = param_value(CTRL_OSC_FILT_ENV2_S);
       break;
     case ENC_ENV_AMOUNT:
-      s_val = ctrl->value[CTRL_OSC_FILT_ENV2_AMT];
+      s_val = param_value(CTRL_OSC_FILT_ENV2_AMT);
       break;
     default:
       break;
@@ -710,10 +700,10 @@ void _i2c_resume_left_rgbled_3_01(uint8_t bus, i2c_callback_t callback,
   uint16_t r_val = 0;
   switch (toggle->osc_filt_env_attack_func) {
   case ENC_SELECT_ENV_1:
-    r_val = ctrl->value[CTRL_OSC_FILT_ENV1_R];
+    r_val = param_value(CTRL_OSC_FILT_ENV1_R);
     break;
   case ENC_SELECT_ENV_2:
-    r_val = ctrl->value[CTRL_OSC_FILT_ENV2_R];
+    r_val = param_value(CTRL_OSC_FILT_ENV2_R);
     break;
   default:
     break;
@@ -742,9 +732,8 @@ void _i2c_resume_left_rgbled_3_10(uint8_t bus, i2c_callback_t callback,
 
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
-  ctrl_t *ctrl = ctrl_get_active();
 
-  rgb_led_set_pwm_lab(rgb_osc2_drive_lab(ctrl), pwm_seq + (3 * 3), 8 * 3);
+  rgb_led_set_pwm_lab(rgb_osc2_drive_lab(), pwm_seq + (3 * 3), 8 * 3);
   rgb_led_set_scale_animated(pwm_seq + (3 * 3), scale_seq + (3 * 3), 8 * 3,
                              12 + OSC2_PATTERN_OFFSET, false);
 
@@ -878,28 +867,26 @@ uint16_t _commit_filt_cutoff_dac_value(
 
 void _i2c_resume_left_dac_0_0_1(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   note_t *note = note_get_active();
   dac7678_set_value(
       I2C_LEFT, 0, 0, 1,
       _commit_filt_cutoff_dac_value(
           note, param_value(CTRL_OSC1_FILT_CUTOFF),
-          ctrl->value[CTRL_OSC_FILT_ENV1_A], ctrl->value[CTRL_OSC_FILT_ENV1_D],
-          ctrl->value[CTRL_OSC_FILT_ENV1_S], ctrl->value[CTRL_OSC_FILT_ENV1_R],
-          ctrl->value[CTRL_OSC_FILT_ENV1_AMT], 0, 0, 0, 0, 0),
+          param_value(CTRL_OSC_FILT_ENV1_A), param_value(CTRL_OSC_FILT_ENV1_D),
+          param_value(CTRL_OSC_FILT_ENV1_S), param_value(CTRL_OSC_FILT_ENV1_R),
+          param_value(CTRL_OSC_FILT_ENV1_AMT), 0, 0, 0, 0, 0),
       callback, userdata);
 }
 
 void _i2c_resume_left_dac_0_0_2(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   note_t *note = note_get_active();
   uint8_t osc1_note =
-      note->value.note_number + (12 - ctrl->value[CTRL_OSC1_TUNE_COARSE]);
+      note->value.note_number + (12 - param_value(CTRL_OSC1_TUNE_COARSE));
   uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
   osc1_note_dac_val +=
       ((int16_t)CTRL_DEFAULT_MID -
-       ctrl->value[CTRL_OSC1_TUNE_FINE]); // TODO: Handle wrapping, maybe
+       param_value(CTRL_OSC1_TUNE_FINE)); // TODO: Handle wrapping, maybe
                                           // add it to osc1_note_dac_val?
   dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val, callback, userdata);
 }
@@ -921,24 +908,21 @@ uint16_t _vca_lin_to_log(uint16_t input) {
 
 void _i2c_resume_left_dac_0_0_3(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 0, 3,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_TO_OSC1_MIX]),
+                    _vca_lin_to_log(param_value(CTRL_OSC1_TO_OSC1_MIX)),
                     callback, userdata);
 }
 
 void _i2c_resume_left_dac_0_0_4(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 0, 4,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_TO_OSC2_MIX]),
+                    _vca_lin_to_log(param_value(CTRL_OSC1_TO_OSC2_MIX)),
                     callback, userdata);
 }
 
 void _i2c_resume_left_dac_0_0_5(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_LEFT, 0, 0, 5, ctrl->value[CTRL_OSC1_SQU_PWM], callback,
+  dac7678_set_value(I2C_LEFT, 0, 0, 5, param_value(CTRL_OSC1_SQU_PWM), callback,
                     userdata);
 }
 
@@ -951,9 +935,8 @@ void _i2c_resume_left_dac_0_0_6(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_left_dac_0_0_7(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(I2C_LEFT, 0, 0, 7,
-                    _vca_lin_to_log(ctrl->value[CTRL_OSC1_SQU_LVL]), callback,
+                    _vca_lin_to_log(param_value(CTRL_OSC1_SQU_LVL)), callback,
                     userdata);
 }
 
@@ -1031,19 +1014,17 @@ uint16_t _env_amt_lin_to_log(uint16_t input) {
 
 void _i2c_resume_left_dac_0_4_2(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(
       I2C_LEFT, 0, 4, 2,
-      _env_amt_lin_to_log(CTRL_DEFAULT_MAX - ctrl->value[CTRL_OSC_AMP_ENV_AMT]),
+      _env_amt_lin_to_log(CTRL_DEFAULT_MAX - param_value(CTRL_OSC_AMP_ENV_AMT)),
       callback, userdata);
 }
 
 void _i2c_resume_left_dac_0_4_3(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   dac7678_set_value(
       I2C_LEFT, 0, 4, 3,
-      _env_amt_lin_to_log(CTRL_DEFAULT_MAX - ctrl->value[CTRL_SUB_AMP_ENV_AMT]),
+      _env_amt_lin_to_log(CTRL_DEFAULT_MAX - param_value(CTRL_SUB_AMP_ENV_AMT)),
       callback, userdata);
 }
 
@@ -1068,18 +1049,17 @@ void _i2c_resume_left_dac_2_0_0(uint8_t bus, i2c_callback_t callback,
 }
 void _i2c_resume_left_dac_2_0_2(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   note_t *note = note_get_active();
   dac7678_set_value(
       I2C_LEFT, 2, 0, 2,
       _commit_filt_cutoff_dac_value(
           note, param_value(CTRL_SUB_FILT_CUTOFF),
-          ctrl->value[CTRL_SUB_FILT_ENV1_A], ctrl->value[CTRL_SUB_FILT_ENV1_D],
-          ctrl->value[CTRL_SUB_FILT_ENV1_S], ctrl->value[CTRL_SUB_FILT_ENV1_R],
-          ctrl->value[CTRL_SUB_FILT_ENV1_AMT],
-          ctrl->value[CTRL_SUB_FILT_ENV2_A], ctrl->value[CTRL_SUB_FILT_ENV2_D],
-          ctrl->value[CTRL_SUB_FILT_ENV2_S], ctrl->value[CTRL_SUB_FILT_ENV2_R],
-          ctrl->value[CTRL_SUB_FILT_ENV2_AMT]),
+          param_value(CTRL_SUB_FILT_ENV1_A), param_value(CTRL_SUB_FILT_ENV1_D),
+          param_value(CTRL_SUB_FILT_ENV1_S), param_value(CTRL_SUB_FILT_ENV1_R),
+          param_value(CTRL_SUB_FILT_ENV1_AMT),
+          param_value(CTRL_SUB_FILT_ENV2_A), param_value(CTRL_SUB_FILT_ENV2_D),
+          param_value(CTRL_SUB_FILT_ENV2_S), param_value(CTRL_SUB_FILT_ENV2_R),
+          param_value(CTRL_SUB_FILT_ENV2_AMT)),
       callback, userdata);
 }
 void _i2c_resume_left_dac_2_0_4(uint8_t bus, i2c_callback_t callback,
@@ -1090,15 +1070,14 @@ void _i2c_resume_left_dac_2_0_4(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_left_dac_2_0_5(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
   note_t *note = note_get_active();
   dac7678_set_value(
       I2C_LEFT, 2, 0, 5,
       _commit_filt_cutoff_dac_value(
           note, param_value(CTRL_OSC2_FILT_CUTOFF),
-          ctrl->value[CTRL_OSC_FILT_ENV2_A], ctrl->value[CTRL_OSC_FILT_ENV2_D],
-          ctrl->value[CTRL_OSC_FILT_ENV2_S], ctrl->value[CTRL_OSC_FILT_ENV2_R],
-          ctrl->value[CTRL_OSC_FILT_ENV2_AMT], 0, 0, 0, 0, 0),
+          param_value(CTRL_OSC_FILT_ENV2_A), param_value(CTRL_OSC_FILT_ENV2_D),
+          param_value(CTRL_OSC_FILT_ENV2_S), param_value(CTRL_OSC_FILT_ENV2_R),
+          param_value(CTRL_OSC_FILT_ENV2_AMT), 0, 0, 0, 0, 0),
       callback, userdata);
 }
 

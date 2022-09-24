@@ -15,7 +15,7 @@
 
 lab_t _drive_lab(lab_t in, ctrl_enum_t drive_enum) {
   hsv_t hsv = oklab_to_hsv(in);
-  double drive = ctrl_double_value(param_value(drive_enum));
+  double drive = ctrl_double(param_value(drive_enum));
   hsv.h -= 120.0 * drive;
   if (hsv.h >= 360.0)
     hsv.h -= 360.0;

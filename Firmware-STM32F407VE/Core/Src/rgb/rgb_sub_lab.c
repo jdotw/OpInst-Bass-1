@@ -13,12 +13,11 @@
 #include <math.h>
 
 lab_t rgb_sub_squ_lab() {
-  return rgb_primitive_lab_value(param_value(CTRL_SUB_LVL), 0.0, 1.0, 1.0);
+  return rgb_primitive_lab(param_value(CTRL_SUB_LVL), 0.0, 1.0, 1.0);
 }
 
 lab_t rgb_sub_noise_lab() {
-  return rgb_primitive_lab_value(param_value(CTRL_SUB_NOISE_LVL), 1.0, 0.0,
-                                 1.0);
+  return rgb_primitive_lab(param_value(CTRL_SUB_NOISE_LVL), 1.0, 0.0, 1.0);
 }
 
 lab_t rgb_sub_mix_lab() {
@@ -30,7 +29,7 @@ lab_t rgb_sub_mix_lab() {
 
 lab_t rgb_sub_to_osc2_mix_lab() {
   lab_t out = rgb_sub_mix_lab();
-  out.L *= ctrl_double_value(param_value(CTRL_SUB_TO_OSC2_MIX));
+  out.L *= ctrl_double(param_value(CTRL_SUB_TO_OSC2_MIX));
   out.v = param_value(CTRL_SUB_TO_OSC2_MIX);
   return out;
 }

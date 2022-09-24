@@ -13,16 +13,15 @@
 #include <math.h>
 
 lab_t rgb_osc2_saw_lab() {
-  return rgb_primitive_lab_value(param_value(CTRL_OSC2_SAW_LVL), 1.0, 0.0, 0.0);
+  return rgb_primitive_lab(param_value(CTRL_OSC2_SAW_LVL), 1.0, 0.0, 0.0);
 }
 
 lab_t rgb_osc2_squ_lab() {
-  return rgb_primitive_lab_value(param_value(CTRL_OSC2_SQU_LVL), 0.0, 1.0, 0.0);
+  return rgb_primitive_lab(param_value(CTRL_OSC2_SQU_LVL), 0.0, 1.0, 0.0);
 }
 
 lab_t rgb_osc2_noise_lab() {
-  return rgb_primitive_lab_value(param_value(CTRL_OSC2_NOISE_LVL), 0.0, 0.0,
-                                 1.0);
+  return rgb_primitive_lab(param_value(CTRL_OSC2_NOISE_LVL), 0.0, 0.0, 1.0);
 }
 
 lab_t rgb_osc2_mix_lab() {

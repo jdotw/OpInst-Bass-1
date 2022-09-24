@@ -35,14 +35,6 @@ void ctrl_overflow_handler() {
   // TODO: Buzz the haptic
 }
 
-double ctrl_double(ctrl_t *ctrl, ctrl_enum_t in) {
-  return (double)(ctrl->value[in] / 4095.0);
-}
+double ctrl_double(uint16_t value) { return (double)(value / 4095.0); }
 
-double ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in) {
-  return 1.0 - ctrl_double(ctrl, in);
-}
-
-double ctrl_double_value(uint16_t value) { return (double)(value / 4095.0); }
-
-double ctrl_double_value_inverse(uint16_t value) { return 1.0 - value; }
+double ctrl_double_inverse(uint16_t value) { return 1.0 - value; }

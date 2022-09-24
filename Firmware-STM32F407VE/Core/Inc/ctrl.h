@@ -227,10 +227,8 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
 void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
                        bool changed, bool state);
 
-double ctrl_double(ctrl_t *ctrl, ctrl_enum_t in);
-double ctrl_double_inverse(ctrl_t *ctrl, ctrl_enum_t in);
-double ctrl_double_value(uint16_t value);
-double ctrl_double_value_inverse(uint16_t value);
+double ctrl_double(uint16_t value);
+double ctrl_double_inverse(uint16_t value);
 
 // ctrl_name.c
 

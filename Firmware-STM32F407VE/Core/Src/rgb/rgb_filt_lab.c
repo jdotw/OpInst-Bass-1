@@ -19,7 +19,7 @@
 
 lab_t _filt_freq_lab(lab_t in, ctrl_enum_t cutoff_enum) {
   hsv_t hsv = oklab_to_hsv(in);
-  double cutoff = ctrl_double_value(param_value(cutoff_enum));
+  double cutoff = ctrl_double(param_value(cutoff_enum));
   hsv.s *= cutoff;
   hsv.v *= (cutoff * cutoff);
   lab_t lab = hsv_to_oklab(hsv);
@@ -29,7 +29,7 @@ lab_t _filt_freq_lab(lab_t in, ctrl_enum_t cutoff_enum) {
 
 lab_t _filt_reso_lab(lab_t in, ctrl_enum_t res_enum) {
   hsv_t hsv = oklab_to_hsv(in);
-  double res = ctrl_double_value(param_value(res_enum));
+  double res = ctrl_double(param_value(res_enum));
   hsv.h += 90.0 * res;
   if (hsv.h >= 360.0)
     hsv.h -= 360.0;

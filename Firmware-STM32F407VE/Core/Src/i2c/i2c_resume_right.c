@@ -15,6 +15,7 @@
 #include "is32.h"
 #include "main.h"
 #include "osc.h"
+#include "param.h"
 #include "pca9555.h"
 #include "rgb.h"
 #include "rotpic.h"
@@ -29,14 +30,13 @@ void _i2c_resume_right_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
                                    void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
 
   /* Osc1 Drive
    * RIGHT1:00
    * 0, 1, 3, 2 <--- Note 3 before 2
    */
 
-  rgb_led_set_pwm_lab(rgb_osc1_drive_lab(ctrl), pwm_seq, 4 * 3);
+  rgb_led_set_pwm_lab(rgb_osc1_drive_lab(), pwm_seq, 4 * 3);
   rgb_led_set_scale_animated(pwm_seq, scale_seq, 2 * 3, 11, false);
   rgb_led_set_scale_animated(pwm_seq + (2 * 3), scale_seq + (2 * 3), 2 * 3, 13,
                              true);
@@ -46,7 +46,7 @@ void _i2c_resume_right_rgbled_1_00(uint8_t bus, i2c_callback_t callback,
    * 4, 5, 6, 7, 8
    */
 
-  rgb_led_set_pwm_lab(rgb_osc_amp_out_lab(ctrl), pwm_seq + (4 * 3), 5 * 3);
+  rgb_led_set_pwm_lab(rgb_osc_amp_out_lab(), pwm_seq + (4 * 3), 5 * 3);
   rgb_led_set_scale_animated(pwm_seq + (4 * 3), scale_seq + (4 * 3), 5 * 3,
                              20 + OSC2_PATTERN_OFFSET, false);
 
@@ -63,7 +63,6 @@ void _i2c_resume_right_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
                                    void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
 
   /* FX Wet
    * RIGHT1:01
@@ -71,7 +70,7 @@ void _i2c_resume_right_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
    *
    */
 
-  rgb_led_set_pwm_lab(rgb_fx_wet_lab(ctrl), pwm_seq, (7 * 3));
+  rgb_led_set_pwm_lab(rgb_fx_wet_lab(), pwm_seq, (7 * 3));
   rgb_led_set_scale_animated(pwm_seq, scale_seq, (7 * 3), 0 + FX_PATTERN_OFFSET,
                              false);
 
@@ -81,7 +80,7 @@ void _i2c_resume_right_rgbled_1_01(uint8_t bus, i2c_callback_t callback,
    *
    */
 
-  rgb_led_set_pwm_lab(rgb_sub_amp_out_lab(ctrl), pwm_seq + (7 * 3), 5 * 3);
+  rgb_led_set_pwm_lab(rgb_sub_amp_out_lab(), pwm_seq + (7 * 3), 5 * 3);
   rgb_led_set_scale_animated(pwm_seq + (7 * 3), scale_seq + (7 * 3), 5 * 3,
                              16 + SUB_PATTERN_OFFSET, false);
 
@@ -95,7 +94,6 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
                                    void *userdata) {
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   adsr_grid_t *grid;
 
@@ -122,7 +120,7 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
    * [0,0=0=06]
    */
 
-  uint16_t a_val = ctrl->value[CTRL_SUB_AMP_ENV_A];
+  uint16_t a_val = param_value(CTRL_SUB_AMP_ENV_A);
 
   grid = adsr_led_set_grid_curve(a_val);
   pwm_seq[6] = grid->led[0][0];
@@ -144,7 +142,7 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
    * [0,2=06=00][1,2=09=03][2,2=11=05]
    */
 
-  uint16_t d_val = ctrl->value[CTRL_SUB_AMP_ENV_D];
+  uint16_t d_val = param_value(CTRL_SUB_AMP_ENV_D);
   grid = adsr_led_set_grid_curve(d_val);
   pwm_seq[0] = grid->led[0][2];
   pwm_seq[1] = grid->led[0][1];
@@ -162,11 +160,11 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
   uint16_t s_val = 0;
   switch (toggle->sub_amp_env_sustain_func) {
   case ENC_ENV_SUSTAIN:
-    s_val = ctrl->value[CTRL_SUB_AMP_ENV_S];
+    s_val = param_value(CTRL_SUB_AMP_ENV_S);
     grid = adsr_led_set_grid_bar(s_val);
     break;
   case ENC_ENV_AMOUNT:
-    s_val = ctrl->value[CTRL_SUB_AMP_ENV_AMT];
+    s_val = param_value(CTRL_SUB_AMP_ENV_AMT);
     grid = adsr_led_set_grid_stack(s_val);
     break;
   default:
@@ -200,7 +198,7 @@ void _i2c_resume_right_rgbled_1_10(uint8_t bus, i2c_callback_t callback,
    * [0,2=18=18][1,2=21=21][2,2=23=23]
    */
 
-  uint16_t r_val = ctrl->value[CTRL_SUB_AMP_ENV_R];
+  uint16_t r_val = param_value(CTRL_SUB_AMP_ENV_R);
   grid = adsr_led_set_grid_curve(r_val);
   pwm_seq[18] = grid->led[0][2];
   pwm_seq[19] = grid->led[0][1];
@@ -235,7 +233,6 @@ void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
 
   uint16_t pwm_seq[36] = {0};
   uint8_t scale_seq[36] = {0};
-  ctrl_t *ctrl = ctrl_get_active();
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   adsr_grid_t *grid;
 
@@ -258,7 +255,7 @@ void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
    * [0,0=0=18]
    */
 
-  uint16_t a_val = ctrl->value[CTRL_OSC_AMP_ENV_A];
+  uint16_t a_val = param_value(CTRL_OSC_AMP_ENV_A);
   grid = adsr_led_set_grid_curve(a_val);
 
   pwm_seq[18] = grid->led[0][0];
@@ -280,7 +277,7 @@ void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
    * [0,2=06=15][1,2=09=16][2,2=11=17]
    */
 
-  uint16_t d_val = ctrl->value[CTRL_OSC_AMP_ENV_D];
+  uint16_t d_val = param_value(CTRL_OSC_AMP_ENV_D);
   grid = adsr_led_set_grid_curve(d_val);
   pwm_seq[12] = grid->led[0][0];
   pwm_seq[13] = grid->led[1][1];
@@ -298,11 +295,11 @@ void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
   uint16_t s_val;
   switch (toggle->osc_amp_env_sustain_func) {
   case ENC_ENV_SUSTAIN:
-    s_val = ctrl->value[CTRL_OSC_AMP_ENV_S];
+    s_val = param_value(CTRL_OSC_AMP_ENV_S);
     grid = adsr_led_set_grid_bar(s_val);
     break;
   case ENC_ENV_AMOUNT:
-    s_val = ctrl->value[CTRL_OSC_AMP_ENV_AMT];
+    s_val = param_value(CTRL_OSC_AMP_ENV_AMT);
     grid = adsr_led_set_grid_stack(s_val);
     break;
   default:
@@ -328,7 +325,7 @@ void _i2c_resume_right_rgbled_2_00(uint8_t bus, i2c_callback_t callback,
    * [0,2=18=0][1,2=21=3][2,2=23=5]
    */
 
-  uint16_t r_val = ctrl->value[CTRL_OSC_AMP_ENV_R];
+  uint16_t r_val = param_value(CTRL_OSC_AMP_ENV_R);
   grid = adsr_led_set_grid_curve(r_val);
   pwm_seq[0] = grid->led[0][2];
   pwm_seq[1] = grid->led[0][1];
@@ -352,9 +349,8 @@ void _i2c_resume_right_rgbled_2_01(uint8_t bus, i2c_callback_t callback,
 
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
-  ctrl_t *ctrl = ctrl_get_active();
 
-  rgb_led_set_pwm_lab(rgb_fx_dry_lab(ctrl), pwm_seq, 11 * 3);
+  rgb_led_set_pwm_lab(rgb_fx_dry_lab(), pwm_seq, 11 * 3);
   rgb_led_set_scale_animated(pwm_seq, scale_seq, 11 * 3, 0 + FX_PATTERN_OFFSET,
                              false);
 
@@ -372,7 +368,6 @@ void _i2c_resume_right_rgbled_2_10(uint8_t bus, i2c_callback_t callback,
 
   uint16_t pwm_seq[36];
   uint8_t scale_seq[36];
-  ctrl_t *ctrl = ctrl_get_active();
   seq_t *seq = seq_get();
   mod_t *mod = mod_get();
 
@@ -381,7 +376,7 @@ void _i2c_resume_right_rgbled_2_10(uint8_t bus, i2c_callback_t callback,
    * 0, 1, 2, 3, 4, 5, 7
    */
 
-  rgb_led_set_pwm_lab(rgb_fx_feedback_lab(ctrl), pwm_seq, 8 * 3);
+  rgb_led_set_pwm_lab(rgb_fx_feedback_lab(), pwm_seq, 8 * 3);
   rgb_led_set_scale_animated(pwm_seq, scale_seq, 8 * 3, 5 + FX_PATTERN_OFFSET,
                              true);
 
@@ -450,57 +445,49 @@ void _i2c_resume_right_rotpic_1_001(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_right_dac_2_2_0(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 0, ctrl->value[CTRL_OSC_AMP_ENV_R],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 0, param_value(CTRL_OSC_AMP_ENV_R),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_1(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 1, ctrl->value[CTRL_SUB_AMP_ENV_R],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 1, param_value(CTRL_SUB_AMP_ENV_R),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_2(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 2, ctrl->value[CTRL_OSC_AMP_ENV_S],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 2, param_value(CTRL_OSC_AMP_ENV_S),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_3(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 3, ctrl->value[CTRL_SUB_AMP_ENV_S],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 3, param_value(CTRL_SUB_AMP_ENV_S),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_4(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 4, ctrl->value[CTRL_OSC_AMP_ENV_A],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 4, param_value(CTRL_OSC_AMP_ENV_A),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_5(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 5, ctrl->value[CTRL_SUB_AMP_ENV_D],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 5, param_value(CTRL_SUB_AMP_ENV_D),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_6(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 6, ctrl->value[CTRL_OSC_AMP_ENV_D],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 6, param_value(CTRL_OSC_AMP_ENV_D),
                     callback, userdata);
 }
 
 void _i2c_resume_right_dac_2_2_7(uint8_t bus, i2c_callback_t callback,
                                  void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_RIGHT, 2, 2, 7, ctrl->value[CTRL_SUB_AMP_ENV_A],
+  dac7678_set_value(I2C_RIGHT, 2, 2, 7, param_value(CTRL_SUB_AMP_ENV_A),
                     callback, userdata);
 }
 

@@ -48,48 +48,46 @@ void rgb_led_set_scale_animated(uint16_t *pwm, uint8_t *scale, uint8_t len,
                                 uint8_t offset, bool invert);
 void rgb_led_increment_pattern_step();
 
-lab_t rgb_primitive_lab(ctrl_t *ctrl, double r, double g, double b,
-                        ctrl_enum_t i);
-lab_t rgb_primitive_lab_value(uint16_t value, double r, double g, double b);
+lab_t rgb_primitive_lab(uint16_t value, double r, double g, double b);
 
 // rgb_osc1_lab.c
-lab_t rgb_osc1_saw_lab();
-lab_t rgb_osc1_squ_lab();
-lab_t rgb_osc1_mix_lab();
-lab_t rgb_osc1_to_2_mix_lab();
+lab_t rgb_osc1_saw_lab(void);
+lab_t rgb_osc1_squ_lab(void);
+lab_t rgb_osc1_mix_lab(void);
+lab_t rgb_osc1_to_2_mix_lab(void);
 
 // rgb_osc2_lab.c
-lab_t rgb_osc2_saw_lab();
-lab_t rgb_osc2_squ_lab();
-lab_t rgb_osc2_noise_lab();
-lab_t rgb_osc2_mix_lab();
-lab_t rgb_osc2_prefilt_lab();
+lab_t rgb_osc2_saw_lab(void);
+lab_t rgb_osc2_squ_lab(void);
+lab_t rgb_osc2_noise_lab(void);
+lab_t rgb_osc2_mix_lab(void);
+lab_t rgb_osc2_prefilt_lab(void);
 
 // rgb_sub_lab.c
-lab_t rgb_sub_squ_lab();
-lab_t rgb_sub_noise_lab();
-lab_t rgb_sub_mix_lab();
-lab_t rgb_sub_to_osc2_mix_lab();
+lab_t rgb_sub_squ_lab(void);
+lab_t rgb_sub_noise_lab(void);
+lab_t rgb_sub_mix_lab(void);
+lab_t rgb_sub_to_osc2_mix_lab(void);
 
 // rgb_filt_lab.c
-lab_t rgb_osc1_filt_freq_lab();
-lab_t rgb_osc1_filt_reso_lab();
-lab_t rgb_osc2_filt_freq_lab();
-lab_t rgb_osc2_filt_reso_lab();
-lab_t rgb_sub_filt_freq_lab();
-lab_t rgb_sub_filt_reso_lab();
+lab_t rgb_osc1_filt_freq_lab(void);
+lab_t rgb_osc1_filt_reso_lab(void);
+lab_t rgb_osc2_filt_freq_lab(void);
+lab_t rgb_osc2_filt_reso_lab(void);
+lab_t rgb_sub_filt_freq_lab(void);
+lab_t rgb_sub_filt_reso_lab(void);
 
 // rgb_drive_lab.c
-lab_t rgb_osc1_drive_lab();
-lab_t rgb_osc2_drive_lab();
+lab_t rgb_osc1_drive_lab(void);
+lab_t rgb_osc2_drive_lab(void);
 
 // rgb_amp_lab.c
-lab_t rgb_osc_amp_out_lab();
-lab_t rgb_sub_amp_out_lab();
+lab_t rgb_osc_amp_out_lab(void);
+lab_t rgb_sub_amp_out_lab(void);
 
 // rgb_fx_lab.c
-lab_t rgb_fx_wet_lab();
-lab_t rgb_fx_feedback_lab();
-lab_t rgb_fx_dry_lab();
+lab_t rgb_fx_wet_lab(void);
+lab_t rgb_fx_feedback_lab(void);
+lab_t rgb_fx_dry_lab(void);
 
 #endif /* INC_RGB_H_ */
