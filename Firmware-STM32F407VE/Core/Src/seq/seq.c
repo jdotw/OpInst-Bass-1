@@ -6,6 +6,7 @@
  */
 
 #include "seq.h"
+#include "i2c.h"
 #include "string.h"
 
 seq_t seq;
@@ -20,7 +21,6 @@ seq_t *seq_get(void) { return &seq; }
 void seq_init() {
   seq.state.last_step = SEQ_DEFAULT_LAST_STEP;
   seq.state.selected_step = UINT8_MAX;
-  seq.state.prev_active_step = UINT8_MAX;
   for (uint8_t i = 0; i < SEQ_MAX_STEP; i++) {
     for (uint8_t j = 0; j < CTRL_ENUM_MAX; j++) {
       seq.state.step_ctrl[i].value[j] = UINT16_MAX;
@@ -41,8 +41,6 @@ void seq_reset() { seq.state.active_step = 0; }
 
 void seq_set_step(uint8_t step) {
   if (seq.state.active_step != step) {
-    seq.state.prev_selected_step = UINT8_MAX;
-    seq.state.prev_active_step = seq.state.active_step;
     seq.state.active_step = step;
     uint8_t page = step / SEQ_STEPS_PER_PAGE;
     if (seq.state.active_page != page) {

@@ -27,14 +27,11 @@ typedef struct seq_state_struct {
 
   uint8_t last_step;
 
-  uint8_t prev_active_step;
   uint8_t active_step;
   uint8_t active_page;
 
   uint8_t selected_page;
   uint8_t selected_step;
-  uint8_t prev_selected_page;
-  uint8_t prev_selected_step;
 
   ctrl_t step_ctrl[64];
 } seq_state_t;

@@ -88,7 +88,6 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
         (seq->state.selected_step / 4) != seq->state.selected_page ||
         !seq->state.button_state[(seq->state.selected_step % 16)].pressed) {
       // Selected step has changed
-      seq->state.prev_selected_step = seq->state.selected_step;
       seq->state.selected_step = UINT8_MAX; // Default to no selection
       for (uint8_t i = 0; i < 16; i++) {
         if (seq->state.button_state[i].pressed) {
@@ -96,9 +95,6 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
           seq->state.selected_step = i * (seq->state.selected_page + 1);
           break; // Always select the lowest button
         }
-      }
-      if (seq->state.selected_step == UINT8_MAX &&
-          seq->state.prev_selected_step != UINT8_MAX) {
       }
     }
   }

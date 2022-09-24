@@ -28,15 +28,6 @@
 #define MIDI_PITCH_BEND_MID_POINT 0x2000 // per MIDI spec
 
 typedef struct midi_state_s {
-  // Note State
-  bool note_on;
-  uint8_t prev_note_number;
-  uint8_t prev_note_velocity;
-  uint8_t cur_note_number;
-  uint8_t cur_note_velocity;
-  uint32_t
-      cur_note_time_ticks; // Time that the current note key was pressed (ticks)
-
   // Pitch Bend and Mod Wheel
   uint16_t pitch_bend_amount;
   uint8_t mod_wheel_amount;
