@@ -72,12 +72,12 @@ lab_t rgb_sub_mix_lab();
 lab_t rgb_sub_to_osc2_mix_lab();
 
 // rgb_filt_lab.c
-lab_t rgb_osc1_filt_freq_lab(ctrl_t *ctrl);
-lab_t rgb_osc1_filt_reso_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_filt_freq_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_filt_reso_lab(ctrl_t *ctrl);
-lab_t rgb_sub_filt_freq_lab(ctrl_t *ctrl);
-lab_t rgb_sub_filt_reso_lab(ctrl_t *ctrl);
+lab_t rgb_osc1_filt_freq_lab();
+lab_t rgb_osc1_filt_reso_lab();
+lab_t rgb_osc2_filt_freq_lab();
+lab_t rgb_osc2_filt_reso_lab();
+lab_t rgb_sub_filt_freq_lab();
+lab_t rgb_sub_filt_reso_lab();
 
 // rgb_drive_lab.c
 lab_t rgb_osc1_drive_lab(ctrl_t *ctrl);

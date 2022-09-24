@@ -819,8 +819,7 @@ void _i2c_resume_left_rotpic_2_000(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_left_dac_0_0_0(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_LEFT, 0, 0, 0, ctrl->value[CTRL_OSC1_FILT_RES],
+  dac7678_set_value(I2C_LEFT, 0, 0, 0, param_value(CTRL_OSC1_FILT_RES),
                     callback, userdata);
 }
 
@@ -884,7 +883,7 @@ void _i2c_resume_left_dac_0_0_1(uint8_t bus, i2c_callback_t callback,
   dac7678_set_value(
       I2C_LEFT, 0, 0, 1,
       _commit_filt_cutoff_dac_value(
-          note, ctrl->value[CTRL_OSC1_FILT_CUTOFF],
+          note, param_value(CTRL_OSC1_FILT_CUTOFF),
           ctrl->value[CTRL_OSC_FILT_ENV1_A], ctrl->value[CTRL_OSC_FILT_ENV1_D],
           ctrl->value[CTRL_OSC_FILT_ENV1_S], ctrl->value[CTRL_OSC_FILT_ENV1_R],
           ctrl->value[CTRL_OSC_FILT_ENV1_AMT], 0, 0, 0, 0, 0),
@@ -1066,8 +1065,7 @@ void _i2c_resume_left_dac_0_4_7(uint8_t bus, i2c_callback_t callback,
 
 void _i2c_resume_left_dac_2_0_0(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_LEFT, 2, 0, 0, ctrl->value[CTRL_OSC2_FILT_RES],
+  dac7678_set_value(I2C_LEFT, 2, 0, 0, param_value(CTRL_OSC2_FILT_RES),
                     callback, userdata);
 }
 void _i2c_resume_left_dac_2_0_2(uint8_t bus, i2c_callback_t callback,
@@ -1077,7 +1075,7 @@ void _i2c_resume_left_dac_2_0_2(uint8_t bus, i2c_callback_t callback,
   dac7678_set_value(
       I2C_LEFT, 2, 0, 2,
       _commit_filt_cutoff_dac_value(
-          note, ctrl->value[CTRL_SUB_FILT_CUTOFF],
+          note, param_value(CTRL_SUB_FILT_CUTOFF),
           ctrl->value[CTRL_SUB_FILT_ENV1_A], ctrl->value[CTRL_SUB_FILT_ENV1_D],
           ctrl->value[CTRL_SUB_FILT_ENV1_S], ctrl->value[CTRL_SUB_FILT_ENV1_R],
           ctrl->value[CTRL_SUB_FILT_ENV1_AMT],
@@ -1088,8 +1086,7 @@ void _i2c_resume_left_dac_2_0_2(uint8_t bus, i2c_callback_t callback,
 }
 void _i2c_resume_left_dac_2_0_4(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
-  ctrl_t *ctrl = ctrl_get_active();
-  dac7678_set_value(I2C_LEFT, 2, 0, 4, ctrl->value[CTRL_SUB_FILT_RES], callback,
+  dac7678_set_value(I2C_LEFT, 2, 0, 4, param_value(CTRL_SUB_FILT_RES), callback,
                     userdata);
 }
 
@@ -1100,7 +1097,7 @@ void _i2c_resume_left_dac_2_0_5(uint8_t bus, i2c_callback_t callback,
   dac7678_set_value(
       I2C_LEFT, 2, 0, 5,
       _commit_filt_cutoff_dac_value(
-          note, ctrl->value[CTRL_OSC2_FILT_CUTOFF],
+          note, param_value(CTRL_OSC2_FILT_CUTOFF),
           ctrl->value[CTRL_OSC_FILT_ENV2_A], ctrl->value[CTRL_OSC_FILT_ENV2_D],
           ctrl->value[CTRL_OSC_FILT_ENV2_S], ctrl->value[CTRL_OSC_FILT_ENV2_R],
           ctrl->value[CTRL_OSC_FILT_ENV2_AMT], 0, 0, 0, 0, 0),

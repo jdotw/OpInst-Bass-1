@@ -9,6 +9,7 @@
 #include "i2c.h"
 #include "is32.h"
 #include "main.h"
+#include "param.h"
 #include "rgb.h"
 #include <math.h>
 
@@ -16,9 +17,9 @@
  * Common
  */
 
-lab_t _filt_freq_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t cutoff_enum) {
+lab_t _filt_freq_lab(lab_t in, ctrl_enum_t cutoff_enum) {
   hsv_t hsv = oklab_to_hsv(in);
-  double cutoff = ctrl_double(ctrl, cutoff_enum);
+  double cutoff = ctrl_double_value(param_value(cutoff_enum));
   hsv.s *= cutoff;
   hsv.v *= (cutoff * cutoff);
   lab_t lab = hsv_to_oklab(hsv);
@@ -26,9 +27,9 @@ lab_t _filt_freq_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t cutoff_enum) {
   return lab;
 }
 
-lab_t _filt_reso_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t res_enum) {
+lab_t _filt_reso_lab(lab_t in, ctrl_enum_t res_enum) {
   hsv_t hsv = oklab_to_hsv(in);
-  double res = ctrl_double(ctrl, res_enum);
+  double res = ctrl_double_value(param_value(res_enum));
   hsv.h += 90.0 * res;
   if (hsv.h >= 360.0)
     hsv.h -= 360.0;
@@ -43,35 +44,34 @@ lab_t _filt_reso_lab(ctrl_t *ctrl, lab_t in, ctrl_enum_t res_enum) {
  * Osc1
  */
 
-lab_t rgb_osc1_filt_freq_lab(ctrl_t *ctrl) {
-  return _filt_freq_lab(ctrl, rgb_osc1_mix_lab(ctrl), CTRL_OSC1_FILT_CUTOFF);
+lab_t rgb_osc1_filt_freq_lab() {
+  return _filt_freq_lab(rgb_osc1_mix_lab(), CTRL_OSC1_FILT_CUTOFF);
 }
 
-lab_t rgb_osc1_filt_reso_lab(ctrl_t *ctrl) {
-  return _filt_reso_lab(ctrl, rgb_osc1_filt_freq_lab(ctrl), CTRL_OSC1_FILT_RES);
+lab_t rgb_osc1_filt_reso_lab() {
+  return _filt_reso_lab(rgb_osc1_filt_freq_lab(), CTRL_OSC1_FILT_RES);
 }
 
 /*
  * Osc2
  */
 
-lab_t rgb_osc2_filt_freq_lab(ctrl_t *ctrl) {
-  return _filt_freq_lab(ctrl, rgb_osc2_prefilt_lab(ctrl),
-                        CTRL_OSC2_FILT_CUTOFF);
+lab_t rgb_osc2_filt_freq_lab() {
+  return _filt_freq_lab(rgb_osc2_prefilt_lab(), CTRL_OSC2_FILT_CUTOFF);
 }
 
-lab_t rgb_osc2_filt_reso_lab(ctrl_t *ctrl) {
-  return _filt_reso_lab(ctrl, rgb_osc2_filt_freq_lab(ctrl), CTRL_OSC2_FILT_RES);
+lab_t rgb_osc2_filt_reso_lab() {
+  return _filt_reso_lab(rgb_osc2_filt_freq_lab(), CTRL_OSC2_FILT_RES);
 }
 
 /*
  * Sub
  */
 
-lab_t rgb_sub_filt_freq_lab(ctrl_t *ctrl) {
-  return _filt_freq_lab(ctrl, rgb_sub_mix_lab(ctrl), CTRL_SUB_FILT_CUTOFF);
+lab_t rgb_sub_filt_freq_lab() {
+  return _filt_freq_lab(rgb_sub_mix_lab(), CTRL_SUB_FILT_CUTOFF);
 }
 
-lab_t rgb_sub_filt_reso_lab(ctrl_t *ctrl) {
-  return _filt_reso_lab(ctrl, rgb_sub_filt_freq_lab(ctrl), CTRL_SUB_FILT_RES);
+lab_t rgb_sub_filt_reso_lab() {
+  return _filt_reso_lab(rgb_sub_filt_freq_lab(), CTRL_SUB_FILT_RES);
 }
