@@ -84,12 +84,12 @@ lab_t rgb_osc1_drive_lab();
 lab_t rgb_osc2_drive_lab();
 
 // rgb_amp_lab.c
-lab_t rgb_osc_amp_out_lab(ctrl_t *ctrl);
-lab_t rgb_sub_amp_out_lab(ctrl_t *ctrl);
+lab_t rgb_osc_amp_out_lab();
+lab_t rgb_sub_amp_out_lab();
 
 // rgb_fx_lab.c
-lab_t rgb_fx_wet_lab(ctrl_t *ctrl);
-lab_t rgb_fx_feedback_lab(ctrl_t *ctrl);
-lab_t rgb_fx_dry_lab(ctrl_t *ctrl);
+lab_t rgb_fx_wet_lab();
+lab_t rgb_fx_feedback_lab();
+lab_t rgb_fx_dry_lab();
 
 #endif /* INC_RGB_H_ */
