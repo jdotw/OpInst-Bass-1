@@ -61,6 +61,7 @@ void seq_advance_step() {
   } else {
     seq_set_step(seq.state.active_step + 1);
   }
+  i2c_resume_left_bus_reset();
 }
 
 void seq_advance_selected_page() {
