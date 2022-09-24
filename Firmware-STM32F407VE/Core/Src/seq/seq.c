@@ -22,6 +22,11 @@ void seq_init() {
   seq.state.last_step = SEQ_DEFAULT_LAST_STEP;
   seq.state.selected_step = UINT8_MAX;
   seq.state.prev_active_step = UINT8_MAX;
+  for (uint8_t i = 0; i < SEQ_MAX_STEP; i++) {
+    for (uint8_t j = 0; j < CTRL_ENUM_MAX; j++) {
+      seq.state.step_ctrl[i].value[j] = UINT16_MAX;
+    }
+  }
 }
 
 void seq_changed_reset() { memset(&seq.changed, 0, sizeof(seq.changed)); }
@@ -100,30 +105,4 @@ ctrl_t *seq_get_active_step_ctrl(seq_t *seq) {
   }
 
   return step_ctrl;
-}
-
-void seq_apply_active_step_ctrl(seq_t *seq, ctrl_t *ctrl) {
-  // Using the state in state_ptr, overlays the control values
-  // that are set for that step (p-locks) onto the
-  // ctrl_value_ptr and ctrl_changed_ptr
-  // That is, if the step has a value set for any control
-  // (noted by _changed = true flag for that value) then it
-  // overrides the state in the ctrl_value_ptr struct and causes
-  // the corresponding ctrl_changed_ptr flag to be set.
-  //
-  // This is gonna be a lot of code :|
-
-  ctrl_t *step_ctrl = seq_get_active_step_ctrl(seq);
-  static ctrl_t *prev_ctrl = NULL;
-
-  for (uint8_t i = 0; i < CTRL_ENUM_MAX; i++) {
-    if (step_ctrl && step_ctrl->changed[i]) {
-      ctrl->value[i] = step_ctrl->value[i];
-      ctrl->changed[i] = step_ctrl->changed[i];
-    } else if (prev_ctrl && prev_ctrl->changed[i]) {
-      ctrl->changed[i] = true;
-    }
-  }
-
-  prev_ctrl = step_ctrl;
 }

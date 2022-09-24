@@ -189,7 +189,6 @@ typedef enum {
 
 typedef struct {
   uint16_t value[CTRL_ENUM_MAX];
-  bool changed[CTRL_ENUM_MAX];
 } ctrl_t;
 
 typedef struct {
@@ -216,8 +215,6 @@ ctrl_toggle_t *ctrl_get_active_toggle(void);
 bool ctrl_get_enabled(void);
 void ctrl_set_enabled(bool enabled);
 
-void ctrl_changed_init(void);
-void ctrl_changed_reset(void);
 void ctrl_toggle_init(void);
 
 void ctrl_overflow_handler(void);

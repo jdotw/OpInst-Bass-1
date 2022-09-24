@@ -229,10 +229,8 @@ lv_obj_t *ctrl_screen() {
 }
 
 void ctrl_changed_screen_commit() {
-  ctrl_t *ctrl = ctrl_get_active();
   mod_t *mod = mod_get();
-  if ((changed_ctrl1 != CTRL_ENUM_MAX && ctrl->changed[changed_ctrl1]) ||
-      ((changed_ctrl2 != CTRL_ENUM_MAX) && ctrl->changed[changed_ctrl2])) {
+  if (changed_ctrl1 != CTRL_ENUM_MAX || changed_ctrl2 != CTRL_ENUM_MAX) {
     oled_reload_screen();
   }
   if (mod->changed.down || mod->changed.up) {

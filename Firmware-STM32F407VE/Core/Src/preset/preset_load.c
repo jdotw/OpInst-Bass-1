@@ -23,13 +23,11 @@ ctrl_enum_t _preset_ctrl_enum(char *name);
 
 void _preset_load_ctrl(cJSON *ctrl_obj, ctrl_t *ctrlptr) {
   memset(&ctrlptr->value, 0, sizeof(ctrlptr->value));
-  memset(&ctrlptr->changed, 0, sizeof(ctrlptr->changed));
 
   for (cJSON *ctrl_value = ctrl_obj->child; ctrl_value;
        ctrl_value = ctrl_value->next) {
     ctrl_enum_t ctrl_enum = _preset_ctrl_enum(ctrl_value->string);
     ctrlptr->value[ctrl_enum] = ctrl_value->valueint;
-    ctrlptr->changed[ctrl_enum] = true;
   }
 }
 

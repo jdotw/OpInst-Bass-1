@@ -95,7 +95,7 @@ bool preset_save(uint8_t index, char *name) {
   for (uint8_t step = 0; step < SEQ_MAX_STEPS; step++) {
     cJSON *step_obj = cJSON_CreateObject();
     for (ctrl_enum_t i = 0; i < CTRL_ENUM_MAX; i++) {
-      if (seq->state.step_ctrl[step].changed[i]) {
+      if (seq->state.step_ctrl[step].value[i] != UINT16_MAX) {
         const char *name = _preset_ctrl_name_func(i);
         int16_t value = seq->state.step_ctrl[step].value[i];
         cJSON_AddNumberToObject(step_obj, name, (double)value);

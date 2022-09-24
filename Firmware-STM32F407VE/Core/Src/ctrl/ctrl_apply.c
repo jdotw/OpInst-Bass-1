@@ -48,7 +48,6 @@ void _ctrl_apply_delta(ctrl_enum_t ctrl_enum, int16_t delta,
       ctrl->value[ctrl_enum] += scaled_enc_delta;
     }
   }
-  ctrl->changed[ctrl_enum] = true;
   if (did_overflow) {
     ctrl_overflow_handler();
   }

@@ -83,7 +83,6 @@ void preset_load_selected() {
     if (!loaded_system) {
       // Fallback to init
       ctrl_value_init();
-      ctrl_changed_reset();
       seq_init();
       seq_changed_reset();
     }

@@ -43,7 +43,6 @@ Core/Src/adsr/adsr.c \
 Core/Src/adsr/adsr_led.c \
 Core/Src/blink.c \
 Core/Src/button/button_led.c \
-Core/Src/commit/commit.c \
 Core/Src/ctrl/ctrl.c \
 Core/Src/ctrl/ctrl_apply.c \
 Core/Src/ctrl/ctrl_name.c \
