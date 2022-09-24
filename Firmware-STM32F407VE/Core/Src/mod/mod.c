@@ -11,5 +11,3 @@
 mod_t mod;
 
 mod_t *mod_get() { return &mod; }
-
-void mod_changed_reset() { memset(&mod.changed, 0, sizeof(mod.changed)); }

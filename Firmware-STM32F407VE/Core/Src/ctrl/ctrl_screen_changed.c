@@ -233,14 +233,13 @@ void ctrl_changed_screen_commit() {
   if (changed_ctrl1 != CTRL_ENUM_MAX || changed_ctrl2 != CTRL_ENUM_MAX) {
     oled_reload_screen();
   }
-  if (mod->changed.down || mod->changed.up) {
-    if (mod->state.down) {
-      // Reset to Max
-      ctrl_value_set_max(last_pushed_ctrl);
-    } else if (mod->state.up) {
-      // Reset to Min
-      ctrl_value_set_min(last_pushed_ctrl);
-    }
+  if (mod->state.down) {
+    // Reset to Max
+    ctrl_value_set_max(last_pushed_ctrl);
+    oled_reload_screen();
+  } else if (mod->state.up) {
+    // Reset to Min
+    ctrl_value_set_min(last_pushed_ctrl);
     oled_reload_screen();
   }
 }

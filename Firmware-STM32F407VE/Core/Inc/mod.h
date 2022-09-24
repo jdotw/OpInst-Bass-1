@@ -21,12 +21,9 @@ struct mod_button_struct {
 
 typedef struct {
   struct mod_button_struct state;
-  struct mod_button_struct changed;
 } mod_t;
 
 mod_t *mod_get();
-
-void mod_changed_reset(void);
 
 uint16_t *mod_shift_button_led_rgb(bool pressed);
 

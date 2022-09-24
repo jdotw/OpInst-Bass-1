@@ -58,7 +58,6 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
       if (seq->state.button_state[i].pressed != pressed) {
         // State change for this button
         seq->state.button_state[i].pressed = pressed;
-        seq->changed.button_changed[i] = true;
       }
     }
 
@@ -67,24 +66,20 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
     case I2C_LEFT:
       if (mod->state.start != !(pin_state & START_PIN)) {
         mod->state.start = !(pin_state & START_PIN);
-        mod->changed.start = true;
       }
       break;
     case I2C_RIGHT:
       if (mod->state.page != !(pin_state & AUX_PIN)) {
         mod->state.page = !(pin_state & AUX_PIN);
-        mod->changed.page = true;
         if (mod->state.page) {
           seq_advance_selected_page();
         }
       }
       if (mod->state.up != !(pin_state & UP_PIN)) {
         mod->state.up = !(pin_state & UP_PIN);
-        mod->changed.up = true;
       }
       if (mod->state.down != !(pin_state & DOWN_PIN)) {
         mod->state.down = !(pin_state & DOWN_PIN);
-        mod->changed.down = true;
       }
       break;
     }
@@ -99,15 +94,11 @@ void seq_poll_gpio(uint8_t bus, uint8_t channel) {
         if (seq->state.button_state[i].pressed) {
           // Set new selection
           seq->state.selected_step = i * (seq->state.selected_page + 1);
-          seq->changed.selected_step = true;
           break; // Always select the lowest button
         }
       }
       if (seq->state.selected_step == UINT8_MAX &&
           seq->state.prev_selected_step != UINT8_MAX) {
-        // There was a buttons selected previously,
-        // but it has now been let go.
-        seq->changed.selected_step = true;
       }
     }
   }
@@ -119,6 +110,5 @@ void seq_poll_mcu_gpio() {
                        GPIO_PIN_RESET; // Pulled down
   if (mod->state.shift != shift_pressed) {
     mod->state.shift = shift_pressed;
-    mod->changed.shift = true;
   }
 }

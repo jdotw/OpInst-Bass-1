@@ -84,7 +84,6 @@ void preset_load_selected() {
       // Fallback to init
       ctrl_value_init();
       seq_init();
-      seq_changed_reset();
     }
   }
 }

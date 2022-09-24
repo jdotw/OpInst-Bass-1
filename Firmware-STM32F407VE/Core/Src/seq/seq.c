@@ -18,7 +18,6 @@ seq_t seq;
 seq_t *seq_get(void) { return &seq; }
 
 void seq_init() {
-  memset(&seq.changed, 1, sizeof(seq.changed));
   seq.state.last_step = SEQ_DEFAULT_LAST_STEP;
   seq.state.selected_step = UINT8_MAX;
   seq.state.prev_active_step = UINT8_MAX;
@@ -29,39 +28,25 @@ void seq_init() {
   }
 }
 
-void seq_changed_reset() { memset(&seq.changed, 0, sizeof(seq.changed)); }
-
 void seq_start() {
   seq_reset();
   seq.state.running = true;
-  seq.changed.running = true;
 }
 
-void seq_stop() {
-  seq.state.running = false;
-  seq.changed.running = true;
-}
+void seq_stop() { seq.state.running = false; }
 
-void seq_continue() {
-  seq.state.running = true;
-  seq.changed.running = true;
-}
+void seq_continue() { seq.state.running = true; }
 
-void seq_reset() {
-  seq.state.active_step = 0;
-  seq.changed.active_step = true;
-}
+void seq_reset() { seq.state.active_step = 0; }
 
 void seq_set_step(uint8_t step) {
   if (seq.state.active_step != step) {
     seq.state.prev_selected_step = UINT8_MAX;
     seq.state.prev_active_step = seq.state.active_step;
     seq.state.active_step = step;
-    seq.changed.active_step = true;
     uint8_t page = step / SEQ_STEPS_PER_PAGE;
     if (seq.state.active_page != page) {
       seq.state.active_page = page;
-      seq.changed.active_page = true;
     }
   }
 }
@@ -70,7 +55,6 @@ void seq_advance_step() {
   if (!seq.state.running) {
     // Mustve booted mid-sequence!
     seq.state.running = true;
-    seq.changed.running = true;
   }
   if (seq.state.active_step == seq.state.last_step) {
     seq_set_step(0);
@@ -85,7 +69,6 @@ void seq_advance_selected_page() {
   } else {
     seq.state.selected_page++;
   }
-  seq.changed.selected_page = true;
 }
 
 ctrl_t *seq_get_active_step_ctrl(seq_t *seq) {

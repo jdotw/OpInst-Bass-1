@@ -91,12 +91,12 @@ lv_obj_t *preset_set_name_screen() {
 
 void preset_set_name_screen_commit() {
   mod_t *mod = mod_get();
-  if (mod->changed.up && mod->state.up) {
+  if (mod->state.up) {
     // Up (cancel) button is pressed
     // Cancel the preset naming
     preset_set_screen(PRESET_SELECT_SCREEN);
     oled_reload_screen();
-  } else if (mod->changed.down && mod->state.down) {
+  } else if (mod->state.down) {
     // Down (save) button is pressed
     // Save to SD Card
     preset_save(preset_index, name_buf);
