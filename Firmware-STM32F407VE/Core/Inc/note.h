@@ -16,11 +16,6 @@ struct note_value_struct {
   bool note_on;
 };
 
-struct note_changed_struct {
-  bool note_number;
-  bool note_on;
-};
-
 struct note_trig_struct {
   bool ping_trigger;
   uint32_t triggered_at;
@@ -28,7 +23,6 @@ struct note_trig_struct {
 
 typedef struct {
   struct note_trig_struct trig;
-  struct note_changed_struct changed;
   struct note_value_struct value;
   uint32_t event_ticks;
 } note_t;
@@ -37,6 +31,5 @@ note_t *note_get_active(void);
 
 void note_set_on(uint8_t note_number);
 void note_set_off(void);
-void note_changed_reset(void);
 
 #endif /* INC_NOTE_H_ */
