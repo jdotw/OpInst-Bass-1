@@ -80,8 +80,8 @@ lab_t rgb_sub_filt_freq_lab();
 lab_t rgb_sub_filt_reso_lab();
 
 // rgb_drive_lab.c
-lab_t rgb_osc1_drive_lab(ctrl_t *ctrl);
-lab_t rgb_osc2_drive_lab(ctrl_t *ctrl);
+lab_t rgb_osc1_drive_lab();
+lab_t rgb_osc2_drive_lab();
 
 // rgb_amp_lab.c
 lab_t rgb_osc_amp_out_lab(ctrl_t *ctrl);
