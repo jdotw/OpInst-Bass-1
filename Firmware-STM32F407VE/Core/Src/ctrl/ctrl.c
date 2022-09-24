@@ -37,4 +37,4 @@ void ctrl_overflow_handler() {
 
 double ctrl_double(uint16_t value) { return (double)(value / 4095.0); }
 
-double ctrl_double_inverse(uint16_t value) { return 1.0 - value; }
+double ctrl_double_inverse(uint16_t value) { return 1.0 - ctrl_double(value); }
