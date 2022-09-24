@@ -89,7 +89,8 @@ lv_obj_t *preset_set_name_screen() {
   return _preset_set_name_container;
 }
 
-void preset_set_name_screen_commit(mod_t *mod) {
+void preset_set_name_screen_commit() {
+  mod_t *mod = mod_get();
   if (mod->changed.up && mod->state.up) {
     // Up (cancel) button is pressed
     // Cancel the preset naming

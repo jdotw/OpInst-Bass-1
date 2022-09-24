@@ -32,13 +32,13 @@ lv_obj_t *preset_screen() {
   }
 }
 
-void preset_screen_commit(mod_t *mod) {
+void preset_screen_commit() {
   switch (active_preset_screen) {
   case PRESET_SELECT_SCREEN:
-    preset_select_screen_commit(mod);
+    preset_select_screen_commit();
     break;
   case PRESET_SET_NAME_SCREEN:
-    preset_set_name_screen_commit(mod);
+    preset_set_name_screen_commit();
     break;
   }
 }

@@ -244,6 +244,6 @@ void ctrl_value_set_max(ctrl_enum_t ctrl_enum);
 lv_obj_t *ctrl_screen(void);
 lv_obj_t *ctrl_changed_screen_init();
 void ctrl_changed_screen_push_ctrl(ctrl_enum_t ctrl_enum);
-void ctrl_changed_screen_commit(ctrl_t *ctrl, mod_t *mod);
+void ctrl_changed_screen_commit();
 
 #endif /* INC_CTRL_H_ */

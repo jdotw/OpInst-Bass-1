@@ -107,7 +107,8 @@ lv_obj_t *preset_select_screen() {
   return _preset_container;
 }
 
-void preset_select_screen_commit(mod_t *mod) {
+void preset_select_screen_commit() {
+  mod_t *mod = mod_get();
   if (mod->changed.down && mod->state.down) {
     // Down (save) button is pressed
     // Switch to Preset Set Name screen
