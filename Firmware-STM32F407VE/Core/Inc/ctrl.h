@@ -222,10 +222,8 @@ void ctrl_toggle_init(void);
 
 void ctrl_overflow_handler(void);
 
-void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
-                      int8_t delta);
-void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
-                       bool changed, bool state);
+void ctrl_apply_delta(enc_enum_t enc, int8_t delta);
+void ctrl_apply_toggle(enc_enum_t ctrl_enum, bool changed, bool state);
 
 double ctrl_double(uint16_t value);
 double ctrl_double_inverse(uint16_t value);

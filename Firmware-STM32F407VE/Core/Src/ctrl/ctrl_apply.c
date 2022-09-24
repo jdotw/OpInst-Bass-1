@@ -13,9 +13,10 @@
 #include <stdint.h>
 #include <string.h>
 
-void _ctrl_apply_delta(ctrl_t *ctrl, ctrl_enum_t ctrl_enum, int16_t delta,
+void _ctrl_apply_delta(ctrl_enum_t ctrl_enum, int16_t delta,
                        int16_t scale_percent, uint16_t min_value,
                        uint16_t max_value) {
+  ctrl_t *ctrl = ctrl_get_active();
   seq_t *seq = seq_get();
   if (seq->state.selected_step != UINT8_MAX) {
     // We have a selected step
@@ -61,8 +62,8 @@ void _ctrl_apply_delta(ctrl_t *ctrl, ctrl_enum_t ctrl_enum, int16_t delta,
 bool tuning_enc_debounce_forward = false;
 uint32_t tuning_enc_debounce = 0;
 
-void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
-                      int8_t delta) {
+void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   if (!ctrl_get_enabled() || delta == 0)
     return;
 
@@ -71,17 +72,17 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   switch (enc) {
   /* OSC 1 */
   case ENC_OSC1_SAW:
-    _ctrl_apply_delta(ctrl, CTRL_OSC1_SAW_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC1_SAW_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC1_SQU:
     switch (toggle->osc1_squ_func) {
     case ENC_OSC_SQU_LEVEL:
-      _ctrl_apply_delta(ctrl, CTRL_OSC1_SQU_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+      _ctrl_apply_delta(CTRL_OSC1_SQU_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                         CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_OSC_SQU_PWM:
-      _ctrl_apply_delta(ctrl, CTRL_OSC1_SQU_PWM, delta, CTRL_SCALE_TWO_TURNS,
+      _ctrl_apply_delta(CTRL_OSC1_SQU_PWM, delta, CTRL_SCALE_TWO_TURNS,
                         CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
@@ -89,7 +90,7 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
     }
     break;
   case ENC_OSC1_TO_OSC2:
-    _ctrl_apply_delta(ctrl, CTRL_OSC1_TO_OSC2_MIX, delta, CTRL_SCALE_HALT_TURN,
+    _ctrl_apply_delta(CTRL_OSC1_TO_OSC2_MIX, delta, CTRL_SCALE_HALT_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
@@ -100,12 +101,11 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
       tuning_enc_debounce_forward = is_forward;
       switch (toggle->osc1_tune_func) {
       case ENC_OSC_TUNE_COARSE:
-        _ctrl_apply_delta(ctrl, CTRL_OSC1_TUNE_COARSE, delta, 100, 0, 24);
+        _ctrl_apply_delta(CTRL_OSC1_TUNE_COARSE, delta, 100, 0, 24);
         break;
       case ENC_OSC_TUNE_FINE:
-        _ctrl_apply_delta(ctrl, CTRL_OSC1_TUNE_FINE, delta,
-                          CTRL_SCALE_TWO_TURNS, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_OSC1_TUNE_FINE, delta, CTRL_SCALE_TWO_TURNS,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       default:
         break;
@@ -116,31 +116,31 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
 
   /* OSC 1 FILTER AND DRIVE */
   case ENC_OSC1_FILT_CUTOFF:
-    _ctrl_apply_delta(ctrl, CTRL_OSC1_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS,
+    _ctrl_apply_delta(CTRL_OSC1_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC1_FILT_RES:
-    _ctrl_apply_delta(ctrl, CTRL_OSC1_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC1_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC1_DRIVE:
-    _ctrl_apply_delta(ctrl, CTRL_OSC1_DRIVE_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC1_DRIVE_AMT, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
   /* OSC 2 */
   case ENC_OSC2_SAW:
-    _ctrl_apply_delta(ctrl, CTRL_OSC2_SAW_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC2_SAW_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC2_SQU:
     switch (toggle->osc2_squ_func) {
     case ENC_OSC_SQU_LEVEL:
-      _ctrl_apply_delta(ctrl, CTRL_OSC2_SQU_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+      _ctrl_apply_delta(CTRL_OSC2_SQU_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                         CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_OSC_SQU_PWM:
-      _ctrl_apply_delta(ctrl, CTRL_OSC2_SQU_PWM, delta, CTRL_SCALE_TWO_TURNS,
+      _ctrl_apply_delta(CTRL_OSC2_SQU_PWM, delta, CTRL_SCALE_TWO_TURNS,
                         CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
@@ -148,45 +148,45 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
     }
     break;
   case ENC_OSC2_NOISE:
-    _ctrl_apply_delta(ctrl, CTRL_OSC2_NOISE_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC2_NOISE_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
   /* OSC 2 FILTER AND DRIVE */
   case ENC_OSC2_FILT_CUTOFF:
-    _ctrl_apply_delta(ctrl, CTRL_OSC2_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS,
+    _ctrl_apply_delta(CTRL_OSC2_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC2_FILT_RES:
-    _ctrl_apply_delta(ctrl, CTRL_OSC2_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC2_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC2_DRIVE:
-    _ctrl_apply_delta(ctrl, CTRL_OSC2_DRIVE_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC2_DRIVE_AMT, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
   /* SUB */
   case ENC_SUB:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_SUB_NOISE:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_NOISE_LVL, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_NOISE_LVL, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_SUB_TO_OSC2:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_TO_OSC2_MIX, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_TO_OSC2_MIX, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
   /* SUB FILTER */
   case ENC_SUB_FILT_CUTOFF:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS,
+    _ctrl_apply_delta(CTRL_SUB_FILT_CUTOFF, delta, CTRL_SCALE_FOUR_TURNS,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_SUB_FILT_RES:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_FILT_RES, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
@@ -194,14 +194,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   case ENC_OSC_FILT_ENV_A:
     switch (toggle->osc_filt_env_attack_func) {
     case ENC_SELECT_ENV_1:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV1_A, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_FILT_ENV1_A, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_SELECT_ENV_2:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV2_A, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_FILT_ENV2_A, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
@@ -210,14 +208,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   case ENC_OSC_FILT_ENV_D:
     switch (toggle->osc_filt_env_attack_func) {
     case ENC_SELECT_ENV_1:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV1_D, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_FILT_ENV1_D, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_SELECT_ENV_2:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV2_D, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_FILT_ENV2_D, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
@@ -228,14 +224,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
     case ENC_SELECT_ENV_1:
       switch (toggle->osc_filt_env_sustain_func) {
       case ENC_ENV_SUSTAIN:
-        _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV1_S, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_OSC_FILT_ENV1_S, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       case ENC_ENV_AMOUNT:
-        _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV1_AMT, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_OSC_FILT_ENV1_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       default:
         break;
@@ -244,14 +238,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
     case ENC_SELECT_ENV_2:
       switch (toggle->osc_filt_env_sustain_func) {
       case ENC_ENV_SUSTAIN:
-        _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV2_S, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_OSC_FILT_ENV2_S, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       case ENC_ENV_AMOUNT:
-        _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV2_AMT, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_OSC_FILT_ENV2_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       default:
         break;
@@ -264,14 +256,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   case ENC_OSC_FILT_ENV_R:
     switch (toggle->osc_filt_env_attack_func) {
     case ENC_SELECT_ENV_1:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV1_R, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_FILT_ENV1_R, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_SELECT_ENV_2:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_FILT_ENV2_R, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_FILT_ENV2_R, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
@@ -280,30 +270,29 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
 
   /* OSC AMP ADSR ENVELOPE */
   case ENC_OSC_AMP_ENV_A:
-    _ctrl_apply_delta(ctrl, CTRL_OSC_AMP_ENV_A, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC_AMP_ENV_A, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC_AMP_ENV_D:
-    _ctrl_apply_delta(ctrl, CTRL_OSC_AMP_ENV_D, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC_AMP_ENV_D, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_OSC_AMP_ENV_S:
     switch (toggle->osc_amp_env_sustain_func) {
     case ENC_ENV_SUSTAIN:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_AMP_ENV_S, delta, CTRL_SCALE_WHOLE_TURN,
+      _ctrl_apply_delta(CTRL_OSC_AMP_ENV_S, delta, CTRL_SCALE_WHOLE_TURN,
                         CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_ENV_AMOUNT:
-      _ctrl_apply_delta(ctrl, CTRL_OSC_AMP_ENV_AMT, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_OSC_AMP_ENV_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
     }
     break;
   case ENC_OSC_AMP_ENV_R:
-    _ctrl_apply_delta(ctrl, CTRL_OSC_AMP_ENV_R, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_OSC_AMP_ENV_R, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
@@ -311,14 +300,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   case ENC_SUB_FILT_ENV_A:
     switch (toggle->sub_filt_env_attack_func) {
     case ENC_SELECT_ENV_1:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV1_A, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_FILT_ENV1_A, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_SELECT_ENV_2:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV2_A, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_FILT_ENV2_A, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
@@ -327,14 +314,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   case ENC_SUB_FILT_ENV_D:
     switch (toggle->sub_filt_env_attack_func) {
     case ENC_SELECT_ENV_1:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV1_D, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_FILT_ENV1_D, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_SELECT_ENV_2:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV2_D, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_FILT_ENV2_D, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
@@ -345,14 +330,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
     case ENC_SELECT_ENV_1:
       switch (toggle->sub_filt_env_sustain_func) {
       case ENC_ENV_SUSTAIN:
-        _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV1_S, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_SUB_FILT_ENV1_S, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       case ENC_ENV_AMOUNT:
-        _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV1_AMT, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_SUB_FILT_ENV1_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       default:
         break;
@@ -361,14 +344,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
     case ENC_SELECT_ENV_2:
       switch (toggle->sub_filt_env_sustain_func) {
       case ENC_ENV_SUSTAIN:
-        _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV2_S, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_SUB_FILT_ENV2_S, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       case ENC_ENV_AMOUNT:
-        _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV2_AMT, delta,
-                          CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                          CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_SUB_FILT_ENV2_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
         break;
       default:
         break;
@@ -381,14 +362,12 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
   case ENC_SUB_FILT_ENV_R:
     switch (toggle->sub_filt_env_attack_func) {
     case ENC_SELECT_ENV_1:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV1_R, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_FILT_ENV1_R, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_SELECT_ENV_2:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_FILT_ENV2_R, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_FILT_ENV2_R, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
@@ -397,59 +376,58 @@ void ctrl_apply_delta(ctrl_t *ctrl, ctrl_toggle_t *toggle, enc_enum_t enc,
 
   /* SUB AMP ADSR ENVELOPE */
   case ENC_SUB_AMP_ENV_A:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_AMP_ENV_A, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_AMP_ENV_A, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_SUB_AMP_ENV_D:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_AMP_ENV_D, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_AMP_ENV_D, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_SUB_AMP_ENV_S:
     switch (toggle->sub_amp_env_sustain_func) {
     case ENC_ENV_SUSTAIN:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_AMP_ENV_S, delta, CTRL_SCALE_WHOLE_TURN,
+      _ctrl_apply_delta(CTRL_SUB_AMP_ENV_S, delta, CTRL_SCALE_WHOLE_TURN,
                         CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     case ENC_ENV_AMOUNT:
-      _ctrl_apply_delta(ctrl, CTRL_SUB_AMP_ENV_AMT, delta,
-                        CTRL_SCALE_WHOLE_TURN, CTRL_DEFAULT_MIN,
-                        CTRL_DEFAULT_MAX);
+      _ctrl_apply_delta(CTRL_SUB_AMP_ENV_AMT, delta, CTRL_SCALE_WHOLE_TURN,
+                        CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
       break;
     default:
       break;
     }
     break;
   case ENC_SUB_AMP_ENV_R:
-    _ctrl_apply_delta(ctrl, CTRL_SUB_AMP_ENV_R, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_SUB_AMP_ENV_R, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
 
   /* FX */
   case ENC_FX_WETDRY:
-    _ctrl_apply_delta(ctrl, CTRL_FX_WETDRY, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_FX_WETDRY, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   case ENC_FX_VAL1:
-    _ctrl_apply_delta(ctrl, CTRL_FX_VAL1, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_FX_VAL1, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, UINT8_MAX);
     break;
   case ENC_FX_VAL2:
-    _ctrl_apply_delta(ctrl, CTRL_FX_VAL2, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_FX_VAL2, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, UINT8_MAX);
     break;
   case ENC_FX_VAL3:
-    _ctrl_apply_delta(ctrl, CTRL_FX_VAL3, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_FX_VAL3, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, UINT8_MAX);
     break;
   case ENC_FX_VAL4:
-    _ctrl_apply_delta(ctrl, CTRL_FX_FEEDBACK, delta, CTRL_SCALE_WHOLE_TURN,
+    _ctrl_apply_delta(CTRL_FX_FEEDBACK, delta, CTRL_SCALE_WHOLE_TURN,
                       CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
     break;
   }
 }
 
-void ctrl_apply_toggle(ctrl_toggle_t *toggle, enc_enum_t ctrl_enum,
-                       bool changed, bool state) {
+void ctrl_apply_toggle(enc_enum_t ctrl_enum, bool changed, bool state) {
+  ctrl_toggle_t *toggle = ctrl_get_active_toggle();
   if (ctrl_get_enabled() && state && changed) {
     switch (ctrl_enum) {
     case ENC_OSC1_SQU:
