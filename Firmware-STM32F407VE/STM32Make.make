@@ -289,7 +289,7 @@ PREFIX = arm-none-eabi-
 POSTFIX = "
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
 # either it can be added to the PATH environment variable.
-GCC_PATH="/Applications/ARM/bin
+GCC_PATH="/opt/homebrew/bin
 ifdef GCC_PATH
 CXX = $(GCC_PATH)/$(PREFIX)g++$(POSTFIX)
 CC = $(GCC_PATH)/$(PREFIX)gcc$(POSTFIX)
