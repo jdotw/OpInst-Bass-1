@@ -83,7 +83,6 @@ void _i2c_resume_left_rgbled_0_01(uint8_t bus, i2c_callback_t callback,
   ctrl_toggle_t *toggle = ctrl_get_active_toggle();
 
   int16_t tuning_step = 0;
-  double tuning_percent = 0.0;
   switch (toggle->osc1_tune_func) {
   case ENC_OSC_TUNE_COARSE:
     tuning_step = (uint8_t)(param_value(CTRL_OSC1_TUNE_COARSE) / 2);
@@ -94,9 +93,11 @@ void _i2c_resume_left_rgbled_0_01(uint8_t bus, i2c_callback_t callback,
     break;
 
   case ENC_OSC_TUNE_FINE:
-    tuning_step = (int16_t)param_value(CTRL_OSC1_TUNE_FINE);
-    tuning_percent = (double)tuning_step / CTRL_DEFAULT_MAX;
-    pwm_seq[(uint8_t)(tuning_percent * 12.0)] = 0x7000;
+    tuning_step = (uint8_t)(param_value(CTRL_OSC1_TUNE_FINE) / 2);
+    pwm_seq[tuning_step] = 0x7000;
+    if (param_value(CTRL_OSC1_TUNE_FINE) % 2) {
+      pwm_seq[tuning_step + 1] = 0x7000;
+    }
     break;
 
   default:
@@ -882,12 +883,11 @@ void _i2c_resume_left_dac_0_0_2(uint8_t bus, i2c_callback_t callback,
                                 void *userdata) {
   note_t *note = note_get_active();
   uint8_t osc1_note =
-      note->value.note_number + (12 - param_value(CTRL_OSC1_TUNE_COARSE));
+      note->value.note_number + (param_value(CTRL_OSC1_TUNE_COARSE) - 12);
   uint16_t osc1_note_dac_val = osc_dac_value_for_note(OSC1, osc1_note);
-  osc1_note_dac_val +=
-      ((int16_t)CTRL_DEFAULT_MID -
-       param_value(CTRL_OSC1_TUNE_FINE)); // TODO: Handle wrapping, maybe
-                                          // add it to osc1_note_dac_val?
+  // TODO: Handle wrapping, maybe
+  // add it to osc1_note_dac_val?
+  osc1_note_dac_val += (param_value(CTRL_OSC1_TUNE_FINE) - 12) * 2;
   dac7678_set_value(I2C_LEFT, 0, 0, 2, osc1_note_dac_val, callback, userdata);
 }
 

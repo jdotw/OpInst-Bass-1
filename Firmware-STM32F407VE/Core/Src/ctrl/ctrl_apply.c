@@ -103,8 +103,7 @@ void ctrl_apply_delta(enc_enum_t enc, int8_t delta) {
         _ctrl_apply_delta(CTRL_OSC1_TUNE_COARSE, delta, 100, 0, 24);
         break;
       case ENC_OSC_TUNE_FINE:
-        _ctrl_apply_delta(CTRL_OSC1_TUNE_FINE, delta, CTRL_SCALE_TWO_TURNS,
-                          CTRL_DEFAULT_MIN, CTRL_DEFAULT_MAX);
+        _ctrl_apply_delta(CTRL_OSC1_TUNE_FINE, delta, 100, 0, 24);
         break;
       default:
         break;
